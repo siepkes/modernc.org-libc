@@ -45,19 +45,20 @@ static inline void a_barrier()
 #define a_cas a_cas
 static inline int a_cas(volatile int *p, int t, int s)
 {
-	for (;;) {
-		register int r0 __asm__("r0") = t;
-		register int r1 __asm__("r1") = s;
-		register volatile int *r2 __asm__("r2") = p;
-		register uintptr_t r3 __asm__("r3") = __a_cas_ptr;
-		int old;
-		__asm__ __volatile__ (
-			BLX " r3"
-			: "+r"(r0), "+r"(r3) : "r"(r1), "r"(r2)
-			: "memory", "lr", "ip", "cc" );
-		if (!r0) return t;
-		if ((old=*p)!=t) return old;
-	}
+	__asm__ __volatile__ ("TODO");
+	//TODO for (;;) {
+	//TODO 	register int r0 __asm__("r0") = t;
+	//TODO 	register int r1 __asm__("r1") = s;
+	//TODO 	register volatile int *r2 __asm__("r2") = p;
+	//TODO 	register uintptr_t r3 __asm__("r3") = __a_cas_ptr;
+	//TODO 	int old;
+	//TODO 	__asm__ __volatile__ (
+	//TODO 		BLX " r3"
+	//TODO 		: "+r"(r0), "+r"(r3) : "r"(r1), "r"(r2)
+	//TODO 		: "memory", "lr", "ip", "cc" );
+	//TODO 	if (!r0) return t;
+	//TODO 	if ((old=*p)!=t) return old;
+	//TODO }
 }
 
 #endif
@@ -66,8 +67,9 @@ static inline int a_cas(volatile int *p, int t, int s)
 #define a_barrier a_barrier
 static inline void a_barrier()
 {
-	register uintptr_t ip __asm__("ip") = __a_barrier_ptr;
-	__asm__ __volatile__( BLX " ip" : "+r"(ip) : : "memory", "cc", "lr" );
+	__asm__ __volatile__ ("TODO");
+	//TODO register uintptr_t ip __asm__("ip") = __a_barrier_ptr;
+	//TODO __asm__ __volatile__( BLX " ip" : "+r"(ip) : : "memory", "cc", "lr" );
 }
 #endif
 

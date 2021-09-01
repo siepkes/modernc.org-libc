@@ -1,3 +1,4 @@
+//go:build ignore
 // +build ignore
 
 package main
@@ -62,7 +63,7 @@ func main() {
 	case "linux":
 		g = append(g, "libc_unix.go")
 		switch goarch {
-		case "amd64", "386":
+		case "amd64":
 			g = append(g, "pthreads.go")
 		}
 		makeMuslLinux(goos, goarch)
