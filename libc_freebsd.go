@@ -7,6 +7,7 @@ package libc // import "modernc.org/libc"
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -43,16 +44,45 @@ var (
 )
 
 type (
-	long  = types.X__syscall_slong_t
-	ulong = types.X__syscall_ulong_t
+	long      = int64
+	ulong     = uint64
+	socklen_t = types.X__socklen_t
 )
+
+// // Keep these outside of the var block otherwise go generate will miss them.
+var X__stderrp = Xstdout
+var X__stdinp = Xstdin
+var X__stdoutp = Xstdout
+
+// include/stdio.h:486:extern int __isthreaded;
+var X__isthreaded int32
+
+// lib/libc/locale/mblocal.h:62:	int __mb_sb_limit;
+var X__mb_sb_limit int32 //TODO initialize and handle.
+
+// include/runetype.h:94:extern _Thread_local const _RuneLocale *_ThreadRuneLocale;
+var X_ThreadRuneLocale uintptr //TODO initialize and implement _Thread_local semantics.
+
+// include/runetype.h:90:extern const _RuneLocale *_CurrentRuneLocale;
+var X_CurrentRuneLocale uintptr //TODO initialize and handle.
+
+// include/xlocale/_ctype.h:54:_RuneLocale	*__runes_for_locale(locale_t, int*);
+func X__runes_for_locale(t *TLS, l locale_t, p uintptr) uintptr {
+	panic(todo(""))
+}
 
 type file uintptr
 
-func (f file) fd() int32      { return (*stdio.FILE)(unsafe.Pointer(f)).F_fileno }
-func (f file) setFd(fd int32) { (*stdio.FILE)(unsafe.Pointer(f)).F_fileno = fd }
-func (f file) err() bool      { return (*stdio.FILE)(unsafe.Pointer(f)).F_flags2&stdio.X_IO_ERR_SEEN != 0 }
-func (f file) setErr()        { (*stdio.FILE)(unsafe.Pointer(f)).F_flags2 |= stdio.X_IO_ERR_SEEN }
+func (f file) fd() int32      { return int32((*stdio.FILE)(unsafe.Pointer(f)).F_file) }
+func (f file) setFd(fd int32) { (*stdio.FILE)(unsafe.Pointer(f)).F_file = int16(fd) }
+
+func (f file) err() bool {
+	return (*stdio.FILE)(unsafe.Pointer(f)).F_flags&1 != 0
+}
+
+func (f file) setErr() {
+	(*stdio.FILE)(unsafe.Pointer(f)).F_flags |= 1
+}
 
 func (f file) close(t *TLS) int32 {
 	r := Xclose(t, f.fd())
@@ -60,6 +90,7 @@ func (f file) close(t *TLS) int32 {
 	if r < 0 {
 		return stdio.EOF
 	}
+
 	return 0
 }
 
@@ -83,9 +114,14 @@ func fwrite(fd int32, b []byte) (int, error) {
 	return unix.Write(int(fd), b) //TODO use Xwrite
 }
 
+// unsigned long	___runetype(__ct_rune_t) __pure;
+func X___runetype(t *TLS, x types.X__ct_rune_t) ulong {
+	panic(todo(""))
+}
+
 // int fprintf(FILE *stream, const char *format, ...);
 func Xfprintf(t *TLS, stream, format, args uintptr) int32 {
-	n, _ := fwrite((*stdio.FILE)(unsafe.Pointer(stream)).F_fileno, printf(format, args))
+	n, _ := fwrite(int32((*stdio.FILE)(unsafe.Pointer(stream)).F_file), printf(format, args))
 	return int32(n)
 }
 
@@ -107,7 +143,7 @@ func Xgetrusage(t *TLS, who int32, usage uintptr) int32 {
 
 // char *fgets(char *s, int size, FILE *stream);
 func Xfgets(t *TLS, s uintptr, size int32, stream uintptr) uintptr {
-	fd := int((*stdio.FILE)(unsafe.Pointer(stream)).F_fileno)
+	fd := int((*stdio.FILE)(unsafe.Pointer(stream)).F_file)
 	var b []byte
 	buf := [1]byte{}
 	for ; size > 0; size-- {
@@ -187,25 +223,33 @@ func Xopen(t *TLS, pathname uintptr, flags int32, args uintptr) int32 {
 
 // int open(const char *pathname, int flags, ...);
 func Xopen64(t *TLS, pathname uintptr, flags int32, args uintptr) int32 {
-	panic(todo(""))
+	var mode types.Mode_t
+	if args != 0 {
+		mode = *(*types.Mode_t)(unsafe.Pointer(args))
+	}
+	fdcwd := fcntl.AT_FDCWD
+	n, _, err := unix.Syscall6(unix.SYS_OPENAT, uintptr(fdcwd), pathname, uintptr(flags), uintptr(mode), 0, 0)
+	if err != 0 {
+		// if dmesgs {
+		// 	dmesg("%v: %q %#x: %v", origin(1), GoString(pathname), flags, err)
+		// }
+		t.setErrno(err)
+		return -1
+	}
+
+	// if dmesgs {
+	// 	dmesg("%v: %q flags %#x mode %#o: fd %v", origin(1), GoString(pathname), flags, mode, n)
+	// }
+	return int32(n)
 }
 
 // off_t lseek(int fd, off_t offset, int whence);
 func Xlseek(t *TLS, fd int32, offset types.Off_t, whence int32) types.Off_t {
-	panic(todo(""))
+	return types.Off_t(Xlseek64(t, fd, offset, whence))
 }
 
 func whenceStr(whence int32) string {
-	switch whence {
-	case fcntl.SEEK_CUR:
-		return "SEEK_CUR"
-	case fcntl.SEEK_END:
-		return "SEEK_END"
-	case fcntl.SEEK_SET:
-		return "SEEK_SET"
-	default:
-		return fmt.Sprintf("whence(%d)", whence)
-	}
+	panic(todo(""))
 }
 
 var fsyncStatbuf stat.Stat
@@ -257,12 +301,23 @@ func Xclose(t *TLS, fd int32) int32 {
 
 // char *getcwd(char *buf, size_t size);
 func Xgetcwd(t *TLS, buf uintptr, size types.Size_t) uintptr {
-	panic(todo(""))
+	if _, err := unix.Getcwd((*RawMem)(unsafe.Pointer(buf))[:size:size]); err != nil {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
+		t.setErrno(err)
+		return 0
+	}
+
+	if dmesgs {
+		dmesg("%v: ok", origin(1))
+	}
+	return buf
 }
 
 // int fstat(int fd, struct stat *statbuf);
 func Xfstat(t *TLS, fd int32, statbuf uintptr) int32 {
-	panic(todo(""))
+	return Xfstat64(t, fd, statbuf)
 }
 
 // int ftruncate(int fd, off_t length);
@@ -272,7 +327,7 @@ func Xftruncate(t *TLS, fd int32, length types.Off_t) int32 {
 
 // int fcntl(int fd, int cmd, ... /* arg */ );
 func Xfcntl(t *TLS, fd, cmd int32, args uintptr) int32 {
-	panic(todo(""))
+	return Xfcntl64(t, fd, cmd, args)
 }
 
 // ssize_t read(int fd, void *buf, size_t count);
@@ -438,12 +493,7 @@ func Xselect(t *TLS, nfds int32, readfds, writefds, exceptfds, timeout uintptr) 
 
 // int mkfifo(const char *pathname, mode_t mode);
 func Xmkfifo(t *TLS, pathname uintptr, mode types.Mode_t) int32 {
-	if err := unix.Mkfifo(GoString(pathname), mode); err != nil {
-		t.setErrno(err)
-		return -1
-	}
-
-	return 0
+	panic(todo(""))
 }
 
 // mode_t umask(mode_t mask);
@@ -650,9 +700,14 @@ func Xgetpwuid(t *TLS, uid uint32) uintptr {
 	sc := bufio.NewScanner(f)
 	for sc.Scan() {
 		// eg. "root:x:0:0:root:/root:/bin/bash"
-		a := strings.Split(sc.Text(), ":")
+		s := sc.Text()
+		if strings.HasPrefix(s, "#") {
+			continue
+		}
+
+		a := strings.Split(s, ":")
 		if len(a) < 7 {
-			panic(todo(""))
+			panic(todo("%q", s))
 		}
 
 		if a[2] == sid {
@@ -919,17 +974,7 @@ func Xbacktrace_symbols_fd(t *TLS, buffer uintptr, size, fd int32) {
 
 // int fileno(FILE *stream);
 func Xfileno(t *TLS, stream uintptr) int32 {
-	if stream == 0 {
-		t.setErrno(errno.EBADF)
-		return -1
-	}
-
-	if fd := (*stdio.FILE)(unsafe.Pointer(stream)).F_fileno; fd >= 0 {
-		return fd
-	}
-
-	t.setErrno(errno.EBADF)
-	return -1
+	panic(todo(""))
 }
 
 var staticGetpwnam pwd.Passwd
@@ -1204,27 +1249,7 @@ func Xmkstemp64(t *TLS, template uintptr) int32 {
 }
 
 func newFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Errno) (r *fts.FTSENT) {
-	var statp uintptr
-	if stat != nil {
-		statp = Xmalloc(t, types.Size_t(unsafe.Sizeof(unix.Stat_t{})))
-		if statp == 0 {
-			panic("OOM")
-		}
-
-		*(*unix.Stat_t)(unsafe.Pointer(statp)) = *stat
-	}
-	csp, errx := CString(path)
-	if errx != nil {
-		panic("OOM")
-	}
-
-	return &fts.FTSENT{
-		Ffts_info:    uint16(info),
-		Ffts_path:    csp,
-		Ffts_pathlen: uint16(len(path)),
-		Ffts_statp:   statp,
-		Ffts_errno:   int32(err),
-	}
+	panic(todo(""))
 }
 
 func newCFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Errno) uintptr {
@@ -1833,4 +1858,114 @@ func Xctime(t *TLS, timep uintptr) uintptr {
 // char *ctime_r(const time_t *timep, char *buf);
 func Xctime_r(t *TLS, timep, buf uintptr) uintptr {
 	panic(todo(""))
+}
+
+// void __assert(const char * func, const char * file, int line, const char *expr) __dead2;
+func X__assert(t *TLS, fn, file uintptr, line int32, expr uintptr) {
+	X__assert_fail(t, expr, file, uint32(line), fn)
+}
+
+// include/stdio.h:456:int	__swbuf(int, FILE *);
+func X__swbuf(t *TLS, n int32, file uintptr) int32 {
+	return Xfputc(t, n, file) //TODO improve performance, use a real buffer.
+}
+
+// int rmdir(const char *pathname);
+func Xrmdir(t *TLS, pathname uintptr) int32 {
+	if err := unix.Rmdir(GoString(pathname)); err != nil {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
+		t.setErrno(err)
+		return -1
+	}
+
+	if dmesgs {
+		dmesg("%v: ok", origin(1))
+	}
+	return 0
+}
+
+// struct dirent *readdir(DIR *dirp);
+func Xreaddir(t *TLS, dir uintptr) uintptr {
+	if (*darwinDir)(unsafe.Pointer(dir)).eof {
+		return 0
+	}
+
+	if (*darwinDir)(unsafe.Pointer(dir)).l == (*darwinDir)(unsafe.Pointer(dir)).h {
+		n, err := unix.Getdirentries((*darwinDir)(unsafe.Pointer(dir)).fd, (*darwinDir)(unsafe.Pointer(dir)).buf[:], nil)
+		// trc("must read: %v %v", n, err)
+		if n == 0 {
+			if err != nil && err != io.EOF {
+				if dmesgs {
+					dmesg("%v: %v FAIL", origin(1), err)
+				}
+				t.setErrno(err)
+			}
+			(*darwinDir)(unsafe.Pointer(dir)).eof = true
+			return 0
+		}
+
+		(*darwinDir)(unsafe.Pointer(dir)).l = 0
+		(*darwinDir)(unsafe.Pointer(dir)).h = n
+		// trc("new l %v, h %v", (*darwinDir)(unsafe.Pointer(dir)).l, (*darwinDir)(unsafe.Pointer(dir)).h)
+	}
+	de := dir + unsafe.Offsetof(darwinDir{}.buf) + uintptr((*darwinDir)(unsafe.Pointer(dir)).l)
+	(*darwinDir)(unsafe.Pointer(dir)).l += int((*unix.Dirent)(unsafe.Pointer(de)).Reclen)
+	return de
+}
+
+type darwinDir struct {
+	buf [4096]byte
+	fd  int
+	h   int
+	l   int
+
+	eof bool
+}
+
+// int sscanf(const char *str, const char *format, ...);
+func Xsscanf(t *TLS, str, format, va uintptr) int32 {
+	r := scanf(strings.NewReader(GoString(str)), format, va)
+	// if dmesgs {
+	// 	dmesg("%v: %q %q: %d", origin(1), GoString(str), GoString(format), r)
+	// }
+	return r
+}
+
+// int * __error(void);
+func X__error(t *TLS) uintptr {
+	return t.errnop
+}
+
+func Xclosedir(t *TLS, dir uintptr) int32 {
+	r := Xclose(t, int32((*darwinDir)(unsafe.Pointer(dir)).fd))
+	Xfree(t, dir)
+	return r
+}
+
+// DIR *opendir(const char *name);
+func Xopendir(t *TLS, name uintptr) uintptr {
+	p := Xmalloc(t, uint64(unsafe.Sizeof(darwinDir{})))
+	if p == 0 {
+		panic("OOM")
+	}
+
+	fd := int(Xopen(t, name, fcntl.O_RDONLY|fcntl.O_DIRECTORY|fcntl.O_CLOEXEC, 0))
+	if fd < 0 {
+		if dmesgs {
+			dmesg("%v: FAIL %v", origin(1), (*darwinDir)(unsafe.Pointer(p)).fd)
+		}
+		Xfree(t, p)
+		return 0
+	}
+
+	if dmesgs {
+		dmesg("%v: ok", origin(1))
+	}
+	(*darwinDir)(unsafe.Pointer(p)).fd = fd
+	(*darwinDir)(unsafe.Pointer(p)).h = 0
+	(*darwinDir)(unsafe.Pointer(p)).l = 0
+	(*darwinDir)(unsafe.Pointer(p)).eof = false
+	return p
 }

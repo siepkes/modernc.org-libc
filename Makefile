@@ -51,8 +51,8 @@ darwin_arm64:
 	GOOS=darwin GOARCH=arm64 go build -v ./...
 
 freebsd_amd64:
-	TARGET_GOOS=linux TARGET_GOARCH=amd64 go generate
-	GOOS=linux GOARCH=amd64 go build -v ./...
+	TARGET_GOOS=freebsd TARGET_GOARCH=amd64 go generate
+	GOOS=freebsd GOARCH=amd64 go build -v ./...
 
 linux_amd64:
 	TARGET_GOOS=linux TARGET_GOARCH=amd64 go generate

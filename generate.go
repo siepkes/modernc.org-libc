@@ -67,6 +67,9 @@ func main() {
 			g = append(g, "pthreads.go")
 		}
 		makeMuslLinux(goos, goarch)
+	case "freebsd":
+		g = append(g, "libc_unix.go")
+		makeMuslFreeBSD(goos, goarch)
 	case "darwin":
 		g = append(g, "libc_unix.go")
 		makeMuslDarwin(goos, goarch)
@@ -460,6 +463,69 @@ func makeMuslLinux(goos, goarch string) {
 	}
 }
 
+func makeMuslFreeBSD(goos, goarch string) {
+	wd, err := os.Getwd()
+	if err != nil {
+		fail(err)
+	}
+
+	if err := os.Chdir("musl"); err != nil {
+		fail(err)
+	}
+
+	var arch string
+	switch goarch {
+	case "amd64":
+		arch = "x86_64"
+	default:
+		fail(fmt.Errorf("unknown/unsupported GOARCH: %q", goarch))
+	}
+	defer func() {
+		if err := os.Chdir(wd); err != nil {
+			fail(err)
+		}
+	}()
+
+	run("mkdir", "-p", "obj/include/bits")
+	run("sh", "-c", fmt.Sprintf("sed -f ./tools/mkalltypes.sed ./arch/%s/bits/alltypes.h.in ./include/alltypes.h.in > obj/include/bits/alltypes.h", arch))
+	run("sh", "-c", fmt.Sprintf("cp arch/%s/bits/syscall.h.in obj/include/bits/syscall.h", arch))
+	run("sh", "-c", fmt.Sprintf("sed -n -e s/__NR_/SYS_/p < arch/%s/bits/syscall.h.in >> obj/include/bits/syscall.h", arch))
+	if _, err := runcc(
+		"-export-externs", "X",
+		"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6",
+		"-nostdinc",
+		"-nostdlib",
+		"-o", fmt.Sprintf("../musl_%s_%s.go", goos, goarch),
+		"-pkgname", "libc",
+		"-static-locals-prefix", "_s",
+
+		// Keep the order below, don't sort!
+		fmt.Sprintf("-I%s", filepath.Join("arch", arch)),
+		fmt.Sprintf("-I%s", "arch/generic"),
+		fmt.Sprintf("-I%s", "obj/src/internal"),
+		fmt.Sprintf("-I%s", "src/include"),
+		fmt.Sprintf("-I%s", "src/internal"),
+		fmt.Sprintf("-I%s", "obj/include"),
+		fmt.Sprintf("-I%s", "include"),
+		// Keep the order above, don't sort!
+
+		"copyright.c", // Inject legalese first
+
+		// Keep the below lines sorted.
+		"src/ctype/isalnum.c",
+		"src/ctype/isalpha.c",
+		"src/ctype/isdigit.c",
+		"src/internal/intscan.c",
+		"src/internal/shgetc.c",
+		"src/stdio/__toread.c",
+		"src/stdio/__uflow.c",
+		"src/stdlib/strtol.c",
+		"src/string/strdup.c",
+	); err != nil {
+		fail(err)
+	}
+}
+
 func run(arg0 string, args ...string) []byte {
 	fmt.Printf("%s %q\n", arg0, args)
 	cmd := exec.Command(arg0, args...)
@@ -538,6 +604,7 @@ static char _;
 			"-export-fields", "F",
 			"-export-structs", "",
 			"-export-typedefs", "",
+			"-header",
 			"-hide", "_OSSwapInt16,_OSSwapInt32,_OSSwapInt64",
 			"-o", dest,
 			"-pkgname", base,
