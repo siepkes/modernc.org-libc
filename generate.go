@@ -492,7 +492,7 @@ func makeMuslFreeBSD(goos, goarch string) {
 	run("sh", "-c", fmt.Sprintf("sed -n -e s/__NR_/SYS_/p < arch/%s/bits/syscall.h.in >> obj/include/bits/syscall.h", arch))
 	if _, err := runcc(
 		"-export-externs", "X",
-		"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6",
+		"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,getnameinfo,gethostbyaddr_r",
 		"-nostdinc",
 		"-nostdlib",
 		"-o", fmt.Sprintf("../musl_%s_%s.go", goos, goarch),
@@ -523,11 +523,28 @@ func makeMuslFreeBSD(goos, goarch string) {
 		"src/math/fmodl.c",
 		"src/math/scalbn.c",
 		"src/math/scalbnl.c",
+		"src/network/freeaddrinfo.c",
+		"src/network/getaddrinfo.c",
+		"src/network/gethostbyaddr.c",
+		"src/network/gethostbyaddr_r.c",
+		"src/network/gethostbyname.c",
+		"src/network/gethostbyname2.c",
+		"src/network/gethostbyname2_r.c",
+		"src/network/getnameinfo.c",
+		"src/network/h_errno.c",
+		"src/network/inet_aton.c",
+		"src/network/inet_ntop.c",
+		"src/network/inet_pton.c",
+		"src/network/lookup_ipliteral.c",
+		"src/network/lookup_name.c",
+		"src/network/lookup_serv.c",
 		"src/stdio/__toread.c",
 		"src/stdio/__uflow.c",
 		"src/stdlib/strtod.c",
 		"src/stdlib/strtol.c",
 		"src/string/strdup.c",
+		"src/string/strnlen.c",
+		"src/string/strspn.c",
 	); err != nil {
 		fail(err)
 	}

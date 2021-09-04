@@ -50,6 +50,7 @@ darwin_arm64:
 	TARGET_GOOS=darwin TARGET_GOARCH=arm64 go generate
 	GOOS=darwin GOARCH=arm64 go build -v ./...
 
+# only on freebsd/amd64
 freebsd_amd64:
 	TARGET_GOOS=freebsd TARGET_GOARCH=amd64 go generate
 	GOOS=freebsd GOARCH=amd64 go build -v ./...

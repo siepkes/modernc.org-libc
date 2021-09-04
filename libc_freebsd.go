@@ -16,7 +16,7 @@ import (
 	"strconv"
 	"strings"
 	"syscall"
-	"time"
+	gotime "time"
 	"unsafe"
 
 	"golang.org/x/sys/unix"
@@ -35,7 +35,7 @@ import (
 	"modernc.org/libc/sys/stat"
 	"modernc.org/libc/sys/types"
 	"modernc.org/libc/termios"
-	ctime "modernc.org/libc/time"
+	"modernc.org/libc/time"
 	"modernc.org/libc/unistd"
 )
 
@@ -44,9 +44,8 @@ var (
 )
 
 type (
-	long      = int64
-	ulong     = uint64
-	socklen_t = types.X__socklen_t
+	long  = int64
+	ulong = uint64
 )
 
 // // Keep these outside of the var block otherwise go generate will miss them.
@@ -127,7 +126,7 @@ func Xfprintf(t *TLS, stream, format, args uintptr) int32 {
 
 // int usleep(useconds_t usec);
 func Xusleep(t *TLS, usec types.X__useconds_t) int32 {
-	time.Sleep(time.Microsecond * time.Duration(usec))
+	gotime.Sleep(gotime.Microsecond * gotime.Duration(usec))
 	return 0
 }
 
@@ -204,11 +203,27 @@ func Xchdir(t *TLS, path uintptr) int32 {
 	return 0
 }
 
-var localtime ctime.Tm
+var localtime time.Tm
 
 // struct tm *localtime(const time_t *timep);
 func Xlocaltime(_ *TLS, timep uintptr) uintptr {
-	panic(todo(""))
+	loc := gotime.Local
+	if r := getenv(Environ(), "TZ"); r != 0 {
+		zone, off := parseZone(GoString(r))
+		loc = gotime.FixedZone(zone, -off)
+	}
+	ut := *(*time.Time_t)(unsafe.Pointer(timep))
+	t := gotime.Unix(int64(ut), 0).In(loc)
+	localtime.Ftm_sec = int32(t.Second())
+	localtime.Ftm_min = int32(t.Minute())
+	localtime.Ftm_hour = int32(t.Hour())
+	localtime.Ftm_mday = int32(t.Day())
+	localtime.Ftm_mon = int32(t.Month() - 1)
+	localtime.Ftm_year = int32(t.Year() - 1900)
+	localtime.Ftm_wday = int32(t.Weekday())
+	localtime.Ftm_yday = int32(t.YearDay())
+	localtime.Ftm_isdst = Bool32(isTimeDST(t))
+	return uintptr(unsafe.Pointer(&localtime))
 }
 
 // struct tm *localtime_r(const time_t *timep, struct tm *result);
@@ -322,7 +337,18 @@ func Xfstat(t *TLS, fd int32, statbuf uintptr) int32 {
 
 // int ftruncate(int fd, off_t length);
 func Xftruncate(t *TLS, fd int32, length types.Off_t) int32 {
-	panic(todo(""))
+	if err := unix.Ftruncate(int(fd), int64(length)); err != nil {
+		if dmesgs {
+			dmesg("%v: fd %d: %v FAIL", origin(1), fd, err)
+		}
+		t.setErrno(err)
+		return -1
+	}
+
+	if dmesgs {
+		dmesg("%v: %d %#x: ok", origin(1), fd, length)
+	}
+	return 0
 }
 
 // int fcntl(int fd, int cmd, ... /* arg */ );
@@ -1968,4 +1994,65 @@ func Xopendir(t *TLS, name uintptr) uintptr {
 	(*darwinDir)(unsafe.Pointer(p)).l = 0
 	(*darwinDir)(unsafe.Pointer(p)).eof = false
 	return p
+}
+
+// int __xuname(int namesize, void *namebuf)
+func X__xuname(t *TLS, namesize int32, namebuf uintptr) int32 {
+	panic(todo(""))
+}
+
+// int chflags(const char *path, u_int flags);
+func Xchflags(t *TLS, path uintptr, flags uint64) int32 {
+	if err := unix.Chflags(GoString(path), int(flags)); err != nil {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
+		t.setErrno(err)
+		return -1
+	}
+
+	if dmesgs {
+		dmesg("%v: ok", origin(1))
+	}
+	return 0
+}
+
+// int pipe(int pipefd[2]);
+func Xpipe(t *TLS, pipefd uintptr) int32 {
+	var a [2]int
+	if err := syscall.Pipe(a[:]); err != nil {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
+		t.setErrno(err)
+		return -1
+	}
+
+	*(*[2]int32)(unsafe.Pointer(pipefd)) = [2]int32{int32(a[0]), int32(a[1])}
+	if dmesgs {
+		dmesg("%v: %v ok", origin(1), a)
+	}
+	return 0
+}
+
+// char *inet_ntoa(struct in_addr in);
+func X__inet_ntoa(t *TLS, in1 in.In_addr) uintptr {
+	panic(todo(""))
+}
+
+func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, offset types.Off_t) uintptr {
+	// Cannot avoid the syscall here, addr sometimes matter.
+	data, _, err := unix.Syscall6(unix.SYS_MMAP, addr, uintptr(length), uintptr(prot), uintptr(flags), uintptr(fd), uintptr(offset))
+	if err != 0 {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
+		t.setErrno(err)
+		return ^uintptr(0) // (void*)-1
+	}
+
+	if dmesgs {
+		dmesg("%v: %#x", origin(1), data)
+	}
+	return data
 }
