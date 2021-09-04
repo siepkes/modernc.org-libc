@@ -492,7 +492,7 @@ func makeMuslFreeBSD(goos, goarch string) {
 	run("sh", "-c", fmt.Sprintf("sed -n -e s/__NR_/SYS_/p < arch/%s/bits/syscall.h.in >> obj/include/bits/syscall.h", arch))
 	if _, err := runcc(
 		"-export-externs", "X",
-		"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,getnameinfo,gethostbyaddr_r",
+		"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,getnameinfo,gethostbyaddr_r,",
 		"-nostdinc",
 		"-nostdlib",
 		"-o", fmt.Sprintf("../musl_%s_%s.go", goos, goarch),

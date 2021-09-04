@@ -17,30 +17,12 @@ import (
 
 // int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 func Xsigaction(t *TLS, signum int32, act, oldact uintptr) int32 {
-	panic(todo(""))
-	//TODO var kact, koldact uintptr
-	//TODO if act != 0 {
-	//TODO 	sz := int(unsafe.Sizeof(signal.X__sigaction{}))
-	//TODO 	kact = t.Alloc(sz)
-	//TODO 	defer t.Free(sz)
-	//TODO 	(*signal.X__sigaction)(unsafe.Pointer(kact)).F__sigaction_u.F__sa_handler = (*signal.Sigaction)(unsafe.Pointer(act)).F__sigaction_u.F__sa_handler
-	//TODO 	(*signal.X__sigaction)(unsafe.Pointer(kact)).Fsa_flags = (*signal.Sigaction)(unsafe.Pointer(act)).Fsa_flags
-	//TODO 	Xmemcpy(t, kact+unsafe.Offsetof(signal.X__sigaction{}.Fsa_mask), act+unsafe.Offsetof(signal.Sigaction{}.Fsa_mask), types.Size_t(unsafe.Sizeof(signal.Sigset_t(0))))
-	//TODO }
-	//TODO if oldact != 0 {
-	//TODO 	panic(todo(""))
-	//TODO }
+	if _, _, err := unix.Syscall(unix.SYS_SIGACTION, uintptr(signum), act, oldact); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	//TODO if _, _, err := unix.Syscall6(unix.SYS_SIGACTION, uintptr(signum), kact, koldact, unsafe.Sizeof(signal.Sigset_t(0)), 0, 0); err != 0 {
-	//TODO 	t.setErrno(err)
-	//TODO 	return -1
-	//TODO }
-
-	//TODO if oldact != 0 {
-	//TODO 	panic(todo(""))
-	//TODO }
-
-	//TODO return 0
+	return 0
 }
 
 // FILE *fopen64(const char *pathname, const char *mode);

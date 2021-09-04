@@ -30,6 +30,7 @@ import (
 	"modernc.org/libc/netdb"
 	"modernc.org/libc/netinet/in"
 	"modernc.org/libc/pwd"
+	"modernc.org/libc/signal"
 	"modernc.org/libc/stdio"
 	"modernc.org/libc/sys/socket"
 	"modernc.org/libc/sys/stat"
@@ -551,7 +552,18 @@ func Xwaitpid(t *TLS, pid types.Pid_t, wstatus uintptr, optname int32) types.Pid
 
 // int uname(struct utsname *buf);
 func Xuname(t *TLS, buf uintptr) int32 {
-	panic(todo(""))
+	if err := unix.Uname((*unix.Utsname)(unsafe.Pointer(buf))); err != nil {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
+		t.setErrno(err)
+		return -1
+	}
+
+	if dmesgs {
+		dmesg("%v: ok", origin(1))
+	}
+	return 0
 }
 
 // ssize_t recv(int sockfd, void *buf, size_t len, int flags);
@@ -1593,7 +1605,19 @@ func X__ccgo_in6addr_anyp(t *TLS) uintptr {
 }
 
 func Xabort(t *TLS) {
-	panic(todo(""))
+	if dmesgs {
+		dmesg("%v:", origin(1))
+	}
+	p := Xcalloc(t, 1, types.Size_t(unsafe.Sizeof(signal.Sigaction{})))
+	if p == 0 {
+		panic("OOM")
+	}
+
+	(*signal.Sigaction)(unsafe.Pointer(p)).F__sigaction_u.F__sa_handler = signal.SIG_DFL
+	Xsigaction(t, signal.SIGABRT, p, 0)
+	Xfree(t, p)
+	unix.Kill(unix.Getpid(), syscall.Signal(signal.SIGABRT))
+	panic(todo("unrechable"))
 }
 
 // int fflush(FILE *stream);
@@ -1998,7 +2022,7 @@ func Xopendir(t *TLS, name uintptr) uintptr {
 
 // int __xuname(int namesize, void *namebuf)
 func X__xuname(t *TLS, namesize int32, namebuf uintptr) int32 {
-	panic(todo(""))
+	return Xuname(t, namebuf)
 }
 
 // int chflags(const char *path, u_int flags);
