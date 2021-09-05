@@ -511,6 +511,8 @@ func makeMuslFreeBSD(goos, goarch string) {
 
 		"copyright.c", // Inject legalese first
 
+		"../freebsd/table.cpp.c",
+
 		// Keep the below lines sorted.
 		"src/ctype/isalnum.c",
 		"src/ctype/isalpha.c",

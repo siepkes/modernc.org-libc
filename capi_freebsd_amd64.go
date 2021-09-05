@@ -4,6 +4,7 @@ package libc // import "modernc.org/libc"
 
 var CAPI = map[string]struct{}{
 	"_CurrentRuneLocale":            {},
+	"_DefaultRuneLocale":            {},
 	"_IO_putc":                      {},
 	"_ThreadRuneLocale":             {},
 	"___errno_location":             {},
@@ -224,6 +225,7 @@ var CAPI = map[string]struct{}{
 	"getresgid":                     {},
 	"getresuid":                     {},
 	"getrlimit":                     {},
+	"getrlimit64":                   {},
 	"getrusage":                     {},
 	"getservbyname":                 {},
 	"getsockname":                   {},

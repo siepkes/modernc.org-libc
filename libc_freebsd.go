@@ -58,13 +58,10 @@ var X__stdoutp = Xstdout
 var X__isthreaded int32
 
 // lib/libc/locale/mblocal.h:62:	int __mb_sb_limit;
-var X__mb_sb_limit int32 //TODO initialize and handle.
+var X__mb_sb_limit int32 = 128 // UTF-8
 
 // include/runetype.h:94:extern _Thread_local const _RuneLocale *_ThreadRuneLocale;
 var X_ThreadRuneLocale uintptr //TODO initialize and implement _Thread_local semantics.
-
-// include/runetype.h:90:extern const _RuneLocale *_CurrentRuneLocale;
-var X_CurrentRuneLocale uintptr //TODO initialize and handle.
 
 // include/xlocale/_ctype.h:54:_RuneLocale	*__runes_for_locale(locale_t, int*);
 func X__runes_for_locale(t *TLS, l locale_t, p uintptr) uintptr {
@@ -663,7 +660,7 @@ func Xaccept(t *TLS, sockfd int32, addr uintptr, addrlen uintptr) int32 {
 
 // int getrlimit(int resource, struct rlimit *rlim);
 func Xgetrlimit(t *TLS, resource int32, rlim uintptr) int32 {
-	panic(todo(""))
+	return Xgetrlimit64(t, resource, rlim)
 }
 
 // int setrlimit(int resource, const struct rlimit *rlim);
@@ -1273,7 +1270,28 @@ func Xmkstemps(t *TLS, template uintptr, suffixlen int32) int32 {
 
 // int mkstemps(char *template, int suffixlen);
 func Xmkstemps64(t *TLS, template uintptr, suffixlen int32) int32 {
-	panic(todo(""))
+	len := uintptr(Xstrlen(t, template))
+	x := template + uintptr(len-6) - uintptr(suffixlen)
+	for i := uintptr(0); i < 6; i++ {
+		if *(*byte)(unsafe.Pointer(x + i)) != 'X' {
+			if dmesgs {
+				dmesg("%v: FAIL", origin(1))
+			}
+			t.setErrno(errno.EINVAL)
+			return -1
+		}
+	}
+
+	fd, err := tempFile(template, x)
+	if err != nil {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
+		t.setErrno(err)
+		return -1
+	}
+
+	return int32(fd)
 }
 
 // int mkstemp(char *template);
@@ -1287,7 +1305,27 @@ func Xmkstemp64(t *TLS, template uintptr) int32 {
 }
 
 func newFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Errno) (r *fts.FTSENT) {
-	panic(todo(""))
+	var statp uintptr
+	if stat != nil {
+		statp = Xmalloc(t, types.Size_t(unsafe.Sizeof(unix.Stat_t{})))
+		if statp == 0 {
+			panic("OOM")
+		}
+
+		*(*unix.Stat_t)(unsafe.Pointer(statp)) = *stat
+	}
+	csp, errx := CString(path)
+	if errx != nil {
+		panic("OOM")
+	}
+
+	return &fts.FTSENT{
+		Ffts_info:    int32(info),
+		Ffts_path:    csp,
+		Ffts_pathlen: uint64(len(path)),
+		Ffts_statp:   statp,
+		Ffts_errno:   int32(err),
+	}
 }
 
 func newCFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Errno) uintptr {

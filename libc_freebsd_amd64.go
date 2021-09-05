@@ -575,3 +575,13 @@ func Xgethostbyaddr_r(tls *TLS, a uintptr, l socklen_t, af int32, h uintptr, buf
 	//TODO *(*uintptr)(unsafe.Pointer(res)) = h
 	//TODO return 0
 }
+
+// int getrlimit(int resource, struct rlimit *rlim);
+func Xgetrlimit64(t *TLS, resource int32, rlim uintptr) int32 {
+	if _, _, err := unix.Syscall(unix.SYS_GETRLIMIT, uintptr(resource), uintptr(rlim), 0); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
+
+	return 0
+}
