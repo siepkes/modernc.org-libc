@@ -265,36 +265,24 @@ func Xlseek64(t *TLS, fd int32, offset types.Off_t, whence int32) types.Off_t {
 	return types.Off_t(n)
 }
 
-// int fcntl(int fd, int cmd, ... /* arg */ );
-func Xfcntl64(t *TLS, fd, cmd int32, args uintptr) (r int32) {
-	var err error
-	var p uintptr
-	var i int
-	switch cmd {
-	case fcntl.F_GETLK, fcntl.F_SETLK:
-		p = *(*uintptr)(unsafe.Pointer(args))
-		err = unix.FcntlFlock(uintptr(fd), int(cmd), (*unix.Flock_t)(unsafe.Pointer(p)))
-	case fcntl.F_GETFL, fcntl.F_GETFD:
-		i, err = unix.FcntlInt(uintptr(fd), int(cmd), 0)
-		r = int32(i)
-	case fcntl.F_SETFD, fcntl.F_SETFL:
-		arg := *(*int32)(unsafe.Pointer(args))
-		_, err = unix.FcntlInt(uintptr(fd), int(cmd), int(arg))
-	default:
-		panic(todo("%v: %v %v", origin(1), fd, cmd))
+func Xfcntl64(t *TLS, fd, cmd int32, args uintptr) int32 {
+	var arg uintptr
+	if args != 0 {
+		arg = *(*uintptr)(unsafe.Pointer(args))
 	}
-	if err != nil {
+	n, _, err := unix.Syscall(unix.SYS_FCNTL, uintptr(fd), uintptr(cmd), arg)
+	if err != 0 {
 		if dmesgs {
-			dmesg("%v: fd %v cmd %v p %#x: %v FAIL", origin(1), fcntlCmdStr(fd), cmd, p, err)
+			dmesg("%v: fd %v cmd %v", origin(1), fcntlCmdStr(fd), cmd)
 		}
 		t.setErrno(err)
 		return -1
 	}
 
 	if dmesgs {
-		dmesg("%v: %d %s %#x: ok", origin(1), fd, fcntlCmdStr(cmd), p)
+		dmesg("%v: %d %s %#x: %d", origin(1), fd, fcntlCmdStr(cmd), arg, n)
 	}
-	return r
+	return int32(n)
 }
 
 // int rename(const char *oldpath, const char *newpath);
