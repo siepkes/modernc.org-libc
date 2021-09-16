@@ -134,3 +134,31 @@ func TestParseZone(t *testing.T) {
 		}
 	}
 }
+
+func TestRint(t *testing.T) {
+	tls := NewTLS()
+	for itest, test := range []struct {
+		x, y float64
+	}{
+		{-1.1, -1.0},
+		{-1.0, -1.0},
+		{-0.9, -1.0},
+		{-0.500001, -1.0},
+		{-0.5, 0},
+		{-0.1, 0},
+
+		{-0, 0},
+		{0.1, 0},
+		{0.499999, 0},
+		{0.5, 0},
+		{0.5000000000000001, 1},
+
+		{0.9, 1},
+		{1, 1},
+		{1.1, 1},
+	} {
+		if g, e := Xrint(tls, test.x), test.y; g != e {
+			t.Errorf("#%d: x %v, got %v, expected %v", itest, test.x, g, e)
+		}
+	}
+}
