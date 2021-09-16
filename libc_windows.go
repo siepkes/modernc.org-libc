@@ -5352,3 +5352,18 @@ func Xsscanf(t *TLS, str, format, va uintptr) int32 {
 func Xstrtod(tls *TLS, s uintptr, p uintptr) float64 { /* strtod.c:22:8: */
 	panic(todo(""))
 }
+
+func Xrint(tls *TLS, x float64) float64 {
+	switch {
+	case x == 0: // also +0 and -0
+		return 0
+	case math.IsInf(x, 0), math.IsNaN(x):
+		return x
+	case x >= math.MinInt64 && x <= math.MaxInt64 && float64(int64(x)) == x:
+		return x
+	case x >= 0:
+		return math.Floor(x + 0.5)
+	default:
+		return math.Ceil(x - 0.5)
+	}
+}

@@ -573,34 +573,6 @@ type int_fast32_t = int32_t   /* stdint.h:2:17 */
 type uint_fast16_t = uint32_t /* stdint.h:3:18 */
 type uint_fast32_t = uint32_t /* stdint.h:4:18 */
 
-var toint double_t = (float64(float64(1)) / 2.22044604925031308085e-16) /* rint.c:10:23 */
-
-func Xrint(tls *TLS, x float64) float64 { /* rint.c:12:8: */
-	bp := tls.Alloc(8)
-	defer tls.Free(8)
-
-	*(*struct{ f float64 })(unsafe.Pointer(bp /* u */)) = struct{ f float64 }{f: x}
-	var e int32 = (int32((*(*uint64_t)(unsafe.Pointer(bp /* &u */)) >> 52) & uint64_t(0x7ff)))
-	var s int32 = (int32(*(*uint64_t)(unsafe.Pointer(bp /* &u */)) >> 63))
-	var y double_t
-
-	if e >= (0x3ff + 52) {
-		return x
-	}
-	if s != 0 {
-		y = ((x - toint) + toint)
-	} else {
-		y = ((x + toint) - toint)
-	}
-	if y == float64(0) {
-		if s != 0 {
-			return -Float64FromFloat64(0.0)
-		}
-		return float64(0)
-	}
-	return y
-}
-
 type wint_t = uint32 /* alltypes.h:198:18 */
 
 type wctype_t = uint32 /* alltypes.h:203:23 */

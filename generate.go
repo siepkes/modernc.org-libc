@@ -220,7 +220,6 @@ func makeMuslWin(goos, goarch string) {
 		"src/env/putenv.c",
 		"src/env/setenv.c",
 		"src/env/unsetenv.c",
-		"src/math/rint.c",
 		"src/multibyte/wcrtomb.c",
 		"src/multibyte/wcsrtombs.c",
 		"src/multibyte/wcstombs.c",
