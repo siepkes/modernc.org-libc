@@ -6747,6 +6747,34 @@ func Xstrspn(tls *TLS, s uintptr, c uintptr) size_t { /* strspn.c:6:8: */
 	return (size_t((int64(s) - int64(a)) / 1))
 }
 
+var toint double_t = (float64(float64(1)) / 2.22044604925031308085e-16) /* rint.c:10:23 */
+
+func Xrint(tls *TLS, x float64) float64 { /* rint.c:12:8: */
+	bp := tls.Alloc(8)
+	defer tls.Free(8)
+
+	*(*struct{ f float64 })(unsafe.Pointer(bp /* u */)) = struct{ f float64 }{f: x}
+	var e int32 = (int32((*(*uint64_t)(unsafe.Pointer(bp /* &u */)) >> 52) & uint64(0x7ff)))
+	var s int32 = (int32(*(*uint64_t)(unsafe.Pointer(bp /* &u */)) >> 63))
+	var y double_t
+
+	if e >= (0x3ff + 52) {
+		return x
+	}
+	if s != 0 {
+		y = ((x - toint) + toint)
+	} else {
+		y = ((x + toint) - toint)
+	}
+	if y == float64(0) {
+		if s != 0 {
+			return -Float64FromFloat64(0.0)
+		}
+		return float64(0)
+	}
+	return y
+}
+
 func init() {
 	*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&X_CurrentRuneLocale)) + 0)) = uintptr(unsafe.Pointer(&X_DefaultRuneLocale)) // table.cpp.c:4092:41:
 }

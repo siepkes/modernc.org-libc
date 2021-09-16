@@ -136,10 +136,6 @@ func TestParseZone(t *testing.T) {
 }
 
 func TestRint(t *testing.T) {
-	if runtime.GOOS == "netbsd" {
-		t.Skip("TODO") //TODO
-	}
-
 	tls := NewTLS()
 	for itest, test := range []struct {
 		x, y float64
