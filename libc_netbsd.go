@@ -30,7 +30,6 @@ import (
 	"modernc.org/libc/netdb"
 	"modernc.org/libc/netinet/in"
 	"modernc.org/libc/pwd"
-	"modernc.org/libc/signal"
 	"modernc.org/libc/stdio"
 	"modernc.org/libc/sys/socket"
 	"modernc.org/libc/sys/stat"
@@ -112,7 +111,7 @@ func fwrite(fd int32, b []byte) (int, error) {
 }
 
 // unsigned long	___runetype(__ct_rune_t) __pure;
-func X___runetype(t *TLS, x types.X__ct_rune_t) ulong {
+func X___runetype(t *TLS, x int32) ulong {
 	panic(todo(""))
 }
 
@@ -123,7 +122,7 @@ func Xfprintf(t *TLS, stream, format, args uintptr) int32 {
 }
 
 // int usleep(useconds_t usec);
-func Xusleep(t *TLS, usec types.X__useconds_t) int32 {
+func Xusleep(t *TLS, usec uint32) int32 {
 	gotime.Sleep(gotime.Microsecond * gotime.Duration(usec))
 	return 0
 }
@@ -1644,19 +1643,20 @@ func X__ccgo_in6addr_anyp(t *TLS) uintptr {
 }
 
 func Xabort(t *TLS) {
-	if dmesgs {
-		dmesg("%v:", origin(1))
-	}
-	p := Xcalloc(t, 1, types.Size_t(unsafe.Sizeof(signal.Sigaction{})))
-	if p == 0 {
-		panic("OOM")
-	}
+	panic(todo("")) //TODO
+	// if dmesgs {
+	// 	dmesg("%v:", origin(1))
+	// }
+	// p := Xcalloc(t, 1, types.Size_t(unsafe.Sizeof(signal.Sigaction{})))
+	// if p == 0 {
+	// 	panic("OOM")
+	// }
 
-	(*signal.Sigaction)(unsafe.Pointer(p)).F__sigaction_u.F__sa_handler = signal.SIG_DFL
-	Xsigaction(t, signal.SIGABRT, p, 0)
-	Xfree(t, p)
-	unix.Kill(unix.Getpid(), syscall.Signal(signal.SIGABRT))
-	panic(todo("unrechable"))
+	// (*signal.Sigaction)(unsafe.Pointer(p)).F__sigaction_u.F__sa_handler = signal.SIG_DFL
+	// Xsigaction(t, signal.SIGABRT, p, 0)
+	// Xfree(t, p)
+	// unix.Kill(unix.Getpid(), syscall.Signal(signal.SIGABRT))
+	// panic(todo("unrechable"))
 }
 
 // int fflush(FILE *stream);

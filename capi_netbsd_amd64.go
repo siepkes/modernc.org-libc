@@ -322,6 +322,7 @@ var CAPI = map[string]struct{}{
 	"remove":                        {},
 	"rename":                        {},
 	"rewind":                        {},
+	"rint":                          {},
 	"rmdir":                         {},
 	"round":                         {},
 	"scalbn":                        {},

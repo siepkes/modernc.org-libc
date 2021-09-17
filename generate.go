@@ -67,7 +67,7 @@ func main() {
 			g = append(g, "pthreads.go")
 		}
 		makeMuslLinux(goos, goarch)
-	case "freebsd":
+	case "freebsd", "netbsd":
 		g = append(g, "libc_unix.go")
 		makeMuslFreeBSD(goos, goarch)
 	case "darwin":
@@ -596,6 +596,10 @@ func libcHeaders(paths []string) error {
 		}
 
 		// trc("%q: %v\n", path, err) //TODO-
+		if runtime.GOOS == "netbsd" && filepath.Base(path) == "fts" { //TODO
+			return nil
+		}
+
 		dir := path
 		ok := false
 		for _, v := range paths {
