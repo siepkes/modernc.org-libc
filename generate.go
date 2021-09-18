@@ -596,9 +596,6 @@ func libcHeaders(paths []string) error {
 		}
 
 		// trc("%q: %v\n", path, err) //TODO-
-		if runtime.GOOS == "netbsd" && filepath.Base(path) == "fts" { //TODO
-			return nil
-		}
 
 		dir := path
 		ok := false
@@ -615,9 +612,18 @@ func libcHeaders(paths []string) error {
 			return nil
 		}
 
-		src := fmt.Sprintf(`#include <%s.h>
-static char _;
-`, dir)
+		var src string
+		switch filepath.ToSlash(path) {
+		case "fts":
+			src = `
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fts.h>
+`
+		default:
+			src = fmt.Sprintf("#include <%s.h>\n", dir)
+		}
+		src += "static char _;\n"
 		fn := filepath.Join(dir, cfile)
 		if err := ioutil.WriteFile(fn, []byte(src), 0660); err != nil {
 			return err
