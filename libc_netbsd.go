@@ -52,6 +52,20 @@ type (
 var X__stderrp = Xstdout
 var X__stdinp = Xstdin
 var X__stdoutp = Xstdout
+var X__sF [3]stdio.FILE
+var X_tolower_tab_ = Xmalloc(nil, 2*65537)
+
+func init() {
+	for c := rune(0); c < 0xffff; c++ {
+		y := c
+		s := strings.ToLower(string(c))
+		a := []rune(s)
+		if len(a) != 0 {
+			y = a[0]
+		}
+		(*[65536]uint16)(unsafe.Pointer(X_tolower_tab_))[c+1] = uint16(y)
+	}
+}
 
 // include/stdio.h:486:extern int __isthreaded;
 var X__isthreaded int32
@@ -91,9 +105,18 @@ func (f file) close(t *TLS) int32 {
 }
 
 func newFile(t *TLS, fd int32) uintptr {
-	p := Xcalloc(t, 1, types.Size_t(unsafe.Sizeof(stdio.FILE{})))
-	if p == 0 {
-		return 0
+	var p uintptr
+	switch fd {
+	case unistd.STDIN_FILENO:
+		p = uintptr(unsafe.Pointer(&X__sF[0]))
+	case unistd.STDOUT_FILENO:
+		p = uintptr(unsafe.Pointer(&X__sF[1]))
+	case unistd.STDERR_FILENO:
+		p = uintptr(unsafe.Pointer(&X__sF[2]))
+	default:
+		if p = Xcalloc(t, 1, types.Size_t(unsafe.Sizeof(stdio.FILE{}))); p == 0 {
+			return 0
+		}
 	}
 	file(p).setFd(fd)
 	return p
@@ -1952,6 +1975,10 @@ func Xctime_r(t *TLS, timep, buf uintptr) uintptr {
 // void __assert(const char * func, const char * file, int line, const char *expr) __dead2;
 func X__assert(t *TLS, fn, file uintptr, line int32, expr uintptr) {
 	X__assert_fail(t, expr, file, uint32(line), fn)
+}
+
+func X__assert13(t *TLS, file uintptr, line int32, fn, msg uintptr) {
+	X__assert_fail(t, msg, file, uint32(line), fn)
 }
 
 // include/stdio.h:456:int	__swbuf(int, FILE *);
