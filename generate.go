@@ -67,9 +67,12 @@ func main() {
 			g = append(g, "pthreads.go")
 		}
 		makeMuslLinux(goos, goarch)
-	case "freebsd", "netbsd":
+	case "freebsd":
 		g = append(g, "libc_unix.go")
 		makeMuslFreeBSD(goos, goarch)
+	case "netbsd":
+		g = append(g, "libc_unix.go")
+		makeMuslNetBSD(goos, goarch)
 	case "darwin":
 		g = append(g, "libc_unix.go")
 		makeMuslDarwin(goos, goarch)
@@ -460,6 +463,96 @@ func makeMuslLinux(goos, goarch string) {
 		"src/thread/pthread_mutexattr_destroy.c",
 		"src/thread/pthread_mutexattr_init.c",
 		"src/thread/pthread_mutexattr_settype.c",
+	); err != nil {
+		fail(err)
+	}
+}
+
+func makeMuslNetBSD(goos, goarch string) {
+	wd, err := os.Getwd()
+	if err != nil {
+		fail(err)
+	}
+
+	if err := os.Chdir("musl"); err != nil {
+		fail(err)
+	}
+
+	var arch string
+	switch goarch {
+	case "amd64":
+		arch = "x86_64"
+	default:
+		fail(fmt.Errorf("unknown/unsupported GOARCH: %q", goarch))
+	}
+	defer func() {
+		if err := os.Chdir(wd); err != nil {
+			fail(err)
+		}
+	}()
+
+	run("mkdir", "-p", "obj/include/bits")
+	run("sh", "-c", fmt.Sprintf("sed -f ./tools/mkalltypes.sed ./arch/%s/bits/alltypes.h.in ./include/alltypes.h.in > obj/include/bits/alltypes.h", arch))
+	run("sh", "-c", fmt.Sprintf("cp arch/%s/bits/syscall.h.in obj/include/bits/syscall.h", arch))
+	run("sh", "-c", fmt.Sprintf("sed -n -e s/__NR_/SYS_/p < arch/%s/bits/syscall.h.in >> obj/include/bits/syscall.h", arch))
+	if _, err := runcc(
+		"-export-externs", "X",
+		"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,getnameinfo,gethostbyaddr_r,",
+		"-nostdinc",
+		"-nostdlib",
+		"-o", fmt.Sprintf("../musl_%s_%s.go", goos, goarch),
+		"-pkgname", "libc",
+		"-static-locals-prefix", "_s",
+
+		// Keep the order below, don't sort!
+		fmt.Sprintf("-I%s", filepath.Join("arch", arch)),
+		fmt.Sprintf("-I%s", "arch/generic"),
+		fmt.Sprintf("-I%s", "obj/src/internal"),
+		fmt.Sprintf("-I%s", "src/include"),
+		fmt.Sprintf("-I%s", "src/internal"),
+		fmt.Sprintf("-I%s", "obj/include"),
+		fmt.Sprintf("-I%s", "include"),
+		// Keep the order above, don't sort!
+
+		"copyright.c", // Inject legalese first
+
+		"../netbsd/ctype_.cpp.c",
+
+		// Keep the below lines sorted.
+		"src/ctype/isalnum.c",
+		"src/ctype/isalpha.c",
+		"src/ctype/isdigit.c",
+		"src/internal/floatscan.c",
+		"src/internal/intscan.c",
+		"src/internal/shgetc.c",
+		"src/math/copysignl.c",
+		"src/math/fabsl.c",
+		"src/math/fmodl.c",
+		"src/math/rint.c",
+		"src/math/scalbn.c",
+		"src/math/scalbnl.c",
+		"src/network/freeaddrinfo.c",
+		"src/network/getaddrinfo.c",
+		"src/network/gethostbyaddr.c",
+		"src/network/gethostbyaddr_r.c",
+		"src/network/gethostbyname.c",
+		"src/network/gethostbyname2.c",
+		"src/network/gethostbyname2_r.c",
+		"src/network/getnameinfo.c",
+		"src/network/h_errno.c",
+		"src/network/inet_aton.c",
+		"src/network/inet_ntop.c",
+		"src/network/inet_pton.c",
+		"src/network/lookup_ipliteral.c",
+		"src/network/lookup_name.c",
+		"src/network/lookup_serv.c",
+		"src/stdio/__toread.c",
+		"src/stdio/__uflow.c",
+		"src/stdlib/strtod.c",
+		"src/stdlib/strtol.c",
+		"src/string/strdup.c",
+		"src/string/strnlen.c",
+		"src/string/strspn.c",
 	); err != nil {
 		fail(err)
 	}

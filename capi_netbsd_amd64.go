@@ -3,8 +3,7 @@
 package libc // import "modernc.org/libc"
 
 var CAPI = map[string]struct{}{
-	"_CurrentRuneLocale":            {},
-	"_DefaultRuneLocale":            {},
+	"_C_ctype_tab_":                 {},
 	"_IO_putc":                      {},
 	"_ThreadRuneLocale":             {},
 	"___errno_location":             {},
@@ -104,6 +103,7 @@ var CAPI = map[string]struct{}{
 	"__toread_needs_stdio_exit":     {},
 	"__uflow":                       {},
 	"__xuname":                      {},
+	"_ctype_tab_":                   {},
 	"_exit":                         {},
 	"_obstack_begin":                {},
 	"_obstack_newchunk":             {},
