@@ -54,6 +54,7 @@ var X__stdinp = Xstdin
 var X__stdoutp = Xstdout
 var X__sF [3]stdio.FILE
 var X_tolower_tab_ = Xmalloc(nil, 2*65537)
+var X_toupper_tab_ = Xmalloc(nil, 2*65537)
 
 func init() {
 	for c := rune(0); c < 0xffff; c++ {
@@ -64,6 +65,13 @@ func init() {
 			y = a[0]
 		}
 		(*[65536]uint16)(unsafe.Pointer(X_tolower_tab_))[c+1] = uint16(y)
+		y = c
+		s = strings.ToUpper(string(c))
+		a = []rune(s)
+		if len(a) != 0 {
+			y = a[0]
+		}
+		(*[65536]uint16)(unsafe.Pointer(X_toupper_tab_))[c+1] = uint16(y)
 	}
 }
 

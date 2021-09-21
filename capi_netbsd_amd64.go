@@ -107,6 +107,7 @@ var CAPI = map[string]struct{}{
 	"_obstack_begin":                {},
 	"_obstack_newchunk":             {},
 	"_tolower_tab_":                 {},
+	"_toupper_tab_":                 {},
 	"abort":                         {},
 	"abs":                           {},
 	"accept":                        {},
