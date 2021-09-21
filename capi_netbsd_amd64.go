@@ -69,6 +69,7 @@ var CAPI = map[string]struct{}{
 	"__cmsg_nxthdr":                 {},
 	"__ctype_b_loc":                 {},
 	"__ctype_get_mb_cur_max":        {},
+	"__errno":                       {},
 	"__errno_location":              {},
 	"__error":                       {},
 	"__floatscan":                   {},

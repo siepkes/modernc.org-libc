@@ -2154,3 +2154,7 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 	}
 	return data
 }
+
+func X__errno(t *TLS) int32 {
+	return *(*int32)(unsafe.Pointer(X__errno_location(t)))
+}
