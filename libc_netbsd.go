@@ -103,8 +103,14 @@ func (f file) setErr() {
 }
 
 func (f file) close(t *TLS) int32 {
-	r := Xclose(t, f.fd())
-	Xfree(t, uintptr(f))
+	fd := f.fd()
+	r := Xclose(t, fd)
+	switch fd {
+	case unistd.STDIN_FILENO, unistd.STDOUT_FILENO, unistd.STDERR_FILENO:
+		X__sF[fd] = stdio.FILE{}
+	default:
+		Xfree(t, uintptr(f))
+	}
 	if r < 0 {
 		return stdio.EOF
 	}
