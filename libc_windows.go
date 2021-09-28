@@ -480,7 +480,7 @@ func Xopen64(t *TLS, pathname uintptr, flags int32, cmode uintptr) int32 {
 
 	var mode types.Mode_t
 	if cmode != 0 {
-		mode = *(*types.Mode_t)(unsafe.Pointer(cmode))
+		mode = (types.Mode_t)(VaUint32(&cmode))
 	}
 	// 	fdcwd := fcntl.AT_FDCWD
 	h, err := syscall.Open(GoString(pathname), int(flags), uint32(mode))

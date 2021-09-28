@@ -238,7 +238,7 @@ func Xopen(t *TLS, pathname uintptr, flags int32, args uintptr) int32 {
 func Xopen64(t *TLS, pathname uintptr, flags int32, args uintptr) int32 {
 	var mode types.Mode_t
 	if args != 0 {
-		mode = *(*types.Mode_t)(unsafe.Pointer(args))
+		mode = (types.Mode_t)(VaUint32(&args))
 	}
 	fdcwd := fcntl.AT_FDCWD
 	n, _, err := unix.Syscall6(unix.SYS_OPENAT, uintptr(fdcwd), pathname, uintptr(flags), uintptr(mode), 0, 0)
