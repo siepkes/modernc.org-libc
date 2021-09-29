@@ -994,7 +994,7 @@ func Bool%s(b bool) %s {
 		for _, v := range ints {
 			fmt.Fprintf(b, `
 func SetBitFieldPtr%s%s(p uintptr, v %s, off int, mask uint%[1]s) {
-	*(*uint%[1]s)(unsafe.Pointer(p)) = *(*uint%[1]s)(unsafe.Pointer(p))&^uint%[1]s(mask) | uint%[1]s(v<<off)&mask
+	*(*uint%[1]s)(unsafe.Pointer(p)) = *(*uint%[1]s)(unsafe.Pointer(p))&^uint%[1]s(mask) | uint%[1]s(v)<<off&mask
 }
 
 `, sz, capitalize(v), v)
@@ -1006,7 +1006,7 @@ func SetBitFieldPtr%s%s(p uintptr, v %s, off int, mask uint%[1]s) {
 		for _, v := range []int{8, 16, 32, 64} {
 			fmt.Fprintf(b, `
 func AssignBitFieldPtr%dInt%d(p uintptr, v int%[2]d, w, off int, mask uint%[1]d) int%[2]d {
-	*(*uint%[1]d)(unsafe.Pointer(p)) = *(*uint%[1]d)(unsafe.Pointer(p))&^uint%[1]d(mask) | uint%[1]d(v<<off)&mask
+	*(*uint%[1]d)(unsafe.Pointer(p)) = *(*uint%[1]d)(unsafe.Pointer(p))&^uint%[1]d(mask) | uint%[1]d(v)<<off&mask
 	s := %[2]d - w
 	return v << s >> s
 }
@@ -1020,7 +1020,7 @@ func AssignBitFieldPtr%dInt%d(p uintptr, v int%[2]d, w, off int, mask uint%[1]d)
 		for _, v := range []int{8, 16, 32, 64} {
 			fmt.Fprintf(b, `
 func AssignBitFieldPtr%dUint%d(p uintptr, v uint%[2]d, w, off int, mask uint%[1]d) uint%[2]d {
-	*(*uint%[1]d)(unsafe.Pointer(p)) = *(*uint%[1]d)(unsafe.Pointer(p))&^uint%[1]d(mask) | uint%[1]d(v<<off)&mask
+	*(*uint%[1]d)(unsafe.Pointer(p)) = *(*uint%[1]d)(unsafe.Pointer(p))&^uint%[1]d(mask) | uint%[1]d(v)<<off&mask
 	return v & uint%[2]d(mask >> off)
 }
 
