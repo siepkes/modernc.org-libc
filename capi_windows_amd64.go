@@ -313,7 +313,6 @@ var CAPI = map[string]struct{}{
 	"__ccgo_dmesg":                      {},
 	"__ccgo_in6addr_anyp":               {},
 	"__ccgo_sqlite3_log":                {},
-	"__ctype_b_loc":                     {},
 	"__ctype_get_mb_cur_max":            {},
 	"__env_rm_add":                      {},
 	"__errno_location":                  {},

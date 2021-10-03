@@ -398,6 +398,7 @@ func makeMuslLinux(goos, goarch string) {
 		"copyright.c", // Inject legalese first
 
 		// Keep the below lines sorted.
+		"src/ctype/__ctype_b_loc.c",
 		"src/ctype/isalnum.c",
 		"src/ctype/isalpha.c",
 		"src/ctype/isdigit.c",

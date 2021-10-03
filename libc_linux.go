@@ -42,6 +42,7 @@ import (
 
 var (
 	in6_addr_any in.In6_addr
+	_            = X__ctype_b_loc
 )
 
 type (

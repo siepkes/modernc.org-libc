@@ -71,7 +71,6 @@ var CAPI = map[string]struct{}{
 	"__ccgo_in6addr_anyp":           {},
 	"__ccgo_sqlite3_log":            {},
 	"__cmsg_nxthdr":                 {},
-	"__ctype_b_loc":                 {},
 	"__ctype_get_mb_cur_max":        {},
 	"__errno":                       {},
 	"__errno_location":              {},
