@@ -529,4 +529,4 @@ type Pollfd = struct {
 
 // Define some inlines helping to catch common problems.
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

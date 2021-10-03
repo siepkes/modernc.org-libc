@@ -936,4 +936,4 @@ type Stat = struct {
 	F__glibc_reserved [3]int64
 } /* stat.h:50:1 */
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

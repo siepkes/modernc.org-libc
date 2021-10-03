@@ -503,7 +503,7 @@ type X_IO_FILE = struct {
 	F_old_offset     X__off_t
 	F_cur_column     uint16
 	F_vtable_offset  int8
-	F_shortbuf       [1]int8
+	F_shortbuf       [1]uint8
 	_                [4]byte
 	F_lock           uintptr
 	F_offset         X__off64_t
@@ -513,7 +513,7 @@ type X_IO_FILE = struct {
 	F_freeres_buf    uintptr
 	F__pad5          Size_t
 	F_mode           int32
-	F_unused2        [20]int8
+	F_unused2        [20]uint8
 } /* __FILE.h:4:1 */
 
 type X__FILE = X_IO_FILE /* __FILE.h:5:25 */
@@ -537,4 +537,4 @@ type Fpos_t = X__fpos64_t /* stdio.h:86:20 */
 // If we are compiling with optimizing read this file.  It contains
 //    several optimizing inline functions and macros.
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

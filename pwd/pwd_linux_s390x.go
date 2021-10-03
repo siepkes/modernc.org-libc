@@ -781,4 +781,4 @@ type Passwd = struct {
 	Fpw_shell  uintptr
 } /* pwd.h:49:1 */
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

@@ -769,4 +769,4 @@ type Utimbuf = struct {
 	Fmodtime X__time_t
 } /* utime.h:36:1 */
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

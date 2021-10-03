@@ -2413,14 +2413,14 @@ type Pthread_t = uint64 /* pthreadtypes.h:27:27 */
 //    type is not exposed on purpose.
 type Pthread_mutexattr_t = struct {
 	_       [0]uint32
-	F__size [4]int8
+	F__size [4]uint8
 } /* pthreadtypes.h:36:3 */
 
 // Data structure for condition variable handling.  The structure of
 //    the attribute type is not exposed on purpose.
 type Pthread_condattr_t = struct {
 	_       [0]uint32
-	F__size [4]int8
+	F__size [4]uint8
 } /* pthreadtypes.h:45:3 */
 
 // Keys for thread-specific data
@@ -2431,7 +2431,7 @@ type Pthread_once_t = int32 /* pthreadtypes.h:53:30 */
 
 type Pthread_attr_t1 = struct {
 	_       [0]uint64
-	F__size [56]int8
+	F__size [56]uint8
 } /* pthreadtypes.h:56:1 */
 
 type Pthread_attr_t = Pthread_attr_t1 /* pthreadtypes.h:62:30 */
@@ -2446,7 +2446,7 @@ type Pthread_rwlock_t = struct{ F__data X__pthread_rwlock_arch_t } /* pthreadtyp
 
 type Pthread_rwlockattr_t = struct {
 	_       [0]uint64
-	F__size [8]int8
+	F__size [8]uint8
 } /* pthreadtypes.h:97:3 */
 
 // POSIX spinlock data type.
@@ -2456,12 +2456,12 @@ type Pthread_spinlock_t = int32 /* pthreadtypes.h:103:22 */
 //    deliberately not exposed.
 type Pthread_barrier_t = struct {
 	_       [0]uint64
-	F__size [32]int8
+	F__size [32]uint8
 } /* pthreadtypes.h:112:3 */
 
 type Pthread_barrierattr_t = struct {
 	_       [0]uint32
-	F__size [4]int8
+	F__size [4]uint8
 } /* pthreadtypes.h:118:3 */
 
 // Type for length arguments in socket calls.
@@ -2511,7 +2511,7 @@ type Sa_family_t = uint16 /* sockaddr.h:28:28 */
 // Structure describing a generic socket address.
 type Sockaddr = struct {
 	Fsa_family Sa_family_t
-	Fsa_data   [14]int8
+	Fsa_data   [14]uint8
 } /* socket.h:178:1 */
 
 // Structure large enough to hold any socket address (with the historical
@@ -2519,7 +2519,7 @@ type Sockaddr = struct {
 
 type Sockaddr_storage = struct {
 	Fss_family    Sa_family_t
-	F__ss_padding [118]int8
+	F__ss_padding [118]uint8
 	F__ss_align   uint64
 } /* socket.h:191:1 */
 
@@ -2745,7 +2745,7 @@ type In_addr = struct{ Fs_addr In_addr_t } /* in.h:31:1 */
 //    source route (this gets put into the header proper).
 type Ip_opts = struct {
 	Fip_dst  struct{ Fs_addr In_addr_t }
-	Fip_opts [40]int8
+	Fip_opts [40]uint8
 } /* in.h:142:1 */
 
 // Like `struct ip_mreq' but including interface specification by index.
@@ -2840,7 +2840,7 @@ type Group_req = struct {
 	_             [4]byte
 	Fgr_group     struct {
 		Fss_family    Sa_family_t
-		F__ss_padding [118]int8
+		F__ss_padding [118]uint8
 		F__ss_align   uint64
 	}
 } /* in.h:301:1 */
@@ -2850,12 +2850,12 @@ type Group_source_req = struct {
 	_              [4]byte
 	Fgsr_group     struct {
 		Fss_family    Sa_family_t
-		F__ss_padding [118]int8
+		F__ss_padding [118]uint8
 		F__ss_align   uint64
 	}
 	Fgsr_source struct {
 		Fss_family    Sa_family_t
-		F__ss_padding [118]int8
+		F__ss_padding [118]uint8
 		F__ss_align   uint64
 	}
 } /* in.h:310:1 */
@@ -2874,14 +2874,14 @@ type Group_filter = struct {
 	_             [4]byte
 	Fgf_group     struct {
 		Fss_family    Sa_family_t
-		F__ss_padding [118]int8
+		F__ss_padding [118]uint8
 		F__ss_align   uint64
 	}
 	Fgf_fmode  Uint32_t
 	Fgf_numsrc Uint32_t
 	Fgf_slist  [1]struct {
 		Fss_family    Sa_family_t
-		F__ss_padding [118]int8
+		F__ss_padding [118]uint8
 		F__ss_align   uint64
 	}
 } /* in.h:345:1 */
@@ -3112,4 +3112,4 @@ type Addrinfo = struct {
 	Fai_next      uintptr
 } /* netdb.h:565:1 */
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

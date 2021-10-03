@@ -776,4 +776,4 @@ type Group = struct {
 	Fgr_mem    uintptr
 } /* grp.h:42:1 */
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

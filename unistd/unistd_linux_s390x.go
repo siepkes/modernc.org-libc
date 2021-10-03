@@ -1582,4 +1582,4 @@ type Socklen_t = X__socklen_t /* unistd.h:274:21 */
 //    License along with the GNU C Library; if not, see
 //    <https://www.gnu.org/licenses/>.
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

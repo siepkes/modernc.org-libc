@@ -1520,14 +1520,14 @@ type Pthread_t = uint64 /* pthreadtypes.h:27:27 */
 //    type is not exposed on purpose.
 type Pthread_mutexattr_t = struct {
 	_       [0]uint32
-	F__size [4]int8
+	F__size [4]uint8
 } /* pthreadtypes.h:36:3 */
 
 // Data structure for condition variable handling.  The structure of
 //    the attribute type is not exposed on purpose.
 type Pthread_condattr_t = struct {
 	_       [0]uint32
-	F__size [4]int8
+	F__size [4]uint8
 } /* pthreadtypes.h:45:3 */
 
 // Keys for thread-specific data
@@ -1538,7 +1538,7 @@ type Pthread_once_t = int32 /* pthreadtypes.h:53:30 */
 
 type Pthread_attr_t1 = struct {
 	_       [0]uint64
-	F__size [56]int8
+	F__size [56]uint8
 } /* pthreadtypes.h:56:1 */
 
 type Pthread_attr_t = Pthread_attr_t1 /* pthreadtypes.h:62:30 */
@@ -1553,7 +1553,7 @@ type Pthread_rwlock_t = struct{ F__data X__pthread_rwlock_arch_t } /* pthreadtyp
 
 type Pthread_rwlockattr_t = struct {
 	_       [0]uint64
-	F__size [8]int8
+	F__size [8]uint8
 } /* pthreadtypes.h:97:3 */
 
 // POSIX spinlock data type.
@@ -1563,12 +1563,12 @@ type Pthread_spinlock_t = int32 /* pthreadtypes.h:103:22 */
 //    deliberately not exposed.
 type Pthread_barrier_t = struct {
 	_       [0]uint64
-	F__size [32]int8
+	F__size [32]uint8
 } /* pthreadtypes.h:112:3 */
 
 type Pthread_barrierattr_t = struct {
 	_       [0]uint32
-	F__size [4]int8
+	F__size [4]uint8
 } /* pthreadtypes.h:118:3 */
 
 // Copyright (C) 1991-2020 Free Software Foundation, Inc.
@@ -1786,7 +1786,7 @@ type X_ftsent = struct {
 	Ffts_flags   uint16
 	Ffts_instr   uint16
 	Ffts_statp   uintptr
-	Ffts_name    [1]int8
+	Ffts_name    [1]uint8
 	_            [7]byte
 } /* fts.h:58:2 */
 
@@ -1890,4 +1890,4 @@ type FTS = struct {
 
 type FTSENT = X_ftsent /* fts.h:147:3 */
 
-var _ int8 /* gen.c:5:13: */
+var _ uint8 /* gen.c:5:13: */

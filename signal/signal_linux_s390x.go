@@ -1319,7 +1319,7 @@ type Sigval_t = X__sigval_t /* sigval_t.h:16:20 */
 // Forward declaration.
 type Pthread_attr_t1 = struct {
 	_       [0]uint64
-	F__size [56]int8
+	F__size [56]uint8
 } /* sigevent_t.h:17:9 */
 
 // Determine the wordsize from the preprocessor defines.
@@ -2168,14 +2168,14 @@ type Pthread_t = uint64 /* pthreadtypes.h:27:27 */
 //    type is not exposed on purpose.
 type Pthread_mutexattr_t = struct {
 	_       [0]uint32
-	F__size [4]int8
+	F__size [4]uint8
 } /* pthreadtypes.h:36:3 */
 
 // Data structure for condition variable handling.  The structure of
 //    the attribute type is not exposed on purpose.
 type Pthread_condattr_t = struct {
 	_       [0]uint32
-	F__size [4]int8
+	F__size [4]uint8
 } /* pthreadtypes.h:45:3 */
 
 // Keys for thread-specific data
@@ -2194,7 +2194,7 @@ type Pthread_rwlock_t = struct{ F__data X__pthread_rwlock_arch_t } /* pthreadtyp
 
 type Pthread_rwlockattr_t = struct {
 	_       [0]uint64
-	F__size [8]int8
+	F__size [8]uint8
 } /* pthreadtypes.h:97:3 */
 
 // POSIX spinlock data type.
@@ -2204,12 +2204,12 @@ type Pthread_spinlock_t = int32 /* pthreadtypes.h:103:22 */
 //    deliberately not exposed.
 type Pthread_barrier_t = struct {
 	_       [0]uint64
-	F__size [32]int8
+	F__size [32]uint8
 } /* pthreadtypes.h:112:3 */
 
 type Pthread_barrierattr_t = struct {
 	_       [0]uint32
-	F__size [4]int8
+	F__size [4]uint8
 } /* pthreadtypes.h:118:3 */
 
 // System-specific extensions.
@@ -2231,4 +2231,4 @@ type Pthread_barrierattr_t = struct {
 //    License along with the GNU C Library; if not, see
 //    <https://www.gnu.org/licenses/>.
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

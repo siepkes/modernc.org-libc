@@ -1012,4 +1012,4 @@ type Termios = struct {
 
 // #define TTYDEFCHARS to include an array of default control characters.
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

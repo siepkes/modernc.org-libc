@@ -1047,4 +1047,4 @@ type X__locale_t = uintptr /* __locale_t.h:42:32 */
 
 type Locale_t = X__locale_t /* locale_t.h:24:20 */
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

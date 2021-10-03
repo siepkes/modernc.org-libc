@@ -930,4 +930,4 @@ type X__float128 = float64        /* <builtin>:47:21 */
 // This administrivia gets added to the end of limits.h
 //    if the system has its own version of limits.h.
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */

@@ -878,7 +878,7 @@ type Dirent = struct {
 	Fd_off    X__off64_t
 	Fd_reclen uint16
 	Fd_type   uint8
-	Fd_name   [256]int8
+	Fd_name   [256]uint8
 	_         [5]byte
 } /* dirent.h:22:1 */
 
@@ -900,4 +900,4 @@ type Dirent = struct {
 //    License along with the GNU C Library; if not, see
 //    <https://www.gnu.org/licenses/>.
 
-var _ int8 /* gen.c:2:13: */
+var _ uint8 /* gen.c:2:13: */
