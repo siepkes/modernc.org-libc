@@ -62,6 +62,7 @@ var CAPI = map[string]struct{}{
 	"__builtin_sub_overflowInt64":      {},
 	"__builtin_trap":                   {},
 	"__builtin_unreachable":            {},
+	"__ccgo_dmesg":                     {},
 	"__ccgo_getMutexType":              {},
 	"__ccgo_in6addr_anyp":              {},
 	"__ccgo_pthreadAttrGetDetachState": {},

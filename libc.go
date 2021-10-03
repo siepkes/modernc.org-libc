@@ -756,8 +756,8 @@ func Xmemset(t *TLS, s uintptr, c int32, n types.Size_t) uintptr {
 	if n != 0 {
 		c := byte(c & 0xff)
 
-		//this will make sure that on platforms where they are not equally alligned
-		//we clear out the first few bytes until allignment
+		// This will make sure that on platforms where they are not equally aligned we
+		// clear out the first few bytes until allignment
 		bytesBeforeAllignment := s % unsafe.Alignof(uint64(0))
 		if bytesBeforeAllignment > uintptr(n) {
 			bytesBeforeAllignment = uintptr(n)
@@ -786,13 +786,9 @@ func Xmemset(t *TLS, s uintptr, c int32, n types.Size_t) uintptr {
 
 // void *memcpy(void *dest, const void *src, size_t n);
 func Xmemcpy(t *TLS, dest, src uintptr, n types.Size_t) (r uintptr) {
-	if n == 0 {
-		return dest
+	if n != 0 {
+		copy((*RawMem)(unsafe.Pointer(dest))[:n:n], (*RawMem)(unsafe.Pointer(src))[:n:n])
 	}
-
-	s := (*RawMem)(unsafe.Pointer(src))[:n:n]
-	d := (*RawMem)(unsafe.Pointer(dest))[:n:n]
-	copy(d, s)
 	return dest
 }
 
@@ -1295,4 +1291,10 @@ func AtExit(f func()) {
 	atExitMu.Lock()
 	atExit = append(atExit, f)
 	atExitMu.Unlock()
+}
+
+func X__ccgo_dmesg(t *TLS, fmt uintptr, va uintptr) {
+	if dmesgs {
+		dmesg("%s", printf(fmt, va))
+	}
 }

@@ -5,6 +5,7 @@
 package libc // import "modernc.org/libc"
 
 import (
+	"encoding/hex"
 	"runtime"
 	"testing"
 	"unsafe"
@@ -156,6 +157,28 @@ func TestRint(t *testing.T) {
 	} {
 		if g, e := Xrint(tls, test.x), test.y; g != e {
 			t.Errorf("#%d: x %v, got %v, expected %v", itest, test.x, g, e)
+		}
+	}
+}
+
+var testBuf [67]byte
+
+func TestMemset(t *testing.T) {
+	v := 0
+	for start := 0; start < len(testBuf); start++ {
+		for n := 0; n < len(testBuf)-start; n++ {
+			for x := range testBuf {
+				testBuf[x] = byte(v)
+				v++
+			}
+			for x := start; x < start+n; x++ {
+				testBuf[x] = byte(v)
+			}
+			e := testBuf
+			Xmemset(nil, uintptr(unsafe.Pointer(&testBuf[start])), int32(v), size_t(n))
+			if testBuf != e {
+				t.Fatalf("start %v, v %#x n %v, exp\n%s\ngot\n%s", start, byte(v), n, hex.Dump(e[:]), hex.Dump(testBuf[:]))
+			}
 		}
 	}
 }
