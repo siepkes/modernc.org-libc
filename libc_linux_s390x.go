@@ -139,17 +139,19 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 
 // void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
 func Xmmap64(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, offset types.Off_t) uintptr {
-	data, _, err := unix.Syscall6(unix.SYS_MMAP, addr, uintptr(length), uintptr(prot), uintptr(flags), uintptr(fd), uintptr(offset))
+	// https://github.com/golang/go/blob/7d822af4500831d131562f17dcf53374469d823e/src/syscall/syscall_linux_s390x.go#L77
+	args := [6]uintptr{addr, uintptr(length), uintptr(prot), uintptr(flags), uintptr(fd), uintptr(offset)}
+	data, _, err := unix.Syscall(unix.SYS_MMAP, uintptr(unsafe.Pointer(&args[0])), 0, 0)
 	if err != 0 {
 		// if dmesgs {
-		// 	dmesg("%v: %v", origin(1), err)
+		// 	dmesg("%v: addr %#x, length %#x, prot %#x, flags %#x, fd %v, offset %#x: %v", origin(1), addr, length, prot, flags, fd, offset, err)
 		// }
 		t.setErrno(err)
 		return ^uintptr(0) // (void*)-1
 	}
 
 	// if dmesgs {
-	// 	dmesg("%v: %#x", origin(1), data)
+	// 	dmesg("%v: addr %#x, length %#x, prot %#x, flags %#x, fd %v, offset %#x: ok", origin(1), addr, length, prot, flags, fd, offset)
 	// }
 	return data
 }
