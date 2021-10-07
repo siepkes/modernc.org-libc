@@ -161,24 +161,34 @@ func TestRint(t *testing.T) {
 	}
 }
 
-var testBuf [67]byte
+var testMemsetBuf [67]byte
 
 func TestMemset(t *testing.T) {
 	v := 0
-	for start := 0; start < len(testBuf); start++ {
-		for n := 0; n < len(testBuf)-start; n++ {
-			for x := range testBuf {
-				testBuf[x] = byte(v)
+	for start := 0; start < len(testMemsetBuf); start++ {
+		for n := 0; n < len(testMemsetBuf)-start; n++ {
+			for x := range testMemsetBuf {
+				testMemsetBuf[x] = byte(v)
 				v++
 			}
 			for x := start; x < start+n; x++ {
-				testBuf[x] = byte(v)
+				testMemsetBuf[x] = byte(v)
 			}
-			e := testBuf
-			Xmemset(nil, uintptr(unsafe.Pointer(&testBuf[start])), int32(v), size_t(n))
-			if testBuf != e {
-				t.Fatalf("start %v, v %#x n %v, exp\n%s\ngot\n%s", start, byte(v), n, hex.Dump(e[:]), hex.Dump(testBuf[:]))
+			e := testMemsetBuf
+			Xmemset(nil, uintptr(unsafe.Pointer(&testMemsetBuf[start])), int32(v), size_t(n))
+			if testMemsetBuf != e {
+				t.Fatalf("start %v, v %#x n %v, exp\n%s\ngot\n%s", start, byte(v), n, hex.Dump(e[:]), hex.Dump(testMemsetBuf[:]))
 			}
 		}
 	}
+}
+
+
+const testGetentropySize = 100
+
+var testGetentropyBuf [testGetentropySize]byte
+
+func TestGetentropy(t *testing.T) {
+	Xgetentropy(NewTLS(), uintptr(unsafe.Pointer(&testGetentropyBuf[0])), testGetentropySize)
+	t.Logf("\n%s", hex.Dump(testGetentropyBuf[:]))
 }
