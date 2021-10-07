@@ -183,7 +183,6 @@ func TestMemset(t *testing.T) {
 	}
 }
 
-
 const testGetentropySize = 100
 
 var testGetentropyBuf [testGetentropySize]byte
@@ -191,4 +190,28 @@ var testGetentropyBuf [testGetentropySize]byte
 func TestGetentropy(t *testing.T) {
 	Xgetentropy(NewTLS(), uintptr(unsafe.Pointer(&testGetentropyBuf[0])), testGetentropySize)
 	t.Logf("\n%s", hex.Dump(testGetentropyBuf[:]))
+}
+
+func TestReallocArray(t *testing.T) {
+	const size = 16
+	tls := NewTLS()
+	p := Xmalloc(tls, size)
+	if p == 0 {
+		t.Fatal()
+	}
+
+	for i := 0; i < size; i++ {
+		(*RawMem)(unsafe.Pointer(p))[i] = byte(i ^ 0x55)
+	}
+
+	q := Xreallocarray(tls, p, 2, size)
+	if q == 0 {
+		t.Fatal()
+	}
+
+	for i := 0; i < size; i++ {
+		if g, e := (*RawMem)(unsafe.Pointer(q))[i], byte(i^0x55); g != e {
+			t.Fatal(i, g, e)
+		}
+	}
 }

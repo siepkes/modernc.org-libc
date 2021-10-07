@@ -258,6 +258,11 @@ func X__builtin_popcount(t *TLS, x uint32) int32 {
 	return int32(mbits.OnesCount32(x))
 }
 
+// int __builtin_popcountl (unsigned long x)
+func X__builtin_popcountl(t *TLS, x ulong) int32 {
+	return int32(mbits.OnesCount64(uint64(x)))
+}
+
 // char * __builtin___strcpy_chk (char *dest, const char *src, size_t os);
 func X__builtin___strcpy_chk(t *TLS, dest, src uintptr, os types.Size_t) uintptr {
 	return Xstrcpy(t, dest, src)
@@ -1292,4 +1297,15 @@ func Xgetentropy(t *TLS, buffer uintptr, length size_t) int32 {
 	}
 
 	return 0
+}
+
+// void * reallocarray(void *ptr, size_t nmemb, size_t size);
+func Xreallocarray(t *TLS, ptr uintptr, nmemb, size size_t) uintptr {
+	hi, lo := mathutil.MulUint128_64(uint64(nmemb), uint64(size))
+	if hi != 0 || lo > uint64(unsafe.Sizeof(RawMem{})) {
+		t.setErrno(errno.ENOMEM)
+		return 0
+	}
+
+	return Xrealloc(t, ptr, size_t(lo))
 }
