@@ -1497,7 +1497,7 @@ func Xstrerror(t *TLS, errnum int32) uintptr {
 
 // void *dlopen(const char *filename, int flags);
 func Xdlopen(t *TLS, filename uintptr, flags int32) uintptr {
-	panic(todo(""))
+	panic(todo("%q", GoString(filename)))
 }
 
 // char *dlerror(void);

@@ -25,6 +25,8 @@ var CAPI = map[string]struct{}{
 	"__builtin_bswap16":             {},
 	"__builtin_bswap32":             {},
 	"__builtin_bswap64":             {},
+	"__builtin_clz":                 {},
+	"__builtin_clzl":                {},
 	"__builtin_clzll":               {},
 	"__builtin_constant_p_impl":     {},
 	"__builtin_copysign":            {},
@@ -432,4 +434,6 @@ var CAPI = map[string]struct{}{
 	"wcwidth":                       {},
 	"write":                         {},
 	"zero_struct_address":           {},
+	"longjmp":                       {},
+	"setjmp":                        {},
 }

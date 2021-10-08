@@ -220,6 +220,8 @@ func write(b []byte) (int, error) {
 
 func X__builtin_abort(t *TLS)                                         { Xabort(t) }
 func X__builtin_abs(t *TLS, j int32) int32                            { return Xabs(t, j) }
+func X__builtin_clz(t *TLS, n uint32) int32                           { return int32(mbits.LeadingZeros32(n)) }
+func X__builtin_clzl(t *TLS, n ulong) int32                           { return int32(mbits.LeadingZeros64(uint64(n))) }
 func X__builtin_clzll(t *TLS, n uint64) int32                         { return int32(mbits.LeadingZeros64(n)) }
 func X__builtin_constant_p_impl()                                     { panic(todo("internal error: should never be called")) }
 func X__builtin_copysign(t *TLS, x, y float64) float64                { return Xcopysign(t, x, y) }
@@ -1308,4 +1310,14 @@ func Xreallocarray(t *TLS, ptr uintptr, nmemb, size size_t) uintptr {
 	}
 
 	return Xrealloc(t, ptr, size_t(lo))
+}
+
+// int setjmp(jmp_buf env);
+func Xsetjmp(t *TLS, env uintptr) int32 {
+	panic(todo(""))
+}
+
+// void longjmp(jmp_buf env, int val);
+func Xlongjmp(t *TLS, env uintptr, val int32) {
+	panic(todo(""))
 }
