@@ -681,4 +681,8 @@ var CAPI = map[string]struct{}{
 	"wsprintfW":                         {},
 	"longjmp":                           {},
 	"setjmp":                            {},
+	"_longjmp":                          {},
+	"_setjmp":                           {},
+	"mkostemp":                          {},
+	"getrandom":                         {},
 }

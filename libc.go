@@ -1321,3 +1321,29 @@ func Xsetjmp(t *TLS, env uintptr) int32 {
 func Xlongjmp(t *TLS, env uintptr, val int32) {
 	panic(todo(""))
 }
+
+// https://linux.die.net/man/3/_setjmp
+//
+// The _longjmp() and _setjmp() functions shall be equivalent to longjmp() and
+// setjmp(), respectively, with the additional restriction that _longjmp() and
+// _setjmp() shall not manipulate the signal mask.
+
+// int _setjmp(jmp_buf env);
+func X_setjmp(t *TLS, env uintptr) int32 {
+	panic(todo(""))
+}
+
+// void _longjmp(jmp_buf env, int val);
+func X_longjmp(t *TLS, env uintptr, val int32) {
+	panic(todo(""))
+}
+
+// int mkostemp(char *template, int flags);
+func Xmkostemp(t *TLS, template uintptr, flags int32) int32 {
+	panic(todo(""))
+}
+
+// ssize_t getrandom(void *buf, size_t buflen, unsigned int flags);
+func getrandom(t *TLS, buf uintptr, buflen size_t, flags uint32) ssize_t {
+	panic(todo(""))
+}

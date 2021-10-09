@@ -469,3 +469,8 @@ func Xuuid_unparse(t *TLS, uu uuid.Uuid_t, out uintptr) {
 func Xuuid_parse(t *TLS, in uintptr, uu uuid.Uuid_t) int32 {
 	panic(todo(""))
 }
+
+// void uuid_copy(uuid_t dst, uuid_t src);
+func Xuuid_copy(t *TLS, dst, dts uuid.Uuid_t) {
+	panic(todo(""))
+}

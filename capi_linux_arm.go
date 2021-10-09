@@ -454,4 +454,9 @@ var CAPI = map[string]struct{}{
 	"zero_struct_address":              {},
 	"longjmp":                          {},
 	"setjmp":                           {},
+	"_longjmp":                         {},
+	"_setjmp":                          {},
+	"mkostemp":                         {},
+	"fstatfs":                          {},
+	"getrandom":                        {},
 }

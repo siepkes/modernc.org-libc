@@ -1993,3 +1993,8 @@ func Xpwrite(t *TLS, fd int32, buf uintptr, count types.Size_t, offset types.Off
 	}
 	return types.Ssize_t(n)
 }
+
+// int fstatfs(int fd, struct statfs *buf);
+func Xfstatfs(t *TLS, fd int32, buf uintptr) int32 {
+	panic(todo(""))
+}
