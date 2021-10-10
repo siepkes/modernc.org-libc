@@ -1281,7 +1281,7 @@ type X__pthread_rwlock_arch_t = struct {
 	F__pad1          [7]uint8
 	F__pad2          uint64
 	F__flags         uint32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 } /* pthreadtypes-arch.h:65:1 */
 
 // Common definition of pthread_mutex_t.
@@ -1686,18 +1686,18 @@ type X__itimer_which_t = int32 /* time.h:117:13 */
 
 // ISO C `broken-down time' structure.
 type Tm = struct {
-	Ftm_sec    int32
-	Ftm_min    int32
-	Ftm_hour   int32
-	Ftm_mday   int32
-	Ftm_mon    int32
-	Ftm_year   int32
-	Ftm_wday   int32
-	Ftm_yday   int32
-	Ftm_isdst  int32
-	_          [4]byte
-	Ftm_gmtoff int64
-	Ftm_zone   uintptr
+	Ftm_sec      int32
+	Ftm_min      int32
+	Ftm_hour     int32
+	Ftm_mday     int32
+	Ftm_mon      int32
+	Ftm_year     int32
+	Ftm_wday     int32
+	Ftm_yday     int32
+	Ftm_isdst    int32
+	F__ccgo_pad1 [4]byte
+	Ftm_gmtoff   int64
+	Ftm_zone     uintptr
 } /* struct_tm.h:7:1 */
 
 // NB: Include guard matches what <linux/time.h> uses.

@@ -1299,7 +1299,7 @@ type Sigaction = struct {
 	F__sigaction_handler struct{ Fsa_handler X__sighandler_t }
 	Fsa_mask             X__sigset_t
 	Fsa_flags            int32
-	_                    [4]byte
+	F__ccgo_pad1         [4]byte
 	Fsa_restorer         uintptr
 } /* sigaction.h:27:1 */
 
@@ -1562,10 +1562,10 @@ type X_xstate = struct {
 
 // Structure describing a signal stack.
 type Stack_t = struct {
-	Fss_sp    uintptr
-	Fss_flags int32
-	_         [4]byte
-	Fss_size  Size_t
+	Fss_sp       uintptr
+	Fss_flags    int32
+	F__ccgo_pad1 [4]byte
+	Fss_size     Size_t
 } /* stack_t.h:31:5 */
 
 // This will define `ucontext_t' and `mcontext_t'.
@@ -1735,9 +1735,9 @@ type Ucontext_t = Ucontext_t1 /* ucontext.h:151:5 */
 
 // Structure describing a signal stack (obsolete).
 type Sigstack = struct {
-	Fss_sp      uintptr
-	Fss_onstack int32
-	_           [4]byte
+	Fss_sp       uintptr
+	Fss_onstack  int32
+	F__ccgo_pad1 [4]byte
 } /* struct_sigstack.h:23:1 */
 
 // Some of the functions for handling signals in threaded programs must
@@ -1870,7 +1870,7 @@ type X__pthread_rwlock_arch_t = struct {
 	F__pad1          [7]uint8
 	F__pad2          uint64
 	F__flags         uint32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 } /* pthreadtypes-arch.h:65:1 */
 
 // Common definition of pthread_mutex_t.

@@ -2078,7 +2078,7 @@ type X__pthread_rwlock_arch_t = struct {
 	F__pad1          [7]uint8
 	F__pad2          uint64
 	F__flags         uint32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 } /* pthreadtypes-arch.h:65:1 */
 
 // Common definition of pthread_mutex_t.
@@ -2240,21 +2240,21 @@ type Sockaddr_storage = struct {
 type Msghdr = struct {
 	Fmsg_name       uintptr
 	Fmsg_namelen    Socklen_t
-	_               [4]byte
+	F__ccgo_pad1    [4]byte
 	Fmsg_iov        uintptr
 	Fmsg_iovlen     Size_t
 	Fmsg_control    uintptr
 	Fmsg_controllen Size_t
 	Fmsg_flags      int32
-	_               [4]byte
+	F__ccgo_pad2    [4]byte
 } /* socket.h:254:1 */
 
 // Structure used for storage of ancillary data object information.
 type Cmsghdr = struct {
-	_           [0]uint64
-	Fcmsg_len   Size_t
-	Fcmsg_level int32
-	Fcmsg_type  int32
+	F__ccgo_pad1 [0]uint64
+	Fcmsg_len    Size_t
+	Fcmsg_level  int32
+	Fcmsg_type   int32
 } /* socket.h:272:1 */
 
 // Ugly workaround for unclean kernel headers.
@@ -2454,7 +2454,7 @@ type Ipv6_mreq = struct {
 // Multicast group request.
 type Group_req = struct {
 	Fgr_interface Uint32_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fgr_group     struct {
 		Fss_family    Sa_family_t
 		F__ss_padding [118]int8
@@ -2464,7 +2464,7 @@ type Group_req = struct {
 
 type Group_source_req = struct {
 	Fgsr_interface Uint32_t
-	_              [4]byte
+	F__ccgo_pad1   [4]byte
 	Fgsr_group     struct {
 		Fss_family    Sa_family_t
 		F__ss_padding [118]int8
@@ -2488,7 +2488,7 @@ type Ip_msfilter = struct {
 
 type Group_filter = struct {
 	Fgf_interface Uint32_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fgf_group     struct {
 		Fss_family    Sa_family_t
 		F__ss_padding [118]int8

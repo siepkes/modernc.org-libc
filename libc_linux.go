@@ -1495,6 +1495,11 @@ func Xstrerror(t *TLS, errnum int32) uintptr {
 	return uintptr(unsafe.Pointer(&strerrorBuf[0]))
 }
 
+// int strerror_r(int errnum, char *buf, size_t buflen);
+func Xstrerror_r(t *TLS, errnum int32, buf uintptr, buflen size_t) int32 {
+	panic(todo(""))
+}
+
 // void *dlopen(const char *filename, int flags);
 func Xdlopen(t *TLS, filename uintptr, flags int32) uintptr {
 	panic(todo("%q", GoString(filename)))
@@ -1996,5 +2001,21 @@ func Xpwrite(t *TLS, fd int32, buf uintptr, count types.Size_t, offset types.Off
 
 // int fstatfs(int fd, struct statfs *buf);
 func Xfstatfs(t *TLS, fd int32, buf uintptr) int32 {
-	panic(todo(""))
+	if err := unix.Fstatfs(int(fd), (*unix.Statfs_t)(unsafe.Pointer(buf))); err != nil {
+		t.setErrno(err)
+		return -1
+	}
+
+	return 0
+}
+
+// ssize_t getrandom(void *buf, size_t buflen, unsigned int flags);
+func Xgetrandom(t *TLS, buf uintptr, buflen size_t, flags uint32) ssize_t {
+	n, err := unix.Getrandom((*RawMem)(unsafe.Pointer(buf))[:buflen], int(flags))
+	if err != nil {
+		t.setErrno(err)
+		return -1
+	}
+
+	return ssize_t(n)
 }

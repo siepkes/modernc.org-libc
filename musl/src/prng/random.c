@@ -22,7 +22,9 @@ static int n = 31;
 static int i = 3;
 static int j = 0;
 static uint32_t *x = init+1;
-static volatile int lock[1];
+
+// static volatile int lock[1];
+static void *lock; // *sync.Mutec
 
 static uint32_t lcg31(uint32_t x) {
 	return (1103515245*x + 12345) & 0x7fffffff;

@@ -416,18 +416,18 @@ type Time_t = X__time_t /* time_t.h:7:18 */
 
 // ISO C `broken-down time' structure.
 type Tm = struct {
-	Ftm_sec    int32
-	Ftm_min    int32
-	Ftm_hour   int32
-	Ftm_mday   int32
-	Ftm_mon    int32
-	Ftm_year   int32
-	Ftm_wday   int32
-	Ftm_yday   int32
-	Ftm_isdst  int32
-	_          [4]byte
-	Ftm_gmtoff int64
-	Ftm_zone   uintptr
+	Ftm_sec      int32
+	Ftm_min      int32
+	Ftm_hour     int32
+	Ftm_mday     int32
+	Ftm_mon      int32
+	Ftm_year     int32
+	Ftm_wday     int32
+	Ftm_yday     int32
+	Ftm_isdst    int32
+	F__ccgo_pad1 [4]byte
+	Ftm_gmtoff   int64
+	Ftm_zone     uintptr
 } /* struct_tm.h:7:1 */
 
 // NB: Include guard matches what <linux/time.h> uses.

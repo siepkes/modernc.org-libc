@@ -412,6 +412,7 @@ func makeMuslLinux(goos, goarch string) {
 		"src/internal/floatscan.c",
 		"src/internal/intscan.c",
 		"src/internal/shgetc.c",
+		"src/locale/localeconv.c",
 		"src/math/__fpclassify.c",
 		"src/math/__fpclassifyf.c",
 		"src/math/__fpclassifyl.c",

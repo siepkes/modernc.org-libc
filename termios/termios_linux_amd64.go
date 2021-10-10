@@ -875,15 +875,15 @@ type Speed_t = uint32  /* termios.h:24:22 */
 type Tcflag_t = uint32 /* termios.h:25:22 */
 
 type Termios = struct {
-	Fc_iflag  Tcflag_t
-	Fc_oflag  Tcflag_t
-	Fc_cflag  Tcflag_t
-	Fc_lflag  Tcflag_t
-	Fc_line   Cc_t
-	Fc_cc     [32]Cc_t
-	_         [3]byte
-	Fc_ispeed Speed_t
-	Fc_ospeed Speed_t
+	Fc_iflag     Tcflag_t
+	Fc_oflag     Tcflag_t
+	Fc_cflag     Tcflag_t
+	Fc_lflag     Tcflag_t
+	Fc_line      Cc_t
+	Fc_cc        [32]Cc_t
+	F__ccgo_pad1 [3]byte
+	Fc_ispeed    Speed_t
+	Fc_ospeed    Speed_t
 } /* termios.h:28:1 */
 
 // -

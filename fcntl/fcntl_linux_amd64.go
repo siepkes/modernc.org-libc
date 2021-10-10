@@ -809,13 +809,13 @@ type X__sig_atomic_t = int32 /* types.h:212:13 */
 // Not necessary, we always have 64-bit offsets.
 
 type Flock = struct {
-	Fl_type   int16
-	Fl_whence int16
-	_         [4]byte
-	Fl_start  X__off64_t
-	Fl_len    X__off64_t
-	Fl_pid    X__pid_t
-	_         [4]byte
+	Fl_type      int16
+	Fl_whence    int16
+	F__ccgo_pad1 [4]byte
+	Fl_start     X__off64_t
+	Fl_len       X__off64_t
+	Fl_pid       X__pid_t
+	F__ccgo_pad2 [4]byte
 } /* fcntl.h:35:1 */
 
 // Include generic Linux declarations.

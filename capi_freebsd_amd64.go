@@ -249,7 +249,6 @@ var CAPI = map[string]struct{}{
 	"inet_ntoa":                     {},
 	"inet_ntop":                     {},
 	"inet_pton":                     {},
-	"initstate_r":                   {},
 	"ioctl":                         {},
 	"isalnum":                       {},
 	"isalpha":                       {},
@@ -434,5 +433,4 @@ var CAPI = map[string]struct{}{
 	"_longjmp":                      {},
 	"_setjmp":                       {},
 	"mkostemp":                      {},
-	"getrandom":                     {},
 }

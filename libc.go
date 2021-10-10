@@ -199,14 +199,6 @@ var (
 	randomGen = rand.New(rand.NewSource(42))
 )
 
-// long int random(void);
-func Xrandom(t *TLS) long {
-	randomMu.Lock()
-	r := randomGen.Int63n(math.MaxInt32 + 1)
-	randomMu.Unlock()
-	return long(r)
-}
-
 func write(b []byte) (int, error) {
 	// if dmesgs {
 	// 	dmesg("%v: %s", origin(1), b)
@@ -1249,12 +1241,6 @@ func Xposix_fadvise(t *TLS, fd int32, offset, len types.Off_t, advice int32) int
 	panic(todo(""))
 }
 
-// int initstate_r(unsigned int seed, char *statebuf,
-//                        size_t statelen, struct random_data *buf);
-func Xinitstate_r(t *TLS, seed uint32, statebuf uintptr, statelen types.Size_t, buf uintptr) int32 {
-	panic(todo(""))
-}
-
 // int random_r(struct random_data *buf, int32_t *result);
 func Xrandom_r(t *TLS, buf, result uintptr) int32 {
 	panic(todo(""))
@@ -1340,10 +1326,5 @@ func X_longjmp(t *TLS, env uintptr, val int32) {
 
 // int mkostemp(char *template, int flags);
 func Xmkostemp(t *TLS, template uintptr, flags int32) int32 {
-	panic(todo(""))
-}
-
-// ssize_t getrandom(void *buf, size_t buflen, unsigned int flags);
-func getrandom(t *TLS, buf uintptr, buflen size_t, flags uint32) ssize_t {
 	panic(todo(""))
 }

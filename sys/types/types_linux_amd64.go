@@ -1205,7 +1205,7 @@ type X__pthread_rwlock_arch_t = struct {
 	F__pad1          [7]uint8
 	F__pad2          uint64
 	F__flags         uint32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 } /* pthreadtypes-arch.h:65:1 */
 
 // Common definition of pthread_mutex_t.

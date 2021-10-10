@@ -1261,18 +1261,18 @@ type Clock_t = X__clock_t /* clock_t.h:7:19 */
 
 // ISO C `broken-down time' structure.
 type Tm = struct {
-	Ftm_sec    int32
-	Ftm_min    int32
-	Ftm_hour   int32
-	Ftm_mday   int32
-	Ftm_mon    int32
-	Ftm_year   int32
-	Ftm_wday   int32
-	Ftm_yday   int32
-	Ftm_isdst  int32
-	_          [4]byte
-	Ftm_gmtoff int64
-	Ftm_zone   uintptr
+	Ftm_sec      int32
+	Ftm_min      int32
+	Ftm_hour     int32
+	Ftm_mday     int32
+	Ftm_mon      int32
+	Ftm_year     int32
+	Ftm_wday     int32
+	Ftm_yday     int32
+	Ftm_isdst    int32
+	F__ccgo_pad1 [4]byte
+	Ftm_gmtoff   int64
+	Ftm_zone     uintptr
 } /* struct_tm.h:7:1 */
 
 // NB: Include guard matches what <linux/time.h> uses.
@@ -1539,7 +1539,7 @@ type X__pthread_rwlock_arch_t = struct {
 	F__pad1          [7]uint8
 	F__pad2          uint64
 	F__flags         uint32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 } /* pthreadtypes-arch.h:65:1 */
 
 // Common definition of pthread_mutex_t.
@@ -1669,7 +1669,7 @@ type X_pthread_cleanup_buffer = struct {
 	F__routine    uintptr
 	F__arg        uintptr
 	F__canceltype int32
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	F__prev       uintptr
 } /* pthread.h:191:1 */
 
@@ -1679,7 +1679,7 @@ type X__pthread_unwind_buf_t = struct {
 	F__cancel_jmp_buf [1]struct {
 		F__cancel_jmp_buf X__jmp_buf
 		F__mask_was_saved int32
-		_                 [4]byte
+		F__ccgo_pad1      [4]byte
 	}
 	F__pad [4]uintptr
 } /* pthread.h:532:3 */
