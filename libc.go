@@ -199,6 +199,14 @@ var (
 	randomGen = rand.New(rand.NewSource(42))
 )
 
+// long int random(void);
+func Xrandom(t *TLS) long {
+	randomMu.Lock()
+	r := randomGen.Int63n(math.MaxInt32 + 1)
+	randomMu.Unlock()
+	return long(r)
+}
+
 func write(b []byte) (int, error) {
 	// if dmesgs {
 	// 	dmesg("%v: %s", origin(1), b)
