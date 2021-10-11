@@ -2129,3 +2129,8 @@ func Xsscanf(t *TLS, str, format, va uintptr) int32 {
 	// }
 	return r
 }
+
+// int posix_fadvise(int fd, off_t offset, off_t len, int advice);
+func Xposix_fadvise(t *TLS, fd int32, offset, len types.Off_t, advice int32) int32 {
+	panic(todo(""))
+}

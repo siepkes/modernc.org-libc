@@ -1244,16 +1244,6 @@ func Xclock_gettime(t *TLS, clk_id int32, tp uintptr) int32 {
 	panic(todo(""))
 }
 
-// int posix_fadvise(int fd, off_t offset, off_t len, int advice);
-func Xposix_fadvise(t *TLS, fd int32, offset, len types.Off_t, advice int32) int32 {
-	panic(todo(""))
-}
-
-// int random_r(struct random_data *buf, int32_t *result);
-func Xrandom_r(t *TLS, buf, result uintptr) int32 {
-	panic(todo(""))
-}
-
 // AtExit will attempt to run f at process exit. The execution cannot be
 // guaranteed, neither its ordering with respect to any other handlers
 // registered by AtExit.
@@ -1324,7 +1314,7 @@ func Xlongjmp(t *TLS, env uintptr, val int32) {
 
 // int _setjmp(jmp_buf env);
 func X_setjmp(t *TLS, env uintptr) int32 {
-	panic(todo(""))
+	return 0 //TODO
 }
 
 // void _longjmp(jmp_buf env, int val);

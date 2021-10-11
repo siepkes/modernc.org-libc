@@ -366,6 +366,7 @@ var CAPI = map[string]struct{}{
 	"raise":                            {},
 	"rand":                             {},
 	"rand_r":                           {},
+	"random":                           {},
 	"random_r":                         {},
 	"read":                             {},
 	"readdir":                          {},

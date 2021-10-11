@@ -5,8 +5,11 @@
 package libc // import "modernc.org/libc"
 
 import (
+	"math"
+	"math/rand"
 	"os"
 	"strings"
+	"sync"
 	"unsafe"
 
 	guuid "github.com/google/uuid"
@@ -14,6 +17,7 @@ import (
 	"modernc.org/libc/errno"
 	"modernc.org/libc/fcntl"
 	"modernc.org/libc/signal"
+	"modernc.org/libc/stdlib"
 	"modernc.org/libc/sys/types"
 	"modernc.org/libc/uuid"
 )
@@ -495,5 +499,33 @@ func Xuuid_copy(t *TLS, dst, src uintptr) {
 //
 // char *initstate_r(unsigned int seed, char *statebuf, size_t statelen, struct random_data *buf);
 func Xinitstate_r(t *TLS, seed uint32, statebuf uintptr, statelen types.Size_t, buf uintptr) int32 {
-	panic(todo(""))
+	if buf == 0 {
+		panic(todo(""))
+	}
+
+	randomDataMu.Lock()
+
+	defer randomDataMu.Unlock()
+
+	randomData[buf] = rand.New(rand.NewSource(int64(seed)))
+	return 0
+}
+
+var (
+	randomData   = map[uintptr]*rand.Rand{}
+	randomDataMu sync.Mutex
+)
+
+// int random_r(struct random_data *buf, int32_t *result);
+func Xrandom_r(t *TLS, buf, result uintptr) int32 {
+	randomDataMu.Lock()
+
+	defer randomDataMu.Unlock()
+
+	mr := randomData[buf]
+	if stdlib.RAND_MAX != math.MaxInt32 {
+		panic(todo(""))
+	}
+	*(*int32)(unsafe.Pointer(result)) = mr.Int31()
+	return 0
 }

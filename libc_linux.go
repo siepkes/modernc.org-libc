@@ -2019,3 +2019,12 @@ func Xgetrandom(t *TLS, buf uintptr, buflen size_t, flags uint32) ssize_t {
 
 	return ssize_t(n)
 }
+
+// int posix_fadvise(int fd, off_t offset, off_t len, int advice);
+func Xposix_fadvise(t *TLS, fd int32, offset, len types.Off_t, advice int32) int32 {
+	if err := unix.Fadvise(int(fd), int64(offset), int64(len), int(advice)); err != nil {
+		return int32(err.(unix.Errno))
+	}
+
+	return 0
+}
