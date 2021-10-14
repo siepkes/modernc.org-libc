@@ -5526,7 +5526,9 @@ func X__unlockfile(tls *TLS, f uintptr) { /* __lockfile.c:19:6: */
 func X__toread(tls *TLS, f uintptr) int32 { /* __toread.c:3:5: */
 	*(*int32)(unsafe.Pointer(f + 136 /* &.mode */)) |= ((*FILE)(unsafe.Pointer(f)).mode - 1)
 	if (*FILE)(unsafe.Pointer(f)).wpos != (*FILE)(unsafe.Pointer(f)).wbase {
-		(*(*func(*TLS, uintptr, uintptr, size_t) size_t)(unsafe.Pointer((f + 72 /* &.write */))))(tls, f, uintptr(0), uint64(0))
+		(*struct {
+			f func(*TLS, uintptr, uintptr, size_t) size_t
+		})(unsafe.Pointer(&struct{ uintptr }{(*FILE)(unsafe.Pointer(f)).write})).f(tls, f, uintptr(0), uint64(0))
 	}
 	(*FILE)(unsafe.Pointer(f)).wpos = AssignPtrUintptr(f+56 /* &.wbase */, AssignPtrUintptr(f+32 /* &.wend */, uintptr(0)))
 	if ((*FILE)(unsafe.Pointer(f)).flags & uint32(4)) != 0 {
@@ -5554,7 +5556,9 @@ func X__uflow(tls *TLS, f uintptr) int32 { /* __uflow.c:6:5: */
 
 	// var c uint8 at bp, 1
 
-	if !(X__toread(tls, f) != 0) && ((*(*func(*TLS, uintptr, uintptr, size_t) size_t)(unsafe.Pointer((f + 64 /* &.read */))))(tls, f, bp /* &c */, uint64(1)) == uint64(1)) {
+	if !(X__toread(tls, f) != 0) && ((*struct {
+		f func(*TLS, uintptr, uintptr, size_t) size_t
+	})(unsafe.Pointer(&struct{ uintptr }{(*FILE)(unsafe.Pointer(f)).read})).f(tls, f, bp /* &c */, uint64(1)) == uint64(1)) {
 		return int32(*(*uint8)(unsafe.Pointer(bp /* c */)))
 	}
 	return -1
