@@ -1321,8 +1321,3 @@ func X_setjmp(t *TLS, env uintptr) int32 {
 func X_longjmp(t *TLS, env uintptr, val int32) {
 	panic(todo(""))
 }
-
-// int mkostemp(char *template, int flags);
-func Xmkostemp(t *TLS, template uintptr, flags int32) int32 {
-	panic(todo(""))
-}

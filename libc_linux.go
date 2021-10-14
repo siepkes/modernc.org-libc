@@ -1266,7 +1266,27 @@ func Xmkstemps64(t *TLS, template uintptr, suffixlen int32) int32 {
 		}
 	}
 
-	fd, err := tempFile(template, x)
+	fd, err := tempFile(template, x, 0)
+	if err != 0 {
+		t.setErrno(err)
+		return -1
+	}
+
+	return int32(fd)
+}
+
+// int mkostemp(char *template, int flags);
+func Xmkostemp(t *TLS, template uintptr, flags int32) int32 {
+	len := uintptr(Xstrlen(t, template))
+	x := template + uintptr(len-6)
+	for i := uintptr(0); i < 6; i++ {
+		if *(*byte)(unsafe.Pointer(x + i)) != 'X' {
+			t.setErrno(errno.EINVAL)
+			return -1
+		}
+	}
+
+	fd, err := tempFile(template, x, flags)
 	if err != 0 {
 		t.setErrno(err)
 		return -1
