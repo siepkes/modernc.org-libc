@@ -10,6 +10,7 @@ import (
 	"os"
 	"strings"
 	"sync"
+	"unicode"
 	"unsafe"
 
 	guuid "github.com/google/uuid"
@@ -20,6 +21,7 @@ import (
 	"modernc.org/libc/stdlib"
 	"modernc.org/libc/sys/types"
 	"modernc.org/libc/uuid"
+	"modernc.org/libc/wctype"
 )
 
 // int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
@@ -528,4 +530,14 @@ func Xrandom_r(t *TLS, buf, result uintptr) int32 {
 	}
 	*(*int32)(unsafe.Pointer(result)) = mr.Int31()
 	return 0
+}
+
+// int iswspace(wint_t wc);
+func Xiswspace(t *TLS, wc wctype.Wint_t) int32 {
+	return Bool32(unicode.IsSpace(rune(wc)))
+}
+
+// int iswalnum(wint_t wc);
+func Xiswalnum(t *TLS, wc wctype.Wint_t) int32 {
+	return Bool32(unicode.IsLetter(rune(wc)) || unicode.IsNumber(rune(wc)))
 }
