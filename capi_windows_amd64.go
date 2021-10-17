@@ -678,4 +678,6 @@ var CAPI = map[string]struct{}{
 	"_longjmp":                          {},
 	"_setjmp":                           {},
 	"mkostemp":                          {},
+	"__sync_add_and_fetch_uint32":       {},
+	"__sync_sub_and_fetch_uint32":       {},
 }

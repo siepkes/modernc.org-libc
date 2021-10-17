@@ -459,4 +459,6 @@ var CAPI = map[string]struct{}{
 	"mkostemp":                         {},
 	"fstatfs":                          {},
 	"getrandom":                        {},
+	"__sync_add_and_fetch_uint32":      {},
+	"__sync_sub_and_fetch_uint32":      {},
 }

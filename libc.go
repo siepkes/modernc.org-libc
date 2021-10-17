@@ -1321,3 +1321,13 @@ func X_setjmp(t *TLS, env uintptr) int32 {
 func X_longjmp(t *TLS, env uintptr, val int32) {
 	panic(todo(""))
 }
+
+// unsigned __sync_add_and_fetch_uint32(*unsigned, unsigned)
+func X__sync_add_and_fetch_uint32(t *TLS, p uintptr, v uint32) uint32 {
+	return atomic.AddUint32((*uint32)(unsafe.Pointer(p)), v)
+}
+
+// unsigned __sync_sub_and_fetch_uint32(*unsigned, unsigned)
+func X__sync_sub_and_fetch_uint32(t *TLS, p uintptr, v uint32) uint32 {
+	return atomic.AddUint32((*uint32)(unsafe.Pointer(p)), -v)
+}

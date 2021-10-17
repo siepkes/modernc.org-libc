@@ -492,4 +492,6 @@ var CAPI = map[string]struct{}{
 	"write":                            {},
 	"writev":                           {},
 	"zero_struct_address":              {},
+	"__sync_add_and_fetch_uint32":      {},
+	"__sync_sub_and_fetch_uint32":      {},
 }
