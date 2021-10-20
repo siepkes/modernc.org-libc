@@ -1497,7 +1497,7 @@ type X__pthread_rwlock_arch_t = struct {
 	F__pad1          uint64
 	F__pad2          uint64
 	F__flags         uint32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 } /* struct_rwlock.h:23:1 */
 
 // Common definition of pthread_cond_t.
@@ -1777,7 +1777,7 @@ type X_ftsent = struct {
 	Ffts_symfd   int32
 	Ffts_pathlen uint16
 	Ffts_namelen uint16
-	_            [4]byte
+	F__ccgo_pad1 [4]byte
 	Ffts_ino     Ino_t
 	Ffts_dev     Dev_t
 	Ffts_nlink   Nlink_t
@@ -1787,7 +1787,7 @@ type X_ftsent = struct {
 	Ffts_instr   uint16
 	Ffts_statp   uintptr
 	Ffts_name    [1]uint8
-	_            [7]byte
+	F__ccgo_pad2 [7]byte
 } /* fts.h:58:2 */
 
 // File tree traversal functions declarations.
@@ -1882,10 +1882,10 @@ type FTS = struct {
 	Ffts_rfd     int32
 	Ffts_pathlen int32
 	Ffts_nitems  int32
-	_            [4]byte
+	F__ccgo_pad1 [4]byte
 	Ffts_compar  uintptr
 	Ffts_options int32
-	_            [4]byte
+	F__ccgo_pad2 [4]byte
 } /* fts.h:81:3 */
 
 type FTSENT = X_ftsent /* fts.h:147:3 */

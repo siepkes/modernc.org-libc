@@ -1421,7 +1421,7 @@ type X__pthread_rwlock_arch_t = struct {
 	F__pad1          uint64
 	F__pad2          uint64
 	F__flags         uint32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 } /* struct_rwlock.h:23:1 */
 
 // Common definition of pthread_cond_t.

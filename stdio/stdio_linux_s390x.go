@@ -484,7 +484,7 @@ type X__fpos64_t = X_G_fpos64_t /* __fpos64_t.h:14:3 */
 
 type X_IO_FILE = struct {
 	F_flags          int32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 	F_IO_read_ptr    uintptr
 	F_IO_read_end    uintptr
 	F_IO_read_base   uintptr
@@ -504,7 +504,7 @@ type X_IO_FILE = struct {
 	F_cur_column     uint16
 	F_vtable_offset  int8
 	F_shortbuf       [1]uint8
-	_                [4]byte
+	F__ccgo_pad2     [4]byte
 	F_lock           uintptr
 	F_offset         X__off64_t
 	F_codecvt        uintptr

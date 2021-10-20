@@ -1750,10 +1750,10 @@ type Sigcontext = struct {
 
 // Structure describing a signal stack.
 type Stack_t = struct {
-	Fss_sp    uintptr
-	Fss_flags int32
-	_         [4]byte
-	Fss_size  Size_t
+	Fss_sp       uintptr
+	Fss_flags    int32
+	F__ccgo_pad1 [4]byte
+	Fss_size     Size_t
 } /* stack_t.h:31:5 */
 
 // This will define `ucontext_t' and `mcontext_t'.
@@ -1831,9 +1831,9 @@ type Fpreg_t = struct{ Fd float64 } /* ucontext.h:64:5 */
 
 // Register set for the floating-point registers.
 type Fpregset_t = struct {
-	Ffpc  uint32
-	_     [4]byte
-	Ffprs [16]Fpreg_t
+	Ffpc         uint32
+	F__ccgo_pad1 [4]byte
+	Ffprs        [16]Fpreg_t
 } /* ucontext.h:71:5 */
 
 // Context to describe whole processor state.
@@ -1876,9 +1876,9 @@ type Ucontext_t = Ucontext_t1 /* ucontext.h:90:5 */
 
 // Structure describing a signal stack (obsolete).
 type Sigstack = struct {
-	Fss_sp      uintptr
-	Fss_onstack int32
-	_           [4]byte
+	Fss_sp       uintptr
+	Fss_onstack  int32
+	F__ccgo_pad1 [4]byte
 } /* struct_sigstack.h:23:1 */
 
 // Some of the functions for handling signals in threaded programs must
@@ -2145,7 +2145,7 @@ type X__pthread_rwlock_arch_t = struct {
 	F__pad1          uint64
 	F__pad2          uint64
 	F__flags         uint32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 } /* struct_rwlock.h:23:1 */
 
 // Common definition of pthread_cond_t.

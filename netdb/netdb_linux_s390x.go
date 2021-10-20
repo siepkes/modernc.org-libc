@@ -2390,7 +2390,7 @@ type X__pthread_rwlock_arch_t = struct {
 	F__pad1          uint64
 	F__pad2          uint64
 	F__flags         uint32
-	_                [4]byte
+	F__ccgo_pad1     [4]byte
 } /* struct_rwlock.h:23:1 */
 
 // Common definition of pthread_cond_t.
@@ -2528,21 +2528,21 @@ type Sockaddr_storage = struct {
 type Msghdr = struct {
 	Fmsg_name       uintptr
 	Fmsg_namelen    Socklen_t
-	_               [4]byte
+	F__ccgo_pad1    [4]byte
 	Fmsg_iov        uintptr
 	Fmsg_iovlen     Size_t
 	Fmsg_control    uintptr
 	Fmsg_controllen Size_t
 	Fmsg_flags      int32
-	_               [4]byte
+	F__ccgo_pad2    [4]byte
 } /* socket.h:257:1 */
 
 // Structure used for storage of ancillary data object information.
 type Cmsghdr = struct {
-	_           [0]uint64
-	Fcmsg_len   Size_t
-	Fcmsg_level int32
-	Fcmsg_type  int32
+	F__ccgo_pad1 [0]uint64
+	Fcmsg_len    Size_t
+	Fcmsg_level  int32
+	Fcmsg_type   int32
 } /* socket.h:275:1 */
 
 // SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note
@@ -2837,7 +2837,7 @@ type Ipv6_mreq = struct {
 // Multicast group request.
 type Group_req = struct {
 	Fgr_interface Uint32_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fgr_group     struct {
 		Fss_family    Sa_family_t
 		F__ss_padding [118]uint8
@@ -2847,7 +2847,7 @@ type Group_req = struct {
 
 type Group_source_req = struct {
 	Fgsr_interface Uint32_t
-	_              [4]byte
+	F__ccgo_pad1   [4]byte
 	Fgsr_group     struct {
 		Fss_family    Sa_family_t
 		F__ss_padding [118]uint8
@@ -2871,7 +2871,7 @@ type Ip_msfilter = struct {
 
 type Group_filter = struct {
 	Fgf_interface Uint32_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fgf_group     struct {
 		Fss_family    Sa_family_t
 		F__ss_padding [118]uint8
@@ -3039,10 +3039,10 @@ type Group_filter = struct {
 // A null pointer constant.
 
 type Rpcent = struct {
-	Fr_name    uintptr
-	Fr_aliases uintptr
-	Fr_number  int32
-	_          [4]byte
+	Fr_name      uintptr
+	Fr_aliases   uintptr
+	Fr_number    int32
+	F__ccgo_pad1 [4]byte
 } /* netdb.h:46:1 */
 
 // Copyright (C) 1996-2020 Free Software Foundation, Inc.
@@ -3083,19 +3083,19 @@ type Hostent = struct {
 
 // Description of data base entry for a single service.
 type Servent = struct {
-	Fs_name    uintptr
-	Fs_aliases uintptr
-	Fs_port    int32
-	_          [4]byte
-	Fs_proto   uintptr
+	Fs_name      uintptr
+	Fs_aliases   uintptr
+	Fs_port      int32
+	F__ccgo_pad1 [4]byte
+	Fs_proto     uintptr
 } /* netdb.h:255:1 */
 
 // Description of data base entry for a single service.
 type Protoent = struct {
-	Fp_name    uintptr
-	Fp_aliases uintptr
-	Fp_proto   int32
-	_          [4]byte
+	Fp_name      uintptr
+	Fp_aliases   uintptr
+	Fp_proto     int32
+	F__ccgo_pad1 [4]byte
 } /* netdb.h:324:1 */
 
 // Extension from POSIX.1:2001.
@@ -3106,7 +3106,7 @@ type Addrinfo = struct {
 	Fai_socktype  int32
 	Fai_protocol  int32
 	Fai_addrlen   Socklen_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fai_addr      uintptr
 	Fai_canonname uintptr
 	Fai_next      uintptr

@@ -769,11 +769,11 @@ type Gid_t = X__gid_t /* grp.h:37:17 */
 
 // The group structure.
 type Group = struct {
-	Fgr_name   uintptr
-	Fgr_passwd uintptr
-	Fgr_gid    X__gid_t
-	_          [4]byte
-	Fgr_mem    uintptr
+	Fgr_name     uintptr
+	Fgr_passwd   uintptr
+	Fgr_gid      X__gid_t
+	F__ccgo_pad1 [4]byte
+	Fgr_mem      uintptr
 } /* grp.h:42:1 */
 
 var _ uint8 /* gen.c:2:13: */
