@@ -869,11 +869,11 @@ type X__darwin_wctype_t = X__uint32_t /* _types.h:43:20 */
 type Gid_t = X__darwin_gid_t /* _gid_t.h:31:25 */
 
 type Group = struct {
-	Fgr_name   uintptr
-	Fgr_passwd uintptr
-	Fgr_gid    Gid_t
-	_          [4]byte
-	Fgr_mem    uintptr
+	Fgr_name     uintptr
+	Fgr_passwd   uintptr
+	Fgr_gid      Gid_t
+	F__ccgo_pad1 [4]byte
+	Fgr_mem      uintptr
 } /* grp.h:53:1 */
 
 // Public include file for the UUID library

@@ -2240,14 +2240,14 @@ type Time_t = X__darwin_time_t /* _time_t.h:31:33 */
 // vnode_internal.h).
 type Ostat = struct {
 	Fst_dev       X__uint16_t
-	_             [6]byte
+	F__ccgo_pad1  [6]byte
 	Fst_ino       Ino_t
 	Fst_mode      Mode_t
 	Fst_nlink     Nlink_t
 	Fst_uid       X__uint16_t
 	Fst_gid       X__uint16_t
 	Fst_rdev      X__uint16_t
-	_             [2]byte
+	F__ccgo_pad2  [2]byte
 	Fst_size      X__int32_t
 	Fst_atimespec struct {
 		Ftv_sec  X__darwin_time_t
@@ -2287,7 +2287,7 @@ type Stat = struct {
 	Fst_uid       Uid_t
 	Fst_gid       Gid_t
 	Fst_rdev      Dev_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fst_atimespec struct {
 		Ftv_sec  X__darwin_time_t
 		Ftv_nsec int64
@@ -2321,7 +2321,7 @@ type Stat64 = struct {
 	Fst_uid       Uid_t
 	Fst_gid       Gid_t
 	Fst_rdev      Dev_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fst_atimespec struct {
 		Ftv_sec  X__darwin_time_t
 		Ftv_nsec int64

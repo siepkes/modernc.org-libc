@@ -29,7 +29,6 @@ import (
 	"modernc.org/libc/netdb"
 	"modernc.org/libc/netinet/in"
 	"modernc.org/libc/pwd"
-
 	"modernc.org/libc/signal"
 	"modernc.org/libc/stdio"
 	"modernc.org/libc/sys/socket"
@@ -57,6 +56,8 @@ type (
 var X__stderrp = Xstdout
 var X__stdinp = Xstdin
 var X__stdoutp = Xstdout
+
+var startTime = gotime.Now() // For clock(3)
 
 type file uintptr
 
@@ -2133,4 +2134,9 @@ func Xsscanf(t *TLS, str, format, va uintptr) int32 {
 // int posix_fadvise(int fd, off_t offset, off_t len, int advice);
 func Xposix_fadvise(t *TLS, fd int32, offset, len types.Off_t, advice int32) int32 {
 	panic(todo(""))
+}
+
+// clock_t clock(void);
+func Xclock(t *TLS) time.Clock_t {
+	return time.Clock_t(gotime.Since(startTime) * gotime.Duration(time.CLOCKS_PER_SEC) / gotime.Second)
 }

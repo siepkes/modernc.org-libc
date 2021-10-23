@@ -803,14 +803,14 @@ type Cc_t = uint8      /* termios.h:264:25 */
 type Speed_t = uint64  /* termios.h:265:25 */
 
 type Termios = struct {
-	Fc_iflag  Tcflag_t
-	Fc_oflag  Tcflag_t
-	Fc_cflag  Tcflag_t
-	Fc_lflag  Tcflag_t
-	Fc_cc     [20]Cc_t
-	_         [4]byte
-	Fc_ispeed Speed_t
-	Fc_ospeed Speed_t
+	Fc_iflag     Tcflag_t
+	Fc_oflag     Tcflag_t
+	Fc_cflag     Tcflag_t
+	Fc_lflag     Tcflag_t
+	Fc_cc        [20]Cc_t
+	F__ccgo_pad1 [4]byte
+	Fc_ispeed    Speed_t
+	Fc_ospeed    Speed_t
 } /* termios.h:267:1 */
 
 // Include tty ioctl's that aren't just for backwards compatibility

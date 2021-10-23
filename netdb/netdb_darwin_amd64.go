@@ -5658,13 +5658,13 @@ type Sae_connid_t = X__uint32_t /* socket.h:293:20 */
 // sockaddr endpoints
 type Sa_endpoints = struct {
 	Fsae_srcif      uint32
-	_               [4]byte
+	F__ccgo_pad1    [4]byte
 	Fsae_srcaddr    uintptr
 	Fsae_srcaddrlen Socklen_t
-	_               [4]byte
+	F__ccgo_pad2    [4]byte
 	Fsae_dstaddr    uintptr
 	Fsae_dstaddrlen Socklen_t
-	_               [4]byte
+	F__ccgo_pad3    [4]byte
 } /* socket.h:303:9 */
 
 // connectx() flag parameters
@@ -5738,10 +5738,10 @@ type Sockaddr_storage = struct {
 type Msghdr = struct {
 	Fmsg_name       uintptr
 	Fmsg_namelen    Socklen_t
-	_               [4]byte
+	F__ccgo_pad1    [4]byte
 	Fmsg_iov        uintptr
 	Fmsg_iovlen     int32
-	_               [4]byte
+	F__ccgo_pad2    [4]byte
 	Fmsg_control    uintptr
 	Fmsg_controllen Socklen_t
 	Fmsg_flags      int32
@@ -5773,12 +5773,12 @@ type Cmsghdr = struct {
 
 // sendfile(2) header/trailer struct
 type Sf_hdtr = struct {
-	Fheaders  uintptr
-	Fhdr_cnt  int32
-	_         [4]byte
-	Ftrailers uintptr
-	Ftrl_cnt  int32
-	_         [4]byte
+	Fheaders     uintptr
+	Fhdr_cnt     int32
+	F__ccgo_pad1 [4]byte
+	Ftrailers    uintptr
+	Ftrl_cnt     int32
+	F__ccgo_pad2 [4]byte
 } /* socket.h:678:1 */
 
 // The following two #includes insure htonl and family are defined
@@ -6030,7 +6030,7 @@ type Ip_mreq_source = struct {
 // Filter APIs. [RFC3678]
 type Group_req = struct {
 	Fgr_interface Uint32_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fgr_group     struct {
 		Fss_len     X__uint8_t
 		Fss_family  Sa_family_t
@@ -6042,7 +6042,7 @@ type Group_req = struct {
 
 type Group_source_req = struct {
 	Fgsr_interface Uint32_t
-	_              [4]byte
+	F__ccgo_pad1   [4]byte
 	Fgsr_group     struct {
 		Fss_len     X__uint8_t
 		Fss_family  Sa_family_t
@@ -6662,18 +6662,18 @@ type Netent = struct {
 } /* netdb.h:127:1 */
 
 type Servent = struct {
-	Fs_name    uintptr
-	Fs_aliases uintptr
-	Fs_port    int32
-	_          [4]byte
-	Fs_proto   uintptr
+	Fs_name      uintptr
+	Fs_aliases   uintptr
+	Fs_port      int32
+	F__ccgo_pad1 [4]byte
+	Fs_proto     uintptr
 } /* netdb.h:134:1 */
 
 type Protoent = struct {
-	Fp_name    uintptr
-	Fp_aliases uintptr
-	Fp_proto   int32
-	_          [4]byte
+	Fp_name      uintptr
+	Fp_aliases   uintptr
+	Fp_proto     int32
+	F__ccgo_pad1 [4]byte
 } /* netdb.h:141:1 */
 
 type Addrinfo = struct {
@@ -6682,17 +6682,17 @@ type Addrinfo = struct {
 	Fai_socktype  int32
 	Fai_protocol  int32
 	Fai_addrlen   Socklen_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fai_canonname uintptr
 	Fai_addr      uintptr
 	Fai_next      uintptr
 } /* netdb.h:147:1 */
 
 type Rpcent = struct {
-	Fr_name    uintptr
-	Fr_aliases uintptr
-	Fr_number  int32
-	_          [4]byte
+	Fr_name      uintptr
+	Fr_aliases   uintptr
+	Fr_number    int32
+	F__ccgo_pad1 [4]byte
 } /* netdb.h:159:1 */
 
 var _ int8 /* gen.c:2:13: */

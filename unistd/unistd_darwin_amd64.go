@@ -3140,9 +3140,9 @@ type Timespec = struct {
 // @APPLE_OSREFERENCE_LICENSE_HEADER_END@
 
 type Timeval = struct {
-	Ftv_sec  X__darwin_time_t
-	Ftv_usec X__darwin_suseconds_t
-	_        [4]byte
+	Ftv_sec      X__darwin_time_t
+	Ftv_usec     X__darwin_suseconds_t
+	F__ccgo_pad1 [4]byte
 } /* _timeval.h:34:1 */
 
 // The time_t and suseconds_t types shall be defined as described in

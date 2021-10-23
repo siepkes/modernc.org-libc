@@ -1762,9 +1762,9 @@ type Fpos_t = X__darwin_off_t /* _stdio.h:81:25 */
 
 // stdio buffers
 type X__sbuf = struct {
-	F_base uintptr
-	F_size int32
-	_      [4]byte
+	F_base       uintptr
+	F_size       int32
+	F__ccgo_pad1 [4]byte
 } /* _stdio.h:92:1 */
 
 // stdio state variables.
@@ -1792,41 +1792,41 @@ type X__sbuf = struct {
 //
 // NB: see WARNING above before changing the layout of this structure!
 type X__sFILE = struct {
-	F_p     uintptr
-	F_r     int32
-	F_w     int32
-	F_flags int16
-	F_file  int16
-	_       [4]byte
-	F_bf    struct {
-		F_base uintptr
-		F_size int32
-		_      [4]byte
+	F_p          uintptr
+	F_r          int32
+	F_w          int32
+	F_flags      int16
+	F_file       int16
+	F__ccgo_pad1 [4]byte
+	F_bf         struct {
+		F_base       uintptr
+		F_size       int32
+		F__ccgo_pad1 [4]byte
 	}
-	F_lbfsize int32
-	_         [4]byte
-	F_cookie  uintptr
-	F_close   uintptr
-	F_read    uintptr
-	F_seek    uintptr
-	F_write   uintptr
-	F_ub      struct {
-		F_base uintptr
-		F_size int32
-		_      [4]byte
+	F_lbfsize    int32
+	F__ccgo_pad2 [4]byte
+	F_cookie     uintptr
+	F_close      uintptr
+	F_read       uintptr
+	F_seek       uintptr
+	F_write      uintptr
+	F_ub         struct {
+		F_base       uintptr
+		F_size       int32
+		F__ccgo_pad1 [4]byte
 	}
 	F_extra uintptr
 	F_ur    int32
 	F_ubuf  [3]uint8
 	F_nbuf  [1]uint8
 	F_lb    struct {
-		F_base uintptr
-		F_size int32
-		_      [4]byte
+		F_base       uintptr
+		F_size       int32
+		F__ccgo_pad1 [4]byte
 	}
-	F_blksize int32
-	_         [4]byte
-	F_offset  Fpos_t
+	F_blksize    int32
+	F__ccgo_pad3 [4]byte
+	F_offset     Fpos_t
 } /* _stdio.h:126:9 */
 
 // stdio state variables.

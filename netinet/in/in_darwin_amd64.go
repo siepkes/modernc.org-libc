@@ -5404,13 +5404,13 @@ type Sae_connid_t = X__uint32_t /* socket.h:293:20 */
 // sockaddr endpoints
 type Sa_endpoints = struct {
 	Fsae_srcif      uint32
-	_               [4]byte
+	F__ccgo_pad1    [4]byte
 	Fsae_srcaddr    uintptr
 	Fsae_srcaddrlen Socklen_t
-	_               [4]byte
+	F__ccgo_pad2    [4]byte
 	Fsae_dstaddr    uintptr
 	Fsae_dstaddrlen Socklen_t
-	_               [4]byte
+	F__ccgo_pad3    [4]byte
 } /* socket.h:303:9 */
 
 // connectx() flag parameters
@@ -5484,10 +5484,10 @@ type Sockaddr_storage = struct {
 type Msghdr = struct {
 	Fmsg_name       uintptr
 	Fmsg_namelen    Socklen_t
-	_               [4]byte
+	F__ccgo_pad1    [4]byte
 	Fmsg_iov        uintptr
 	Fmsg_iovlen     int32
-	_               [4]byte
+	F__ccgo_pad2    [4]byte
 	Fmsg_control    uintptr
 	Fmsg_controllen Socklen_t
 	Fmsg_flags      int32
@@ -5519,12 +5519,12 @@ type Cmsghdr = struct {
 
 // sendfile(2) header/trailer struct
 type Sf_hdtr = struct {
-	Fheaders  uintptr
-	Fhdr_cnt  int32
-	_         [4]byte
-	Ftrailers uintptr
-	Ftrl_cnt  int32
-	_         [4]byte
+	Fheaders     uintptr
+	Fhdr_cnt     int32
+	F__ccgo_pad1 [4]byte
+	Ftrailers    uintptr
+	Ftrl_cnt     int32
+	F__ccgo_pad2 [4]byte
 } /* socket.h:678:1 */
 
 // The following two #includes insure htonl and family are defined
@@ -5776,7 +5776,7 @@ type Ip_mreq_source = struct {
 // Filter APIs. [RFC3678]
 type Group_req = struct {
 	Fgr_interface Uint32_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fgr_group     struct {
 		Fss_len     X__uint8_t
 		Fss_family  Sa_family_t
@@ -5788,7 +5788,7 @@ type Group_req = struct {
 
 type Group_source_req = struct {
 	Fgsr_interface Uint32_t
-	_              [4]byte
+	F__ccgo_pad1   [4]byte
 	Fgsr_group     struct {
 		Fss_len     X__uint8_t
 		Fss_family  Sa_family_t
