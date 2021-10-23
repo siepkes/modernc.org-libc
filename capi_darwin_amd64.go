@@ -260,6 +260,8 @@ var CAPI = map[string]struct{}{
 	"isprint":                       {},
 	"isspace":                       {},
 	"isupper":                       {},
+	"iswalnum":                      {},
+	"iswspace":                      {},
 	"isxdigit":                      {},
 	"kill":                          {},
 	"ldexp":                         {},

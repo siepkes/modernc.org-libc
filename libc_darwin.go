@@ -16,13 +16,13 @@ import (
 	"strings"
 	"syscall"
 	gotime "time"
+	"unicode"
 	"unsafe"
 
 	"golang.org/x/sys/unix"
 	"modernc.org/libc/errno"
 	"modernc.org/libc/fcntl"
 	"modernc.org/libc/fts"
-
 	gonetdb "modernc.org/libc/honnef.co/go/netdb"
 	"modernc.org/libc/langinfo"
 	"modernc.org/libc/limits"
@@ -37,6 +37,7 @@ import (
 	"modernc.org/libc/termios"
 	"modernc.org/libc/time"
 	"modernc.org/libc/unistd"
+	"modernc.org/libc/wctype"
 )
 
 const (
@@ -2139,4 +2140,14 @@ func Xposix_fadvise(t *TLS, fd int32, offset, len types.Off_t, advice int32) int
 // clock_t clock(void);
 func Xclock(t *TLS) time.Clock_t {
 	return time.Clock_t(gotime.Since(startTime) * gotime.Duration(time.CLOCKS_PER_SEC) / gotime.Second)
+}
+
+// int iswspace(wint_t wc);
+func Xiswspace(t *TLS, wc wctype.Wint_t) int32 {
+	return Bool32(unicode.IsSpace(rune(wc)))
+}
+
+// int iswalnum(wint_t wc);
+func Xiswalnum(t *TLS, wc wctype.Wint_t) int32 {
+	return Bool32(unicode.IsLetter(rune(wc)) || unicode.IsNumber(rune(wc)))
 }

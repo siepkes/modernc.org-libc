@@ -6,7 +6,6 @@ package libc // import "modernc.org/libc"
 
 import (
 	"strings"
-	"unicode"
 	"unsafe"
 
 	"golang.org/x/sys/unix"
@@ -14,7 +13,6 @@ import (
 	"modernc.org/libc/signal"
 	"modernc.org/libc/sys/types"
 	"modernc.org/libc/utime"
-	"modernc.org/libc/wctype"
 )
 
 // int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
@@ -450,14 +448,4 @@ func Xfopen64(t *TLS, pathname, mode uintptr) uintptr {
 	}
 
 	panic("OOM")
-}
-
-// int iswspace(wint_t wc);
-func Xiswspace(t *TLS, wc wctype.Wint_t) int32 {
-	return Bool32(unicode.IsSpace(rune(wc)))
-}
-
-// int iswalnum(wint_t wc);
-func Xiswalnum(t *TLS, wc wctype.Wint_t) int32 {
-	return Bool32(unicode.IsLetter(rune(wc)) || unicode.IsNumber(rune(wc)))
 }
