@@ -127,6 +127,7 @@ var CAPI = map[string]struct{}{
 	"acos":                          {},
 	"acosh":                         {},
 	"alarm":                         {},
+	"arc4random_buf":                {},
 	"asin":                          {},
 	"asinh":                         {},
 	"atan":                          {},

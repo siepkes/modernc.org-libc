@@ -6,6 +6,7 @@ package libc // import "modernc.org/libc"
 
 import (
 	"bufio"
+	crand "crypto/rand"
 	"encoding/hex"
 	"fmt"
 	"io"
@@ -2150,4 +2151,11 @@ func Xiswspace(t *TLS, wc wctype.Wint_t) int32 {
 // int iswalnum(wint_t wc);
 func Xiswalnum(t *TLS, wc wctype.Wint_t) int32 {
 	return Bool32(unicode.IsLetter(rune(wc)) || unicode.IsNumber(rune(wc)))
+}
+
+// void arc4random_buf(void *buf, size_t nbytes);
+func Xarc4random_buf(t *TLS, buf uintptr, buflen size_t) {
+	if _, err := crand.Read((*RawMem)(unsafe.Pointer(buf))[:buflen]); err != nil {
+		panic(todo(""))
+	}
 }
