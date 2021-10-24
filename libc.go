@@ -1298,7 +1298,7 @@ func Xreallocarray(t *TLS, ptr uintptr, nmemb, size size_t) uintptr {
 
 // int setjmp(jmp_buf env);
 func Xsetjmp(t *TLS, env uintptr) int32 {
-	panic(todo(""))
+	return 0 //TODO
 }
 
 // void longjmp(jmp_buf env, int val);
