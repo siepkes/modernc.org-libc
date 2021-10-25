@@ -438,4 +438,5 @@ var CAPI = map[string]struct{}{
 	"wcwidth":                       {},
 	"write":                         {},
 	"zero_struct_address":           {},
+	"tmpfile":                       {},
 }

@@ -8,6 +8,7 @@
 package libc // import "modernc.org/libc"
 
 import (
+	"io/ioutil"
 	"os"
 	gosignal "os/signal"
 	"reflect"
@@ -216,4 +217,22 @@ func Xgetresuid(t *TLS, ruid, euid, suid uintptr) int32 {
 // int getresgid(gid_t *rgid, gid_t *egid, gid_t *sgid);
 func Xgetresgid(t *TLS, rgid, egid, sgid uintptr) int32 {
 	panic(todo(""))
+}
+
+// FILE *tmpfile(void);
+func Xtmpfile(t *TLS) uintptr {
+	f, err := ioutil.TempFile("", "tmpfile-")
+	if err != nil {
+		t.setErrno(err)
+		return 0
+	}
+
+	cf := newFile(t, int32(f.Fd()))
+	AtExit(func() {
+		nm := f.Name()
+		file(cf).close(t)
+		os.Remove(nm)
+	})
+
+	return cf
 }

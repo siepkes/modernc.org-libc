@@ -466,6 +466,7 @@ var CAPI = map[string]struct{}{
 	"tcsendbreak":                      {},
 	"tcsetattr":                        {},
 	"time":                             {},
+	"tmpfile":                          {},
 	"tolower":                          {},
 	"toupper":                          {},
 	"trunc":                            {},
