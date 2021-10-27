@@ -215,3 +215,69 @@ func TestReallocArray(t *testing.T) {
 		}
 	}
 }
+
+func mustCString(s string) uintptr {
+	r, err := CString(s)
+	if err != nil {
+		panic("CString failed")
+	}
+
+	return r
+}
+
+var testSnprintfBuf [3]byte
+
+func TestSnprintf(t *testing.T) {
+	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
+	p := uintptr(unsafe.Pointer(&testSnprintfBuf[0]))
+	if g, e := Xsnprintf(nil, p, 0, 0, 0), int32(0); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := testSnprintfBuf, [3]byte{0xff, 0xff, 0xff}; g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := Xsnprintf(nil, p, 0, mustCString(""), 0), int32(0); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := testSnprintfBuf, [3]byte{0xff, 0xff, 0xff}; g != e {
+		t.Fatal(g, e)
+	}
+
+	s := mustCString("12")
+	if g, e := Xsnprintf(nil, p, 0, s, 0), int32(2); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := testSnprintfBuf, [3]byte{0xff, 0xff, 0xff}; g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := Xsnprintf(nil, p, 1, s, 0), int32(2); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := testSnprintfBuf, [3]byte{'1', 0xff, 0xff}; g != e {
+		t.Fatal(g, e)
+	}
+
+	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
+	if g, e := Xsnprintf(nil, p, 2, s, 0), int32(2); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := testSnprintfBuf, [3]byte{'1', '2', 0xff}; g != e {
+		t.Fatal(g, e)
+	}
+
+	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
+	if g, e := Xsnprintf(nil, p, 3, s, 0), int32(2); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := testSnprintfBuf, [3]byte{'1', '2', 0}; g != e {
+		t.Fatal(g, e)
+	}
+}

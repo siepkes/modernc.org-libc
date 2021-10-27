@@ -516,21 +516,19 @@ func Xprintf(t *TLS, format, args uintptr) int32 {
 
 // int snprintf(char *str, size_t size, const char *format, ...);
 func Xsnprintf(t *TLS, str uintptr, size types.Size_t, format, args uintptr) (r int32) {
-	switch size {
-	case 0:
-		return 0
-	case 1:
-		*(*byte)(unsafe.Pointer(str)) = 0
+	if format == 0 {
 		return 0
 	}
 
 	b := printf(format, args)
-	if len(b)+1 > int(size) {
-		b = b[:size-1]
-	}
 	r = int32(len(b))
-	copy((*RawMem)(unsafe.Pointer(str))[:r:r], b)
-	*(*byte)(unsafe.Pointer(str + uintptr(r))) = 0
+	if len(b) > int(size) {
+		b = b[:size]
+	}
+	copy((*RawMem)(unsafe.Pointer(str))[:size:size], b)
+	if types.Size_t(r) < size {
+		*(*byte)(unsafe.Pointer(str + uintptr(size) - 1)) = 0
+	}
 	return r
 }
 
