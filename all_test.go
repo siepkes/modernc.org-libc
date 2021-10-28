@@ -259,7 +259,7 @@ func TestSnprintf(t *testing.T) {
 		t.Fatal(g, e)
 	}
 
-	if g, e := testSnprintfBuf, [3]byte{'1', 0xff, 0xff}; g != e {
+	if g, e := testSnprintfBuf, [3]byte{0x00, 0xff, 0xff}; g != e {
 		t.Fatal(g, e)
 	}
 
@@ -268,7 +268,7 @@ func TestSnprintf(t *testing.T) {
 		t.Fatal(g, e)
 	}
 
-	if g, e := testSnprintfBuf, [3]byte{'1', '2', 0xff}; g != e {
+	if g, e := testSnprintfBuf, [3]byte{'1', 0x00, 0xff}; g != e {
 		t.Fatal(g, e)
 	}
 
@@ -277,7 +277,7 @@ func TestSnprintf(t *testing.T) {
 		t.Fatal(g, e)
 	}
 
-	if g, e := testSnprintfBuf, [3]byte{'1', '2', 0}; g != e {
+	if g, e := testSnprintfBuf, [3]byte{'1', '2', 0x00}; g != e {
 		t.Fatal(g, e)
 	}
 }

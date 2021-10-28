@@ -522,13 +522,16 @@ func Xsnprintf(t *TLS, str uintptr, size types.Size_t, format, args uintptr) (r 
 
 	b := printf(format, args)
 	r = int32(len(b))
-	if len(b) > int(size) {
-		b = b[:size]
+	if size == 0 {
+		return r
 	}
-	copy((*RawMem)(unsafe.Pointer(str))[:size:size], b)
-	if types.Size_t(r) < size {
-		*(*byte)(unsafe.Pointer(str + uintptr(size) - 1)) = 0
+
+	if len(b)+1 > int(size) {
+		b = b[:size-1]
 	}
+	n := len(b)
+	copy((*RawMem)(unsafe.Pointer(str))[:n:n], b)
+	*(*byte)(unsafe.Pointer(str + uintptr(n))) = 0
 	return r
 }
 
