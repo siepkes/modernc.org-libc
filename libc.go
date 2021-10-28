@@ -1329,3 +1329,8 @@ func X__sync_add_and_fetch_uint32(t *TLS, p uintptr, v uint32) uint32 {
 func X__sync_sub_and_fetch_uint32(t *TLS, p uintptr, v uint32) uint32 {
 	return atomic.AddUint32((*uint32)(unsafe.Pointer(p)), -v)
 }
+
+// int sched_yield(void);
+func Xsched_yield(t *TLS) {
+	runtime.Gosched()
+}

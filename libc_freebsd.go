@@ -11,7 +11,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"runtime"
 	"runtime/debug"
 	"strconv"
 	"strings"
@@ -1929,11 +1928,6 @@ func X__isoc99_sscanf(t *TLS, str, format, va uintptr) int32 {
 	// 	dmesg("%v: %q %q: %d", origin(1), GoString(str), GoString(format), r)
 	// }
 	return r
-}
-
-// int sched_yield(void);
-func Xsched_yield(t *TLS) {
-	runtime.Gosched()
 }
 
 var ctimeStaticBuf [32]byte

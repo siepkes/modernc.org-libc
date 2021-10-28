@@ -71,11 +71,11 @@ linux_386:
 	GOOS=linux GOARCH=386 go build -v ./...
 
 linux_arm:
-	CCGO_CPP=arm-linux-gnueabi-cpp-8 TARGET_GOOS=linux TARGET_GOARCH=arm go generate
+	CCGO_CPP=arm-linux-gnueabi-cpp TARGET_GOOS=linux TARGET_GOARCH=arm go generate
 	GOOS=linux GOARCH=arm go build -v ./...
 
 linux_arm64:
-	CCGO_CPP=aarch64-linux-gnu-cpp-8 TARGET_GOOS=linux TARGET_GOARCH=arm64 go generate
+	CCGO_CPP=aarch64-linux-gnu-cpp TARGET_GOOS=linux TARGET_GOARCH=arm64 go generate
 	GOOS=linux GOARCH=arm64 go build -v ./...
 
 linux_s390x:

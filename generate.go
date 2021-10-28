@@ -63,18 +63,20 @@ func main() {
 	case "linux":
 		g = append(g, "libc_unix.go")
 		switch goarch {
-		case "amd64":
-			g = append(g, "pthreads.go")
+		case "amd64", "386":
+			g = append(g, "pthread.go")
+		default:
+			g = append(g, "pthread_unix.go")
 		}
 		makeMuslLinux(goos, goarch)
 	case "freebsd":
-		g = append(g, "libc_unix.go")
+		g = append(g, "libc_unix.go", "pthread_unix.go")
 		makeMuslFreeBSD(goos, goarch)
 	case "netbsd":
-		g = append(g, "libc_unix.go")
+		g = append(g, "libc_unix.go", "pthread_netbsd.go")
 		makeMuslNetBSD(goos, goarch)
 	case "darwin":
-		g = append(g, "libc_unix.go")
+		g = append(g, "libc_unix.go", "pthread_unix.go")
 		makeMuslDarwin(goos, goarch)
 	case "windows":
 		makeMuslWin(goos, goarch)
@@ -690,15 +692,16 @@ func libcHeaders(paths []string) error {
 			return nil
 		}
 
-		// trc("%q: %v\n", path, err) //TODO-
+		path = filepath.Clean(path)
+		if strings.HasPrefix(path, ".") {
+			return nil
+		}
 
 		dir := path
 		ok := false
 		for _, v := range paths {
 			full := filepath.Join(v, dir+".h")
-			// trc("%s\n", full) //TODO-
 			if fi, err := os.Stat(full); err == nil && !fi.IsDir() {
-				// trc("OK %s\n", full) //TODO-
 				ok = true
 				break
 			}

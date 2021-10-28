@@ -8,17 +8,20 @@ import (
 	"bufio"
 	"encoding/hex"
 	"fmt"
+	"math"
+	"math/rand"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"runtime"
 	"runtime/debug"
 	"strconv"
 	"strings"
+	"sync"
 	"syscall"
 	"time"
 	"unsafe"
 
+	guuid "github.com/google/uuid"
 	"golang.org/x/sys/unix"
 	"modernc.org/libc/errno"
 	"modernc.org/libc/fcntl"
@@ -32,12 +35,14 @@ import (
 	"modernc.org/libc/pwd"
 	"modernc.org/libc/signal"
 	"modernc.org/libc/stdio"
+	"modernc.org/libc/stdlib"
 	"modernc.org/libc/sys/socket"
 	"modernc.org/libc/sys/stat"
 	"modernc.org/libc/sys/types"
 	"modernc.org/libc/termios"
 	ctime "modernc.org/libc/time"
 	"modernc.org/libc/unistd"
+	"modernc.org/libc/uuid/uuid"
 )
 
 var (
@@ -1971,11 +1976,6 @@ func X__isoc99_sscanf(t *TLS, str, format, va uintptr) int32 {
 	return r
 }
 
-// int sched_yield(void);
-func Xsched_yield(t *TLS) {
-	runtime.Gosched()
-}
-
 var ctimeStaticBuf [32]byte
 
 // char *ctime(const time_t *timep);
@@ -2047,4 +2047,74 @@ func Xposix_fadvise(t *TLS, fd int32, offset, len types.Off_t, advice int32) int
 	}
 
 	return 0
+}
+
+// void uuid_generate_random(uuid_t out);
+func Xuuid_generate_random(t *TLS, out uintptr) {
+	panic(todo(""))
+}
+
+// void uuid_unparse(uuid_t uu, char *out);
+func Xuuid_unparse(t *TLS, uu, out uintptr) {
+	s := (*guuid.UUID)(unsafe.Pointer(uu)).String()
+	copy((*RawMem)(unsafe.Pointer(out))[:], s)
+	*(*byte)(unsafe.Pointer(out + uintptr(len(s)))) = 0
+}
+
+// int uuid_parse( char *in, uuid_t uu);
+func Xuuid_parse(t *TLS, in uintptr, uu uintptr) int32 {
+	r, err := guuid.Parse(GoString(in))
+	if err != nil {
+		return -1
+	}
+
+	copy((*RawMem)(unsafe.Pointer(uu))[:unsafe.Sizeof(uuid.Uuid_t{})], r[:])
+	return 0
+}
+
+// The initstate_r() function is like initstate(3) except that it initializes
+// the state in the object pointed to by buf, rather than initializing the
+// global state  variable.   Before  calling this function, the buf.state field
+// must be initialized to NULL.  The initstate_r() function records a pointer
+// to the statebuf argument inside the structure pointed to by buf.  Thus,
+// state‐ buf should not be deallocated so long as buf is still in use.  (So,
+// statebuf should typically be allocated as a static variable, or allocated on
+// the heap using malloc(3) or similar.)
+//
+// char *initstate_r(unsigned int seed, char *statebuf, size_t statelen, struct random_data *buf);
+func Xinitstate_r(t *TLS, seed uint32, statebuf uintptr, statelen types.Size_t, buf uintptr) int32 {
+	if buf == 0 {
+		panic(todo(""))
+	}
+
+	randomDataMu.Lock()
+
+	defer randomDataMu.Unlock()
+
+	randomData[buf] = rand.New(rand.NewSource(int64(seed)))
+	return 0
+}
+
+var (
+	randomData   = map[uintptr]*rand.Rand{}
+	randomDataMu sync.Mutex
+)
+
+// int random_r(struct random_data *buf, int32_t *result);
+func Xrandom_r(t *TLS, buf, result uintptr) int32 {
+	randomDataMu.Lock()
+
+	defer randomDataMu.Unlock()
+
+	mr := randomData[buf]
+	if stdlib.RAND_MAX != math.MaxInt32 {
+		panic(todo(""))
+	}
+	*(*int32)(unsafe.Pointer(result)) = mr.Int31()
+	return 0
+}
+
+// void uuid_copy(uuid_t dst, uuid_t src);
+func Xuuid_copy(t *TLS, dst, src uintptr) {
+	*(*uuid.Uuid_t)(unsafe.Pointer(dst)) = *(*uuid.Uuid_t)(unsafe.Pointer(src))
 }

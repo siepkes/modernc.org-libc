@@ -452,26 +452,6 @@ func Xfopen64(t *TLS, pathname, mode uintptr) uintptr {
 	return 0
 }
 
-// void uuid_generate_random(uuid_t out);
-func Xuuid_generate_random(t *TLS, out uintptr) {
-	panic(todo(""))
-}
-
-// void uuid_unparse(uuid_t uu, char *out);
-func Xuuid_unparse(t *TLS, uu, out uintptr) {
-	panic(todo(""))
-}
-
-// int uuid_parse( char *in, uuid_t uu);
-func Xuuid_parse(t *TLS, in uintptr, uu uintptr) int32 {
-	panic(todo(""))
-}
-
-// void uuid_copy(uuid_t dst, uuid_t src);
-func Xuuid_copy(t *TLS, dst, dts uintptr) {
-	panic(todo(""))
-}
-
 //TODO-
 func __syscall1(t *TLS, trap, p1 long) long {
 	return __syscall(unix.Syscall(uintptr(trap), uintptr(p1), 0, 0))
