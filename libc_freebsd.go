@@ -1761,11 +1761,6 @@ func Xfscanf(t *TLS, stream, format, va uintptr) int32 {
 	panic(todo(""))
 }
 
-// FILE *fdopen(int fd, const char *mode);
-func Xfdopen(t *TLS, fd int32, mode uintptr) uintptr {
-	panic(todo(""))
-}
-
 // int fputs(const char *s, FILE *stream);
 func Xfputs(t *TLS, s, stream uintptr) int32 {
 	if _, _, err := unix.Syscall(unix.SYS_WRITE, uintptr(file(stream).fd()), s, uintptr(Xstrlen(t, s))); err != 0 {

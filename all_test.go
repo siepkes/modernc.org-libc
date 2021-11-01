@@ -6,6 +6,8 @@ package libc // import "modernc.org/libc"
 
 import (
 	"encoding/hex"
+	"os"
+	"path/filepath"
 	"runtime"
 	"testing"
 	"unsafe"
@@ -279,5 +281,39 @@ func TestSnprintf(t *testing.T) {
 
 	if g, e := testSnprintfBuf, [3]byte{'1', '2', 0x00}; g != e {
 		t.Fatal(g, e)
+	}
+}
+
+var testFdopenBuf [100]byte
+
+func TestFdopen(t *testing.T) {
+	const s = "foobarbaz\n"
+	tempdir := t.TempDir()
+	f, err := os.Create(filepath.Join(tempdir, "test_fdopen"))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if _, err := f.Write([]byte(s)); err != nil {
+		t.Fatal(err)
+	}
+
+	if _, err := f.Seek(0, os.SEEK_SET); err != nil {
+		t.Fatal(err)
+	}
+
+	tls := NewTLS()
+
+	defer tls.Close()
+
+	p := Xfdopen(tls, int32(f.Fd()), mustCString("r"))
+
+	bp := uintptr(unsafe.Pointer(&testFdopenBuf))
+	if g, e := Xfread(tls, bp, 1, size_t(len(testFdopenBuf)), p), size_t(len(s)); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := string(GoBytes(bp, len(s))), s; g != e {
+		t.Fatalf("%q %q", g, e)
 	}
 }
