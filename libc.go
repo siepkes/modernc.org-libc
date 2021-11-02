@@ -1337,27 +1337,3 @@ func X__sync_sub_and_fetch_uint32(t *TLS, p uintptr, v uint32) uint32 {
 func Xsched_yield(t *TLS) {
 	runtime.Gosched()
 }
-
-// FILE *fdopen(int fd, const char *mode);
-func Xfdopen(t *TLS, fd int32, mode uintptr) uintptr {
-	m := strings.ReplaceAll(GoString(mode), "b", "")
-	switch m {
-	case
-		"a",
-		"a+",
-		"r",
-		"r+",
-		"w",
-		"w+":
-	default:
-		t.setErrno(errno.EINVAL)
-		return 0
-	}
-
-	if p := newFile(t, fd); p != 0 {
-		return p
-	}
-
-	t.setErrno(errno.EINVAL)
-	return 0
-}

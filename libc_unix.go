@@ -12,6 +12,7 @@ import (
 	"os"
 	gosignal "os/signal"
 	"reflect"
+	"strings"
 	"syscall"
 	"unsafe"
 
@@ -235,4 +236,28 @@ func Xtmpfile(t *TLS) uintptr {
 	})
 
 	return cf
+}
+
+// FILE *fdopen(int fd, const char *mode);
+func Xfdopen(t *TLS, fd int32, mode uintptr) uintptr {
+	m := strings.ReplaceAll(GoString(mode), "b", "")
+	switch m {
+	case
+		"a",
+		"a+",
+		"r",
+		"r+",
+		"w",
+		"w+":
+	default:
+		t.setErrno(errno.EINVAL)
+		return 0
+	}
+
+	if p := newFile(t, fd); p != 0 {
+		return p
+	}
+
+	t.setErrno(errno.EINVAL)
+	return 0
 }

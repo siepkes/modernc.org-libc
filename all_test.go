@@ -287,6 +287,10 @@ func TestSnprintf(t *testing.T) {
 var testFdopenBuf [100]byte
 
 func TestFdopen(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("not implemented on Windows")
+	}
+
 	const s = "foobarbaz\n"
 	tempdir := t.TempDir()
 	f, err := os.Create(filepath.Join(tempdir, "test_fdopen"))

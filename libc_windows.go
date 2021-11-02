@@ -5362,3 +5362,8 @@ func Xrint(tls *TLS, x float64) float64 {
 		return math.Ceil(x - 0.5)
 	}
 }
+
+// FILE *fdopen(int fd, const char *mode);
+func Xfdopen(t *TLS, fd int32, mode uintptr) uintptr {
+	panic(todo(""))
+}
