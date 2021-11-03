@@ -453,7 +453,13 @@ type X__float128 = float64        /* <builtin>:47:21 */
 //      array_name[restrict]
 //    GCC 3.1 supports this.
 
+// Describes a char array whose address can safely be passed as the first
+//    argument to strncpy and strncat, as the char array is not necessarily
+//    a NUL-terminated string.
+
 // Undefine (also defined in libc-symbols.h).
+// Copies attributes from the declaration or type referenced by
+//    the argument.
 
 // Determine the wordsize from the preprocessor defines.
 
@@ -509,7 +515,7 @@ type X__float128 = float64        /* <builtin>:47:21 */
 //    in the C library which is a stub, meaning it will fail
 //    every time called, usually setting errno to ENOSYS.
 
-// Copyright (C) 1989-2017 Free Software Foundation, Inc.
+// Copyright (C) 1989-2020 Free Software Foundation, Inc.
 //
 // This file is part of GCC.
 //
@@ -540,15 +546,6 @@ type X__float128 = float64        /* <builtin>:47:21 */
 
 // This avoids lossage on SunOS but only if stdtypes.h comes first.
 //    There's no way to win with the other order!  Sun lossage.
-
-// On 4.3bsd-net2, make sure ansi.h is included, so we have
-//    one less case to deal with in the following.
-// On FreeBSD 5, machine/ansi.h does not exist anymore...
-
-// In 4.3bsd-net2, machine/ansi.h defines these symbols, which are
-//    defined if the corresponding type is *not* defined.
-//    FreeBSD-2.1 defines _MACHINE_ANSI_H_ instead of _ANSI_H_.
-//    NetBSD defines _I386_ANSI_H_ and _X86_64_ANSI_H_ instead of _ANSI_H_
 
 // Sequent's header files use _PTRDIFF_T_ in some conflicting way.
 //    Just ignore it.
@@ -583,11 +580,6 @@ type X__float128 = float64        /* <builtin>:47:21 */
 
 // Define this type if we are doing the whole job,
 //    or if we want this type in particular.
-
-//  In 4.3bsd-net2, leave these undefined to indicate that size_t, etc.
-//     are already defined.
-//  BSD/OS 3.1 and FreeBSD [23].x require the MACHINE_ANSI_H check here.
-//  NetBSD 5 requires the I386_ANSI_H and X86_64_ANSI_H checks here.
 
 // A null pointer constant.
 

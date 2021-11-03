@@ -8,9 +8,10 @@
 //TODO linux,arm
 //TODO linux,arm64
 //TODO linux,s390x
+//TODO netbsd,amd64
 
-//go:build (linux && amd64) || (linux && 386)
-// +build linux,amd64 linux,386
+//go:build (linux && 386) || (linux && amd64)
+// +build linux,386 linux,amd64
 
 package libc // import "modernc.org/libc"
 
