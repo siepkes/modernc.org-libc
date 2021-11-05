@@ -5,13 +5,10 @@
 //TODO darwin,amd64
 //TODO darwin,arm64
 //TODO freebsd,amd64
-//TODO linux,arm
-//TODO linux,arm64
-//TODO linux,s390x
 //TODO netbsd,amd64
 
-//go:build (linux && 386) || (linux && amd64)
-// +build linux,386 linux,amd64
+//go:build linux
+// +build linux
 
 package libc // import "modernc.org/libc"
 

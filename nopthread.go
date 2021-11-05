@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//go:build darwin || (freebsd && amd64) || (linux && arm) || (linux && arm64) || (linux && s390x) || (netbsd && amd64) || windows
-// +build darwin freebsd,amd64 linux,arm linux,arm64 linux,s390x netbsd,amd64 windows
+//go:build darwin || freebsd || netbsd || windows
+// +build darwin freebsd netbsd windows
 
 package libc // import "modernc.org/libc"
 
