@@ -59,8 +59,9 @@ netbsd_amd64:
 
 # only on freebsd/amd64
 freebsd_amd64:
-	TARGET_GOOS=freebsd TARGET_GOARCH=amd64 go generate
-	GOOS=freebsd GOARCH=amd64 go build -v ./...
+	@echo "Should be executed only on freebsd/amd64."
+	go generate 2>&1 | tee log-generate
+	go build -v ./...
 
 linux_amd64:
 	@echo "Should be executed only on linux/amd64."
