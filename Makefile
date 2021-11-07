@@ -63,8 +63,9 @@ freebsd_amd64:
 	GOOS=freebsd GOARCH=amd64 go build -v ./...
 
 linux_amd64:
-	TARGET_GOOS=linux TARGET_GOARCH=amd64 go generate
-	GOOS=linux GOARCH=amd64 go build -v ./...
+	@echo "Should be executed only on linux/amd64."
+	go generate 2>&1 | tee log-generate
+	go build -v ./...
 
 linux_386:
 	CCGO_CPP=i686-linux-gnu-cpp TARGET_GOOS=linux TARGET_GOARCH=386 go generate

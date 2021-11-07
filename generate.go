@@ -52,6 +52,7 @@ func trc(s string, args ...interface{}) string { //TODO-
 }
 
 func main() {
+	fmt.Printf("Running on %s/%s.\n", runtime.GOOS, runtime.GOARCH)
 	if s := os.Getenv("TARGET_GOOS"); s != "" {
 		goos = s
 	}
