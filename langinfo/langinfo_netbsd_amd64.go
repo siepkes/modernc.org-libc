@@ -111,9 +111,9 @@ type X__float128 = float64        /* <builtin>:47:21 */
 //	@(#)cdefs.h	8.8 (Berkeley) 1/9/95
 
 type X__nl_cat_d = struct {
-	F__data uintptr
-	F__size int32
-	_       [4]byte
+	F__data      uintptr
+	F__size      int32
+	F__ccgo_pad1 [4]byte
 } /* nl_types.h:77:9 */
 
 // return true if value 'a' fits in type 't'

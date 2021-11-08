@@ -358,8 +358,8 @@ type X__wctype_t = uintptr       /* ansi.h:54:31 */
 // mbstate_t is an opaque object to keep conversion state, during multibyte
 // stream conversions.  The content must not be referenced by user programs.
 type X__mbstate_t = struct {
-	F__mbstateL X__int64_t
-	_           [120]byte
+	F__mbstateL  X__int64_t
+	F__ccgo_pad1 [120]byte
 } /* ansi.h:63:3 */
 
 type X__va_list = X__builtin_va_list /* ansi.h:72:27 */

@@ -30,18 +30,16 @@ const (
 	EXPR_NEST_MAX                        = 32
 	FLT_DIG                              = 6
 	GID_MAX                              = 2147483647
-	INT_MAX                              = 2147483647
+	INT_MAX                              = 0x7fffffff
 	INT_MIN                              = -2147483648
 	IOV_MAX                              = 1024
 	LINE_MAX                             = 2048
 	LINK_MAX                             = 32767
-	LLONG_MAX                            = 9223372036854775807
+	LLONG_MAX                            = 0x7fffffffffffffff
 	LLONG_MIN                            = -9223372036854775808
 	LOGIN_NAME_MAX                       = 17
 	LONG_BIT                             = 64
-	LONG_LONG_MAX                        = 9223372036854775807
-	LONG_LONG_MIN                        = -9223372036854775808
-	LONG_MAX                             = 9223372036854775807
+	LONG_MAX                             = 0x7fffffffffffffff
 	LONG_MIN                             = -9223372036854775808
 	MAX_CANON                            = 255
 	MAX_INPUT                            = 255
@@ -65,29 +63,26 @@ const (
 	QUAD_MAX                             = 0x7fffffffffffffff
 	QUAD_MIN                             = -9223372036854775808
 	RE_DUP_MAX                           = 255
-	SCHAR_MAX                            = 127
+	SCHAR_MAX                            = 0x7f
 	SCHAR_MIN                            = -128
-	SHRT_MAX                             = 32767
+	SHRT_MAX                             = 0x7fff
 	SHRT_MIN                             = -32768
 	SIZE_T_MAX                           = 18446744073709551615
 	SSIZE_MAX                            = 9223372036854775807
 	SSIZE_MIN                            = -9223372036854775808
 	TMP_MAX                              = 308915776
-	UCHAR_MAX                            = 255
+	UCHAR_MAX                            = 0xff
 	UID_MAX                              = 2147483647
-	UINT_MAX                             = 4294967295
-	ULLONG_MAX                           = 18446744073709551615
-	ULONG_LONG_MAX                       = 18446744073709551615
-	ULONG_MAX                            = 18446744073709551615
+	UINT_MAX                             = 0xffffffff
+	ULLONG_MAX                           = 0xffffffffffffffff
+	ULONG_MAX                            = 0xffffffffffffffff
 	UQUAD_MAX                            = 0xffffffffffffffff
-	USHRT_MAX                            = 65535
+	USHRT_MAX                            = 0xffff
 	WORD_BIT                             = 32
 	X_FILE_OFFSET_BITS                   = 64
-	X_GCC_LIMITS_H_                      = 0
 	X_GETGR_R_SIZE_MAX                   = 1024
 	X_GETPW_R_SIZE_MAX                   = 1024
 	X_LIMITS_H_                          = 0
-	X_LIMITS_H___                        = 0
 	X_LP64                               = 1
 	X_NETBSD_SOURCE                      = 1
 	X_POSIX2_BC_BASE_MAX                 = 99
@@ -154,41 +149,6 @@ type X__uint128_t = struct {
 
 type X__builtin_va_list = uintptr /* <builtin>:46:14 */
 type X__float128 = float64        /* <builtin>:47:21 */
-
-// Copyright (C) 1992-2020 Free Software Foundation, Inc.
-//
-// This file is part of GCC.
-//
-// GCC is free software; you can redistribute it and/or modify it under
-// the terms of the GNU General Public License as published by the Free
-// Software Foundation; either version 3, or (at your option) any later
-// version.
-//
-// GCC is distributed in the hope that it will be useful, but WITHOUT ANY
-// WARRANTY; without even the implied warranty of MERCHANTABILITY or
-// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-// for more details.
-//
-// Under Section 7 of GPL version 3, you are granted additional
-// permissions described in the GCC Runtime Library Exception, version
-// 3.1, as published by the Free Software Foundation.
-//
-// You should have received a copy of the GNU General Public License and
-// a copy of the GCC Runtime Library Exception along with this program;
-// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-// <http://www.gnu.org/licenses/>.
-
-// This administrivia gets added to the beginning of limits.h
-//    if the system has its own version of limits.h.
-
-// We use _GCC_LIMITS_H_ because we want this not to match
-//    any macros that the system's limits.h uses for its own purposes.
-
-// Use "..." so that we find syslimits.h only in this same directory.
-// syslimits.h stands for the system's own limits.h file.
-//    If we can use it ok unmodified, then we install this text.
-//    If fixincludes fixes it, then the fixed version is installed
-//    instead of this text.
 
 //	$NetBSD: limits.h,v 1.40 2016/08/04 06:43:43 christos Exp $
 
@@ -496,62 +456,5 @@ type X__float128 = float64        /* <builtin>:47:21 */
 // IEEE Std 1003.1c-95, adopted in X/Open CAE Specification Issue 5 Version 2
 
 // X/Open CAE Specification Issue 5 Version 2
-
-// Copyright (C) 1991-2020 Free Software Foundation, Inc.
-//
-// This file is part of GCC.
-//
-// GCC is free software; you can redistribute it and/or modify it under
-// the terms of the GNU General Public License as published by the Free
-// Software Foundation; either version 3, or (at your option) any later
-// version.
-//
-// GCC is distributed in the hope that it will be useful, but WITHOUT ANY
-// WARRANTY; without even the implied warranty of MERCHANTABILITY or
-// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-// for more details.
-//
-// Under Section 7 of GPL version 3, you are granted additional
-// permissions described in the GCC Runtime Library Exception, version
-// 3.1, as published by the Free Software Foundation.
-//
-// You should have received a copy of the GNU General Public License and
-// a copy of the GCC Runtime Library Exception along with this program;
-// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-// <http://www.gnu.org/licenses/>.
-
-// Number of bits in a `char'.
-
-// Maximum length of a multibyte character.
-
-// Minimum and maximum values a `signed char' can hold.
-
-// Maximum value an `unsigned char' can hold.  (Minimum is 0).
-
-// Minimum and maximum values a `char' can hold.
-
-// Minimum and maximum values a `signed short int' can hold.
-
-// Maximum value an `unsigned short int' can hold.  (Minimum is 0).
-
-// Minimum and maximum values a `signed int' can hold.
-
-// Maximum value an `unsigned int' can hold.  (Minimum is 0).
-
-// Minimum and maximum values a `signed long int' can hold.
-//    (Same as `int').
-
-// Maximum value an `unsigned long int' can hold.  (Minimum is 0).
-
-// Minimum and maximum values a `signed long long int' can hold.
-
-// Maximum value an `unsigned long long int' can hold.  (Minimum is 0).
-
-// Minimum and maximum values a `signed long long int' can hold.
-
-// Maximum value an `unsigned long long int' can hold.  (Minimum is 0).
-
-// This administrivia gets added to the end of limits.h
-//    if the system has its own version of limits.h.
 
 var _ int8 /* gen.c:2:13: */

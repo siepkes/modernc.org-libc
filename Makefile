@@ -54,8 +54,9 @@ darwin_arm64:
 
 # only on netbsd/amd64
 netbsd_amd64:
-	TARGET_GOOS=netbsd TARGET_GOARCH=amd64 go generate
-	GOOS=netbsd GOARCH=amd64 go build -v ./...
+	@echo "Should be executed only on netbsd/amd64."
+	go generate 2>&1 | tee log-generate
+	go build -v ./...
 
 # only on freebsd/amd64
 freebsd_amd64:

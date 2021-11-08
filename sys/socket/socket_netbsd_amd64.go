@@ -323,8 +323,8 @@ type X__wctype_t = uintptr       /* ansi.h:54:31 */
 // mbstate_t is an opaque object to keep conversion state, during multibyte
 // stream conversions.  The content must not be referenced by user programs.
 type X__mbstate_t = struct {
-	F__mbstateL X__int64_t
-	_           [120]byte
+	F__mbstateL  X__int64_t
+	F__ccgo_pad1 [120]byte
 } /* ansi.h:63:3 */
 
 type X__va_list = X__builtin_va_list /* ansi.h:72:27 */
@@ -662,10 +662,10 @@ type Sigset_t = struct{ F__bits [4]X__uint32_t } /* sigtypes.h:62:3 */
 // Macro for manipulating signal masks.
 
 type Sigaltstack = struct {
-	Fss_sp    uintptr
-	Fss_size  Size_t
-	Fss_flags int32
-	_         [4]byte
+	Fss_sp       uintptr
+	Fss_size     Size_t
+	Fss_flags    int32
+	F__ccgo_pad1 [4]byte
 } /* sigtypes.h:108:9 */
 
 // Macro for manipulating signal masks.
@@ -758,7 +758,7 @@ type Kinfo_pcb = struct {
 			Fsa_family X__sa_family_t
 			Fsa_data   [14]int8
 		}
-		_ [248]byte
+		F__ccgo_pad1 [248]byte
 	}
 	Fki_d struct {
 		F_kid_dst struct {
@@ -766,7 +766,7 @@ type Kinfo_pcb = struct {
 			Fsa_family X__sa_family_t
 			Fsa_data   [14]int8
 		}
-		_ [248]byte
+		F__ccgo_pad1 [248]byte
 	}
 	Fki_inode   X__uint64_t
 	Fki_vnode   X__uint64_t
@@ -823,10 +823,10 @@ type Kinfo_pcb = struct {
 type Msghdr = struct {
 	Fmsg_name       uintptr
 	Fmsg_namelen    X__socklen_t
-	_               [4]byte
+	F__ccgo_pad1    [4]byte
 	Fmsg_iov        uintptr
 	Fmsg_iovlen     int32
-	_               [4]byte
+	F__ccgo_pad2    [4]byte
 	Fmsg_control    uintptr
 	Fmsg_controllen X__socklen_t
 	Fmsg_flags      int32
@@ -836,16 +836,16 @@ type Mmsghdr = struct {
 	Fmsg_hdr struct {
 		Fmsg_name       uintptr
 		Fmsg_namelen    X__socklen_t
-		_               [4]byte
+		F__ccgo_pad1    [4]byte
 		Fmsg_iov        uintptr
 		Fmsg_iovlen     int32
-		_               [4]byte
+		F__ccgo_pad2    [4]byte
 		Fmsg_control    uintptr
 		Fmsg_controllen X__socklen_t
 		Fmsg_flags      int32
 	}
-	Fmsg_len uint32
-	_        [4]byte
+	Fmsg_len     uint32
+	F__ccgo_pad1 [4]byte
 } /* socket.h:506:1 */
 
 // Extra flags used internally only

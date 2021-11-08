@@ -2143,7 +2143,10 @@ func Xrint(tls *TLS, x float64) float64 { /* rint.c:12:8: */
 	bp := tls.Alloc(8)
 	defer tls.Free(8)
 
-	*(*struct{ f float64 })(unsafe.Pointer(bp /* u */)) = struct{ f float64 }{f: x}
+	*(*struct{ f float64 })(unsafe.Pointer(bp /* u */)) = func() (r struct{ f float64 }) {
+		*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&r)) + 0)) = x
+		return r
+	}()
 	var e int32 = (int32((*(*uint64_t)(unsafe.Pointer(bp /* &u */)) >> 52) & uint64(0x7ff)))
 	var s int32 = (int32(*(*uint64_t)(unsafe.Pointer(bp /* &u */)) >> 63))
 	var y double_t
@@ -4159,7 +4162,9 @@ func X__lookup_serv(tls *TLS, buf uintptr, name uintptr, proto int32, socktype i
 func X__toread(tls *TLS, f uintptr) int32 { /* __toread.c:3:5: */
 	*(*int32)(unsafe.Pointer(f + 136 /* &.mode */)) |= ((*FILE1)(unsafe.Pointer(f)).mode - 1)
 	if (*FILE1)(unsafe.Pointer(f)).wpos != (*FILE1)(unsafe.Pointer(f)).wbase {
-		(*(*func(*TLS, uintptr, uintptr, size_t) size_t)(unsafe.Pointer((f + 72 /* &.write */))))(tls, f, uintptr(0), uint64(0))
+		(*struct {
+			f func(*TLS, uintptr, uintptr, size_t) size_t
+		})(unsafe.Pointer(&struct{ uintptr }{(*FILE1)(unsafe.Pointer(f)).write})).f(tls, f, uintptr(0), uint64(0))
 	}
 	(*FILE1)(unsafe.Pointer(f)).wpos = AssignPtrUintptr(f+56 /* &.wbase */, AssignPtrUintptr(f+32 /* &.wend */, uintptr(0)))
 	if ((*FILE1)(unsafe.Pointer(f)).flags & uint32(4)) != 0 {
@@ -4187,7 +4192,9 @@ func X__uflow(tls *TLS, f uintptr) int32 { /* __uflow.c:6:5: */
 
 	// var c uint8 at bp, 1
 
-	if !(X__toread(tls, f) != 0) && ((*(*func(*TLS, uintptr, uintptr, size_t) size_t)(unsafe.Pointer((f + 64 /* &.read */))))(tls, f, bp /* &c */, uint64(1)) == uint64(1)) {
+	if !(X__toread(tls, f) != 0) && ((*struct {
+		f func(*TLS, uintptr, uintptr, size_t) size_t
+	})(unsafe.Pointer(&struct{ uintptr }{(*FILE1)(unsafe.Pointer(f)).read})).f(tls, f, bp /* &c */, uint64(1)) == uint64(1)) {
 		return int32(*(*uint8)(unsafe.Pointer(bp /* c */)))
 	}
 	return -1

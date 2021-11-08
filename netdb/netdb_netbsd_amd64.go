@@ -523,8 +523,8 @@ type X__wctype_t = uintptr       /* ansi.h:54:31 */
 // mbstate_t is an opaque object to keep conversion state, during multibyte
 // stream conversions.  The content must not be referenced by user programs.
 type X__mbstate_t = struct {
-	F__mbstateL X__int64_t
-	_           [120]byte
+	F__mbstateL  X__int64_t
+	F__ccgo_pad1 [120]byte
 } /* ansi.h:63:3 */
 
 type X__va_list = X__builtin_va_list /* ansi.h:72:27 */
@@ -980,18 +980,18 @@ type Netent = struct {
 } /* netdb.h:161:1 */
 
 type Servent = struct {
-	Fs_name    uintptr
-	Fs_aliases uintptr
-	Fs_port    int32
-	_          [4]byte
-	Fs_proto   uintptr
+	Fs_name      uintptr
+	Fs_aliases   uintptr
+	Fs_port      int32
+	F__ccgo_pad1 [4]byte
+	Fs_proto     uintptr
 } /* netdb.h:176:1 */
 
 type Protoent = struct {
-	Fp_name    uintptr
-	Fp_aliases uintptr
-	Fp_proto   int32
-	_          [4]byte
+	Fp_name      uintptr
+	Fp_aliases   uintptr
+	Fp_proto     int32
+	F__ccgo_pad1 [4]byte
 } /* netdb.h:183:1 */
 
 // Note: ai_addrlen used to be a size_t, per RFC 2553.
@@ -1009,7 +1009,7 @@ type Addrinfo = struct {
 	Fai_socktype  int32
 	Fai_protocol  int32
 	Fai_addrlen   X__socklen_t
-	_             [4]byte
+	F__ccgo_pad1  [4]byte
 	Fai_canonname uintptr
 	Fai_addr      uintptr
 	Fai_next      uintptr
