@@ -790,8 +790,8 @@ type X__darwin_ct_rune_t = int32 /* _types.h:70:33 */ // ct_rune_t
 // mbstate_t is an opaque object to keep conversion state, during multibyte
 // stream conversions.  The content must not be referenced by user programs.
 type X__mbstate_t = struct {
-	_           [0]uint64
-	F__mbstate8 [128]int8
+	F__ccgo_pad1 [0]uint64
+	F__mbstate8  [128]int8
 } /* _types.h:79:3 */
 
 type X__darwin_mbstate_t = X__mbstate_t /* _types.h:81:33 */ // mbstate_t
@@ -4605,18 +4605,18 @@ type Sigset_t = X__darwin_sigset_t /* _sigset_t.h:31:41 */
 type Uid_t = X__darwin_uid_t /* _uid_t.h:31:31 */
 
 type Sigval = struct {
-	_          [0]uint64
-	Fsival_int int32
-	_          [4]byte
+	F__ccgo_pad1 [0]uint64
+	Fsival_int   int32
+	F__ccgo_pad2 [4]byte
 } /* signal.h:158:1 */
 
 type Sigevent = struct {
 	Fsigev_notify int32
 	Fsigev_signo  int32
 	Fsigev_value  struct {
-		_          [0]uint64
-		Fsival_int int32
-		_          [4]byte
+		F__ccgo_pad1 [0]uint64
+		Fsival_int   int32
+		F__ccgo_pad2 [4]byte
 	}
 	Fsigev_notify_function   uintptr
 	Fsigev_notify_attributes uintptr
@@ -4631,9 +4631,9 @@ type X__siginfo = struct {
 	Fsi_status int32
 	Fsi_addr   uintptr
 	Fsi_value  struct {
-		_          [0]uint64
-		Fsival_int int32
-		_          [4]byte
+		F__ccgo_pad1 [0]uint64
+		Fsival_int   int32
+		F__ccgo_pad2 [4]byte
 	}
 	Fsi_band int64
 	F__pad   [7]uint64

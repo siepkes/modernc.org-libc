@@ -1273,8 +1273,8 @@ type X__darwin_ct_rune_t = int32 /* _types.h:70:33 */ // ct_rune_t
 // mbstate_t is an opaque object to keep conversion state, during multibyte
 // stream conversions.  The content must not be referenced by user programs.
 type X__mbstate_t = struct {
-	_           [0]uint64
-	F__mbstate8 [128]int8
+	F__ccgo_pad1 [0]uint64
+	F__mbstate8  [128]int8
 } /* _types.h:79:3 */
 
 type X__darwin_mbstate_t = X__mbstate_t /* _types.h:81:33 */ // mbstate_t
@@ -6056,8 +6056,8 @@ type In_pktinfo = struct {
 // IPv6 address
 type In6_addr = struct {
 	F__u6_addr struct {
-		_           [0]uint32
-		F__u6_addr8 [16]X__uint8_t
+		F__ccgo_pad1 [0]uint32
+		F__u6_addr8  [16]X__uint8_t
 	}
 } /* in6.h:151:9 */
 
@@ -6274,8 +6274,8 @@ type Sockaddr_in6 = struct {
 	Fsin6_flowinfo X__uint32_t
 	Fsin6_addr     struct {
 		F__u6_addr struct {
-			_           [0]uint32
-			F__u6_addr8 [16]X__uint8_t
+			F__ccgo_pad1 [0]uint32
+			F__u6_addr8  [16]X__uint8_t
 		}
 	}
 	Fsin6_scope_id X__uint32_t
@@ -6351,8 +6351,8 @@ type Sockaddr_in6 = struct {
 type Ipv6_mreq = struct {
 	Fipv6mr_multiaddr struct {
 		F__u6_addr struct {
-			_           [0]uint32
-			F__u6_addr8 [16]X__uint8_t
+			F__ccgo_pad1 [0]uint32
+			F__u6_addr8  [16]X__uint8_t
 		}
 	}
 	Fipv6mr_interface uint32
@@ -6362,8 +6362,8 @@ type Ipv6_mreq = struct {
 type In6_pktinfo = struct {
 	Fipi6_addr struct {
 		F__u6_addr struct {
-			_           [0]uint32
-			F__u6_addr8 [16]X__uint8_t
+			F__ccgo_pad1 [0]uint32
+			F__u6_addr8  [16]X__uint8_t
 		}
 	}
 	Fipi6_ifindex uint32
@@ -6378,8 +6378,8 @@ type Ip6_mtuinfo = struct {
 		Fsin6_flowinfo X__uint32_t
 		Fsin6_addr     struct {
 			F__u6_addr struct {
-				_           [0]uint32
-				F__u6_addr8 [16]X__uint8_t
+				F__ccgo_pad1 [0]uint32
+				F__u6_addr8  [16]X__uint8_t
 			}
 		}
 		Fsin6_scope_id X__uint32_t
