@@ -533,13 +533,12 @@ func Xfchmod(t *TLS, fd int32, mode types.Mode_t) int32 {
 
 // int fchown(int fd, uid_t owner, gid_t group);
 func Xfchown(t *TLS, fd int32, owner types.Uid_t, group types.Gid_t) int32 {
-	panic(todo(""))
-	// if _, _, err := unix.Syscall(unix.SYS_FCHOWN, uintptr(fd), uintptr(owner), uintptr(group)); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if _, _, err := unix.Syscall(unix.SYS_FCHOWN, uintptr(fd), uintptr(owner), uintptr(group)); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // uid_t geteuid(void);
