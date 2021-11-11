@@ -155,6 +155,10 @@ var CAPI = map[string]struct{}{`)
 }
 
 func makeMuslWin(goos, goarch string) {
+	if runtime.GOOS != "windows" {
+		fail(fmt.Errorf("must be runned on Windows"))
+	}
+
 	wd, err := os.Getwd()
 	if err != nil {
 		fail(err)
@@ -183,10 +187,18 @@ func makeMuslWin(goos, goarch string) {
 		}
 	}()
 
-	run("mkdir", "-p", "obj/include/bits")
-	run("sh", "-c", fmt.Sprintf("sed -f ./tools/mkalltypes.sed ./arch/%s/bits/alltypes.h.in ./include/alltypes.h.in > obj/include/bits/alltypes.h", arch))
-	run("sh", "-c", fmt.Sprintf("cp arch/%s/bits/syscall.h.in obj/include/bits/syscall.h", arch))
-	run("sh", "-c", fmt.Sprintf("sed -n -e s/__NR_/SYS_/p < arch/%s/bits/syscall.h.in >> obj/include/bits/syscall.h", arch))
+	//TODO- run("mkdir", "-p", "obj/include/bits")
+	//TODO- run("sh", "-c", fmt.Sprintf("sed -f ./tools/mkalltypes.sed ./arch/%s/bits/alltypes.h.in ./include/alltypes.h.in > obj/include/bits/alltypes.h", arch))
+	//TODO- run("sh", "-c", fmt.Sprintf("cp arch/%s/bits/syscall.h.in obj/include/bits/syscall.h", arch))
+	//TODO- run("sh", "-c", fmt.Sprintf("sed -n -e s/__NR_/SYS_/p < arch/%s/bits/syscall.h.in >> obj/include/bits/syscall.h", arch))
+	if err := os.MkdirAll("obj\\include\\bits", 0770); err != nil {
+		fail(err)
+	}
+
+	run("cmd", "/c", fmt.Sprintf("sed -f ./tools/mkalltypes.sed ./arch/%s/bits/alltypes.h.in ./include/alltypes.h.in > obj/include/bits/alltypes.h", arch))
+	run("cmd", "/c", fmt.Sprintf("cp arch/%s/bits/syscall.h.in obj/include/bits/syscall.h", arch))
+	run("cmd", "/c", fmt.Sprintf("sed -n -e s/__NR_/SYS_/p < arch/%s/bits/syscall.h.in >> obj/include/bits/syscall.h", arch))
+
 	if _, err := runcc(
 		"-D__environ=environ",
 		"-export-externs", "X",
