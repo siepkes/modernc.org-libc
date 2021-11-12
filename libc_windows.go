@@ -1900,7 +1900,7 @@ func XHeapFree(t *TLS, hHeap uintptr, dwFlags uint32, lpMem uintptr) int32 {
 
 // HANDLE GetProcessHeap();
 func XGetProcessHeap(t *TLS) uintptr {
-	r0, _, err := syscall.Syscall(procOpenEventA.Addr(), 0, 0, 0, 0)
+	r0, _, err := syscall.Syscall(procGetProcessHeap.Addr(), 0, 0, 0, 0)
 	if r0 == 0 {
 		t.setErrno(err)
 	}
