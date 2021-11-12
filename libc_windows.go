@@ -8,13 +8,6 @@ import (
 	"errors"
 	"fmt"
 	"math"
-	"modernc.org/libc/errno"
-	"modernc.org/libc/fcntl"
-	"modernc.org/libc/limits"
-	"modernc.org/libc/sys/stat"
-	"modernc.org/libc/sys/types"
-	"modernc.org/libc/time"
-	"modernc.org/libc/unistd"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -26,6 +19,14 @@ import (
 	"unicode"
 	"unicode/utf16"
 	"unsafe"
+
+	"modernc.org/libc/errno"
+	"modernc.org/libc/fcntl"
+	"modernc.org/libc/limits"
+	"modernc.org/libc/sys/stat"
+	"modernc.org/libc/sys/types"
+	"modernc.org/libc/time"
+	"modernc.org/libc/unistd"
 )
 
 // Keep these outside of the var block otherwise go generate will miss them.
@@ -5421,7 +5422,25 @@ func Xgai_strerrorA(t *TLS, ecode int32) uintptr {
 	panic(todo(""))
 }
 
+// https://github.com/Alexpux/mingw-w64/blob/master/mingw-w64-headers/crt/sys/timeb.h#L69
+//
+// struct __timeb64 {
+//     __time64_t time;
+//     unsigned short millitm;
+//     short timezone;
+//     short dstflag;
+//   };
+
+type __timeb64 struct {
+	time     types.X__time64_t
+	millitm  uint32
+	timezone int16
+	dstflag  int16
+}
+
 // void _ftime64( struct __timeb64 *timeptr );
 func X_ftime64(t *TLS, timeptr uintptr) {
-	panic(todo(""))
+	tm := gotime.Now()
+	(*__timeb64)(unsafe.Pointer(timeptr)).time = types.X__time64_t(tm.Unix())
+	(*__timeb64)(unsafe.Pointer(timeptr)).millitm = uint32(tm.UnixMicro() / 1000)
 }
