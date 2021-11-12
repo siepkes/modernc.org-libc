@@ -5424,5 +5424,5 @@ type __timeb64 struct {
 func X_ftime64(t *TLS, timeptr uintptr) {
 	tm := gotime.Now()
 	(*__timeb64)(unsafe.Pointer(timeptr)).time = types.X__time64_t(tm.Unix())
-	(*__timeb64)(unsafe.Pointer(timeptr)).millitm = uint32(tm.UnixMicro() / 1000)
+	(*__timeb64)(unsafe.Pointer(timeptr)).millitm = uint32(tm.UnixMilli() % 1000)
 }
