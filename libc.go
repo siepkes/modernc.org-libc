@@ -451,7 +451,7 @@ func Xvprintf(t *TLS, s, ap uintptr) int32 { return Xprintf(t, s, ap) }
 
 // int vsprintf(char *str, const char *format, va_list ap);
 func Xvsprintf(t *TLS, str, format, va uintptr) int32 {
-	panic(todo(""))
+	return Xsprintf(t, str, format, va)
 }
 
 // int vsnprintf(char *str, size_t size, const char *format, va_list ap);

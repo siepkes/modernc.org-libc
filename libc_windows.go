@@ -77,6 +77,7 @@ var (
 	procLeaveCriticalSection       = modkernel32.NewProc("LeaveCriticalSection")
 	procDeleteCriticalSection      = modkernel32.NewProc("DeleteCriticalSection")
 	procSetFilePointer             = modkernel32.NewProc("SetFilePointer")
+	procGetModuleHandleA           = modkernel32.NewProc("GetModuleHandleA")
 	procGetModuleHandleW           = modkernel32.NewProc("GetModuleHandleW")
 	procGetModuleFileNameW         = modkernel32.NewProc("GetModuleFileNameW")
 	procGetProcAddress             = modkernel32.NewProc("GetProcAddress")
@@ -3941,6 +3942,15 @@ func XWSAStartup(t *TLS, wVersionRequired uint16, lpWSAData uintptr) int32 {
 	return int32(r0)
 }
 
+// HMODULE GetModuleHandleA(LPCSTR lpModuleName);
+func XGetModuleHandleA(t *TLS, lpModuleName uintptr) uintptr {
+	r0, _, err := syscall.Syscall(procGetModuleHandleA.Addr(), 1, lpModuleName, 0, 0)
+	if r0 == 0 {
+		t.setErrno(err)
+	}
+	return r0
+}
+
 // HMODULE GetModuleHandleW(
 //   LPCWSTR lpModuleName
 // );
@@ -4505,7 +4515,7 @@ func X__mingw_vfprintf(t *TLS, f uintptr, format, va uintptr) int32 {
 
 // int vsprintf(char * restrict s, const char * restrict format, va_list arg);
 func X__mingw_vsprintf(t *TLS, s, format, ap uintptr) int32 {
-	panic(todo(""))
+	return Xvsprintf(t, s, format, ap)
 }
 
 // int vsnprintf(char *str, size_t size, const char *format, va_list ap);
@@ -4820,7 +4830,7 @@ func goWideStringN(p uintptr, n int) string {
 
 // LPWSTR GetCommandLineW();
 func XGetCommandLineW(t *TLS) uintptr {
-	panic(todo(""))
+	return uintptr(unsafe.Pointer(syscall.GetCommandLine()))
 }
 
 // BOOL AddAccessDeniedAce(
@@ -5365,5 +5375,25 @@ func Xrint(tls *TLS, x float64) float64 {
 
 // FILE *fdopen(int fd, const char *mode);
 func Xfdopen(t *TLS, fd int32, mode uintptr) uintptr {
+	panic(todo(""))
+}
+
+// struct tm *_gmtime64( const __time64_t *sourceTime );
+func X_gmtime64(t *TLS, sourceTime uintptr) uintptr {
+	panic(todo(""))
+}
+
+// __time64_t _mktime64(struct tm *timeptr);
+func X_mktime64(t *TLS, timeptr uintptr) int64 {
+	panic(todo(""))
+}
+
+// char * gai_strerrorA(int ecode);
+func Xgai_strerrorA(t *TLS, ecode int32) uintptr {
+	panic(todo(""))
+}
+
+// void _ftime64( struct __timeb64 *timeptr );
+func X_ftime64(t *TLS, timeptr uintptr) {
 	panic(todo(""))
 }
