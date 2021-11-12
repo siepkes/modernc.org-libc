@@ -92,6 +92,7 @@ var (
 	procGetTickCount               = modkernel32.NewProc("GetTickCount")
 	procGetVersionExA              = modkernel32.NewProc("GetVersionExA")
 	procGetVersionExW              = modkernel32.NewProc("GetVersionExW")
+	procHeapAlloc                  = modkernel32.NewProc("HeapAlloc")
 	procInitializeCriticalSection  = modkernel32.NewProc("InitializeCriticalSection")
 	procLeaveCriticalSection       = modkernel32.NewProc("LeaveCriticalSection")
 	procLockFile                   = modkernel32.NewProc("LockFile")
@@ -1917,7 +1918,7 @@ func XHeapFree(t *TLS, hHeap uintptr, dwFlags uint32, lpMem uintptr) int32 {
 // HANDLE GetProcessHeap();
 func XGetProcessHeap(t *TLS) uintptr {
 	r0, _, err := syscall.Syscall(procOpenEventA.Addr(), 0, 0, 0, 0)
-	if err != 0 {
+	if r0 == 0 {
 		t.setErrno(err)
 	}
 	return r0
@@ -1929,7 +1930,11 @@ func XGetProcessHeap(t *TLS) uintptr {
 //   SIZE_T dwBytes
 // );
 func XHeapAlloc(t *TLS, hHeap uintptr, dwFlags uint32, dwBytes types.Size_t) uintptr {
-	panic(todo(""))
+	r0, _, err := syscall.Syscall(procHeapAlloc.Addr(), 3, hHeap, uintptr(dwFlags), uintptr(dwBytes))
+	if r0 == 0 {
+		t.setErrno(err)
+	}
+	return r0
 }
 
 // WCHAR * gai_strerrorW(
