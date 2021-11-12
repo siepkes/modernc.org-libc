@@ -2624,6 +2624,27 @@ func XFindFirstFileW(t *TLS, lpFileName, lpFindFileData uintptr) uintptr {
 	return r0
 }
 
+// HANDLE FindFirstFileExW(
+//   LPCWSTR            lpFileName,
+//   FINDEX_INFO_LEVELS fInfoLevelId,
+//   LPVOID             lpFindFileData,
+//   FINDEX_SEARCH_OPS  fSearchOp,
+//   LPVOID             lpSearchFilter,
+//   DWORD              dwAdditionalFlags
+// );
+func XFindFirstFileExW(t *TLS, lpFileName uintptr, fInfoLevelId int32, lpFindFileData uintptr, fSearchOp int32, lpSearchFilter uintptr, dwAdditionalFlags uint32) uintptr {
+	r0, _, e1 := syscall.Syscall6(procFindFirstFileW.Addr(), 6, lpFileName, uintptr(fInfoLevelId), lpFindFileData, uintptr(fSearchOp), lpSearchFilter, uintptr(dwAdditionalFlags))
+	handle := syscall.Handle(r0)
+	if handle == syscall.InvalidHandle {
+		if e1 != 0 {
+			t.setErrno(e1)
+		} else {
+			t.setErrno(errno.EINVAL)
+		}
+	}
+	return r0
+}
+
 // BOOL FindClose(HANDLE hFindFile);
 func XFindClose(t *TLS, hFindFile uintptr) int32 {
 	r0, _, e1 := syscall.Syscall(procFindClose.Addr(), 1, hFindFile, 0, 0)
@@ -3665,18 +3686,6 @@ func XGetModuleFileNameW(t *TLS, hModule, lpFileName uintptr, nSize uint32) uint
 		t.setErrno(err)
 	}
 	return uint32(r0)
-}
-
-// HANDLE FindFirstFileExW(
-//   LPCWSTR            lpFileName,
-//   FINDEX_INFO_LEVELS fInfoLevelId,
-//   LPVOID             lpFindFileData,
-//   FINDEX_SEARCH_OPS  fSearchOp,
-//   LPVOID             lpSearchFilter,
-//   DWORD              dwAdditionalFlags
-// );
-func XFindFirstFileExW(t *TLS, lpFileName uintptr, fInfoLevelId int32, lpFindFileData uintptr, fSearchOp int32, lpSearchFilter uintptr, dwAdditionalFlags uint32) uintptr {
-	panic(todo(""))
 }
 
 // NET_API_STATUS NET_API_FUNCTION NetGetDCName(
