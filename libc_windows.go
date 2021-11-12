@@ -85,11 +85,12 @@ var (
 	procCreateEventA               = modkernel32.NewProc("CreateEventA")
 	procCreateEventW               = modkernel32.NewProc("CreateEventW")
 	procGetACP                     = modkernel32.NewProc("GetACP")
-	procGetEnvironmentVariableW    = modkernel32.NewProc("GetEnvironmentVariableW")
-	procGetEnvironmentVariableA    = modkernel32.NewProc("GetEnvironmentVariableA")
+	procFindClose                  = modkernel32.NewProc("FindClose")
+	procFindFirstFileExW           = modkernel32.NewProc("FindFirstFileExW")
 	procFindFirstFileW             = modkernel32.NewProc("FindFirstFileW")
 	procFindNextFileW              = modkernel32.NewProc("FindNextFileW")
-	procFindClose                  = modkernel32.NewProc("FindClose")
+	procGetEnvironmentVariableA    = modkernel32.NewProc("GetEnvironmentVariableA")
+	procGetEnvironmentVariableW    = modkernel32.NewProc("GetEnvironmentVariableW")
 	procLstrlenW                   = modkernel32.NewProc("lstrlenW")
 	procGetFileInformationByHandle = modkernel32.NewProc("GetFileInformationByHandle")
 	procQueryPerformanceFrequency  = modkernel32.NewProc("QueryPerformanceFrequency")
@@ -2633,7 +2634,7 @@ func XFindFirstFileW(t *TLS, lpFileName, lpFindFileData uintptr) uintptr {
 //   DWORD              dwAdditionalFlags
 // );
 func XFindFirstFileExW(t *TLS, lpFileName uintptr, fInfoLevelId int32, lpFindFileData uintptr, fSearchOp int32, lpSearchFilter uintptr, dwAdditionalFlags uint32) uintptr {
-	r0, _, e1 := syscall.Syscall6(procFindFirstFileW.Addr(), 6, lpFileName, uintptr(fInfoLevelId), lpFindFileData, uintptr(fSearchOp), lpSearchFilter, uintptr(dwAdditionalFlags))
+	r0, _, e1 := syscall.Syscall6(procFindFirstFileExW.Addr(), 6, lpFileName, uintptr(fInfoLevelId), lpFindFileData, uintptr(fSearchOp), lpSearchFilter, uintptr(dwAdditionalFlags))
 	handle := syscall.Handle(r0)
 	if handle == syscall.InvalidHandle {
 		if e1 != 0 {
