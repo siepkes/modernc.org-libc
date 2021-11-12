@@ -125,6 +125,11 @@ var (
 	//	procSetThreadPriority          = modkernel32.NewProc("SetThreadPriority")
 	//--
 
+	modadvapi = syscall.NewLazyDLL("advapi32.dll")
+	//--
+	procGetFileSecurityW = modadvapi.NewProc("GetFileSecurityW")
+	//--
+
 	modws2_32 = syscall.NewLazyDLL("ws2_32.dll")
 	//--
 	procWSAStartup = modws2_32.NewProc("WSAStartup")
@@ -3744,7 +3749,11 @@ func XGetWindowsDirectoryA(t *TLS, _ ...interface{}) int32 {
 //   LPDWORD              lpnLengthNeeded
 // );
 func XGetFileSecurityW(t *TLS, lpFileName uintptr, RequestedInformation uint32, pSecurityDescriptor uintptr, nLength uint32, lpnLengthNeeded uintptr) int32 {
-	panic(todo(""))
+	r0, _, err := syscall.Syscall6(procGetFileSecurityW.Addr(), 5, lpFileName, uintptr(RequestedInformation), pSecurityDescriptor, uintptr(nLength), lpnLengthNeeded, 0)
+	if err != 0 {
+		t.setErrno(err)
+	}
+	return int32(r0)
 }
 
 // BOOL GetSecurityDescriptorOwner(
