@@ -4517,7 +4517,7 @@ func X__mingw_vfscanf(t *TLS, stream, format, ap uintptr) int32 {
 
 // int vsscanf(const char *str, const char *format, va_list ap);
 func X__mingw_vsscanf(t *TLS, str, format, ap uintptr) int32 {
-	panic(todo(""))
+	return Xsscanf(t, str, format, ap)
 }
 
 // int vfprintf(FILE * restrict stream, const char * restrict format, va_list arg);
