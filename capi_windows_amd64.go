@@ -378,6 +378,7 @@ var CAPI = map[string]struct{}{
 	"_ftime64":                          {},
 	"_gmtime64":                         {},
 	"_imp___environ":                    {},
+	"_iob":                              {},
 	"_isatty":                           {},
 	"_localtime64":                      {},
 	"_longjmp":                          {},

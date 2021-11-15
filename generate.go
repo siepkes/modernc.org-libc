@@ -74,6 +74,7 @@ func main() {
 		g = append(g, "libc_unix.go", "pthread.go")
 		makeMuslDarwin(goos, goarch)
 	case "windows":
+		g = append(g, "libc_windows.go")
 		makeMuslWin(goos, goarch)
 	}
 	_, _, hostSysIncludes, err := cc.HostConfig(os.Getenv("CCGO_CPP"))

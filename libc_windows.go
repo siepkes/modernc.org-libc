@@ -23,6 +23,7 @@ import (
 	"modernc.org/libc/errno"
 	"modernc.org/libc/fcntl"
 	"modernc.org/libc/limits"
+	"modernc.org/libc/stdio"
 	"modernc.org/libc/sys/stat"
 	"modernc.org/libc/sys/types"
 	"modernc.org/libc/time"
@@ -33,6 +34,7 @@ import (
 
 var X__imp__environ = EnvironP()
 var X_imp___environ = EnvironP()
+var X_iob [stdio.X_IOB_ENTRIES]stdio.FILE
 
 var Xtimezone long // extern long timezone;
 
