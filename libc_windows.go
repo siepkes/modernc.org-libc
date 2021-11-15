@@ -4512,6 +4512,9 @@ func X__mingw_vsnwprintf(t *TLS, buffer uintptr, count types.Size_t, format, va 
 	panic(todo(""))
 }
 
+// int vprintf(const char *format, va_list ap);
+func X__mingw_vprintf(t *TLS, s, ap uintptr) int32 { return Xvprintf(t, s, ap) }
+
 // int vfscanf(FILE * restrict stream, const char * restrict format, va_list arg);
 func X__mingw_vfscanf(t *TLS, stream, format, ap uintptr) int32 {
 	panic(todo(""))

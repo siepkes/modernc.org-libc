@@ -337,6 +337,7 @@ var CAPI = map[string]struct{}{
 	"__mingw_vfscanf":                   {},
 	"__mingw_vfwprintf":                 {},
 	"__mingw_vfwscanf":                  {},
+	"__mingw_vprintf":                   {},
 	"__mingw_vsnprintf":                 {},
 	"__mingw_vsnwprintf":                {},
 	"__mingw_vsprintf":                  {},
