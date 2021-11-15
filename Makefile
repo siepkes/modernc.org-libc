@@ -88,11 +88,12 @@ linux_s390x:
 	GOOS=linux GOARCH=s390x go build -v ./...
 
 windows_amd64:
-	@echo "Should be executed only on windows/arm64."
+	@echo "Should be executed only on windows/amd64."
 	go generate 2>&1 | tee log-generate
 	go build -v ./...
 
 windows_386:
+	@echo "Should be executed only on linux/amd64."
 	CCGO_CPP=i686-w64-mingw32-cpp TARGET_GOOS=windows TARGET_GOARCH=386 go generate
 	GOOS=windows GOARCH=386 go build -v ./...
 
