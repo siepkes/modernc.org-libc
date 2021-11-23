@@ -28,6 +28,7 @@ import (
 	"modernc.org/libc/limits"
 	"modernc.org/libc/netdb"
 	"modernc.org/libc/netinet/in"
+	"modernc.org/libc/pthread"
 	"modernc.org/libc/pwd"
 	"modernc.org/libc/signal"
 	"modernc.org/libc/stdio"
@@ -2106,4 +2107,47 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 		dmesg("%v: %#x", origin(1), data)
 	}
 	return data
+}
+
+const PTHREAD_MUTEX_DEFAULT = 0
+
+func X__ccgo_pthreadMutexattrGettype(tls *TLS, a uintptr) int32 { /* pthread_attr_get.c:93:5: */
+	return *(*int32)(unsafe.Pointer(a)) & int32(3)
+}
+
+func X__ccgo_getMutexType(tls *TLS, m uintptr) int32 { /* pthread_mutex_lock.c:3:5: */
+	return *(*int32)(unsafe.Pointer(m)) & 15
+}
+
+func X__ccgo_pthreadAttrGetDetachState(tls *TLS, a uintptr) int32 { /* pthread_attr_get.c:3:5: */
+	return *(*int32)(unsafe.Pointer(a))
+}
+
+func Xpthread_attr_init(t *TLS, pAttr uintptr) int32 {
+	*(*pthread.Pthread_attr_t)(unsafe.Pointer(pAttr)) = pthread.Pthread_attr_t(0)
+	return 0
+}
+
+// The pthread_mutex_init() function shall initialize the mutex referenced by
+// mutex with attributes specified by attr. If attr is NULL, the default mutex
+// attributes are used; the effect shall be the same as passing the address of
+// a default mutex attributes object. Upon successful initialization, the state
+// of the mutex becomes initialized and unlocked.
+//
+// If successful, the pthread_mutex_destroy() and pthread_mutex_init()
+// functions shall return zero; otherwise, an error number shall be returned to
+// indicate the error.
+//
+// int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr);
+func Xpthread_mutex_init(t *TLS, pMutex, pAttr uintptr) int32 {
+	typ := PTHREAD_MUTEX_DEFAULT
+	if pAttr != 0 {
+		typ = int(X__ccgo_pthreadMutexattrGettype(t, pAttr))
+	}
+	mutexesMu.Lock()
+
+	defer mutexesMu.Unlock()
+
+	mutexes[pMutex] = newMutex(typ)
+	return 0
 }

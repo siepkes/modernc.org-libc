@@ -54,15 +54,15 @@ darwin_arm64:
 	go generate 2>&1 | tee log-generate
 	go build -v ./...
 
-# only on netbsd/amd64
-netbsd_amd64:
-	@echo "Should be executed only on netbsd/amd64."
-	go generate 2>&1 | tee log-generate
-	go build -v ./...
-
 # only on freebsd/amd64
 freebsd_amd64:
 	@echo "Should be executed only on freebsd/amd64."
+	go generate 2>&1 | tee log-generate
+	go build -v ./...
+
+# only on netbsd/amd64
+netbsd_amd64:
+	@echo "Should be executed only on netbsd/amd64."
 	go generate 2>&1 | tee log-generate
 	go build -v ./...
 

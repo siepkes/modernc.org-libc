@@ -2153,3 +2153,15 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 func X__errno(t *TLS) uintptr {
 	return X__errno_location(t)
 }
+
+func X__ccgo_pthreadMutexattrGettype(tls *TLS, a uintptr) int32 { /* pthread_attr_get.c:93:5: */
+	return *(*int32)(unsafe.Pointer(a)) & int32(3)
+}
+
+func X__ccgo_getMutexType(tls *TLS, m uintptr) int32 { /* pthread_mutex_lock.c:3:5: */
+	return *(*int32)(unsafe.Pointer(m)) & 15
+}
+
+func X__ccgo_pthreadAttrGetDetachState(tls *TLS, a uintptr) int32 { /* pthread_attr_get.c:3:5: */
+	return *(*int32)(unsafe.Pointer(a))
+}
