@@ -62,16 +62,16 @@ func main() {
 	g := []string{"libc.go", "mem.go"}
 	switch goos {
 	case "linux":
-		g = append(g, "libc_unix.go", "pthread.go")
+		g = append(g, "libc_unix.go", "pthread.go", "pthread_all.go")
 		makeMuslLinux(goos, goarch)
 	case "freebsd":
-		g = append(g, "libc_unix.go", "pthread.go")
+		g = append(g, "libc_unix.go", "pthread.go", "pthread_all.go")
 		makeMuslFreeBSD(goos, goarch)
 	case "netbsd":
-		g = append(g, "libc_unix.go", "pthread.go")
+		g = append(g, "libc_unix.go", "pthread.go", "pthread_all.go")
 		makeMuslNetBSD(goos, goarch)
 	case "darwin":
-		g = append(g, "libc_unix.go", "pthread.go")
+		g = append(g, "libc_unix.go", "pthread.go", "pthread_all.go")
 		makeMuslDarwin(goos, goarch)
 	case "windows":
 		g = append(g, "libc_windows.go")
