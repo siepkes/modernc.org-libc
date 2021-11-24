@@ -135,6 +135,7 @@ var (
 	procSetEvent                   = modkernel32.NewProc("SetEvent")
 	procSetFilePointer             = modkernel32.NewProc("SetFilePointer")
 	procSleepEx                    = modkernel32.NewProc("SleepEx")
+	procSystemTimeToFileTime       = modkernel32.NewProc("SystemTimeToFileTime")
 	procUnlockFile                 = modkernel32.NewProc("UnlockFile")
 	procUnlockFileEx               = modkernel32.NewProc("UnlockFileEx")
 	procWaitForSingleObjectEx      = modkernel32.NewProc("WaitForSingleObjectEx")
@@ -3236,7 +3237,8 @@ func XSleep(t *TLS, dwMilliseconds uint32) {
 
 // BOOL SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime, LPFILETIME lpFileTime);
 func XSystemTimeToFileTime(t *TLS, lpSystemTime, lpFileTime uintptr) int32 {
-	panic(todo(""))
+	r0, _, _ := syscall.Syscall(procSystemTimeToFileTime, 2, lpSystemTime, lpFileTime)
+	return int32(r0)
 }
 
 // BOOL UnlockFile(
