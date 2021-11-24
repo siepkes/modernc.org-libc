@@ -3237,7 +3237,7 @@ func XSleep(t *TLS, dwMilliseconds uint32) {
 
 // BOOL SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime, LPFILETIME lpFileTime);
 func XSystemTimeToFileTime(t *TLS, lpSystemTime, lpFileTime uintptr) int32 {
-	r0, _, _ := syscall.Syscall(procSystemTimeToFileTime, 2, lpSystemTime, lpFileTime)
+	r0, _, _ := syscall.Syscall(procSystemTimeToFileTime.Addr(), 2, lpSystemTime, lpFileTime, 0)
 	return int32(r0)
 }
 

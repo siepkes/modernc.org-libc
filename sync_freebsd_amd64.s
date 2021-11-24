@@ -2,11 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package libc // import "modernc.org/libc"
+#include "textflag.h"
 
-// __sync_synchronize();
-func X__sync_synchronize(t *TLS) {
-	__sync_synchronize()
-}
-
-func __sync_synchronize()
+TEXT ·__sync_synchronize(SB), NOSPLIT, $0
+	MFENCE
+	RET

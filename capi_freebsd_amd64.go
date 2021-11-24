@@ -107,6 +107,7 @@ var CAPI = map[string]struct{}{
 	"__swbuf":                          {},
 	"__sync_add_and_fetch_uint32":      {},
 	"__sync_sub_and_fetch_uint32":      {},
+	"__sync_synchronize":               {},
 	"__syscall1":                       {},
 	"__syscall3":                       {},
 	"__syscall4":                       {},
