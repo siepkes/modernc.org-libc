@@ -357,6 +357,7 @@ var CAPI = map[string]struct{}{
 	"__strchrnul":                       {},
 	"__sync_add_and_fetch_uint32":       {},
 	"__sync_sub_and_fetch_uint32":       {},
+	"__sync_synchronize":                {},
 	"_access":                           {},
 	"_assert":                           {},
 	"_beginthread":                      {},

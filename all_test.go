@@ -321,3 +321,9 @@ func TestFdopen(t *testing.T) {
 		t.Fatalf("%q %q", g, e)
 	}
 }
+
+func TestSync(t *testing.T) {
+	tls := NewTLS()
+	X__sync_synchronize(tls)
+	tls.Close()
+}

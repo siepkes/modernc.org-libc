@@ -4,9 +4,14 @@
 
 package libc // import "modernc.org/libc"
 
+import (
+	"sync/atomic"
+)
+
+var __sync_synchronize_dummy int32
+
 // __sync_synchronize();
 func X__sync_synchronize(t *TLS) {
-	__sync_synchronize()
+	// Attempt to implement a full memory barrier without assembler.
+	atomic.StoreInt32(&__sync_synchronize_dummy, atomic.LoadInt32(&__sync_synchronize_dummy)+1)
 }
-
-func __sync_synchronize()
