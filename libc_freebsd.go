@@ -2112,15 +2112,15 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 const PTHREAD_MUTEX_DEFAULT = 0
 
 func X__ccgo_pthreadMutexattrGettype(tls *TLS, a uintptr) int32 { /* pthread_attr_get.c:93:5: */
-	return *(*int32)(unsafe.Pointer(a)) & int32(3)
+	return (int32((*pthread_mutexattr_t)(unsafe.Pointer(a)).__attr & uint32(3)))
 }
 
 func X__ccgo_getMutexType(tls *TLS, m uintptr) int32 { /* pthread_mutex_lock.c:3:5: */
-	return *(*int32)(unsafe.Pointer(m)) & 15
+	return (*(*int32)(unsafe.Pointer((m /* &.__u */ /* &.__i */))) & 15)
 }
 
 func X__ccgo_pthreadAttrGetDetachState(tls *TLS, a uintptr) int32 { /* pthread_attr_get.c:3:5: */
-	return *(*int32)(unsafe.Pointer(a))
+	return *(*int32)(unsafe.Pointer((a /* &.__u */ /* &.__i */) + 6*4))
 }
 
 func Xpthread_attr_init(t *TLS, pAttr uintptr) int32 {
@@ -2153,7 +2153,7 @@ func Xpthread_mutex_init(t *TLS, pMutex, pAttr uintptr) int32 {
 }
 
 func Xpthread_attr_getdetachstate(tls *TLS, a uintptr, state uintptr) int32 { /* pthread_attr_get.c:7:5: */
-	*(*int32)(unsafe.Pointer(state)) = *(*int32)(unsafe.Pointer(a))
+	*(*int32)(unsafe.Pointer(state)) = *(*int32)(unsafe.Pointer((a /* &.__u */ /* &.__i */) + 6*4))
 	return 0
 }
 
@@ -2161,7 +2161,7 @@ func Xpthread_attr_setdetachstate(tls *TLS, a uintptr, state int32) int32 { /* p
 	if uint32(state) > 1 {
 		return 22
 	}
-	*(*int32)(unsafe.Pointer(a)) = state
+	*(*int32)(unsafe.Pointer((a /* &.__u */ /* &.__i */) + 6*4)) = state
 	return 0
 }
 
