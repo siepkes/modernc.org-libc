@@ -33,6 +33,7 @@ import (
 
 	"github.com/mattn/go-isatty"
 	"modernc.org/libc/errno"
+	"modernc.org/libc/stdio"
 	"modernc.org/libc/sys/types"
 	"modernc.org/libc/time"
 	"modernc.org/libc/unistd"
@@ -1336,4 +1337,33 @@ func X__sync_sub_and_fetch_uint32(t *TLS, p uintptr, v uint32) uint32 {
 // int sched_yield(void);
 func Xsched_yield(t *TLS) {
 	runtime.Gosched()
+}
+
+// int getc(FILE *stream);
+func Xgetc(t *TLS, stream uintptr) int32 {
+	return Xfgetc(t, stream)
+}
+
+// char *fgets(char *s, int size, FILE *stream);
+func Xfgets(t *TLS, s uintptr, size int32, stream uintptr) uintptr {
+	var b []byte
+out:
+	for ; size > 0; size-- {
+		switch c := Xfgetc(t, stream); c {
+		case '\n':
+			b = append(b, byte(c))
+			break out
+		case stdio.EOF:
+			break out
+		default:
+			b = append(b, byte(c))
+		}
+	}
+	if len(b) == 0 {
+		return 0
+	}
+
+	b = append(b, 0)
+	copy((*RawMem)(unsafe.Pointer(s))[:len(b):len(b)], b)
+	return s
 }

@@ -114,46 +114,6 @@ func Xgetrusage(t *TLS, who int32, usage uintptr) int32 {
 	return 0
 }
 
-// char *fgets(char *s, int size, FILE *stream);
-func Xfgets(t *TLS, s uintptr, size int32, stream uintptr) uintptr {
-	fd := int((*stdio.FILE)(unsafe.Pointer(stream)).F_fileno)
-	var b []byte
-	buf := [1]byte{}
-	for ; size > 0; size-- {
-		n, err := unix.Read(fd, buf[:])
-		if n != 0 {
-			b = append(b, buf[0])
-			if buf[0] == '\n' {
-				b = append(b, 0)
-				copy((*RawMem)(unsafe.Pointer(s))[:len(b):len(b)], b)
-				return s
-			}
-
-			continue
-		}
-
-		switch {
-		case n == 0 && err == nil && len(b) == 0:
-			return 0
-		default:
-			panic(todo(""))
-		}
-
-		// if err == nil {
-		// 	panic("internal error")
-		// }
-
-		// if len(b) != 0 {
-		// 		b = append(b, 0)
-		// 		copy((*RawMem)(unsafe.Pointer(s)[:len(b)]), b)
-		// 		return s
-		// }
-
-		// t.setErrno(err)
-	}
-	panic(todo(""))
-}
-
 // int lstat(const char *pathname, struct stat *statbuf);
 func Xlstat(t *TLS, pathname, statbuf uintptr) int32 {
 	return Xlstat64(t, pathname, statbuf)
@@ -1756,16 +1716,6 @@ func Xferror(t *TLS, stream uintptr) int32 {
 	return Bool32(file(stream).err())
 }
 
-// int fgetc(FILE *stream);
-func Xfgetc(t *TLS, stream uintptr) int32 {
-	panic(todo(""))
-}
-
-// int getc(FILE *stream);
-func Xgetc(t *TLS, stream uintptr) int32 {
-	return Xfgetc(t, stream)
-}
-
 // int ungetc(int c, FILE *stream);
 func Xungetc(t *TLS, c int32, stream uintptr) int32 {
 	panic(todo(""))
@@ -2113,4 +2063,15 @@ func Xrandom_r(t *TLS, buf, result uintptr) int32 {
 // void uuid_copy(uuid_t dst, uuid_t src);
 func Xuuid_copy(t *TLS, dst, src uintptr) {
 	*(*uuid.Uuid_t)(unsafe.Pointer(dst)) = *(*uuid.Uuid_t)(unsafe.Pointer(src))
+}
+
+// int fgetc(FILE *stream);
+func Xfgetc(t *TLS, stream uintptr) int32 {
+	fd := int((*stdio.FILE)(unsafe.Pointer(stream)).F_fileno)
+	var buf [1]byte
+	if n, _ := unix.Read(fd, buf[:]); n != 0 {
+		return int32(buf[0])
+	}
+
+	return stdio.EOF
 }
