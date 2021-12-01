@@ -376,6 +376,7 @@ var CAPI = map[string]struct{}{
 	"round":                         {},
 	"scalbn":                        {},
 	"scalbnl":                       {},
+	"sched_yield":                   {},
 	"select":                        {},
 	"send":                          {},
 	"sendmsg":                       {},
