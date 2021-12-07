@@ -949,7 +949,7 @@ func Xatol(t *TLS, nptr uintptr) long {
 }
 
 // time_t mktime(struct tm *tm);
-func Xmktime(t *TLS, ptm uintptr) types.Time_t {
+func Xmktime(t *TLS, ptm uintptr) time.Time_t {
 	loc := gotime.Local
 	if r := getenv(Environ(), "TZ"); r != 0 {
 		zone, off := parseZone(GoString(r))
@@ -967,7 +967,7 @@ func Xmktime(t *TLS, ptm uintptr) types.Time_t {
 	)
 	(*time.Tm)(unsafe.Pointer(ptm)).Ftm_wday = int32(tt.Weekday())
 	(*time.Tm)(unsafe.Pointer(ptm)).Ftm_yday = int32(tt.YearDay() - 1)
-	return types.Time_t(tt.Unix())
+	return time.Time_t(tt.Unix())
 }
 
 // char *strpbrk(const char *s, const char *accept);
