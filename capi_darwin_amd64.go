@@ -477,5 +477,6 @@ var CAPI = map[string]struct{}{
 	"wctomb":                           {},
 	"wcwidth":                          {},
 	"write":                            {},
+	"writev":                           {},
 	"zero_struct_address":              {},
 }

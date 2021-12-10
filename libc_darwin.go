@@ -2156,3 +2156,20 @@ func Xpthread_mutexattr_settype(tls *TLS, a uintptr, type1 int32) int32 { /* pth
 	(*pthread_mutexattr_t)(unsafe.Pointer(a)).__attr = (((*pthread_mutexattr_t)(unsafe.Pointer(a)).__attr & Uint32FromInt32(CplInt32(3))) | uint32(type1))
 	return 0
 }
+
+// ssize_t writev(int fd, const struct iovec *iov, int iovcnt);
+func Xwritev(t *TLS, fd int32, iov uintptr, iovcnt int32) types.Ssize_t {
+	// if dmesgs {
+	// 	dmesg("%v: fd %v iov %#x iovcnt %v", origin(1), fd, iov, iovcnt)
+	// }
+	r, _, err := unix.Syscall(unix.SYS_WRITEV, uintptr(fd), iov, uintptr(iovcnt))
+	if err != 0 {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
+		t.setErrno(err)
+		return -1
+	}
+
+	return types.Ssize_t(r)
+}
