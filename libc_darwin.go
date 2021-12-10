@@ -575,40 +575,37 @@ func Xgettimeofday(t *TLS, tv, tz uintptr) int32 {
 
 // int getsockopt(int sockfd, int level, int optname, void *optval, socklen_t *optlen);
 func Xgetsockopt(t *TLS, sockfd, level, optname int32, optval, optlen uintptr) int32 {
-	panic(todo(""))
-	// if _, _, err := unix.Syscall6(unix.SYS_GETSOCKOPT, uintptr(sockfd), uintptr(level), uintptr(optname), optval, optlen, 0); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if _, _, err := unix.Syscall6(unix.SYS_GETSOCKOPT, uintptr(sockfd), uintptr(level), uintptr(optname), optval, optlen, 0); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // int setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t optlen);
 func Xsetsockopt(t *TLS, sockfd, level, optname int32, optval uintptr, optlen socket.Socklen_t) int32 {
-	panic(todo(""))
-	// if _, _, err := unix.Syscall6(unix.SYS_SETSOCKOPT, uintptr(sockfd), uintptr(level), uintptr(optname), optval, uintptr(optlen), 0); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if _, _, err := unix.Syscall6(unix.SYS_SETSOCKOPT, uintptr(sockfd), uintptr(level), uintptr(optname), optval, uintptr(optlen), 0); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // int ioctl(int fd, unsigned long request, ...);
 func Xioctl(t *TLS, fd int32, request ulong, va uintptr) int32 {
-	panic(todo(""))
-	// var argp uintptr
-	// if va != 0 {
-	// 	argp = VaUintptr(&va)
-	// }
-	// n, _, err := unix.Syscall(unix.SYS_IOCTL, uintptr(fd), uintptr(request), argp)
-	// if err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	var argp uintptr
+	if va != 0 {
+		argp = VaUintptr(&va)
+	}
+	n, _, err := unix.Syscall(unix.SYS_IOCTL, uintptr(fd), uintptr(request), argp)
+	if err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return int32(n)
+	return int32(n)
 }
 
 // int getsockname(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
@@ -652,13 +649,12 @@ func Xselect(t *TLS, nfds int32, readfds, writefds, exceptfds, timeout uintptr) 
 
 // int mkfifo(const char *pathname, mode_t mode);
 func Xmkfifo(t *TLS, pathname uintptr, mode types.Mode_t) int32 {
-	panic(todo(""))
-	// if err := unix.Mkfifo(GoString(pathname), mode); err != nil {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if err := unix.Mkfifo(GoString(pathname), uint32(mode)); err != nil {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // mode_t umask(mode_t mask);
