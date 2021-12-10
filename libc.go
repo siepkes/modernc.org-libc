@@ -1063,7 +1063,10 @@ func X_IO_putc(t *TLS, c int32, fp uintptr) int32 {
 
 // int atexit(void (*function)(void));
 func Xatexit(t *TLS, function uintptr) int32 {
-	panic(todo(""))
+	AtExit(func() {
+		(*struct{ f func(*TLS) })(unsafe.Pointer(&struct{ uintptr }{function})).f(t)
+	})
+	return 0
 }
 
 // int vasprintf(char **strp, const char *fmt, va_list ap);
