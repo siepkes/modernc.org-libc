@@ -12,6 +12,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	gosignal "os/signal"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -2172,4 +2173,48 @@ func Xwritev(t *TLS, fd int32, iov uintptr, iovcnt int32) types.Ssize_t {
 	}
 
 	return types.Ssize_t(r)
+}
+
+// int pause(void);
+func Xpause(t *TLS) int32 {
+	c := make(chan os.Signal)
+	gosignal.Notify(c,
+		syscall.SIGABRT,
+		syscall.SIGALRM,
+		syscall.SIGBUS,
+		syscall.SIGCHLD,
+		syscall.SIGCONT,
+		syscall.SIGFPE,
+		syscall.SIGHUP,
+		syscall.SIGILL,
+		// syscall.SIGINT,
+		syscall.SIGIO,
+		syscall.SIGIOT,
+		syscall.SIGKILL,
+		syscall.SIGPIPE,
+		syscall.SIGPROF,
+		syscall.SIGQUIT,
+		syscall.SIGSEGV,
+		syscall.SIGSTOP,
+		syscall.SIGSYS,
+		syscall.SIGTERM,
+		syscall.SIGTRAP,
+		syscall.SIGTSTP,
+		syscall.SIGTTIN,
+		syscall.SIGTTOU,
+		syscall.SIGURG,
+		syscall.SIGUSR1,
+		syscall.SIGUSR2,
+		syscall.SIGVTALRM,
+		syscall.SIGWINCH,
+		syscall.SIGXCPU,
+		syscall.SIGXFSZ,
+	)
+	switch <-c {
+	case syscall.SIGINT:
+		panic(todo(""))
+	default:
+		t.setErrno(errno.EINTR)
+		return -1
+	}
 }

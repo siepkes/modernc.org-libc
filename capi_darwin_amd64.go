@@ -312,6 +312,7 @@ var CAPI = map[string]struct{}{
 	"opendir":                          {},
 	"openpty":                          {},
 	"pathconf":                         {},
+	"pause":                            {},
 	"pclose":                           {},
 	"perror":                           {},
 	"pipe":                             {},
