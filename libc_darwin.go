@@ -711,94 +711,86 @@ func Xuname(t *TLS, buf uintptr) int32 {
 
 // ssize_t recv(int sockfd, void *buf, size_t len, int flags);
 func Xrecv(t *TLS, sockfd int32, buf uintptr, len types.Size_t, flags int32) types.Ssize_t {
-	panic(todo(""))
-	// n, _, err := unix.Syscall6(unix.SYS_RECVFROM, uintptr(sockfd), buf, uintptr(len), uintptr(flags), 0, 0)
-	// if err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	n, _, err := unix.Syscall6(unix.SYS_RECVFROM, uintptr(sockfd), buf, uintptr(len), uintptr(flags), 0, 0)
+	if err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return types.Ssize_t(n)
+	return types.Ssize_t(n)
 }
 
 // ssize_t send(int sockfd, const void *buf, size_t len, int flags);
 func Xsend(t *TLS, sockfd int32, buf uintptr, len types.Size_t, flags int32) types.Ssize_t {
-	panic(todo(""))
-	// n, _, err := unix.Syscall6(unix.SYS_SENDTO, uintptr(sockfd), buf, uintptr(len), uintptr(flags), 0, 0)
-	// if err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	n, _, err := unix.Syscall6(unix.SYS_SENDTO, uintptr(sockfd), buf, uintptr(len), uintptr(flags), 0, 0)
+	if err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return types.Ssize_t(n)
+	return types.Ssize_t(n)
 }
 
 // int shutdown(int sockfd, int how);
 func Xshutdown(t *TLS, sockfd, how int32) int32 {
-	panic(todo(""))
-	// if _, _, err := unix.Syscall(unix.SYS_SHUTDOWN, uintptr(sockfd), uintptr(how), 0); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if _, _, err := unix.Syscall(unix.SYS_SHUTDOWN, uintptr(sockfd), uintptr(how), 0); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // int getpeername(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 func Xgetpeername(t *TLS, sockfd int32, addr uintptr, addrlen uintptr) int32 {
-	panic(todo(""))
-	// if _, _, err := unix.Syscall(unix.SYS_GETPEERNAME, uintptr(sockfd), addr, uintptr(addrlen)); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if _, _, err := unix.Syscall(unix.SYS_GETPEERNAME, uintptr(sockfd), addr, uintptr(addrlen)); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // int socket(int domain, int type, int protocol);
 func Xsocket(t *TLS, domain, type1, protocol int32) int32 {
-	panic(todo(""))
-	// n, _, err := unix.Syscall(unix.SYS_SOCKET, uintptr(domain), uintptr(type1), uintptr(protocol))
-	// if err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	n, _, err := unix.Syscall(unix.SYS_SOCKET, uintptr(domain), uintptr(type1), uintptr(protocol))
+	if err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return int32(n)
+	return int32(n)
 }
 
 // int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 func Xbind(t *TLS, sockfd int32, addr uintptr, addrlen uint32) int32 {
-	panic(todo(""))
-	// n, _, err := unix.Syscall(unix.SYS_BIND, uintptr(sockfd), addr, uintptr(addrlen))
-	// if err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	n, _, err := unix.Syscall(unix.SYS_BIND, uintptr(sockfd), addr, uintptr(addrlen))
+	if err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return int32(n)
+	return int32(n)
 }
 
 // int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 func Xconnect(t *TLS, sockfd int32, addr uintptr, addrlen uint32) int32 {
-	panic(todo(""))
-	// if _, _, err := unix.Syscall(unix.SYS_CONNECT, uintptr(sockfd), addr, uintptr(addrlen)); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if _, _, err := unix.Syscall(unix.SYS_CONNECT, uintptr(sockfd), addr, uintptr(addrlen)); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // int listen(int sockfd, int backlog);
 func Xlisten(t *TLS, sockfd, backlog int32) int32 {
-	panic(todo(""))
-	// if _, _, err := unix.Syscall(unix.SYS_LISTEN, uintptr(sockfd), uintptr(backlog), 0); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if _, _, err := unix.Syscall(unix.SYS_LISTEN, uintptr(sockfd), uintptr(backlog), 0); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
