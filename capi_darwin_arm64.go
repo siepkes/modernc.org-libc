@@ -237,6 +237,7 @@ var CAPI = map[string]struct{}{
 	"getpid":                           {},
 	"getpwnam":                         {},
 	"getpwuid":                         {},
+	"getpwuid_r":                       {},
 	"getresgid":                        {},
 	"getresuid":                        {},
 	"getrusage":                        {},

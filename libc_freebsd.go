@@ -5,14 +5,12 @@
 package libc // import "modernc.org/libc"
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"runtime/debug"
-	"strconv"
 	"strings"
 	"syscall"
 	gotime "time"
@@ -28,7 +26,6 @@ import (
 	"modernc.org/libc/netdb"
 	"modernc.org/libc/netinet/in"
 	"modernc.org/libc/pthread"
-	"modernc.org/libc/pwd"
 	"modernc.org/libc/signal"
 	"modernc.org/libc/stdio"
 	"modernc.org/libc/sys/socket"
@@ -674,60 +671,6 @@ func Xsystem(t *TLS, command uintptr) int32 {
 		return int32(ps.ExitCode())
 	}
 
-	return 0
-}
-
-// int getpwuid_r(uid_t uid, struct passwd *pwd, char *buf, size_t buflen, struct passwd **result);
-func Xgetpwuid_r(t *TLS, uid types.Uid_t, cpwd, buf uintptr, buflen types.Size_t, result uintptr) int32 {
-	f, err := os.Open("/etc/passwd")
-	if err != nil {
-		panic(todo("", err))
-	}
-
-	defer f.Close()
-
-	sid := strconv.Itoa(int(uid))
-	sc := bufio.NewScanner(f)
-	for sc.Scan() {
-		// eg. "root:x:0:0:root:/root:/bin/bash"
-		a := strings.Split(sc.Text(), ":")
-		if len(a) < 7 {
-			panic(todo(""))
-		}
-
-		if a[2] == sid {
-			uid, err := strconv.Atoi(a[2])
-			if err != nil {
-				panic(todo(""))
-			}
-
-			gid, err := strconv.Atoi(a[3])
-			if err != nil {
-				panic(todo(""))
-			}
-
-			gecos := a[4]
-			if strings.Contains(gecos, ",") {
-				a := strings.Split(gecos, ",")
-				gecos = a[0]
-			}
-			var v pwd.Passwd
-			if initPasswd2(t, buf, buflen, &v, a[0], a[1], uint32(uid), uint32(gid), gecos, a[5], a[6]) {
-				*(*pwd.Passwd)(unsafe.Pointer(cpwd)) = v
-				*(*uintptr)(unsafe.Pointer(result)) = cpwd
-				return 0
-			}
-
-			*(*uintptr)(unsafe.Pointer(result)) = 0
-			return errno.ERANGE
-		}
-	}
-
-	if sc.Err() != nil {
-		panic(todo(""))
-	}
-
-	*(*uintptr)(unsafe.Pointer(result)) = 0
 	return 0
 }
 

@@ -776,3 +776,62 @@ func Xgetgrnam_r(t *TLS, name, pGrp, buf uintptr, buflen types.Size_t, result ui
 	*(*uintptr)(unsafe.Pointer(result)) = 0
 	return 0
 }
+
+// int getpwuid_r(uid_t uid, struct passwd *pwd, char *buf, size_t buflen, struct passwd **result);
+func Xgetpwuid_r(t *TLS, uid types.Uid_t, cpwd, buf uintptr, buflen types.Size_t, result uintptr) int32 {
+	f, err := os.Open("/etc/passwd")
+	if err != nil {
+		panic(todo("", err))
+	}
+
+	defer f.Close()
+
+	sid := strconv.Itoa(int(uid))
+	sc := bufio.NewScanner(f)
+	for sc.Scan() {
+		s := strings.TrimSpace(sc.Text())
+		if len(s) == 0 || strings.HasPrefix(s, "#") {
+			continue
+		}
+
+		// eg. "root:x:0:0:root:/root:/bin/bash"
+		a := strings.Split(s, ":")
+		if len(a) < 7 {
+			panic(todo("%q", s))
+		}
+
+		if a[2] == sid {
+			uid, err := strconv.Atoi(a[2])
+			if err != nil {
+				panic(todo(""))
+			}
+
+			gid, err := strconv.Atoi(a[3])
+			if err != nil {
+				panic(todo(""))
+			}
+
+			gecos := a[4]
+			if strings.Contains(gecos, ",") {
+				a := strings.Split(gecos, ",")
+				gecos = a[0]
+			}
+			var v pwd.Passwd
+			if initPasswd2(t, buf, buflen, &v, a[0], a[1], uint32(uid), uint32(gid), gecos, a[5], a[6]) {
+				*(*pwd.Passwd)(unsafe.Pointer(cpwd)) = v
+				*(*uintptr)(unsafe.Pointer(result)) = cpwd
+				return 0
+			}
+
+			*(*uintptr)(unsafe.Pointer(result)) = 0
+			return errno.ERANGE
+		}
+	}
+
+	if sc.Err() != nil {
+		panic(todo(""))
+	}
+
+	*(*uintptr)(unsafe.Pointer(result)) = 0
+	return 0
+}
