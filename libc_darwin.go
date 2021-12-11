@@ -1894,18 +1894,6 @@ func Xrmdir(t *TLS, pathname uintptr) int32 {
 	return 0
 }
 
-func X__darwin_fd_set(...interface{}) {
-	panic(todo(""))
-}
-
-func X__darwin_fd_clr(...interface{}) {
-	panic(todo(""))
-}
-
-func X__darwin_fd_isset(...interface{}) int32 {
-	panic(todo(""))
-}
-
 // uint64_t mach_absolute_time(void);
 func Xmach_absolute_time(t *TLS) uint64 {
 	return uint64(gotime.Now().UnixNano())
@@ -2205,4 +2193,39 @@ func Xpause(t *TLS) int32 {
 		t.setErrno(errno.EINTR)
 		return -1
 	}
+}
+
+// #define __DARWIN_FD_SETSIZE     1024
+// #define __DARWIN_NFDBITS        (sizeof(__int32_t) * __DARWIN_NBBY) /* bits per mask */
+// #define __DARWIN_NBBY           8                               /* bits in a byte */
+// #define __DARWIN_howmany(x, y)  ((((x) % (y)) == 0) ? ((x) / (y)) : (((x) / (y)) + 1)) /* # y's == x bits? */
+
+// typedef struct fd_set {
+//         __int32_t       fds_bits[__DARWIN_howmany(__DARWIN_FD_SETSIZE, __DARWIN_NFDBITS)];
+// } fd_set;
+
+// __darwin_fd_set(int _fd, struct fd_set *const _p)
+// {
+//         (_p->fds_bits[(unsigned long)_fd / __DARWIN_NFDBITS] |= ((__int32_t)(((unsigned long)1) << ((unsigned long)_fd % __DARWIN_NFDBITS))));
+// }
+func X__darwin_fd_set(tls *TLS, _fd int32, _p uintptr) int32 { /* main.c:12:1: */
+	*(*int32)(unsafe.Pointer(_p + uintptr(uint64(_fd)/(uint64(unsafe.Sizeof(int32(0)))*uint64(8)))*4)) |= int32(uint64(uint64(1)) << (uint64(_fd) % (uint64(unsafe.Sizeof(int32(0))) * uint64(8))))
+	return int32(0)
+}
+
+// __darwin_fd_isset(int _fd, const struct fd_set *_p)
+// {
+//         return _p->fds_bits[(unsigned long)_fd / __DARWIN_NFDBITS] & ((__int32_t)(((unsigned long)1) << ((unsigned long)_fd % __DARWIN_NFDBITS)));
+// }
+func X__darwin_fd_isset(tls *TLS, _fd int32, _p uintptr) int32 { /* main.c:17:1: */
+	return *(*int32)(unsafe.Pointer(_p + uintptr(uint64(_fd)/(uint64(unsafe.Sizeof(int32(0)))*uint64(8)))*4)) & int32(uint64(uint64(1))<<(uint64(_fd)%(uint64(unsafe.Sizeof(int32(0)))*uint64(8))))
+}
+
+// __darwin_fd_clr(int _fd, struct fd_set *const _p)
+// {
+//         (_p->fds_bits[(unsigned long)_fd / __DARWIN_NFDBITS] &= ~((__int32_t)(((unsigned long)1) << ((unsigned long)_fd % __DARWIN_NFDBITS))));
+// }
+func X__darwin_fd_clr(tls *TLS, _fd int32, _p uintptr) int32 { /* main.c:22:1: */
+	*(*int32)(unsafe.Pointer(_p + uintptr(uint64(_fd)/(uint64(unsafe.Sizeof(int32(0)))*uint64(8)))*4)) &= ^int32(uint64(uint64(1)) << (uint64(_fd) % (uint64(unsafe.Sizeof(int32(0))) * uint64(8))))
+	return int32(0)
 }
