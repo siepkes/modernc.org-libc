@@ -5,7 +5,6 @@
 package libc // import "modernc.org/libc"
 
 import (
-	"bufio"
 	crand "crypto/rand"
 	"encoding/hex"
 	"fmt"
@@ -14,7 +13,6 @@ import (
 	"os/exec"
 	gosignal "os/signal"
 	"path/filepath"
-	"strconv"
 	"strings"
 	"syscall"
 	gotime "time"
@@ -30,7 +28,6 @@ import (
 	"modernc.org/libc/limits"
 	"modernc.org/libc/netdb"
 	"modernc.org/libc/netinet/in"
-	"modernc.org/libc/pwd"
 	"modernc.org/libc/signal"
 	"modernc.org/libc/stdio"
 	"modernc.org/libc/sys/socket"
@@ -857,92 +854,6 @@ func Xsystem(t *TLS, command uintptr) int32 {
 	return 0
 }
 
-var staticGetpwuid pwd.Passwd
-
-func init() {
-	atExit = append(atExit, func() { closePasswd(&staticGetpwuid) })
-}
-
-func closePasswd(p *pwd.Passwd) {
-	Xfree(nil, p.Fpw_name)
-	Xfree(nil, p.Fpw_passwd)
-	Xfree(nil, p.Fpw_gecos)
-	Xfree(nil, p.Fpw_dir)
-	Xfree(nil, p.Fpw_shell)
-	*p = pwd.Passwd{}
-}
-
-// struct passwd *getpwuid(uid_t uid);
-func Xgetpwuid(t *TLS, uid uint32) uintptr {
-	f, err := os.Open("/etc/passwd")
-	if err != nil {
-		if dmesgs {
-			dmesg("%v: %v", origin(1), err)
-		}
-		panic(todo("", err))
-	}
-
-	defer f.Close()
-
-	sid := strconv.Itoa(int(uid))
-	sc := bufio.NewScanner(f)
-	for sc.Scan() {
-		s := strings.TrimSpace(sc.Text())
-		if len(s) == 0 || strings.HasPrefix(s, "#") {
-			continue
-		}
-
-		// eg. "root:x:0:0:root:/root:/bin/bash"
-		a := strings.Split(sc.Text(), ":")
-		if len(a) < 7 {
-			panic(todo("%q", sc.Text()))
-		}
-
-		if a[2] == sid {
-			uid, err := strconv.Atoi(a[2])
-			if err != nil {
-				panic(todo(""))
-			}
-
-			gid, err := strconv.Atoi(a[3])
-			if err != nil {
-				panic(todo(""))
-			}
-
-			closePasswd(&staticGetpwuid)
-			gecos := a[4]
-			if strings.Contains(gecos, ",") {
-				a := strings.Split(gecos, ",")
-				gecos = a[0]
-			}
-			initPasswd(t, &staticGetpwuid, a[0], a[1], uint32(uid), uint32(gid), gecos, a[5], a[6])
-			if dmesgs {
-				dmesg("%v: ok", origin(1))
-			}
-			return uintptr(unsafe.Pointer(&staticGetpwuid))
-		}
-	}
-
-	if sc.Err() != nil {
-		panic(todo(""))
-	}
-
-	if dmesgs {
-		dmesg("%v: 0", origin(1))
-	}
-	return 0
-}
-
-func initPasswd(t *TLS, p *pwd.Passwd, name, pwd string, uid, gid uint32, gecos, dir, shell string) {
-	p.Fpw_name = cString(t, name)
-	p.Fpw_passwd = cString(t, pwd)
-	p.Fpw_uid = uid
-	p.Fpw_gid = gid
-	p.Fpw_gecos = cString(t, gecos)
-	p.Fpw_dir = cString(t, dir)
-	p.Fpw_shell = cString(t, shell)
-}
-
 // int setvbuf(FILE *stream, char *buf, int mode, size_t size);
 func Xsetvbuf(t *TLS, stream, buf uintptr, mode int32, size types.Size_t) int32 {
 	return 0 //TODO
@@ -982,164 +893,6 @@ func Xfileno(t *TLS, stream uintptr) int32 {
 	}
 	t.setErrno(errno.EBADF)
 	return -1
-}
-
-// struct passwd *getpwnam(const char *name);
-func Xgetpwnam(t *TLS, name uintptr) uintptr {
-	f, err := os.Open("/etc/passwd")
-	if err != nil {
-		panic(todo("", err))
-	}
-
-	defer f.Close()
-
-	sname := GoString(name)
-	sc := bufio.NewScanner(f)
-	for sc.Scan() {
-		// eg. "root:x:0:0:root:/root:/bin/bash"
-		a := strings.Split(sc.Text(), ":")
-		if len(a) < 7 {
-			panic(todo(""))
-		}
-
-		if a[0] == sname {
-			uid, err := strconv.Atoi(a[2])
-			if err != nil {
-				panic(todo(""))
-			}
-
-			gid, err := strconv.Atoi(a[3])
-			if err != nil {
-				panic(todo(""))
-			}
-
-			closePasswd(&staticGetpwnam)
-			gecos := a[4]
-			if strings.Contains(gecos, ",") {
-				a := strings.Split(gecos, ",")
-				gecos = a[0]
-			}
-			initPasswd(t, &staticGetpwnam, a[0], a[1], uint32(uid), uint32(gid), gecos, a[5], a[6])
-			return uintptr(unsafe.Pointer(&staticGetpwnam))
-		}
-	}
-
-	if sc.Err() != nil {
-		panic(todo(""))
-	}
-
-	return 0
-}
-
-// var staticGetgrnam grp.Group
-//
-// func init() {
-// 	atExit = append(atExit, func() { closeGroup(&staticGetgrnam) })
-// }
-
-// struct group *getgrnam(const char *name);
-func Xgetgrnam(t *TLS, name uintptr) uintptr {
-	panic(todo(""))
-	// f, err := os.Open("/etc/group")
-	// if err != nil {
-	// 	panic(todo(""))
-	// }
-
-	// defer f.Close()
-
-	// sname := GoString(name)
-	// sc := bufio.NewScanner(f)
-	// for sc.Scan() {
-	// 	// eg. "root:x:0:"
-	// 	a := strings.Split(sc.Text(), ":")
-	// 	if len(a) < 4 {
-	// 		panic(todo(""))
-	// 	}
-
-	// 	if a[0] == sname {
-	// 		closeGroup(&staticGetgrnam)
-	// 		gid, err := strconv.Atoi(a[2])
-	// 		if err != nil {
-	// 			panic(todo(""))
-	// 		}
-
-	// 		var names []string
-	// 		if a[3] != "" {
-	// 			names = strings.Split(a[3], ",")
-	// 		}
-	// 		initGroup(t, &staticGetgrnam, a[0], a[1], uint32(gid), names)
-	// 		return uintptr(unsafe.Pointer(&staticGetgrnam))
-	// 	}
-	// }
-
-	// if sc.Err() != nil {
-	// 	panic(todo(""))
-	// }
-
-	// return 0
-}
-
-// func closeGroup(p *grp.Group) {
-// 	Xfree(nil, p.Fgr_name)
-// 	Xfree(nil, p.Fgr_passwd)
-// 	if p.Fgr_mem != 0 {
-// 		panic(todo(""))
-// 	}
-//
-// 	*p = grp.Group{}
-// }
-//
-// func initGroup(t *TLS, p *grp.Group, name, pwd string, gid uint32, names []string) {
-// 	p.Fgr_name = cString(t, name)
-// 	p.Fgr_passwd = cString(t, pwd)
-// 	p.Fgr_gid = gid
-// 	p.Fgr_mem = 0
-// 	if len(names) != 0 {
-// 		panic(todo("%q %q %v %q %v", name, pwd, gid, names, len(names)))
-// 	}
-// }
-//
-// func init() {
-// 	atExit = append(atExit, func() { closeGroup(&staticGetgrgid) })
-// }
-//
-// var staticGetgrgid grp.Group
-
-// struct group *getgrgid(gid_t gid);
-func Xgetgrgid(t *TLS, gid uint32) uintptr {
-	panic(todo(""))
-	// f, err := os.Open("/etc/group")
-	// if err != nil {
-	// 	panic(todo(""))
-	// }
-
-	// defer f.Close()
-
-	// sid := strconv.Itoa(int(gid))
-	// sc := bufio.NewScanner(f)
-	// for sc.Scan() {
-	// 	// eg. "root:x:0:"
-	// 	a := strings.Split(sc.Text(), ":")
-	// 	if len(a) < 4 {
-	// 		panic(todo(""))
-	// 	}
-
-	// 	if a[2] == sid {
-	// 		closeGroup(&staticGetgrgid)
-	// 		var names []string
-	// 		if a[3] != "" {
-	// 			names = strings.Split(a[3], ",")
-	// 		}
-	// 		initGroup(t, &staticGetgrgid, a[0], a[1], gid, names)
-	// 		return uintptr(unsafe.Pointer(&staticGetgrgid))
-	// 	}
-	// }
-
-	// if sc.Err() != nil {
-	// 	panic(todo(""))
-	// }
-
-	// return 0
 }
 
 // int mkstemps(char *template, int suffixlen);
