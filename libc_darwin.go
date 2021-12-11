@@ -57,6 +57,19 @@ var X__stderrp = Xstdout
 var X__stdinp = Xstdin
 var X__stdoutp = Xstdout
 
+// user@darwin-m1:~/tmp$ cat main.c
+//  #include <xlocale.h>
+//  #include <stdio.h>
+//
+// int main() {
+// 	printf("%i\n", ___mb_cur_max());
+// 	return 0;
+// }
+// user@darwin-m1:~/tmp$ gcc main.c && ./a.out
+// 1
+// user@darwin-m1:~/tmp$
+var X__mb_cur_max int32 = 1
+
 var startTime = gotime.Now() // For clock(3)
 
 type file uintptr
@@ -1979,6 +1992,3 @@ func X__darwin_fd_clr(tls *TLS, _fd int32, _p uintptr) int32 { /* main.c:22:1: *
 func Xungetc(t *TLS, c int32, stream uintptr) int32 {
 	panic(todo(""))
 }
-
-// size_t __mb_cur_max(void);
-func X__mb_cur_max(t *TLS) types.Size_t { return X__ctype_get_mb_cur_max(t) }
