@@ -283,24 +283,23 @@ func Xlocaltime(_ *TLS, timep uintptr) uintptr {
 
 // struct tm *localtime_r(const time_t *timep, struct tm *result);
 func Xlocaltime_r(_ *TLS, timep, result uintptr) uintptr {
-	panic(todo(""))
-	// loc := gotime.Local
-	// if r := getenv(Environ(), "TZ"); r != 0 {
-	// 	zone, off := parseZone(GoString(r))
-	// 	loc = gotime.FixedZone(zone, -off)
-	// }
-	// ut := *(*unix.Time_t)(unsafe.Pointer(timep))
-	// t := gotime.Unix(int64(ut), 0).In(loc)
-	// (*time.Tm)(unsafe.Pointer(result)).Ftm_sec = int32(t.Second())
-	// (*time.Tm)(unsafe.Pointer(result)).Ftm_min = int32(t.Minute())
-	// (*time.Tm)(unsafe.Pointer(result)).Ftm_hour = int32(t.Hour())
-	// (*time.Tm)(unsafe.Pointer(result)).Ftm_mday = int32(t.Day())
-	// (*time.Tm)(unsafe.Pointer(result)).Ftm_mon = int32(t.Month() - 1)
-	// (*time.Tm)(unsafe.Pointer(result)).Ftm_year = int32(t.Year() - 1900)
-	// (*time.Tm)(unsafe.Pointer(result)).Ftm_wday = int32(t.Weekday())
-	// (*time.Tm)(unsafe.Pointer(result)).Ftm_yday = int32(t.YearDay())
-	// (*time.Tm)(unsafe.Pointer(result)).Ftm_isdst = Bool32(isTimeDST(t))
-	// return result
+	loc := gotime.Local
+	if r := getenv(Environ(), "TZ"); r != 0 {
+		zone, off := parseZone(GoString(r))
+		loc = gotime.FixedZone(zone, -off)
+	}
+	ut := *(*time_t)(unsafe.Pointer(timep))
+	t := gotime.Unix(int64(ut), 0).In(loc)
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_sec = int32(t.Second())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_min = int32(t.Minute())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_hour = int32(t.Hour())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_mday = int32(t.Day())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_mon = int32(t.Month() - 1)
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_year = int32(t.Year() - 1900)
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_wday = int32(t.Weekday())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_yday = int32(t.YearDay())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_isdst = Bool32(isTimeDST(t))
+	return result
 }
 
 // int open(const char *pathname, int flags, ...);
@@ -985,58 +984,51 @@ func Xfileno(t *TLS, stream uintptr) int32 {
 	return -1
 }
 
-// var staticGetpwnam pwd.Passwd
-//
-// func init() {
-// 	atExit = append(atExit, func() { closePasswd(&staticGetpwnam) })
-// }
-
 // struct passwd *getpwnam(const char *name);
 func Xgetpwnam(t *TLS, name uintptr) uintptr {
-	panic(todo(""))
-	// f, err := os.Open("/etc/passwd")
-	// if err != nil {
-	// 	panic(todo("", err))
-	// }
+	f, err := os.Open("/etc/passwd")
+	if err != nil {
+		panic(todo("", err))
+	}
 
-	// defer f.Close()
+	defer f.Close()
 
-	// sname := GoString(name)
-	// sc := bufio.NewScanner(f)
-	// for sc.Scan() {
-	// 	// eg. "root:x:0:0:root:/root:/bin/bash"
-	// 	a := strings.Split(sc.Text(), ":")
-	// 	if len(a) < 7 {
-	// 		panic(todo(""))
-	// 	}
+	sname := GoString(name)
+	sc := bufio.NewScanner(f)
+	for sc.Scan() {
+		// eg. "root:x:0:0:root:/root:/bin/bash"
+		a := strings.Split(sc.Text(), ":")
+		if len(a) < 7 {
+			panic(todo(""))
+		}
 
-	// 	if a[0] == sname {
-	// 		uid, err := strconv.Atoi(a[2])
-	// 		if err != nil {
-	// 			panic(todo(""))
-	// 		}
+		if a[0] == sname {
+			uid, err := strconv.Atoi(a[2])
+			if err != nil {
+				panic(todo(""))
+			}
 
-	// 		gid, err := strconv.Atoi(a[3])
-	// 		if err != nil {
-	// 			panic(todo(""))
-	// 		}
+			gid, err := strconv.Atoi(a[3])
+			if err != nil {
+				panic(todo(""))
+			}
 
-	// 		closePasswd(&staticGetpwnam)
-	// 		gecos := a[4]
-	// 		if strings.Contains(gecos, ",") {
-	// 			a := strings.Split(gecos, ",")
-	// 			gecos = a[0]
-	// 		}
-	// 		initPasswd(t, &staticGetpwnam, a[0], a[1], uint32(uid), uint32(gid), gecos, a[5], a[6])
-	// 		return uintptr(unsafe.Pointer(&staticGetpwnam))
-	// 	}
-	// }
+			closePasswd(&staticGetpwnam)
+			gecos := a[4]
+			if strings.Contains(gecos, ",") {
+				a := strings.Split(gecos, ",")
+				gecos = a[0]
+			}
+			initPasswd(t, &staticGetpwnam, a[0], a[1], uint32(uid), uint32(gid), gecos, a[5], a[6])
+			return uintptr(unsafe.Pointer(&staticGetpwnam))
+		}
+	}
 
-	// if sc.Err() != nil {
-	// 	panic(todo(""))
-	// }
+	if sc.Err() != nil {
+		panic(todo(""))
+	}
 
-	// return 0
+	return 0
 }
 
 // var staticGetgrnam grp.Group

@@ -983,12 +983,6 @@ func Xfileno(t *TLS, stream uintptr) int32 {
 	panic(todo(""))
 }
 
-var staticGetpwnam pwd.Passwd
-
-func init() {
-	atExit = append(atExit, func() { closePasswd(&staticGetpwnam) })
-}
-
 var staticGetgrnam grp.Group
 
 func init() {

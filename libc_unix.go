@@ -19,10 +19,17 @@ import (
 	"golang.org/x/sys/unix"
 	"modernc.org/libc/errno"
 	"modernc.org/libc/poll"
+	"modernc.org/libc/pwd"
 	"modernc.org/libc/signal"
 	"modernc.org/libc/stdio"
 	"modernc.org/libc/sys/types"
 )
+
+var staticGetpwnam pwd.Passwd
+
+func init() {
+	atExit = append(atExit, func() { closePasswd(&staticGetpwnam) })
+}
 
 // sighandler_t signal(int signum, sighandler_t handler);
 func Xsignal(t *TLS, signum int32, handler uintptr) uintptr { //TODO use sigaction?
