@@ -219,6 +219,7 @@ func write(b []byte) (int, error) {
 	return len(b), nil
 }
 
+func X__builtin_bzero(t *TLS, s uintptr, n types.Size_t)              { Xbzero(t, s, n) }
 func X__builtin_abort(t *TLS)                                         { Xabort(t) }
 func X__builtin_abs(t *TLS, j int32) int32                            { return Xabs(t, j) }
 func X__builtin_clz(t *TLS, n uint32) int32                           { return int32(mbits.LeadingZeros32(n)) }
@@ -1369,4 +1370,12 @@ out:
 	b = append(b, 0)
 	copy((*RawMem)(unsafe.Pointer(s))[:len(b):len(b)], b)
 	return s
+}
+
+// void bzero(void *s, size_t n);
+func Xbzero(t *TLS, s uintptr, n types.Size_t) {
+	b := (*RawMem)(unsafe.Pointer(s))[:n]
+	for i := range b {
+		b[i] = 0
+	}
 }
