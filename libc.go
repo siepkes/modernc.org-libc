@@ -1379,3 +1379,29 @@ func Xbzero(t *TLS, s uintptr, n types.Size_t) {
 		b[i] = 0
 	}
 }
+
+// char *rindex(const char *s, int c);
+func Xrindex(t *TLS, s uintptr, c int32) uintptr {
+	if s == 0 {
+		return 0
+	}
+
+	var r uintptr
+	for {
+		c2 := int32(*(*byte)(unsafe.Pointer(s)))
+		if c2 == c {
+			r = s
+		}
+
+		if c2 == 0 {
+			return r
+		}
+
+		s++
+	}
+}
+
+// int isascii(int c);
+func Xisascii(t *TLS, c int32) int32 {
+	return Bool32(c >= 0 && c <= 0x7f)
+}

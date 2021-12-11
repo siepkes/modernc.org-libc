@@ -1992,3 +1992,8 @@ func X__darwin_fd_clr(tls *TLS, _fd int32, _p uintptr) int32 { /* main.c:22:1: *
 func Xungetc(t *TLS, c int32, stream uintptr) int32 {
 	panic(todo(""))
 }
+
+// int issetugid(void);
+func Xissetugid(t *TLS) int32 {
+	panic(todo(""))
+}
