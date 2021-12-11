@@ -1974,3 +1974,11 @@ func X__darwin_fd_clr(tls *TLS, _fd int32, _p uintptr) int32 { /* main.c:22:1: *
 	*(*int32)(unsafe.Pointer(_p + uintptr(uint64(_fd)/(uint64(unsafe.Sizeof(int32(0)))*uint64(8)))*4)) &= ^int32(uint64(uint64(1)) << (uint64(_fd) % (uint64(unsafe.Sizeof(int32(0))) * uint64(8))))
 	return int32(0)
 }
+
+// int ungetc(int c, FILE *stream);
+func Xungetc(t *TLS, c int32, stream uintptr) int32 {
+	panic(todo(""))
+}
+
+// size_t __mb_cur_max(void);
+func X__mb_cur_max(t *TLS) types.Size_t { return X__ctype_get_mb_cur_max(t) }
