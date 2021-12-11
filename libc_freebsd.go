@@ -193,7 +193,23 @@ func Xlocaltime(_ *TLS, timep uintptr) uintptr {
 
 // struct tm *localtime_r(const time_t *timep, struct tm *result);
 func Xlocaltime_r(_ *TLS, timep, result uintptr) uintptr {
-	panic(todo(""))
+	loc := gotime.Local
+	if r := getenv(Environ(), "TZ"); r != 0 {
+		zone, off := parseZone(GoString(r))
+		loc = gotime.FixedZone(zone, -off)
+	}
+	ut := *(*unix.Time_t)(unsafe.Pointer(timep))
+	t := gotime.Unix(int64(ut), 0).In(loc)
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_sec = int32(t.Second())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_min = int32(t.Minute())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_hour = int32(t.Hour())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_mday = int32(t.Day())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_mon = int32(t.Month() - 1)
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_year = int32(t.Year() - 1900)
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_wday = int32(t.Weekday())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_yday = int32(t.YearDay())
+	(*time.Tm)(unsafe.Pointer(result)).Ftm_isdst = Bool32(isTimeDST(t))
+	return result
 }
 
 // int open(const char *pathname, int flags, ...);
