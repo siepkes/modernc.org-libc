@@ -908,42 +908,6 @@ func Xfileno(t *TLS, stream uintptr) int32 {
 	return -1
 }
 
-// int mkstemps(char *template, int suffixlen);
-func Xmkstemps(t *TLS, template uintptr, suffixlen int32) int32 {
-	panic(todo(""))
-}
-
-// int mkstemps(char *template, int suffixlen);
-func Xmkstemps64(t *TLS, template uintptr, suffixlen int32) int32 {
-	len := uintptr(Xstrlen(t, template))
-	x := template + uintptr(len-6) - uintptr(suffixlen)
-	for i := uintptr(0); i < 6; i++ {
-		if *(*byte)(unsafe.Pointer(x + i)) != 'X' {
-			if dmesgs {
-				dmesg("%v: FAIL", origin(1))
-			}
-			t.setErrno(errno.EINVAL)
-			return -1
-		}
-	}
-
-	fd, err := tempFile(template, x)
-	if err != nil {
-		if dmesgs {
-			dmesg("%v: %v FAIL", origin(1), err)
-		}
-		t.setErrno(err)
-		return -1
-	}
-
-	return int32(fd)
-}
-
-// int mkstemp(char *template);
-func Xmkstemp(t *TLS, template uintptr) int32 {
-	return Xmkstemps64(t, template, 0)
-}
-
 func newFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Errno) (r *fts.FTSENT) {
 	var statp uintptr
 	if stat != nil {
@@ -2000,5 +1964,27 @@ func Xungetc(t *TLS, c int32, stream uintptr) int32 {
 
 // int issetugid(void);
 func Xissetugid(t *TLS) int32 {
+	panic(todo(""))
+}
+
+var progname uintptr
+
+// const char *getprogname(void);
+func Xgetprogname(t *TLS) uintptr {
+	if progname != 0 {
+		return progname
+	}
+
+	var err error
+	progname, err = CString(filepath.Base(os.Args[0]))
+	if err != nil {
+		t.setErrno(err)
+		return 0
+	}
+
+	return progname
+}
+
+func Xlocaleconv(tls *TLS) uintptr { /* localeconv.c:31:14: */
 	panic(todo(""))
 }

@@ -10,14 +10,18 @@ package libc // import "modernc.org/libc"
 import (
 	"bufio"
 	"io/ioutil"
+	"math"
+	"math/rand"
 	"os"
 	gosignal "os/signal"
 	"reflect"
 	"strconv"
 	"strings"
+	"sync"
 	"syscall"
 	"unsafe"
 
+	guuid "github.com/google/uuid"
 	"golang.org/x/sys/unix"
 	"modernc.org/libc/errno"
 	"modernc.org/libc/grp"
@@ -25,7 +29,9 @@ import (
 	"modernc.org/libc/pwd"
 	"modernc.org/libc/signal"
 	"modernc.org/libc/stdio"
+	"modernc.org/libc/stdlib"
 	"modernc.org/libc/sys/types"
+	"modernc.org/libc/uuid/uuid"
 )
 
 var staticGetpwnam pwd.Passwd
@@ -834,4 +840,148 @@ func Xgetpwuid_r(t *TLS, uid types.Uid_t, cpwd, buf uintptr, buflen types.Size_t
 
 	*(*uintptr)(unsafe.Pointer(result)) = 0
 	return 0
+}
+
+// int mkostemp(char *template, int flags);
+func Xmkostemp(t *TLS, template uintptr, flags int32) int32 {
+	len := uintptr(Xstrlen(t, template))
+	x := template + uintptr(len-6)
+	for i := uintptr(0); i < 6; i++ {
+		if *(*byte)(unsafe.Pointer(x + i)) != 'X' {
+			t.setErrno(errno.EINVAL)
+			return -1
+		}
+	}
+
+	fd, err := tempFile(template, x, flags)
+	if err != nil {
+		t.setErrno(err)
+		return -1
+	}
+
+	return int32(fd)
+}
+
+// void uuid_generate_random(uuid_t out);
+func Xuuid_generate_random(t *TLS, out uintptr) {
+	panic(todo(""))
+}
+
+// void uuid_unparse(uuid_t uu, char *out);
+func Xuuid_unparse(t *TLS, uu, out uintptr) {
+	s := (*guuid.UUID)(unsafe.Pointer(uu)).String()
+	copy((*RawMem)(unsafe.Pointer(out))[:], s)
+	*(*byte)(unsafe.Pointer(out + uintptr(len(s)))) = 0
+}
+
+// int uuid_parse( char *in, uuid_t uu);
+func Xuuid_parse(t *TLS, in uintptr, uu uintptr) int32 {
+	r, err := guuid.Parse(GoString(in))
+	if err != nil {
+		return -1
+	}
+
+	copy((*RawMem)(unsafe.Pointer(uu))[:unsafe.Sizeof(uuid.Uuid_t{})], r[:])
+	return 0
+}
+
+var staticRandomData = &rand.Rand{}
+
+// char *initstate(unsigned seed, char *state, size_t size);
+func Xinitstate(t *TLS, seed uint32, statebuf uintptr, statelen types.Size_t) uintptr {
+	staticRandomData = rand.New(rand.NewSource(int64(seed)))
+	return 0
+}
+
+// char *setstate(const char *state);
+func Xsetstate(t *TLS, state uintptr) uintptr {
+	t.setErrno(errno.EINVAL) //TODO
+	return 0
+}
+
+// The initstate_r() function is like initstate(3) except that it initializes
+// the state in the object pointed to by buf, rather than initializing the
+// global state  variable.   Before  calling this function, the buf.state field
+// must be initialized to NULL.  The initstate_r() function records a pointer
+// to the statebuf argument inside the structure pointed to by buf.  Thus,
+// state‐ buf should not be deallocated so long as buf is still in use.  (So,
+// statebuf should typically be allocated as a static variable, or allocated on
+// the heap using malloc(3) or similar.)
+//
+// char *initstate_r(unsigned int seed, char *statebuf, size_t statelen, struct random_data *buf);
+func Xinitstate_r(t *TLS, seed uint32, statebuf uintptr, statelen types.Size_t, buf uintptr) int32 {
+	if buf == 0 {
+		panic(todo(""))
+	}
+
+	randomDataMu.Lock()
+
+	defer randomDataMu.Unlock()
+
+	randomData[buf] = rand.New(rand.NewSource(int64(seed)))
+	return 0
+}
+
+var (
+	randomData   = map[uintptr]*rand.Rand{}
+	randomDataMu sync.Mutex
+)
+
+// int mkstemps(char *template, int suffixlen);
+func Xmkstemps(t *TLS, template uintptr, suffixlen int32) int32 {
+	return Xmkstemps64(t, template, suffixlen)
+}
+
+// int mkstemps(char *template, int suffixlen);
+func Xmkstemps64(t *TLS, template uintptr, suffixlen int32) int32 {
+	len := uintptr(Xstrlen(t, template))
+	x := template + uintptr(len-6) - uintptr(suffixlen)
+	for i := uintptr(0); i < 6; i++ {
+		if *(*byte)(unsafe.Pointer(x + i)) != 'X' {
+			t.setErrno(errno.EINVAL)
+			return -1
+		}
+	}
+
+	fd, err := tempFile(template, x, 0)
+	if err != nil {
+		t.setErrno(err)
+		return -1
+	}
+
+	return int32(fd)
+}
+
+// int mkstemp(char *template);
+func Xmkstemp(t *TLS, template uintptr) int32 {
+	return Xmkstemp64(t, template)
+}
+
+// int mkstemp(char *template);
+func Xmkstemp64(t *TLS, template uintptr) int32 {
+	return Xmkstemps64(t, template, 0)
+}
+
+// int random_r(struct random_data *buf, int32_t *result);
+func Xrandom_r(t *TLS, buf, result uintptr) int32 {
+	randomDataMu.Lock()
+
+	defer randomDataMu.Unlock()
+
+	mr := randomData[buf]
+	if stdlib.RAND_MAX != math.MaxInt32 {
+		panic(todo(""))
+	}
+	*(*int32)(unsafe.Pointer(result)) = mr.Int31()
+	return 0
+}
+
+// void uuid_copy(uuid_t dst, uuid_t src);
+func Xuuid_copy(t *TLS, dst, src uintptr) {
+	*(*uuid.Uuid_t)(unsafe.Pointer(dst)) = *(*uuid.Uuid_t)(unsafe.Pointer(src))
+}
+
+// int strerror_r(int errnum, char *buf, size_t buflen);
+func Xstrerror_r(t *TLS, errnum int32, buf uintptr, buflen size_t) int32 {
+	panic(todo(""))
 }
