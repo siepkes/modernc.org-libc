@@ -873,17 +873,6 @@ func Xuuid_unparse(t *TLS, uu, out uintptr) {
 	*(*byte)(unsafe.Pointer(out + uintptr(len(s)))) = 0
 }
 
-//TODOX // int uuid_parse( char *in, uuid_t uu);
-//TODOX func Xuuid_parse(t *TLS, in uintptr, uu uintptr) int32 {
-//TODOX 	r, err := guuid.Parse(GoString(in))
-//TODOX 	if err != nil {
-//TODOX 		return -1
-//TODOX 	}
-//TODOX
-//TODOX 	copy((*RawMem)(unsafe.Pointer(uu))[:unsafe.Sizeof(uuid.Uuid_t{})], r[:])
-//TODOX 	return 0
-//TODOX }
-
 var staticRandomData = &rand.Rand{}
 
 // char *initstate(unsigned seed, char *state, size_t size);
