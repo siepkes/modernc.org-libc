@@ -1409,3 +1409,8 @@ func Xfgetc(t *TLS, stream uintptr) int32 {
 
 	return stdio.EOF
 }
+
+// void uuid_copy(uuid_t dst, uuid_t src);
+func Xuuid_copy(t *TLS, dst, src uintptr) {
+	*(*uuid.Uuid_t)(unsafe.Pointer(dst)) = *(*uuid.Uuid_t)(unsafe.Pointer(src))
+}

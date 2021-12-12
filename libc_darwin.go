@@ -36,6 +36,7 @@ import (
 	"modernc.org/libc/termios"
 	"modernc.org/libc/time"
 	"modernc.org/libc/unistd"
+	"modernc.org/libc/uuid/uuid"
 	"modernc.org/libc/wctype"
 )
 
@@ -1987,4 +1988,9 @@ func Xgetprogname(t *TLS) uintptr {
 
 func Xlocaleconv(tls *TLS) uintptr { /* localeconv.c:31:14: */
 	panic(todo(""))
+}
+
+// void uuid_copy(uuid_t dst, uuid_t src);
+func Xuuid_copy(t *TLS, dst, src uintptr) {
+	*(*uuid.Uuid_t)(unsafe.Pointer(dst)) = *(*uuid.Uuid_t)(unsafe.Pointer(src))
 }
