@@ -1313,11 +1313,6 @@ func Xwritev(t *TLS, fd int32, iov uintptr, iovcnt int32) types.Ssize_t {
 	return types.Ssize_t(n)
 }
 
-// void endpwent(void);
-func Xendpwent(t *TLS) {
-	// nop
-}
-
 // int __isoc99_sscanf(const char *str, const char *format, ...);
 func X__isoc99_sscanf(t *TLS, str, format, va uintptr) int32 {
 	r := Xsscanf(t, str, format, va)
@@ -1327,21 +1322,21 @@ func X__isoc99_sscanf(t *TLS, str, format, va uintptr) int32 {
 	return r
 }
 
-var ctimeStaticBuf [32]byte
-
-// char *ctime(const time_t *timep);
-func Xctime(t *TLS, timep uintptr) uintptr {
-	return Xctime_r(t, timep, uintptr(unsafe.Pointer(&ctimeStaticBuf[0])))
-}
-
-// char *ctime_r(const time_t *timep, char *buf);
-func Xctime_r(t *TLS, timep, buf uintptr) uintptr {
-	ut := *(*unix.Time_t)(unsafe.Pointer(timep))
-	tm := time.Unix(int64(ut), 0).Local()
-	s := tm.Format(time.ANSIC) + "\n\x00"
-	copy((*RawMem)(unsafe.Pointer(buf))[:26:26], s)
-	return buf
-}
+// var ctimeStaticBuf [32]byte
+//
+// // char *ctime(const time_t *timep);
+// func Xctime(t *TLS, timep uintptr) uintptr {
+// 	return Xctime_r(t, timep, uintptr(unsafe.Pointer(&ctimeStaticBuf[0])))
+// }
+//
+// // char *ctime_r(const time_t *timep, char *buf);
+// func Xctime_r(t *TLS, timep, buf uintptr) uintptr {
+// 	ut := *(*unix.Time_t)(unsafe.Pointer(timep))
+// 	tm := time.Unix(int64(ut), 0).Local()
+// 	s := tm.Format(time.ANSIC) + "\n\x00"
+// 	copy((*RawMem)(unsafe.Pointer(buf))[:26:26], s)
+// 	return buf
+// }
 
 // ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset);
 func Xpwrite(t *TLS, fd int32, buf uintptr, count types.Size_t, offset types.Off_t) types.Ssize_t {

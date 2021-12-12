@@ -1352,11 +1352,6 @@ func Xwritev(t *TLS, fd int32, iov uintptr, iovcnt int32) types.Ssize_t {
 	panic(todo(""))
 }
 
-// void endpwent(void);
-func Xendpwent(t *TLS) {
-	// nop
-}
-
 // int __isoc99_sscanf(const char *str, const char *format, ...);
 func X__isoc99_sscanf(t *TLS, str, format, va uintptr) int32 {
 	r := Xsscanf(t, str, format, va)
@@ -1364,18 +1359,6 @@ func X__isoc99_sscanf(t *TLS, str, format, va uintptr) int32 {
 	// 	dmesg("%v: %q %q: %d", origin(1), GoString(str), GoString(format), r)
 	// }
 	return r
-}
-
-var ctimeStaticBuf [32]byte
-
-// char *ctime(const time_t *timep);
-func Xctime(t *TLS, timep uintptr) uintptr {
-	return Xctime_r(t, timep, uintptr(unsafe.Pointer(&ctimeStaticBuf[0])))
-}
-
-// char *ctime_r(const time_t *timep, char *buf);
-func Xctime_r(t *TLS, timep, buf uintptr) uintptr {
-	panic(todo(""))
 }
 
 // void __assert(const char * func, const char * file, int line, const char *expr) __dead2;

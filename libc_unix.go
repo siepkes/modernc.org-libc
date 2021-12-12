@@ -19,6 +19,7 @@ import (
 	"strings"
 	"sync"
 	"syscall"
+	"time"
 	"unsafe"
 
 	guuid "github.com/google/uuid"
@@ -31,6 +32,7 @@ import (
 	"modernc.org/libc/stdio"
 	"modernc.org/libc/stdlib"
 	"modernc.org/libc/sys/types"
+	ctime "modernc.org/libc/time"
 )
 
 var staticGetpwnam pwd.Passwd
@@ -863,7 +865,8 @@ func Xmkostemp(t *TLS, template uintptr, flags int32) int32 {
 
 // void uuid_generate_random(uuid_t out);
 func Xuuid_generate_random(t *TLS, out uintptr) {
-	panic(todo(""))
+	x := guuid.New()
+	copy((*RawMem)(unsafe.Pointer(out))[:], x[:])
 }
 
 // void uuid_unparse(uuid_t uu, char *out);
@@ -967,4 +970,25 @@ func Xrandom_r(t *TLS, buf, result uintptr) int32 {
 // int strerror_r(int errnum, char *buf, size_t buflen);
 func Xstrerror_r(t *TLS, errnum int32, buf uintptr, buflen size_t) int32 {
 	panic(todo(""))
+}
+
+// void endpwent(void);
+func Xendpwent(t *TLS) {
+	// nop
+}
+
+var ctimeStaticBuf [32]byte
+
+// char *ctime(const time_t *timep);
+func Xctime(t *TLS, timep uintptr) uintptr {
+	return Xctime_r(t, timep, uintptr(unsafe.Pointer(&ctimeStaticBuf[0])))
+}
+
+// char *ctime_r(const time_t *timep, char *buf);
+func Xctime_r(t *TLS, timep, buf uintptr) uintptr {
+	ut := *(*ctime.Time_t)(unsafe.Pointer(timep))
+	tm := time.Unix(int64(ut), 0).Local()
+	s := tm.Format(time.ANSIC) + "\n\x00"
+	copy((*RawMem)(unsafe.Pointer(buf))[:26:26], s)
+	return buf
 }
