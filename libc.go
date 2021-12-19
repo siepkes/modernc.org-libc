@@ -232,6 +232,8 @@ func X__builtin_copysignl(t *TLS, x, y float64) float64               { return X
 func X__builtin_exit(t *TLS, status int32)                            { Xexit(t, status) }
 func X__builtin_expect(t *TLS, exp, c long) long                      { return exp }
 func X__builtin_fabs(t *TLS, x float64) float64                       { return Xfabs(t, x) }
+func X__builtin_fabsf(t *TLS, x float32) float32                      { return Xfabsf(t, x) }
+func X__builtin_fabsl(t *TLS, x float64) float64                      { return Xfabs(t, x) }
 func X__builtin_free(t *TLS, ptr uintptr)                             { Xfree(t, ptr) }
 func X__builtin_getentropy(t *TLS, buf uintptr, n types.Size_t) int32 { return Xgetentropy(t, buf, n) }
 func X__builtin_huge_val(t *TLS) float64                              { return math.Inf(1) }

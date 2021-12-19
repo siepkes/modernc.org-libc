@@ -2004,3 +2004,26 @@ func Xuuid_parse(t *TLS, in uintptr, uu uintptr) int32 {
 	copy((*RawMem)(unsafe.Pointer(uu))[:unsafe.Sizeof(uuid.Uuid_t{})], r[:])
 	return 0
 }
+
+// unsigned long	___runetype(__ct_rune_t) __pure;
+func X___runetype(t *TLS, x int32) ulong {
+	panic(todo(""))
+}
+
+// static __inline
+func X__toupper(tls *TLS, c int32) int32 { /* table.cpp.c:376:13: */
+	if c < 128 {
+		return Xtoupper(tls, c)
+	}
+
+	panic(todo(""))
+}
+
+// static __inline
+func X__tolower(tls *TLS, c int32) int32 { /* table.cpp.c:392:13: */
+	if c < 128 {
+		return Xtolower(tls, c)
+	}
+
+	panic(todo(""))
+}
