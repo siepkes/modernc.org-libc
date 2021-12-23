@@ -351,6 +351,7 @@ func makeMuslDarwin(goos, goarch string) {
 		"-D__environ=environ",
 		"-export-externs", "X",
 		"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6",
+		"-hide", "isascii,isspace,tolower,toupper",
 		"-nostdinc",
 		"-nostdlib",
 		"-o", fmt.Sprintf("../musl_%s_%s.go", goos, goarch),
@@ -369,16 +370,9 @@ func makeMuslDarwin(goos, goarch string) {
 
 		"copyright.c", // Inject legalese first
 
-		"../freebsd/table.cpp.c",
+		"../darwin/table.c",
 
 		// Keep the below lines sorted.
-		"src/ctype/isalnum.c",
-		"src/ctype/isalpha.c",
-		"src/ctype/isdigit.c",
-		"src/ctype/islower.c",
-		"src/ctype/isprint.c",
-		"src/ctype/isupper.c",
-		"src/ctype/isxdigit.c",
 		"src/env/putenv.c",
 		"src/env/setenv.c",
 		"src/env/unsetenv.c",

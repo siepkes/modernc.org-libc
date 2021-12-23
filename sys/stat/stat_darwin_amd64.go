@@ -131,6 +131,8 @@ type X__uint128_t = struct {
 type X__builtin_va_list = uintptr /* <builtin>:46:14 */
 type X__float128 = float64        /* <builtin>:47:21 */
 
+var X__darwin_check_fd_set_overflow uintptr /* <builtin>:146:5: */
+
 // Copyright (c) 2000-2014 Apple Inc. All rights reserved.
 //
 // @APPLE_OSREFERENCE_LICENSE_HEADER_START@

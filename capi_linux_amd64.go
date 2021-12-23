@@ -34,8 +34,6 @@ var CAPI = map[string]struct{}{
 	"__builtin_exit":                   {},
 	"__builtin_expect":                 {},
 	"__builtin_fabs":                   {},
-	"__builtin_fabsf":                  {},
-	"__builtin_fabsl":                  {},
 	"__builtin_free":                   {},
 	"__builtin_getentropy":             {},
 	"__builtin_huge_val":               {},

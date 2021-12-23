@@ -336,16 +336,14 @@ typedef struct {
 ///	
 ///	
 ///	
-
-// static __inline
-int __maskrune(__ct_rune_t _c, unsigned long _f)
-{
-	//TODO
-	abort();
-//TODO  return ((_c < 0 || _c >= (1 <<8 )) ? ___runetype(_c) :
-//TODO   (__getCurrentRuneLocale())->__runetype[_c]) & _f;
-}
-
+///	
+///	static __inline int
+///	__maskrune(__ct_rune_t _c, unsigned long _f)
+///	{
+///	 return ((_c < 0 || _c >= (1 <<8 )) ? ___runetype(_c) :
+///	  (__getCurrentRuneLocale())->__runetype[_c]) & _f;
+///	}
+///	
 ///	static __inline int
 ///	__sbmaskrune(__ct_rune_t _c, unsigned long _f)
 ///	{
@@ -371,28 +369,28 @@ int __maskrune(__ct_rune_t _c, unsigned long _f)
 ///	 return (_c < 0 || _c >= 128) ? 0 :
 ///	        !!(_DefaultRuneLocale.__runetype[_c] & _f);
 ///	}
-
-// static __inline
-/// __ct_rune_t __toupper(__ct_rune_t _c)
-/// {
-///   return (_c < 0 || _c >= (1 <<8 )) ? ___toupper(_c) :
-///          (__getCurrentRuneLocale())->__mapupper[_c];
-/// }
-/// 
+///	
+///	static __inline __ct_rune_t
+///	__toupper(__ct_rune_t _c)
+///	{
+///	 return (_c < 0 || _c >= (1 <<8 )) ? ___toupper(_c) :
+///	        (__getCurrentRuneLocale())->__mapupper[_c];
+///	}
+///	
 ///	static __inline __ct_rune_t
 ///	__sbtoupper(__ct_rune_t _c)
 ///	{
 ///	 return (_c < 0 || _c >= __mb_sb_limit) ? _c :
 ///	        (__getCurrentRuneLocale())->__mapupper[_c];
 ///	}
-
-// static __inline
-/// __ct_rune_t __tolower(__ct_rune_t _c)
-/// {
-///   return (_c < 0 || _c >= (1 <<8 )) ? ___tolower(_c) :
-///          (__getCurrentRuneLocale())->__maplower[_c];
-/// }
-/// 
+///	
+///	static __inline __ct_rune_t
+///	__tolower(__ct_rune_t _c)
+///	{
+///	 return (_c < 0 || _c >= (1 <<8 )) ? ___tolower(_c) :
+///	        (__getCurrentRuneLocale())->__maplower[_c];
+///	}
+///	
 ///	static __inline __ct_rune_t
 ///	__sbtolower(__ct_rune_t _c)
 ///	{

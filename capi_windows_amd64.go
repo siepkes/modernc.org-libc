@@ -466,6 +466,7 @@ var CAPI = map[string]struct{}{
 	"exp":                               {},
 	"fabs":                              {},
 	"fabsf":                             {},
+	"fabsl":                             {},
 	"fchmod":                            {},
 	"fclose":                            {},
 	"fcntl":                             {},

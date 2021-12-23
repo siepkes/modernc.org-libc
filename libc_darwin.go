@@ -2005,25 +2005,26 @@ func Xuuid_parse(t *TLS, in uintptr, uu uintptr) int32 {
 	return 0
 }
 
-// unsigned long	___runetype(__ct_rune_t) __pure;
-func X___runetype(t *TLS, x int32) ulong {
+// struct __float2 { float __sinval; float __cosval; };
+
+// struct __float2 __sincosf_stret(float);
+func X__sincosf_stret(t *TLS, f float32) struct{ F__sinval, F__cosval float32 } {
 	panic(todo(""))
 }
 
-// static __inline
-func X__toupper(tls *TLS, c int32) int32 { /* table.cpp.c:376:13: */
-	if c < 128 {
-		return Xtoupper(tls, c)
-	}
+// struct __double2 { double __sinval; double __cosval; };
 
+// struct __double2 __sincos_stret(double);
+func X__sincos_stret(t *TLS, f float64) struct{ F__sinval, F__cosval float64 } {
 	panic(todo(""))
 }
 
-// static __inline
-func X__tolower(tls *TLS, c int32) int32 { /* table.cpp.c:392:13: */
-	if c < 128 {
-		return Xtolower(tls, c)
-	}
+// struct __float2 __sincospif_stret(float);
+func X__sincospif_stret(t *TLS, f float32) struct{ F__sinval, F__cosval float32 } {
+	panic(todo(""))
+}
 
+// struct _double2 __sincospi_stret(double);
+func X__sincospi_stret(t *TLS, f float64) struct{ F__sinval, F__cosval float64 } {
 	panic(todo(""))
 }
