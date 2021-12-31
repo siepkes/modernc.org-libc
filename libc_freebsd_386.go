@@ -593,7 +593,7 @@ func newFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Err
 	return &fts.FTSENT{
 		Ffts_info:    int32(info),
 		Ffts_path:    csp,
-		Ffts_pathlen: uint64(len(path)),
+		Ffts_pathlen: uint32(len(path)),
 		Ffts_statp:   statp,
 		Ffts_errno:   int32(err),
 	}
@@ -601,7 +601,7 @@ func newFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Err
 
 // DIR *opendir(const char *name);
 func Xopendir(t *TLS, name uintptr) uintptr {
-	p := Xmalloc(t, uint64(unsafe.Sizeof(darwinDir{})))
+	p := Xmalloc(t, uint32(unsafe.Sizeof(darwinDir{})))
 	if p == 0 {
 		panic("OOM")
 	}

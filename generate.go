@@ -657,6 +657,8 @@ func makeMuslFreeBSD(goos, goarch string) {
 	switch goarch {
 	case "amd64":
 		arch = "x86_64"
+	case "386":
+		arch = "i386"
 	default:
 		fail(fmt.Errorf("unknown/unsupported GOARCH: %q", goarch))
 	}
