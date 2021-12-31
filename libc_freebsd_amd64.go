@@ -629,3 +629,19 @@ func Xopendir(t *TLS, name uintptr) uintptr {
 	(*darwinDir)(unsafe.Pointer(p)).eof = false
 	return p
 }
+
+// int chflags(const char *path, u_int flags);
+func Xchflags(t *TLS, path uintptr, flags uint64) int32 {
+	if err := unix.Chflags(GoString(path), int(flags)); err != nil {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
+		t.setErrno(err)
+		return -1
+	}
+
+	if dmesgs {
+		dmesg("%v: ok", origin(1))
+	}
+	return 0
+}

@@ -1384,22 +1384,6 @@ func X__xuname(t *TLS, namesize int32, namebuf uintptr) int32 {
 	return Xuname(t, namebuf)
 }
 
-// int chflags(const char *path, u_int flags);
-func Xchflags(t *TLS, path uintptr, flags uint64) int32 {
-	if err := unix.Chflags(GoString(path), int(flags)); err != nil {
-		if dmesgs {
-			dmesg("%v: %v FAIL", origin(1), err)
-		}
-		t.setErrno(err)
-		return -1
-	}
-
-	if dmesgs {
-		dmesg("%v: ok", origin(1))
-	}
-	return 0
-}
-
 // int pipe(int pipefd[2]);
 func Xpipe(t *TLS, pipefd uintptr) int32 {
 	var a [2]int
