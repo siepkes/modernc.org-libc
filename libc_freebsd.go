@@ -42,11 +42,6 @@ var (
 	in6_addr_any in.In6_addr
 )
 
-type (
-	long  = int64
-	ulong = uint64
-)
-
 // // Keep these outside of the var block otherwise go generate will miss them.
 var X__stderrp = Xstdout
 var X__stdinp = Xstdin

@@ -17,6 +17,11 @@ import (
 	"modernc.org/libc/utime"
 )
 
+type (
+	long  = int64
+	ulong = uint64
+)
+
 // int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 func Xsigaction(t *TLS, signum int32, act, oldact uintptr) int32 {
 	if _, _, err := unix.Syscall(unix.SYS_SIGACTION, uintptr(signum), act, oldact); err != 0 {

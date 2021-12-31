@@ -17,6 +17,11 @@ import (
 	"modernc.org/libc/utime"
 )
 
+type (
+	long  = int32
+	ulong = uint32
+)
+
 // int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 func Xsigaction(t *TLS, signum int32, act, oldact uintptr) int32 {
 	if _, _, err := unix.Syscall(unix.SYS_SIGACTION, uintptr(signum), act, oldact); err != 0 {
@@ -624,3 +629,5 @@ func Xopendir(t *TLS, name uintptr) uintptr {
 	(*darwinDir)(unsafe.Pointer(p)).eof = false
 	return p
 }
+
+func X__srget(t *TLS, stream uintptr) int32 { return Xgetc(t, stream) }
