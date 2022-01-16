@@ -25,14 +25,15 @@ all:
 	go test 2>&1 -timeout 1h | tee -a $(log)
 	GOOS=darwin GOARCH=amd64 go build
 	GOOS=darwin GOARCH=arm64 go build
-	GOOS=freebsd GOARCH=amd64 go build
 	GOOS=freebsd GOARCH=386 go build
+	GOOS=freebsd GOARCH=amd64 go build
 	GOOS=linux GOARCH=386 go build
 	GOOS=linux GOARCH=amd64 go build
 	GOOS=linux GOARCH=arm go build
 	GOOS=linux GOARCH=arm64 go build
 	GOOS=linux GOARCH=s390x go build
 	GOOS=netbsd GOARCH=amd64 go build
+	GOOS=openbsd GOARCH=amd64 go build
 	GOOS=windows GOARCH=386 go build
 	GOOS=windows GOARCH=amd64 go build
 	go vet -unsafeptr=false 2>&1 | grep -v $(ngrep) || true
@@ -93,6 +94,12 @@ linux_arm64:
 linux_s390x:
 	CCGO_CPP=s390x-linux-gnu-cpp TARGET_GOOS=linux TARGET_GOARCH=s390x go generate
 	GOOS=linux GOARCH=s390x go build -v ./...
+
+# only on openbsd/amd64
+openbsd_amd64:
+	@echo "Should be executed only on openbsd/amd64."
+	go generate 2>&1 | tee log-generate
+	go build -v ./...
 
 windows_amd64:
 	@echo "Should be executed only on windows/amd64."

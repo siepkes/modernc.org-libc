@@ -70,6 +70,9 @@ func main() {
 	case "netbsd":
 		g = append(g, "libc_unix.go", "pthread.go", "pthread_all.go")
 		makeMuslNetBSD(goos, goarch)
+	case "openbsd":
+		g = append(g, "libc_unix.go", "pthread.go", "pthread_all.go")
+		makeMuslFreeBSD(goos, goarch)
 	case "darwin":
 		g = append(g, "libc_unix.go", "pthread.go", "pthread_all.go")
 		makeMuslDarwin(goos, goarch)
@@ -699,6 +702,8 @@ func makeMuslFreeBSD(goos, goarch string) {
 		"src/ctype/isalnum.c",
 		"src/ctype/isalpha.c",
 		"src/ctype/isdigit.c",
+		"src/ctype/isprint.c",
+		"src/ctype/isspace.c",
 		"src/internal/floatscan.c",
 		"src/internal/intscan.c",
 		"src/internal/shgetc.c",
