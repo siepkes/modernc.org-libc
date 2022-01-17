@@ -705,6 +705,7 @@ func makeMuslFreeBSD(goos, goarch string) {
 		"src/ctype/islower.c",
 		"src/ctype/isprint.c",
 		"src/ctype/isspace.c",
+		"src/ctype/isupper.c",
 		"src/ctype/isxdigit.c",
 		"src/internal/floatscan.c",
 		"src/internal/intscan.c",
