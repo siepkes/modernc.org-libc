@@ -1481,7 +1481,7 @@ func X__xuname(t *TLS, namesize int32, namebuf uintptr) int32 {
 }
 
 // int chflags(const char *path, u_int flags);
-func Xchflags(t *TLS, path uintptr, flags uint64) int32 {
+func Xchflags(t *TLS, path uintptr, flags uint32) int32 {
 	if err := unix.Chflags(GoString(path), int(flags)); err != nil {
 		if dmesgs {
 			dmesg("%v: %v FAIL", origin(1), err)
