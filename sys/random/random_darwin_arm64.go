@@ -49,10 +49,6 @@ const (
 	MAC_OS_X_VERSION_10_7                  = 1070
 	MAC_OS_X_VERSION_10_8                  = 1080
 	MAC_OS_X_VERSION_10_9                  = 1090
-	X_ANSI_STDDEF_H                        = 0
-	X_BSD_PTRDIFF_T_                       = 0
-	X_BSD_SIZE_T_                          = 0
-	X_BSD_SIZE_T_DEFINED_                  = 0
 	X_CDEFS_H_                             = 0
 	X_DARWIN_FEATURE_64_BIT_INODE          = 1
 	X_DARWIN_FEATURE_ONLY_64_BIT_INODE     = 1
@@ -60,38 +56,13 @@ const (
 	X_DARWIN_FEATURE_ONLY_VERS_1050        = 1
 	X_DARWIN_FEATURE_UNIX_CONFORMANCE      = 3
 	X_FILE_OFFSET_BITS                     = 64
-	X_GCC_MAX_ALIGN_T                      = 0
-	X_GCC_PTRDIFF_T                        = 0
-	X_GCC_SIZE_T                           = 0
-	X_GCC_WCHAR_T                          = 0
 	X_LP64                                 = 1
 	X_Nonnull                              = 0
 	X_Null_unspecified                     = 0
 	X_Nullable                             = 0
 	X_PTRDIFF_T                            = 0
-	X_PTRDIFF_T_                           = 0
-	X_PTRDIFF_T_DECLARED                   = 0
-	X_SIZET_                               = 0
 	X_SIZE_T                               = 0
-	X_SIZE_T_                              = 0
-	X_SIZE_T_DECLARED                      = 0
-	X_SIZE_T_DEFINED                       = 0
-	X_SIZE_T_DEFINED_                      = 0
-	X_STDDEF_H                             = 0
-	X_STDDEF_H_                            = 0
-	X_SYS_SIZE_T_H                         = 0
-	X_T_PTRDIFF                            = 0
-	X_T_PTRDIFF_                           = 0
-	X_T_SIZE                               = 0
-	X_T_SIZE_                              = 0
-	X_T_WCHAR                              = 0
-	X_T_WCHAR_                             = 0
 	X_WCHAR_T                              = 0
-	X_WCHAR_T_                             = 0
-	X_WCHAR_T_DECLARED                     = 0
-	X_WCHAR_T_DEFINED                      = 0
-	X_WCHAR_T_DEFINED_                     = 0
-	X_WCHAR_T_H                            = 0
 )
 
 type Ptrdiff_t = int64 /* <builtin>:3:26 */
@@ -112,16 +83,16 @@ type X__uint128_t = struct {
 type X__builtin_va_list = uintptr /* <builtin>:46:14 */
 type X__float128 = float64        /* <builtin>:47:21 */
 
-// A null pointer constant.
+var X__darwin_check_fd_set_overflow uintptr /* <builtin>:146:5: */
 
-// Offset of member MEMBER in a struct of type TYPE.
+// ===---- __stddef_max_align_t.h - Definition of max_align_t for modules ---===
+//
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+//===-----------------------------------------------------------------------===
 
-// Type whose alignment is supported in every context and is at least
-//    as great as that of any standard type not using alignment
-//    specifiers.
-type Max_align_t = struct {
-	F__max_align_ll int64
-	F__max_align_ld float64
-} /* stddef.h:426:3 */
+type Max_align_t = float64 /* __stddef_max_align_t.h:16:21 */
 
 var _ int8 /* gen.c:2:13: */
