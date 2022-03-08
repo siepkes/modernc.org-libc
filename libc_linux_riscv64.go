@@ -485,3 +485,15 @@ func Xiswspace(t *TLS, wc wctype.Wint_t) int32 {
 func Xiswalnum(t *TLS, wc wctype.Wint_t) int32 {
 	return Bool32(unicode.IsLetter(rune(wc)) || unicode.IsNumber(rune(wc)))
 }
+
+func __syscall1(t *TLS, trap, p1 long) long {
+	return __syscall(unix.Syscall(uintptr(trap), uintptr(p1), 0, 0))
+}
+
+func __syscall3(t *TLS, trap, p1, p2, p3 long) long {
+	return __syscall(unix.Syscall(uintptr(trap), uintptr(p1), uintptr(p2), uintptr(p3)))
+}
+
+func __syscall4(t *TLS, trap, p1, p2, p3, p4 long) long {
+	return __syscall(unix.Syscall6(uintptr(trap), uintptr(p1), uintptr(p2), uintptr(p3), uintptr(p4), 0, 0))
+}
