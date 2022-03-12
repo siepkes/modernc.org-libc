@@ -15,6 +15,7 @@ import (
 	"modernc.org/libc/fcntl"
 	"modernc.org/libc/signal"
 	"modernc.org/libc/sys/types"
+	"modernc.org/libc/utime"
 	"modernc.org/libc/wctype"
 )
 
@@ -201,18 +202,34 @@ func Xlseek64(t *TLS, fd int32, offset types.Off_t, whence int32) types.Off_t {
 	return types.Off_t(n)
 }
 
+// From man utime executed on linux/riscv64:
+//
+// The utimbuf structure is:
+//
+//            struct utimbuf {
+//                time_t actime;       /* access time */
+//                time_t modtime;      /* modification time */
+//            };
+
+type utimbuf struct {
+	actime  utime.Time_t
+	modtime utime.Time_t
+}
+
 // int utime(const char *filename, const struct utimbuf *times);
 func Xutime(t *TLS, filename, times uintptr) int32 {
 	if times == 0 {
 		return Xutimes(t, filename, 0)
 	}
 
-	panic(todo("")) // Missing defination to struct utimbuf in types_linux_riscv64.go.
-	tv := [2]types.Timeval{
-		{ /* TODO: fill this */ },
-		{ /* TODO: fill this */ },
+	n := int(unsafe.Sizeof([2]types.Timeval{}))
+	p := t.Alloc(n)
+	defer t.Free(n)
+	*(*[2]types.Timeval)(unsafe.Pointer(p)) = [2]types.Timeval{
+		{Ftv_sec: (*utimbuf)(unsafe.Pointer(times)).actime},
+		{Ftv_sec: (*utimbuf)(unsafe.Pointer(times)).modtime},
 	}
-	return Xutimes(t, filename, uintptr(unsafe.Pointer(&tv[0])))
+	return Xutimes(t, filename, p)
 }
 
 // unsigned int alarm(unsigned int seconds);
