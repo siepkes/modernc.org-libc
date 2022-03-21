@@ -8,5 +8,5 @@ require (
 	golang.org/x/sys v0.0.0-20211007075335-d3039528d8ac
 	modernc.org/ccgo/v3 v3.15.17 // indirect
 	modernc.org/mathutil v1.4.1
-	modernc.org/memory v1.0.6
+	modernc.org/memory v1.0.7
 )
