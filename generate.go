@@ -209,7 +209,7 @@ func makeMuslWin(goos, goarch string) {
 	run("cmd", "/c", fmt.Sprintf("cp arch/%s/bits/syscall.h.in obj/include/bits/syscall.h", arch))
 	run("cmd", "/c", fmt.Sprintf("sed -n -e s/__NR_/SYS_/p < arch/%s/bits/syscall.h.in >> obj/include/bits/syscall.h", arch))
 
-	if _, err := runcc(
+	if out, err := runcc(
 		"-D__environ=environ",
 		"-export-externs", "X",
 		"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6",
@@ -249,7 +249,7 @@ func makeMuslWin(goos, goarch string) {
 		"src/string/strchrnul.c",
 		"src/string/strdup.c",
 	); err != nil {
-		fail(err)
+		fail(fmt.Errorf("%s\nFAIL: %v", out, err))
 	}
 }
 
@@ -855,7 +855,7 @@ func libcHeaders(paths []string) error {
 }
 
 func fail(err error) {
-	fmt.Fprintln(os.Stderr, err)
+	fmt.Fprintf(os.Stderr, "%v (%v: %v:)\n", err, origin(3), origin(2))
 	os.Exit(1)
 }
 
