@@ -451,6 +451,8 @@ func makeMuslLinux(goos, goarch string) {
 		arch = "aarch64"
 	case "s390x":
 		arch = "s390x"
+	case "ppc64le":
+		arch = "powerpc64"
 	case "riscv64":
 		arch = "riscv64"
 	default:
@@ -841,6 +843,7 @@ func libcHeaders(paths []string) error {
 			"-export-typedefs", "",
 			"-header",
 			"-hide", "_OSSwapInt16,_OSSwapInt32,_OSSwapInt64",
+			"-ignore-unsupported-alignment",
 			"-o", dest,
 			"-pkgname", base,
 		}
