@@ -207,6 +207,7 @@ const (
 	X_CALL_LINUX                   = 1            // <predefined>:123:1:
 	X_DEFAULT_SOURCE               = 1            // features.h:227:1:
 	X_FEATURES_H                   = 1            // features.h:19:1:
+	X_FILE_OFFSET_BITS             = 64           // <builtin>:25:1:
 	X_HAVE_STRUCT_TERMIOS_C_ISPEED = 1            // termios-struct.h:34:1:
 	X_HAVE_STRUCT_TERMIOS_C_OSPEED = 1            // termios-struct.h:35:1:
 	X_LITTLE_ENDIAN                = 1            // <predefined>:37:1:

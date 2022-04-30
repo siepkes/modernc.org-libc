@@ -31,7 +31,7 @@ const (
 	F_EXLCK               = 4          // fcntl-linux.h:231:1:
 	F_GETFD               = 1          // fcntl-linux.h:168:1:
 	F_GETFL               = 3          // fcntl-linux.h:170:1:
-	F_GETLK               = 5          // fcntl-linux.h:105:1:
+	F_GETLK               = 12         // fcntl-linux.h:109:1:
 	F_GETLK64             = 12         // fcntl-linux.h:115:1:
 	F_GETOWN              = 9          // fcntl-linux.h:180:1:
 	F_LOCK                = 1          // fcntl.h:238:1:
@@ -39,9 +39,9 @@ const (
 	F_RDLCK               = 0          // fcntl-linux.h:223:1:
 	F_SETFD               = 2          // fcntl-linux.h:169:1:
 	F_SETFL               = 4          // fcntl-linux.h:171:1:
-	F_SETLK               = 6          // fcntl-linux.h:106:1:
+	F_SETLK               = 13         // fcntl-linux.h:110:1:
 	F_SETLK64             = 13         // fcntl-linux.h:116:1:
-	F_SETLKW              = 7          // fcntl-linux.h:107:1:
+	F_SETLKW              = 14         // fcntl-linux.h:111:1:
 	F_SETLKW64            = 14         // fcntl-linux.h:117:1:
 	F_SETOWN              = 8          // fcntl-linux.h:179:1:
 	F_SHLCK               = 8          // fcntl-linux.h:232:1:
@@ -132,6 +132,7 @@ const (
 	X_DEFAULT_SOURCE      = 1          // features.h:227:1:
 	X_FCNTL_H             = 1          // fcntl.h:23:1:
 	X_FEATURES_H          = 1          // features.h:19:1:
+	X_FILE_OFFSET_BITS    = 64         // <builtin>:25:1:
 	X_LITTLE_ENDIAN       = 1          // <predefined>:37:1:
 	X_LP64                = 1          // <predefined>:335:1:
 	X_MKNOD_VER           = 1          // stat.h:41:1:
@@ -897,8 +898,8 @@ type Flock = struct {
 	Fl_type      int16
 	Fl_whence    int16
 	F__ccgo_pad1 [4]byte
-	Fl_start     X__off_t
-	Fl_len       X__off_t
+	Fl_start     X__off64_t
+	Fl_len       X__off64_t
 	Fl_pid       X__pid_t
 	F__ccgo_pad2 [4]byte
 } /* fcntl.h:36:1 */
@@ -978,7 +979,7 @@ type Flock = struct {
 //    by any POSIX header, so we don't conditionalize the definitions here.
 type Mode_t = X__mode_t /* fcntl.h:50:18 */
 
-type Off_t = X__off_t /* fcntl.h:56:17 */
+type Off_t = X__off64_t /* fcntl.h:58:19 */
 
 type Pid_t = X__pid_t /* fcntl.h:69:17 */
 
@@ -1070,16 +1071,16 @@ type Timespec = struct {
 
 type Stat = struct {
 	Fst_dev     X__dev_t
-	Fst_ino     X__ino_t
+	Fst_ino     X__ino64_t
 	Fst_nlink   X__nlink_t
 	Fst_mode    X__mode_t
 	Fst_uid     X__uid_t
 	Fst_gid     X__gid_t
 	F__pad2     int32
 	Fst_rdev    X__dev_t
-	Fst_size    X__off_t
+	Fst_size    X__off64_t
 	Fst_blksize X__blksize_t
-	Fst_blocks  X__blkcnt_t
+	Fst_blocks  X__blkcnt64_t
 	Fst_atim    struct {
 		Ftv_sec  X__time_t
 		Ftv_nsec X__syscall_slong_t

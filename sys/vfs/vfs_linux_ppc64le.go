@@ -33,6 +33,7 @@ const (
 	X_CALL_LINUX       = 1      // <predefined>:123:1:
 	X_DEFAULT_SOURCE   = 1      // features.h:227:1:
 	X_FEATURES_H       = 1      // features.h:19:1:
+	X_FILE_OFFSET_BITS = 64     // <builtin>:25:1:
 	X_LITTLE_ENDIAN    = 1      // <predefined>:37:1:
 	X_LP64             = 1      // <predefined>:335:1:
 	X_POSIX_C_SOURCE   = 200809 // features.h:281:1:
@@ -782,11 +783,11 @@ type X__sig_atomic_t = int32 /* types.h:214:13 */
 type Statfs = struct {
 	Ff_type    X__fsword_t
 	Ff_bsize   X__fsword_t
-	Ff_blocks  X__fsblkcnt_t
-	Ff_bfree   X__fsblkcnt_t
-	Ff_bavail  X__fsblkcnt_t
-	Ff_files   X__fsfilcnt_t
-	Ff_ffree   X__fsfilcnt_t
+	Ff_blocks  X__fsblkcnt64_t
+	Ff_bfree   X__fsblkcnt64_t
+	Ff_bavail  X__fsblkcnt64_t
+	Ff_files   X__fsfilcnt64_t
+	Ff_ffree   X__fsfilcnt64_t
 	Ff_fsid    X__fsid_t
 	Ff_namelen X__fsword_t
 	Ff_frsize  X__fsword_t

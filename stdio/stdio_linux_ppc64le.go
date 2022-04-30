@@ -47,6 +47,7 @@ const (
 	X_CALL_LINUX          = 1      // <predefined>:123:1:
 	X_DEFAULT_SOURCE      = 1      // features.h:227:1:
 	X_FEATURES_H          = 1      // features.h:19:1:
+	X_FILE_OFFSET_BITS    = 64     // <builtin>:25:1:
 	X_GCC_SIZE_T          = 0      // stddef.h:195:1:
 	X_IOFBF               = 0      // stdio.h:93:1:
 	X_IOLBF               = 1      // stdio.h:94:1:
@@ -532,12 +533,12 @@ type FILE = X_IO_FILE /* FILE.h:7:25 */
 
 type Va_list = X__gnuc_va_list /* stdio.h:52:24 */
 
-type Off_t = X__off_t /* stdio.h:63:17 */
+type Off_t = X__off64_t /* stdio.h:65:19 */
 
 type Ssize_t = X__ssize_t /* stdio.h:77:19 */
 
 // The type of the second argument to `fgetpos' and `fsetpos'.
-type Fpos_t = X__fpos_t /* stdio.h:84:18 */
+type Fpos_t = X__fpos64_t /* stdio.h:86:20 */
 
 // If we are compiling with optimizing read this file.  It contains
 //    several optimizing inline functions and macros.

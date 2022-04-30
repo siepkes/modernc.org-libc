@@ -53,6 +53,7 @@ const (
 	X_CALL_LINUX                       = 1      // <predefined>:123:1:
 	X_DEFAULT_SOURCE                   = 1      // features.h:227:1:
 	X_FEATURES_H                       = 1      // features.h:19:1:
+	X_FILE_OFFSET_BITS                 = 64     // <builtin>:25:1:
 	X_GCC_SIZE_T                       = 0      // stddef.h:195:1:
 	X_GETOPT_CORE_H                    = 1      // getopt_core.h:21:1:
 	X_GETOPT_POSIX_H                   = 1      // getopt_posix.h:21:1:
@@ -1562,7 +1563,7 @@ type Gid_t = X__gid_t /* unistd.h:232:17 */
 
 type Uid_t = X__uid_t /* unistd.h:237:17 */
 
-type Off_t = X__off_t /* unistd.h:243:17 */
+type Off_t = X__off64_t /* unistd.h:245:19 */
 
 type Useconds_t = X__useconds_t /* unistd.h:255:22 */
 

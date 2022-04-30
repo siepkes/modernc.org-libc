@@ -81,6 +81,7 @@ const (
 	X_CALL_LINUX                         = 1                    // <predefined>:123:1:
 	X_DEFAULT_SOURCE                     = 1                    // features.h:227:1:
 	X_FEATURES_H                         = 1                    // features.h:19:1:
+	X_FILE_OFFSET_BITS                   = 64                   // <builtin>:25:1:
 	X_GCC_LIMITS_H_                      = 0                    // limits.h:30:1:
 	X_LIBC_LIMITS_H_                     = 1                    // limits.h:23:1:
 	X_LIMITS_H___                        = 0                    // limits.h:60:1:

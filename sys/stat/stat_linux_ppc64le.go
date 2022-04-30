@@ -68,6 +68,7 @@ const (
 	X_CALL_LINUX         = 1          // <predefined>:123:1:
 	X_DEFAULT_SOURCE     = 1          // features.h:227:1:
 	X_FEATURES_H         = 1          // features.h:19:1:
+	X_FILE_OFFSET_BITS   = 64         // <builtin>:25:1:
 	X_LITTLE_ENDIAN      = 1          // <predefined>:37:1:
 	X_LP64               = 1          // <predefined>:335:1:
 	X_MKNOD_VER          = 1          // stat.h:41:1:
@@ -895,13 +896,13 @@ type Dev_t = X__dev_t /* stat.h:40:17 */
 
 type Gid_t = X__gid_t /* stat.h:45:17 */
 
-type Ino_t = X__ino_t /* stat.h:51:17 */
+type Ino_t = X__ino64_t /* stat.h:53:19 */
 
 type Mode_t = X__mode_t /* stat.h:59:18 */
 
 type Nlink_t = X__nlink_t /* stat.h:64:19 */
 
-type Off_t = X__off_t /* stat.h:70:17 */
+type Off_t = X__off64_t /* stat.h:72:19 */
 
 type Uid_t = X__uid_t /* stat.h:78:17 */
 
@@ -930,16 +931,16 @@ type Uid_t = X__uid_t /* stat.h:78:17 */
 
 type Stat = struct {
 	Fst_dev     X__dev_t
-	Fst_ino     X__ino_t
+	Fst_ino     X__ino64_t
 	Fst_nlink   X__nlink_t
 	Fst_mode    X__mode_t
 	Fst_uid     X__uid_t
 	Fst_gid     X__gid_t
 	F__pad2     int32
 	Fst_rdev    X__dev_t
-	Fst_size    X__off_t
+	Fst_size    X__off64_t
 	Fst_blksize X__blksize_t
-	Fst_blocks  X__blkcnt_t
+	Fst_blocks  X__blkcnt64_t
 	Fst_atim    struct {
 		Ftv_sec  X__time_t
 		Ftv_nsec X__syscall_slong_t

@@ -62,6 +62,7 @@ const (
 	X_DIRENT_HAVE_D_TYPE                 = 0          // dirent.h:52:1:
 	X_DIRENT_MATCHES_DIRENT64            = 1          // dirent.h:56:1:
 	X_FEATURES_H                         = 1          // features.h:19:1:
+	X_FILE_OFFSET_BITS                   = 64         // <builtin>:25:1:
 	X_GCC_SIZE_T                         = 0          // stddef.h:195:1:
 	X_LINUX_LIMITS_H                     = 0          // limits.h:3:1:
 	X_LITTLE_ENDIAN                      = 1          // <predefined>:37:1:
@@ -890,8 +891,8 @@ type X__sig_atomic_t = int32 /* types.h:214:13 */
 //    <https://www.gnu.org/licenses/>.
 
 type Dirent = struct {
-	Fd_ino       X__ino_t
-	Fd_off       X__off_t
+	Fd_ino       X__ino64_t
+	Fd_off       X__off64_t
 	Fd_reclen    uint16
 	Fd_type      uint8
 	Fd_name      [256]uint8

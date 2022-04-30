@@ -69,6 +69,14 @@ func Xfcntl64(t *TLS, fd, cmd int32, args uintptr) int32 {
 	if args != 0 {
 		arg = *(*uintptr)(unsafe.Pointer(args))
 	}
+	switch cmd {
+	case unix.F_GETLK64: // 0xc
+		cmd = unix.F_GETLK // 0x5
+	case unix.F_SETLK64: // 0xd
+		cmd = unix.F_SETLK // 0x6
+	case unix.F_SETLKW64: // 0xe
+		cmd = unix.F_SETLKW // 0x7
+	}
 	if cmd == fcntl.F_SETFL {
 		arg |= unix.O_LARGEFILE
 	}

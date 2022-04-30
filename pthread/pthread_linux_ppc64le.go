@@ -64,6 +64,7 @@ const (
 	X_CALL_LINUX                    = 1      // <predefined>:123:1:
 	X_DEFAULT_SOURCE                = 1      // features.h:227:1:
 	X_FEATURES_H                    = 1      // features.h:19:1:
+	X_FILE_OFFSET_BITS              = 64     // <builtin>:25:1:
 	X_GCC_SIZE_T                    = 0      // stddef.h:195:1:
 	X_LITTLE_ENDIAN                 = 1      // <predefined>:37:1:
 	X_LP64                          = 1      // <predefined>:335:1:

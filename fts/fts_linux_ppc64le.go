@@ -114,6 +114,7 @@ const (
 	X_DEFAULT_SOURCE             = 1          // features.h:227:1:
 	X_ENDIAN_H                   = 1          // endian.h:19:1:
 	X_FEATURES_H                 = 1          // features.h:19:1:
+	X_FILE_OFFSET_BITS           = 64         // <builtin>:25:1:
 	X_FTS_H                      = 1          // fts.h:51:1:
 	X_GCC_SIZE_T                 = 0          // stddef.h:195:1:
 	X_LITTLE_ENDIAN              = 1          // <predefined>:37:1:
@@ -874,7 +875,7 @@ type U_quad_t = X__u_quad_t /* types.h:38:20 */
 type Fsid_t = X__fsid_t     /* types.h:39:18 */
 type Loff_t = X__loff_t     /* types.h:42:18 */
 
-type Ino_t = X__ino_t /* types.h:47:17 */
+type Ino_t = X__ino64_t /* types.h:49:19 */
 
 type Dev_t = X__dev_t /* types.h:59:17 */
 
@@ -886,7 +887,7 @@ type Nlink_t = X__nlink_t /* types.h:74:19 */
 
 type Uid_t = X__uid_t /* types.h:79:17 */
 
-type Off_t = X__off_t /* types.h:85:17 */
+type Off_t = X__off64_t /* types.h:87:19 */
 
 type Pid_t = X__pid_t /* types.h:97:17 */
 
@@ -1243,9 +1244,9 @@ type Fd_mask = X__fd_mask /* select.h:77:19 */
 type Blksize_t = X__blksize_t /* types.h:185:21 */
 
 // Types from the Large File Support interface.
-type Blkcnt_t = X__blkcnt_t     /* types.h:192:20 */ // Type to count number of disk blocks.
-type Fsblkcnt_t = X__fsblkcnt_t /* types.h:196:22 */ // Type to count file system blocks.
-type Fsfilcnt_t = X__fsfilcnt_t /* types.h:200:22 */ // Type to count file system inodes.
+type Blkcnt_t = X__blkcnt64_t     /* types.h:205:22 */ // Type to count number of disk blocks.
+type Fsblkcnt_t = X__fsblkcnt64_t /* types.h:209:24 */ // Type to count file system blocks.
+type Fsfilcnt_t = X__fsfilcnt64_t /* types.h:213:24 */ // Type to count file system inodes.
 
 // Now add the thread types.
 // Declaration of common pthread types for all architectures.
@@ -1672,16 +1673,16 @@ type Pthread_barrierattr_t = struct {
 
 type Stat = struct {
 	Fst_dev     X__dev_t
-	Fst_ino     X__ino_t
+	Fst_ino     X__ino64_t
 	Fst_nlink   X__nlink_t
 	Fst_mode    X__mode_t
 	Fst_uid     X__uid_t
 	Fst_gid     X__gid_t
 	F__pad2     int32
 	Fst_rdev    X__dev_t
-	Fst_size    X__off_t
+	Fst_size    X__off64_t
 	Fst_blksize X__blksize_t
-	Fst_blocks  X__blkcnt_t
+	Fst_blocks  X__blkcnt64_t
 	Fst_atim    struct {
 		Ftv_sec  X__time_t
 		Ftv_nsec X__syscall_slong_t
