@@ -15,65 +15,64 @@ var _ atomic.Value
 var _ unsafe.Pointer
 
 const (
-	BUFSIZ                = 8192
-	EOF                   = -1
-	FILENAME_MAX          = 4096
-	FOPEN_MAX             = 16
-	L_ctermid             = 9
-	L_tmpnam              = 20
-	P_tmpdir              = "/tmp"
-	SEEK_CUR              = 1
-	SEEK_END              = 2
-	SEEK_SET              = 0
-	TMP_MAX               = 238328
-	X_ARCH_PPC            = 1
-	X_ARCH_PPC64          = 1
-	X_ARCH_PPCGR          = 1
-	X_ARCH_PPCSQ          = 1
-	X_ARCH_PWR4           = 1
-	X_ARCH_PWR5           = 1
-	X_ARCH_PWR5X          = 1
-	X_ARCH_PWR6           = 1
-	X_ARCH_PWR7           = 1
-	X_ARCH_PWR8           = 1
-	X_ATFILE_SOURCE       = 1
-	X_BITS_STDIO_LIM_H    = 1
-	X_BITS_TIME64_H       = 1
-	X_BITS_TYPESIZES_H    = 1
-	X_BITS_TYPES_H        = 1
-	X_BSD_SIZE_T_         = 0
-	X_BSD_SIZE_T_DEFINED_ = 0
-	X_CALL_ELF            = 2
-	X_CALL_LINUX          = 1
-	X_DEFAULT_SOURCE      = 1
-	X_FEATURES_H          = 1
-	X_FILE_OFFSET_BITS    = 64
-	X_GCC_SIZE_T          = 0
-	X_IOFBF               = 0
-	X_IOLBF               = 1
-	X_IONBF               = 2
-	X_IO_EOF_SEEN         = 0x0010
-	X_IO_ERR_SEEN         = 0x0020
-	X_IO_USER_LOCK        = 0x8000
-	X_LITTLE_ENDIAN       = 1
-	X_LP64                = 1
-	X_POSIX_C_SOURCE      = 200809
-	X_POSIX_SOURCE        = 1
-	X_SIZET_              = 0
-	X_SIZE_T              = 0
-	X_SIZE_T_             = 0
-	X_SIZE_T_DECLARED     = 0
-	X_SIZE_T_DEFINED      = 0
-	X_SIZE_T_DEFINED_     = 0
-	X_STDC_PREDEF_H       = 1
-	X_STDIO_H             = 1
-	X_SYS_CDEFS_H         = 1
-	X_SYS_SIZE_T_H        = 0
-	X_T_SIZE              = 0
-	X_T_SIZE_             = 0
-	X_VA_LIST_DEFINED     = 0
-	Linux                 = 1
-	Unix                  = 1
+	BUFSIZ                = 8192   // stdio.h:99:1:
+	EOF                   = -1     // stdio.h:104:1:
+	FILENAME_MAX          = 4096   // stdio_lim.h:27:1:
+	FOPEN_MAX             = 16     // stdio_lim.h:37:1:
+	L_ctermid             = 9      // stdio_lim.h:30:1:
+	L_tmpnam              = 20     // stdio_lim.h:25:1:
+	P_tmpdir              = "/tmp" // stdio.h:120:1:
+	SEEK_CUR              = 1      // stdio.h:110:1:
+	SEEK_END              = 2      // stdio.h:111:1:
+	SEEK_SET              = 0      // stdio.h:109:1:
+	TMP_MAX               = 238328 // stdio_lim.h:26:1:
+	X_ARCH_PPC            = 1      // <predefined>:198:1:
+	X_ARCH_PPC64          = 1      // <predefined>:402:1:
+	X_ARCH_PPCGR          = 1      // <predefined>:15:1:
+	X_ARCH_PPCSQ          = 1      // <predefined>:43:1:
+	X_ARCH_PWR4           = 1      // <predefined>:381:1:
+	X_ARCH_PWR5           = 1      // <predefined>:90:1:
+	X_ARCH_PWR5X          = 1      // <predefined>:137:1:
+	X_ARCH_PWR6           = 1      // <predefined>:91:1:
+	X_ARCH_PWR7           = 1      // <predefined>:92:1:
+	X_ARCH_PWR8           = 1      // <predefined>:93:1:
+	X_ATFILE_SOURCE       = 1      // features.h:342:1:
+	X_BITS_STDIO_LIM_H    = 1      // stdio_lim.h:19:1:
+	X_BITS_TIME64_H       = 1      // time64.h:24:1:
+	X_BITS_TYPESIZES_H    = 1      // typesizes.h:24:1:
+	X_BITS_TYPES_H        = 1      // types.h:24:1:
+	X_BSD_SIZE_T_         = 0      // stddef.h:189:1:
+	X_BSD_SIZE_T_DEFINED_ = 0      // stddef.h:192:1:
+	X_CALL_ELF            = 2      // <predefined>:415:1:
+	X_CALL_LINUX          = 1      // <predefined>:123:1:
+	X_DEFAULT_SOURCE      = 1      // features.h:227:1:
+	X_FEATURES_H          = 1      // features.h:19:1:
+	X_GCC_SIZE_T          = 0      // stddef.h:195:1:
+	X_IOFBF               = 0      // stdio.h:93:1:
+	X_IOLBF               = 1      // stdio.h:94:1:
+	X_IONBF               = 2      // stdio.h:95:1:
+	X_IO_EOF_SEEN         = 0x0010 // struct_FILE.h:111:1:
+	X_IO_ERR_SEEN         = 0x0020 // struct_FILE.h:114:1:
+	X_IO_USER_LOCK        = 0x8000 // struct_FILE.h:117:1:
+	X_LITTLE_ENDIAN       = 1      // <predefined>:37:1:
+	X_LP64                = 1      // <predefined>:335:1:
+	X_POSIX_C_SOURCE      = 200809 // features.h:281:1:
+	X_POSIX_SOURCE        = 1      // features.h:279:1:
+	X_SIZET_              = 0      // stddef.h:196:1:
+	X_SIZE_T              = 0      // stddef.h:183:1:
+	X_SIZE_T_             = 0      // stddef.h:188:1:
+	X_SIZE_T_DECLARED     = 0      // stddef.h:193:1:
+	X_SIZE_T_DEFINED      = 0      // stddef.h:191:1:
+	X_SIZE_T_DEFINED_     = 0      // stddef.h:190:1:
+	X_STDC_PREDEF_H       = 1      // <predefined>:203:1:
+	X_STDIO_H             = 1      // stdio.h:24:1:
+	X_SYS_CDEFS_H         = 1      // cdefs.h:19:1:
+	X_SYS_SIZE_T_H        = 0      // stddef.h:184:1:
+	X_T_SIZE              = 0      // stddef.h:186:1:
+	X_T_SIZE_             = 0      // stddef.h:185:1:
+	X_VA_LIST_DEFINED     = 0      // stdio.h:53:1:
+	Linux                 = 1      // <predefined>:263:1:
+	Unix                  = 1      // <predefined>:222:1:
 )
 
 type Ptrdiff_t = int64 /* <builtin>:3:26 */
@@ -533,12 +532,12 @@ type FILE = X_IO_FILE /* FILE.h:7:25 */
 
 type Va_list = X__gnuc_va_list /* stdio.h:52:24 */
 
-type Off_t = X__off64_t /* stdio.h:65:19 */
+type Off_t = X__off_t /* stdio.h:63:17 */
 
 type Ssize_t = X__ssize_t /* stdio.h:77:19 */
 
 // The type of the second argument to `fgetpos' and `fsetpos'.
-type Fpos_t = X__fpos64_t /* stdio.h:86:20 */
+type Fpos_t = X__fpos_t /* stdio.h:84:18 */
 
 // If we are compiling with optimizing read this file.  It contains
 //    several optimizing inline functions and macros.

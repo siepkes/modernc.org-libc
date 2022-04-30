@@ -96,11 +96,9 @@ linux_s390x:
 	CCGO_CPP=s390x-linux-gnu-cpp TARGET_GOOS=linux TARGET_GOARCH=s390x go generate
 	GOOS=linux GOARCH=s390x go build -v ./...
 
-# only on linux/ppc64le
 linux_ppc64le:
-	@echo "Should be executed only on linux/ppc64le."
-	go generate 2>&1 | tee log-generate
-	go build -v ./...
+	CCGO_CPP=powerpc64le-linux-gnu-cpp TARGET_GOOS=linux TARGET_GOARCH=ppc64le go generate
+	GOOS=linux GOARCH=ppc64le go build -v ./...
 
 # only on openbsd/amd64
 openbsd_amd64:

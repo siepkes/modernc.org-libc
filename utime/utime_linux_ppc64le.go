@@ -15,34 +15,33 @@ var _ atomic.Value
 var _ unsafe.Pointer
 
 const (
-	X_ARCH_PPC         = 1
-	X_ARCH_PPC64       = 1
-	X_ARCH_PPCGR       = 1
-	X_ARCH_PPCSQ       = 1
-	X_ARCH_PWR4        = 1
-	X_ARCH_PWR5        = 1
-	X_ARCH_PWR5X       = 1
-	X_ARCH_PWR6        = 1
-	X_ARCH_PWR7        = 1
-	X_ARCH_PWR8        = 1
-	X_ATFILE_SOURCE    = 1
-	X_BITS_TIME64_H    = 1
-	X_BITS_TYPESIZES_H = 1
-	X_BITS_TYPES_H     = 1
-	X_CALL_ELF         = 2
-	X_CALL_LINUX       = 1
-	X_DEFAULT_SOURCE   = 1
-	X_FEATURES_H       = 1
-	X_FILE_OFFSET_BITS = 64
-	X_LITTLE_ENDIAN    = 1
-	X_LP64             = 1
-	X_POSIX_C_SOURCE   = 200809
-	X_POSIX_SOURCE     = 1
-	X_STDC_PREDEF_H    = 1
-	X_SYS_CDEFS_H      = 1
-	X_UTIME_H          = 1
-	Linux              = 1
-	Unix               = 1
+	X_ARCH_PPC         = 1      // <predefined>:198:1:
+	X_ARCH_PPC64       = 1      // <predefined>:402:1:
+	X_ARCH_PPCGR       = 1      // <predefined>:15:1:
+	X_ARCH_PPCSQ       = 1      // <predefined>:43:1:
+	X_ARCH_PWR4        = 1      // <predefined>:381:1:
+	X_ARCH_PWR5        = 1      // <predefined>:90:1:
+	X_ARCH_PWR5X       = 1      // <predefined>:137:1:
+	X_ARCH_PWR6        = 1      // <predefined>:91:1:
+	X_ARCH_PWR7        = 1      // <predefined>:92:1:
+	X_ARCH_PWR8        = 1      // <predefined>:93:1:
+	X_ATFILE_SOURCE    = 1      // features.h:342:1:
+	X_BITS_TIME64_H    = 1      // time64.h:24:1:
+	X_BITS_TYPESIZES_H = 1      // typesizes.h:24:1:
+	X_BITS_TYPES_H     = 1      // types.h:24:1:
+	X_CALL_ELF         = 2      // <predefined>:415:1:
+	X_CALL_LINUX       = 1      // <predefined>:123:1:
+	X_DEFAULT_SOURCE   = 1      // features.h:227:1:
+	X_FEATURES_H       = 1      // features.h:19:1:
+	X_LITTLE_ENDIAN    = 1      // <predefined>:37:1:
+	X_LP64             = 1      // <predefined>:335:1:
+	X_POSIX_C_SOURCE   = 200809 // features.h:281:1:
+	X_POSIX_SOURCE     = 1      // features.h:279:1:
+	X_STDC_PREDEF_H    = 1      // <predefined>:203:1:
+	X_SYS_CDEFS_H      = 1      // cdefs.h:19:1:
+	X_UTIME_H          = 1      // utime.h:23:1:
+	Linux              = 1      // <predefined>:263:1:
+	Unix               = 1      // <predefined>:222:1:
 )
 
 type Ptrdiff_t = int64 /* <builtin>:3:26 */

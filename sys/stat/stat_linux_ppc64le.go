@@ -15,81 +15,80 @@ var _ atomic.Value
 var _ unsafe.Pointer
 
 const (
-	ACCESSPERMS          = 511
-	ALLPERMS             = 4095
-	DEFFILEMODE          = 438
-	S_BLKSIZE            = 512
-	S_IEXEC              = 64
-	S_IFBLK              = 24576
-	S_IFCHR              = 8192
-	S_IFDIR              = 16384
-	S_IFIFO              = 4096
-	S_IFLNK              = 40960
-	S_IFMT               = 61440
-	S_IFREG              = 32768
-	S_IFSOCK             = 49152
-	S_IREAD              = 256
-	S_IRGRP              = 32
-	S_IROTH              = 4
-	S_IRUSR              = 256
-	S_IRWXG              = 56
-	S_IRWXO              = 7
-	S_IRWXU              = 448
-	S_ISGID              = 1024
-	S_ISUID              = 2048
-	S_ISVTX              = 512
-	S_IWGRP              = 16
-	S_IWOTH              = 2
-	S_IWRITE             = 128
-	S_IWUSR              = 128
-	S_IXGRP              = 8
-	S_IXOTH              = 1
-	S_IXUSR              = 64
-	UTIME_NOW            = 1073741823
-	UTIME_OMIT           = 1073741822
-	X_ARCH_PPC           = 1
-	X_ARCH_PPC64         = 1
-	X_ARCH_PPCGR         = 1
-	X_ARCH_PPCSQ         = 1
-	X_ARCH_PWR4          = 1
-	X_ARCH_PWR5          = 1
-	X_ARCH_PWR5X         = 1
-	X_ARCH_PWR6          = 1
-	X_ARCH_PWR7          = 1
-	X_ARCH_PWR8          = 1
-	X_ATFILE_SOURCE      = 1
-	X_BITS_ENDIANNESS_H  = 1
-	X_BITS_ENDIAN_H      = 1
-	X_BITS_STAT_H        = 1
-	X_BITS_TIME64_H      = 1
-	X_BITS_TYPESIZES_H   = 1
-	X_BITS_TYPES_H       = 1
-	X_CALL_ELF           = 2
-	X_CALL_LINUX         = 1
-	X_DEFAULT_SOURCE     = 1
-	X_FEATURES_H         = 1
-	X_FILE_OFFSET_BITS   = 64
-	X_LITTLE_ENDIAN      = 1
-	X_LP64               = 1
-	X_MKNOD_VER          = 1
-	X_MKNOD_VER_LINUX    = 1
-	X_MKNOD_VER_SVR4     = 2
-	X_POSIX_C_SOURCE     = 200809
-	X_POSIX_SOURCE       = 1
-	X_STATBUF_ST_BLKSIZE = 0
-	X_STATBUF_ST_NSEC    = 0
-	X_STATBUF_ST_RDEV    = 0
-	X_STAT_VER           = 1
-	X_STAT_VER_KERNEL    = 1
-	X_STAT_VER_LINUX     = 3
-	X_STAT_VER_LINUX_OLD = 1
-	X_STAT_VER_SVR4      = 2
-	X_STDC_PREDEF_H      = 1
-	X_STRUCT_TIMESPEC    = 1
-	X_SYS_CDEFS_H        = 1
-	X_SYS_STAT_H         = 1
-	Linux                = 1
-	Unix                 = 1
+	ACCESSPERMS          = 511        // stat.h:195:1:
+	ALLPERMS             = 4095       // stat.h:196:1:
+	DEFFILEMODE          = 438        // stat.h:197:1:
+	S_BLKSIZE            = 512        // stat.h:199:1:
+	S_IEXEC              = 64         // stat.h:177:1:
+	S_IFBLK              = 24576      // stat.h:107:1:
+	S_IFCHR              = 8192       // stat.h:106:1:
+	S_IFDIR              = 16384      // stat.h:105:1:
+	S_IFIFO              = 4096       // stat.h:110:1:
+	S_IFLNK              = 40960      // stat.h:113:1:
+	S_IFMT               = 61440      // stat.h:104:1:
+	S_IFREG              = 32768      // stat.h:108:1:
+	S_IFSOCK             = 49152      // stat.h:117:1:
+	S_IREAD              = 256        // stat.h:175:1:
+	S_IRGRP              = 32         // stat.h:180:1:
+	S_IROTH              = 4          // stat.h:186:1:
+	S_IRUSR              = 256        // stat.h:168:1:
+	S_IRWXG              = 56         // stat.h:184:1:
+	S_IRWXO              = 7          // stat.h:190:1:
+	S_IRWXU              = 448        // stat.h:172:1:
+	S_ISGID              = 1024       // stat.h:161:1:
+	S_ISUID              = 2048       // stat.h:160:1:
+	S_ISVTX              = 512        // stat.h:165:1:
+	S_IWGRP              = 16         // stat.h:181:1:
+	S_IWOTH              = 2          // stat.h:187:1:
+	S_IWRITE             = 128        // stat.h:176:1:
+	S_IWUSR              = 128        // stat.h:169:1:
+	S_IXGRP              = 8          // stat.h:182:1:
+	S_IXOTH              = 1          // stat.h:188:1:
+	S_IXUSR              = 64         // stat.h:170:1:
+	UTIME_NOW            = 1073741823 // stat.h:271:1:
+	UTIME_OMIT           = 1073741822 // stat.h:272:1:
+	X_ARCH_PPC           = 1          // <predefined>:198:1:
+	X_ARCH_PPC64         = 1          // <predefined>:402:1:
+	X_ARCH_PPCGR         = 1          // <predefined>:15:1:
+	X_ARCH_PPCSQ         = 1          // <predefined>:43:1:
+	X_ARCH_PWR4          = 1          // <predefined>:381:1:
+	X_ARCH_PWR5          = 1          // <predefined>:90:1:
+	X_ARCH_PWR5X         = 1          // <predefined>:137:1:
+	X_ARCH_PWR6          = 1          // <predefined>:91:1:
+	X_ARCH_PWR7          = 1          // <predefined>:92:1:
+	X_ARCH_PWR8          = 1          // <predefined>:93:1:
+	X_ATFILE_SOURCE      = 1          // features.h:342:1:
+	X_BITS_ENDIANNESS_H  = 1          // endianness.h:2:1:
+	X_BITS_ENDIAN_H      = 1          // endian.h:20:1:
+	X_BITS_STAT_H        = 1          // stat.h:23:1:
+	X_BITS_TIME64_H      = 1          // time64.h:24:1:
+	X_BITS_TYPESIZES_H   = 1          // typesizes.h:24:1:
+	X_BITS_TYPES_H       = 1          // types.h:24:1:
+	X_CALL_ELF           = 2          // <predefined>:415:1:
+	X_CALL_LINUX         = 1          // <predefined>:123:1:
+	X_DEFAULT_SOURCE     = 1          // features.h:227:1:
+	X_FEATURES_H         = 1          // features.h:19:1:
+	X_LITTLE_ENDIAN      = 1          // <predefined>:37:1:
+	X_LP64               = 1          // <predefined>:335:1:
+	X_MKNOD_VER          = 1          // stat.h:41:1:
+	X_MKNOD_VER_LINUX    = 1          // stat.h:39:1:
+	X_MKNOD_VER_SVR4     = 2          // stat.h:40:1:
+	X_POSIX_C_SOURCE     = 200809     // features.h:281:1:
+	X_POSIX_SOURCE       = 1          // features.h:279:1:
+	X_STATBUF_ST_BLKSIZE = 0          // stat.h:237:1:
+	X_STATBUF_ST_NSEC    = 0          // stat.h:240:1:
+	X_STATBUF_ST_RDEV    = 0          // stat.h:238:1:
+	X_STAT_VER           = 1          // stat.h:35:1:
+	X_STAT_VER_KERNEL    = 1          // stat.h:29:1:
+	X_STAT_VER_LINUX     = 3          // stat.h:31:1:
+	X_STAT_VER_LINUX_OLD = 1          // stat.h:28:1:
+	X_STAT_VER_SVR4      = 2          // stat.h:30:1:
+	X_STDC_PREDEF_H      = 1          // <predefined>:203:1:
+	X_STRUCT_TIMESPEC    = 1          // struct_timespec.h:3:1:
+	X_SYS_CDEFS_H        = 1          // cdefs.h:19:1:
+	X_SYS_STAT_H         = 1          // stat.h:23:1:
+	Linux                = 1          // <predefined>:263:1:
+	Unix                 = 1          // <predefined>:222:1:
 )
 
 type Ptrdiff_t = int64 /* <builtin>:3:26 */
@@ -896,13 +895,13 @@ type Dev_t = X__dev_t /* stat.h:40:17 */
 
 type Gid_t = X__gid_t /* stat.h:45:17 */
 
-type Ino_t = X__ino64_t /* stat.h:53:19 */
+type Ino_t = X__ino_t /* stat.h:51:17 */
 
 type Mode_t = X__mode_t /* stat.h:59:18 */
 
 type Nlink_t = X__nlink_t /* stat.h:64:19 */
 
-type Off_t = X__off64_t /* stat.h:72:19 */
+type Off_t = X__off_t /* stat.h:70:17 */
 
 type Uid_t = X__uid_t /* stat.h:78:17 */
 
@@ -931,16 +930,16 @@ type Uid_t = X__uid_t /* stat.h:78:17 */
 
 type Stat = struct {
 	Fst_dev     X__dev_t
-	Fst_ino     X__ino64_t
+	Fst_ino     X__ino_t
 	Fst_nlink   X__nlink_t
 	Fst_mode    X__mode_t
 	Fst_uid     X__uid_t
 	Fst_gid     X__gid_t
 	F__pad2     int32
 	Fst_rdev    X__dev_t
-	Fst_size    X__off64_t
+	Fst_size    X__off_t
 	Fst_blksize X__blksize_t
-	Fst_blocks  X__blkcnt64_t
+	Fst_blocks  X__blkcnt_t
 	Fst_atim    struct {
 		Ftv_sec  X__time_t
 		Ftv_nsec X__syscall_slong_t

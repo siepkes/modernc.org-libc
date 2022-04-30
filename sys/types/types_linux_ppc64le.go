@@ -15,64 +15,63 @@ var _ atomic.Value
 var _ unsafe.Pointer
 
 const (
-	BIG_ENDIAN                   = 4321
-	BYTE_ORDER                   = 1234
-	FD_SETSIZE                   = 1024
-	LITTLE_ENDIAN                = 1234
-	PDP_ENDIAN                   = 3412
-	X_ARCH_PPC                   = 1
-	X_ARCH_PPC64                 = 1
-	X_ARCH_PPCGR                 = 1
-	X_ARCH_PPCSQ                 = 1
-	X_ARCH_PWR4                  = 1
-	X_ARCH_PWR5                  = 1
-	X_ARCH_PWR5X                 = 1
-	X_ARCH_PWR6                  = 1
-	X_ARCH_PWR7                  = 1
-	X_ARCH_PWR8                  = 1
-	X_ATFILE_SOURCE              = 1
-	X_BITS_BYTESWAP_H            = 1
-	X_BITS_ENDIANNESS_H          = 1
-	X_BITS_ENDIAN_H              = 1
-	X_BITS_PTHREADTYPES_ARCH_H   = 1
-	X_BITS_PTHREADTYPES_COMMON_H = 1
-	X_BITS_STDINT_INTN_H         = 1
-	X_BITS_TIME64_H              = 1
-	X_BITS_TYPESIZES_H           = 1
-	X_BITS_TYPES_H               = 1
-	X_BITS_UINTN_IDENTITY_H      = 1
-	X_BSD_SIZE_T_                = 0
-	X_BSD_SIZE_T_DEFINED_        = 0
-	X_CALL_ELF                   = 2
-	X_CALL_LINUX                 = 1
-	X_DEFAULT_SOURCE             = 1
-	X_ENDIAN_H                   = 1
-	X_FEATURES_H                 = 1
-	X_FILE_OFFSET_BITS           = 64
-	X_GCC_SIZE_T                 = 0
-	X_LITTLE_ENDIAN              = 1
-	X_LP64                       = 1
-	X_POSIX_C_SOURCE             = 200809
-	X_POSIX_SOURCE               = 1
-	X_RWLOCK_INTERNAL_H          = 0
-	X_SIZET_                     = 0
-	X_SIZE_T                     = 0
-	X_SIZE_T_                    = 0
-	X_SIZE_T_DECLARED            = 0
-	X_SIZE_T_DEFINED             = 0
-	X_SIZE_T_DEFINED_            = 0
-	X_STDC_PREDEF_H              = 1
-	X_STRUCT_TIMESPEC            = 1
-	X_SYS_CDEFS_H                = 1
-	X_SYS_SELECT_H               = 1
-	X_SYS_SIZE_T_H               = 0
-	X_SYS_TYPES_H                = 1
-	X_THREAD_MUTEX_INTERNAL_H    = 1
-	X_THREAD_SHARED_TYPES_H      = 1
-	X_T_SIZE                     = 0
-	X_T_SIZE_                    = 0
-	Linux                        = 1
-	Unix                         = 1
+	BIG_ENDIAN                   = 4321   // endian.h:28:1:
+	BYTE_ORDER                   = 1234   // endian.h:30:1:
+	FD_SETSIZE                   = 1024   // select.h:73:1:
+	LITTLE_ENDIAN                = 1234   // endian.h:27:1:
+	PDP_ENDIAN                   = 3412   // endian.h:29:1:
+	X_ARCH_PPC                   = 1      // <predefined>:198:1:
+	X_ARCH_PPC64                 = 1      // <predefined>:402:1:
+	X_ARCH_PPCGR                 = 1      // <predefined>:15:1:
+	X_ARCH_PPCSQ                 = 1      // <predefined>:43:1:
+	X_ARCH_PWR4                  = 1      // <predefined>:381:1:
+	X_ARCH_PWR5                  = 1      // <predefined>:90:1:
+	X_ARCH_PWR5X                 = 1      // <predefined>:137:1:
+	X_ARCH_PWR6                  = 1      // <predefined>:91:1:
+	X_ARCH_PWR7                  = 1      // <predefined>:92:1:
+	X_ARCH_PWR8                  = 1      // <predefined>:93:1:
+	X_ATFILE_SOURCE              = 1      // features.h:342:1:
+	X_BITS_BYTESWAP_H            = 1      // byteswap.h:24:1:
+	X_BITS_ENDIANNESS_H          = 1      // endianness.h:2:1:
+	X_BITS_ENDIAN_H              = 1      // endian.h:20:1:
+	X_BITS_PTHREADTYPES_ARCH_H   = 1      // pthreadtypes-arch.h:21:1:
+	X_BITS_PTHREADTYPES_COMMON_H = 1      // pthreadtypes.h:20:1:
+	X_BITS_STDINT_INTN_H         = 1      // stdint-intn.h:20:1:
+	X_BITS_TIME64_H              = 1      // time64.h:24:1:
+	X_BITS_TYPESIZES_H           = 1      // typesizes.h:24:1:
+	X_BITS_TYPES_H               = 1      // types.h:24:1:
+	X_BITS_UINTN_IDENTITY_H      = 1      // uintn-identity.h:24:1:
+	X_BSD_SIZE_T_                = 0      // stddef.h:189:1:
+	X_BSD_SIZE_T_DEFINED_        = 0      // stddef.h:192:1:
+	X_CALL_ELF                   = 2      // <predefined>:415:1:
+	X_CALL_LINUX                 = 1      // <predefined>:123:1:
+	X_DEFAULT_SOURCE             = 1      // features.h:227:1:
+	X_ENDIAN_H                   = 1      // endian.h:19:1:
+	X_FEATURES_H                 = 1      // features.h:19:1:
+	X_GCC_SIZE_T                 = 0      // stddef.h:195:1:
+	X_LITTLE_ENDIAN              = 1      // <predefined>:37:1:
+	X_LP64                       = 1      // <predefined>:335:1:
+	X_POSIX_C_SOURCE             = 200809 // features.h:281:1:
+	X_POSIX_SOURCE               = 1      // features.h:279:1:
+	X_RWLOCK_INTERNAL_H          = 0      // struct_rwlock.h:21:1:
+	X_SIZET_                     = 0      // stddef.h:196:1:
+	X_SIZE_T                     = 0      // stddef.h:183:1:
+	X_SIZE_T_                    = 0      // stddef.h:188:1:
+	X_SIZE_T_DECLARED            = 0      // stddef.h:193:1:
+	X_SIZE_T_DEFINED             = 0      // stddef.h:191:1:
+	X_SIZE_T_DEFINED_            = 0      // stddef.h:190:1:
+	X_STDC_PREDEF_H              = 1      // <predefined>:203:1:
+	X_STRUCT_TIMESPEC            = 1      // struct_timespec.h:3:1:
+	X_SYS_CDEFS_H                = 1      // cdefs.h:19:1:
+	X_SYS_SELECT_H               = 1      // select.h:22:1:
+	X_SYS_SIZE_T_H               = 0      // stddef.h:184:1:
+	X_SYS_TYPES_H                = 1      // types.h:23:1:
+	X_THREAD_MUTEX_INTERNAL_H    = 1      // struct_mutex.h:20:1:
+	X_THREAD_SHARED_TYPES_H      = 1      // thread-shared-types.h:20:1:
+	X_T_SIZE                     = 0      // stddef.h:186:1:
+	X_T_SIZE_                    = 0      // stddef.h:185:1:
+	Linux                        = 1      // <predefined>:263:1:
+	Unix                         = 1      // <predefined>:222:1:
 )
 
 type Ptrdiff_t = int64 /* <builtin>:3:26 */
@@ -796,7 +795,7 @@ type U_quad_t = X__u_quad_t /* types.h:38:20 */
 type Fsid_t = X__fsid_t     /* types.h:39:18 */
 type Loff_t = X__loff_t     /* types.h:42:18 */
 
-type Ino_t = X__ino64_t /* types.h:49:19 */
+type Ino_t = X__ino_t /* types.h:47:17 */
 
 type Dev_t = X__dev_t /* types.h:59:17 */
 
@@ -808,7 +807,7 @@ type Nlink_t = X__nlink_t /* types.h:74:19 */
 
 type Uid_t = X__uid_t /* types.h:79:17 */
 
-type Off_t = X__off64_t /* types.h:87:19 */
+type Off_t = X__off_t /* types.h:85:17 */
 
 type Pid_t = X__pid_t /* types.h:97:17 */
 
@@ -1165,9 +1164,9 @@ type Fd_mask = X__fd_mask /* select.h:77:19 */
 type Blksize_t = X__blksize_t /* types.h:185:21 */
 
 // Types from the Large File Support interface.
-type Blkcnt_t = X__blkcnt64_t     /* types.h:205:22 */ // Type to count number of disk blocks.
-type Fsblkcnt_t = X__fsblkcnt64_t /* types.h:209:24 */ // Type to count file system blocks.
-type Fsfilcnt_t = X__fsfilcnt64_t /* types.h:213:24 */ // Type to count file system inodes.
+type Blkcnt_t = X__blkcnt_t     /* types.h:192:20 */ // Type to count number of disk blocks.
+type Fsblkcnt_t = X__fsblkcnt_t /* types.h:196:22 */ // Type to count file system blocks.
+type Fsfilcnt_t = X__fsfilcnt_t /* types.h:200:22 */ // Type to count file system inodes.
 
 // Now add the thread types.
 // Declaration of common pthread types for all architectures.

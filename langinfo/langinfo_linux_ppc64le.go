@@ -15,37 +15,36 @@ var _ atomic.Value
 var _ unsafe.Pointer
 
 const (
-	NL_CAT_LOCALE             = 1
-	NL_SETD                   = 1
-	X_ARCH_PPC                = 1
-	X_ARCH_PPC64              = 1
-	X_ARCH_PPCGR              = 1
-	X_ARCH_PPCSQ              = 1
-	X_ARCH_PWR4               = 1
-	X_ARCH_PWR5               = 1
-	X_ARCH_PWR5X              = 1
-	X_ARCH_PWR6               = 1
-	X_ARCH_PWR7               = 1
-	X_ARCH_PWR8               = 1
-	X_ATFILE_SOURCE           = 1
-	X_BITS_LOCALE_H           = 1
-	X_BITS_TYPES_LOCALE_T_H   = 1
-	X_BITS_TYPES___LOCALE_T_H = 1
-	X_CALL_ELF                = 2
-	X_CALL_LINUX              = 1
-	X_DEFAULT_SOURCE          = 1
-	X_FEATURES_H              = 1
-	X_FILE_OFFSET_BITS        = 64
-	X_LANGINFO_H              = 1
-	X_LITTLE_ENDIAN           = 1
-	X_LP64                    = 1
-	X_NL_TYPES_H              = 1
-	X_POSIX_C_SOURCE          = 200809
-	X_POSIX_SOURCE            = 1
-	X_STDC_PREDEF_H           = 1
-	X_SYS_CDEFS_H             = 1
-	Linux                     = 1
-	Unix                      = 1
+	NL_CAT_LOCALE             = 1      // nl_types.h:27:1:
+	NL_SETD                   = 1      // nl_types.h:24:1:
+	X_ARCH_PPC                = 1      // <predefined>:198:1:
+	X_ARCH_PPC64              = 1      // <predefined>:402:1:
+	X_ARCH_PPCGR              = 1      // <predefined>:15:1:
+	X_ARCH_PPCSQ              = 1      // <predefined>:43:1:
+	X_ARCH_PWR4               = 1      // <predefined>:381:1:
+	X_ARCH_PWR5               = 1      // <predefined>:90:1:
+	X_ARCH_PWR5X              = 1      // <predefined>:137:1:
+	X_ARCH_PWR6               = 1      // <predefined>:91:1:
+	X_ARCH_PWR7               = 1      // <predefined>:92:1:
+	X_ARCH_PWR8               = 1      // <predefined>:93:1:
+	X_ATFILE_SOURCE           = 1      // features.h:342:1:
+	X_BITS_LOCALE_H           = 1      // locale.h:24:1:
+	X_BITS_TYPES_LOCALE_T_H   = 1      // locale_t.h:20:1:
+	X_BITS_TYPES___LOCALE_T_H = 1      // __locale_t.h:21:1:
+	X_CALL_ELF                = 2      // <predefined>:415:1:
+	X_CALL_LINUX              = 1      // <predefined>:123:1:
+	X_DEFAULT_SOURCE          = 1      // features.h:227:1:
+	X_FEATURES_H              = 1      // features.h:19:1:
+	X_LANGINFO_H              = 1      // langinfo.h:20:1:
+	X_LITTLE_ENDIAN           = 1      // <predefined>:37:1:
+	X_LP64                    = 1      // <predefined>:335:1:
+	X_NL_TYPES_H              = 1      // nl_types.h:19:1:
+	X_POSIX_C_SOURCE          = 200809 // features.h:281:1:
+	X_POSIX_SOURCE            = 1      // features.h:279:1:
+	X_STDC_PREDEF_H           = 1      // <predefined>:203:1:
+	X_SYS_CDEFS_H             = 1      // cdefs.h:19:1:
+	Linux                     = 1      // <predefined>:263:1:
+	Unix                      = 1      // <predefined>:222:1:
 )
 
 // Definition of locale category symbol values.
