@@ -617,6 +617,7 @@ func makeMuslNetBSD(goos, goarch string) {
 		"src/ctype/isalnum.c",
 		"src/ctype/isalpha.c",
 		"src/ctype/isdigit.c",
+		"src/ctype/isprint.c",
 		"src/internal/floatscan.c",
 		"src/internal/intscan.c",
 		"src/internal/shgetc.c",
