@@ -108,6 +108,7 @@ var CAPI = map[string]struct{}{
 	"__sF":                             {},
 	"__shgetc":                         {},
 	"__shlim":                          {},
+	"__srget":                          {},
 	"__stderrp":                        {},
 	"__stdinp":                         {},
 	"__stdoutp":                        {},
