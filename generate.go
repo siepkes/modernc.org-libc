@@ -879,7 +879,7 @@ func ccgoHelpers() {
 		}
 		ints   = append(signed[:len(signed):len(signed)], unsigned...)
 		intptr = append(ints[:len(ints):len(ints)], "uintptr")
-		arith  = append(ints[:len(ints):len(ints)], "float32", "float64")
+		arith  = append(ints[:len(ints):len(ints)], "float32", "float64", "complex64", "complex128")
 		scalar = append(arith[:len(arith):len(arith)], []string{"uintptr"}...)
 		sizes  = []string{"8", "16", "32", "64"}
 		atomic = []string{
@@ -1065,7 +1065,29 @@ import (
 	fmt.Fprintln(b)
 	for _, v := range scalar {
 		for _, w := range scalar {
-			fmt.Fprintf(b, "func %sFrom%s(n %s) %s { return %[4]s(n) }\n", capitalize(v), capitalize(w), w, v)
+			switch {
+			case strings.HasPrefix(v, "complex64"):
+				switch {
+				case strings.HasPrefix(w, "complex"):
+					fmt.Fprintf(b, "func %sFrom%s(n %s) %s { return %[4]s(n) }\n", capitalize(v), capitalize(w), w, v)
+				default:
+					fmt.Fprintf(b, "func %sFrom%s(n %s) %s { return %[4]s(complex(float32(n), 0)) }\n", capitalize(v), capitalize(w), w, v)
+				}
+			case strings.HasPrefix(v, "complex128"):
+				switch {
+				case strings.HasPrefix(w, "complex"):
+					fmt.Fprintf(b, "func %sFrom%s(n %s) %s { return %[4]s(n) }\n", capitalize(v), capitalize(w), w, v)
+				default:
+					fmt.Fprintf(b, "func %sFrom%s(n %s) %s { return %[4]s(complex(float64(n), 0)) }\n", capitalize(v), capitalize(w), w, v)
+				}
+			default:
+				switch {
+				case strings.HasPrefix(w, "complex"):
+					fmt.Fprintf(b, "func %sFrom%s(n %s) %s { return %[4]s(real(n)) }\n", capitalize(v), capitalize(w), w, v)
+				default:
+					fmt.Fprintf(b, "func %sFrom%s(n %s) %s { return %[4]s(n) }\n", capitalize(v), capitalize(w), w, v)
+				}
+			}
 		}
 	}
 
