@@ -196,11 +196,12 @@ func Xconfstr(t *TLS, name int32, buf uintptr, len types.Size_t) types.Size_t {
 
 // int puts(const char *s);
 func Xputs(t *TLS, s uintptr) int32 {
-	if _, err := fmt.Printf("%s\n", GoString(s)); err != nil {
+	n, err := fmt.Printf("%s\n", GoString(s))
+	if err != nil {
 		return stdio.EOF
 	}
 
-	return 0
+	return int32(n)
 }
 
 var (
