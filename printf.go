@@ -18,6 +18,8 @@ const (
 	modH
 	modL
 	modLL
+	modLf
+	modLg
 	modQ
 	modCapitalL
 	modJ
@@ -583,7 +585,17 @@ func parseLengthModifier(format uintptr) (_ uintptr, n int) {
 	case 'q':
 		panic(todo(""))
 	case 'L':
-		panic(todo(""))
+		format++
+		n = modNone
+		switch c := *(*byte)(unsafe.Pointer(format)); c {
+		case 'f', 'F':
+			format++
+			n = modLf
+		case 'g', 'G':
+			format++
+			n = modLg
+		}
+		return format, n
 	case 'j':
 		panic(todo(""))
 	case 'z':
