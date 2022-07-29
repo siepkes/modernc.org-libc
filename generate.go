@@ -1163,7 +1163,7 @@ func AssignBitFieldPtr%dUint%d(p uintptr, v uint%[2]d, w, off int, mask uint%[1]
 			fmt.Fprintf(b, `
 func PostDecBitFieldPtr%dInt%d(p uintptr, d int%[2]d, w, off int, mask uint%[1]d) (r int%[2]d) {
 	x0 := *(*uint%[1]d)(unsafe.Pointer(p))
-	s := %[2]d - w
+	s := %[2]d - w - off
 	r = int%[2]d(x0) & int%[2]d(mask) << s >> (s+off)
 	*(*uint%[1]d)(unsafe.Pointer(p)) = x0&^uint%[1]d(mask) | uint%[1]d(r-d)<<off&mask
 	return r
@@ -1194,7 +1194,7 @@ func PostDecBitFieldPtr%dUint%d(p uintptr, d uint%[2]d, w, off int, mask uint%[1
 			fmt.Fprintf(b, `
 func PostIncBitFieldPtr%dInt%d(p uintptr, d int%[2]d, w, off int, mask uint%[1]d) (r int%[2]d) {
 	x0 := *(*uint%[1]d)(unsafe.Pointer(p))
-	s := %[2]d - w
+	s := %[2]d - w - off
 	r = int%[2]d(x0) & int%[2]d(mask) << s >> (s+off)
 	*(*uint%[1]d)(unsafe.Pointer(p)) = x0&^uint%[1]d(mask) | uint%[1]d(r+d)<<off&mask
 	return r
