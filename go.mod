@@ -7,5 +7,5 @@ require (
 	github.com/mattn/go-isatty v0.0.12
 	golang.org/x/sys v0.0.0-20211007075335-d3039528d8ac
 	modernc.org/mathutil v1.4.1
-	modernc.org/memory v1.1.1
+	modernc.org/memory v1.2.0
 )
