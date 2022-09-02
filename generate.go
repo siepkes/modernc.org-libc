@@ -1107,7 +1107,7 @@ import (
 	}
 
 	fmt.Fprintln(b)
-	for _, v := range ints {
+	for _, v := range intptr {
 		fmt.Fprintf(b, `
 func Bool%s(b bool) %s {
 	if b {
