@@ -409,7 +409,7 @@ func X__builtin_object_size(t *TLS, p uintptr, typ int32) types.Size_t {
 
 var atomicLoadStore16 sync.Mutex
 
-func AtomicLoadNUint16(ptr uintptr, memorder int16) uint16 {
+func AtomicLoadNUint16(ptr uintptr, memorder int32) uint16 {
 	atomicLoadStore16.Lock()
 	r := *(*uint16)(unsafe.Pointer(ptr))
 	atomicLoadStore16.Unlock()
