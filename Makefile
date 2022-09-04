@@ -70,7 +70,7 @@ freebsd_386:
 	go build -v ./...
 
 # only on freebsd/arm
-freebsd_386:
+freebsd_arm:
 	@echo "Should be executed only on freebsd/arm."
 	go generate 2>&1 | tee log-generate
 	go build -v ./...
