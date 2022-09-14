@@ -27,6 +27,7 @@ all:
 	GOOS=darwin GOARCH=arm64 go build
 	GOOS=freebsd GOARCH=386 go build
 	GOOS=freebsd GOARCH=amd64 go build
+	GOOS=freebsd GOARCH=arm64 go build
 	GOOS=linux GOARCH=386 go build
 	GOOS=linux GOARCH=amd64 go build
 	GOOS=linux GOARCH=arm go build
