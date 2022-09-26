@@ -18,19 +18,18 @@ import (
 )
 
 type (
-	long  = int64
-	ulong = uint64
+	long  = int32
+	ulong = uint32
 )
 
 // int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 func Xsigaction(t *TLS, signum int32, act, oldact uintptr) int32 {
-	panic(todo(""))
-	// if _, _, err := unix.Syscall(unix.SYS_SIGACTION, uintptr(signum), act, oldact); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if _, _, err := unix.Syscall(unix.SYS_SIGACTION, uintptr(signum), act, oldact); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // FILE *fopen64(const char *pathname, const char *mode);
@@ -325,8 +324,8 @@ func Xutime(t *TLS, filename, times uintptr) int32 {
 	var a []unix.Timeval
 	if times != 0 {
 		a = make([]unix.Timeval, 2)
-		a[0].Sec = (*utime.Utimbuf)(unsafe.Pointer(times)).Factime
-		a[1].Sec = (*utime.Utimbuf)(unsafe.Pointer(times)).Fmodtime
+		a[0].Sec = int64((*utime.Utimbuf)(unsafe.Pointer(times)).Factime)
+		a[1].Sec = int64((*utime.Utimbuf)(unsafe.Pointer(times)).Fmodtime)
 	}
 	if err := unix.Utimes(GoString(filename), a); err != nil {
 		if dmesgs {
@@ -386,7 +385,6 @@ func Xalarm(t *TLS, seconds uint32) uint32 {
 	// return uint32(n)
 }
 
-// int getnameinfo(const struct sockaddr * restrict sa, socklen_t salen, char * restrict host, socklen_t hostlen, char * restrict serv,  socklen_t servlen, int flags);
 func Xgetnameinfo(tls *TLS, sa1 uintptr, sl socklen_t, node uintptr, nodelen size_t, serv uintptr, servlen size_t, flags int32) int32 { /* getnameinfo.c:125:5: */
 	panic(todo(""))
 	//TODO bp := tls.Alloc(347)
@@ -598,9 +596,9 @@ func newFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Err
 	}
 
 	return &fts.FTSENT{
-		Ffts_info:    uint16(info),
+		Ffts_info:    int32(info),
 		Ffts_path:    csp,
-		Ffts_pathlen: uint64(len(path)),
+		Ffts_pathlen: uint32(len(path)),
 		Ffts_statp:   statp,
 		Ffts_errno:   int32(err),
 	}
@@ -608,7 +606,7 @@ func newFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Err
 
 // DIR *opendir(const char *name);
 func Xopendir(t *TLS, name uintptr) uintptr {
-	p := Xmalloc(t, uint64(unsafe.Sizeof(darwinDir{})))
+	p := Xmalloc(t, uint32(unsafe.Sizeof(darwinDir{})))
 	if p == 0 {
 		panic("OOM")
 	}
