@@ -406,9 +406,7 @@ more:
 		// The void * pointer argument is printed in hexadecimal (as if by %#x or
 		// %#lx).
 		format++
-		arg := VaUintptr(args)
-		buf.WriteString("0x")
-		buf.WriteString(strconv.FormatInt(int64(arg), 16))
+		fmt.Fprintf(buf, "%#0x", VaUintptr(args))
 	case 'c':
 		// If no l modifier is present, the int argument is converted to an unsigned
 		// char, and the resulting character is written.  If an l modifier is present,
