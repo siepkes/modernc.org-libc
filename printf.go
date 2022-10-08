@@ -137,13 +137,13 @@ more:
 		format++
 		var arg int64
 		switch mod {
-		case modNone, modL, modLL, mod64:
+		case modL, modLL, mod64:
 			arg = VaInt64(args)
 		case modH:
 			arg = int64(int16(VaInt32(args)))
 		case modHH:
 			arg = int64(int8(VaInt32(args)))
-		case mod32:
+		case mod32, modNone:
 			arg = int64(VaInt32(args))
 		default:
 			panic(todo("", mod))
