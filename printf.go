@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"unsafe"
+	"runtime"
 )
 
 const (
@@ -406,7 +407,17 @@ more:
 		// The void * pointer argument is printed in hexadecimal (as if by %#x or
 		// %#lx).
 		format++
-		fmt.Fprintf(buf, "%#0x", VaUintptr(args))
+		switch runtime.GOOS {
+		case "windows":
+			switch runtime.GOARCH {
+			case "386", "arm":
+				fmt.Fprintf(buf, "%08X", VaUintptr(args))
+			default:
+				fmt.Fprintf(buf, "%016X", VaUintptr(args))
+			}
+		default:
+			fmt.Fprintf(buf, "%#0x", VaUintptr(args))
+		}
 	case 'c':
 		// If no l modifier is present, the int argument is converted to an unsigned
 		// char, and the resulting character is written.  If an l modifier is present,
