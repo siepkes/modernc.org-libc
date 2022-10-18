@@ -74,6 +74,12 @@ netbsd_amd64:
 	go generate 2>&1 | tee log-generate
 	go build -v ./...
 
+# only on netbsd/arm
+netbsd_arm:
+	@echo "Should be executed only on netbsd/arm."
+	go generate 2>&1 | tee log-generate
+	go build -v ./...
+
 linux_amd64:
 	@echo "Should be executed only on linux/amd64."
 	go generate 2>&1 | tee log-generate
