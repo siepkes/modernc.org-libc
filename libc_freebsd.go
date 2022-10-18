@@ -14,6 +14,7 @@ import (
 	"strings"
 	"syscall"
 	gotime "time"
+	"unicode"
 	"unsafe"
 
 	guuid "github.com/google/uuid"
@@ -1509,3 +1510,11 @@ func Xuuid_parse(t *TLS, in uintptr, uu uintptr) int32 {
 }
 
 func X__srget(t *TLS, stream uintptr) int32 { return Xgetc(t, stream) }
+
+func X___tolower(t *TLS, r rune) rune {
+	return unicode.ToLower(r)
+}
+
+func X___toupper(t *TLS, r rune) rune {
+	return unicode.ToLower(r)
+}

@@ -9,6 +9,8 @@ var CAPI = map[string]struct{}{
 	"_ThreadRuneLocale":                {},
 	"___errno_location":                {},
 	"___runetype":                      {},
+	"___tolower":                       {},
+	"___toupper":                       {},
 	"__assert":                         {},
 	"__assert_fail":                    {},
 	"__builtin___memcpy_chk":           {},

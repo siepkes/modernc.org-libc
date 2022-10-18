@@ -7,10 +7,10 @@ package libc // import "modernc.org/libc"
 import (
 	"bytes"
 	"fmt"
+	"runtime"
 	"strconv"
 	"strings"
 	"unsafe"
-	"runtime"
 )
 
 const (
