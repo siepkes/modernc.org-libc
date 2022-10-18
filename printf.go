@@ -137,6 +137,9 @@ more:
 		// the output is empty.
 		format++
 		var arg int64
+		if isWindows && mod == modL {
+			mod = modNone
+		}
 		switch mod {
 		case modL, modLL, mod64:
 			arg = VaInt64(args)
@@ -168,6 +171,9 @@ more:
 		// precision 0, the output is empty.
 		format++
 		var arg uint64
+		if isWindows && mod == modL {
+			mod = modNone
+		}
 		switch mod {
 		case modNone:
 			arg = uint64(VaUint32(args))
@@ -201,6 +207,9 @@ more:
 		// precision 0, the output is empty.
 		format++
 		var arg uint64
+		if isWindows && mod == modL {
+			mod = modNone
+		}
 		switch mod {
 		case modNone:
 			arg = uint64(VaUint32(args))
@@ -285,6 +294,9 @@ more:
 		// printed with an explicit precision 0, the output is empty.
 		format++
 		var arg uint64
+		if isWindows && mod == modL {
+			mod = modNone
+		}
 		switch mod {
 		case modNone:
 			arg = uint64(VaUint32(args))
