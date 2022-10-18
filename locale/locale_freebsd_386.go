@@ -16,30 +16,30 @@ var _ unsafe.Pointer
 
 const (
 	LC_ALL             = 0  // locale.h:67:1:
-	LC_ALL_MASK        = 63 // _locale.h:44:1:
+	LC_ALL_MASK        = 63 // _locale.h:43:1:
 	LC_COLLATE         = 1  // locale.h:68:1:
-	LC_COLLATE_MASK    = 1  // _locale.h:38:1:
+	LC_COLLATE_MASK    = 1  // _locale.h:37:1:
 	LC_CTYPE           = 2  // locale.h:69:1:
-	LC_CTYPE_MASK      = 2  // _locale.h:39:1:
+	LC_CTYPE_MASK      = 2  // _locale.h:38:1:
 	LC_MESSAGES        = 6  // locale.h:73:1:
-	LC_MESSAGES_MASK   = 32 // _locale.h:43:1:
+	LC_MESSAGES_MASK   = 32 // _locale.h:42:1:
 	LC_MONETARY        = 3  // locale.h:70:1:
-	LC_MONETARY_MASK   = 4  // _locale.h:40:1:
+	LC_MONETARY_MASK   = 4  // _locale.h:39:1:
 	LC_NUMERIC         = 4  // locale.h:71:1:
-	LC_NUMERIC_MASK    = 8  // _locale.h:41:1:
+	LC_NUMERIC_MASK    = 8  // _locale.h:40:1:
 	LC_TIME            = 5  // locale.h:72:1:
-	LC_TIME_MASK       = 16 // _locale.h:42:1:
-	LC_VERSION_MASK    = 64 // _locale.h:46:1:
+	LC_TIME_MASK       = 16 // _locale.h:41:1:
+	LC_VERSION_MASK    = 64 // _locale.h:45:1:
 	X_FILE_OFFSET_BITS = 64 // <builtin>:25:1:
 	X_ILP32            = 1  // <predefined>:1:1:
 	X_LC_LAST          = 7  // locale.h:75:1:
 	X_LOCALE_H_        = 0  // locale.h:36:1:
-	X_LOCALE_T_DEFINED = 0  // _locale.h:50:1:
+	X_LOCALE_T_DEFINED = 0  // _locale.h:49:1:
 	X_Nonnull          = 0  // cdefs.h:790:1:
 	X_Null_unspecified = 0  // cdefs.h:792:1:
 	X_Nullable         = 0  // cdefs.h:791:1:
 	X_SYS_CDEFS_H_     = 0  // cdefs.h:39:1:
-	X_XLOCALE_LOCALE_H = 0  // _locale.h:35:1:
+	X_XLOCALE_LOCALE_H = 0  // _locale.h:34:1:
 	I386               = 1  // <predefined>:335:1:
 	Unix               = 1  // <predefined>:336:1:
 )
@@ -147,7 +147,6 @@ type Lconv = struct {
 // SPDX-License-Identifier: BSD-2-Clause-FreeBSD
 //
 // Copyright (c) 2011, 2012 The FreeBSD Foundation
-// All rights reserved.
 //
 // This software was developed by David Chisnall under sponsorship from
 // the FreeBSD Foundation.
@@ -177,6 +176,6 @@ type Lconv = struct {
 
 // Bit shifting order of LC_*_MASK should match XLC_* and LC_* order.
 
-type Locale_t = uintptr /* _locale.h:51:25 */
+type Locale_t = uintptr /* _locale.h:50:25 */
 
 var _ int8 /* gen.c:2:13: */

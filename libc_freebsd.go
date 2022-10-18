@@ -1428,7 +1428,7 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 const PTHREAD_MUTEX_DEFAULT = 0
 
 func X__ccgo_pthreadMutexattrGettype(tls *TLS, a uintptr) int32 { /* pthread_attr_get.c:93:5: */
-	return (int32((*pthread_mutexattr_t)(unsafe.Pointer(a)).__attr & uint32(3)))
+	return (int32((*pthread_mutexattr_t)(unsafe.Pointer(a)).F__attr & uint32(3)))
 }
 
 func X__ccgo_getMutexType(tls *TLS, m uintptr) int32 { /* pthread_mutex_lock.c:3:5: */
@@ -1494,7 +1494,7 @@ func Xpthread_mutexattr_settype(tls *TLS, a uintptr, type1 int32) int32 { /* pth
 	if uint32(type1) > uint32(2) {
 		return 22
 	}
-	(*pthread_mutexattr_t)(unsafe.Pointer(a)).__attr = (((*pthread_mutexattr_t)(unsafe.Pointer(a)).__attr & Uint32FromInt32(CplInt32(3))) | uint32(type1))
+	(*pthread_mutexattr_t)(unsafe.Pointer(a)).F__attr = (((*pthread_mutexattr_t)(unsafe.Pointer(a)).F__attr & Uint32FromInt32(CplInt32(3))) | uint32(type1))
 	return 0
 }
 

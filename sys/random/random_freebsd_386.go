@@ -18,9 +18,9 @@ const (
 	BIG_ENDIAN              = 4321 // _endian.h:70:1:
 	BYTE_ORDER              = 1234 // _endian.h:72:1:
 	FD_SETSIZE              = 1024 // select.h:61:1:
-	GRND_INSECURE           = 0x4  // random.h:160:1:
-	GRND_NONBLOCK           = 0x1  // random.h:158:1:
-	GRND_RANDOM             = 0x2  // random.h:159:1:
+	GRND_INSECURE           = 0x4  // random.h:161:1:
+	GRND_NONBLOCK           = 0x1  // random.h:159:1:
+	GRND_RANDOM             = 0x2  // random.h:160:1:
 	LITTLE_ENDIAN           = 1234 // _endian.h:69:1:
 	PDP_ENDIAN              = 3412 // _endian.h:71:1:
 	X_ACCMODE_T_DECLARED    = 0    // types.h:166:1:
