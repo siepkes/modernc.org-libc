@@ -1539,3 +1539,18 @@ func Xuuid_parse(t *TLS, in uintptr, uu uintptr) int32 {
 }
 
 func X__srget(t *TLS, stream uintptr) int32 { return Xgetc(t, stream) }
+
+// uint16_t __builtin_bswap16 (uint32_t x)
+func Xbswap16(t *TLS, x uint16) uint16 {
+	return X__builtin_bswap16(t, x)
+}
+
+// uint32_t __builtin_bswap32 (uint32_t x)
+func Xbswap32(t *TLS, x uint32) uint32 {
+	return X__builtin_bswap32(t, x)
+}
+
+// uint64_t __builtin_bswap64 (uint64_t x)
+func Xbswap64(t *TLS, x uint64) uint64 {
+	return X__builtin_bswap64(t, x)
+}
