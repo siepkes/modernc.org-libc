@@ -54,13 +54,11 @@ func (c *PerfCounter) String() string {
 
 	c.enabled = false
 
-	m := len(c.a)
-	for ; m > 0 && c.a[m-1] == 0; m-- {
-	}
-
 	var a []string
-	for i, v := range c.a[:m] {
-		a = append(a, fmt.Sprintf("%q: %s", c.labels[i], h(v)))
+	for i, v := range c.a {
+		if v != 0 {
+			a = append(a, fmt.Sprintf("%q: %s", c.labels[i], h(v)))
+		}
 	}
 	return fmt.Sprint(a)
 }

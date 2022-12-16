@@ -327,3 +327,17 @@ func TestSync(t *testing.T) {
 	X__sync_synchronize(tls)
 	tls.Close()
 }
+
+func TestTmp(t *testing.T) {
+	p := NewPerfCounter([]string{"a", "b", "c"})
+	p.Inc(1)
+	t.Logf("====\n%s\n----", p)
+	c := NewStackCapture(100)
+	for i := 0; i < 20; i++ {
+		c.Record()
+		if i%3 == 0 {
+			c.Record()
+		}
+	}
+	t.Logf("====\n%s\n----", c)
+}
