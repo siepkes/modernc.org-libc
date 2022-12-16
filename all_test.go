@@ -328,7 +328,7 @@ func TestSync(t *testing.T) {
 	tls.Close()
 }
 
-func TestTmp(t *testing.T) {
+func TestProbes(t *testing.T) {
 	p := NewPerfCounter([]string{"a", "b", "c"})
 	p.Inc(1)
 	t.Logf("====\n%s\n----", p)
