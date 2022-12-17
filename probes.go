@@ -32,8 +32,8 @@ func NewPerfCounter(labels []string) *PerfCounter {
 	}
 }
 
-func (c *PerfCounter) Disable(n int) { c.enabled = false }
-func (c *PerfCounter) Enable(n int)  { c.enabled = true }
+func (c *PerfCounter) Disable() { c.enabled = false }
+func (c *PerfCounter) Enable()  { c.enabled = true }
 
 func (c *PerfCounter) Clear() {
 	for i := range c.a {
@@ -106,8 +106,8 @@ func NewStackCapture(depth int) *StackCapture {
 	}
 }
 
-func (c *StackCapture) Disable(n int) { c.enabled = false }
-func (c *StackCapture) Enable(n int)  { c.enabled = true }
+func (c *StackCapture) Disable() { c.enabled = false }
+func (c *StackCapture) Enable()  { c.enabled = true }
 
 func (c *StackCapture) Clear() {
 	c.Lock()
