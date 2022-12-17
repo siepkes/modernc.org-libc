@@ -35,6 +35,12 @@ func NewPerfCounter(labels []string) *PerfCounter {
 func (c *PerfCounter) Disable(n int) { c.enabled = false }
 func (c *PerfCounter) Enable(n int)  { c.enabled = true }
 
+func (c *PerfCounter) Clear() {
+	for i := range c.a {
+		c.a[i] = 0
+	}
+}
+
 func (c *PerfCounter) Inc(n int) {
 	if c.enabled {
 		atomic.AddInt32(&c.a[n], 1)
@@ -102,6 +108,13 @@ func NewStackCapture(depth int) *StackCapture {
 
 func (c *StackCapture) Disable(n int) { c.enabled = false }
 func (c *StackCapture) Enable(n int)  { c.enabled = true }
+
+func (c *StackCapture) Clear() {
+	c.Lock()
+
+	defer c.Unlock()
+	c.m = map[string]int{}
+}
 
 var (
 	stackCapturePrefix = []byte("\n\t")
