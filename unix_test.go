@@ -8,9 +8,9 @@
 package libc // import "modernc.org/libc"
 
 import (
-	"testing"
 	"os"
 	"path/filepath"
+	"testing"
 
 	"golang.org/x/sys/unix"
 )
