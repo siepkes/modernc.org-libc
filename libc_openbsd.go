@@ -354,7 +354,7 @@ func Xftruncate(t *TLS, fd int32, length types.Off_t) int32 {
 	}
 
 	if dmesgs {
-		dmesg("%v: %d %#x: ok", origin(1), fd, length)
+		dmesg("%v: fd %d length %#0x: ok", origin(1), fd, length)
 	}
 	return 0
 }
