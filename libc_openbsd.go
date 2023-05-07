@@ -1479,7 +1479,7 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 	}
 
 	if dmesgs {
-		dmesg("%v: %#x", origin(1), data)
+		dmesg("%v: addr %#0x, length %#x0, prot %#0x, flags %#0x, fd %d, offset %#0x returns %#0x", origin(1), addr, length, prot, flags, fd, offset, data)
 	}
 	return data
 }
