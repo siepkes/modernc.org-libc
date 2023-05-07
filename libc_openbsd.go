@@ -372,10 +372,10 @@ func Xread(t *TLS, fd int32, buf uintptr, count types.Size_t) types.Ssize_t {
 		return -1
 	}
 
-	// if dmesgs {
-	// 	// dmesg("%v: %d %#x: %#x\n%s", origin(1), fd, count, n, hex.Dump(GoBytes(buf, int(n))))
-	// 	dmesg("%v: %d %#x: %#x", origin(1), fd, count, n)
-	// }
+	if dmesgs {
+		// dmesg("%v: %d %#x: %#x\n%s", origin(1), fd, count, n, hex.Dump(GoBytes(buf, int(n))))
+		dmesg("%v: fd %d, buf %#0x, count %#x: n %#x", origin(1), fd, count, n)
+	}
 	return types.Ssize_t(n)
 }
 
@@ -387,19 +387,19 @@ func Xwrite(t *TLS, fd int32, buf uintptr, count types.Size_t) types.Ssize_t {
 		var n uintptr
 		switch n, _, err = unix.Syscall(unix.SYS_WRITE, uintptr(fd), buf, uintptr(count)); err {
 		case 0:
-			// if dmesgs {
-			// 	// dmesg("%v: %d %#x: %#x\n%s", origin(1), fd, count, n, hex.Dump(GoBytes(buf, int(n))))
-			// 	dmesg("%v: %d %#x: %#x", origin(1), fd, count, n)
-			// }
+			if dmesgs {
+				// dmesg("%v: %d %#x: %#x\n%s", origin(1), fd, count, n, hex.Dump(GoBytes(buf, int(n))))
+				dmesg("%v: %d %#x: %#x", origin(1), fd, count, n)
+			}
 			return types.Ssize_t(n)
 		case errno.EAGAIN:
 			// nop
 		}
 	}
 
-	// if dmesgs {
-	// 	dmesg("%v: fd %v, count %#x: %v", origin(1), fd, count, err)
-	// }
+	if dmesgs {
+		dmesg("%v: fd %v, buf %#0x, count %#x: %v", origin(1), fd, count, err)
+	}
 	t.setErrno(err)
 	return -1
 }
