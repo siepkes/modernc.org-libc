@@ -31,6 +31,8 @@ modernc.org/ccgo/v4 v4.0.0-20230615101409-b1b6a2088a98 h1:3NSDW+Qrc63ZZXCKmbRaF8
 modernc.org/ccgo/v4 v4.0.0-20230615101409-b1b6a2088a98/go.mod h1:9+JrBEvg3gIv+rH43pnCWfLfG2MYPVlG+AvehtnQsW4=
 modernc.org/ccgo/v4 v4.0.0-20230615111303-aa1df29cece0 h1:Fo3Y4ZvS370W3auwc4QaSPZoTZL1aR8FjZuchlWtNAQ=
 modernc.org/ccgo/v4 v4.0.0-20230615111303-aa1df29cece0/go.mod h1:9+JrBEvg3gIv+rH43pnCWfLfG2MYPVlG+AvehtnQsW4=
+modernc.org/ccgo/v4 v4.0.0-20230615145654-5a2d73c1916a h1:QlMaXGo7zcV/Tk7QG2Z3e6+mypVHpxAKilfA4/jtFho=
+modernc.org/ccgo/v4 v4.0.0-20230615145654-5a2d73c1916a/go.mod h1:9+JrBEvg3gIv+rH43pnCWfLfG2MYPVlG+AvehtnQsW4=
 modernc.org/ccorpus2 v1.3.1 h1:8m8u4M2USmclI8pB4AFixQldtQXD/4NqZP4owsfXaW0=
 modernc.org/ccorpus2 v1.3.1/go.mod h1:Wifvo4Q/qS/h1aRoC2TffcHsnxwTikmi1AuLANuucJQ=
 modernc.org/fileutil v1.0.0/go.mod h1:JHsWpkrk/CnVV1H/eGlFf85BEpfkrp56ro8nojIq9Q8=
