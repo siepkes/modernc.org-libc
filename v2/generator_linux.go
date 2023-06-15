@@ -1,0 +1,88 @@
+// Copyright 2023 The Libc Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build ignore
+// +build ignore
+
+package main
+
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+	"runtime"
+	"strings"
+
+	util "modernc.org/ccgo/v3/lib"
+	ccgo "modernc.org/ccgo/v4/lib"
+	"modernc.org/ccorpus2"
+)
+
+const (
+	archivePath          = "assets/musl.libc.org/releases/musl-1.2.4.tar.gz"
+	extractedArchivePath = "musl-1.2.4"
+	muslIncludes         = "include"
+)
+
+var (
+	cc     = "gcc"
+	goarch = runtime.GOARCH
+	goos   = runtime.GOOS
+)
+
+func fail(rc int, msg string, args ...any) {
+	fmt.Fprintln(os.Stderr, strings.TrimSpace(fmt.Sprintf(msg, args...)))
+	os.Exit(rc)
+}
+
+func main() {
+	if os.Getenv(ccgo.CCEnvVar) != "" {
+		if err := ccgo.NewTask(goos, goarch, os.Args, os.Stdout, os.Stderr, nil).Main(); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
+		return
+	}
+
+	tempDir, err := os.MkdirTemp("", "libc-v2-generate")
+	if err != nil {
+		fail(1, "creating temp dir: %v\n", err)
+	}
+
+	defer func() {
+		switch os.Getenv("GO_GENERATE_KEEP") {
+		case "":
+			os.RemoveAll(tempDir)
+		default:
+			fmt.Printf("%s: temporary directory kept\n", tempDir)
+		}
+	}()
+
+	f, err := ccorpus2.FS.Open(archivePath)
+	if err != nil {
+		fail(1, "cannot open tar file: %v\n", err)
+	}
+
+	util.MustUntar(true, tempDir, f, nil)
+	srcRoot := filepath.Join(tempDir, extractedArchivePath)
+	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(srcRoot, "COPYRIGHT"), nil)
+	util.MustInDir(true, srcRoot, func() error {
+		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s ./configure", cc))
+		if err := ccgo.NewTask(
+			goos, goarch,
+			[]string{
+				os.Args[0],
+				"-exec-cc", cc,
+				"-extended-errors",
+				"-ignore-asm-errors",
+				"-ignore-header-functions",
+				"-ignore-unsupported-alignment",
+				"-exec", "make", // keep last
+			},
+			os.Stdout, os.Stderr, nil,
+		).Main(); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
+		return nil
+	})
+}
