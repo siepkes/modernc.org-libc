@@ -14,6 +14,7 @@ import (
 	"runtime"
 	"strings"
 
+	"modernc.org/cc/v4"
 	util "modernc.org/ccgo/v3/lib"
 	ccgo "modernc.org/ccgo/v4/lib"
 	"modernc.org/ccorpus2"
@@ -26,9 +27,9 @@ const (
 )
 
 var (
-	cc     = "gcc"
-	goarch = runtime.GOARCH
-	goos   = runtime.GOOS
+	cCompiler = "gcc"
+	goarch    = runtime.GOARCH
+	goos      = runtime.GOOS
 )
 
 func fail(rc int, msg string, args ...any) {
@@ -65,14 +66,19 @@ func main() {
 
 	util.MustUntar(true, tempDir, f, nil)
 	srcRoot := filepath.Join(tempDir, extractedArchivePath)
+	util.MustCopyDir(true, tempDir, "overlay", nil)
 	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(srcRoot, "COPYRIGHT"), nil)
 	util.MustInDir(true, srcRoot, func() error {
-		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s ./configure", cc))
+		var cflags string
+		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
+			cflags = fmt.Sprintf("CFLAGS=%s", s)
+		}
+		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure", cCompiler, cflags))
 		if err := ccgo.NewTask(
 			goos, goarch,
 			[]string{
 				os.Args[0],
-				"-exec-cc", cc,
+				"-exec-cc", cCompiler,
 				"-extended-errors",
 				"-ignore-asm-errors",
 				"-ignore-header-functions",

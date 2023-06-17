@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-.PHONY:	all clean edit editor generate test
+.PHONY:	all clean edit editor generate generate2 test
 
 all:
 
@@ -25,6 +25,9 @@ editor:
 generate:
 	go run generator*.go 2> log-generate-errors | tee log-generate
 	cat log-generate-errors
+
+generate2:
+	go run generator*.go 2>&1 | tee log-generate
 
 test:
 	go test -v -timeout 24h 2>&1 | tee log-test
