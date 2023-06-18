@@ -5,6 +5,10 @@
 //go:build ignore
 // +build ignore
 
+// /tmp/libc-v2-generate2882489557/ : temporary directory kept
+
+// /tmp/libc-v2-generate2882489557/musl-1.2.4/src/linux
+
 package main
 
 import (
