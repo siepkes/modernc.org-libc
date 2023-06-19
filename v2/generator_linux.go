@@ -69,16 +69,16 @@ func main() {
 	}
 
 	util.MustUntar(true, tempDir, f, nil)
-	srcRoot := filepath.Join(tempDir, extractedArchivePath)
-	util.MustCopyDir(true, tempDir, "overlay", nil)
-	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(srcRoot, "COPYRIGHT"), nil)
-	util.MustInDir(true, srcRoot, func() error {
+	muslRoot := filepath.Join(tempDir, extractedArchivePath)
+	util.MustCopyDir(true, tempDir, filepath.Join("overlay", "c"), nil)
+	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(muslRoot, "COPYRIGHT"), nil)
+	util.MustInDir(true, muslRoot, func() (err error) {
 		var cflags string
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
 			cflags = fmt.Sprintf("CFLAGS=%s", s)
 		}
-		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure", cCompiler, cflags))
-		if err := ccgo.NewTask(
+		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static", cCompiler, cflags))
+		return ccgo.NewTask(
 			goos, goarch,
 			[]string{
 				os.Args[0],
@@ -90,9 +90,6 @@ func main() {
 				"-exec", "make", // keep last
 			},
 			os.Stdout, os.Stderr, nil,
-		).Main(); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-		}
-		return nil
+		).Main()
 	})
 }

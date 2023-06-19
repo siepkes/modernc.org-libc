@@ -39,6 +39,8 @@ modernc.org/ccgo/v4 v4.0.0-20230617154820-d0ad23ac1efc h1:+cotksKTdKdCekbj6LHYlf
 modernc.org/ccgo/v4 v4.0.0-20230617154820-d0ad23ac1efc/go.mod h1:Noh8WhzezZDxeTPIWUmL20Yc91zq5WA+Mnn+smAaOmc=
 modernc.org/ccgo/v4 v4.0.0-20230618200727-2ca7799573ea h1:nQVmST3rVUe7HZ8EonGp/U/QGHUzMCXqbBJOQtE1KgM=
 modernc.org/ccgo/v4 v4.0.0-20230618200727-2ca7799573ea/go.mod h1:2HMSTl5Bmuw5zIxebLdA9+oMyd/m13hIQqkQuvGNCNo=
+modernc.org/ccgo/v4 v4.0.0-20230619171128-5259d326ef98 h1:M5DG3sHeR+eB2sO0kxlEope7RNN6ae5C1V5RFNKLiPg=
+modernc.org/ccgo/v4 v4.0.0-20230619171128-5259d326ef98/go.mod h1:2HMSTl5Bmuw5zIxebLdA9+oMyd/m13hIQqkQuvGNCNo=
 modernc.org/ccorpus2 v1.3.1 h1:8m8u4M2USmclI8pB4AFixQldtQXD/4NqZP4owsfXaW0=
 modernc.org/ccorpus2 v1.3.1/go.mod h1:Wifvo4Q/qS/h1aRoC2TffcHsnxwTikmi1AuLANuucJQ=
 modernc.org/fileutil v1.0.0/go.mod h1:JHsWpkrk/CnVV1H/eGlFf85BEpfkrp56ro8nojIq9Q8=

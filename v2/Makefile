@@ -27,7 +27,8 @@ generate:
 	cat log-generate-errors
 
 generate2:
-	go run generator*.go 2>&1 | tee log-generate
+	echo -n > /tmp/ccgo.log
+	go run -tags=ccgo.dmesg generator*.go 2>&1 | tee log-generate
 
 test:
 	go test -v -timeout 24h 2>&1 | tee log-test
