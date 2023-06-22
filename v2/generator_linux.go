@@ -77,7 +77,8 @@ func main() {
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
 			cflags = fmt.Sprintf("CFLAGS=%s", s)
 		}
-		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static", cCompiler, cflags))
+		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static --disable-optimize", cCompiler, cflags))
+		util.MustShell(true, "find", "src/string", "-name", "*.s", "-delete")
 		return ccgo.NewTask(
 			goos, goarch,
 			[]string{
