@@ -49,19 +49,25 @@ func main() {
 		return
 	}
 
-	tempDir, err := os.MkdirTemp("", "libc-v2-generate")
-	if err != nil {
-		fail(1, "creating temp dir: %v\n", err)
-	}
-
-	defer func() {
-		switch os.Getenv("GO_GENERATE_KEEP") {
-		case "":
-			os.RemoveAll(tempDir)
-		default:
-			fmt.Printf("%s: temporary directory kept\n", tempDir)
+	tempDir := os.Getenv("GO_GENERATE_DIR")
+	switch {
+	case tempDir != "":
+		util.MustShell(true, "sh", "-c", fmt.Sprintf("rm -rf %s/*", tempDir))
+	default:
+		var err error
+		if tempDir, err = os.MkdirTemp("", "libc-v2-generate"); err != nil {
+			fail(1, "creating temp dir: %v\n", err)
 		}
-	}()
+
+		defer func() {
+			switch os.Getenv("GO_GENERATE_KEEP") {
+			case "":
+				os.RemoveAll(tempDir)
+			default:
+				fmt.Printf("%s: temporary directory kept\n", tempDir)
+			}
+		}()
+	}
 
 	f, err := ccorpus2.FS.Open(archivePath)
 	if err != nil {
@@ -88,6 +94,19 @@ func main() {
 				"-ignore-asm-errors",
 				"-ignore-header-functions",
 				"-ignore-unsupported-alignment",
+				"--package-name=libc",
+				// "-positions",
+				"--prefix-define=_",
+				"--prefix-enumerator=E",
+				"--prefix-external=X",
+				"--prefix-field=F",
+				"--prefix-macro=M",
+				"--prefix-static-internal=_",
+				"--prefix-static-none=_",
+				"--prefix-tagged-enum=TE",
+				"--prefix-tagged-struct=TS",
+				"--prefix-tagged-union=TU",
+				"--prefix-typename=TN",
 				"-exec", "make", // keep last
 			},
 			os.Stdout, os.Stderr, nil,
