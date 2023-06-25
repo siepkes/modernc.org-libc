@@ -96,7 +96,6 @@ func main() {
 				"-ignore-unsupported-alignment",
 				"--package-name=libc",
 				// "-positions",
-				"--prefix-define=_",
 				"--prefix-enumerator=E",
 				"--prefix-external=X",
 				"--prefix-field=F",
