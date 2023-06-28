@@ -4,7 +4,9 @@
 
 .PHONY:	all clean edit editor generate generate2 test work
 
-all:
+all: editor
+	golint 2>&1
+	staticcheck 2>&1
 
 clean:
 	rm -f log-* cpu.test mem.test *.out go.work*
@@ -19,8 +21,6 @@ editor:
 	go test 2>&1 | tee -a log-editor
 	go install -v  2>&1 | tee -a log-editor
 	go build -o /dev/null generator*.go
-	staticcheck 2>&1 | tee -a log-editor
-	golint 2>&1 | tee -a log-editor
 
 generate:
 	echo -n > /tmp/ccgo.log
@@ -43,3 +43,4 @@ work:
 	go work init
 	go work use .
 	go work use ../../ccgo/v4
+	go work use ../../cc/v4
