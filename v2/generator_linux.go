@@ -106,6 +106,7 @@ func main() {
 				"--prefix-tagged-struct=TS",
 				"--prefix-tagged-union=TU",
 				"--prefix-typename=TN",
+				"--prefix-undefined=_",
 				"-exec", "make", // keep last
 			},
 			os.Stdout, os.Stderr, nil,
