@@ -31,3 +31,16 @@ TEXT ·a_cas_p(SB),NOSPLIT,$0-32
 	CMPXCHGQ	CX, 0(BX)
 	MOVQ	AX, ret+24(FP)
 	RET
+
+// static inline void a_or(volatile int *p, int v)
+// {
+// 	__asm__ __volatile__(
+// 		"lock ; or %1, %0"
+// 		: "=m"(*p) : "r"(v) : "memory" );
+// }
+TEXT ·a_or(SB),NOSPLIT,$0-12
+	MOVQ	p+0(FP), BX
+	MOVL	v+8(FP), AX
+	LOCK
+	ORL	AX, 0(BX)
+	RET

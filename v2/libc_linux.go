@@ -4,21 +4,14 @@
 
 package libc // import "modernc.org/libc/v2"
 
-import (
-	// "math"
-	// "sync/atomic"
-	"unsafe"
-)
-
-// type TSipc_perm2 = TSipc_perm
-// type TNucontext_t1 = TNucontext_t
-// type TSgroup1 = TSgroup
-// type TScookie1 = TScookie
-// type TScookie2 = TScookie
-// type TStm32 = TStm
+// import (
+// 	"math"
+// 	"sync/atomic"
+// 	"unsafe"
+// )
 //
 // // musl-1.2.4/src/env/__init_tls.c:81:extern weak hidden const size_t _DYNAMIC[];
-// var __DYNAMIC [1]TNsize_t
+// var __DYNAMIC [1]Tsize_t
 //
 // // musl-1.2.4/arch/x86_64/atomic_arch.h:70:static inline void a_inc(volatile int *p)
 // func _a_inc(t *TLS, p uintptr) {
@@ -85,26 +78,33 @@ import (
 // 	panic(todo(""))
 // }
 
-func a_cas(p *int32, t, s int32) int32
+func a_cas(p uintptr, t, s int32) int32
 
 // musl-1.2.4/arch/x86_64/atomic_arch.h:2:static inline int a_cas(volatile int *p, int t, int s)
 func _a_cas(t *TLS, p uintptr, test, s int32) int32 {
-	return a_cas((*int32)(unsafe.Pointer(p)), test, s)
+	return a_cas(p, test, s)
 }
 
-// func a_cas_p(p *uintptr, t, s uintptr) uintptr
-//
-// // musl-1.2.4/arch/x86_64/atomic_arch.h:11:static inline void *a_cas_p(volatile void *p, void *t, void *s)
-// func _a_cas_p(t *TLS, p, test, s uintptr) uintptr {
-// 	return a_cas_p((*uintptr)(unsafe.Pointer(p)), test, s)
-// }
-//
+func a_cas_p(p uintptr, t, s uintptr) uintptr
+
+// musl-1.2.4/arch/x86_64/atomic_arch.h:11:static inline void *a_cas_p(volatile void *p, void *t, void *s)
+func _a_cas_p(t *TLS, p, test, s uintptr) uintptr {
+	return a_cas_p(p, test, s)
+}
+
+func a_or(p uintptr, v int32)
+
+// musl-1.2.4/arch/x86_64/atomic_arch.h:46:static inline void a_or(volatile int *p, int v)
+func _a_or(t *TLS, p uintptr, v int32) {
+	a_or(p, v)
+}
+
 // // musl-1.2.4/arch/x86_64/pthread_arch.h:1:static inline uintptr_t __get_tp()
-// func ___get_tp(t *TLS) TNuintptr_t {
+// func ___get_tp(t *TLS) Tuintptr_t {
 // 	panic(todo(""))
 // }
 //
-// func default_malloc(tls *TLS, n TNsize_t) (r uintptr) {
+// func default_malloc(tls *TLS, n Tsize_t) (r uintptr) {
 // 	return _default_malloc(tls, n)
 // }
 //
@@ -202,12 +202,12 @@ func _a_cas(t *TLS, p uintptr, test, s int32) int32 {
 // }
 //
 // // musl-1.2.4/src/malloc/mallocng/meta.h:175:static inline size_t get_stride(const struct meta *g)
-// func _get_stride(tls *TLS, g uintptr) TNsize_t {
+// func _get_stride(tls *TLS, g uintptr) Tsize_t {
 // 	panic(todo(""))
 // }
 //
 // // musl-1.2.4/src/malloc/mallocng/meta.h:184:static inline void set_size(unsigned char *p, unsigned char *end, size_t n)
-// func _set_size(tls *TLS, p, end uintptr, n TNsize_t) {
+// func _set_size(tls *TLS, p, end uintptr, n Tsize_t) {
 // 	panic(todo(""))
 // }
 //
@@ -218,5 +218,30 @@ func _a_cas(t *TLS, p uintptr, test, s int32) int32 {
 //
 // // musl-1.2.4/src/malloc/mallocng/meta.h:249:static inline void step_seq(void)
 // func _step_seq(tls *TLS) {
+// 	panic(todo(""))
+// }
+//
+// // musl-1.2.4/src/malloc/mallocng/meta.h:259:static inline void record_seq(int sc)
+// func _record_seq(tls *TLS, sc int32) {
+// 	panic(todo(""))
+// }
+//
+// // musl-1.2.4/src/malloc/mallocng/meta.h:109:static inline void free_meta(struct meta *m)
+// func _free_meta(tls *TLS, m uintptr) {
+// 	panic(todo(""))
+// }
+//
+// // musl-1.2.4/src/malloc/mallocng/meta.h:283:static inline int is_bouncing(int sc)
+// func _is_bouncing(tls *TLS, sc int32) int32 {
+// 	panic(todo(""))
+// }
+//
+// // musl-1.2.4/src/malloc/mallocng/meta.h:90:static inline void dequeue(struct meta **phead, struct meta *m)
+// func _dequeue(tls *TLS, phead, m uintptr) int32 {
+// 	panic(todo(""))
+// }
+//
+// // musl-1.2.4/src/malloc/mallocng/meta.h:115:static inline uint32_t activate_group(struct meta *m)
+// func _activate_group(tls *TLS, m uintptr) uint32 {
 // 	panic(todo(""))
 // }
