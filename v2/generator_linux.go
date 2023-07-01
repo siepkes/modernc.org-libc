@@ -90,7 +90,7 @@ func main() {
 			[]string{
 				os.Args[0],
 				"--package-name=libc",
-				"--prefix-define=_def_",
+				"--prefix-define=_ignore_",
 				"--prefix-external=X",
 				"--prefix-field=F",
 				"--prefix-static-internal=_",
