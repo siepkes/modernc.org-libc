@@ -224,3 +224,13 @@ package libc // import "modernc.org/libc/v2"
 // func _activate_group(tls *TLS, m uintptr) uint32 {
 // 	panic(todo(""))
 // }
+//
+// // musl-1.2.4/src/malloc/mallocng/meta.h:159:static inline size_t get_nominal_size(const unsigned char *p, const unsigned char *end)
+// func _get_nominal_size(tls *TLS, p, end uintptr) Tsize_t {
+// 	panic(todo(""))
+// }
+//
+// // musl-1.2.4/src/malloc/mallocng/glue.h:72:static inline void wrlock()
+// func _wrlock(tls *TLS) {
+// 	panic(todo(""))
+// }
