@@ -18,8 +18,8 @@ edit:
 
 editor:
 	gofmt -l -s -w *.go 2>&1 | tee log-editor
-	go test 2>&1 | tee -a log-editor
-	go install -v  2>&1 | tee -a log-editor
+	go test ./... 2>&1 | tee -a log-editor
+	go install -v  ./... 2>&1 | tee -a log-editor
 	go build -o /dev/null generator*.go
 
 generate:

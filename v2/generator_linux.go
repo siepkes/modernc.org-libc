@@ -42,6 +42,7 @@ func fail(rc int, msg string, args ...any) {
 }
 
 func main() {
+
 	if os.Getenv(ccgo.CCEnvVar) != "" {
 		if err := ccgo.NewTask(goos, goarch, os.Args, os.Stdout, os.Stderr, nil).Main(); err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -50,6 +51,7 @@ func main() {
 	}
 
 	tempDir := os.Getenv("GO_GENERATE_DIR")
+	doCopy := tempDir == ""
 	switch {
 	case tempDir != "":
 		util.MustShell(true, "sh", "-c", fmt.Sprintf("rm -rf %s/*", tempDir))
@@ -78,6 +80,7 @@ func main() {
 	muslRoot := filepath.Join(tempDir, extractedArchivePath)
 	util.MustCopyDir(true, tempDir, filepath.Join("overlay", "c"), nil)
 	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(muslRoot, "COPYRIGHT"), nil)
+	result := filepath.FromSlash("lib/libc.so.go")
 	util.MustInDir(true, muslRoot, func() (err error) {
 		var cflags string
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
@@ -85,12 +88,13 @@ func main() {
 		}
 		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static --disable-optimize", cCompiler, cflags))
 		util.MustShell(true, "find", "src/string", "-name", "*.s", "-delete")
-		return ccgo.NewTask(
+		if err := ccgo.NewTask(
 			goos, goarch,
 			[]string{
 				os.Args[0],
 				"--package-name=libc",
-				"--prefix-external=X",
+				"--prefix-enumerator=_",
+				"--prefix-external=x_",
 				"--prefix-field=F",
 				"--prefix-static-internal=_",
 				"--prefix-static-none=_",
@@ -98,16 +102,25 @@ func main() {
 				"--prefix-tagged-struct=T",
 				"--prefix-tagged-union=T",
 				"--prefix-typename=T",
+				"--prefix-macro=m_",
 				"--prefix-undefined=_",
 				"-exec-cc", cCompiler,
 				"-extended-errors",
 				"-ignore-asm-errors",
 				"-ignore-header-functions",
 				"-ignore-unsupported-alignment",
-				// "-positions", "-full-paths", //TODO-
+				// "-positions", "-full-paths",
 				"-exec", "make", // keep last
 			},
 			os.Stdout, os.Stderr, nil,
-		).Main()
+		).Main(); err != nil {
+			return err
+		}
+		util.MustShell(true, "sed", "-i", `0,/)/s/)/\n\t. "modernc.org\/libc\/v2\/rtl"\n)/`, result)
+		return nil
 	})
+	if doCopy {
+		util.MustShell(true, "cp", filepath.Join(muslRoot, result), ".")
+		util.MustShell(true, "go", "build", "./...")
+	}
 }

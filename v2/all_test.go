@@ -8,6 +8,8 @@ import (
 	"os"
 	"testing"
 	"unsafe"
+
+	"modernc.org/libc/v2/rtl"
 )
 
 func TestMain(m *testing.M) {
@@ -75,8 +77,8 @@ func TestAtomicOrInt32(t *testing.T) {
 		t.Fatalf("%032b", j)
 	}
 
-	a_or(pi, Int32FromUint32(0x80000000))
-	if j := testAtomicCASInt32; j != Int32FromUint32(0x80000003) {
+	a_or(pi, rtl.Int32FromUint32(0x80000000))
+	if j := testAtomicCASInt32; j != rtl.Int32FromUint32(0x80000003) {
 		t.Fatalf("%032b", j)
 	}
 }
