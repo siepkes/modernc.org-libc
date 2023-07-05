@@ -88,6 +88,7 @@ func main() {
 		}
 		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static --disable-optimize", cCompiler, cflags))
 		util.MustShell(true, "find", "src/string", "-name", "*.s", "-delete")
+		util.MustShell(true, "rm", "src/math/x86_64/fabs.c", "src/math/x86_64/fabsf.c")
 		if err := ccgo.NewTask(
 			goos, goarch,
 			[]string{
