@@ -426,7 +426,7 @@ func _do_putc(tls *rtl.TLS, c int32, f uintptr) int32 {
 // }
 //
 // // musl-1.2.4/include/setjmp.h:39:_Noreturn void longjmp (jmp_buf, int);
-// func _longjmp(tls *rtl.TLS, _ Tjmp_buf, _ int32) long {
+// func _longjmp(tls *rtl.TLS, _ uintptr, _ int32) long {
 // 	panic(todo(""))
 // }
 //
