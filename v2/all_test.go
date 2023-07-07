@@ -82,3 +82,83 @@ func TestAtomicOrInt32(t *testing.T) {
 		t.Fatalf("%032b", j)
 	}
 }
+
+func TestXfmod(t *testing.T) {
+	tls := rtl.NewTLS()
+
+	defer tls.Close()
+
+	x := 1.3518643030646695
+	y := 6.283185307179586
+	if g, e := Xfmod(tls, x, y), 1.3518643030646695; g != e {
+		t.Fatal(g, e)
+	}
+}
+
+func TestSwap(t *testing.T) {
+	if g, e := ___bswap_16(nil, 0x1234), uint16(0x3412); g != e {
+		t.Errorf("%#04x %#04x", g, e)
+	}
+	if g, e := ___bswap_32(nil, 0x12345678), uint32(0x78563412); g != e {
+		t.Errorf("%#04x %#04x", g, e)
+	}
+}
+
+var (
+	valist       [256]byte
+	formatString [256]byte
+	srcString    [256]byte
+	printBuf     [256]byte
+	testPrintfS1 = [...]byte{'X', 'Y', 0}
+)
+
+// func TestPrintf(t *testing.T) {
+// 	tls := rtl.NewTLS()
+//
+// 	defer tls.Close()
+//
+// 	i := uint64(0x123456789abcdef)
+// 	j := uint64(0xf123456789abcde)
+// 	k := uint64(0x23456789abcdef1)
+// 	l := uint64(0xef123456789abcd)
+// 	for itest, test := range []struct {
+// 		fmt    string
+// 		args   []interface{}
+// 		result string
+// 	}{
+// 		{
+// 			"%I64x %I32x %I64x %I32x",
+// 			[]interface{}{int64(i), int32(j), int64(k), int32(l)},
+// 			"123456789abcdef 789abcde 23456789abcdef1 6789abcd",
+// 		},
+// 		{
+// 			"%llx %x %llx %x",
+// 			[]interface{}{int64(i), int32(j), int64(k), int32(l)},
+// 			"123456789abcdef 789abcde 23456789abcdef1 6789abcd",
+// 		},
+// 		{
+// 			"%.1s\n",
+// 			[]interface{}{uintptr(unsafe.Pointer(&testPrintfS1[0]))},
+// 			"X\n",
+// 		},
+// 		{
+// 			"%.2s\n",
+// 			[]interface{}{uintptr(unsafe.Pointer(&testPrintfS1[0]))},
+// 			"XY\n",
+// 		},
+// 	} {
+// 		copy(formatString[:], test.fmt+"\x00")
+// 		printBuf = [256]byte{}
+// 		x_sprintf(tls, uintptr(unsafe.Pointer(&printBuf)), uintptr(unsafe.Pointer(&formatString[0])), rtl.VaList(uintptr(unsafe.Pointer(&valist[0])), test.args...))
+// 		x := bytes.IndexByte(printBuf[:], 0)
+// 		if x < 0 {
+// 			t.Errorf("%v:", itest)
+// 			continue
+// 		}
+//
+// 		b := printBuf[:x]
+// 		if g, e := string(b), test.result; g != e {
+// 			t.Errorf("%v: %q %q", itest, g, e)
+// 		}
+// 	}
+// }

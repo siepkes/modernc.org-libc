@@ -18,7 +18,68 @@ type (
 )
 
 // musl-1.2.4/src/env/__init_tls.c:81:extern weak hidden const Tsize_t _DYNAMIC[];
-// var __DYNAMIC [1]Tsize_t
+var __DYNAMIC [1]Tsize_t
+
+func ___clone(tls *rtl.TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va uintptr) (r int32) {
+	return -m_ENOSYS
+}
+
+func default_malloc(tls *rtl.TLS, n Tsize_t) (r uintptr) {
+	return _default_malloc(tls, n)
+}
+
+// musl-1.2.4/src/malloc/mallocng/meta.h:175:static inline Tsize_t get_stride(const struct meta *g)
+func _get_stride(tls *rtl.TLS, g uintptr) Tsize_t {
+	panic(todo(""))
+}
+
+// musl-1.2.4/src/malloc/mallocng/meta.h:184:static inline void set_size(unsigned char *p, unsigned char *end, Tsize_t n)
+func _set_size(tls *rtl.TLS, p, end uintptr, n Tsize_t) {
+	panic(todo(""))
+}
+
+// musl-1.2.4/src/malloc/mallocng/meta.h:159:static inline Tsize_t get_nominal_size(const unsigned char *p, const unsigned char *end)
+func _get_nominal_size(tls *rtl.TLS, p, end uintptr) Tsize_t {
+	panic(todo(""))
+}
+
+// musl-1.2.4/src/internal/libm.h:131:static inline double fp_barrier(double x)
+func _fp_barrier(tls *rtl.TLS, x float64) float64 {
+	panic(todo(""))
+}
+
+// musl-1.2.4/src/malloc/mallocng/meta.h:229:static inline int size_to_class(Tsize_t n)
+func _size_to_class(tls *rtl.TLS, n Tsize_t) int32 {
+	panic(todo(""))
+}
+
+// musl-1.2.4/src/malloc/mallocng/meta.h:196:static inline void *enframe(struct meta *g, int idx, Tsize_t n, int ctr)
+func _enframe(tls *rtl.TLS, g uintptr, idx int32, n Tsize_t, ctr int32) uintptr {
+	panic(todo(""))
+}
+
+// musl-1.2.4/src/malloc/mallocng/meta.h:240:static inline int size_overflows(Tsize_t n)
+func _size_overflows(tls *rtl.TLS, n Tsize_t) int32 {
+	panic(todo(""))
+}
+
+// musl-1.2.4/src/internal/syscall.h:61:static inline long __alt_socketcall(int sys, int sock, int cp, Tsyscall_arg_t a, Tsyscall_arg_t b, Tsyscall_arg_t c, Tsyscall_arg_t d, Tsyscall_arg_t e, Tsyscall_arg_t f)
+func ___alt_socketcall(tls *rtl.TLS, sys, sock, cp int32, a, b, c, d, e, f Tsyscall_arg_t) long {
+	panic(todo(""))
+}
+
+// musl-1.2.4/include/setjmp.h:39:_Noreturn void longjmp (jmp_buf, int);
+func _longjmp(tls *rtl.TLS, _ uintptr, _ int32) long {
+	panic(todo(""))
+}
+
+// musl-1.2.4/src/thread/pthread_cancel.c:17:long __syscall_cp_asm(volatile void *, syscall_arg_t,
+// syscall_arg_t, syscall_arg_t, syscall_arg_t, syscall_arg_t, syscall_arg_t, syscall_arg_t);
+func ___syscall_cp_asm(tls *rtl.TLS, _ uintptr, _, _, _, _, _, _, _ Tsyscall_arg_t) long {
+	panic(todo(""))
+}
+
+// ----------------------------------------------------------------------------
 
 // musl-1.2.4/src/thread/pthread_cancel.c:46:extern hidden const char __cp_begin[1], __cp_end[1], __cp_cancel[1];
 var ___cp_begin [1]char
@@ -221,18 +282,18 @@ func ___isspace(tls *rtl.TLS, c int32) int32 {
 }
 
 // musl-1.2.4/include/byteswap.h:7:static __inline uint16_t __bswap_16(uint16_t __x)
-func ___bswap_16(tls *rtl.TLS, x uint16) uint16 {
-	panic(todo(""))
+func ___bswap_16(tls *rtl.TLS, __x uint16) uint16 {
+	return __x<<8 | __x>>8
 }
 
 // musl-1.2.4/include/endian.h:24:static __inline uint32_t __bswap32(uint32_t __x)
-func ___bswap32(tls *rtl.TLS, x uint32) uint32 {
-	panic(todo(""))
+func ___bswap32(tls *rtl.TLS, __x uint32) uint32 {
+	return __x>>int32(24) | __x>>int32(8)&uint32(0xff00) | __x<<int32(8)&uint32(0xff0000) | __x<<int32(24)
 }
 
 // musl-1.2.4/include/byteswap.h:12:static __inline uint32_t __bswap_32(uint32_t __x)
 func ___bswap_32(tls *rtl.TLS, x uint32) uint32 {
-	panic(todo(""))
+	return ___bswap32(tls, x)
 }
 
 // musl-1.2.4/src/malloc/mallocng/meta.h:129:static inline struct meta *get_meta(const unsigned char *p)
@@ -375,63 +436,13 @@ func _do_putc(tls *rtl.TLS, c int32, f uintptr) int32 {
 	panic(todo(""))
 }
 
-// ============================================================================
+func ___assert_fail(tls *rtl.TLS, expr uintptr, file uintptr, line int32, func1 uintptr) {
+	panic(todo(""))
+}
 
-// func ___clone(tls *rtl.TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va uintptr) (r int32) {
-// 	return -m_ENOSYS
-// }
-//
-// func default_malloc(tls *rtl.TLS, n Tsize_t) (r uintptr) {
-// 	return _default_malloc(tls, n)
-// }
-//
-// // musl-1.2.4/src/malloc/mallocng/meta.h:175:static inline Tsize_t get_stride(const struct meta *g)
-// func _get_stride(tls *rtl.TLS, g uintptr) Tsize_t {
-// 	panic(todo(""))
-// }
-//
-// // musl-1.2.4/src/malloc/mallocng/meta.h:184:static inline void set_size(unsigned char *p, unsigned char *end, Tsize_t n)
-// func _set_size(tls *rtl.TLS, p, end uintptr, n Tsize_t) {
-// 	panic(todo(""))
-// }
-//
-// // musl-1.2.4/src/malloc/mallocng/meta.h:159:static inline Tsize_t get_nominal_size(const unsigned char *p, const unsigned char *end)
-// func _get_nominal_size(tls *rtl.TLS, p, end uintptr) Tsize_t {
-// 	panic(todo(""))
-// }
-//
-// // musl-1.2.4/src/internal/libm.h:131:static inline double fp_barrier(double x)
-// func _fp_barrier(tls *rtl.TLS, x float64) float64 {
-// 	panic(todo(""))
-// }
-//
-// // musl-1.2.4/src/malloc/mallocng/meta.h:229:static inline int size_to_class(Tsize_t n)
-// func _size_to_class(tls *rtl.TLS, n Tsize_t) int32 {
-// 	panic(todo(""))
-// }
-//
-// // musl-1.2.4/src/malloc/mallocng/meta.h:196:static inline void *enframe(struct meta *g, int idx, Tsize_t n, int ctr)
-// func _enframe(tls *rtl.TLS, g uintptr, idx int32, n Tsize_t, ctr int32) uintptr {
-// 	panic(todo(""))
-// }
-//
-// // musl-1.2.4/src/malloc/mallocng/meta.h:240:static inline int size_overflows(Tsize_t n)
-// func _size_overflows(tls *rtl.TLS, n Tsize_t) int32 {
-// 	panic(todo(""))
-// }
-//
-// // musl-1.2.4/src/internal/syscall.h:61:static inline long __alt_socketcall(int sys, int sock, int cp, Tsyscall_arg_t a, Tsyscall_arg_t b, Tsyscall_arg_t c, Tsyscall_arg_t d, Tsyscall_arg_t e, Tsyscall_arg_t f)
-// func ___alt_socketcall(tls *rtl.TLS, sys, sock, cp int32, a, b, c, d, e, f Tsyscall_arg_t) long {
-// 	panic(todo(""))
-// }
-//
-// // musl-1.2.4/include/setjmp.h:39:_Noreturn void longjmp (jmp_buf, int);
-// func _longjmp(tls *rtl.TLS, _ uintptr, _ int32) long {
-// 	panic(todo(""))
-// }
-//
-// // musl-1.2.4/src/thread/pthread_cancel.c:17:long __syscall_cp_asm(volatile void *, syscall_arg_t,
-// // syscall_arg_t, syscall_arg_t, syscall_arg_t, syscall_arg_t, syscall_arg_t, syscall_arg_t);
-// func ___syscall_cp_asm(tls *rtl.TLS, _ uintptr, _, _, _, _, _, _, _ Tsyscall_arg_t) long {
-// 	panic(todo(""))
-// }
+// ----------------------------------------------------------------------------
+
+// Xfmod computes the floating-point remainder of dividing x by y.  The return
+// value is x - n * y, where n is the quotient of x / y, rounded toward zero to
+// an integer.
+func Xfmod(tls *rtl.TLS, x float64, y float64) (r float64) { return x_fmod(tls, x, y) }

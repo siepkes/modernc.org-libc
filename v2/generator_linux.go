@@ -107,6 +107,7 @@ func main() {
 				"--prefix-undefined=_",
 				"-exec-cc", cCompiler,
 				"-extended-errors",
+				"-hide=__assert_fail",
 				"-ignore-asm-errors",
 				"-ignore-header-functions",
 				"-ignore-unsupported-alignment",
@@ -121,7 +122,6 @@ func main() {
 		return nil
 	})
 	if doCopy {
-		util.MustShell(true, "cp", filepath.Join(muslRoot, result), ".")
-		util.MustShell(true, "go", "build", "./...")
+		util.MustShell(true, "cp", filepath.Join(muslRoot, result), fmt.Sprintf("libc_so_%s_%s.go", goos, goarch))
 	}
 }

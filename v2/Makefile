@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-.PHONY:	all clean edit editor generate generate2 test work
+.PHONY:	all clean edit editor generate generate2 test tidy work
 
 all: editor
 	golint 2>&1
@@ -28,6 +28,10 @@ generate:
 	echo -n > log-generate-errors
 	go run generator*.go 2> log-generate-errors | tee log-generate
 	cat log-generate-errors
+	go build -v ./...
+	# go install github.com/mdempsky/unconvert@latest
+	./unconvert.sh
+	go build -v ./...
 
 generate2:
 	echo -n > /tmp/ccgo.log
@@ -38,6 +42,9 @@ generate2:
 test:
 	go test -v -timeout 24h 2>&1 | tee log-test
 	grep -a 'TOTAL\|PASS' log-test || true 2>&1 | tee -a log-test
+
+tidy:
+	./unconvert.sh
 
 work:
 	go work init
