@@ -1097,114 +1097,11 @@ func _cleanup(tls *TLS, ctx uintptr) {
 	x_pthread_cond_broadcast(tls, q+64)
 	___aio_unref_queue(tls, q)
 	if sev.Fsigev_notify == int32(m_SIGEV_SIGNAL) {
-		*(*Tsiginfo_t)(unsafe.Pointer(bp)) = Tsiginfo_t{Fsi_signo: sev.Fsigev_signo, Fsi_code: -int32(4), F__si_fields: *(*struct {
-			F__si_common [0]struct {
-				F__first struct {
-					F__timer [0]struct {
-						Fsi_timerid int32
-						Fsi_overrun int32
-					}
-					F__piduid struct {
-						Fsi_pid Tpid_t
-						Fsi_uid Tuid_t
-					}
-				}
-				F__second struct {
-					F__sigchld [0]struct {
-						Fsi_status int32
-						Fsi_utime  Tclock_t
-						Fsi_stime  Tclock_t
-					}
-					Fsi_value    Tsigval
-					F__ccgo_pad2 [16]byte
-				}
-			}
-			F__sigfault [0]struct {
-				Fsi_addr     uintptr
-				Fsi_addr_lsb int16
-				F__first     struct {
-					Fsi_pkey    [0]uint32
-					F__addr_bnd struct {
-						Fsi_lower uintptr
-						Fsi_upper uintptr
-					}
-				}
-			}
-			F__sigpoll [0]struct {
-				Fsi_band     int64
-				Fsi_fd       int32
-				F__ccgo_pad2 [4]byte
-			}
-			F__sigsys [0]struct {
-				Fsi_call_addr uintptr
-				Fsi_syscall   int32
-				Fsi_arch      uint32
-			}
-			F__pad [112]int8
-		})(unsafe.Pointer(&struct {
-			f struct {
-				F__first struct {
-					F__timer [0]struct {
-						Fsi_timerid int32
-						Fsi_overrun int32
-					}
-					F__piduid struct {
-						Fsi_pid Tpid_t
-						Fsi_uid Tuid_t
-					}
-				}
-				F__second struct {
-					F__sigchld [0]struct {
-						Fsi_status int32
-						Fsi_utime  Tclock_t
-						Fsi_stime  Tclock_t
-					}
-					Fsi_value    Tsigval
-					F__ccgo_pad2 [16]byte
-				}
-			}
-			_ [80]byte
-		}{f: struct {
-			F__first struct {
-				F__timer [0]struct {
-					Fsi_timerid int32
-					Fsi_overrun int32
-				}
-				F__piduid struct {
-					Fsi_pid Tpid_t
-					Fsi_uid Tuid_t
-				}
-			}
-			F__second struct {
-				F__sigchld [0]struct {
-					Fsi_status int32
-					Fsi_utime  Tclock_t
-					Fsi_stime  Tclock_t
-				}
-				Fsi_value    Tsigval
-				F__ccgo_pad2 [16]byte
-			}
-		}{F__first: *(*struct {
-			F__timer [0]struct {
-				Fsi_timerid int32
-				Fsi_overrun int32
-			}
-			F__piduid struct {
-				Fsi_pid Tpid_t
-				Fsi_uid Tuid_t
-			}
-		})(unsafe.Pointer(&struct {
-			Fsi_pid Tpid_t
-			Fsi_uid Tuid_t
-		}{Fsi_pid: x_getpid(tls), Fsi_uid: x_getuid(tls)})), F__second: struct {
-			F__sigchld [0]struct {
-				Fsi_status int32
-				Fsi_utime  Tclock_t
-				Fsi_stime  Tclock_t
-			}
-			Fsi_value    Tsigval
-			F__ccgo_pad2 [16]byte
-		}{Fsi_value: sev.Fsigev_value}}}))}
+		*(*int32)(unsafe.Pointer(bp)) = sev.Fsigev_signo
+		*(*Tsigval)(unsafe.Pointer(bp + 24)) = sev.Fsigev_value
+		*(*int32)(unsafe.Pointer(bp + 8)) = -Int32FromInt32(4)
+		*(*Tpid_t)(unsafe.Pointer(bp + 16)) = x_getpid(tls)
+		*(*Tuid_t)(unsafe.Pointer(bp + 20)) = x_getuid(tls)
 		___syscall3(tls, int64(129), int64((*(*struct {
 			Fsi_pid Tpid_t
 			Fsi_uid Tuid_t
@@ -1681,114 +1578,11 @@ func _notify_signal(tls *TLS, sev uintptr) {
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxValist 0 */
 	defer tls.Free(128)
 	var _ /* si at bp+0 */ Tsiginfo_t
-	*(*Tsiginfo_t)(unsafe.Pointer(bp)) = Tsiginfo_t{Fsi_signo: (*Tsigevent)(unsafe.Pointer(sev)).Fsigev_signo, Fsi_code: -int32(4), F__si_fields: *(*struct {
-		F__si_common [0]struct {
-			F__first struct {
-				F__timer [0]struct {
-					Fsi_timerid int32
-					Fsi_overrun int32
-				}
-				F__piduid struct {
-					Fsi_pid Tpid_t
-					Fsi_uid Tuid_t
-				}
-			}
-			F__second struct {
-				F__sigchld [0]struct {
-					Fsi_status int32
-					Fsi_utime  Tclock_t
-					Fsi_stime  Tclock_t
-				}
-				Fsi_value    Tsigval
-				F__ccgo_pad2 [16]byte
-			}
-		}
-		F__sigfault [0]struct {
-			Fsi_addr     uintptr
-			Fsi_addr_lsb int16
-			F__first     struct {
-				Fsi_pkey    [0]uint32
-				F__addr_bnd struct {
-					Fsi_lower uintptr
-					Fsi_upper uintptr
-				}
-			}
-		}
-		F__sigpoll [0]struct {
-			Fsi_band     int64
-			Fsi_fd       int32
-			F__ccgo_pad2 [4]byte
-		}
-		F__sigsys [0]struct {
-			Fsi_call_addr uintptr
-			Fsi_syscall   int32
-			Fsi_arch      uint32
-		}
-		F__pad [112]int8
-	})(unsafe.Pointer(&struct {
-		f struct {
-			F__first struct {
-				F__timer [0]struct {
-					Fsi_timerid int32
-					Fsi_overrun int32
-				}
-				F__piduid struct {
-					Fsi_pid Tpid_t
-					Fsi_uid Tuid_t
-				}
-			}
-			F__second struct {
-				F__sigchld [0]struct {
-					Fsi_status int32
-					Fsi_utime  Tclock_t
-					Fsi_stime  Tclock_t
-				}
-				Fsi_value    Tsigval
-				F__ccgo_pad2 [16]byte
-			}
-		}
-		_ [80]byte
-	}{f: struct {
-		F__first struct {
-			F__timer [0]struct {
-				Fsi_timerid int32
-				Fsi_overrun int32
-			}
-			F__piduid struct {
-				Fsi_pid Tpid_t
-				Fsi_uid Tuid_t
-			}
-		}
-		F__second struct {
-			F__sigchld [0]struct {
-				Fsi_status int32
-				Fsi_utime  Tclock_t
-				Fsi_stime  Tclock_t
-			}
-			Fsi_value    Tsigval
-			F__ccgo_pad2 [16]byte
-		}
-	}{F__first: *(*struct {
-		F__timer [0]struct {
-			Fsi_timerid int32
-			Fsi_overrun int32
-		}
-		F__piduid struct {
-			Fsi_pid Tpid_t
-			Fsi_uid Tuid_t
-		}
-	})(unsafe.Pointer(&struct {
-		Fsi_pid Tpid_t
-		Fsi_uid Tuid_t
-	}{Fsi_pid: x_getpid(tls), Fsi_uid: x_getuid(tls)})), F__second: struct {
-		F__sigchld [0]struct {
-			Fsi_status int32
-			Fsi_utime  Tclock_t
-			Fsi_stime  Tclock_t
-		}
-		Fsi_value    Tsigval
-		F__ccgo_pad2 [16]byte
-	}{Fsi_value: (*Tsigevent)(unsafe.Pointer(sev)).Fsigev_value}}}))}
+	*(*int32)(unsafe.Pointer(bp)) = (*Tsigevent)(unsafe.Pointer(sev)).Fsigev_signo
+	*(*Tsigval)(unsafe.Pointer(bp + 24)) = (*Tsigevent)(unsafe.Pointer(sev)).Fsigev_value
+	*(*int32)(unsafe.Pointer(bp + 8)) = -Int32FromInt32(4)
+	*(*Tpid_t)(unsafe.Pointer(bp + 16)) = x_getpid(tls)
+	*(*Tuid_t)(unsafe.Pointer(bp + 20)) = x_getuid(tls)
 	___syscall3(tls, int64(129), int64((*(*struct {
 		Fsi_pid Tpid_t
 		Fsi_uid Tuid_t
@@ -33567,10 +33361,8 @@ func x___membarrier(tls *TLS, cmd int32, flags int32) (r1 int32) {
 		x___block_app_sigs(tls, bp)
 		x___tl_lock(tls)
 		x_sem_init(tls, uintptr(unsafe.Pointer(&_barrier_sem)), int32(0), uint32(0))
-		*(*Tsigaction)(unsafe.Pointer(bp + 128)) = Tsigaction{F__sa_handler: struct {
-			Fsa_sigaction [0]uintptr
-			Fsa_handler   uintptr
-		}{Fsa_handler: __ccgo_fp(_bcast_barrier)}, Fsa_flags: Int32FromInt32(m_SA_RESTART) | Int32FromInt32(m_SA_ONSTACK)}
+		*(*int32)(unsafe.Pointer(bp + 264)) = Int32FromInt32(m_SA_RESTART) | Int32FromInt32(m_SA_ONSTACK)
+		*(*uintptr)(unsafe.Pointer(bp + 128)) = __ccgo_fp(_bcast_barrier)
 		x_memset(tls, uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp + 128))).Fsa_mask)), -int32(1), uint64(128))
 		if !(x___libc_sigaction(tls, int32(m_SIGSYNCCALL), bp+128, uintptr(0)) != 0) {
 			for td = (*T__pthread)(unsafe.Pointer(self)).Fnext; td != self; td = (*T__pthread)(unsafe.Pointer(td)).Fnext {
@@ -63283,10 +63075,8 @@ func x_signal(tls *TLS, sig int32, func1 uintptr) (r uintptr) {
 	defer tls.Free(304)
 	var _ /* sa at bp+152 */ Tsigaction
 	var _ /* sa_old at bp+0 */ Tsigaction
-	*(*Tsigaction)(unsafe.Pointer(bp + 152)) = Tsigaction{F__sa_handler: struct {
-		Fsa_sigaction [0]uintptr
-		Fsa_handler   uintptr
-	}{Fsa_handler: func1}, Fsa_flags: int32(m_SA_RESTART)}
+	*(*uintptr)(unsafe.Pointer(bp + 152)) = func1
+	*(*int32)(unsafe.Pointer(bp + 288)) = int32(m_SA_RESTART)
 	if x___sigaction(tls, sig, bp+152, bp) < int32(0) {
 		return uintptr(-Int32FromInt32(1))
 	}
@@ -72541,10 +72331,8 @@ func _init_cancellation(tls *TLS) {
 	bp := tls.Alloc(152) /* tlsAllocs 152 maxValist 0 */
 	defer tls.Free(152)
 	var _ /* sa at bp+0 */ Tsigaction
-	*(*Tsigaction)(unsafe.Pointer(bp)) = Tsigaction{F__sa_handler: *(*struct {
-		Fsa_sigaction [0]uintptr
-		Fsa_handler   uintptr
-	})(unsafe.Pointer(&struct{ f uintptr }{f: __ccgo_fp(_cancel_handler)})), Fsa_flags: Int32FromInt32(m_SA_SIGINFO) | Int32FromInt32(m_SA_RESTART) | Int32FromInt32(m_SA_ONSTACK)}
+	*(*int32)(unsafe.Pointer(bp + 136)) = Int32FromInt32(m_SA_SIGINFO) | Int32FromInt32(m_SA_RESTART) | Int32FromInt32(m_SA_ONSTACK)
+	*(*uintptr)(unsafe.Pointer(bp)) = __ccgo_fp(_cancel_handler)
 	x_memset(tls, uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).Fsa_mask)), -int32(1), uint64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 	x___libc_sigaction(tls, int32(m_SIGCANCEL), bp, uintptr(0))
 }
@@ -74639,10 +74427,8 @@ func x___synccall(tls *TLS, func1 uintptr, ctx uintptr) {
 	var _ /* sa at bp+136 */ Tsigaction
 	var v1 int32
 	var v2 uintptr
-	*(*Tsigaction)(unsafe.Pointer(bp + 136)) = Tsigaction{F__sa_handler: struct {
-		Fsa_sigaction [0]uintptr
-		Fsa_handler   uintptr
-	}{Fsa_handler: __ccgo_fp(_handler)}, Fsa_flags: Int32FromInt32(m_SA_RESTART) | Int32FromInt32(m_SA_ONSTACK)}
+	*(*int32)(unsafe.Pointer(bp + 272)) = Int32FromInt32(m_SA_RESTART) | Int32FromInt32(m_SA_ONSTACK)
+	*(*uintptr)(unsafe.Pointer(bp + 136)) = __ccgo_fp(_handler)
 	self = ___get_tp(tls)
 	count = int32(0)
 	/* Blocking signals in two steps, first only app-level signals
