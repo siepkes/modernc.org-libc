@@ -1739,20 +1739,20 @@ func ___frexp_exp(tls *TLS, x float64, expt uintptr) (r float64) {
 	 */
 	exp_x = x_exp(tls, x-_kln2)
 	{
-		hx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: exp_x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: exp_x})))))) >> int32(32))
 	}
 	*(*int32)(unsafe.Pointer(expt)) = int32(hx>>Int32FromInt32(20) - uint32(Int32FromInt32(0x3ff)+Int32FromInt32(1023)) + _k)
 	{
-		exp_x = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		exp_x = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: uint64(hx&Uint32FromInt32(0xfffff)|uint32((Int32FromInt32(0x3ff)+Int32FromInt32(1023))<<Int32FromInt32(20)))<<Int32FromInt32(32) | uint64(uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: uint64(hx&Uint32FromInt32(0xfffff)|uint32((Int32FromInt32(0x3ff)+Int32FromInt32(1023))<<Int32FromInt32(20)))<<Int32FromInt32(32) | uint64(uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: exp_x}))))))}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: exp_x}))))))))}))))))
 	}
 	return exp_x
 }
@@ -1779,10 +1779,10 @@ func x___ldexp_cexp(tls *TLS, z complex128, expt int32) (r complex128) {
 	var y float64
 	var _ /* ex_expt at bp+0 */ int32
 	x = Float64FromComplex128(z)
-	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 	exp_x = ___frexp_exp(tls, x, bp)
 	expt = expt + *(*int32)(unsafe.Pointer(bp))
 	/*
@@ -1791,17 +1791,17 @@ func x___ldexp_cexp(tls *TLS, z complex128, expt int32) (r complex128) {
 	 */
 	half_expt = expt / int32(2)
 	{
-		scale1 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		scale1 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: uint64((Int32FromInt32(0x3ff)+half_expt)<<Int32FromInt32(20))<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: uint64((Int32FromInt32(0x3ff)+half_expt)<<Int32FromInt32(20))<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))))
 	}
 	half_expt = expt - half_expt
 	{
-		scale2 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		scale2 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: uint64((Int32FromInt32(0x3ff)+half_expt)<<Int32FromInt32(20))<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: uint64((Int32FromInt32(0x3ff)+half_expt)<<Int32FromInt32(20))<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))))
 	}
 	return *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
@@ -1827,17 +1827,17 @@ func ___frexp_expf(tls *TLS, x float32, expt uintptr) (r float32) {
 	var hx Tuint32_t
 	exp_x = x_expf(tls, x-_kln21)
 	{
-		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: exp_x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: exp_x}))))))
 	}
 	*(*int32)(unsafe.Pointer(expt)) = int32(hx>>Int32FromInt32(23) - uint32(Int32FromInt32(0x7f)+Int32FromInt32(127)) + _k1)
 	{
-		exp_x = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		exp_x = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float32
 			F_i Tuint32_t
-		}{F_i: hx&uint32(0x7fffff) | uint32((Int32FromInt32(0x7f)+Int32FromInt32(127))<<Int32FromInt32(23))}))))
+		})(unsafe.Pointer(&struct{ f Tuint32_t }{f: hx&Uint32FromInt32(0x7fffff) | uint32((Int32FromInt32(0x7f)+Int32FromInt32(127))<<Int32FromInt32(23))}))))))
 	}
 	return exp_x
 }
@@ -1853,25 +1853,25 @@ func x___ldexp_cexpf(tls *TLS, z complex64, expt int32) (r complex64) {
 	var y float32
 	var _ /* ex_expt at bp+0 */ int32
 	x = Float32FromComplex64(z)
-	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))
 	exp_x = ___frexp_expf(tls, x, bp)
 	expt = expt + *(*int32)(unsafe.Pointer(bp))
 	half_expt = expt / int32(2)
 	{
-		scale1 = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		scale1 = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float32
 			F_i Tuint32_t
-		}{F_i: uint32((int32(0x7f) + half_expt) << int32(23))}))))
+		})(unsafe.Pointer(&struct{ f Tuint32_t }{f: uint32((Int32FromInt32(0x7f) + half_expt) << Int32FromInt32(23))}))))))
 	}
 	half_expt = expt - half_expt
 	{
-		scale2 = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		scale2 = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float32
 			F_i Tuint32_t
-		}{F_i: uint32((int32(0x7f) + half_expt) << int32(23))}))))
+		})(unsafe.Pointer(&struct{ f Tuint32_t }{f: uint32((Int32FromInt32(0x7f) + half_expt) << Int32FromInt32(23))}))))))
 	}
 	return *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
@@ -1882,17 +1882,17 @@ func x___ldexp_cexpf(tls *TLS, z complex64, expt int32) (r complex64) {
 }
 
 func x_cabs(tls *TLS, z complex128) (r float64) {
-	return x_hypot(tls, Float64FromComplex128(z), +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return x_hypot(tls, Float64FromComplex128(z), +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8)))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)))
 }
 
 func x_cabsf(tls *TLS, z complex64) (r float32) {
-	return x_hypotf(tls, Float32FromComplex64(z), +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return x_hypotf(tls, Float32FromComplex64(z), +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4)))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)))
 }
 
 func x_cabsl(tls *TLS, z complex128) (r float64) {
@@ -1906,10 +1906,10 @@ func x_cacos(tls *TLS, z complex128) (r complex128) {
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
 		0: float64(1.5707963267948966) - Float64FromComplex128(z),
-		1: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		1: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8))}))))))
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))}))))))
 }
 
 // FIXME
@@ -1923,38 +1923,38 @@ func x_cacosf(tls *TLS, z complex64) (r complex64) {
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
 		0: _float_pi_2 - Float32FromComplex64(z),
-		1: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		1: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4))}))))))
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))}))))))
 }
 
 func x_cacosh(tls *TLS, z complex128) (r complex128) {
 	var zineg int32
-	zineg = int32(___DOUBLE_BITS(tls, +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	zineg = int32(___DOUBLE_BITS(tls, +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))) >> Int32FromInt32(63))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))) >> Int32FromInt32(63))
 	z = x_cacos(tls, z)
 	if zineg != 0 {
 		return *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
 		})(unsafe.Pointer(&[2]float64{
-			0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F__xy [0][2]float64
 				F__z  complex128
-			}{F__z: z})) + UintptrFromInt32(1)*8)),
+			})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 			1: -Float64FromComplex128(z)}))))))
 	} else {
 		return *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
 		})(unsafe.Pointer(&[2]float64{
-			0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F__xy [0][2]float64
 				F__z  complex128
-			}{F__z: z})) + UintptrFromInt32(1)*8)),
+			})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 			1: Float64FromComplex128(z)}))))))
 	}
 	return r
@@ -1962,30 +1962,30 @@ func x_cacosh(tls *TLS, z complex128) (r complex128) {
 
 func x_cacoshf(tls *TLS, z complex64) (r complex64) {
 	var zineg int32
-	zineg = int32(___FLOAT_BITS(tls, +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	zineg = int32(___FLOAT_BITS(tls, +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))) >> Int32FromInt32(31))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))) >> Int32FromInt32(31))
 	z = x_cacosf(tls, z)
 	if zineg != 0 {
 		return *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
 		})(unsafe.Pointer(&[2]float32{
-			0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F__xy [0][2]float32
 				F__z  complex64
-			}{F__z: z})) + UintptrFromInt32(1)*4)),
+			})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 			1: -Float32FromComplex64(z)}))))))
 	} else {
 		return *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
 		})(unsafe.Pointer(&[2]float32{
-			0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F__xy [0][2]float32
 				F__z  complex64
-			}{F__z: z})) + UintptrFromInt32(1)*4)),
+			})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 			1: Float32FromComplex64(z)}))))))
 	}
 	return r
@@ -2000,17 +2000,17 @@ func x_cacosl(tls *TLS, z complex128) (r complex128) {
 }
 
 func x_carg(tls *TLS, z complex128) (r float64) {
-	return x_atan2(tls, +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return x_atan2(tls, +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8)), Float64FromComplex128(z))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)), Float64FromComplex128(z))
 }
 
 func x_cargf(tls *TLS, z complex64) (r float32) {
-	return x_atan2f(tls, +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return x_atan2f(tls, +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4)), Float32FromComplex64(z))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)), Float32FromComplex64(z))
 }
 
 func x_cargl(tls *TLS, z complex128) (r float64) {
@@ -2023,10 +2023,10 @@ func x_casin(tls *TLS, z complex128) (r1 complex128) {
 	var x float64
 	var y float64
 	x = Float64FromComplex128(z)
-	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 	w = *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
@@ -2043,10 +2043,10 @@ func x_casin(tls *TLS, z complex128) (r1 complex128) {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: r})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: r})))) + UintptrFromInt32(1)*8)),
 		1: -Float64FromComplex128(r)}))))))
 }
 
@@ -2056,10 +2056,10 @@ func x_casinf(tls *TLS, z complex64) (r1 complex64) {
 	var x float32
 	var y float32
 	x = Float32FromComplex64(z)
-	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))
 	w = *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
@@ -2076,10 +2076,10 @@ func x_casinf(tls *TLS, z complex64) (r1 complex64) {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: r})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: r})))) + UintptrFromInt32(1)*4)),
 		1: -Float32FromComplex64(r)}))))))
 }
 
@@ -2088,19 +2088,19 @@ func x_casinh(tls *TLS, z complex128) (r complex128) {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 		1: Float64FromComplex128(z)})))))))
 	return *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 		1: -Float64FromComplex128(z)}))))))
 }
 
@@ -2109,19 +2109,19 @@ func x_casinhf(tls *TLS, z complex64) (r complex64) {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 		1: Float32FromComplex64(z)})))))))
 	return *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 		1: -Float32FromComplex64(z)}))))))
 }
 
@@ -2160,10 +2160,10 @@ func x_catan(tls *TLS, z complex128) (r complex128) {
 	var x2 float64
 	var y float64
 	x = Float64FromComplex128(z)
-	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 	x2 = x * x
 	a = float64(1) - x2 - y*y
 	t = float64(0.5) * x_atan2(tls, float64(2)*x, a)
@@ -2212,10 +2212,10 @@ func x_catanf(tls *TLS, z complex64) (r complex64) {
 	var x2 float32
 	var y float32
 	x = Float32FromComplex64(z)
-	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))
 	x2 = x * x
 	a = Float32FromFloat32(1) - x2 - y*y
 	t = Float32FromFloat32(0.5) * x_atan2f(tls, Float32FromFloat32(2)*x, a)
@@ -2238,19 +2238,19 @@ func x_catanh(tls *TLS, z complex128) (r complex128) {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 		1: Float64FromComplex128(z)})))))))
 	return *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 		1: -Float64FromComplex128(z)}))))))
 }
 
@@ -2259,19 +2259,19 @@ func x_catanhf(tls *TLS, z complex64) (r complex64) {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 		1: Float32FromComplex64(z)})))))))
 	return *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 		1: -Float32FromComplex64(z)}))))))
 }
 
@@ -2288,10 +2288,10 @@ func x_ccos(tls *TLS, z complex128) (r complex128) {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 		1: Float64FromComplex128(z)})))))))
 }
 
@@ -2300,10 +2300,10 @@ func x_ccosf(tls *TLS, z complex64) (r complex64) {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 		1: Float32FromComplex64(z)})))))))
 }
 
@@ -2322,23 +2322,23 @@ func x_ccosh(tls *TLS, z complex128) (r complex128) {
 	var x float64
 	var y float64
 	x = Float64FromComplex128(z)
-	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 	{
-		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 		hx = int32(__u >> int32(32))
 		lx = int32(uint32(__u))
 	}
 	{
-		__u1 = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u1 = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: y}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: y}))))))
 		hy = int32(__u1 >> int32(32))
 		ly = int32(uint32(__u1))
 	}
@@ -2386,10 +2386,10 @@ func x_ccosh(tls *TLS, z complex128) (r complex128) {
 					F__z  complex128
 				})(unsafe.Pointer(&[2]float64{
 					0: Float64FromComplex128(z),
-					1: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+					1: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 						F__xy [0][2]float64
 						F__z  complex128
-					}{F__z: z})) + UintptrFromInt32(1)*8)) * x_copysign(tls, Float64FromInt32(1), x)}))))))
+					})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)) * x_copysign(tls, Float64FromInt32(1), x)}))))))
 			} else {
 				/* x >= 1455: the result always overflows */
 				h = _huge * x
@@ -2512,21 +2512,21 @@ func x_ccoshf(tls *TLS, z complex64) (r complex64) {
 	var x float32
 	var y float32
 	x = Float32FromComplex64(z)
-	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))
 	{
-		hx = int32(*(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = int32(*(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x})))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x})))))))
 	}
 	{
-		hy = int32(*(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hy = int32(*(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: y})))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: y})))))))
 	}
 	ix = int32(0x7fffffff) & hx
 	iy = int32(0x7fffffff) & hy
@@ -2571,10 +2571,10 @@ func x_ccoshf(tls *TLS, z complex64) (r complex64) {
 					F__z  complex64
 				})(unsafe.Pointer(&[2]float32{
 					0: Float32FromComplex64(z),
-					1: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+					1: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 						F__xy [0][2]float32
 						F__z  complex64
-					}{F__z: z})) + UintptrFromInt32(1)*4)) * x_copysignf(tls, Float32FromInt32(1), x)}))))))
+					})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)) * x_copysignf(tls, Float32FromInt32(1), x)}))))))
 			} else {
 				/* x >= 192.7: the result always overflows */
 				h = _huge1 * x
@@ -2668,15 +2668,15 @@ func x_cexp(tls *TLS, z complex128) (r complex128) {
 	var x float64
 	var y float64
 	x = Float64FromComplex128(z)
-	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 	{
-		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: y}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: y}))))))
 		hy = uint32(__u >> int32(32))
 		ly = uint32(__u)
 	}
@@ -2691,10 +2691,10 @@ func x_cexp(tls *TLS, z complex128) (r complex128) {
 			1: y}))))))
 	}
 	{
-		__u1 = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u1 = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 		hx = uint32(__u1 >> int32(32))
 		lx = uint32(__u1)
 	}
@@ -2769,15 +2769,15 @@ func x_cexpf(tls *TLS, z complex64) (r complex64) {
 	var x float32
 	var y float32
 	x = Float32FromComplex64(z)
-	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))
 	{
-		hy = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hy = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: y}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: y}))))))
 	}
 	hy = hy & Uint32FromInt32(0x7fffffff)
 	/* cexp(x + I 0) = exp(x) + I 0 */
@@ -2790,10 +2790,10 @@ func x_cexpf(tls *TLS, z complex64) (r complex64) {
 			1: y}))))))
 	}
 	{
-		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	/* cexp(0 + I y) = cos(y) + I sin(y) */
 	if hx&uint32(0x7fffffff) == uint32(0) {
@@ -2864,24 +2864,24 @@ func x_cexpl(tls *TLS, z complex128) (r complex128) {
 }
 
 func x_cimag(tls *TLS, z complex128) (r float64) {
-	return +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 }
 
 func x_cimagf(tls *TLS, z complex64) (r float32) {
-	return +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))
 }
 
 func x_cimagl(tls *TLS, z complex128) (r float64) {
-	return +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 }
 
 func x_clog(tls *TLS, z complex128) (r1 complex128) {
@@ -2920,10 +2920,10 @@ func x_conj(tls *TLS, z complex128) (r complex128) {
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
 		0: Float64FromComplex128(z),
-		1: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		1: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8))}))))))
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))}))))))
 }
 
 func x_conjf(tls *TLS, z complex64) (r complex64) {
@@ -2932,10 +2932,10 @@ func x_conjf(tls *TLS, z complex64) (r complex64) {
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
 		0: Float32FromComplex64(z),
-		1: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		1: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4))}))))))
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))}))))))
 }
 
 func x_conjl(tls *TLS, z complex128) (r complex128) {
@@ -2944,10 +2944,10 @@ func x_conjl(tls *TLS, z complex128) (r complex128) {
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
 		0: Float64FromComplex128(z),
-		1: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		1: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8))}))))))
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))}))))))
 }
 
 func x_cpow(tls *TLS, z complex128, c complex128) (r complex128) {
@@ -2965,37 +2965,37 @@ func x_cpowl(tls *TLS, z complex128, c complex128) (r complex128) {
 const m_FP_INFINITE = 1
 
 func x_cproj(tls *TLS, z complex128) (r complex128) {
-	if BoolInt32(___DOUBLE_BITS(tls, Float64FromComplex128(z))&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 || BoolInt32(___DOUBLE_BITS(tls, +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	if BoolInt32(___DOUBLE_BITS(tls, Float64FromComplex128(z))&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 || BoolInt32(___DOUBLE_BITS(tls, +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8)))&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)))&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 		return *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
 		})(unsafe.Pointer(&[2]float64{
 			0: float64(___builtin_inff(tls)),
-			1: x_copysign(tls, float64(0), +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			1: x_copysign(tls, float64(0), +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F__xy [0][2]float64
 				F__z  complex128
-			}{F__z: z})) + UintptrFromInt32(1)*8)))}))))))
+			})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)))}))))))
 	}
 	return z
 }
 
 func x_cprojf(tls *TLS, z complex64) (r complex64) {
-	if BoolInt32(___FLOAT_BITS(tls, Float32FromComplex64(z))&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 || BoolInt32(___FLOAT_BITS(tls, +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	if BoolInt32(___FLOAT_BITS(tls, Float32FromComplex64(z))&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 || BoolInt32(___FLOAT_BITS(tls, +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4)))&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 {
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)))&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 {
 		return *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
 		})(unsafe.Pointer(&[2]float32{
 			0: ___builtin_inff(tls),
-			1: x_copysignf(tls, float32(0), +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			1: x_copysignf(tls, float32(0), +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F__xy [0][2]float32
 				F__z  complex64
-			}{F__z: z})) + UintptrFromInt32(1)*4)))}))))))
+			})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)))}))))))
 	}
 	return z
 }
@@ -3021,19 +3021,19 @@ func x_csin(tls *TLS, z complex128) (r complex128) {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 		1: Float64FromComplex128(z)})))))))
 	return *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 		1: -Float64FromComplex128(z)}))))))
 }
 
@@ -3042,19 +3042,19 @@ func x_csinf(tls *TLS, z complex64) (r complex64) {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 		1: Float32FromComplex64(z)})))))))
 	return *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 		1: -Float32FromComplex64(z)}))))))
 }
 
@@ -3073,23 +3073,23 @@ func x_csinh(tls *TLS, z complex128) (r complex128) {
 	var x float64
 	var y float64
 	x = Float64FromComplex128(z)
-	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 	{
-		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 		hx = int32(__u >> int32(32))
 		lx = int32(uint32(__u))
 	}
 	{
-		__u1 = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u1 = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: y}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: y}))))))
 		hy = int32(__u1 >> int32(32))
 		ly = int32(uint32(__u1))
 	}
@@ -3137,10 +3137,10 @@ func x_csinh(tls *TLS, z complex128) (r complex128) {
 					F__z  complex128
 				})(unsafe.Pointer(&[2]float64{
 					0: Float64FromComplex128(z) * x_copysign(tls, Float64FromInt32(1), x),
-					1: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+					1: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 						F__xy [0][2]float64
 						F__z  complex128
-					}{F__z: z})) + UintptrFromInt32(1)*8))}))))))
+					})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))}))))))
 			} else {
 				/* x >= 1455: the result always overflows */
 				h = _huge2 * x
@@ -3264,21 +3264,21 @@ func x_csinhf(tls *TLS, z complex64) (r complex64) {
 	var x float32
 	var y float32
 	x = Float32FromComplex64(z)
-	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))
 	{
-		hx = int32(*(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = int32(*(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x})))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x})))))))
 	}
 	{
-		hy = int32(*(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hy = int32(*(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: y})))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: y})))))))
 	}
 	ix = int32(0x7fffffff) & hx
 	iy = int32(0x7fffffff) & hy
@@ -3323,10 +3323,10 @@ func x_csinhf(tls *TLS, z complex64) (r complex64) {
 					F__z  complex64
 				})(unsafe.Pointer(&[2]float32{
 					0: Float32FromComplex64(z) * x_copysignf(tls, Float32FromInt32(1), x),
-					1: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+					1: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 						F__xy [0][2]float32
 						F__z  complex64
-					}{F__z: z})) + UintptrFromInt32(1)*4))}))))))
+					})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))}))))))
 			} else {
 				/* x >= 192.7: the result always overflows */
 				h = _huge3 * x
@@ -3413,10 +3413,10 @@ func x_csqrt(tls *TLS, z complex128) (r complex128) {
 	var scale int32
 	var t float64
 	a = Float64FromComplex128(z)
-	b = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	b = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 	/* Handle special cases. */
 	if z == Complex128FromInt32(0) {
 		return *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
@@ -3508,10 +3508,10 @@ func x_csqrtf(tls *TLS, z complex64) (r complex64) {
 	var b float32
 	var t float64
 	a = Float32FromComplex64(z)
-	b = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	b = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))
 	/* Handle special cases. */
 	if z == Complex64FromInt32(0) {
 		return *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
@@ -3602,19 +3602,19 @@ func x_ctan(tls *TLS, z complex128) (r complex128) {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 		1: Float64FromComplex128(z)})))))))
 	return *(*complex128)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
 	})(unsafe.Pointer(&[2]float64{
-		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float64
 			F__z  complex128
-		}{F__z: z})) + UintptrFromInt32(1)*8)),
+		})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8)),
 		1: -Float64FromComplex128(z)}))))))
 }
 
@@ -3623,19 +3623,19 @@ func x_ctanf(tls *TLS, z complex64) (r complex64) {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: -+*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 		1: Float32FromComplex64(z)})))))))
 	return *(*complex64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
 	})(unsafe.Pointer(&[2]float32{
-		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		0: +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F__xy [0][2]float32
 			F__z  complex64
-		}{F__z: z})) + UintptrFromInt32(1)*4)),
+		})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4)),
 		1: -Float32FromComplex64(z)}))))))
 }
 
@@ -3656,15 +3656,15 @@ func x_ctanh(tls *TLS, z complex128) (r complex128) {
 	var v2 float64
 	var v3 float64
 	x = Float64FromComplex128(z)
-	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float64
 		F__z  complex128
-	}{F__z: z})) + UintptrFromInt32(1)*8))
+	})(unsafe.Pointer(&struct{ f complex128 }{f: z})))) + UintptrFromInt32(1)*8))
 	{
-		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 		hx = uint32(__u >> int32(32))
 		lx = uint32(__u)
 	}
@@ -3700,13 +3700,13 @@ func x_ctanh(tls *TLS, z complex128) (r complex128) {
 				1: v1}))))))
 		}
 		{
-			x = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			x = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_f [0]float64
 				F_i Tuint64_t
-			}{F_i: uint64(hx-Uint32FromInt32(0x40000000))<<Int32FromInt32(32) | uint64(uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			})(unsafe.Pointer(&struct{ f Tuint64_t }{f: uint64(hx-Uint32FromInt32(0x40000000))<<Int32FromInt32(32) | uint64(uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: x}))))))}))))
+			})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))))}))))))
 		} /* x = copysign(1, x) */
 		if BoolInt32(___DOUBLE_BITS(tls, y)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 			v2 = y
@@ -3783,15 +3783,15 @@ func x_ctanhf(tls *TLS, z complex64) (r complex64) {
 	var v2 float32
 	var v3 float32
 	x = Float32FromComplex64(z)
-	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	y = +*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F__xy [0][2]float32
 		F__z  complex64
-	}{F__z: z})) + UintptrFromInt32(1)*4))
+	})(unsafe.Pointer(&struct{ f complex64 }{f: z})))) + UintptrFromInt32(1)*4))
 	{
-		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	ix = hx & uint32(0x7fffffff)
 	if ix >= uint32(0x7f800000) {
@@ -3809,10 +3809,10 @@ func x_ctanhf(tls *TLS, z complex64) (r complex64) {
 				1: v1}))))))
 		}
 		{
-			x = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			x = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_f [0]float32
 				F_i Tuint32_t
-			}{F_i: hx - uint32(0x40000000)}))))
+			})(unsafe.Pointer(&struct{ f Tuint32_t }{f: hx - Uint32FromInt32(0x40000000)}))))))
 		}
 		if BoolInt32(___FLOAT_BITS(tls, y)&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 {
 			v2 = y
@@ -5816,10 +5816,10 @@ func _BF_swap(tls *TLS, x uintptr, count int32) {
 	var tmp TBF_word
 	var v1 int32
 	var v2 uintptr
-	if *(*int8)(unsafe.Pointer(&struct {
+	if *(*int8)(unsafe.Pointer(&*(*struct {
 		Fc [0]int8
 		Fi int32
-	}{Fi: int32(1)})) != 0 {
+	})(unsafe.Pointer(&struct{ f int32 }{f: Int32FromInt32(1)})))) != 0 {
 		for first := true; ; first = false {
 			if !first {
 				count--
@@ -36190,10 +36190,10 @@ func x___expo2(tls *TLS, x float64, sign float64) (r float64) {
 	var scale float64
 	/* note that k is odd and scale*scale overflows */
 	{
-		scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: uint64(uint32(Int32FromInt32(0x3ff)+_k2/Int32FromInt32(2))<<Int32FromInt32(20))<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: uint64(uint32(Int32FromInt32(0x3ff)+_k2/Int32FromInt32(2))<<Int32FromInt32(20))<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))))
 	}
 	/* exp(x - k ln2) * 2**(k-1) */
 	/* in directed rounding correct sign before rounding or overflow is important */
@@ -36211,10 +36211,10 @@ func x___expo2f(tls *TLS, x float32, sign float32) (r float32) {
 	var scale float32
 	/* note that k is odd and scale*scale overflows */
 	{
-		scale = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		scale = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float32
 			F_i Tuint32_t
-		}{F_i: uint32(Int32FromInt32(0x7f)+_k3/Int32FromInt32(2)) << int32(23)}))))
+		})(unsafe.Pointer(&struct{ f Tuint32_t }{f: uint32(Int32FromInt32(0x7f)+_k3/Int32FromInt32(2)) << Int32FromInt32(23)}))))))
 	}
 	/* exp(x - k ln2) * 2**(k-1) */
 	/* in directed rounding correct sign before rounding or overflow is important */
@@ -36741,10 +36741,10 @@ func x___tan(tls *TLS, x float64, y float64, odd int32) (r1 float64) {
 	var v1 Tdouble_t
 	var v2 Tdouble_t
 	{
-		hx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	big = BoolInt32(hx&uint32(0x7fffffff) >= uint32(0x3FE59428)) /* |x| >= 0.6744 */
 	if big != 0 {
@@ -36784,26 +36784,26 @@ func x___tan(tls *TLS, x float64, y float64, odd int32) (r1 float64) {
 	/* -1.0/(x+r) has up to 2ulp error, so compute it accurately */
 	w0 = w
 	{
-		w0 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		w0 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: w0}))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: w0}))))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))))
 	}
 	v = r - (w0 - x) /* w0+v = r+x */
 	v2 = -Float64FromFloat64(1) / w
 	a = v2
 	a0 = v2
 	{
-		a0 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		a0 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: a0}))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: a0}))))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))))
 	}
 	return a0 + a*(Float64FromFloat64(1)+a0*w0+a0*v)
 }
@@ -36885,19 +36885,19 @@ func x_acos(tls *TLS, x float64) (r float64) {
 	var w float64
 	var z float64
 	{
-		hx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = hx & uint32(0x7fffffff)
 	/* |x| >= 1 or nan */
 	if ix >= uint32(0x3ff00000) {
 		{
-			lx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			lx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: x})))))
+			})(unsafe.Pointer(&struct{ f float64 }{f: x})))))))
 		}
 		if ix-uint32(0x3ff00000)|lx == uint32(0) {
 			/* acos(1)=0, acos(-1)=pi */
@@ -36927,13 +36927,13 @@ func x_acos(tls *TLS, x float64) (r float64) {
 	s = x_sqrt(tls, z)
 	df = s
 	{
-		df = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		df = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: df}))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: df}))))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))))
 	}
 	c = (z - df*df) / (s + df)
 	w = _R(tls, z)*s + c
@@ -36964,10 +36964,10 @@ func x_acosf(tls *TLS, x float32) (r float32) {
 	var w float32
 	var z float32
 	{
-		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	ix = hx & uint32(0x7fffffff)
 	/* |x| >= 1 or nan */
@@ -36998,16 +36998,16 @@ func x_acosf(tls *TLS, x float32) (r float32) {
 	z = (Float32FromInt32(1) - x) * Float32FromFloat32(0.5)
 	s = x_sqrtf(tls, z)
 	{
-		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: s}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: s}))))))
 	}
 	{
-		df = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		df = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float32
 			F_i Tuint32_t
-		}{F_i: hx & uint32(0xfffff000)}))))
+		})(unsafe.Pointer(&struct{ f Tuint32_t }{f: hx & Uint32FromUint32(0xfffff000)}))))))
 	}
 	c = (z - df*df) / (s + df)
 	w = _R1(tls, z)*s + c
@@ -37102,19 +37102,19 @@ func x_asin(tls *TLS, x float64) (r1 float64) {
 	var s float64
 	var z float64
 	{
-		hx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = hx & uint32(0x7fffffff)
 	/* |x| >= 1 or nan */
 	if ix >= uint32(0x3ff00000) {
 		{
-			lx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			lx = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: x})))))
+			})(unsafe.Pointer(&struct{ f float64 }{f: x})))))))
 		}
 		if ix-uint32(0x3ff00000)|lx == uint32(0) {
 			/* asin(1) = +-pi/2 with inexact */
@@ -37140,13 +37140,13 @@ func x_asin(tls *TLS, x float64) (r1 float64) {
 		/* f+c = sqrt(z) */
 		f = s
 		{
-			f = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			f = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_f [0]float64
 				F_i Tuint64_t
-			}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: f}))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))
+			})(unsafe.Pointer(&struct{ f float64 }{f: f}))))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))))
 		}
 		c = (z - f*f) / (s + f)
 		x = float64(0.5)*_pio2_hi2 - (Float64FromInt32(2)*s*r - (_pio2_lo2 - Float64FromInt32(2)*c) - (float64(0.5)*_pio2_hi2 - Float64FromInt32(2)*f))
@@ -37179,10 +37179,10 @@ func x_asinf(tls *TLS, x float32) (r float32) {
 	var s float64
 	var z float32
 	{
-		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		hx = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	ix = hx & uint32(0x7fffffff)
 	if ix >= uint32(0x3f800000) {
@@ -37362,10 +37362,10 @@ func x_atan(tls *TLS, x float64) (r float64) {
 	var v1 Tdouble_t
 	var v2 Tdouble_t
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	sign = ix >> int32(31)
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -37458,18 +37458,18 @@ func x_atan2(tls *TLS, y float64, x float64) (r float64) {
 		return x + y
 	}
 	{
-		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 		ix = uint32(__u >> int32(32))
 		lx = uint32(__u)
 	}
 	{
-		__u1 = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u1 = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: y}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: y}))))))
 		iy = uint32(__u1 >> int32(32))
 		ly = uint32(__u1)
 	}
@@ -37569,16 +37569,16 @@ func x_atan2f(tls *TLS, y float32, x float32) (r float32) {
 		return x + y
 	}
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	{
-		iy = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		iy = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: y}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: y}))))))
 	}
 	if ix == uint32(0x3f800000) { /* x=1.0 */
 		return x_atanf(tls, y)
@@ -37692,10 +37692,10 @@ func x_atanf(tls *TLS, x float32) (r float32) {
 	var v1 Tfloat_t
 	var v2 Tfloat_t
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = ix >> int32(31)
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -38196,10 +38196,10 @@ func x_cos(tls *TLS, x float64) (r float64) {
 	var n uint32
 	var _ /* y at bp+0 */ [2]float64
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	/* |x| ~< pi/4 */
@@ -38258,10 +38258,10 @@ func x_cosf(tls *TLS, x float32) (r float32) {
 	var v1 float64
 	var v2 float64
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = ix >> int32(31)
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -38542,13 +38542,13 @@ func _erfc2(tls *TLS, ix Tuint32_t, x float64) (r float64) {
 	}
 	z = x
 	{
-		z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: z}))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: z}))))))>>Int32FromInt32(32)<<Int32FromInt32(32) | uint64(uint32(Int32FromInt32(0)))}))))))
 	}
 	return x_exp(tls, -z*z-float64(0.5625)) * x_exp(tls, (z-x)*(z+x)+R/S) / x
 }
@@ -38562,10 +38562,10 @@ func x_erf(tls *TLS, x float64) (r1 float64) {
 	var z float64
 	var v1 float64
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	sign = int32(ix >> int32(31))
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -38609,10 +38609,10 @@ func x_erfc(tls *TLS, x float64) (r1 float64) {
 	var v1 float64
 	var v2 float64
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	sign = int32(ix >> int32(31))
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -38748,16 +38748,16 @@ func _erfc21(tls *TLS, ix Tuint32_t, x float32) (r float32) {
 		S = Float32FromFloat32(1) + s*(_sb11+s*(_sb21+s*(_sb31+s*(_sb41+s*(_sb51+s*(_sb61+s*_sb71))))))
 	}
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	{
-		z = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		z = *(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float32
 			F_i Tuint32_t
-		}{F_i: ix & uint32(0xffffe000)}))))
+		})(unsafe.Pointer(&struct{ f Tuint32_t }{f: ix & Uint32FromUint32(0xffffe000)}))))))
 	}
 	return x_expf(tls, -z*z-Float32FromFloat32(0.5625)) * x_expf(tls, (z-x)*(z+x)+R/S) / x
 }
@@ -38771,10 +38771,10 @@ func x_erff(tls *TLS, x float32) (r1 float32) {
 	var z float32
 	var v1 float32
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = int32(ix >> int32(31))
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -38818,10 +38818,10 @@ func x_erfcf(tls *TLS, x float32) (r1 float32) {
 	var v1 float32
 	var v2 float32
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = int32(ix >> int32(31))
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -38890,19 +38890,19 @@ func _specialcase(tls *TLS, tmp Tdouble_t, sbits Tuint64_t, ki Tuint64_t) (r flo
 	if ki&uint64(0x80000000) == uint64(0) {
 		/* k > 0, the exponent of scale might have overflowed by <= 460.  */
 		sbits = sbits - Uint64FromUint64(1009)<<Int32FromInt32(52)
-		scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: sbits}))))
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits}))))))
 		y = float64(5.486124068793689e+303) * (scale + scale*tmp)
 		return _eval_as_double(tls, y)
 	}
 	/* k < 0, need special care in the subnormal range.  */
 	sbits = sbits + Uint64FromUint64(1022)<<Int32FromInt32(52)
-	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: sbits}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits}))))))
 	y = scale + scale*tmp
 	if y < float64(1) {
 		/* Round y to the right precision before scaling it into the subnormal
@@ -38928,10 +38928,10 @@ func _specialcase(tls *TLS, tmp Tdouble_t, sbits Tuint64_t, ki Tuint64_t) (r flo
 //
 //	/* Top 12 bits of a double (sign and exponent bits).  */
 func _top12(tls *TLS, x float64) (r Tuint32_t) {
-	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: x})))) >> int32(52))
+	})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(52))
 }
 
 func x_exp(tls *TLS, x float64) (r1 float64) {
@@ -38955,22 +38955,22 @@ func x_exp(tls *TLS, x float64) (r1 float64) {
 			return float64(1) + x
 		}
 		if abstop >= _top12(tls, float64(1024)) {
-			if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: x})))) == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: float64(-___builtin_inff(tls))})))) {
+			})(unsafe.Pointer(&struct{ f float64 }{f: float64(-___builtin_inff(tls))})))))) {
 				return float64(0)
 			}
 			if abstop >= _top12(tls, float64(___builtin_inff(tls))) {
 				return float64(1) + x
 			}
-			if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: x}))))>>int32(63) != 0 {
+			})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))>>int32(63) != 0 {
 				return x___math_uflow(tls, uint32(0))
 			} else {
 				return x___math_oflow(tls, uint32(0))
@@ -38984,19 +38984,19 @@ func x_exp(tls *TLS, x float64) (r1 float64) {
 	z = x___exp_data.Finvln2N * x
 	/* z - kd is in [-1, 1] in non-nearest rounding modes.  */
 	kd = _eval_as_double(tls, z+x___exp_data.Fshift)
-	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: kd}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: kd}))))))
 	kd = kd - x___exp_data.Fshift
 	r = x + kd*x___exp_data.Fnegln2hiN + kd*x___exp_data.Fnegln2loN
 	/* 2^(k/N) ~= scale * (1 + tail).  */
 	idx = uint64(2) * (ki % uint64(Int32FromInt32(1)<<Int32FromInt32(m_EXP_TABLE_BITS)))
 	top = ki << (Int32FromInt32(52) - Int32FromInt32(m_EXP_TABLE_BITS))
-	tail = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	tail = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp_data.Ftab)) + uintptr(idx)*8))}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp_data.Ftab)) + uintptr(idx)*8))}))))))
 	/* This is only a valid scale when -1023*N < k < 1024*N.  */
 	sbits = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp_data.Ftab)) + uintptr(idx+Uint64FromInt32(1))*8)) + top
 	/* exp(x) = 2^(k/N) * exp(r) ~= scale + scale * (tail + exp(r) - 1).  */
@@ -39008,10 +39008,10 @@ func x_exp(tls *TLS, x float64) (r1 float64) {
 	if ___builtin_expect(tls, BoolInt32(abstop == uint32(0)), int32(0)) != 0 {
 		return _specialcase(tls, tmp, sbits, ki)
 	}
-	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: sbits}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits}))))))
 	/* Note: tmp == 0 or |tmp| > 2^-200 and scale > 2^-739, so there
 	   is no spurious underflow here even without fma.  */
 	return _eval_as_double(tls, scale+scale*tmp)
@@ -39132,19 +39132,19 @@ func _specialcase1(tls *TLS, tmp Tdouble_t, sbits Tuint64_t, ki Tuint64_t) (r fl
 	if ki&uint64(0x80000000) == uint64(0) {
 		/* k > 0, the exponent of scale might have overflowed by 1.  */
 		sbits = sbits - Uint64FromUint64(1)<<Int32FromInt32(52)
-		scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: sbits}))))
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits}))))))
 		y = Float64FromInt32(2) * (scale + scale*tmp)
 		return _eval_as_double(tls, y)
 	}
 	/* k < 0, need special care in the subnormal range.  */
 	sbits = sbits + Uint64FromUint64(1022)<<Int32FromInt32(52)
-	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: sbits}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits}))))))
 	y = scale + scale*tmp
 	if y < float64(1) {
 		/* Round y to the right precision before scaling it into the subnormal
@@ -39170,10 +39170,10 @@ func _specialcase1(tls *TLS, tmp Tdouble_t, sbits Tuint64_t, ki Tuint64_t) (r fl
 //
 //	/* Top 12 bits of a double (sign and exponent bits).  */
 func _top121(tls *TLS, x float64) (r Tuint32_t) {
-	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: x})))) >> int32(52))
+	})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(52))
 }
 
 func x_exp2(tls *TLS, x float64) (r1 float64) {
@@ -39196,42 +39196,42 @@ func x_exp2(tls *TLS, x float64) (r1 float64) {
 			return float64(1) + x
 		}
 		if abstop >= _top121(tls, float64(1024)) {
-			if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: x})))) == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: float64(-___builtin_inff(tls))})))) {
+			})(unsafe.Pointer(&struct{ f float64 }{f: float64(-___builtin_inff(tls))})))))) {
 				return float64(0)
 			}
 			if abstop >= _top121(tls, float64(___builtin_inff(tls))) {
 				return float64(1) + x
 			}
-			if !(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if !(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: x}))))>>Int32FromInt32(63) != 0) {
+			})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))>>Int32FromInt32(63) != 0) {
 				return x___math_oflow(tls, uint32(0))
 			} else {
-				if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+				if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 					F_i [0]Tuint64_t
 					F_f float64
-				}{F_f: x})))) >= *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+				})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >= *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 					F_i [0]Tuint64_t
 					F_f float64
-				}{F_f: -Float64FromFloat64(1075)})))) {
+				})(unsafe.Pointer(&struct{ f float64 }{f: -Float64FromFloat64(1075)})))))) {
 					return x___math_uflow(tls, uint32(0))
 				}
 			}
 		}
-		if uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		if uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) > uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) > uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: float64(928)})))) {
+		})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(928)})))))) {
 			/* Large x is special cased below.  */
 			abstop = uint32(0)
 		}
@@ -39239,19 +39239,19 @@ func x_exp2(tls *TLS, x float64) (r1 float64) {
 	/* exp2(x) = 2^(k/N) * 2^r, with 2^r in [2^(-1/2N),2^(1/2N)].  */
 	/* x = k/N + r, with int k and r in [-1/2N, 1/2N].  */
 	kd = _eval_as_double(tls, x+x___exp_data.Fexp2_shift)
-	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: kd})))) /* k.  */
+	})(unsafe.Pointer(&struct{ f float64 }{f: kd})))))) /* k.  */
 	kd = kd - x___exp_data.Fexp2_shift /* k/N for int k.  */
 	r = x - kd
 	/* 2^(k/N) ~= scale * (1 + tail).  */
 	idx = uint64(2) * (ki % uint64(Int32FromInt32(1)<<Int32FromInt32(m_EXP_TABLE_BITS)))
 	top = ki << (Int32FromInt32(52) - Int32FromInt32(m_EXP_TABLE_BITS))
-	tail = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	tail = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp_data.Ftab)) + uintptr(idx)*8))}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp_data.Ftab)) + uintptr(idx)*8))}))))))
 	/* This is only a valid scale when -1023*N < k < 1024*N.  */
 	sbits = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp_data.Ftab)) + uintptr(idx+Uint64FromInt32(1))*8)) + top
 	/* exp2(x) = 2^(k/N) * 2^r ~= scale + scale * (tail + 2^r - 1).  */
@@ -39263,10 +39263,10 @@ func x_exp2(tls *TLS, x float64) (r1 float64) {
 	if ___builtin_expect(tls, BoolInt32(abstop == uint32(0)), int32(0)) != 0 {
 		return _specialcase1(tls, tmp, sbits, ki)
 	}
-	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: sbits}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits}))))))
 	/* Note: tmp == 0 or |tmp| > 2^-65 and scale > 2^-928, so there
 	   is no spurious underflow here even without fma.  */
 	return _eval_as_double(tls, scale+scale*tmp)
@@ -39276,10 +39276,10 @@ const m_EXP2F_POLY_ORDER = 3
 const m_EXP2F_TABLE_BITS = 5
 
 func _top122(tls *TLS, x float32) (r Tuint32_t) {
-	return *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint32_t
 		F_f float32
-	}{F_f: x})))) >> int32(20)
+	})(unsafe.Pointer(&struct{ f float32 }{f: x})))))) >> int32(20)
 }
 
 func x_exp2f(tls *TLS, x float32) (r1 float32) {
@@ -39297,13 +39297,13 @@ func x_exp2f(tls *TLS, x float32) (r1 float32) {
 	abstop = _top122(tls, x) & uint32(0x7ff)
 	if ___builtin_expect(tls, BoolInt32(abstop >= _top122(tls, Float32FromFloat32(128))), int32(0)) != 0 {
 		/* |x| >= 128 or x is nan.  */
-		if *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		if *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x})))) == *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		})(unsafe.Pointer(&struct{ f float32 }{f: x})))))) == *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: -___builtin_inff(tls)})))) {
+		})(unsafe.Pointer(&struct{ f float32 }{f: -___builtin_inff(tls)})))))) {
 			return Float32FromFloat32(0)
 		}
 		if abstop >= _top122(tls, ___builtin_inff(tls)) {
@@ -39318,19 +39318,19 @@ func x_exp2f(tls *TLS, x float32) (r1 float32) {
 	}
 	/* x = k/N + r with r in [-1/(2N), 1/(2N)] and int k.  */
 	kd = _eval_as_double(tls, xd+x___exp2f_data.Fshift_scaled)
-	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: kd}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: kd}))))))
 	kd = kd - x___exp2f_data.Fshift_scaled /* k/N for int k.  */
 	r = xd - kd
 	/* exp2(x) = 2^(k/N) * 2^r ~= s * (C0*r^3 + C1*r^2 + C2*r + 1) */
 	t = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Ftab)) + uintptr(ki%uint64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)))*8))
 	t = t + ki<<(Int32FromInt32(52)-Int32FromInt32(m_EXP2F_TABLE_BITS))
-	s = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	s = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: t}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: t}))))))
 	z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Fpoly)) + UintptrFromInt32(0)*8))*r + *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Fpoly)) + UintptrFromInt32(1)*8))
 	r2 = r * r
 	y = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Fpoly)) + UintptrFromInt32(2)*8))*r + Float64FromInt32(1)
@@ -39360,10 +39360,10 @@ type Texp_data = struct {
 }
 
 func _top123(tls *TLS, x float32) (r Tuint32_t) {
-	return *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint32_t
 		F_f float32
-	}{F_f: x})))) >> int32(20)
+	})(unsafe.Pointer(&struct{ f float32 }{f: x})))))) >> int32(20)
 }
 
 func x_expf(tls *TLS, x float32) (r1 float32) {
@@ -39381,13 +39381,13 @@ func x_expf(tls *TLS, x float32) (r1 float32) {
 	abstop = _top123(tls, x) & uint32(0x7ff)
 	if ___builtin_expect(tls, BoolInt32(abstop >= _top123(tls, Float32FromFloat32(88))), int32(0)) != 0 {
 		/* |x| >= 88 or x is nan.  */
-		if *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		if *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x})))) == *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		})(unsafe.Pointer(&struct{ f float32 }{f: x})))))) == *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: -___builtin_inff(tls)})))) {
+		})(unsafe.Pointer(&struct{ f float32 }{f: -___builtin_inff(tls)})))))) {
 			return Float32FromFloat32(0)
 		}
 		if abstop >= _top123(tls, ___builtin_inff(tls)) {
@@ -39406,19 +39406,19 @@ func x_expf(tls *TLS, x float32) (r1 float32) {
 	   ideally ties-to-even rule is used, otherwise the magnitude of r
 	   can be bigger which gives larger approximation error.  */
 	kd = _eval_as_double(tls, z+x___exp2f_data.Fshift)
-	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: kd}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: kd}))))))
 	kd = kd - x___exp2f_data.Fshift
 	r = z - kd
 	/* exp(x) = 2^(k/N) * 2^(r/N) ~= s * (C0*r^3 + C1*r^2 + C2*r + 1) */
 	t = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Ftab)) + uintptr(ki%uint64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)))*8))
 	t = t + ki<<(Int32FromInt32(52)-Int32FromInt32(m_EXP2F_TABLE_BITS))
-	s = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	s = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: t}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: t}))))))
 	z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Fpoly_scaled)) + UintptrFromInt32(0)*8))*r + *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Fpoly_scaled)) + UintptrFromInt32(1)*8))
 	r2 = r * r
 	y = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Fpoly_scaled)) + UintptrFromInt32(2)*8))*r + Float64FromInt32(1)
@@ -40621,10 +40621,10 @@ func x_j0(tls *TLS, x float64) (r1 float64) {
 	var s float64
 	var z float64
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	/* j0(+-inf)=0, j0(nan)=nan */
@@ -40675,10 +40675,10 @@ func x_y0(tls *TLS, x float64) (r float64) {
 	var v float64
 	var z float64
 	{
-		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 		ix = uint32(__u >> int32(32))
 		lx = uint32(__u)
 	}
@@ -40782,10 +40782,10 @@ func _pzero(tls *TLS, x float64) (r1 float64) {
 	var s Tdouble_t
 	var z Tdouble_t
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	if ix >= uint32(0x40200000) {
@@ -40888,10 +40888,10 @@ func _qzero(tls *TLS, x float64) (r1 float64) {
 	var s Tdouble_t
 	var z Tdouble_t
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	if ix >= uint32(0x40200000) {
@@ -40971,10 +40971,10 @@ func x_j0f(tls *TLS, x float32) (r1 float32) {
 	var s float32
 	var z float32
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	if ix >= uint32(0x7f800000) {
@@ -41018,10 +41018,10 @@ func x_y0f(tls *TLS, x float32) (r float32) {
 	var v float32
 	var z float32
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	if ix&uint32(0x7fffffff) == uint32(0) {
 		return float32(-Int32FromInt32(1)) / Float32FromFloat32(0)
@@ -41120,10 +41120,10 @@ func _pzerof(tls *TLS, x float32) (r1 float32) {
 	var s Tfloat_t
 	var z Tfloat_t
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	if ix >= uint32(0x41000000) {
@@ -41226,10 +41226,10 @@ func _qzerof(tls *TLS, x float32) (r1 float32) {
 	var s Tfloat_t
 	var z Tfloat_t
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	if ix >= uint32(0x41000000) {
@@ -41319,10 +41319,10 @@ func x_j1(tls *TLS, x float64) (r1 float64) {
 	var sign int32
 	var z float64
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	sign = int32(ix >> int32(31))
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -41365,10 +41365,10 @@ func x_y1(tls *TLS, x float64) (r float64) {
 	var v float64
 	var z float64
 	{
-		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 		ix = uint32(__u >> int32(32))
 		lx = uint32(__u)
 	}
@@ -41468,10 +41468,10 @@ func _pone(tls *TLS, x float64) (r1 float64) {
 	var s Tdouble_t
 	var z Tdouble_t
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	if ix >= uint32(0x40200000) {
@@ -41575,10 +41575,10 @@ func _qone(tls *TLS, x float64) (r1 float64) {
 	var s Tdouble_t
 	var z Tdouble_t
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	if ix >= uint32(0x40200000) {
@@ -41659,10 +41659,10 @@ func x_j1f(tls *TLS, x float32) (r1 float32) {
 	var sign int32
 	var z float32
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = int32(ix >> int32(31))
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -41702,10 +41702,10 @@ func x_y1f(tls *TLS, x float32) (r float32) {
 	var v float32
 	var z float32
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	if ix&uint32(0x7fffffff) == uint32(0) {
 		return float32(-Int32FromInt32(1)) / Float32FromFloat32(0)
@@ -41802,10 +41802,10 @@ func _ponef(tls *TLS, x float32) (r1 float32) {
 	var s Tfloat_t
 	var z Tfloat_t
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	if ix >= uint32(0x41000000) {
@@ -41909,10 +41909,10 @@ func _qonef(tls *TLS, x float32) (r1 float32) {
 	var s Tfloat_t
 	var z Tfloat_t
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	if ix >= uint32(0x41000000) {
@@ -41961,10 +41961,10 @@ func x_jn(tls *TLS, n int32, x float64) (r float64) {
 	var z float64
 	var v1 float64
 	{
-		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 		ix = uint32(__u >> int32(32))
 		lx = uint32(__u)
 	}
@@ -42163,10 +42163,10 @@ func x_yn(tls *TLS, n int32, x float64) (r float64) {
 	var v1 float64
 	var v2 float64
 	{
-		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		__u = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 		ix = uint32(__u >> int32(32))
 		lx = uint32(__u)
 	}
@@ -42232,20 +42232,20 @@ func x_yn(tls *TLS, n int32, x float64) (r float64) {
 		b = x_y1(tls, x)
 		/* quit if b is -inf */
 		{
-			ib = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			ib = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: b})))) >> int32(32))
+			})(unsafe.Pointer(&struct{ f float64 }{f: b})))))) >> int32(32))
 		}
 		for i = int32(0); i < nm1 && ib != uint32(0xfff00000); {
 			i++
 			temp = b
 			b = float64(2)*float64(i)/x*b - a
 			{
-				ib = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+				ib = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 					F_i [0]Tuint64_t
 					F_f float64
-				}{F_f: b})))) >> int32(32))
+				})(unsafe.Pointer(&struct{ f float64 }{f: b})))))) >> int32(32))
 			}
 			a = temp
 		}
@@ -42277,10 +42277,10 @@ func x_jnf(tls *TLS, n int32, x float32) (r float32) {
 	var z float32
 	var v1 float32
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = int32(ix >> int32(31))
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -42441,10 +42441,10 @@ func x_ynf(tls *TLS, n int32, x float32) (r float32) {
 	var v1 float32
 	var v2 float32
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = int32(ix >> int32(31))
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -42479,20 +42479,20 @@ func x_ynf(tls *TLS, n int32, x float32) (r float32) {
 	b = x_y1f(tls, x)
 	/* quit if b is -inf */
 	{
-		ib = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ib = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: b}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: b}))))))
 	}
 	for i = int32(0); i < nm1 && ib != uint32(0xff800000); {
 		i++
 		temp = b
 		b = Float32FromFloat32(2)*float32(i)/x*b - a
 		{
-			ib = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			ib = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint32_t
 				F_f float32
-			}{F_f: b}))))
+			})(unsafe.Pointer(&struct{ f float32 }{f: b}))))))
 		}
 		a = temp
 	}
@@ -43032,10 +43032,10 @@ const m_OFF = 4604367669032910848
 //
 //	/* Top 16 bits of a double.  */
 func _top16(tls *TLS, x float64) (r Tuint32_t) {
-	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: x})))) >> int32(48))
+	})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(48))
 }
 
 func x_log(tls *TLS, x float64) (r1 float64) {
@@ -43058,27 +43058,27 @@ func x_log(tls *TLS, x float64) (r1 float64) {
 	var w Tdouble_t
 	var y Tdouble_t
 	var z Tdouble_t
-	ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: x}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 	top = _top16(tls, x)
-	if ___builtin_expect(tls, BoolInt32(ix-*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	if ___builtin_expect(tls, BoolInt32(ix-*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: Float64FromFloat64(1) - Float64FromFloat64(0.0625)})))) < *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1) - Float64FromFloat64(0.0625)})))))) < *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: Float64FromFloat64(1) + Float64FromFloat64(0.064697265625)}))))-*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1) + Float64FromFloat64(0.064697265625)}))))))-*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: Float64FromFloat64(1) - Float64FromFloat64(0.0625)}))))), int32(0)) != 0 {
+	})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1) - Float64FromFloat64(0.0625)}))))))), int32(0)) != 0 {
 		/* Handle close to 1.0 inputs separately.  */
 		/* Fix sign of zero with downward rounding when x==1.  */
-		if int32(m_WANT_ROUNDING) != 0 && ___builtin_expect(tls, BoolInt32(ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		if int32(m_WANT_ROUNDING) != 0 && ___builtin_expect(tls, BoolInt32(ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: float64(1)}))))), int32(0)) != 0 {
+		})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1)}))))))), int32(0)) != 0 {
 			return Float64FromInt32(0)
 		}
 		r = x - float64(1)
@@ -43102,20 +43102,20 @@ func x_log(tls *TLS, x float64) (r1 float64) {
 		if ix*uint64(2) == uint64(0) {
 			return x___math_divzero(tls, uint32(1))
 		}
-		if ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		if ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: float64(___builtin_inff(tls))})))) { /* log(inf) == inf.  */
+		})(unsafe.Pointer(&struct{ f float64 }{f: float64(___builtin_inff(tls))})))))) { /* log(inf) == inf.  */
 			return x
 		}
 		if top&uint32(0x8000) != 0 || top&uint32(0x7ff0) == uint32(0x7ff0) {
 			return x___math_invalid(tls, x)
 		}
 		/* x is subnormal, normalize it.  */
-		ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x * float64(4.503599627370496e+15)}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x * Float64FromFloat64(4.503599627370496e+15)}))))))
 		ix = ix - Uint64FromUint64(52)<<Int32FromInt32(52)
 	}
 	/* x = 2^k z; where z is in range [OFF,2*OFF) and exact.
@@ -43133,10 +43133,10 @@ func x_log(tls *TLS, x float64) (r1 float64) {
 		Finvc float64
 		Flogc float64
 	})(unsafe.Pointer(uintptr(unsafe.Pointer(&x___log_data.Ftab)) + uintptr(i)*16))).Flogc
-	z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: iz}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: iz}))))))
 	/* log(x) = log1p(z/c-1) + log(c) + k*Ln2.  */
 	/* r ~= z/c - 1, |r| < 1/(2*N).  */
 	/* rounding error: 0x1p-55/N + 0x1p-66.  */
@@ -43554,10 +43554,10 @@ const m_LOG2_TABLE_BITS = 6
 //
 //	/* Top 16 bits of a double.  */
 func _top161(tls *TLS, x float64) (r Tuint32_t) {
-	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: x})))) >> int32(48))
+	})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(48))
 }
 
 func x_log2(tls *TLS, x float64) (r1 float64) {
@@ -43585,37 +43585,37 @@ func x_log2(tls *TLS, x float64) (r1 float64) {
 	var top Tuint32_t
 	var y Tdouble_t
 	var z Tdouble_t
-	ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: x}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 	top = _top161(tls, x)
-	if ___builtin_expect(tls, BoolInt32(ix-*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	if ___builtin_expect(tls, BoolInt32(ix-*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: Float64FromFloat64(1) - Float64FromFloat64(0.04239702224731445)})))) < *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1) - Float64FromFloat64(0.04239702224731445)})))))) < *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: Float64FromFloat64(1) + Float64FromFloat64(0.044274330139160156)}))))-*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1) + Float64FromFloat64(0.044274330139160156)}))))))-*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: Float64FromFloat64(1) - Float64FromFloat64(0.04239702224731445)}))))), int32(0)) != 0 {
+	})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1) - Float64FromFloat64(0.04239702224731445)}))))))), int32(0)) != 0 {
 		/* Handle close to 1.0 inputs separately.  */
 		/* Fix sign of zero with downward rounding when x==1.  */
-		if int32(m_WANT_ROUNDING) != 0 && ___builtin_expect(tls, BoolInt32(ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		if int32(m_WANT_ROUNDING) != 0 && ___builtin_expect(tls, BoolInt32(ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: float64(1)}))))), int32(0)) != 0 {
+		})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1)}))))))), int32(0)) != 0 {
 			return Float64FromInt32(0)
 		}
 		r = x - float64(1)
-		rhi = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		rhi = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: r})))) & (-Uint64FromUint64(1) << Int32FromInt32(32))}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: r})))))) & (-Uint64FromUint64(1) << Int32FromInt32(32))}))))))
 		rlo = r - rhi
 		hi = rhi * x___log2_data.Finvln2hi
 		lo = rlo*x___log2_data.Finvln2hi + r*x___log2_data.Finvln2lo
@@ -43634,20 +43634,20 @@ func x_log2(tls *TLS, x float64) (r1 float64) {
 		if ix*uint64(2) == uint64(0) {
 			return x___math_divzero(tls, uint32(1))
 		}
-		if ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		if ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: float64(___builtin_inff(tls))})))) { /* log(inf) == inf.  */
+		})(unsafe.Pointer(&struct{ f float64 }{f: float64(___builtin_inff(tls))})))))) { /* log(inf) == inf.  */
 			return x
 		}
 		if top&uint32(0x8000) != 0 || top&uint32(0x7ff0) == uint32(0x7ff0) {
 			return x___math_invalid(tls, x)
 		}
 		/* x is subnormal, normalize it.  */
-		ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x * float64(4.503599627370496e+15)}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x * Float64FromFloat64(4.503599627370496e+15)}))))))
 		ix = ix - Uint64FromUint64(52)<<Int32FromInt32(52)
 	}
 	/* x = 2^k z; where z is in range [OFF,2*OFF) and exact.
@@ -43665,10 +43665,10 @@ func x_log2(tls *TLS, x float64) (r1 float64) {
 		Finvc float64
 		Flogc float64
 	})(unsafe.Pointer(uintptr(unsafe.Pointer(&x___log2_data.Ftab)) + uintptr(i)*16))).Flogc
-	z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: iz}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: iz}))))))
 	kd = float64(k)
 	/* log2(x) = log2(z/c) + log2(c) + k.  */
 	/* r ~= z/c - 1, |r| < 1/(2*N).  */
@@ -43680,13 +43680,13 @@ func x_log2(tls *TLS, x float64) (r1 float64) {
 		Fchi float64
 		Fclo float64
 	})(unsafe.Pointer(uintptr(unsafe.Pointer(&x___log2_data.Ftab2)) + uintptr(i)*16))).Fclo) * invc
-	rhi1 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	rhi1 = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: r})))) & (-Uint64FromUint64(1) << Int32FromInt32(32))}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: r})))))) & (-Uint64FromUint64(1) << Int32FromInt32(32))}))))))
 	rlo1 = r - rhi1
 	t1 = rhi1 * x___log2_data.Finvln2hi
 	t2 = rlo1*x___log2_data.Finvln2hi + r*x___log2_data.Finvln2lo
@@ -43739,10 +43739,10 @@ func x_log2f(tls *TLS, x float32) (r1 float32) {
 	var y Tdouble_t
 	var y0 Tdouble_t
 	var z Tdouble_t
-	ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint32_t
 		F_f float32
-	}{F_f: x}))))
+	})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	/* Fix sign of zero with downward rounding when x==1.  */
 	if int32(m_WANT_ROUNDING) != 0 && ___builtin_expect(tls, BoolInt32(ix == uint32(0x3f800000)), int32(0)) != 0 {
 		return Float32FromInt32(0)
@@ -43759,10 +43759,10 @@ func x_log2f(tls *TLS, x float32) (r1 float32) {
 			return x___math_invalidf(tls, x)
 		}
 		/* x is subnormal, normalize it.  */
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x * Float32FromFloat32(8.388608e+06)}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x * Float32FromFloat32(8.388608e+06)}))))))
 		ix = ix - uint32(Int32FromInt32(23)<<Int32FromInt32(23))
 	}
 	/* x = 2^k z; where z is in range [OFF,2*OFF] and exact.
@@ -43781,10 +43781,10 @@ func x_log2f(tls *TLS, x float32) (r1 float32) {
 		Finvc float64
 		Flogc float64
 	})(unsafe.Pointer(uintptr(unsafe.Pointer(&x___log2f_data.Ftab)) + uintptr(i)*16))).Flogc
-	z = float64(*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	z = float64(*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float32
 		F_i Tuint32_t
-	}{F_i: iz})))))
+	})(unsafe.Pointer(&struct{ f Tuint32_t }{f: iz})))))))
 	/* log2(x) = log1p(z/c-1)/ln2 + log2(c) + k */
 	r = z*invc - Float64FromInt32(1)
 	y0 = logc + float64(k)
@@ -43866,10 +43866,10 @@ func x_logf(tls *TLS, x float32) (r1 float32) {
 	var y Tdouble_t
 	var y0 Tdouble_t
 	var z Tdouble_t
-	ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint32_t
 		F_f float32
-	}{F_f: x}))))
+	})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	/* Fix sign of zero with downward rounding when x==1.  */
 	if int32(m_WANT_ROUNDING) != 0 && ___builtin_expect(tls, BoolInt32(ix == uint32(0x3f800000)), int32(0)) != 0 {
 		return Float32FromInt32(0)
@@ -43886,10 +43886,10 @@ func x_logf(tls *TLS, x float32) (r1 float32) {
 			return x___math_invalidf(tls, x)
 		}
 		/* x is subnormal, normalize it.  */
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x * Float32FromFloat32(8.388608e+06)}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x * Float32FromFloat32(8.388608e+06)}))))))
 		ix = ix - uint32(Int32FromInt32(23)<<Int32FromInt32(23))
 	}
 	/* x = 2^k z; where z is in range [OFF,2*OFF] and exact.
@@ -43907,10 +43907,10 @@ func x_logf(tls *TLS, x float32) (r1 float32) {
 		Finvc float64
 		Flogc float64
 	})(unsafe.Pointer(uintptr(unsafe.Pointer(&x___logf_data.Ftab)) + uintptr(i)*16))).Flogc
-	z = float64(*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	z = float64(*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float32
 		F_i Tuint32_t
-	}{F_i: iz})))))
+	})(unsafe.Pointer(&struct{ f Tuint32_t }{f: iz})))))))
 	/* log(x) = log1p(z/c-1) + log(c) + k*Ln2 */
 	r = z*invc - Float64FromInt32(1)
 	y0 = logc + float64(k)*x___logf_data.Fln2
@@ -44313,10 +44313,10 @@ ulperr_exp: 0.509 ULP (ULP error of exp, 0.511 ULP without fma)
 //
 //	/* Top 12 bits of a double (sign and exponent bits).  */
 func _top124(tls *TLS, x float64) (r Tuint32_t) {
-	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: x})))) >> int32(52))
+	})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(52))
 }
 
 // C documentation
@@ -44362,10 +44362,10 @@ func _log_inline(tls *TLS, ix Tuint64_t, tail uintptr) (r1 Tdouble_t) {
 	i = int32(tmp >> (Int32FromInt32(52) - Int32FromInt32(m_POW_LOG_TABLE_BITS)) % uint64(Int32FromInt32(1)<<Int32FromInt32(m_POW_LOG_TABLE_BITS)))
 	k = int32(int64(tmp) >> int32(52)) /* arithmetic shift */
 	iz = ix - tmp&(Uint64FromUint64(0xfff)<<Int32FromInt32(52))
-	z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: iz}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: iz}))))))
 	kd = float64(k)
 	/* log(x) = k*Ln2 + log(c) + log1p(z/c-1).  */
 	invc = (*(*struct {
@@ -44389,10 +44389,10 @@ func _log_inline(tls *TLS, ix Tuint64_t, tail uintptr) (r1 Tdouble_t) {
 	/* Note: 1/c is j/N or j/N/2 where j is an integer in [N,2N) and
 	   |z/c - 1| < 1/N, so r = z/c - 1 is exactly representible.  */
 	/* Split z such that rhi, rlo and rhi*rhi are exact and |rlo| <= |r|.  */
-	zhi = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	zhi = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: (iz + Uint64FromUint64(1)<<Int32FromInt32(31)) & (-Uint64FromUint64(1) << Int32FromInt32(32))}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: (iz + Uint64FromUint64(1)<<Int32FromInt32(31)) & (-Uint64FromUint64(1) << Int32FromInt32(32))}))))))
 	zlo = z - zhi
 	rhi = zhi*invc - float64(1)
 	rlo = zlo * invc
@@ -44438,20 +44438,20 @@ func _specialcase2(tls *TLS, tmp Tdouble_t, sbits Tuint64_t, ki Tuint64_t) (r fl
 	if ki&uint64(0x80000000) == uint64(0) {
 		/* k > 0, the exponent of scale might have overflowed by <= 460.  */
 		sbits = sbits - Uint64FromUint64(1009)<<Int32FromInt32(52)
-		scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_f [0]float64
 			F_i Tuint64_t
-		}{F_i: sbits}))))
+		})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits}))))))
 		y = float64(5.486124068793689e+303) * (scale + scale*tmp)
 		return _eval_as_double(tls, y)
 	}
 	/* k < 0, need special care in the subnormal range.  */
 	sbits = sbits + Uint64FromUint64(1022)<<Int32FromInt32(52)
 	/* Note: sbits is signed scale.  */
-	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: sbits}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits}))))))
 	y = scale + scale*tmp
 	if x_fabs(tls, y) < float64(1) {
 		/* Round y to the right precision before scaling it into the subnormal
@@ -44468,10 +44468,10 @@ func _specialcase2(tls *TLS, tmp Tdouble_t, sbits Tuint64_t, ki Tuint64_t) (r fl
 		y = _eval_as_double(tls, hi+lo) - one
 		/* Fix the sign of 0.  */
 		if y == float64(0) {
-			y = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			y = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_f [0]float64
 				F_i Tuint64_t
-			}{F_i: sbits & uint64(0x8000000000000000)}))))
+			})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits & Uint64FromUint64(0x8000000000000000)}))))))
 		}
 		/* The underflow exception needs to be signaled explicitly.  */
 		_fp_force_eval(tls, _fp_barrier(tls, float64(2.2250738585072014e-308))*float64(2.2250738585072014e-308))
@@ -44515,10 +44515,10 @@ func _exp_inline(tls *TLS, x Tdouble_t, xtail Tdouble_t, sign_bias Tuint32_t) (r
 		}
 		if abstop >= _top124(tls, float64(1024)) {
 			/* Note: inf and nan are already handled.  */
-			if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: x}))))>>int32(63) != 0 {
+			})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))>>int32(63) != 0 {
 				return x___math_uflow(tls, sign_bias)
 			} else {
 				return x___math_oflow(tls, sign_bias)
@@ -44532,10 +44532,10 @@ func _exp_inline(tls *TLS, x Tdouble_t, xtail Tdouble_t, sign_bias Tuint32_t) (r
 	z = x___exp_data.Finvln2N * x
 	/* z - kd is in [-1, 1] in non-nearest rounding modes.  */
 	kd = _eval_as_double(tls, z+x___exp_data.Fshift)
-	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: kd}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: kd}))))))
 	kd = kd - x___exp_data.Fshift
 	r = x + kd*x___exp_data.Fnegln2hiN + kd*x___exp_data.Fnegln2loN
 	/* The code assumes 2^-200 < |xtail| < 2^-8/N.  */
@@ -44543,10 +44543,10 @@ func _exp_inline(tls *TLS, x Tdouble_t, xtail Tdouble_t, sign_bias Tuint32_t) (r
 	/* 2^(k/N) ~= scale * (1 + tail).  */
 	idx = uint64(2) * (ki % uint64(Int32FromInt32(1)<<Int32FromInt32(m_EXP_TABLE_BITS)))
 	top = (ki + uint64(sign_bias)) << (Int32FromInt32(52) - Int32FromInt32(m_EXP_TABLE_BITS))
-	tail = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	tail = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp_data.Ftab)) + uintptr(idx)*8))}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp_data.Ftab)) + uintptr(idx)*8))}))))))
 	/* This is only a valid scale when -1023*N < k < 1024*N.  */
 	sbits = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp_data.Ftab)) + uintptr(idx+Uint64FromInt32(1))*8)) + top
 	/* exp(x) = 2^(k/N) * exp(r) ~= scale + scale * (tail + exp(r) - 1).  */
@@ -44558,10 +44558,10 @@ func _exp_inline(tls *TLS, x Tdouble_t, xtail Tdouble_t, sign_bias Tuint32_t) (r
 	if ___builtin_expect(tls, BoolInt32(abstop == uint32(0)), int32(0)) != 0 {
 		return _specialcase2(tls, tmp, sbits, ki)
 	}
-	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	scale = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: sbits}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: sbits}))))))
 	/* Note: tmp == 0 or |tmp| > 2^-200 and scale > 2^-739, so there
 	   is no spurious underflow here even without fma.  */
 	return _eval_as_double(tls, scale+scale*tmp)
@@ -44593,10 +44593,10 @@ func _checkint(tls *TLS, iy Tuint64_t) (r int32) {
 //
 //	/* Returns 1 if input is the bit representation of 0, infinity or nan.  */
 func _zeroinfnan(tls *TLS, i Tuint64_t) (r int32) {
-	return BoolInt32(uint64(2)*i-uint64(1) >= uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	return BoolInt32(uint64(2)*i-uint64(1) >= uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: float64(___builtin_inff(tls))}))))-uint64(1))
+	})(unsafe.Pointer(&struct{ f float64 }{f: float64(___builtin_inff(tls))}))))))-uint64(1))
 }
 
 func x_pow(tls *TLS, x float64, y float64) (r float64) {
@@ -44621,14 +44621,14 @@ func x_pow(tls *TLS, x float64, y float64) (r float64) {
 	var v2 float64
 	var v3 float64
 	sign_bias = uint32(0)
-	ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: x}))))
-	iy = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
+	iy = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: y}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: y}))))))
 	topx = _top124(tls, x)
 	topy = _top124(tls, y)
 	if ___builtin_expect(tls, BoolInt32(topx-uint32(0x001) >= uint32(Int32FromInt32(0x7ff)-Int32FromInt32(0x001)) || topy&uint32(0x7ff)-uint32(0x3be) >= uint32(Int32FromInt32(0x43e)-Int32FromInt32(0x3be))), int32(0)) != 0 {
@@ -44640,31 +44640,31 @@ func x_pow(tls *TLS, x float64, y float64) (r float64) {
 			if uint64(2)*iy == uint64(0) {
 				return float64(1)
 			}
-			if ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: float64(1)})))) {
+			})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1)})))))) {
 				return float64(1)
 			}
-			if uint64(2)*ix > uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if uint64(2)*ix > uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: float64(___builtin_inff(tls))})))) || uint64(2)*iy > uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			})(unsafe.Pointer(&struct{ f float64 }{f: float64(___builtin_inff(tls))})))))) || uint64(2)*iy > uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: float64(___builtin_inff(tls))})))) {
+			})(unsafe.Pointer(&struct{ f float64 }{f: float64(___builtin_inff(tls))})))))) {
 				return x + y
 			}
-			if uint64(2)*ix == uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if uint64(2)*ix == uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: float64(1)})))) {
+			})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1)})))))) {
 				return float64(1)
 			}
-			if BoolInt32(uint64(2)*ix < uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if BoolInt32(uint64(2)*ix < uint64(2)**(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: float64(1)}))))) == BoolInt32(!(iy>>Int32FromInt32(63) != 0)) {
+			})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1)}))))))) == BoolInt32(!(iy>>Int32FromInt32(63) != 0)) {
 				return float64(0)
 			} /* |x|<1 && y==inf or |x|>1 && y==-inf.  */
 			return y * y
@@ -44698,19 +44698,19 @@ func x_pow(tls *TLS, x float64, y float64) (r float64) {
 		}
 		if topy&uint32(0x7ff)-uint32(0x3be) >= uint32(Int32FromInt32(0x43e)-Int32FromInt32(0x3be)) {
 			/* Note: sign_bias == 0 here because y is not odd.  */
-			if ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if ix == *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: float64(1)})))) {
+			})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1)})))))) {
 				return float64(1)
 			}
 			if topy&uint32(0x7ff) < uint32(0x3be) {
 				/* |y| < 2^-65, x^y ~= 1 + y*log(x).  */
 				if int32(m_WANT_ROUNDING) != 0 {
-					if ix > *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+					if ix > *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 						F_i [0]Tuint64_t
 						F_f float64
-					}{F_f: float64(1)})))) {
+					})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1)})))))) {
 						v2 = float64(1) + y
 					} else {
 						v2 = float64(1) - y
@@ -44720,10 +44720,10 @@ func x_pow(tls *TLS, x float64, y float64) (r float64) {
 					return float64(1)
 				}
 			}
-			if BoolInt32(ix > *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			if BoolInt32(ix > *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: float64(1)}))))) == BoolInt32(topy < uint32(0x800)) {
+			})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(1)}))))))) == BoolInt32(topy < uint32(0x800)) {
 				v3 = x___math_oflow(tls, uint32(0))
 			} else {
 				v3 = x___math_uflow(tls, uint32(0))
@@ -44732,27 +44732,27 @@ func x_pow(tls *TLS, x float64, y float64) (r float64) {
 		}
 		if topx == uint32(0) {
 			/* Normalize subnormal x so exponent becomes negative.  */
-			ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint64_t
 				F_f float64
-			}{F_f: x * float64(4.503599627370496e+15)}))))
+			})(unsafe.Pointer(&struct{ f float64 }{f: x * Float64FromFloat64(4.503599627370496e+15)}))))))
 			ix = ix & Uint64FromInt64(0x7fffffffffffffff)
 			ix = ix - Uint64FromUint64(52)<<Int32FromInt32(52)
 		}
 	}
 	hi = _log_inline(tls, ix, bp)
-	yhi = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	yhi = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: iy & (-Uint64FromUint64(1) << Int32FromInt32(27))}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: iy & (-Uint64FromUint64(1) << Int32FromInt32(27))}))))))
 	ylo = y - yhi
-	lhi = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	lhi = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: hi})))) & (-Uint64FromUint64(1) << Int32FromInt32(27))}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: hi})))))) & (-Uint64FromUint64(1) << Int32FromInt32(27))}))))))
 	llo = hi - lhi + *(*Tdouble_t)(unsafe.Pointer(bp))
 	ehi = yhi * lhi
 	elo = ylo*lhi + y*llo /* |elo| < |ehi| * 2^-25.  */
@@ -44822,10 +44822,10 @@ func _log2_inline(tls *TLS, ix Tuint32_t) (r1 Tdouble_t) {
 		Finvc float64
 		Flogc float64
 	})(unsafe.Pointer(uintptr(unsafe.Pointer(&x___powf_log2_data.Ftab)) + uintptr(i)*16))).Flogc
-	z = float64(*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	z = float64(*(*float32)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float32
 		F_i Tuint32_t
-	}{F_i: iz})))))
+	})(unsafe.Pointer(&struct{ f Tuint32_t }{f: iz})))))))
 	/* log2(x) = log1p(z/c-1)/ln2 + log2(c) + k */
 	r = z*invc - Float64FromInt32(1)
 	y0 = logc + float64(k)
@@ -44857,20 +44857,20 @@ func _exp2_inline(tls *TLS, xd Tdouble_t, sign_bias Tuint32_t) (r1 float32) {
 	var z Tdouble_t
 	/* x = k/N + r with r in [-1/(2N), 1/(2N)] */
 	kd = _eval_as_double(tls, xd+x___exp2f_data.Fshift_scaled)
-	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ki = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: kd}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: kd}))))))
 	kd = kd - x___exp2f_data.Fshift_scaled /* k/N */
 	r = xd - kd
 	/* exp2(x) = 2^(k/N) * 2^r ~= s * (C0*r^3 + C1*r^2 + C2*r + 1) */
 	t = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Ftab)) + uintptr(ki%uint64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)))*8))
 	ski = ki + uint64(sign_bias)
 	t = t + ski<<(Int32FromInt32(52)-Int32FromInt32(m_EXP2F_TABLE_BITS))
-	s = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	s = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_f [0]float64
 		F_i Tuint64_t
-	}{F_i: t}))))
+	})(unsafe.Pointer(&struct{ f Tuint64_t }{f: t}))))))
 	z = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Fpoly)) + UintptrFromInt32(0)*8))*r + *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Fpoly)) + UintptrFromInt32(1)*8))
 	r2 = r * r
 	y = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___exp2f_data.Fpoly)) + UintptrFromInt32(2)*8))*r + Float64FromInt32(1)
@@ -44915,14 +44915,14 @@ func x_powf(tls *TLS, x float32, y float32) (r float32) {
 	var ylogx Tdouble_t
 	var v1 float32
 	sign_bias = uint32(0)
-	ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint32_t
 		F_f float32
-	}{F_f: x}))))
-	iy = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
+	iy = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint32_t
 		F_f float32
-	}{F_f: y}))))
+	})(unsafe.Pointer(&struct{ f float32 }{f: y}))))))
 	if ___builtin_expect(tls, BoolInt32(ix-uint32(0x00800000) >= uint32(Int32FromInt32(0x7f800000)-Int32FromInt32(0x00800000)) || _zeroinfnan1(tls, iy) != 0), int32(0)) != 0 {
 		/* Either (x < 0x1p-126 or inf or nan) or (y is 0 or inf or nan).  */
 		if ___builtin_expect(tls, _zeroinfnan1(tls, iy), int32(0)) != 0 {
@@ -44971,23 +44971,23 @@ func x_powf(tls *TLS, x float32, y float32) (r float32) {
 		}
 		if ix < uint32(0x00800000) {
 			/* Normalize subnormal x so exponent becomes negative.  */
-			ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+			ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 				F_i [0]Tuint32_t
 				F_f float32
-			}{F_f: x * Float32FromFloat32(8.388608e+06)}))))
+			})(unsafe.Pointer(&struct{ f float32 }{f: x * Float32FromFloat32(8.388608e+06)}))))))
 			ix = ix & Uint32FromInt32(0x7fffffff)
 			ix = ix - uint32(Int32FromInt32(23)<<Int32FromInt32(23))
 		}
 	}
 	logx = _log2_inline(tls, ix)
 	ylogx = float64(y) * logx /* cannot overflow, y is single prec.  */
-	if ___builtin_expect(tls, BoolInt32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	if ___builtin_expect(tls, BoolInt32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: ylogx}))))>>int32(47)&uint64(0xffff) >= *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	})(unsafe.Pointer(&struct{ f float64 }{f: ylogx}))))))>>int32(47)&uint64(0xffff) >= *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		F_i [0]Tuint64_t
 		F_f float64
-	}{F_f: float64(126) * float64(Int32FromInt32(1)<<Int32FromInt32(0))}))))>>int32(47)), int32(0)) != 0 {
+	})(unsafe.Pointer(&struct{ f float64 }{f: Float64FromFloat64(126) * float64(Int32FromInt32(1)<<Int32FromInt32(0))}))))))>>int32(47)), int32(0)) != 0 {
 		/* |y*log(x)| >= 126.  */
 		if ylogx > float64(127.99999995700433)*float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)) {
 			return x___math_oflowf(tls, sign_bias)
@@ -45627,10 +45627,10 @@ func x_sin(tls *TLS, x float64) (r float64) {
 	var v3 float64
 	/* High word of x. */
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	/* |x| ~< pi/4 */
@@ -45700,10 +45700,10 @@ func x_sincos(tls *TLS, x float64, sin uintptr, cos uintptr) {
 	var v3 float64
 	var v4 float64
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	/* |x| ~< pi/4 */
@@ -45800,10 +45800,10 @@ func x_sincosf(tls *TLS, x float32, sin uintptr, cos uintptr) {
 	var v7 float64
 	var v8 float32
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = ix >> int32(31)
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -45961,10 +45961,10 @@ func x_sinf(tls *TLS, x float32) (r float32) {
 	var v4 float64
 	var v5 float64
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = int32(ix >> int32(31))
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -46160,10 +46160,10 @@ func x_tan(tls *TLS, x float64) (r float64) {
 	var v2 float64
 	var v3 float64
 	{
-		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = uint32(*(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint64_t
 			F_f float64
-		}{F_f: x})))) >> int32(32))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x})))))) >> int32(32))
 	}
 	ix = ix & Uint32FromInt32(0x7fffffff)
 	/* |x| ~< pi/4 */
@@ -46232,10 +46232,10 @@ func x_tanf(tls *TLS, x float32) (r float32) {
 	var v6 float64
 	var v7 float64
 	{
-		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint32_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			F_i [0]Tuint32_t
 			F_f float32
-		}{F_f: x}))))
+		})(unsafe.Pointer(&struct{ f float32 }{f: x}))))))
 	}
 	sign = ix >> int32(31)
 	ix = ix & Uint32FromInt32(0x7fffffff)
@@ -46767,18 +46767,18 @@ func _normalize(tls *TLS, x float64) (r Tnum) {
 	var ix Tuint64_t
 	var sign int32
 	var v1 int32
-	ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+	ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 		Fi [0]Tuint64_t
 		Ff float64
-	}{Ff: x}))))
+	})(unsafe.Pointer(&struct{ f float64 }{f: x}))))))
 	e = int32(ix >> int32(52))
 	sign = e & int32(0x800)
 	e = e & Int32FromInt32(0x7ff)
 	if !(e != 0) {
-		ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&struct {
+		ix = *(*Tuint64_t)(unsafe.Pointer(uintptr(unsafe.Pointer(&*(*struct {
 			Fi [0]Tuint64_t
 			Ff float64
-		}{Ff: x * float64(9.223372036854776e+18)}))))
+		})(unsafe.Pointer(&struct{ f float64 }{f: x * Float64FromFloat64(9.223372036854776e+18)}))))))
 		e = int32(ix >> int32(52) & uint64(0x7ff))
 		if e != 0 {
 			v1 = e - int32(63)
@@ -52445,10 +52445,10 @@ func x_htonl(tls *TLS, n Tuint32_t) (r Tuint32_t) {
 		Fi int32
 	}
 	var v1 uint32
-	u = struct {
+	u = *(*struct {
 		Fc [0]int8
 		Fi int32
-	}{Fi: int32(1)}
+	})(unsafe.Pointer(&struct{ f int32 }{f: int32(1)}))
 	if *(*int8)(unsafe.Pointer(&u)) != 0 {
 		v1 = ___bswap_32(tls, n)
 	} else {
@@ -52463,10 +52463,10 @@ func x_htons(tls *TLS, n Tuint16_t) (r Tuint16_t) {
 		Fi int32
 	}
 	var v1 int32
-	u = struct {
+	u = *(*struct {
 		Fc [0]int8
 		Fi int32
-	}{Fi: int32(1)}
+	})(unsafe.Pointer(&struct{ f int32 }{f: int32(1)}))
 	if *(*int8)(unsafe.Pointer(&u)) != 0 {
 		v1 = int32(___bswap_16(tls, n))
 	} else {
@@ -54063,10 +54063,10 @@ func x_ntohl(tls *TLS, n Tuint32_t) (r Tuint32_t) {
 		Fi int32
 	}
 	var v1 uint32
-	u = struct {
+	u = *(*struct {
 		Fc [0]int8
 		Fi int32
-	}{Fi: int32(1)}
+	})(unsafe.Pointer(&struct{ f int32 }{f: int32(1)}))
 	if *(*int8)(unsafe.Pointer(&u)) != 0 {
 		v1 = ___bswap_32(tls, n)
 	} else {
@@ -54081,10 +54081,10 @@ func x_ntohs(tls *TLS, n Tuint16_t) (r Tuint16_t) {
 		Fi int32
 	}
 	var v1 int32
-	u = struct {
+	u = *(*struct {
 		Fc [0]int8
 		Fi int32
-	}{Fi: int32(1)}
+	})(unsafe.Pointer(&struct{ f int32 }{f: int32(1)}))
 	if *(*int8)(unsafe.Pointer(&u)) != 0 {
 		v1 = int32(___bswap_16(tls, n))
 	} else {
