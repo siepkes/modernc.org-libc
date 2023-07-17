@@ -38,6 +38,8 @@ generate2:
 	echo -n > log-generate
 	echo -n > log-generate-errors
 	go run -tags=ccgo.dmesg generator*.go 2>&1 | tee log-generate
+	grep FAIL /tmp/ccgo.log
+	go build -v ./...
 
 test:
 	go test -v -timeout 24h 2>&1 | tee log-test

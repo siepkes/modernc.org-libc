@@ -5,9 +5,7 @@
 //go:build ignore
 // +build ignore
 
-// /tmp/libc-v2-generate2882489557/ : temporary directory kept
-
-// /tmp/libc-v2-generate2882489557/musl-1.2.4/src/linux
+// ~/tmp/musl/musl-1.2.4/
 
 package main
 
@@ -51,7 +49,6 @@ func main() {
 	}
 
 	tempDir := os.Getenv("GO_GENERATE_DIR")
-	doCopy := tempDir == ""
 	switch {
 	case tempDir != "":
 		util.MustShell(true, "sh", "-c", fmt.Sprintf("rm -rf %s/*", tempDir))
@@ -87,30 +84,32 @@ func main() {
 			cflags = fmt.Sprintf("CFLAGS=%s", s)
 		}
 		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static --disable-optimize", cCompiler, cflags))
-		util.MustShell(true, "find", "src/string", "-name", "*.s", "-delete")
-		util.MustShell(true, "rm", "src/math/x86_64/fabs.c", "src/math/x86_64/fabsf.c")
 		if err := ccgo.NewTask(
 			goos, goarch,
 			[]string{
 				os.Args[0],
 				"--package-name=libc",
+				"--predef=float __builtin_inff(void);",
+				"--predef=long __builtin_expect(long, long);",
 				"--prefix-enumerator=_",
 				"--prefix-external=x_",
 				"--prefix-field=F",
+				"--prefix-macro=m_",
 				"--prefix-static-internal=_",
 				"--prefix-static-none=_",
 				"--prefix-tagged-enum=_",
 				"--prefix-tagged-struct=T",
 				"--prefix-tagged-union=T",
 				"--prefix-typename=T",
-				"--prefix-macro=m_",
 				"--prefix-undefined=_",
 				"-exec-cc", cCompiler,
 				"-extended-errors",
-				"-hide=__assert_fail",
+				"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS",
+				"-hide", "a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32",
+				"-hide", "fabs,fabsf,fabsl",
 				"-ignore-asm-errors",
-				"-ignore-header-functions",
 				"-ignore-unsupported-alignment",
+				"-ignore-unsupported-atomic-sizes",
 				// "-positions", "-full-paths",
 				"-exec", "make", // keep last
 			},
@@ -118,10 +117,8 @@ func main() {
 		).Main(); err != nil {
 			return err
 		}
-		util.MustShell(true, "sed", "-i", `0,/)/s/)/\n\t. "modernc.org\/libc\/v2\/rtl"\n)/`, result)
+		util.MustShell(true, "sed", "-i", `0,/^)$/{s/^)$/\n\t. "modernc.org\/libc\/v2\/rtl"\n)/}`, result)
 		return nil
 	})
-	if doCopy {
-		util.MustShell(true, "cp", filepath.Join(muslRoot, result), fmt.Sprintf("libc_so_%s_%s.go", goos, goarch))
-	}
+	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fmt.Sprintf("libc_so_%s_%s.go", goos, goarch))
 }
