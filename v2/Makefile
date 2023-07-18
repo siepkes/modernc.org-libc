@@ -31,7 +31,9 @@ generate:
 	go build -v ./...
 	# go install github.com/mdempsky/unconvert@latest
 	./unconvert.sh
-	go build -v ./...
+	go build -v ./...  | tee -a log-generate
+	go test -v ./... 2>&1 | tee -a log-generate
+	git status
 
 generate2:
 	echo -n > /tmp/ccgo.log
@@ -39,7 +41,9 @@ generate2:
 	echo -n > log-generate-errors
 	go run -tags=ccgo.dmesg generator*.go 2>&1 | tee log-generate
 	grep FAIL /tmp/ccgo.log
-	go build -v ./...
+	go build -v ./...  | tee -a log-generate
+	go test -v ./... 2>&1 | tee -a log-generate
+	git status
 
 test:
 	go test -v -timeout 24h 2>&1 | tee log-test
