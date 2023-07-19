@@ -39,8 +39,9 @@ generate2:
 	echo -n > /tmp/ccgo.log
 	echo -n > log-generate
 	echo -n > log-generate-errors
-	go run -tags=ccgo.dmesg generator*.go 2>&1 | tee log-generate
+	go run -tags=ccgo.dmesg,ccgo.assert generator*.go 2>&1 | tee log-generate
 	grep FAIL /tmp/ccgo.log
+	./unconvert.sh
 	go build -v ./...  | tee -a log-generate
 	go test -v ./... 2>&1 | tee -a log-generate
 	git status

@@ -26,7 +26,7 @@ func _longjmp(tls *rtl.TLS, env uintptr, val int32) int64 {
 }
 
 // musl-1.2.4/src/thread/pthread_cancel.c:17:long __syscall_cp_asm(volatile void *, syscall_arg_t,
-func ___syscall_cp_asm(tls *rtl.TLS, _ uintptr, _, _, _, _, _, _, _ Tsyscall_arg_t) int64 {
+func ___syscall_cp_asm(tls *rtl.TLS, _ uintptr, _, _, _, _, _, _, _ int64) int64 {
 	panic(todo(""))
 }
 
@@ -287,12 +287,12 @@ func _setjmp(tls *rtl.TLS, env uintptr) int32 {
 }
 
 // ptrdiff_t __tlsdesc_static()
-func ___tlsdesc_static(tls *rtl.TLS) Tptrdiff_t {
+func ___tlsdesc_static(tls *rtl.TLS) int64 {
 	panic(todo(""))
 }
 
 // ptrdiff_t __tlsdesc_dynamic()
-func ___tlsdesc_dynamic(tls *rtl.TLS) Tptrdiff_t {
+func ___tlsdesc_dynamic(tls *rtl.TLS) int64 {
 	panic(todo(""))
 }
 
