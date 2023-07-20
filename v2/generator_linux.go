@@ -40,7 +40,6 @@ func fail(rc int, msg string, args ...any) {
 }
 
 func main() {
-
 	if os.Getenv(ccgo.CCEnvVar) != "" {
 		if err := ccgo.NewTask(goos, goarch, os.Args, os.Stdout, os.Stderr, nil).Main(); err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -117,7 +116,7 @@ func main() {
 		).Main(); err != nil {
 			return err
 		}
-		util.MustShell(true, "sed", "-i", `0,/^)$/{s/^)$/\n\t. "modernc.org\/libc\/v2\/rtl"\n)/}`, result)
+		util.MustShell(true, "sed", "-i", `0,/^)$/{s/^)$/\n\t. "modernc.org\/libc\/v2\/internal\/rtl"\n)/}`, result)
 		return nil
 	})
 	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fmt.Sprintf("libc_so_%s_%s.go", goos, goarch))

@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"unsafe"
 
-	. "modernc.org/libc/v2/rtl"
+	. "modernc.org/libc/v2/internal/rtl"
 )
 
 var (

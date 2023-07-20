@@ -7,13 +7,7 @@ package rtl // import "modernc.org/libc/v2/rtl"
 import (
 	"sync/atomic"
 	"unsafe"
-
-	"modernc.org/libc"
 )
-
-type TLS = libc.TLS
-
-func NewTLS() *TLS { return libc.NewTLS() }
 
 // VaList fills a varargs list at p with args and returns p.  The list must
 // have been allocated by caller and it must not be in Go managed memory, ie.

@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-.PHONY:	all clean edit editor generate generate2 test tidy work
+.PHONY:	all check clean edit editor generate generate2 test tidy work
 
 all: editor
 	golint 2>&1
@@ -11,6 +11,9 @@ all: editor
 clean:
 	rm -f log-* cpu.test mem.test *.out go.work*
 	go clean
+
+check:
+	staticcheck 2>&1 | grep -v U1000
 
 edit:
 	@touch log

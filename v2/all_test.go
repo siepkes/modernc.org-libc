@@ -9,7 +9,7 @@ import (
 	"testing"
 	"unsafe"
 
-	"modernc.org/libc/v2/rtl"
+	"modernc.org/libc/v2/internal/rtl"
 )
 
 func TestMain(m *testing.M) {
@@ -84,7 +84,7 @@ func TestAtomicOrInt32(t *testing.T) {
 }
 
 func TestXfmod(t *testing.T) {
-	tls := rtl.NewTLS()
+	tls := NewTLS()
 
 	defer tls.Close()
 
@@ -113,7 +113,7 @@ var (
 )
 
 // func TestPrintf(t *testing.T) {
-// 	tls := rtl.NewTLS()
+// 	tls := NewTLS()
 //
 // 	defer tls.Close()
 //
