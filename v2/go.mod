@@ -13,9 +13,9 @@ require (
 	golang.org/x/tools v0.10.0 // indirect
 	lukechampine.com/uint128 v1.2.0 // indirect
 	modernc.org/cc/v3 v3.41.0 // indirect
-	modernc.org/cc/v4 v4.11.0 // indirect
+	modernc.org/cc/v4 v4.11.1 // indirect
 	modernc.org/ccgo/v3 v3.16.14 // indirect
-	modernc.org/ccgo/v4 v4.0.0-20230720154611-8a40effa9806 // indirect
+	modernc.org/ccgo/v4 v4.0.0-20230721195953-67ec88623f51 // indirect
 	modernc.org/ccorpus2 v1.4.0 // indirect
 	modernc.org/gc/v2 v2.3.0 // indirect
 	modernc.org/libc v1.24.1 // indirect
