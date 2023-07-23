@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-.PHONY:	all check clean edit editor generate generate2 test tidy work
+.PHONY:	all check clean edit editor generate dev test tidy work
 
 all: editor
 	golint 2>&1
@@ -38,11 +38,11 @@ generate:
 	go test -v ./... 2>&1 | tee -a log-generate
 	git status
 
-generate2:
+dev:
 	echo -n > /tmp/ccgo.log
 	echo -n > log-generate
 	echo -n > log-generate-errors
-	go run -tags=ccgo.dmesg,ccgo.assert generator*.go 2>&1 | tee log-generate
+	GO_GENERATE_DEV=1 go run -tags=ccgo.dmesg,ccgo.assert generator*.go 2>&1 | tee log-generate
 	grep FAIL /tmp/ccgo.log
 	./unconvert.sh
 	go build -v ./...  | tee -a log-generate
