@@ -222,8 +222,6 @@ func newTLS() *TLS {
 }
 
 func (t *TLS) Alloc(n int) (r uintptr) {
-	return mustPrivateMalloc(n) //TODO-
-
 	sp := t.sp
 	if sp < len(t.stack) {
 		s := t.stack[sp]
