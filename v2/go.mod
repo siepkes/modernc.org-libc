@@ -15,8 +15,8 @@ require (
 	modernc.org/cc/v3 v3.41.0 // indirect
 	modernc.org/cc/v4 v4.11.3 // indirect
 	modernc.org/ccgo/v3 v3.16.14 // indirect
-	modernc.org/ccgo/v4 v4.0.0-20230723200154-6be9fc7ec230 // indirect
-	modernc.org/ccorpus2 v1.4.0 // indirect
+	modernc.org/ccgo/v4 v4.0.0-20230726175202-4c30bedf484f // indirect
+	modernc.org/ccorpus2 v1.4.1 // indirect
 	modernc.org/gc/v2 v2.3.0 // indirect
 	modernc.org/libc v1.24.1 // indirect
 	modernc.org/mathutil v1.6.0 // indirect

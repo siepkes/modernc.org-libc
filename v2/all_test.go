@@ -8,15 +8,10 @@ import (
 	"bytes"
 	"encoding/hex"
 	"os"
+	"path/filepath"
 	"runtime"
 	"testing"
 	"unsafe"
-
-	"modernc.org/libc/v2/internal/rtl"
-)
-
-var (
-	tls = NewTLS()
 )
 
 func TestMain(m *testing.M) {
@@ -24,9 +19,14 @@ func TestMain(m *testing.M) {
 	os.Exit(rc)
 }
 
+func Test(t *testing.T) {
+	t.Logf("TODO")
+}
+
 var (
-	testAtomicCASInt32 int32
-	testAtomicCASp     uintptr
+	testAtomicCASInt32  int32
+	testAtomicCASUint64 uint64
+	testAtomicCASp      uintptr
 )
 
 func TestAtomicCASInt32(t *testing.T) {
@@ -84,13 +84,36 @@ func TestAtomicOrInt32(t *testing.T) {
 		t.Fatalf("%032b", j)
 	}
 
-	a_or(pi, rtl.Int32FromUint32(0x80000000))
-	if j := testAtomicCASInt32; j != rtl.Int32FromUint32(0x80000003) {
+	a_or(pi, Int32FromUint32(0x80000000))
+	if j := testAtomicCASInt32; j != Int32FromUint32(0x80000003) {
 		t.Fatalf("%032b", j)
 	}
 }
 
+func TestAtomicOrUint64(t *testing.T) {
+	pi := uintptr(unsafe.Pointer(&testAtomicCASUint64))
+	testAtomicCASUint64 = 0
+	a_or_64(pi, 1)
+	if j := testAtomicCASUint64; j != 1 {
+		t.Fatalf("%064b", j)
+	}
+
+	a_or_64(pi, 2)
+	if j := testAtomicCASUint64; j != 3 {
+		t.Fatalf("%064b", j)
+	}
+
+	a_or_64(pi, Uint64FromUint64(0x80000000))
+	if j := testAtomicCASUint64; j != Uint64FromUint64(0x80000003) {
+		t.Fatalf("%064b", j)
+	}
+}
+
 func TestXfmod(t *testing.T) {
+	tls := NewTLS()
+
+	defer tls.Close()
+
 	x := 1.3518643030646695
 	y := 6.283185307179586
 	if g, e := Xfmod(tls, x, y), 1.3518643030646695; g != e {
@@ -116,6 +139,10 @@ var (
 )
 
 func TestSprintf(t *testing.T) {
+	tls := NewTLS()
+
+	defer tls.Close()
+
 	i := uint64(0x123456789abcdef)
 	j := uint64(0xf123456789abcde)
 	k := uint64(0x23456789abcdef1)
@@ -149,7 +176,7 @@ func TestSprintf(t *testing.T) {
 	} {
 		copy(formatString[:], test.fmt+"\x00")
 		printBuf = [256]byte{}
-		rc := x_sprintf(tls, uintptr(unsafe.Pointer(&printBuf)), uintptr(unsafe.Pointer(&formatString[0])), rtl.VaList(uintptr(unsafe.Pointer(&valist[0])), test.args...))
+		rc := Xsprintf(tls, uintptr(unsafe.Pointer(&printBuf)), uintptr(unsafe.Pointer(&formatString[0])), VaList(uintptr(unsafe.Pointer(&valist[0])), test.args...))
 		x := bytes.IndexByte(printBuf[:], 0)
 		if x < 0 {
 			t.Errorf("%v:", itest)
@@ -167,6 +194,10 @@ func TestStrtod(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("TODO")
 	}
+
+	tls := NewTLS()
+
+	defer tls.Close()
 
 	for itest, test := range []struct {
 		s      string
@@ -195,6 +226,10 @@ func TestStrtod(t *testing.T) {
 }
 
 func TestRint(t *testing.T) {
+	tls := NewTLS()
+
+	defer tls.Close()
+
 	for itest, test := range []struct {
 		x, y float64
 	}{
@@ -240,6 +275,7 @@ func TestMemset(t *testing.T) {
 	}
 }
 
+//TODO N/A musl 0.6.0
 //TODO const testGetentropySize = 100
 //TODO
 //TODO var testGetentropyBuf [testGetentropySize]byte
@@ -249,131 +285,124 @@ func TestMemset(t *testing.T) {
 //TODO 	t.Logf("\n%s", hex.Dump(testGetentropyBuf[:]))
 //TODO }
 
-func TestReallocArray(t *testing.T) {
-	const size = 16
-	p := Xmalloc(tls, size)
-	if p == 0 {
-		t.Fatal()
-	}
+//TODO N/A musl 0.6.0
+// TODO func TestReallocArray(t *testing.T) {
+// TODO 	const size = 16
+// TODO 	p := Xmalloc(tls, size)
+// TODO 	if p == 0 {
+// TODO 		t.Fatal()
+// TODO 	}
+// TODO
+// TODO 	//TODO defer Xfree(tls, p), crashes
+// TODO
+// TODO 	for i := 0; i < size; i++ {
+// TODO 		unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i] = byte(i ^ 0x55)
+// TODO 	}
+// TODO
+// TODO 	q := Xreallocarray(tls, p, 2, size)
+// TODO 	if q == 0 {
+// TODO 		t.Fatal()
+// TODO 	}
+// TODO
+// TODO 	for i := 0; i < size; i++ {
+// TODO 		if g, e := unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i], byte(i^0x55); g != e {
+// TODO 			t.Fatal(i, g, e)
+// TODO 		}
+// TODO 	}
+// TODO }
 
-	//TODO defer Xfree(tls, p), crashes
-
-	for i := 0; i < size; i++ {
-		unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i] = byte(i ^ 0x55)
-	}
-
-	q := Xreallocarray(tls, p, 2, size)
-	if q == 0 {
-		t.Fatal()
-	}
-
-	for i := 0; i < size; i++ {
-		if g, e := unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i], byte(i^0x55); g != e {
-			t.Fatal(i, g, e)
-		}
-	}
-}
-
-func mustCString(s string) uintptr {
-	r, err := CString(s)
+func mustTestCString(s string) uintptr {
+	r, err := testCString(s)
 	if err != nil {
-		panic("CString failed")
+		panic("testCString failed")
 	}
 
 	return r
 }
 
+func testCString(s string) (uintptr, error) {
+	n := len(s)
+	p, err := privateMalloc(n + 1)
+	if err != nil {
+		return 0, err
+	}
+
+	copy(unsafe.Slice((*byte)(unsafe.Pointer(p)), n), s)
+	*(*byte)(unsafe.Pointer(p + uintptr(n))) = 0
+	return p, nil
+}
+
 var testSnprintfBuf [3]byte
 
-//TODO func TestSnprintf(t *testing.T) {
-//TODO 	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
-//TODO 	p := uintptr(unsafe.Pointer(&testSnprintfBuf[0]))
-//TODO 	if g, e := Xsnprintf(nil, p, 0, 0, 0), int32(0); g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	if g, e := testSnprintfBuf, [3]byte{0xff, 0xff, 0xff}; g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	if g, e := Xsnprintf(nil, p, 0, mustCString(""), 0), int32(0); g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	if g, e := testSnprintfBuf, [3]byte{0xff, 0xff, 0xff}; g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	s := mustCString("12")
-//TODO 	if g, e := Xsnprintf(nil, p, 0, s, 0), int32(2); g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	if g, e := testSnprintfBuf, [3]byte{0xff, 0xff, 0xff}; g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	if g, e := Xsnprintf(nil, p, 1, s, 0), int32(2); g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	if g, e := testSnprintfBuf, [3]byte{0x00, 0xff, 0xff}; g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
-//TODO 	if g, e := Xsnprintf(nil, p, 2, s, 0), int32(2); g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	if g, e := testSnprintfBuf, [3]byte{'1', 0x00, 0xff}; g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
-//TODO 	if g, e := Xsnprintf(nil, p, 3, s, 0), int32(2); g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	if g, e := testSnprintfBuf, [3]byte{'1', '2', 0x00}; g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO }
+func TestSnprintf(t *testing.T) {
+	tls := NewTLS()
 
-//TODO var testFdopenBuf [100]byte
-//TODO
-//TODO func TestFdopen(t *testing.T) {
-//TODO 	if runtime.GOOS == "windows" {
-//TODO 		t.Skip("not implemented on Windows")
-//TODO 	}
-//TODO
-//TODO 	const s = "foobarbaz\n"
-//TODO 	tempdir := t.TempDir()
-//TODO 	f, err := os.Create(filepath.Join(tempdir, "test_fdopen"))
-//TODO 	if err != nil {
-//TODO 		t.Fatal(err)
-//TODO 	}
-//TODO
-//TODO 	if _, err := f.Write([]byte(s)); err != nil {
-//TODO 		t.Fatal(err)
-//TODO 	}
-//TODO
-//TODO 	if _, err := f.Seek(0, os.SEEK_SET); err != nil {
-//TODO 		t.Fatal(err)
-//TODO 	}
-//TODO
-//TODO 	tls := NewTLS()
-//TODO
-//TODO 	defer tls.Close()
-//TODO
-//TODO 	p := Xfdopen(tls, int32(f.Fd()), mustCString("r"))
-//TODO
-//TODO 	bp := uintptr(unsafe.Pointer(&testFdopenBuf))
-//TODO 	if g, e := Xfread(tls, bp, 1, uint64(len(testFdopenBuf)), p), uint64(len(s)); g != e {
-//TODO 		t.Fatal(g, e)
-//TODO 	}
-//TODO
-//TODO 	if g, e := string(GoBytes(bp, len(s))), s; g != e {
-//TODO 		t.Fatalf("%q %q", g, e)
-//TODO 	}
-//TODO }
+	defer tls.Close()
+
+	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
+	p := uintptr(unsafe.Pointer(&testSnprintfBuf[0]))
+	s := mustTestCString("12")
+	if g, e := Xsnprintf(tls, p, 1, s, 0), int32(2); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := testSnprintfBuf, [3]byte{0x00, 0xff, 0xff}; g != e {
+		t.Fatal(g, e)
+	}
+
+	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
+	if g, e := Xsnprintf(tls, p, 2, s, 0), int32(2); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := testSnprintfBuf, [3]byte{'1', 0x00, 0xff}; g != e {
+		t.Fatal(g, e)
+	}
+
+	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
+	if g, e := Xsnprintf(tls, p, 3, s, 0), int32(2); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := testSnprintfBuf, [3]byte{'1', '2', 0x00}; g != e {
+		t.Fatal(g, e)
+	}
+}
+
+var testFdopenBuf [100]byte
+
+func TestFdopen(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("not implemented on Windows")
+	}
+
+	tls := NewTLS()
+
+	defer tls.Close()
+
+	const s = "foobarbaz\n"
+	tempdir := t.TempDir()
+	f, err := os.Create(filepath.Join(tempdir, "test_fdopen"))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if _, err := f.Write([]byte(s)); err != nil {
+		t.Fatal(err)
+	}
+
+	if _, err := f.Seek(0, os.SEEK_SET); err != nil {
+		t.Fatal(err)
+	}
+
+	p := Xfdopen(tls, int32(f.Fd()), mustTestCString("r"))
+
+	bp := uintptr(unsafe.Pointer(&testFdopenBuf))
+	if g, e := Xfread(tls, bp, 1, uint64(len(testFdopenBuf)), p), uint64(len(s)); g != e {
+		t.Fatal(g, e)
+	}
+
+	if g, e := string(GoBytes(bp, len(s))), s; g != e {
+		t.Fatalf("%q %q", g, e)
+	}
+}

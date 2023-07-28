@@ -21,7 +21,7 @@ edit:
 
 editor:
 	gofmt -l -s -w *.go 2>&1 | tee log-editor
-	go test ./... 2>&1 | tee -a log-editor
+	go test -c -o /dev/null 2>&1 | tee -a log-editor
 	go install -v  ./... 2>&1 | tee -a log-editor
 	go build -o /dev/null generator*.go
 
@@ -48,6 +48,9 @@ dev:
 	go build -v ./...  | tee -a log-generate
 	go test -v ./... 2>&1 | tee -a log-generate
 	git status
+
+musl-0.6.0:
+	GO_GENERATE_ARCHIVE=musl-0.6.0.tar.gz make generate
 
 test:
 	go test -v -timeout 24h 2>&1 | tee log-test
