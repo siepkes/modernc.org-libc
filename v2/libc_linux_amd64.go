@@ -245,6 +245,7 @@ func (t *TLS) Alloc(n int) (r uintptr) {
 }
 
 func (t *TLS) Free(n int) {
+	//TODO shrink stacks
 	t.sp--
 }
 
@@ -280,11 +281,11 @@ func _longjmp(tls *TLS, env uintptr, val int32) int64 {
 	panic(todo(""))
 }
 
-func a_cas(p uintptr, t, s int32) int32
-
-func _a_cas(tls *TLS, p uintptr, test, s int32) int32 {
-	return a_cas(p, test, s)
-}
+// func a_cas(p uintptr, t, s int32) int32
+//
+// func _a_cas(tls *TLS, p uintptr, test, s int32) int32 {
+// 	return a_cas(p, test, s)
+// }
 
 func _a_spin(tls *TLS) {
 	panic(todo(""))
@@ -306,11 +307,11 @@ func _a_cas_p(tls *TLS, p, test, s uintptr) uintptr {
 	return a_cas_p(p, test, s)
 }
 
-func a_or(p uintptr, v int32)
-
-func _a_or(tls *TLS, p uintptr, v int32) {
-	a_or(p, v)
-}
+// func a_or(p uintptr, v int32)
+//
+// func _a_or(tls *TLS, p uintptr, v int32) {
+// 	a_or(p, v)
+// }
 
 func a_or_64(p uintptr, v uint64)
 
@@ -384,39 +385,17 @@ func ___set_thread_area(tls *TLS, p uintptr) int32 {
 	return 0
 }
 
-func ___bswap_16(tls *TLS, __x uint16) uint16 {
-	return __x<<8 | __x>>8
-}
-
-func ___bswap32(tls *TLS, __x uint32) uint32 {
-	return __x>>int32(24) | __x>>int32(8)&uint32(0xff00) | __x<<int32(8)&uint32(0xff0000) | __x<<int32(24)
-}
-
-func ___bswap_32(tls *TLS, x uint32) uint32 {
-	return ___bswap32(tls, x)
-}
-
-func _memcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
-	return _memmove(tls, dest, src, n)
-}
-
-func _memmove(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
-	if n != 0 {
-		copy(unsafe.Slice((*byte)(unsafe.Pointer(dest)), n), unsafe.Slice((*byte)(unsafe.Pointer(src)), n))
-	}
-	return dest
-}
-
-func _memset(tls *TLS, s uintptr, c int32, n uint64) (r uintptr) {
-	if n != 0 {
-		c := byte(c & 0xff)
-		b := unsafe.Slice((*byte)(unsafe.Pointer(s)), n)
-		for i := range b {
-			b[i] = c
-		}
-	}
-	return s
-}
+// func ___bswap_16(tls *TLS, __x uint16) uint16 {
+// 	return __x<<8 | __x>>8
+// }
+//
+// func ___bswap32(tls *TLS, __x uint32) uint32 {
+// 	return __x>>int32(24) | __x>>int32(8)&uint32(0xff00) | __x<<int32(8)&uint32(0xff0000) | __x<<int32(24)
+// }
+//
+// func ___bswap_32(tls *TLS, x uint32) uint32 {
+// 	return ___bswap32(tls, x)
+// }
 
 func ___setjmp(tls *TLS, env uintptr) int32 {
 	panic(todo(""))
@@ -432,7 +411,7 @@ func ___uniclone(tls *TLS, start, stack, new uintptr) int32 {
 
 // ----------------------------------------------------------------------------
 
-// Xfmod computes the floating-point remainder of dividing x by y.  The return
+// Xfmod computes the floating-point remainder of dividing x by y. The return
 // value is x - n * y, where n is the quotient of x / y, rounded toward zero to
 // an integer.
 func Xfmod(tls *TLS, x float64, y float64) (r float64) {
@@ -440,7 +419,7 @@ func Xfmod(tls *TLS, x float64, y float64) (r float64) {
 }
 
 // Xsprintf provides formatted output conversion. Xsprintf writes to the
-// character string str.  Upon successful return, this functions returns the
+// character string str. Upon successful return, this functions returns the
 // number of characters printed (excluding the null byte used to end output to
 // strings).
 func Xsprintf(tls *TLS, str uintptr, fmt uintptr, va uintptr) (r int32) {
@@ -461,7 +440,7 @@ func Xrint(tls *TLS, x float64) float64 {
 
 // Xmemset fills the first n bytes of the memory area pointed to by s with the constant byte c.
 func Xmemset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
-	return _memset(tls, s, c, n)
+	return x_memset(tls, s, c, n)
 }
 
 // Xsnprintf writes at most size bytes (including the terminating null byte
@@ -470,14 +449,14 @@ func Xsnprintf(tls *TLS, str uintptr, size uint64, format, args uintptr) int32 {
 	return x_snprintf(tls, str, size, format, args)
 }
 
-// Xfdopen associates a stream with the existing file descriptor, fd.  The mode
-// of the stream (one of the values "r", "r+", "w", "w+", "a", "a+") must  be
-// compatible  with  the mode  of the file descriptor.  The file position
-// indicator of the new stream is set to that belonging to fd, and the error
-// and end-of-file indicators are cleared.  Modes "w" or "w+" do not cause
-// truncation of the file.  The file descriptor is not dup'ed, and will be
-// closed when the stream created by fdopen() is closed.  The result of
-// applying fdopen() to a shared memory  object is undefined.
+// Xfdopen associates a stream with the existing file descriptor, fd. The mode
+// of the stream (one of the values "r", "r+", "w", "w+", "a", "a+") must be
+// compatible with the mode of the file descriptor. The file position indicator
+// of the new stream is set to that belonging to fd, and the error and
+// end-of-file indicators are cleared. Modes "w" or "w+" do not cause
+// truncation of the file. The file descriptor is not dup'ed, and will be
+// closed when the stream created by fdopen() is closed. The result of applying
+// fdopen() to a shared memory object is undefined.
 func Xfdopen(tls *TLS, fd int32, mode uintptr) uintptr {
 	return x___fdopen(tls, fd, mode)
 }
@@ -496,29 +475,29 @@ func Xmalloc(tls *TLS, n uint64) (r uintptr) {
 	return x_malloc(tls, n)
 }
 
-// The Xree function frees the memory space pointed to by ptr, which must
-// have been returned by a previous call to Xmalloc(), Xcalloc(), or Xrealloc().
-// Otherwise, or if Xfree(ptr) has  already been called before, undefined
-// behavior occurs.  If ptr is NULL, no operation is performed.
+// The Xree function frees the memory space pointed to by ptr, which must have
+// been returned by a previous call to Xmalloc(), Xcalloc(), or Xrealloc().
+// Otherwise, or if Xfree(ptr) has already been called before, undefined
+// behavior occurs. If ptr is NULL, no operation is performed.
 func Xfree(tls *TLS, p uintptr) {
 	x_free(tls, p)
 }
 
 // Xcalloc allocates memory for an array of nmemb elements of size bytes each
-// and returns a pointer to the allocated memory.  The memory is set to zero.
+// and returns a pointer to the allocated memory. The memory is set to zero.
 // If nmemb or size is 0, then Xcalloc returns either NULL, or a unique pointer
-// value that can later be successfully passed to free().  If the
-// multiplication of nmemb and size would  result  in  integer  overflow, then
-// Xcalloc  returns an error.  By contrast, an integer overflow would not be
-// detected in the following call to malloc(), with the result that an
-// incorrectly sized block of memory would be allocated:
+// value that can later be successfully passed to free(). If the multiplication
+// of nmemb and size would result in integer overflow, then Xcalloc returns an
+// error. By contrast, an integer overflow would not be detected in the
+// following call to malloc(), with the result that an incorrectly sized block
+// of memory would be allocated:
 //
 //	Xmalloc(nmemb * size)
 func Xcalloc(tls *TLS, nmemb, size uint64) (r uintptr) {
 	return x_calloc(tls, nmemb, size)
 }
 
-// Xprintf produces output according to a format.  It writes output to stdout,
+// Xprintf produces output according to a format. It writes output to stdout,
 // the standard output stream;
 func Xprintf(tls *TLS, format, va uintptr) (r int32) {
 	return x_printf(tls, format, va)
@@ -529,8 +508,13 @@ func Xsin(tls *TLS, x float64) (r float64) {
 	return x_sin(tls, x)
 }
 
-// Xstrcpy  copies the string pointed to by src, including the terminating null
-// byte ('\0'), to the buffer pointed to by dest.  The strings may not overlap,
+// Xsinf returns the sine of x, where x is given in radians.
+func Xsinf(tls *TLS, x float32) (r float32) {
+	return x_sinf(tls, x)
+}
+
+// Xstrcpy copies the string pointed to by src, including the terminating null
+// byte ('\0'), to the buffer pointed to by dest. The strings may not overlap,
 // and the destination string dest must be large enough to receive the copy.
 // Beware of buffer overruns!
 func Xstrcpy(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
@@ -539,7 +523,7 @@ func Xstrcpy(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
 
 // Xstrncpy is line Xstrcpy, except that at most n bytes of src are copied.
 // Warning: If there is no null byte among the first n bytes of src, the string
-// placed in dest will not  be null-terminated.
+// placed in dest will not be null-terminated.
 func Xstrncpy(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
 	return x_strncpy(tls, dest, src, n)
 }
@@ -555,6 +539,11 @@ func Xstrcmp(tls *TLS, s1 uintptr, s2 uintptr) (r int32) {
 // excluding the terminating null byte ('\0').
 func Xstrlen(tls *TLS, s uintptr) (r uint64) {
 	return x_strlen(tls, s)
+}
+
+// X__builtin_strlen is equivalent to Xstrlen.
+func X__builtin_strlen(tls *TLS, s uintptr) (r uint64) {
+	return Xstrlen(tls, s)
 }
 
 // Xstrcat appends the src string to the dest string, overwriting the
@@ -585,10 +574,15 @@ func Xstrrchr(tls *TLS, s uintptr, c int32) (r uintptr) {
 	return x_strrchr(tls, s, c)
 }
 
-// Xmemcpy copies n bytes from memory area src to memory area dest.  The memory
-// areas must not overlap.  Use memmove(3) if the memory areas do overlap.
+// Xmemcpy copies n bytes from memory area src to memory area dest. The memory
+// areas must not overlap. Use memmove(3) if the memory areas do overlap.
 func Xmemcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
-	return _memcpy(tls, dest, src, n)
+	return x_memcpy(tls, dest, src, n)
+}
+
+// X__builtin_memcpy is equivalent to Xmemcpy.
+func X__builtin_memcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
+	return Xmemcpy(tls, dest, src, n)
 }
 
 // Xmemcmp compares the first n bytes (each interpreted as unsigned char) of
@@ -605,46 +599,46 @@ func Xmemcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint64) (r1 int32) {
 //
 //	r
 //
-// Open text file for reading.  The stream is positioned at the beginning of
-// the file.
+// Open text file for reading. The stream is positioned at the beginning of the
+// file.
 //
 //	r+
 //
-// Open for reading and writing.  The stream is positioned at the beginning of
+// Open for reading and writing. The stream is positioned at the beginning of
 // the file.
 //
 //	w
 //
-// Truncate file to zero length or create text file for writing.  The stream is
+// Truncate file to zero length or create text file for writing. The stream is
 // positioned at the beginning of the file.
 //
 //	w+
 //
-// Open for reading and writing.  The file is created if it does not exist,
-// otherwise it is truncated.  The stream is positioned at the beginning of the
+// Open for reading and writing. The file is created if it does not exist,
+// otherwise it is truncated. The stream is positioned at the beginning of the
 // file.
 //
 //	a
 //
-// Open for appending (writing at end of file).  The file is created if it does
-// not exist.  The stream is positioned at the end of the file.
+// Open for appending (writing at end of file). The file is created if it does
+// not exist. The stream is positioned at the end of the file.
 //
 //	a+
 //
-// Open  for  reading and appending (writing at end of file).  The file is
-// created if it does not exist.  Output is always appended to the end of the
-// file.  POSIX is silent on what the initial read position is when using this
-// mode.  For glibc, the initial file position for reading is at the beginning
-// of the file, but for Android/BSD/MacOS, the initial  file  position for
-// reading is at the end of the file.
+// Open for reading and appending (writing at end of file). The file is created
+// if it does not exist. Output is always appended to the end of the file.
+// POSIX is silent on what the initial read position is when using this mode.
+// For glibc, the initial file position for reading is at the beginning of the
+// file, but for Android/BSD/MacOS, the initial file position for reading is at
+// the end of the file.
 //
-// The  mode  string can also include the letter 'b' either as a last character
+// The mode string can also include the letter 'b' either as a last character
 // or as a character between the characters in any of the two-character strings
-// described above.  This is strictly for compatibility with C89 and has no
+// described above. This is strictly for compatibility with C89 and has no
 // effect; the 'b' is ignored on all POSIX conforming systems, including Linux.
-// (Other systems may treat text files and binary  files  differently,  and
-// adding the 'b' may be a good idea if you do I/O to a binary file and expect
-// that your program may be ported to non-UNIX environments.)
+// (Other systems may treat text files and binary files differently, and adding
+// the 'b' may be a good idea if you do I/O to a binary file and expect that
+// your program may be ported to non-UNIX environments.)
 func Xfopen(tls *TLS, pathname uintptr, mode uintptr) (r uintptr) {
 	return x_fopen(tls, pathname, mode)
 }
@@ -693,20 +687,20 @@ func Xexit(tls *TLS, code int32) {
 }
 
 // Xtolower returns a lowercase equivalent of c, if c is an uppercase letter
-// and a lowercase representation exists in the current locale.  Otherwise, it
-// returns  c.
+// and a lowercase representation exists in the current locale. Otherwise, it
+// returns c.
 func Xtolower(tls *TLS, c int32) (r int32) {
 	return x_tolower(tls, c)
 }
 
 // Xrealloc function changes the size of the memory block pointed to by ptr to
-// size bytes.  The contents will be unchanged in the range from the start of
-// the region up to the minimum  of the  old and new sizes.  If the new size is
-// larger than the old size, the added memory will not be initialized.  If ptr
+// size bytes. The contents will be unchanged in the range from the start of
+// the region up to the minimum of the old and new sizes. If the new size is
+// larger than the old size, the added memory will not be initialized. If ptr
 // is NULL, then the call is equivalent to Xmalloc(size), for all values of
 // size; if size is equal to zero, and ptr is not NULL, then the call is
-// equivalent to Xfree(ptr).  Unless ptr is NULL, it must have been returned by
-// an earlier call to Xmalloc(), Xcalloc(), or Xrealloc().  If the area pointed
+// equivalent to Xfree(ptr). Unless ptr is NULL, it must have been returned by
+// an earlier call to Xmalloc(), Xcalloc(), or Xrealloc(). If the area pointed
 // to was moved, a Xfree(ptr) is done.
 func Xrealloc(tls *TLS, ptr uintptr, size uint64) (r uintptr) {
 	return x_realloc(tls, ptr, size)
@@ -725,4 +719,279 @@ func Xfabsf(tls *TLS, x float32) (r float32) {
 // X__assert_fail aborts a program.
 func X__assert_fail(tls *TLS, expr uintptr, file uintptr, line uint32, func1 uintptr) {
 	x___assert_fail(tls, expr, file, int32(line), func1)
+}
+
+// Xatoi converts the initial portion of the string pointed to by nptr to int.
+// The behavior is the same as
+//
+//	strtol(nptr, NULL, 10);
+//
+// except that atoi() does not detect errors.
+func Xatoi(tls *TLS, nptr uintptr) (r int32) {
+	return x_atoi(tls, nptr)
+}
+
+// Xatol converts the initial portion of the string pointed to by nptr to long.
+// The behavior is the same as
+//
+//	strtol(nptr, NULL, 10);
+//
+// except that atol() does not detect errors.
+func Xatol(tls *TLS, nptr uintptr) (r int64) {
+	return x_atol(tls, nptr)
+}
+
+// Xfputs writes the string s to stream, without its terminating null byte ('\0').
+func Xfputs(tls *TLS, s uintptr, stream uintptr) (r int32) {
+	return x_fputs(tls, s, stream)
+}
+
+// Xfputc writes the character c, cast to an unsigned char, to stream.
+func Xfputc(tls *TLS, c int32, stream uintptr) (r int32) {
+	return x_fputc(tls, c, stream)
+}
+
+// Xputc is equivalent to Xfputc.
+func Xputc(tls *TLS, c int32, stream uintptr) (r int32) {
+	return x_fputc(tls, c, stream)
+}
+
+// Xutchar(c) is equivalent to Xputc(c, Xstdout).
+func Xputchar(tls *TLS, c int32) (r int32) {
+	return x_putchar(tls, c)
+}
+
+// Xfloor returns the largest integral value that is not greater than x.
+func Xfloor(tls *TLS, x float64) (r float64) {
+	return x_floor(tls, x)
+}
+
+// Xfloorf returns the largest integral value that is not greater than x.
+func Xfloorf(tls *TLS, x float32) (r float32) {
+	return x_floorf(tls, x)
+}
+
+// Xpow returns the value of x raised to the power of y.
+func Xpow(tls *TLS, x float64, y float64) (r float64) {
+	return x_pow(tls, x, y)
+}
+
+// Xpowf returns the value of x raised to the power of y.
+func Xpowf(tls *TLS, x float32, y float32) (r1 float32) {
+	return x_powf(tls, x, y)
+}
+
+// Xcos returns the cosine of x, where x is given in radians.
+func Xcos(tls *TLS, x float64) (r float64) {
+	return x_cos(tls, x)
+}
+
+// Xcosf returns the cosine of x, where x is given in radians.
+func Xcosf(tls *TLS, x float32) (r float32) {
+	return x_cosf(tls, x)
+}
+
+// Xatan2 calculates the principal value of the arc tangent of y/x, using the
+// signs of the two arguments to determine the quadrant of the result.
+func Xatan2(tls *TLS, y float64, x float64) (r float64) {
+	return x_atan2(tls, y, x)
+}
+
+// Xatan2f calculates the principal value of the arc tangent of y/x, using the
+// signs of the two arguments to determine the quadrant of the result.
+func Xatan2f(tls *TLS, y float32, x float32) (r float32) {
+	return x_atan2f(tls, y, x)
+}
+
+// Xsqrt returns the nonnegative square root of x.
+func Xsqrt(tls *TLS, x float64) float64 {
+	return _sqrt(tls, x)
+}
+
+// Xsqrtf returns the nonnegative square root of x.
+func Xsqrtf(tls *TLS, x float32) float32 {
+	return _sqrtf(tls, x)
+}
+
+// Xasin calculates the principal value of the arc sine of x; that is the value
+// whose sine is x.
+func Xasin(tls *TLS, x float64) (r float64) {
+	return x_asin(tls, x)
+}
+
+// Xasinf calculates the principal value of the arc sine of x; that is the value
+// whose sine is x.
+func Xasinf(tls *TLS, x float32) (r float32) {
+	return x_asinf(tls, x)
+}
+
+// For output streams, Xfflush forces a write of all user-space buffered data
+// for the given output or update stream via the stream's underlying write
+// function.
+//
+// For input streams associated with seekable files (e.g., disk files, but not
+// pipes or terminals), Xfflush discards any buffered data that has been
+// fetched from the underlying file, but has not been consumed by the
+// application.
+//
+// The open status of the stream is unaffected.
+//
+// If the stream argument is NULL, Xfflush() flushes all open output streams.
+//
+// For a nonlocking counterpart, see unlocked_stdio(3).
+func Xfflush(tls *TLS, stream uintptr) (r int32) {
+	return x_fflush(tls, stream)
+}
+
+// Xrand returns a pseudo-random integer in the range 0 to RAND_MAX inclusive
+// (i.e., the mathematical range [0, RAND_MAX]).
+func Xrand(tls *TLS) (r int32) {
+	return x_rand(tls)
+}
+
+// Xperror produces a message on standard error describing the last error
+// encountered during a call to a system or library function.
+//
+// First (if s is not NULL and *s is not a null byte ('\0')), the argument
+// string s is printed, followed by a colon and a blank. Then an error message
+// corresponding to the current value of errno and a new-line.
+//
+// To be of most use, the argument string should include the name of the
+// function that incurred the error.
+//
+// The global error list sys_errlist[], which can be indexed by errno, can be
+// used to obtain the error message without the newline. The largest message
+// number provided in the table is sys_nerr-1. Be careful when directly
+// accessing this list, because new error values may not have been added to
+// sys_errlist[]. The use of sys_errlist[] is nowadays deprecated; use str‐
+// error(3) instead.
+//
+// When a system call fails, it usually returns -1 and sets the variable errno
+// to a value describing what went wrong. (These values can be found in
+// <errno.h>.) Many library functions do likewise. The function perror() serves
+// to translate this error code into human-readable form. Note that errno is
+// undefined after a successful system call or library function call: this call
+// may well change this variable, even though it succeeds, for example because
+// it internally used some other library function that failed. Thus, if a
+// failing call is not immediately followed by a call to perror(), the value of
+// errno should be saved.
+func Xperror(tls *TLS, s uintptr) {
+	x_perror(tls, s)
+}
+
+// The qsort() function sorts an array with nmemb elements of size size. The
+// base argument points to the start of the array.
+//
+// The contents of the array are sorted in ascending order according to a
+// comparison function pointed to by compar, which is called with two arguments
+// that point to the objects being com‐ pared.
+//
+// The comparison function must return an integer less than, equal to, or
+// greater than zero if the first argument is considered to be respectively
+// less than, equal to, or greater than the second. If two members compare as
+// equal, their order in the sorted array is undefined.
+//
+// The qsort_r() function is identical to qsort() except that the comparison
+// function compar takes a third argument. A pointer is passed to the
+// comparison function via arg. In this way, the comparison function does not
+// need to use global variables to pass through arbitrary arguments, and is
+// therefore reentrant and safe to use in threads.
+func Xqsort(tls *TLS, array uintptr, nmemb uint64, size uint64, compar uintptr) {
+	x_qsort(tls, array, nmemb, size, compar)
+}
+
+// Xtoupper returns the uppercase equivalent of c if c is a lowercase letter
+// and if an uppercase representation exists in the current locale. Otherwise,
+// it returns c. The Xtoupper_l() function performs the same task, but uses the
+// locale referred to by the locale handle locale.
+func Xtoupper(tls *TLS, c int32) (r int32) {
+	return x_toupper(tls, c)
+}
+
+// Xputs writes the string s and a trailing newline to stdout.
+func Xputs(tls *TLS, s uintptr) (r int32) {
+	return x_puts(tls, s)
+}
+
+// Xsscanf scans input according to format. This format may contain conversion
+// specifications; the results from such conversions, if any, are stored in the
+// locations pointed to by the pointer arguments that follow format. Each
+// pointer argument must be of a type that is appropriate for the value
+// returned by the corresponding conversion specification.
+//
+// If the number of conversion specifications in format exceeds the number of
+// pointer arguments, the results are undefined. If the number of pointer
+// arguments exceeds the number of conversion specifications, then the excess
+// pointer arguments are evaluated, but are otherwise ignored.
+//
+// The Xsscanf reads its input from the character string pointed to by str.
+func Xsscanf(tls *TLS, str uintptr, format uintptr, va uintptr) (r int32) {
+	return x_sscanf(tls, str, format, va)
+}
+
+// Xwrite() writes up to count bytes from the buffer starting at buf to the
+// file referred to by the file descriptor fd.
+//
+// The number of bytes written may be less than count if, for example, there is
+// insufficient space on the underlying physical medium, or the RLIMIT_FSIZE
+// resource limit is encountered (see setrlimit(2)), or the call was
+// interrupted by a signal handler after having written less than count bytes.
+// (See also pipe(7).)
+//
+// For a seekable file (i.e., one to which lseek(2) may be applied, for
+// example, a regular file) writing takes place at the file offset, and the
+// file offset is incremented by the number of bytes actually written. If the
+// file was open(2)ed with O_APPEND, the file offset is first set to the end of
+// the file before writing. The adjustment of the file offset and the write
+// oper‐ ation are performed as an atomic step.
+//
+// POSIX requires that a read(2) that can be proved to occur after a write()
+// has returned will return the new data. Note that not all filesystems are
+// POSIX conforming.
+//
+// According to POSIX.1, if count is greater than SSIZE_MAX, the result is
+// implementation-defined; see NOTES for the upper limit on Linux.
+func Xwrite(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
+	return x_write(tls, fd, buf, count)
+}
+
+// Xmemmove copies n bytes from memory area src to memory area dest. The memory
+// areas may overlap: copying takes place as though the bytes in src are first
+// copied into a temporary array that does not overlap src or dest, and the
+// bytes are then copied from the temporary array to dest.
+func Xmemmove(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
+	return x_memmove(tls, dest, src, n)
+}
+
+// Xmemchr scans the initial n bytes of the memory area pointed to by s for the
+// first instance of c. Both c and the bytes of the memory area pointed to by s
+// are interpreted as unsigned char.
+func Xmemchr(tls *TLS, s uintptr, c int32, n uint64) (r uintptr) {
+	return x_memchr(tls, s, c, n)
+}
+
+// Xfileno examines the argument stream and returns the integer file descriptor
+// used to implement this stream. The file descriptor is still owned by stream
+// and will be closed when fclose(3) is called. Duplicate the file descriptor
+// with dup(2) before passing it to code that might close it.
+func Xfileno(tls *TLS, stream uintptr) (r int32) {
+	return x_fileno(tls, stream)
+}
+
+// Xread attempts to read up to count bytes from file descriptor fd into the
+// buffer starting at buf.
+//
+// On files that support seeking, the read operation commences at the file
+// offset, and the file offset is incremented by the number of bytes read. If
+// the file offset is at or past the end of file, no bytes are read, and read()
+// returns zero.
+//
+// If count is zero, read() may detect the errors described below. In the
+// absence of any errors, or if read() does not check for errors, a read() with
+// a count of 0 returns zero and has no other effects.
+//
+// According to POSIX.1, if count is greater than SSIZE_MAX, the result is
+// implementation-defined; see NOTES for the upper limit on Linux.
+func Xread(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
+	return x_read(tls, fd, buf, count)
 }

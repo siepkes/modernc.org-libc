@@ -8817,6 +8817,7 @@ _5:
 	*(*float64)(unsafe.Pointer(y + 1*8)) = v11
 	goto _8
 _7: /* painful */
+	i = jz
 _14:
 	if !(i > 0) {
 		goto _12
@@ -9092,6 +9093,7 @@ _5:
 	*(*float32)(unsafe.Pointer(y + 1*4)) = v11
 	goto _8
 _7: /* painful */
+	i = jz
 _14:
 	if !(i > 0) {
 		goto _12
@@ -30714,6 +30716,7 @@ func x_mbsrtowcs(tls *TLS, ws uintptr, src uintptr, wn uint64, st uintptr) (r ui
 	if !!(ws != 0) {
 		goto _1
 	}
+	wn = uint64(0)
 _4:
 	if uint32(*(*uint8)(unsafe.Pointer(s)))-uint32(0xc2) >= Uint32FromUint32(0xf5)-Uint32FromUint32(0xc2) {
 		for uint64(s)&uint64(3) != 0 && uint32(*(*uint8)(unsafe.Pointer(s)))-uint32(1) < uint32(0x7f) {
@@ -40040,6 +40043,7 @@ func x___scanf(tls *TLS, r uintptr, fmt uintptr, ap uintptr) (r1 int32) {
 	neg = 0
 	matches = 0
 	is_space = (*Trctx_t)(unsafe.Pointer(r)).Fis_space
+	p = fmt
 _3:
 	if !(*(*int32)(unsafe.Pointer(p)) != 0) {
 		goto _1

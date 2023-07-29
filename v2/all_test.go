@@ -29,26 +29,26 @@ var (
 	testAtomicCASp      uintptr
 )
 
-func TestAtomicCASInt32(t *testing.T) {
-	pi := uintptr(unsafe.Pointer(&testAtomicCASInt32))
-	testAtomicCASInt32 = int32(0)
-	j := a_cas(pi, 1, 2)
-	if testAtomicCASInt32 != 0 || j != 0 {
-		t.Fatal(testAtomicCASInt32, j)
-	}
-
-	if j = a_cas(pi, 0, 3); testAtomicCASInt32 != 3 || j != 0 {
-		t.Fatal(testAtomicCASInt32, j)
-	}
-
-	if j = a_cas(pi, 4, 5); testAtomicCASInt32 != 3 || j != 3 {
-		t.Fatal(testAtomicCASInt32, j)
-	}
-
-	if j = a_cas(pi, 3, 6); testAtomicCASInt32 != 6 || j != 3 {
-		t.Fatal(testAtomicCASInt32, j)
-	}
-}
+// func TestAtomicCASInt32(t *testing.T) {
+// 	pi := uintptr(unsafe.Pointer(&testAtomicCASInt32))
+// 	testAtomicCASInt32 = int32(0)
+// 	j := a_cas(pi, 1, 2)
+// 	if testAtomicCASInt32 != 0 || j != 0 {
+// 		t.Fatal(testAtomicCASInt32, j)
+// 	}
+//
+// 	if j = a_cas(pi, 0, 3); testAtomicCASInt32 != 3 || j != 0 {
+// 		t.Fatal(testAtomicCASInt32, j)
+// 	}
+//
+// 	if j = a_cas(pi, 4, 5); testAtomicCASInt32 != 3 || j != 3 {
+// 		t.Fatal(testAtomicCASInt32, j)
+// 	}
+//
+// 	if j = a_cas(pi, 3, 6); testAtomicCASInt32 != 6 || j != 3 {
+// 		t.Fatal(testAtomicCASInt32, j)
+// 	}
+// }
 
 func TestAtomicCASUintptr(t *testing.T) {
 	pp := uintptr(unsafe.Pointer(&testAtomicCASp))
@@ -71,24 +71,24 @@ func TestAtomicCASUintptr(t *testing.T) {
 	}
 }
 
-func TestAtomicOrInt32(t *testing.T) {
-	pi := uintptr(unsafe.Pointer(&testAtomicCASInt32))
-	testAtomicCASInt32 = int32(0)
-	a_or(pi, 1)
-	if j := testAtomicCASInt32; j != 1 {
-		t.Fatalf("%032b", j)
-	}
-
-	a_or(pi, 2)
-	if j := testAtomicCASInt32; j != 3 {
-		t.Fatalf("%032b", j)
-	}
-
-	a_or(pi, Int32FromUint32(0x80000000))
-	if j := testAtomicCASInt32; j != Int32FromUint32(0x80000003) {
-		t.Fatalf("%032b", j)
-	}
-}
+// func TestAtomicOrInt32(t *testing.T) {
+// 	pi := uintptr(unsafe.Pointer(&testAtomicCASInt32))
+// 	testAtomicCASInt32 = int32(0)
+// 	a_or(pi, 1)
+// 	if j := testAtomicCASInt32; j != 1 {
+// 		t.Fatalf("%032b", j)
+// 	}
+//
+// 	a_or(pi, 2)
+// 	if j := testAtomicCASInt32; j != 3 {
+// 		t.Fatalf("%032b", j)
+// 	}
+//
+// 	a_or(pi, Int32FromUint32(0x80000000))
+// 	if j := testAtomicCASInt32; j != Int32FromUint32(0x80000003) {
+// 		t.Fatalf("%032b", j)
+// 	}
+// }
 
 func TestAtomicOrUint64(t *testing.T) {
 	pi := uintptr(unsafe.Pointer(&testAtomicCASUint64))
@@ -121,14 +121,14 @@ func TestXfmod(t *testing.T) {
 	}
 }
 
-func TestSwap(t *testing.T) {
-	if g, e := ___bswap_16(nil, 0x1234), uint16(0x3412); g != e {
-		t.Errorf("%#04x %#04x", g, e)
-	}
-	if g, e := ___bswap_32(nil, 0x12345678), uint32(0x78563412); g != e {
-		t.Errorf("%#04x %#04x", g, e)
-	}
-}
+// func TestSwap(t *testing.T) {
+// 	if g, e := ___bswap_16(nil, 0x1234), uint16(0x3412); g != e {
+// 		t.Errorf("%#04x %#04x", g, e)
+// 	}
+// 	if g, e := ___bswap_32(nil, 0x12345678), uint32(0x78563412); g != e {
+// 		t.Errorf("%#04x %#04x", g, e)
+// 	}
+// }
 
 var (
 	valist       [256]byte
@@ -404,5 +404,19 @@ func TestFdopen(t *testing.T) {
 
 	if g, e := string(GoBytes(bp, len(s))), s; g != e {
 		t.Fatalf("%q %q", g, e)
+	}
+}
+
+func TestPow(t *testing.T) {
+	tls := NewTLS()
+
+	defer tls.Close()
+
+	for itest, test := range []struct{ x, y, z float64 }{
+		{2, 12, 4096},
+	} {
+		if g, e := Xpow(tls, test.x, test.y), test.z; g != e {
+			t.Errorf("%d: %v %v %v, %v", itest, test.x, test.y, test.z, g)
+		}
 	}
 }
