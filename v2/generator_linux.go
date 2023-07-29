@@ -173,7 +173,7 @@ func main() {
 		}
 		panic("unreachable")
 	})
-	fn := fmt.Sprintf("libc_so_%s_%s.go", goos, goarch)
+	fn := fmt.Sprintf("ccgo_%s_%s.go", goos, goarch)
 	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fn)
 	util.MustShell(true, "sed", "-i", "s/\\<x_stdout\\>/Xstdout/g", fn)
 	util.MustShell(true, "sed", "-i", "s/\\<x_stderr\\>/Xstderr/g", fn)

@@ -15,6 +15,7 @@ import (
 	"syscall"
 	"unsafe"
 
+	"modernc.org/mathutil"
 	"modernc.org/memory"
 )
 
@@ -389,10 +390,6 @@ func ___set_thread_area(tls *TLS, p uintptr) int32 {
 // 	return __x<<8 | __x>>8
 // }
 //
-// func ___bswap32(tls *TLS, __x uint32) uint32 {
-// 	return __x>>int32(24) | __x>>int32(8)&uint32(0xff00) | __x<<int32(8)&uint32(0xff0000) | __x<<int32(24)
-// }
-//
 // func ___bswap_32(tls *TLS, x uint32) uint32 {
 // 	return ___bswap32(tls, x)
 // }
@@ -426,6 +423,11 @@ func Xsprintf(tls *TLS, str uintptr, fmt uintptr, va uintptr) (r int32) {
 	return x_sprintf(tls, str, fmt, va)
 }
 
+// X__builtin_sprintf is equivalent to Xsprintf.
+func X__builtin_sprintf(tls *TLS, str uintptr, fmt uintptr, va uintptr) (r int32) {
+	return Xsprintf(tls, str, fmt, va)
+}
+
 // Xstrtod converts the initial portion of the string pointed to by nptr to
 // double representation.
 func Xstrtod(tls *TLS, nptr, endptr uintptr) float64 {
@@ -443,10 +445,20 @@ func Xmemset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
 	return x_memset(tls, s, c, n)
 }
 
+// X__builtin_memset is equivalent to Xmemset
+func X__builtin_memset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
+	return Xmemset(tls, s, c, n)
+}
+
 // Xsnprintf writes at most size bytes (including the terminating null byte
 // ('\0')) to str, according to a format and args.
 func Xsnprintf(tls *TLS, str uintptr, size uint64, format, args uintptr) int32 {
 	return x_snprintf(tls, str, size, format, args)
+}
+
+// X__builtin_snprintf is equivalent to Xsnprintf.
+func X__builtin_snprintf(tls *TLS, str uintptr, size uint64, format, args uintptr) int32 {
+	return Xsnprintf(tls, str, size, format, args)
 }
 
 // Xfdopen associates a stream with the existing file descriptor, fd. The mode
@@ -475,12 +487,22 @@ func Xmalloc(tls *TLS, n uint64) (r uintptr) {
 	return x_malloc(tls, n)
 }
 
-// The Xree function frees the memory space pointed to by ptr, which must have
+// X__builtin_malloc is equivalent to Xmalloc.
+func X__builtin_malloc(tls *TLS, n uint64) (r uintptr) {
+	return Xmalloc(tls, n)
+}
+
+// The Xfree function frees the memory space pointed to by ptr, which must have
 // been returned by a previous call to Xmalloc(), Xcalloc(), or Xrealloc().
 // Otherwise, or if Xfree(ptr) has already been called before, undefined
 // behavior occurs. If ptr is NULL, no operation is performed.
 func Xfree(tls *TLS, p uintptr) {
 	x_free(tls, p)
+}
+
+// The X__builtin_free is equivalent to Xfree.
+func X__builtin_free(tls *TLS, p uintptr) {
+	Xfree(tls, p)
 }
 
 // Xcalloc allocates memory for an array of nmemb elements of size bytes each
@@ -503,6 +525,12 @@ func Xprintf(tls *TLS, format, va uintptr) (r int32) {
 	return x_printf(tls, format, va)
 }
 
+// X__builtin_printf is equivalent to Xprintf.
+// the standard output stream;
+func X__builtin_printf(tls *TLS, format, va uintptr) (r int32) {
+	return Xprintf(tls, format, va)
+}
+
 // Xsin returns the sine of x, where x is given in radians.
 func Xsin(tls *TLS, x float64) (r float64) {
 	return x_sin(tls, x)
@@ -521,6 +549,11 @@ func Xstrcpy(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
 	return x_strcpy(tls, dest, src)
 }
 
+// X__builtin_strcpy is equivalent to Xstrcpy.
+func X__builtin_strcpy(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
+	return Xstrcpy(tls, dest, src)
+}
+
 // Xstrncpy is line Xstrcpy, except that at most n bytes of src are copied.
 // Warning: If there is no null byte among the first n bytes of src, the string
 // placed in dest will not be null-terminated.
@@ -533,6 +566,11 @@ func Xstrncpy(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
 // done using unsigned characters.
 func Xstrcmp(tls *TLS, s1 uintptr, s2 uintptr) (r int32) {
 	return x_strcmp(tls, s1, s2)
+}
+
+// X__builtin_strcmp is equivalent to Xstrcmp.
+func X__builtin_strcmp(tls *TLS, s1 uintptr, s2 uintptr) (r int32) {
+	return Xstrcmp(tls, s1, s2)
 }
 
 // Xstrlen function calculates the length of the string pointed to by s,
@@ -589,6 +627,11 @@ func X__builtin_memcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
 // the memory areas s1 and s2.
 func Xmemcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint64) (r1 int32) {
 	return x_memcmp(tls, s1, s2, n)
+}
+
+// X__builtin_memcmp is equivalent to Xmemcmp.
+func X__builtin_memcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint64) (r1 int32) {
+	return Xmemcmp(tls, s1, s2, n)
 }
 
 // Xfopen opens the file whose name is the string pointed to by pathname and
@@ -684,6 +727,11 @@ func Xfgets(tls *TLS, s uintptr, size int32, stream uintptr) (r uintptr) {
 // status (i.e., status & 0xFF) is returned to the parent (see wait(2)).
 func Xexit(tls *TLS, code int32) {
 	x_exit(tls, code)
+}
+
+// X__builtin_exit is equivalent to Xexit.
+func X__builtin_exit(tls *TLS, code int32) {
+	Xexit(tls, code)
 }
 
 // Xtolower returns a lowercase equivalent of c, if c is an uppercase letter
@@ -994,4 +1042,211 @@ func Xfileno(tls *TLS, stream uintptr) (r int32) {
 // implementation-defined; see NOTES for the upper limit on Linux.
 func Xread(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
 	return x_read(tls, fd, buf, count)
+}
+
+// Xabort abort the program.
+func Xabort(tls *TLS) {
+	x_abort(tls)
+}
+
+// X__builtin_abort is equivalent to Xabort.
+func X__builtin_abort(tls *TLS) {
+	Xabort(tls)
+}
+
+// Xabs computes the absolute value of the integer argument j.
+func Xabs(tls *TLS, j int32) (r int32) {
+	return x_abs(tls, j)
+}
+
+// Xlabs computes the absolute value of the integer argument j.
+func Xlabs(tls *TLS, j int64) (r int64) {
+	return x_labs(tls, j)
+}
+
+// Xllabs computes the absolute value of the integer argument j.
+func Xllabs(tls *TLS, j int64) (r int64) {
+	return x_llabs(tls, j)
+}
+
+// X__builtin_llabs is equivalent to Xllabs.
+func X__builtin_llabs(tls *TLS, j int64) (r int64) {
+	return Xllabs(tls, j)
+}
+
+// X__builtin_abs is equivalent to Xabs.
+func X__builtin_abs(tls *TLS, j int32) (r int32) {
+	return Xabs(tls, j)
+}
+
+func X__builtin_add_overflowUint32(t *TLS, a, b uint32, res uintptr) int32 {
+	s, c := bits.Add32(a, b, 0)
+	*(*uint32)(unsafe.Pointer(res)) = s
+	return Bool32(c != 0)
+}
+
+// bool __builtin_add_overflow (type1 a, type2 b, type3 *res)
+func X__builtin_add_overflowUint64(t *TLS, a, b uint64, res uintptr) int32 {
+	s, c := bits.Add64(a, b, 0)
+	*(*uint64)(unsafe.Pointer(res)) = s
+	return Bool32(c != 0)
+}
+
+func X__builtin_bswap32(tls *TLS, x uint32) uint32 {
+	return x>>int32(24) | x>>int32(8)&uint32(0xff00) | x<<int32(8)&uint32(0xff0000) | x<<int32(24)
+}
+
+func X__builtin_bswap64(t *TLS, x uint64) uint64 {
+	return x<<56 |
+		x&0xff00<<40 |
+		x&0xff0000<<24 |
+		x&0xff000000<<8 |
+		x&0xff00000000>>8 |
+		x&0xff0000000000>>24 |
+		x&0xff000000000000>>40 |
+		x>>56
+}
+
+// Xcopysign returns a value whose absolute value matches that of x, but whose
+// sign bit matches that of y.
+//
+// For example, Xcopysign(42.0, -1.0) and Xcopysign(-42.0, -1.0) both return
+// -42.0.
+func Xcopysign(tls *TLS, x float64, y float64) (r float64) {
+	return x_copysign(tls, x, y)
+}
+
+// X__builtin_copysign is equivalent to Xcopysign.
+func X__builtin_copysign(tls *TLS, x float64, y float64) (r float64) {
+	return Xcopysign(tls, x, y)
+}
+
+// Xcopysignf returns a value whose absolute value matches that of x, but whose
+// sign bit matches that of y.
+//
+// For example, Xcopysignf(42.0, -1.0) and Xcopysignf(-42.0, -1.0) both return
+// -42.0.
+func Xcopysignf(tls *TLS, x float32, y float32) (r float32) {
+	return x_copysignf(tls, x, y)
+}
+
+// X__builtin_copysignf is equivalent to Xcopysignf.
+func X__builtin_copysignf(tls *TLS, x float32, y float32) (r float32) {
+	return Xcopysignf(tls, x, y)
+}
+
+func X__builtin_copysignl(t *TLS, x, y float64) float64 {
+	return Xcopysign(t, x, y)
+}
+
+func X__builtin_expect(t *TLS, exp, c int64) int64 {
+	return exp
+}
+
+func X__builtin_huge_val(t *TLS) float64 {
+	return math.Inf(1)
+}
+
+func X__builtin_huge_valf(t *TLS) float32 {
+	return float32(math.Inf(1))
+}
+
+func X__builtin_inf(t *TLS) float64 {
+	return math.Inf(1)
+}
+
+func X__builtin_inff(t *TLS) float32 {
+	return float32(math.Inf(1))
+}
+
+func X__builtin_infl(t *TLS) float64 {
+	return math.Inf(1)
+}
+
+func X__builtin_isunordered(t *TLS, a, b float64) int32 {
+	return Bool32(math.IsNaN(a) || math.IsNaN(b))
+}
+
+func X__builtin_mul_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
+	r, ovf := mathutil.MulOverflowInt64(a, b)
+	*(*int64)(unsafe.Pointer(res)) = r
+	return Bool32(ovf)
+}
+
+func X__builtin_nan(t *TLS, s uintptr) float64 {
+	return math.NaN()
+}
+
+func X__builtin_nanf(t *TLS, s uintptr) float32 {
+	return float32(math.NaN())
+}
+
+func X__builtin_nanl(t *TLS, s uintptr) float64 {
+	return math.NaN()
+}
+
+func X__builtin_prefetch(t *TLS, addr, args uintptr) {}
+
+func X__builtin_unreachable(t *TLS) {
+	fmt.Fprintf(os.Stderr, "unrechable\n")
+	os.Stderr.Sync()
+	Xexit(t, 1)
+}
+
+// Xopen opens the file specified by pathname. If the specified file does not
+// exist, it may optionally (if O_CREAT is specified in flags) be created by
+// Xopen.
+//
+// The return value of Xopen is a file descriptor, a small, nonnegative
+// integer that is used in subsequent system calls (read(2), write(2),
+// lseek(2), fcntl(2), etc.) to refer to the open file. The file descriptor
+// returned by a successful call will be the lowest-numbered file descriptor
+// not currently open for the process.
+//
+// By default, the new file descriptor is set to remain open across an
+// execve(2) (i.e., the FD_CLOEXEC file descriptor flag described in fcntl(2)
+// is initially disabled); the O_CLOEXEC flag, described below, can be used to
+// change this default. The file offset is set to the beginning of the file
+// (see lseek(2)).
+//
+// A call to Xopen creates a new open file description, an entry in the
+// system-wide table of open files. The open file description records the file
+// offset and the file status flags (see be‐ low). A file descriptor is a
+// reference to an open file description; this reference is unaffected if
+// pathname is subsequently removed or modified to refer to a different file.
+// For further details on open file descriptions, see NOTES.
+//
+// The argument flags must include one of the following access modes: O_RDONLY,
+// O_WRONLY, or O_RDWR. These request opening the file read-only, write-only,
+// or read/write, respectively.
+//
+// In addition, zero or more file creation flags and file status flags can be
+// bitwise-or'd in flags. The file creation flags are O_CLOEXEC, O_CREAT,
+// O_DIRECTORY, O_EXCL, O_NOCTTY, O_NOFOL‐ LOW, O_TMPFILE, and O_TRUNC. The
+// file status flags are all of the remaining flags listed below. The
+// distinction between these two groups of flags is that the file creation
+// flags affect the semantics of the open operation itself, while the file
+// status flags affect the semantics of subsequent I/O operations. The file
+// status flags can be retrieved and (in some cases) modi‐ fied; see fcntl(2)
+// for details.
+func Xopen(tls *TLS, pathname uintptr, flags int32, va uintptr) (r int32) {
+	return x_open(tls, pathname, flags, va)
+}
+
+// Xvfprintf provides formatted output conversion. Xvfprintf writes output to
+// the given output stream. Upon successful return, this functions returns the
+// number of characters printed.
+func Xvfprintf(tls *TLS, stream uintptr, fmt uintptr, ap uintptr) (r int32) {
+	return x_vfprintf(tls, stream, fmt, ap)
+}
+
+// Xvprintf provides formatted output conversion. Xvprintf writes output to
+// stdout. Upon successful return, this functions returns the number of
+// characters printed.
+func Xvprintf(tls *TLS, fmt uintptr, ap uintptr) (r int32) {
+	return x_vprintf(tls, fmt, ap)
+}
+
+func X__builtin_trap(t *TLS) {
+	Xabort(t)
 }
