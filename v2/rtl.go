@@ -5,6 +5,7 @@
 package libc // import "modernc.org/libc/v2"
 
 import (
+	"reflect"
 	"sync/atomic"
 	"unsafe"
 )
@@ -48,7 +49,10 @@ func VaList(p uintptr, args ...interface{}) (r uintptr) {
 		case uintptr:
 			*(*uintptr)(unsafe.Pointer(p)) = x
 		default:
-			panic(todo("invalid VaList argument type: %T", x))
+			sz := reflect.TypeOf(v).Size()
+			copy(unsafe.Slice((*byte)(unsafe.Pointer(p)), sz), unsafe.Slice((*byte)(unsafe.Pointer((*[2]uintptr)(unsafe.Pointer(&v))[1])), sz))
+			p += roundup(sz, 8)
+			continue
 		}
 		p += 8
 	}
@@ -69,6 +73,18 @@ func roundup(n, to uintptr) uintptr {
 	}
 
 	return n
+}
+
+func VaOther(app *uintptr, sz uint64) (r uintptr) {
+	ap := *(*uintptr)(unsafe.Pointer(app))
+	if ap == 0 {
+		return 0
+	}
+
+	r = ap
+	ap = roundup(ap+uintptr(sz), 8)
+	*(*uintptr)(unsafe.Pointer(app)) = ap
+	return r
 }
 
 func VaInt32(app *uintptr) int32 {

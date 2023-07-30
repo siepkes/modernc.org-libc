@@ -50,7 +50,7 @@ type Tfpos_t = struct {
 }
 
 func x_confstr(tls *TLS, name int32, buf uintptr, len1 uint64) (r uint64) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	var s uintptr
 	s = ts
@@ -1778,7 +1778,7 @@ type Tstat = struct {
 }
 
 func x_fdopendir(tls *TLS, fd int32) (r uintptr) {
-	bp := tls.Alloc(160) /* tlsAllocs 144 maxValist 1 */
+	bp := tls.Alloc(160) /* tlsAllocs 144 maxVaListSize 8 */
 	defer tls.Free(160)
 	var dir, v1 uintptr
 	var _ /* st at bp+0 */ Tstat
@@ -1800,7 +1800,7 @@ const m_O_DIRECTORY = 65536
 const m_O_RDONLY = 0
 
 func x_opendir(tls *TLS, name uintptr) (r uintptr) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	var dir, v2 uintptr
 	var fd, v1 int32
@@ -2348,7 +2348,7 @@ func x_abort(tls *TLS) {
 }
 
 func x___assert_fail(tls *TLS, expr uintptr, file uintptr, line int32, func1 uintptr) {
-	bp := tls.Alloc(40) /* tlsAllocs 0 maxValist 4 */
+	bp := tls.Alloc(40) /* tlsAllocs 0 maxVaListSize 32 */
 	defer tls.Free(40)
 	x_fprintf(tls, Xstderr, ts+34, VaList(bp+8, expr, file, func1, line))
 	x_fflush(tls, UintptrFromInt32(0))
@@ -2476,7 +2476,7 @@ const m_O_TRUNC = 512
 const m_O_WRONLY = 1
 
 func x_creat(tls *TLS, filename uintptr, mode uint32) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	return x_open(tls, filename, Int32FromInt32(m_O_CREAT)|Int32FromInt32(m_O_WRONLY)|Int32FromInt32(m_O_TRUNC), VaList(bp+8, mode))
 }
@@ -2500,8 +2500,6 @@ func x_fcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r1 int32) {
 		if x___libc.Fcancelpt != 0 {
 			(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 			_ = 0
-		} else {
-			_ = Int32FromInt32(1)
 		}
 		_ = Int32FromInt32(0)
 	}
@@ -2510,8 +2508,6 @@ func x_fcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r1 int32) {
 		if x___libc.Fcancelpt != 0 {
 			(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 			_ = 0
-		} else {
-			_ = Int32FromInt32(0)
 		}
 		_ = Int32FromInt32(0)
 	}
@@ -2530,16 +2526,12 @@ func x_open(tls *TLS, filename uintptr, flags int32, va uintptr) (r1 int32) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = int32(_syscall3(tls, int64(m___NR_open), int64(filename), int64(flags|int32(m_O_LARGEFILE)), int64(mode)))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -2557,16 +2549,12 @@ func x_openat(tls *TLS, fd int32, filename uintptr, flags int32, va uintptr) (r1
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = int32(_syscall4(tls, int64(m___NR_openat), int64(fd), int64(filename), int64(flags|int32(m_O_LARGEFILE)), int64(mode)))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -2609,7 +2597,7 @@ type Tipc_perm = struct {
 }
 
 func x_ftok(tls *TLS, path uintptr, id int32) (r int32) {
-	bp := tls.Alloc(144) /* tlsAllocs 144 maxValist 0 */
+	bp := tls.Alloc(144) /* tlsAllocs 144 maxVaListSize 0 */
 	defer tls.Free(144)
 	var _ /* st at bp+0 */ Tstat
 	if x_stat(tls, path, bp) < 0 {
@@ -2912,7 +2900,7 @@ type Trusage = struct {
 }
 
 func x_getdtablesize(tls *TLS) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var v1 uint64
 	var _ /* rl at bp+0 */ Trlimit
@@ -3043,7 +3031,7 @@ type Ttermios = struct {
 }
 
 func x_getpass(tls *TLS, prompt uintptr) (r uintptr) {
-	bp := tls.Alloc(120) /* tlsAllocs 120 maxValist 0 */
+	bp := tls.Alloc(120) /* tlsAllocs 120 maxVaListSize 0 */
 	defer tls.Free(120)
 	var fd, v1 int32
 	var l int64
@@ -3101,7 +3089,7 @@ type Tgroup = struct {
  * from SUS and have nothing to do with the host system. */
 
 func x_initgroups(tls *TLS, user uintptr, gid uint32) (r int32) {
-	bp := tls.Alloc(136) /* tlsAllocs 136 maxValist 0 */
+	bp := tls.Alloc(136) /* tlsAllocs 136 maxVaListSize 0 */
 	defer tls.Free(136)
 	var _ /* count at bp+128 */ int32
 	var _ /* groups at bp+0 */ [32]uint32
@@ -3138,7 +3126,7 @@ func x_endmntent(tls *TLS, f uintptr) (r int32) {
 }
 
 func x_getmntent(tls *TLS, f uintptr) (r uintptr) {
-	bp := tls.Alloc(120) /* tlsAllocs 32 maxValist 10 */
+	bp := tls.Alloc(120) /* tlsAllocs 32 maxVaListSize 80 */
 	defer tls.Free(120)
 	var cnt int32
 	var _ /* n at bp+0 */ [8]int32
@@ -3167,7 +3155,7 @@ var _linebuf [256]int8
 var _mnt Tmntent
 
 func x_addmntent(tls *TLS, f uintptr, mnt uintptr) (r int32) {
-	bp := tls.Alloc(56) /* tlsAllocs 0 maxValist 6 */
+	bp := tls.Alloc(56) /* tlsAllocs 0 maxVaListSize 48 */
 	defer tls.Free(56)
 	x_fseek(tls, f, 0, int32(m_SEEK_END))
 	return BoolInt32(x_fprintf(tls, f, ts+129, VaList(bp+8, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_fsname, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_dir, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_type, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_opts, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_freq, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_passno)) < 0)
@@ -3268,7 +3256,7 @@ func x_signalfd(tls *TLS, fd int32, sigs uintptr, flags int32) (r int32) {
 }
 
 func x_stime(tls *TLS, t uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimeval
 	*(*Ttimeval)(unsafe.Pointer(bp)) = Ttimeval{Ftv_sec: *(*int64)(unsafe.Pointer(t)), Ftv_usec: 0}
@@ -3306,7 +3294,7 @@ func x_umount2(tls *TLS, special uintptr, flags int32) (r int32) {
 const m___NR_utime = 132
 
 func x_utimes(tls *TLS, path uintptr, times uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var v1 int64
 	var _ /* ktimes at bp+0 */ [2]int64
@@ -3333,7 +3321,7 @@ func x_wait3(tls *TLS, status uintptr, options int32, usage uintptr) (r int32) {
 const m___NR_wait4 = 61
 
 func x_wait4(tls *TLS, pid int32, status uintptr, options int32, usage uintptr) (r int32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ret int32
 	var _ /* kusage at bp+0 */ [4]int64
@@ -3536,7 +3524,7 @@ func _get_mapping(tls *TLS, m uintptr, c uint32, n uint32) (r uint32) {
 }
 
 func x_iconv(tls *TLS, cd0 uintptr, in uintptr, inb uintptr, out uintptr, outb uintptr) (r uint64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var c, d, elide, from, to, toelide uint32
 	var cd, k, l, x uint64
@@ -4623,7 +4611,7 @@ func _trim(tls *TLS, self uintptr, n uint64) {
 }
 
 func x_malloc(tls *TLS, _n uint64) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*uint64)(unsafe.Pointer(bp)) = _n
 	var base, c, x uintptr
@@ -4679,7 +4667,7 @@ func x_malloc(tls *TLS, _n uint64) (r uintptr) {
 }
 
 func x_realloc(tls *TLS, p uintptr, _n uint64) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*uint64)(unsafe.Pointer(bp)) = _n
 	var base, new1, next, self, v2, v4 uintptr
@@ -4830,7 +4818,7 @@ func x_free(tls *TLS, p uintptr) {
 }
 
 func x_memalign(tls *TLS, align uint64, len1 uint64) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ret, v1 int32
 	var _ /* mem at bp+0 */ uintptr
@@ -4900,7 +4888,7 @@ type T__uint32_t = uint32
 type T__uint64_t = uint64
 
 func x___fpclassify(tls *TLS, __x float64) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var __ee, v1, v2 int32
 	var _ /* __y at bp+0 */ struct {
@@ -4929,7 +4917,7 @@ func x___fpclassify(tls *TLS, __x float64) (r int32) {
 }
 
 func x___fpclassifyf(tls *TLS, __x float32) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var __ee, v1, v2 int32
 	var _ /* __y at bp+0 */ struct {
@@ -4961,7 +4949,7 @@ func x___fpclassifyf(tls *TLS, __x float32) (r int32) {
 //
 //	/* FIXME: move this to arch-specific file */
 func x___fpclassifyl(tls *TLS, __x float64) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var __ee, v1, v2 int32
 	var _ /* __y at bp+0 */ struct {
@@ -5027,7 +5015,7 @@ var _qS3 = -Float64FromFloat64(0.6882839716054533)  /* 0xBFE6066C, 0x1B8D0159 */
 var _qS4 = float64(0.07703815055590194)
 
 func x_acos(tls *TLS, x float64) (r1 float64) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var c, df, p, q, r, s, w, z float64
 	var hx, ix int32
@@ -5107,7 +5095,7 @@ var _qS31 = float32(-Float64FromFloat64(0.68828397989))  /* 0xbf303361 */
 var _qS41 = float32(0.077038154006)
 
 func x_acosf(tls *TLS, x float32) (r1 float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var c, df, p, q, r, s, w, z float32
 	var hx, idf, ix int32
@@ -5168,7 +5156,7 @@ var _one2 = float64(1)
 var _ln2 = float64(0.6931471805599453)
 
 func x_acosh(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var hx int32
 	var lx uint32
@@ -5207,7 +5195,7 @@ var _one3 = float32(1)
 var _ln21 = float32(0.69314718246)
 
 func x_acoshf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var hx int32
 	var t float32
@@ -5258,7 +5246,7 @@ var _qS32 = -Float64FromFloat64(0.6882839716054533)  /* 0xBFE6066C, 0x1B8D0159 *
 var _qS42 = float64(0.07703815055590194)
 
 func x_asin(tls *TLS, x float64) (r1 float64) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var c, p, q, r, s, t, w float64
 	var hx, ix int32
@@ -5341,7 +5329,7 @@ var _qS33 = float32(-Float64FromFloat64(0.68828397989))  /* 0xbf303361 */
 var _qS43 = float32(0.077038154006)
 
 func x_asinf(tls *TLS, x float32) (r1 float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var c, p, q, r, s, t, w float32
 	var hx, iw, ix int32
@@ -5410,7 +5398,7 @@ var _pi2 = float64(3.141592653589793)     /* 0x400921FB, 0x54442D18 */
 var _pi_lo = float64(1.2246467991473532e-16)
 
 func x_atan2(tls *TLS, y float64, x float64) (r float64) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var hx, hy, ix, iy, k, m int32
 	var lx, ly, zh uint32
@@ -5529,7 +5517,7 @@ var _pi3 = float32(3.141592741)       /* 0x40490fdb */
 var _pi_lo1 = float32(-Float64FromFloat64(8.7422776573e-08))
 
 func x_atan2f(tls *TLS, y float32, x float32) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var hx, hy, ix, iy, k, m int32
 	var z, v1, v2 float32
@@ -5641,7 +5629,7 @@ var _huge2 = float64(1e+300)
 var _zero2 = float64(0)
 
 func x_atanh(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var hx, ix int32
 	var lx uint32
@@ -5685,7 +5673,7 @@ var _huge3 = float32(1e+30)
 var _zero3 = float32(0)
 
 func x_atanhf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var hx, ix int32
 	var t float32
@@ -5724,7 +5712,7 @@ var _half = float64(0.5)
 var _huge4 = float64(1e+300)
 
 func x_cosh(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ix int32
 	var lx uint32
@@ -5774,7 +5762,7 @@ var _half1 = float32(0.5)
 var _huge5 = float32(1e+30)
 
 func x_coshf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ix int32
 	var t, w float32
@@ -5836,7 +5824,7 @@ var _P4 = -Float64FromFloat64(1.6533902205465252e-06) /* 0xBEBBBD41, 0xC5D26BF1 
 var _P5 = float64(4.1381367970572385e-08)
 
 func x_exp(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(48) /* tlsAllocs 48 maxValist 0 */
+	bp := tls.Alloc(48) /* tlsAllocs 48 maxVaListSize 0 */
 	defer tls.Free(48)  /* default IEEE double exp */
 	var c, hi, lo, t, y, v1 float64
 	var hx, hy, hy1, lx uint32
@@ -5950,7 +5938,7 @@ var _P41 = float32(-Float64FromFloat64(1.6533901999e-06)) /* 0xb5ddea0e */
 var _P51 = float32(4.1381369442e-08)
 
 func x_expf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)  /* default IEEE double exp */
 	var c, hi, lo, t, y float32
 	var hx, hy, hy1 uint32
@@ -6041,7 +6029,7 @@ var _Zero = [2]float64{
 	1: -Float64FromFloat64(0)}
 
 func x_fmod(tls *TLS, x float64, y float64) (r float64) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var hx, hy, hz, i, ix, iy, n, sx, v5 int32
 	var lx, ly, lz uint32
@@ -6217,7 +6205,7 @@ var _Zero1 = [2]float32{
 	1: float32(-Float64FromFloat64(0))}
 
 func x_fmodf(tls *TLS, x float32, y float32) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var hx, hy, hz, i, ix, iy, n, sx, v3 int32
 	var _ /* gf_u at bp+0 */ Tieee_float_shape_type
@@ -6326,7 +6314,7 @@ func x_fmodf(tls *TLS, x float32, y float32) (r float32) {
 }
 
 func x_hypot(tls *TLS, x float64, y float64) (r float64) {
-	bp := tls.Alloc(136) /* tlsAllocs 136 maxValist 0 */
+	bp := tls.Alloc(136) /* tlsAllocs 136 maxVaListSize 0 */
 	defer tls.Free(136)
 	var a, b, t1, t2, w, y1, y2 float64
 	var ha, hb, j, k int32
@@ -6480,7 +6468,7 @@ func x_hypot(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func x_hypotf(tls *TLS, x float32, y float32) (r float32) {
-	bp := tls.Alloc(56) /* tlsAllocs 56 maxValist 0 */
+	bp := tls.Alloc(56) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(56)
 	var a, b, t1, t2, w, y1, y2 float32
 	var ha, hb, j, k int32
@@ -6607,7 +6595,7 @@ var _Lg7 = float64(0.14798198605116586)       /* 3FC2F112 DF3E5244 */
 var _zero4 = float64(0)
 
 func x_log(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var R, dk, f, hfsq, s, t1, t2, w, z float64
 	var hx, i, j, k int32
@@ -6697,7 +6685,7 @@ var _log10_2lo = float64(3.694239077158931e-13) /* 0x3D59FEF3, 0x11F12B36 */
 var _zero5 = float64(0)
 
 func x_log10(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var hx, i, k int32
 	var lx uint32
@@ -6745,7 +6733,7 @@ var _log10_2lo1 = float32(7.9034151668e-07) /* 0x355427db */
 var _zero6 = float32(0)
 
 func x_log10f(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var hx, i, k int32
 	var y, z float32
@@ -6795,7 +6783,7 @@ var _Lg71 = float32(0.1479819864)        /* 3E178897 */
 var _zero7 = float32(0)
 
 func x_logf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var R, dk, f, hfsq, s, t1, t2, w, z float32
 	var i, ix, j, k int32
@@ -6913,7 +6901,7 @@ var _ivln2_h = float64(1.4426950216293335)              /* 0x3FF71547, 0x6000000
 var _ivln2_l = float64(1.9259629911266175e-08)
 
 func x_pow(tls *TLS, x float64, y float64) (r1 float64) {
-	bp := tls.Alloc(128) /* tlsAllocs 128 maxValist 0 */
+	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var ax, p_h, p_l, r, s, s2, s_h, s_l, ss, t, t1, t2, t_h, t_l, u, v, w, y1, z, z_h, z_l, v1, v2, v3, v4, v5, v6 float64
 	var hx, hy, i, ix, iy, j, k, n, yisint int32
@@ -7300,7 +7288,7 @@ var _ivln2_h1 = float32(1.4426879883)                     /* 0x3fb8aa00 =16b 1/l
 var _ivln2_l1 = float32(7.0526075433e-06)
 
 func x_powf(tls *TLS, x float32, y float32) (r1 float32) {
-	bp := tls.Alloc(96) /* tlsAllocs 96 maxValist 0 */
+	bp := tls.Alloc(96) /* tlsAllocs 96 maxVaListSize 0 */
 	defer tls.Free(96)
 	var ax, p_h, p_l, r, s, s2, s_h, s_l, sn, t, t1, t2, t_h, t_l, u, v, w, y1, z, z_h, z_l, v1, v2, v3, v4 float32
 	var hx, hy, i, is, ix, iy, j, k, n, yisint int32
@@ -7725,7 +7713,7 @@ var _pio2_3 = float64(2.0222662487111665e-21)  /* 0x3BA3198A, 0x2E000000 */
 var _pio2_3t = float64(8.4784276603689e-32)
 
 func x___ieee754_rem_pio2(tls *TLS, x float64, y uintptr) (r1 int32) {
-	bp := tls.Alloc(64) /* tlsAllocs 64 maxValist 0 */
+	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var e0, hx, i, ix, j, n, nx int32
 	var fn, r, t, w, z, v1 float64
@@ -8113,7 +8101,7 @@ var _pio2_31 = float32(6.0770943833e-11)  /* 0x2e85a300 */
 var _pio2_3t1 = float32(6.1232342629e-17)
 
 func x___ieee754_rem_pio2f(tls *TLS, x float32, y uintptr) (r1 int32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e0, hx, i, ix, j, n, nx int32
 	var fn, r, t, w, z, v1 float32
@@ -8237,7 +8225,7 @@ func x___ieee754_rem_pio2f(tls *TLS, x float32, y uintptr) (r1 int32) {
 var _zero12 = float64(0)
 
 func x_remainder(tls *TLS, x float64, p float64) (r float64) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var hp, hx int32
 	var lp, lx, sx uint32
@@ -8298,7 +8286,7 @@ func x_remainder(tls *TLS, x float64, p float64) (r float64) {
 var _zero13 = float32(0)
 
 func x_remainderf(tls *TLS, x float32, p float32) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var hp, hx int32
 	var p_half float32
@@ -8402,7 +8390,7 @@ var _one16 = float64(1)
 var _shuge = float64(1e+307)
 
 func x_sinh(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var h, t, w float64
 	var ix, jx int32
@@ -8455,7 +8443,7 @@ var _one17 = float32(1)
 var _shuge1 = float32(1e+37)
 
 func x_sinhf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var h, t, w float32
 	var ix, jx int32
@@ -8508,7 +8496,7 @@ var _C5 = float64(2.087572321298175e-09)              /* 0x3E21EE9E, 0xBDB4B1C4 
 var _C6 = -Float64FromFloat64(1.1359647557788195e-11)
 
 func x___kernel_cos(tls *TLS, x float64, y float64) (r1 float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var a, hz, qx, r, z float64
 	var ix int32
@@ -8550,7 +8538,7 @@ var _C51 = float32(2.0875723372e-09)                      /* 0x310f74f6 */
 var _C61 = float32(-Float64FromFloat64(1.1359647598e-11))
 
 func x___kernel_cosf(tls *TLS, x float32, y float32) (r1 float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var a, hz, qx, r, z float32
 	var ix int32
@@ -8605,7 +8593,7 @@ var _two242 = float64(1.6777216e+07) /* 0x41700000, 0x00000000 */
 var _twon24 = float64(5.960464477539063e-08)
 
 func x___kernel_rem_pio2(tls *TLS, x uintptr, y uintptr, e0 int32, nx int32, prec int32, ipio2 uintptr) (r int32) {
-	bp := tls.Alloc(240) /* tlsAllocs 240 maxValist 0 */
+	bp := tls.Alloc(240) /* tlsAllocs 240 maxVaListSize 0 */
 	defer tls.Free(240)
 	var carry, i, ih, j, jk, jp, jv, jx, jz, k, m, n, q0 int32
 	var f, q [20]float64
@@ -8881,7 +8869,7 @@ var _two81 = float32(256) /* 0x43800000 */
 var _twon8 = float32(0.00390625)
 
 func x___kernel_rem_pio2f(tls *TLS, x uintptr, y uintptr, e0 int32, nx int32, prec int32, ipio2 uintptr) (r int32) {
-	bp := tls.Alloc(160) /* tlsAllocs 160 maxValist 0 */
+	bp := tls.Alloc(160) /* tlsAllocs 160 maxVaListSize 0 */
 	defer tls.Free(160)
 	var carry, i, ih, j, jk, jp, jv, jx, jz, k, m, n, q0 int32
 	var f, q [20]float32
@@ -9139,7 +9127,7 @@ var _S5 = -Float64FromFloat64(2.5050760253406863e-08) /* 0xBE5AE5E6, 0x8A2B9CEB 
 var _S6 = float64(1.58969099521155e-10)
 
 func x___kernel_sin(tls *TLS, x float64, y float64, iy int32) (r1 float64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ix int32
 	var r, v, z float64
@@ -9173,7 +9161,7 @@ var _S51 = float32(-Float64FromFloat64(2.5050759689e-08)) /* 0xb2d72f34 */
 var _S61 = float32(1.5896910177e-10)
 
 func x___kernel_sinf(tls *TLS, x float32, y float32, iy int32) (r1 float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ix int32
 	var r, v, z float32
@@ -9217,7 +9205,7 @@ var _xxx = [16]float64{
 	15: float64(3.061616997868383e-17)}
 
 func x___kernel_tan(tls *TLS, x float64, y float64, iy int32) (r1 float64) {
-	bp := tls.Alloc(48) /* tlsAllocs 48 maxValist 0 */
+	bp := tls.Alloc(48) /* tlsAllocs 48 maxVaListSize 0 */
 	defer tls.Free(48)
 	var a, a1, r, s, t, t1, v, w, z, v1, v3, v6 float64
 	var hx, ix int32
@@ -9343,7 +9331,7 @@ var _T = [13]float32{
 	12: float32(2.5907305826e-05)}
 
 func x___kernel_tanf(tls *TLS, x float32, y float32, iy int32) (r1 float32) {
-	bp := tls.Alloc(40) /* tlsAllocs 40 maxValist 0 */
+	bp := tls.Alloc(40) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(40)
 	var a, t, v2 float64
 	var a1, r, s, t1, v, w, z, v1, v3 float32
@@ -9447,7 +9435,7 @@ var _ln22 = float64(0.6931471805599453) /* 0x3FE62E42, 0xFEFA39EF */
 var _huge10 = float64(1e+300)
 
 func x_asinh(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var hx, ix int32
 	var t, w float64
@@ -9488,7 +9476,7 @@ var _ln23 = float32(0.69314718246) /* 0x3f317218 */
 var _huge11 = float32(1e+30)
 
 func x_asinhf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var hx, ix int32
 	var t, w float32
@@ -9553,7 +9541,7 @@ var _one25 = float64(1)
 var _huge12 = float64(1e+300)
 
 func x_atan(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var hx, id, ix int32
 	var low uint32
@@ -9653,7 +9641,7 @@ var _one26 = float32(1)
 var _huge13 = float32(1e+30)
 
 func x_atanf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var hx, id, ix int32
 	var s1, s2, w, z, v1 float32
@@ -9734,7 +9722,7 @@ var _F = float64(1.6071428571428572)             /* 45/28     = 0x3FF9B6DB, 0x6D
 var _G = float64(0.35714285714285715)
 
 func x_cbrt(tls *TLS, x float64) (r1 float64) {
-	bp := tls.Alloc(88) /* tlsAllocs 88 maxValist 0 */
+	bp := tls.Alloc(88) /* tlsAllocs 88 maxVaListSize 0 */
 	defer tls.Free(88)
 	var high, low, sign uint32
 	var hx int32
@@ -9825,7 +9813,7 @@ var _F1 = float32(1.6071428061)                       /* 45/28     = 0x3fcdb6db 
 var _G1 = float32(0.35714286566)
 
 func x_cbrtf(tls *TLS, x float32) (r1 float32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var high, sign uint32
 	var hx int32
@@ -9878,7 +9866,7 @@ func x_cbrtf(tls *TLS, x float32) (r1 float32) {
 var _huge14 = float64(1e+300)
 
 func x_ceil(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var i, j uint32
 	var i0, i1, j0 int32
@@ -9951,7 +9939,7 @@ func x_ceil(tls *TLS, x float64) (r float64) {
 var _huge15 = float32(1e+30)
 
 func x_ceilf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var i uint32
 	var i0, j0 int32
@@ -9996,7 +9984,7 @@ func x_ceilf(tls *TLS, x float32) (r float32) {
 }
 
 func x_copysign(tls *TLS, x float64, y float64) (r float64) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var hx, hy uint32
 	var _ /* gh_u at bp+0 */ Tieee_double_shape_type
@@ -10014,7 +10002,7 @@ func x_copysign(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func x_copysignf(tls *TLS, x float32, y float32) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ix, iy uint32
 	var _ /* gf_u at bp+0 */ Tieee_float_shape_type
@@ -10030,7 +10018,7 @@ func x_copysignf(tls *TLS, x float32, y float32) (r float32) {
 }
 
 func x_cos(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var ix, n int32
 	var z float64
@@ -10067,7 +10055,7 @@ func x_cos(tls *TLS, x float64) (r float64) {
 var _one27 = float32(1)
 
 func x_cosf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ix, n int32
 	var z float32
@@ -10175,7 +10163,7 @@ var _sb6 = float64(474.52854120695537)             /* 0x407DA874, 0xE79FE763 */
 var _sb7 = -Float64FromFloat64(22.44095244658582)
 
 func x_erf(tls *TLS, x float64) (r1 float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var P, Q, R, S, r, s, y, z float64
 	var hx, i, ix int32
@@ -10249,7 +10237,7 @@ func x_erf(tls *TLS, x float64) (r1 float64) {
 }
 
 func x_erfc(tls *TLS, x float64) (r1 float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var P, Q, R, S, r, s, y, z float64
 	var hx, ix int32
@@ -10404,7 +10392,7 @@ var _sb61 = float32(474.52853394)                        /* 0x43ed43a7 */
 var _sb71 = float32(-Float64FromFloat64(22.440952301))
 
 func x_erff(tls *TLS, x float32) (r1 float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var P, Q, R, S, r, s, y, z float32
 	var hx, i, ix int32
@@ -10477,7 +10465,7 @@ func x_erff(tls *TLS, x float32) (r1 float32) {
 }
 
 func x_erfcf(tls *TLS, x float32) (r1 float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var P, Q, R, S, r, s, y, z float32
 	var hx, ix int32
@@ -10570,7 +10558,7 @@ var _Q4 = float64(4.008217827329362e-06)            /* 3ED0CFCA 86E65239 */
 var _Q5 = -Float64FromFloat64(2.0109921818362437e-07)
 
 func x_expm1(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(80) /* tlsAllocs 80 maxValist 0 */
+	bp := tls.Alloc(80) /* tlsAllocs 80 maxVaListSize 0 */
 	defer tls.Free(80)
 	var c, e, hfx, hi, hxs, lo, r1, t, y, v1, v2 float64
 	var high, high1, high2, hx, low uint32
@@ -10736,7 +10724,7 @@ var _Q41 = float32(4.0082177293e-06)                     /* 0x36867e54 */
 var _Q51 = float32(-Float64FromFloat64(2.0109921195e-07))
 
 func x_expm1f(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(40) /* tlsAllocs 40 maxValist 0 */
+	bp := tls.Alloc(40) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(40)
 	var c, e, hfx, hi, hxs, lo, r1, t, y, v2 float32
 	var hx uint32
@@ -10875,7 +10863,7 @@ func x_expm1f(tls *TLS, x float32) (r float32) {
 }
 
 func x_fabs(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var high uint32
 	var _ /* gh_u at bp+0 */ Tieee_double_shape_type
@@ -10890,7 +10878,7 @@ func x_fabs(tls *TLS, x float64) (r float64) {
 }
 
 func x_fabsf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ix uint32
 	var _ /* gf_u at bp+0 */ Tieee_float_shape_type
@@ -10905,7 +10893,7 @@ func x_fabsf(tls *TLS, x float32) (r float32) {
 var _huge18 = float64(1e+300)
 
 func x_floor(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var i, j uint32
 	var i0, i1, j0, v1 int32
@@ -10979,7 +10967,7 @@ func x_floor(tls *TLS, x float64) (r float64) {
 var _huge19 = float32(1e+30)
 
 func x_floorf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var i uint32
 	var i0, j0 int32
@@ -11024,7 +11012,7 @@ func x_floorf(tls *TLS, x float32) (r float32) {
 }
 
 func x_ilogb(tls *TLS, x float64) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var hx, ix, lx int32
 	var _ /* ew_u at bp+0 */ Tieee_double_shape_type
@@ -11070,7 +11058,7 @@ func x_ilogb(tls *TLS, x float64) (r int32) {
 }
 
 func x_ilogbf(tls *TLS, x float32) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var hx, ix int32
 	var _ /* gf_u at bp+0 */ Tieee_float_shape_type
@@ -11131,7 +11119,7 @@ var _Lp7 = float64(0.14798198605116586)        /* 3FC2F112 DF3E5244 */
 var _zero16 = float64(0)
 
 func x_log1p(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(40) /* tlsAllocs 40 maxValist 0 */
+	bp := tls.Alloc(40) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(40)
 	var R, c, f, hfsq, s, u, z, v1 float64
 	var ax, hu, hx, k int32
@@ -11253,7 +11241,7 @@ var _Lp71 = float32(0.1479819864)        /* 3E178897 */
 var _zero17 = float32(0)
 
 func x_log1pf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var R, c, f, hfsq, s, u, z, v1 float32
 	var ax, hu, hx, k int32
@@ -11359,7 +11347,7 @@ func x_log1pf(tls *TLS, x float32) (r float32) {
 }
 
 func x_logb(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ix, lx int32
 	var _ /* ew_u at bp+0 */ Tieee_double_shape_type
@@ -11383,7 +11371,7 @@ func x_logb(tls *TLS, x float64) (r float64) {
 }
 
 func x_logbf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ix int32
 	var _ /* gf_u at bp+0 */ Tieee_float_shape_type
@@ -11416,7 +11404,7 @@ func x_lrintf(tls *TLS, x float32) (r int64) {
 var _one32 = float64(1)
 
 func x_modf(tls *TLS, x float64, iptr uintptr) (r float64) {
-	bp := tls.Alloc(80) /* tlsAllocs 80 maxValist 0 */
+	bp := tls.Alloc(80) /* tlsAllocs 80 maxVaListSize 0 */
 	defer tls.Free(80)
 	var high, high1, high2, i uint32
 	var i0, i1, j0 int32
@@ -11484,7 +11472,7 @@ func x_modf(tls *TLS, x float64, iptr uintptr) (r float64) {
 var _one33 = float32(1)
 
 func x_modff(tls *TLS, x float32, iptr uintptr) (r float32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var i, ix, ix1 uint32
 	var i0, j0 int32
@@ -11530,7 +11518,7 @@ func x_modff(tls *TLS, x float32, iptr uintptr) (r float32) {
 }
 
 func x_nextafter(tls *TLS, x float64, y float64) (r float64) {
-	bp := tls.Alloc(40) /* tlsAllocs 40 maxValist 0 */
+	bp := tls.Alloc(40) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(40)
 	var hx, hy, ix, iy int32
 	var lx, ly uint32
@@ -11610,7 +11598,7 @@ func x_nextafter(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func x_nextafterf(tls *TLS, x float32, y float32) (r float32) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var hx, hy, ix, iy int32
 	var t float32
@@ -11689,7 +11677,7 @@ var _Zero2 = [2]float64{
 //	 * remquo in reduction algorithms.
 //	 */
 func x_remquo(tls *TLS, x float64, y float64, quo uintptr) (r float64) {
-	bp := tls.Alloc(40) /* tlsAllocs 40 maxValist 0 */
+	bp := tls.Alloc(40) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(40)
 	var hx, hy, hz, i, ix, iy, n, sx, v5 int32
 	var lx, ly, lz, q, sxy, v6, v7 uint32
@@ -11907,7 +11895,7 @@ var _Zero3 = [2]float32{
 //	 * remquo in reduction algorithms.
 //	 */
 func x_remquof(tls *TLS, x float32, y float32, quo uintptr) (r float32) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var hx, hy, hz, i, ix, iy, n, sx, v3 int32
 	var q, sxy, v4, v5 uint32
@@ -12058,7 +12046,7 @@ var _TWO52 = [2]float64{
 	1: -Float64FromFloat64(4.503599627370496e+15)}
 
 func x_rint(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(40) /* tlsAllocs 40 maxValist 0 */
+	bp := tls.Alloc(40) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(40)
 	var i, i1 uint32
 	var i0, j0, sx int32
@@ -12137,7 +12125,7 @@ var _TWO23 = [2]float32{
 	1: float32(-Float64FromFloat64(8.388608e+06))}
 
 func x_rintf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var i0, j0, sx int32
 	var t, w float32
@@ -12215,7 +12203,7 @@ var _huge20 = float64(1e+300)
 var _tiny8 = float64(1e-300)
 
 func x_scalbln(tls *TLS, x float64, n int64) (r float64) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var hx, k, lx int32
 	var _ /* ew_u at bp+0 */ Tieee_double_shape_type
@@ -12279,7 +12267,7 @@ var _huge21 = float32(1e+30)
 var _tiny9 = float32(1e-30)
 
 func x_scalblnf(tls *TLS, x float32, n int64) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ix, k int32
 	var _ /* gf_u at bp+0 */ Tieee_float_shape_type
@@ -12333,7 +12321,7 @@ func x_scalbnf(tls *TLS, x float32, n int32) (r float32) {
 }
 
 func x_sin(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var ix, n int32
 	var z float64
@@ -12368,7 +12356,7 @@ func x_sin(tls *TLS, x float64) (r float64) {
 }
 
 func x_sinf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ix, n int32
 	var z float32
@@ -12402,7 +12390,7 @@ func x_sinf(tls *TLS, x float32) (r float32) {
 }
 
 func x_tan(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var ix, n int32
 	var z float64
@@ -12428,7 +12416,7 @@ func x_tan(tls *TLS, x float64) (r float64) {
 }
 
 func x_tanf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ix, n int32
 	var z float32
@@ -12457,7 +12445,7 @@ var _two4 = float64(2)
 var _tiny10 = float64(1e-300)
 
 func x_tanh(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ix, jx int32
 	var t, z, v1 float64
@@ -12502,7 +12490,7 @@ var _two5 = float32(2)
 var _tiny11 = float32(1e-30)
 
 func x_tanhf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ix, jx int32
 	var t, z, v1 float32
@@ -12544,7 +12532,7 @@ func x_tanhf(tls *TLS, x float32) (r float32) {
 var _huge22 = float64(1e+300)
 
 func x_trunc(tls *TLS, x float64) (r float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var i, j uint32
 	var i0, i1, j0 int32
@@ -12598,7 +12586,7 @@ func x_trunc(tls *TLS, x float64) (r float64) {
 var _huge23 = Float32FromFloat32(1e+30)
 
 func x_truncf(tls *TLS, x float32) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var i uint32
 	var i0, j0 int32
@@ -29545,7 +29533,7 @@ func _to64_msb_first(tls *TLS, s uintptr, v uint32) {
 }
 
 func _des_crypt(tls *TLS, ctx uintptr, output uintptr, key uintptr, setting uintptr) (r uintptr) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var q uintptr
 	var salt uint32
@@ -29601,7 +29589,7 @@ func _des_crypt(tls *TLS, ctx uintptr, output uintptr, key uintptr, setting uint
 }
 
 func x___crypt_r(tls *TLS, clear uintptr, salt uintptr, data uintptr) (r uintptr) {
-	bp := tls.Alloc(37152) /* tlsAllocs 37152 maxValist 0 */
+	bp := tls.Alloc(37152) /* tlsAllocs 37152 maxVaListSize 0 */
 	defer tls.Free(37152)
 	var _ /* des_ctx at bp+0 */ Tdes_ctx
 	*(*Tdes_ctx)(unsafe.Pointer(bp)) = Tdes_ctx{}
@@ -29628,7 +29616,7 @@ type Tpasswd = struct {
 }
 
 func x_cuserid(tls *TLS, buf uintptr) (r uintptr) {
-	bp := tls.Alloc(2120) /* tlsAllocs 2104 maxValist 1 */
+	bp := tls.Alloc(2120) /* tlsAllocs 2104 maxVaListSize 8 */
 	defer tls.Free(2120)
 	var _ /* ppw at bp+48 */ uintptr
 	var _ /* pw at bp+0 */ Tpasswd
@@ -29713,7 +29701,7 @@ const m_MB_LEN_MAX = 4
 var _optpos int32
 
 func x_getopt(tls *TLS, argc int32, argv uintptr, optstring uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var i, k, l, v1, v2, v3, v5 int32
 	var optchar uintptr
@@ -29801,7 +29789,7 @@ func x_getpriority(tls *TLS, which int32, who int32) (r int32) {
 const m___NR_getrlimit = 97
 
 func x_getrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var v1, v2 uint64
 	var _ /* k_rlim at bp+0 */ [2]int64
@@ -29826,7 +29814,7 @@ func x_getrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 const m___NR_getrusage = 98
 
 func x_getrusage(tls *TLS, who int32, ru uintptr) (r int32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var fakeaddr uintptr
 	var _ /* ktv at bp+0 */ [2]struct {
@@ -29917,7 +29905,7 @@ const m_F_WRLCK = 1
 const m_SEEK_CUR = 1
 
 func x_lockf(tls *TLS, fd int32, op int32, size int64) (r int32) {
-	bp := tls.Alloc(48) /* tlsAllocs 32 maxValist 1 */
+	bp := tls.Alloc(48) /* tlsAllocs 32 maxVaListSize 8 */
 	defer tls.Free(48)
 	var _ /* l at bp+0 */ Tflock
 	*(*Tflock)(unsafe.Pointer(bp)) = Tflock{Fl_type: int16(m_F_WRLCK), Fl_whence: int16(m_SEEK_CUR), Fl_len: size}
@@ -29969,7 +29957,7 @@ type Thistory = struct {
 }
 
 func _do_nftw(tls *TLS, path uintptr, fn uintptr, fd_limit int32, flags int32, h uintptr) (r1 int32) {
-	bp := tls.Alloc(184) /* tlsAllocs 184 maxValist 0 */
+	bp := tls.Alloc(184) /* tlsAllocs 184 maxVaListSize 0 */
 	defer tls.Free(184)
 	var d, de, name, v6, v9 uintptr
 	var j, l, v1 uint64
@@ -30106,7 +30094,7 @@ func _do_nftw(tls *TLS, path uintptr, fn uintptr, fd_limit int32, flags int32, h
 }
 
 func x_nftw(tls *TLS, path uintptr, fn uintptr, fd_limit int32, flags int32) (r int32) {
-	bp := tls.Alloc(4104) /* tlsAllocs 4104 maxValist 0 */
+	bp := tls.Alloc(4104) /* tlsAllocs 4104 maxVaListSize 0 */
 	defer tls.Free(4104)
 	var l uint64
 	var _ /* pathbuf at bp+0 */ [4097]int8
@@ -30128,7 +30116,7 @@ const m_TIOCSPTLCK = 1074025521
 const m_TIOCSWINSZ = 21524
 
 func x_openpty(tls *TLS, m uintptr, s uintptr, name uintptr, tio uintptr, ws uintptr) (r int32) {
-	bp := tls.Alloc(40) /* tlsAllocs 24 maxValist 1 */
+	bp := tls.Alloc(40) /* tlsAllocs 24 maxVaListSize 8 */
 	defer tls.Free(40)
 	var v1 int32
 	var _ /* buf at bp+4 */ [20]int8
@@ -30170,7 +30158,7 @@ func x_grantpt(tls *TLS, fd int32) (r int32) {
 }
 
 func x_unlockpt(tls *TLS, fd int32) (r int32) {
-	bp := tls.Alloc(24) /* tlsAllocs 8 maxValist 1 */
+	bp := tls.Alloc(24) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(24)
 	var _ /* unlock at bp+0 */ int32
 	*(*int32)(unsafe.Pointer(bp)) = 0
@@ -30178,7 +30166,7 @@ func x_unlockpt(tls *TLS, fd int32) (r int32) {
 }
 
 func x_ptsname(tls *TLS, fd int32) (r uintptr) {
-	bp := tls.Alloc(24) /* tlsAllocs 8 maxValist 1 */
+	bp := tls.Alloc(24) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(24)
 	var s, v2, v3 uintptr
 	var _ /* pty at bp+0 */ int32
@@ -30232,7 +30220,7 @@ func x_setpriority(tls *TLS, which int32, who int32, prio int32) (r int32) {
 const m___NR_setrlimit = 160
 
 func x_setrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* k_rlim at bp+0 */ [2]int64
 	*(*[2]int64)(unsafe.Pointer(bp)) = [2]int64{
@@ -30335,7 +30323,7 @@ func x_closelog(tls *TLS) {
 }
 
 func ___openlog(tls *TLS, ident uintptr, opt int32, facility int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	var fd int32
 	_log_ident = ident
@@ -30366,7 +30354,7 @@ func x_openlog(tls *TLS, ident uintptr, opt int32, facility int32) {
 }
 
 func x_syslog(tls *TLS, priority int32, message uintptr, va uintptr) {
-	bp := tls.Alloc(256) /* tlsAllocs 232 maxValist 2 */
+	bp := tls.Alloc(256) /* tlsAllocs 232 maxVaListSize 16 */
 	defer tls.Free(256)
 	var ap uintptr
 	var _ /* now at bp+168 */ int64
@@ -30552,7 +30540,7 @@ func x_mbrlen(tls *TLS, s uintptr, n uint64, st uintptr) (r uint64) {
 var _internal uint32
 
 func x_mbrtowc(tls *TLS, _wc uintptr, src uintptr, n uint64, st uintptr) (r uint64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*uintptr)(unsafe.Pointer(bp)) = _wc
 	var N, c uint32
@@ -30624,7 +30612,7 @@ func x_mbsinit(tls *TLS, st uintptr) (r int32) {
 }
 
 func x_mbsnrtowcs(tls *TLS, wcs uintptr, src uintptr, n uint64, wn uint64, st uintptr) (r uint64) {
-	bp := tls.Alloc(1032) /* tlsAllocs 1032 maxValist 0 */
+	bp := tls.Alloc(1032) /* tlsAllocs 1032 maxVaListSize 0 */
 	defer tls.Free(1032)
 	var cnt, l, n2, v1 uint64
 	var ws uintptr
@@ -30693,7 +30681,7 @@ func x_mbsnrtowcs(tls *TLS, wcs uintptr, src uintptr, n uint64, wn uint64, st ui
 }
 
 func x_mbsrtowcs(tls *TLS, ws uintptr, src uintptr, wn uint64, st uintptr) (r uint64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var s, wsorig, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v27, v28, v29, v30, v5, v8, v9 uintptr
 	var _ /* c at bp+0 */ uint32
@@ -30889,7 +30877,7 @@ ilseq2:
 }
 
 func x_mbstowcs(tls *TLS, ws uintptr, _s uintptr, wn uint64) (r uint64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	*(*uintptr)(unsafe.Pointer(bp)) = _s
 	var _ /* st at bp+8 */ Tmbstate_t
@@ -30898,7 +30886,7 @@ func x_mbstowcs(tls *TLS, ws uintptr, _s uintptr, wn uint64) (r uint64) {
 }
 
 func x_mbtowc(tls *TLS, wc uintptr, s uintptr, n uint64) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var v1 uint64
 	var _ /* st at bp+0 */ Tmbstate_t
@@ -30957,7 +30945,7 @@ func x_wcrtomb(tls *TLS, s uintptr, wc int32, st uintptr) (r uint64) {
 }
 
 func x_wcsnrtombs(tls *TLS, dst uintptr, wcs uintptr, wn uint64, n uint64, st uintptr) (r uint64) {
-	bp := tls.Alloc(264) /* tlsAllocs 264 maxValist 0 */
+	bp := tls.Alloc(264) /* tlsAllocs 264 maxVaListSize 0 */
 	defer tls.Free(264)
 	var cnt, l, n2, v1 uint64
 	var s uintptr
@@ -31016,7 +31004,7 @@ func x_wcsnrtombs(tls *TLS, dst uintptr, wcs uintptr, wn uint64, n uint64, st ui
 }
 
 func x_wcsrtombs(tls *TLS, s uintptr, ws uintptr, n uint64, st uintptr) (r uint64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var N, l uint64
 	var ws2, v1, v2 uintptr
@@ -31082,7 +31070,7 @@ func x_wcsrtombs(tls *TLS, s uintptr, ws uintptr, n uint64, st uintptr) (r uint6
 }
 
 func x_wcstombs(tls *TLS, s uintptr, _ws uintptr, n uint64) (r uint64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*uintptr)(unsafe.Pointer(bp)) = _ws
 	return x_wcsrtombs(tls, s, bp, n, uintptr(0))
@@ -31248,7 +31236,7 @@ type Tin_pktinfo = struct {
 }
 
 func x___dns_doqueries(tls *TLS, dest uintptr, name uintptr, rr uintptr, rrcnt int32) (r1 int32) {
-	bp := tls.Alloc(912) /* tlsAllocs 896 maxValist 1 */
+	bp := tls.Alloc(912) /* tlsAllocs 896 maxVaListSize 8 */
 	defer tls.Free(912)
 	var __b, f, r, s, z, v4 uintptr
 	var __i, errcode, failed, family, fd, got, i, id, j, nns, ql, rlen, v2, v5 int32
@@ -31470,7 +31458,7 @@ func x___dns_doqueries(tls *TLS, dest uintptr, name uintptr, rr uintptr, rrcnt i
 }
 
 func _mkptr4(tls *TLS, s uintptr, ip uintptr) {
-	bp := tls.Alloc(40) /* tlsAllocs 0 maxValist 4 */
+	bp := tls.Alloc(40) /* tlsAllocs 0 maxVaListSize 32 */
 	defer tls.Free(40)
 	x_sprintf(tls, s, ts+305, VaList(bp+8, int32(*(*uint8)(unsafe.Pointer(ip + 3))), int32(*(*uint8)(unsafe.Pointer(ip + 2))), int32(*(*uint8)(unsafe.Pointer(ip + 1))), int32(*(*uint8)(unsafe.Pointer(ip)))))
 }
@@ -31498,7 +31486,7 @@ func _mkptr6(tls *TLS, s uintptr, ip uintptr) {
 var _xdigits = [17]int8{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'}
 
 func x___dns_query(tls *TLS, r uintptr, a uintptr, family int32, ptr int32) (r1 int32) {
-	bp := tls.Alloc(88) /* tlsAllocs 88 maxValist 0 */
+	bp := tls.Alloc(88) /* tlsAllocs 88 maxVaListSize 0 */
 	defer tls.Free(88)
 	var rrcnt, v1 int32
 	var _ /* buf at bp+0 */ [78]int8
@@ -31528,7 +31516,7 @@ func x___dns_query(tls *TLS, r uintptr, a uintptr, family int32, ptr int32) (r1 
 }
 
 func _decname(tls *TLS, s uintptr, b uintptr, p uintptr) (r int32) {
-	bp := tls.Alloc(64) /* tlsAllocs 64 maxValist 0 */
+	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var j, v1 int32
 	var pz, sz uintptr
@@ -31572,7 +31560,7 @@ func _decname(tls *TLS, s uintptr, b uintptr, p uintptr) (r int32) {
 }
 
 func x___dns_get_rr(tls *TLS, dest uintptr, stride uint64, maxlen uint64, limit uint64, r uintptr, rr int32, dec int32) (r1 int32) {
-	bp := tls.Alloc(256) /* tlsAllocs 256 maxValist 0 */
+	bp := tls.Alloc(256) /* tlsAllocs 256 maxVaListSize 0 */
 	defer tls.Free(256)
 	var ancount, found, len1, qdcount, v1, v2 int32
 	var p uintptr
@@ -31668,7 +31656,7 @@ var _p = [2][2]int32{
 		1: int32(m_RR_AAAA)}}
 
 func x___ipparse(tls *TLS, dest uintptr, family int32, s uintptr) (r int32) {
-	bp := tls.Alloc(136) /* tlsAllocs 136 maxValist 0 */
+	bp := tls.Alloc(136) /* tlsAllocs 136 maxVaListSize 0 */
 	defer tls.Free(136)
 	var d uintptr
 	var i int32
@@ -31717,16 +31705,12 @@ func x_accept(tls *TLS, fd int32, addr uintptr, len1 uintptr) (r int32) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	ret = int32(_syscall6(tls, int64(m___NR_accept), int64(fd), int64(addr), int64(len1), Int64FromInt32(0), Int64FromInt32(0), Int64FromInt32(0)))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return ret
@@ -31745,16 +31729,12 @@ func x_connect(tls *TLS, fd int32, addr uintptr, len1 uint32) (r int32) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	ret = int32(_syscall6(tls, int64(m___NR_connect), int64(fd), int64(addr), int64(len1), Int64FromInt32(0), Int64FromInt32(0), Int64FromInt32(0)))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return ret
@@ -32038,7 +32018,7 @@ type Tres_sym = struct {
 }
 
 func x_dn_expand(tls *TLS, b uintptr, pz uintptr, p uintptr, s uintptr, outlen int32) (r int32) {
-	bp := tls.Alloc(64) /* tlsAllocs 64 maxValist 0 */
+	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var j, v1 int32
 	var sz uintptr
@@ -32150,7 +32130,7 @@ type Taibuf = struct {
 }
 
 func x_getaddrinfo(tls *TLS, host uintptr, serv uintptr, hint uintptr, res uintptr) (r int32) {
-	bp := tls.Alloc(1880) /* tlsAllocs 1864 maxValist 1 */
+	bp := tls.Alloc(1880) /* tlsAllocs 1864 maxVaListSize 8 */
 	defer tls.Free(1880)
 	var buf, f, p, v10, v11, v12, v9 uintptr
 	var cnt, family, flags, i, j, proto, result, type1, v1, v14, v15, v16, v17, v18, v19, v2, v20, v21, v3, v4, v5, v6 int32
@@ -32440,7 +32420,7 @@ func x_getaddrinfo(tls *TLS, host uintptr, serv uintptr, hint uintptr, res uintp
 }
 
 func x_gethostbyaddr(tls *TLS, a uintptr, l uint32, af int32) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* res at bp+0 */ uintptr
 	if x_gethostbyaddr_r(tls, a, l, af, uintptr(unsafe.Pointer(&_h)), uintptr(unsafe.Pointer(&_buf2)), uint64(512), bp, uintptr(unsafe.Pointer(&x_h_errno))) != 0 {
@@ -32458,7 +32438,7 @@ const m_NO_RECOVERY = 3
 const m_TRY_AGAIN = 2
 
 func x_gethostbyaddr_r(tls *TLS, a uintptr, l uint32, af int32, h uintptr, buf uintptr, buflen uint64, res uintptr, err uintptr) (r int32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var i int32
 	var sl uint32
@@ -32541,7 +32521,7 @@ func x_gethostbyname(tls *TLS, name uintptr) (r uintptr) {
 }
 
 func x_gethostbyname2(tls *TLS, name uintptr, af int32) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* res at bp+0 */ uintptr
 	if x_gethostbyname2_r(tls, name, af, uintptr(unsafe.Pointer(&_h1)), uintptr(unsafe.Pointer(&_buf3)), uint64(512), bp, uintptr(unsafe.Pointer(&x_h_errno))) != 0 {
@@ -32558,7 +32538,7 @@ const m_AI_CANONNAME = 2
 const m_HOST_NOT_FOUND = 1
 
 func x_gethostbyname2_r(tls *TLS, name uintptr, af int32, h uintptr, buf uintptr, buflen uint64, res uintptr, err uintptr) (r int32) {
-	bp := tls.Alloc(56) /* tlsAllocs 56 maxValist 0 */
+	bp := tls.Alloc(56) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(56)
 	var canon, p, v3, v5 uintptr
 	var i, v1, v2 int32
@@ -32674,7 +32654,7 @@ const m_NI_NAMEREQD = 8
 const m_NI_NUMERICHOST = 1
 
 func x_getnameinfo(tls *TLS, sa uintptr, sl uint32, node uintptr, nodelen uint32, serv uintptr, servlen uint32, flags int32) (r int32) {
-	bp := tls.Alloc(784) /* tlsAllocs 768 maxValist 1 */
+	bp := tls.Alloc(784) /* tlsAllocs 768 maxVaListSize 8 */
 	defer tls.Free(784)
 	var a uintptr
 	var af int32
@@ -32723,7 +32703,7 @@ func x_getpeername(tls *TLS, fd int32, addr uintptr, len1 uintptr) (r int32) {
 }
 
 func x_getservbyname(tls *TLS, name uintptr, prots uintptr) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* res at bp+0 */ uintptr
 	if x_getservbyname_r(tls, name, prots, uintptr(unsafe.Pointer(&_se)), uintptr(unsafe.Pointer(&_buf4)), uint64(32), bp) != 0 {
@@ -32737,7 +32717,7 @@ var _se Tservent
 var _buf4 [4]int64
 
 func x_getservbyname_r(tls *TLS, name uintptr, prots uintptr, se uintptr, buf uintptr, buflen uint64, res uintptr) (r int32) {
-	bp := tls.Alloc(56) /* tlsAllocs 56 maxValist 0 */
+	bp := tls.Alloc(56) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(56)
 	var i int32
 	var _ /* ai at bp+0 */ uintptr
@@ -32778,7 +32758,7 @@ func x_getservbyname_r(tls *TLS, name uintptr, prots uintptr, se uintptr, buf ui
 }
 
 func x_getservbyport(tls *TLS, port int32, prots uintptr) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* res at bp+0 */ uintptr
 	if x_getservbyport_r(tls, port, prots, uintptr(unsafe.Pointer(&_se1)), uintptr(unsafe.Pointer(&_buf5)), uint64(32), bp) != 0 {
@@ -32794,7 +32774,7 @@ var _buf5 [4]int64
 const m_NI_DGRAM = 16
 
 func x_getservbyport_r(tls *TLS, port int32, prots uintptr, se uintptr, buf uintptr, buflen uint64, res uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var i, v2 int32
 	var v1 uintptr
@@ -32870,7 +32850,7 @@ func x_hstrerror(tls *TLS, ecode int32) (r uintptr) {
 }
 
 func x_htonl(tls *TLS, n uint32) (r uint32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* u at bp+0 */ struct {
 		Fi [0]uint32
@@ -32891,7 +32871,7 @@ func x_htonl(tls *TLS, n uint32) (r uint32) {
 }
 
 func x_htons(tls *TLS, n uint16) (r uint16) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* u at bp+0 */ struct {
 		Fs [0]uint16
@@ -32910,7 +32890,7 @@ func x_htons(tls *TLS, n uint16) (r uint16) {
 }
 
 func x_inet_addr(tls *TLS, p uintptr) (r uint32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* sin at bp+0 */ Tsockaddr_in
 	if x___ipparse(tls, bp, int32(m_PF_INET), p) != 0 {
@@ -32924,7 +32904,7 @@ func x_inet_aton(tls *TLS, cp uintptr, inp uintptr) (r int32) {
 }
 
 func x_inet_ntoa(tls *TLS, _in Tin_addr) (r uintptr) {
-	bp := tls.Alloc(48) /* tlsAllocs 8 maxValist 4 */
+	bp := tls.Alloc(48) /* tlsAllocs 8 maxVaListSize 32 */
 	defer tls.Free(48)
 	*(*Tin_addr)(unsafe.Pointer(bp)) = _in
 	var a uintptr
@@ -32939,7 +32919,7 @@ const m_EAFNOSUPPORT = 97
 const m_ENOSPC = 28
 
 func x_inet_ntop(tls *TLS, af int32, a0 uintptr, s uintptr, l uint32) (r uintptr) {
-	bp := tls.Alloc(240) /* tlsAllocs 104 maxValist 16 */
+	bp := tls.Alloc(240) /* tlsAllocs 104 maxVaListSize 128 */
 	defer tls.Free(240)
 	var a uintptr
 	var best, i, j, max, v1 int32
@@ -32989,7 +32969,7 @@ func x_inet_ntop(tls *TLS, af int32, a0 uintptr, s uintptr, l uint32) (r uintptr
 }
 
 func x_inet_pton(tls *TLS, af int32, s uintptr, a0 uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var a uintptr
 	var i int32
@@ -33022,7 +33002,7 @@ func x_listen(tls *TLS, fd int32, backlog int32) (r int32) {
 }
 
 func x_ntohl(tls *TLS, n uint32) (r uint32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* u at bp+0 */ struct {
 		Fb [0][4]uint8
@@ -33033,7 +33013,7 @@ func x_ntohl(tls *TLS, n uint32) (r uint32) {
 }
 
 func x_ntohs(tls *TLS, n uint16) (r uint16) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* u at bp+0 */ struct {
 		Fb [0][2]uint8
@@ -33111,16 +33091,12 @@ func x_recvfrom(tls *TLS, fd int32, buf uintptr, len1 uint64, flags int32, addr 
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = _syscall6(tls, int64(m___NR_recvfrom), int64(fd), int64(buf), int64(len1), int64(flags), int64(addr), int64(alen))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -33133,16 +33109,12 @@ func x_recvmsg(tls *TLS, fd int32, msg uintptr, flags int32) (r1 int64) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = _syscall6(tls, int64(m___NR_recvmsg), int64(fd), int64(msg), int64(flags), Int64FromInt32(0), Int64FromInt32(0), Int64FromInt32(0))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -33153,7 +33125,7 @@ func x_res_init(tls *TLS) (r int32) {
 }
 
 func x_res_query(tls *TLS, name uintptr, class int32, _type int32, dest uintptr, len1 int32) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*int32)(unsafe.Pointer(bp)) = _type
 	if class != int32(1) || len1 < int32(512) {
@@ -33184,16 +33156,12 @@ func x_sendmsg(tls *TLS, fd int32, msg uintptr, flags int32) (r1 int64) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = _syscall6(tls, int64(m___NR_sendmsg), int64(fd), int64(msg), int64(flags), Int64FromInt32(0), Int64FromInt32(0), Int64FromInt32(0))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -33206,16 +33174,12 @@ func x_sendto(tls *TLS, fd int32, buf uintptr, len1 uint64, flags int32, addr ui
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = _syscall6(tls, int64(m___NR_sendto), int64(fd), int64(buf), int64(len1), int64(flags), int64(addr), int64(alen))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -33246,7 +33210,7 @@ func x_shutdown(tls *TLS, fd int32, how int32) (r int32) {
 const m_SIOCATMARK = 35077
 
 func x_sockatmark(tls *TLS, s int32) (r int32) {
-	bp := tls.Alloc(24) /* tlsAllocs 8 maxValist 1 */
+	bp := tls.Alloc(24) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(24)
 	var _ /* ret at bp+0 */ int32
 	if x_ioctl(tls, s, int32(m_SIOCATMARK), VaList(bp+16, bp)) < 0 {
@@ -33280,7 +33244,7 @@ type Tspwd = struct {
 }
 
 func _getgr_r(tls *TLS, name uintptr, gid uint32, gr uintptr, buf uintptr, size uint64, res uintptr) (r int32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var f uintptr
 	var i uint64
@@ -33343,7 +33307,7 @@ func x_setgrent(tls *TLS) {
 }
 
 func x_getgrent(tls *TLS) (r uintptr) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* nmem at bp+8 */ uint64
 	var _ /* size at bp+0 */ uint64
@@ -33471,7 +33435,7 @@ func x___getgrent_a(tls *TLS, f uintptr, gr uintptr, line uintptr, size uintptr,
 }
 
 func _getpw_r(tls *TLS, name uintptr, uid uint32, pw uintptr, buf uintptr, size uint64, res uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var f uintptr
 	var rv int32
@@ -33524,7 +33488,7 @@ func x_setpwent(tls *TLS) {
 }
 
 func x_getpwent(tls *TLS) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* size at bp+0 */ uint64
 	*(*uint64)(unsafe.Pointer(bp)) = uint64(0)
@@ -33657,7 +33621,7 @@ func x_getspent(tls *TLS) (r uintptr) {
 const m_LINE_LIM = 256
 
 func x_getspnam(tls *TLS, name uintptr) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var e int32
 	var _ /* res at bp+0 */ uintptr
@@ -33682,7 +33646,7 @@ const m_O_NOFOLLOW = 131072
 const m_S_IFREG = 32768
 
 func x_getspnam_r(tls *TLS, name uintptr, sp uintptr, buf uintptr, size uint64, res uintptr) (r int32) {
-	bp := tls.Alloc(440) /* tlsAllocs 424 maxValist 1 */
+	bp := tls.Alloc(440) /* tlsAllocs 424 maxVaListSize 8 */
 	defer tls.Free(440)
 	var f, s, v1, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v5, v6, v7, v8, v9 uintptr
 	var fd, rv, skip int32
@@ -33843,7 +33807,7 @@ func x___rand48_step(tls *TLS, xi uintptr, lc uintptr) (r uint64) {
 }
 
 func x_erand48(tls *TLS, s uintptr) (r float64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* x at bp+0 */ struct {
 		Ff [0]float64
@@ -33910,7 +33874,7 @@ func x_seed48(tls *TLS, s uintptr) (r uintptr) {
 var _p2 [3]uint16
 
 func x_srand48(tls *TLS, seed int64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*[3]uint16)(unsafe.Pointer(bp)) = [3]uint16{
 		0: uint16(0x330e),
@@ -34054,7 +34018,7 @@ const m_SIG_BLOCK = 0
 const m_SIG_SETMASK = 2
 
 func x_system(tls *TLS, cmd uintptr) (r int32) {
-	bp := tls.Alloc(760) /* tlsAllocs 720 maxValist 4 */
+	bp := tls.Alloc(760) /* tlsAllocs 720 maxVaListSize 32 */
 	defer tls.Free(760)
 	var pid int32
 	var _ /* new at bp+128 */ Tsigset_t
@@ -34122,7 +34086,7 @@ const m_FNM_PERIOD = 4
 const m___FNM_CONT = 32768
 
 func _next(tls *TLS, s uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var l int32
 	var v1, v2 uintptr
@@ -34170,7 +34134,7 @@ func _bracket_next(tls *TLS, s uintptr) (r int32) {
 }
 
 func x_fnmatch(tls *TLS, _p uintptr, _s uintptr, flags int32) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	*(*uintptr)(unsafe.Pointer(bp)) = _p
 	*(*uintptr)(unsafe.Pointer(bp + 8)) = _s
@@ -34417,7 +34381,7 @@ func _append(tls *TLS, tail uintptr, name uintptr, len1 uint64, mark int32) (r i
 }
 
 func _match_in_dir(tls *TLS, d uintptr, p uintptr, flags int32, errfunc uintptr, tail uintptr) (r int32) {
-	bp := tls.Alloc(576) /* tlsAllocs 576 maxValist 0 */
+	bp := tls.Alloc(576) /* tlsAllocs 576 maxVaListSize 0 */
 	defer tls.Free(576)
 	var dir, name, namebuf, p2, pat, v3, v4 uintptr
 	var error1, fnm_flags, literal, mark, v2, v5, v6, v8 int32
@@ -34557,7 +34521,7 @@ func _sort(tls *TLS, a uintptr, b uintptr) (r int32) {
 }
 
 func x_glob(tls *TLS, pat uintptr, flags int32, errfunc uintptr, g uintptr) (r int32) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var cnt, i, offs, v1 uint64
 	var d, p, pathv uintptr
@@ -35114,7 +35078,7 @@ func _tre_compare_items(tls *TLS, a uintptr, b uintptr) (r int32) {
 }
 
 func _tre_parse_bracket_items(tls *TLS, ctx uintptr, negate int32, neg_classes uintptr, num_neg_classes uintptr, items uintptr, num_items uintptr, items_size uintptr) (r int32) {
-	bp := tls.Alloc(328) /* tlsAllocs 328 maxValist 0 */
+	bp := tls.Alloc(328) /* tlsAllocs 328 maxVaListSize 0 */
 	defer tls.Free(328)
 	var ccurr, class, cmin, len1, max, min, skip, status, v10, v11, v2, v4, v6, v7, v8, v9 int32
 	var endptr, re, v3, v5 uintptr
@@ -35275,7 +35239,7 @@ func _tre_parse_bracket_items(tls *TLS, ctx uintptr, negate int32, neg_classes u
 }
 
 func _tre_parse_bracket(tls *TLS, ctx uintptr, result uintptr) (r int32) {
-	bp := tls.Alloc(280) /* tlsAllocs 280 maxValist 0 */
+	bp := tls.Alloc(280) /* tlsAllocs 280 maxVaListSize 0 */
 	defer tls.Free(280)
 	var curr_max, curr_min, j, k, k1, max, min, negate, status, v1, v2, v3 int32
 	var l, l1, n, node, u uintptr
@@ -35429,7 +35393,7 @@ func _tre_parse_int(tls *TLS, regex uintptr, regex_end uintptr) (r1 int32) {
 }
 
 func _tre_parse_bound(tls *TLS, ctx uintptr, result uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var counts_set, done, max, min, v1 int32
 	var start uintptr
@@ -35533,7 +35497,7 @@ const _PARSE_POSTFIX = 9
 const _PARSE_RESTORE_CFLAGS = 10
 
 func _tre_parse(tls *TLS, ctx uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var bottom, c, depth, rep_max, rep_min, status, submatch_id, symbol, val, v34 int32
 	var n, stack, tmp1, tmp11, tmp2, tmp21, tmp_node, tmp_node1, tmp_node2, tmp_node3, tree, tree1 uintptr
@@ -36872,7 +36836,7 @@ const _EXPAND_AFTER_ITER = 1
 //	/* Expands each iteration node that has a finite nonzero minimum or maximum
 //	   iteration count to a catenated sequence of copies of the node. */
 func _tre_expand_ast(tls *TLS, mem uintptr, stack uintptr, ast uintptr, position uintptr, tag_directions uintptr, max_depth uintptr) (r int32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var bottom, flags, i, iter_depth, pos_add_last, pos_add_save, pos_add_total, status, status1, status2, symbol, v2 int32
 	var cat, iter, iter1, lit, node, seq1, tmp, uni uintptr
@@ -37359,7 +37323,7 @@ const _NFL_POST_ITERATION = 3
 //	/* Computes and fills in the fields `nullable', `firstpos', and `lastpos' for
 //	   the nodes of the AST `tree'. */
 func _tre_compute_nfl(tls *TLS, mem uintptr, stack uintptr, tree uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var bottom, status, status1, status10, status11, status12, status13, status14, status15, status16, status17, status18, status2, status3, status4, status5, status6, status7, status8, status9, symbol int32
 	var cat, iter, lit, node, tags, uni uintptr
@@ -37867,7 +37831,7 @@ func _tre_free(tls *TLS, preg uintptr) {
 }
 
 func _tre_compile(tls *TLS, preg uintptr, regex uintptr, n uint64, cflags int32) (r int32) {
-	bp := tls.Alloc(72) /* tlsAllocs 72 maxValist 0 */
+	bp := tls.Alloc(72) /* tlsAllocs 72 maxVaListSize 0 */
 	defer tls.Free(72)
 	var add, errcode, i, j, v1 int32
 	var counts, initial, mem, offs, p, stack, submatch_data, tag_directions, tmp_ast_l, tmp_ast_r, tnfa, transitions, tree, v2 uintptr
@@ -38241,7 +38205,7 @@ type Ttre_reach_pos_t = struct {
 }
 
 func _tre_tnfa_run_parallel(tls *TLS, tnfa uintptr, string1 uintptr, len1 int32, match_tags uintptr, eflags int32, match_end_ofs uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var buf, reach, reach_i, reach_next, reach_next_i, reach_pos, str_byte, tag_i, tmp_buf, tmp_iptr, tmp_tags, trans_i uintptr
 	var i, match_eo, new_match, num_tags, pbytes, pos, pos_add_next, prev_c, rbytes, reg_newline, reg_notbol, reg_noteol, tbytes, total_bytes, xbytes, v5, v6, v8 int32
@@ -38529,7 +38493,7 @@ type Ttre_backtrack_struct = struct {
 }
 
 func _tre_tnfa_run_backtrack(tls *TLS, tnfa uintptr, string1 uintptr, len1 int32, match_tags uintptr, eflags int32, match_end_ofs uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var bt, bt_len, cflags, empty_br_match, eo, i, i1, i2, i3, i4, match_eo, next_c_start, pos, pos_add_next, pos_start, prev_c, reg_newline, reg_notbol, reg_noteol, result, ret, so, v1, v11, v5, v6 int32
 	var mem, next_state, next_tags, pmatch, s, s1, stack, state, states_seen, str_byte, str_byte_start, tags, tmp, tmp1, trans_i, trans_i1, v2, v9 uintptr
@@ -39006,7 +38970,7 @@ func _tre_fill_pmatch(tls *TLS, nmatch uint64, pmatch uintptr, cflags int32, tnf
 var ___func__11 = [16]int8{'t', 'r', 'e', '_', 'f', 'i', 'l', 'l', '_', 'p', 'm', 'a', 't', 'c', 'h'}
 
 func _tre_match(tls *TLS, tnfa uintptr, string1 uintptr, len1 uint64, nmatch uint64, pmatch uintptr, eflags int32) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var status int32
 	var tags uintptr
@@ -39159,16 +39123,12 @@ func x_poll(tls *TLS, fds uintptr, n uint32, timeout int32) (r1 int32) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = int32(_syscall3(tls, int64(m___NR_poll), int64(fds), int64(n), int64(timeout)))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -39177,7 +39137,7 @@ func x_poll(tls *TLS, fds uintptr, n uint32, timeout int32) (r1 int32) {
 const m___NR_pselect6 = 270
 
 func x_pselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, ts uintptr, mask uintptr) (r1 int32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var r int32
 	var v2 int64
@@ -39192,8 +39152,6 @@ func x_pselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, ts u
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	if ts != 0 {
@@ -39205,8 +39163,6 @@ func x_pselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, ts u
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -39219,16 +39175,12 @@ func x_select(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, tv ui
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = int32(_syscall5(tls, int64(m___NR_select), int64(n), int64(rfds), int64(wfds), int64(efds), int64(tv)))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -39237,7 +39189,7 @@ func x_select(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, tv ui
 const m___NR_getitimer = 36
 
 func x_getitimer(tls *TLS, which int32, old uintptr) (r int32) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ret, v1 int32
 	var _ /* kold at bp+0 */ [4]int64
@@ -39270,7 +39222,7 @@ func x_raise(tls *TLS, sig int32) (r int32) {
 const m___NR_setitimer = 38
 
 func x_setitimer(tls *TLS, which int32, new1 uintptr, old uintptr) (r int32) {
-	bp := tls.Alloc(64) /* tlsAllocs 64 maxValist 0 */
+	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var ret, v1 int32
 	var v2 int64
@@ -39301,7 +39253,7 @@ const m_SIGSYSCALL = 33
 const m___NR_rt_sigaction = 13
 
 func x___libc_sigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r int32) {
-	bp := tls.Alloc(304) /* tlsAllocs 304 maxValist 0 */
+	bp := tls.Alloc(304) /* tlsAllocs 304 maxVaListSize 0 */
 	defer tls.Free(304)
 	var pkold, pksa int64
 	var v1 uintptr
@@ -39428,7 +39380,7 @@ func x_sigfillset(tls *TLS, set uintptr) (r int32) {
 }
 
 func x_sighold(tls *TLS, sig int32) (r int32) {
-	bp := tls.Alloc(128) /* tlsAllocs 128 maxValist 0 */
+	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* mask at bp+0 */ Tsigset_t
 	x_sigemptyset(tls, bp)
@@ -39439,7 +39391,7 @@ func x_sighold(tls *TLS, sig int32) (r int32) {
 }
 
 func x_sigignore(tls *TLS, sig int32) (r int32) {
-	bp := tls.Alloc(152) /* tlsAllocs 152 maxValist 0 */
+	bp := tls.Alloc(152) /* tlsAllocs 152 maxVaListSize 0 */
 	defer tls.Free(152)
 	var _ /* sa at bp+0 */ Tsigaction
 	x_sigemptyset(tls, uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).Fsa_mask)))
@@ -39451,7 +39403,7 @@ func x_sigignore(tls *TLS, sig int32) (r int32) {
 const m_SA_RESTART = 268435456
 
 func x_siginterrupt(tls *TLS, sig int32, flag int32) (r int32) {
-	bp := tls.Alloc(152) /* tlsAllocs 152 maxValist 0 */
+	bp := tls.Alloc(152) /* tlsAllocs 152 maxVaListSize 0 */
 	defer tls.Free(152)
 	var _ /* sa at bp+0 */ Tsigaction
 	x___sigaction(tls, sig, UintptrFromInt32(0), bp)
@@ -39486,7 +39438,7 @@ func x_siglongjmp(tls *TLS, buf uintptr, ret int32) {
 //#define LFS64_2(x, y) weak_alias(x, y)
 
 func x_signal(tls *TLS, sig int32, func1 uintptr) (r uintptr) {
-	bp := tls.Alloc(152) /* tlsAllocs 152 maxValist 0 */
+	bp := tls.Alloc(152) /* tlsAllocs 152 maxVaListSize 0 */
 	defer tls.Free(152)
 	var _ /* sa at bp+0 */ Tsigaction
 	*(*uintptr)(unsafe.Pointer(bp)) = func1
@@ -39498,7 +39450,7 @@ func x_signal(tls *TLS, sig int32, func1 uintptr) (r uintptr) {
 }
 
 func x_sigpause(tls *TLS, sig int32) (r int32) {
-	bp := tls.Alloc(128) /* tlsAllocs 128 maxValist 0 */
+	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* mask at bp+0 */ Tsigset_t
 	if x___sigprocmask(tls, 0, UintptrFromInt32(0), bp) < 0 || x_sigdelset(tls, bp, sig) < 0 {
@@ -39522,7 +39474,7 @@ func x___libc_sigprocmask(tls *TLS, how int32, set uintptr, old uintptr) (r int3
 }
 
 func x___sigprocmask(tls *TLS, how int32, set uintptr, old uintptr) (r int32) {
-	bp := tls.Alloc(128) /* tlsAllocs 128 maxValist 0 */
+	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* tmp at bp+0 */ Tsigset_t
 	/* Quickly mask out bits 32 and 33 (thread control signals) */
@@ -39537,7 +39489,7 @@ func x___sigprocmask(tls *TLS, how int32, set uintptr, old uintptr) (r int32) {
 const m___NR_rt_sigqueueinfo = 129
 
 func x_sigqueue(tls *TLS, pid int32, sig int32, value Tsigval) (r int32) {
-	bp := tls.Alloc(128) /* tlsAllocs 128 maxValist 0 */
+	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* si at bp+0 */ Tsiginfo_t
 	*(*int32)(unsafe.Pointer(bp)) = sig
@@ -39547,7 +39499,7 @@ func x_sigqueue(tls *TLS, pid int32, sig int32, value Tsigval) (r int32) {
 }
 
 func x_sigrelse(tls *TLS, sig int32) (r int32) {
-	bp := tls.Alloc(128) /* tlsAllocs 128 maxValist 0 */
+	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* mask at bp+0 */ Tsigset_t
 	x_sigemptyset(tls, bp)
@@ -39566,7 +39518,7 @@ func x___libc_current_sigrtmin(tls *TLS) (r int32) {
 }
 
 func x_sigset(tls *TLS, sig int32, handler uintptr) (r uintptr) {
-	bp := tls.Alloc(432) /* tlsAllocs 432 maxValist 0 */
+	bp := tls.Alloc(432) /* tlsAllocs 432 maxVaListSize 0 */
 	defer tls.Free(432)
 	var v1 uintptr
 	var _ /* mask at bp+304 */ Tsigset_t
@@ -39611,7 +39563,7 @@ func x_sigsuspend(tls *TLS, mask uintptr) (r int32) {
 const m___NR_rt_sigtimedwait = 128
 
 func x_sigtimedwait(tls *TLS, mask uintptr, si uintptr, timeout uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var v1 int64
 	var _ /* k_timeout at bp+0 */ [2]int64
@@ -39628,7 +39580,7 @@ func x_sigtimedwait(tls *TLS, mask uintptr, si uintptr, timeout uintptr) (r int3
 }
 
 func x_sigwait(tls *TLS, mask uintptr, sig uintptr) (r int32) {
-	bp := tls.Alloc(128) /* tlsAllocs 128 maxValist 0 */
+	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* si at bp+0 */ Tsiginfo_t
 	if x_sigtimedwait(tls, mask, bp, UintptrFromInt32(0)) < 0 {
@@ -39765,7 +39717,7 @@ const m_F_NOWR = 8
 const m_UNGET = 4
 
 func x___fdopen(tls *TLS, fd int32, mode uintptr) (r uintptr) {
-	bp := tls.Alloc(64) /* tlsAllocs 64 maxValist 0 */
+	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var f, v1 uintptr
 	var flags, plus, v2 int32
@@ -40022,7 +39974,7 @@ func _arg_n(tls *TLS, ap uintptr, n uint32) (r uintptr) {
 }
 
 func x___scanf(tls *TLS, r uintptr, fmt uintptr, ap uintptr) (r1 int32) {
-	bp := tls.Alloc(280) /* tlsAllocs 280 maxValist 0 */
+	bp := tls.Alloc(280) /* tlsAllocs 280 maxVaListSize 0 */
 	defer tls.Free(280)
 	var c, en, en1, ex, ex1, invert, l, m, matches, mode, neg, pos, size, t, wide, width, v14, v17, v18, v22, v24, v25, v31, v32, v33, v34, v35, v36, v48, v49, v50, v51, v52, v54, v55, v57, v58, v60, v61, v62, v63, v64, v66, v67, v69, v70, v71, v73, v77, v78 int32
 	var dest, is_space, p, s, wcs, z, v13, v15, v16, v19, v20, v21, v23, v26, v27, v28, v4, v5, v6, v72, v74, v75, v76, v79, v80 uintptr
@@ -41237,7 +41189,7 @@ func x_fgets(tls *TLS, s uintptr, n int32, f uintptr) (r uintptr) {
 }
 
 func x___fgetwc_unlocked(tls *TLS, f uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var c, v1 int32
 	var l uint64
@@ -41421,7 +41373,7 @@ func x_fputs(tls *TLS, s uintptr, f uintptr) (r int32) {
 }
 
 func x___fputwc_unlocked(tls *TLS, c int32, f uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var l int32
 	var v1, v2 uintptr
@@ -41468,7 +41420,7 @@ func x_fputwc(tls *TLS, c int32, f uintptr) (r int32) {
 }
 
 func x_fputws(tls *TLS, _ws uintptr, f uintptr) (r int32) {
-	bp := tls.Alloc(1032) /* tlsAllocs 1032 maxValist 0 */
+	bp := tls.Alloc(1032) /* tlsAllocs 1032 maxVaListSize 0 */
 	defer tls.Free(1032)
 	*(*uintptr)(unsafe.Pointer(bp)) = _ws
 	var l, v2 uint64
@@ -41892,7 +41844,7 @@ func x_gets(tls *TLS, s uintptr) (r uintptr) {
 }
 
 func x_getw(tls *TLS, f uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var v1 int32
 	var _ /* x at bp+0 */ int32
@@ -41913,7 +41865,7 @@ func x_getwchar(tls *TLS) (r int32) {
 }
 
 func x_pclose(tls *TLS, f uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var _ /* status at bp+0 */ int32
 	x_fclose(tls, f)
@@ -41926,7 +41878,7 @@ func x_pclose(tls *TLS, f uintptr) (r int32) {
 }
 
 func x_perror(tls *TLS, msg uintptr) {
-	bp := tls.Alloc(24) /* tlsAllocs 0 maxValist 2 */
+	bp := tls.Alloc(24) /* tlsAllocs 0 maxVaListSize 16 */
 	defer tls.Free(24)
 	if msg != 0 {
 		x_fprintf(tls, Xstderr, ts+1045, VaList(bp+8, msg, x_strerror(tls, *(*int32)(unsafe.Pointer(x___errno_location(tls))))))
@@ -41936,7 +41888,7 @@ func x_perror(tls *TLS, msg uintptr) {
 }
 
 func x_popen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
-	bp := tls.Alloc(48) /* tlsAllocs 8 maxValist 4 */
+	bp := tls.Alloc(48) /* tlsAllocs 8 maxVaListSize 32 */
 	defer tls.Free(48)
 	var f, mi, modes uintptr
 	var op, pid int32
@@ -42033,7 +41985,7 @@ func x_puts(tls *TLS, s uintptr) (r int32) {
 }
 
 func x_putw(tls *TLS, _x int32, f uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*int32)(unsafe.Pointer(bp)) = _x
 	var v1 int32
@@ -42175,7 +42127,7 @@ const m_TMP_MAX = 10000
 const m_W_OK = 2
 
 func x_tempnam(tls *TLS, dir uintptr, pfx uintptr) (r uintptr) {
-	bp := tls.Alloc(40) /* tlsAllocs 0 maxValist 4 */
+	bp := tls.Alloc(40) /* tlsAllocs 0 maxVaListSize 32 */
 	defer tls.Free(40)
 	var l, pid int32
 	var s uintptr
@@ -42221,7 +42173,7 @@ var _index int32
 const m_L_tmpnam = 20
 
 func x_tmpfile(tls *TLS) (r uintptr) {
-	bp := tls.Alloc(24) /* tlsAllocs 24 maxValist 0 */
+	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(24)
 	var f, s uintptr
 	var fd int32
@@ -42242,7 +42194,7 @@ func x_tmpfile(tls *TLS) (r uintptr) {
 }
 
 func x_tmpnam(tls *TLS, s uintptr) (r uintptr) {
-	bp := tls.Alloc(32) /* tlsAllocs 0 maxValist 3 */
+	bp := tls.Alloc(32) /* tlsAllocs 0 maxVaListSize 24 */
 	defer tls.Free(32)
 	var dir uintptr
 	var pid int32
@@ -42332,7 +42284,7 @@ func x_ungetc(tls *TLS, c int32, f uintptr) (r int32) {
 }
 
 func x_ungetwc(tls *TLS, c int32, f uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var l, v1 int32
 	var v2 bool
@@ -42434,7 +42386,7 @@ func x_vasprintf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
 }
 
 func x_vdprintf(tls *TLS, fd int32, fmt uintptr, ap uintptr) (r1 int32) {
-	bp := tls.Alloc(1248) /* tlsAllocs 1248 maxValist 0 */
+	bp := tls.Alloc(1248) /* tlsAllocs 1248 maxVaListSize 0 */
 	defer tls.Free(1248)
 	var r int32
 	var _ /* buf at bp+0 */ [1024]int8
@@ -42615,7 +42567,7 @@ func _out(tls *TLS, f uintptr, s uintptr, l uint64) {
 }
 
 func _pad(tls *TLS, f uintptr, c int8, w int32, l int32, fl int32) {
-	bp := tls.Alloc(256) /* tlsAllocs 256 maxValist 0 */
+	bp := tls.Alloc(256) /* tlsAllocs 256 maxVaListSize 0 */
 	defer tls.Free(256)
 	var v1 uint64
 	var _ /* pad at bp+0 */ [256]int8
@@ -42689,7 +42641,7 @@ func _fmt_u(tls *TLS, x uint64, s uintptr) (r uintptr) {
 }
 
 func _fmt_fp(tls *TLS, f uintptr, y float64, w int32, p int32, fl int32, t int32) (r1 int32) {
-	bp := tls.Alloc(520) /* tlsAllocs 520 maxValist 0 */
+	bp := tls.Alloc(520) /* tlsAllocs 520 maxVaListSize 0 */
 	defer tls.Free(520)
 	var a, d, ebuf, estr, prefix, r, s, s1, s2, s3, s4, z, z2, v1, v10, v11, v12, v13, v15, v16, v17, v18, v19, v2, v21, v23, v24, v25, v28, v38, v39, v41, v42, v43, v45, v47, v48, v49, v6, v7, v9 uintptr
 	var carry, carry1, rm, x2 uint32
@@ -43175,7 +43127,7 @@ func _getint(tls *TLS, s uintptr) (r int32) {
 }
 
 func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, nl_type uintptr) (r int32) {
-	bp := tls.Alloc(72) /* tlsAllocs 72 maxValist 0 */
+	bp := tls.Alloc(72) /* tlsAllocs 72 maxVaListSize 0 */
 	defer tls.Free(72)
 	var a, prefix, ws, z, v31, v36, v4, v40 uintptr
 	var argpos, cnt, i, l, p, pl, t, w, v1, v2, v3, v32, v35, v39, v43 int32
@@ -43582,7 +43534,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 }
 
 func x_vfprintf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
-	bp := tls.Alloc(120) /* tlsAllocs 120 maxValist 0 */
+	bp := tls.Alloc(120) /* tlsAllocs 120 maxVaListSize 0 */
 	defer tls.Free(120)
 	var ret int32
 	var _ /* ap2 at bp+0 */ uintptr
@@ -43618,7 +43570,7 @@ func _f_read(tls *TLS, r uintptr) {
 }
 
 func x_vfscanf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
-	bp := tls.Alloc(56) /* tlsAllocs 56 maxValist 0 */
+	bp := tls.Alloc(56) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(56)
 	var fmt2 uintptr
 	var i, l, result, v1 uint64
@@ -43668,7 +43620,7 @@ func _f_read1(tls *TLS, r uintptr) {
 }
 
 func x_vfwscanf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
-	bp := tls.Alloc(56) /* tlsAllocs 56 maxValist 0 */
+	bp := tls.Alloc(56) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(56)
 	var result int32
 	var _ /* r at bp+0 */ Trctx_t
@@ -43694,7 +43646,7 @@ func _sn_write(tls *TLS, f uintptr, s uintptr, l uint64) (r uint64) {
 }
 
 func x_vsnprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, ap uintptr) (r1 int32) {
-	bp := tls.Alloc(232) /* tlsAllocs 232 maxValist 0 */
+	bp := tls.Alloc(232) /* tlsAllocs 232 maxVaListSize 0 */
 	defer tls.Free(232)
 	var r int32
 	var v1 uintptr
@@ -43743,7 +43695,7 @@ func _s_read(tls *TLS, r uintptr) {
 }
 
 func x_vsscanf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
-	bp := tls.Alloc(56) /* tlsAllocs 56 maxValist 0 */
+	bp := tls.Alloc(56) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(56)
 	var fmt2 uintptr
 	var i, l, v1 uint64
@@ -43774,7 +43726,7 @@ func _s_read1(tls *TLS, r uintptr) {
 }
 
 func x_vswscanf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
-	bp := tls.Alloc(56) /* tlsAllocs 56 maxValist 0 */
+	bp := tls.Alloc(56) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(56)
 	var _ /* r at bp+0 */ Trctx_t
 	*(*Trctx_t)(unsafe.Pointer(bp)) = Trctx_t{Fread: __ccgo_fp(_s_read1), Fopaque: s, Fwide: int32(1), Fis_space: __ccgo_fp(x_iswspace)}
@@ -43923,7 +43875,7 @@ func x_div(tls *TLS, num int32, den int32) (r Tdiv_t) {
 }
 
 func x_frexp(tls *TLS, x float64, e uintptr) (r float64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ee int32
 	var p1, p2 uintptr
@@ -43953,7 +43905,7 @@ func x_frexp(tls *TLS, x float64, e uintptr) (r float64) {
 }
 
 func x_frexpf(tls *TLS, x float32, e uintptr) (r float32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var ee int32
 	var p1, p2 uintptr
@@ -44029,7 +43981,7 @@ func x_lldiv(tls *TLS, num int64, den int64) (r Tlldiv_t) {
 }
 
 func _swap(tls *TLS, a uintptr, b uintptr, len1 uint64) {
-	bp := tls.Alloc(256) /* tlsAllocs 256 maxValist 0 */
+	bp := tls.Alloc(256) /* tlsAllocs 256 maxVaListSize 0 */
 	defer tls.Free(256)
 	var l, v1 uint64
 	var _ /* tmp at bp+0 */ [256]int8
@@ -44143,7 +44095,7 @@ func x_strtol(tls *TLS, s uintptr, p uintptr, base int32) (r int64) {
 }
 
 func x_strtold(tls *TLS, _s1 uintptr, p uintptr) (r float64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	*(*uintptr)(unsafe.Pointer(bp)) = _s1
 	var e int64
@@ -44584,7 +44536,7 @@ var _digits = [256]uint8{
 	255: uint8(-Int32FromInt32(1))}
 
 func x_strtoumax(tls *TLS, _s1 uintptr, p uintptr, base int32) (r uint64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*uintptr)(unsafe.Pointer(bp)) = _s1
 	var s, v1 uintptr
@@ -44797,7 +44749,7 @@ func x_wcstoull(tls *TLS, s uintptr, p uintptr, base int32) (r uint64) {
 }
 
 func x_wcstoumax(tls *TLS, _s uintptr, p uintptr, base int32) (r uint64) {
-	bp := tls.Alloc(80) /* tlsAllocs 80 maxValist 0 */
+	bp := tls.Alloc(80) /* tlsAllocs 80 maxVaListSize 0 */
 	defer tls.Free(80)
 	*(*uintptr)(unsafe.Pointer(bp)) = _s
 	var sign, skipped int32
@@ -45204,7 +45156,7 @@ func x_strcpy(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
 }
 
 func x_strcspn(tls *TLS, _s uintptr, _c uintptr) (r uint64) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var a, c, s, v2, p3 uintptr
 	var v1 uint64
@@ -45509,7 +45461,7 @@ func x_strsignal(tls *TLS, signum int32) (r uintptr) {
 }
 
 func x_strspn(tls *TLS, _s uintptr, _c uintptr) (r uint64) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var a, c, s, p1 uintptr
 	var v2 bool
@@ -45603,7 +45555,7 @@ func _fourbyte_strstr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
 }
 
 func _twoway_strstr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var grow, ip, jp, k, l, mem, mem0, ms, p, p0, v1, v2, v3, v4, v5, v6, v7, v8 uint64
 	var shift [256]uint64
@@ -46357,7 +46309,7 @@ const m_O_EXCL = 128
 //#define LFS64_2(x, y) weak_alias(x, y)
 
 func x_mkstemp(tls *TLS, template uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	var fd int32
 retry:
@@ -46378,7 +46330,7 @@ retry:
 }
 
 func x___mktemp(tls *TLS, template uintptr) (r uintptr) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	var l int32
 	l = int32(x_strlen(tls, template))
@@ -46441,7 +46393,7 @@ func x_cfsetispeed(tls *TLS, tio uintptr, speed uint32) (r int32) {
 const m_TCSBRK = 21513
 
 func x_tcdrain(tls *TLS, fd int32) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	return x_ioctl(tls, fd, int32(m_TCSBRK), VaList(bp+8, int32(1)))
 }
@@ -46449,7 +46401,7 @@ func x_tcdrain(tls *TLS, fd int32) (r int32) {
 const m_TCXONC = 21514
 
 func x_tcflow(tls *TLS, fd int32, action int32) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	return x_ioctl(tls, fd, int32(m_TCXONC), VaList(bp+8, action))
 }
@@ -46457,7 +46409,7 @@ func x_tcflow(tls *TLS, fd int32, action int32) (r int32) {
 const m_TCFLSH = 21515
 
 func x_tcflush(tls *TLS, fd int32, queue int32) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	return x_ioctl(tls, fd, int32(m_TCFLSH), VaList(bp+8, queue))
 }
@@ -46465,7 +46417,7 @@ func x_tcflush(tls *TLS, fd int32, queue int32) (r int32) {
 const m_TCGETS = 21505
 
 func x_tcgetattr(tls *TLS, fd int32, tio uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	if x_ioctl(tls, fd, int32(m_TCGETS), VaList(bp+8, tio)) != 0 {
 		return -int32(1)
@@ -46476,7 +46428,7 @@ func x_tcgetattr(tls *TLS, fd int32, tio uintptr) (r int32) {
 const m_TIOCGSID = 21545
 
 func x_tcgetsid(tls *TLS, fd int32) (r int32) {
-	bp := tls.Alloc(24) /* tlsAllocs 8 maxValist 1 */
+	bp := tls.Alloc(24) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(24)
 	var _ /* sid at bp+0 */ int32
 	if x_ioctl(tls, fd, int32(m_TIOCGSID), VaList(bp+16, bp)) < 0 {
@@ -46486,7 +46438,7 @@ func x_tcgetsid(tls *TLS, fd int32) (r int32) {
 }
 
 func x_tcsendbreak(tls *TLS, fd int32, dur int32) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	/* nonzero duration is implementation-defined, so ignore it */
 	return x_ioctl(tls, fd, int32(m_TCSBRK), VaList(bp+8, 0))
@@ -46495,7 +46447,7 @@ func x_tcsendbreak(tls *TLS, fd int32, dur int32) (r int32) {
 const m_TCSETS = 21506
 
 func x_tcsetattr(tls *TLS, fd int32, act int32, tio uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 0 maxValist 1 */
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	if act < 0 || act > int32(2) {
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_EINVAL)
@@ -46529,7 +46481,7 @@ const m_ETIMEDOUT = 110
 const m_FUTEX_WAIT = 0
 
 func x___timedwait(tls *TLS, addr uintptr, val int32, clk int32, at uintptr, priv int32) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var v1 uint64
 	var v2 int64
@@ -46760,7 +46712,7 @@ func _relock(tls *TLS, m uintptr) {
 }
 
 func x_pthread_cond_timedwait(tls *TLS, c uintptr, m uintptr, ts uintptr) (r1 int32) {
-	bp := tls.Alloc(96) /* tlsAllocs 96 maxValist 0 */
+	bp := tls.Alloc(96) /* tlsAllocs 96 maxVaListSize 0 */
 	defer tls.Free(96)
 	var __f, __x uintptr
 	var e, r, v2, v5 int32
@@ -46769,8 +46721,6 @@ func x_pthread_cond_timedwait(tls *TLS, c uintptr, m uintptr, ts uintptr) (r1 in
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	__f = __ccgo_fp(_relock)
@@ -46790,16 +46740,12 @@ func x_pthread_cond_timedwait(tls *TLS, c uintptr, m uintptr, ts uintptr) (r1 in
 		if x___libc.Fcancelpt != 0 {
 			(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 			_ = 0
-		} else {
-			_ = Int32FromInt32(1)
 		}
 		_ = Int32FromInt32(0)
 		e = x___timedwait(tls, uintptr(unsafe.Pointer(&(*Tpthread_cond_t)(unsafe.Pointer(c)).F__u.F__i)), int32(1), m_CLOCK_REALTIME, ts, 0)
 		if x___libc.Fcancelpt != 0 {
 			(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 			_ = 0
-		} else {
-			_ = Int32FromInt32(0)
 		}
 		_ = Int32FromInt32(0)
 	}
@@ -46815,8 +46761,6 @@ func x_pthread_cond_timedwait(tls *TLS, c uintptr, m uintptr, ts uintptr) (r1 in
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return e
@@ -46872,7 +46816,7 @@ func x___pthread_unwind_next(tls *TLS, cb uintptr) {
 }
 
 func _docancel(tls *TLS, self uintptr) {
-	bp := tls.Alloc(96) /* tlsAllocs 96 maxValist 0 */
+	bp := tls.Alloc(96) /* tlsAllocs 96 maxVaListSize 0 */
 	defer tls.Free(96)
 	var _ /* cb at bp+0 */ T__ptcb
 	*(*T__ptcb)(unsafe.Pointer(bp)) = T__ptcb{F__next: (*T__pthread)(unsafe.Pointer(self)).Fcancelbuf}
@@ -46937,7 +46881,7 @@ func _rsyscall_handler(tls *TLS, sig int32, si uintptr, ctx uintptr) {
 }
 
 func _rsyscall(tls *TLS, nr int32, a int64, b int64, c int64, d int64, e int64, f int64) (r int32) {
-	bp := tls.Alloc(128) /* tlsAllocs 128 maxValist 0 */
+	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var i, ret, v2, v3, v4 int32
 	var self uintptr
@@ -47008,7 +46952,7 @@ func _rsyscall(tls *TLS, nr int32, a int64, b int64, c int64, d int64, e int64, 
 }
 
 func _init_threads(tls *TLS) {
-	bp := tls.Alloc(152) /* tlsAllocs 152 maxValist 0 */
+	bp := tls.Alloc(152) /* tlsAllocs 152 maxVaListSize 0 */
 	defer tls.Free(152)
 	var _ /* sa at bp+0 */ Tsigaction
 	*(*int32)(unsafe.Pointer(bp + 136)) = Int32FromInt32(m_SA_SIGINFO) | Int32FromInt32(m_SA_RESTART)
@@ -47139,8 +47083,6 @@ func x_pthread_join(tls *TLS, t uintptr, res uintptr) (r int32) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	if tmp != 0 {
@@ -47149,8 +47091,6 @@ func x_pthread_join(tls *TLS, t uintptr, res uintptr) (r int32) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	if res != 0 {
@@ -47166,7 +47106,7 @@ func _nodtor(tls *TLS, dummy uintptr) {
 }
 
 func x_pthread_key_create(tls *TLS, _k uintptr, dtor uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*uintptr)(unsafe.Pointer(bp)) = _k
 	var i, j, v1 int32
@@ -47345,7 +47285,7 @@ func _undo(tls *TLS, control uintptr) {
 }
 
 func x_pthread_once(tls *TLS, control uintptr, init1 uintptr) (r int32) {
-	bp := tls.Alloc(96) /* tlsAllocs 96 maxValist 0 */
+	bp := tls.Alloc(96) /* tlsAllocs 96 maxVaListSize 0 */
 	defer tls.Free(96)
 	var __f, __x uintptr
 	var _ /* __cb at bp+0 */ T__ptcb
@@ -47638,15 +47578,11 @@ func x_pthread_testcancel(tls *TLS) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 }
@@ -47655,7 +47591,7 @@ const m_ABDAY_1 = 131072
 const m_ABMON_1 = 131086
 
 func x___asctime(tls *TLS, tm uintptr, buf uintptr) (r uintptr) {
-	bp := tls.Alloc(64) /* tlsAllocs 0 maxValist 7 */
+	bp := tls.Alloc(64) /* tlsAllocs 0 maxVaListSize 56 */
 	defer tls.Free(64)
 	/* FIXME: change __langinfo to __C_langinfo once we have locales */
 	if x_snprintf(tls, buf, uint64(26), ts+1149, VaList(bp+8, x___langinfo(tls, int32(m_ABDAY_1)+(*Ttm)(unsafe.Pointer(tm)).Ftm_wday), x___langinfo(tls, int32(m_ABMON_1)+(*Ttm)(unsafe.Pointer(tm)).Ftm_mon), (*Ttm)(unsafe.Pointer(tm)).Ftm_mday, (*Ttm)(unsafe.Pointer(tm)).Ftm_hour, (*Ttm)(unsafe.Pointer(tm)).Ftm_min, (*Ttm)(unsafe.Pointer(tm)).Ftm_sec, int32(1900)+(*Ttm)(unsafe.Pointer(tm)).Ftm_year)) >= int32(26) {
@@ -47765,7 +47701,7 @@ var _days_thru_month = [12]int32{
 	11: int32(366)}
 
 func x___tm_to_time(tls *TLS, tm uintptr) (r int64) {
-	bp := tls.Alloc(48) /* tlsAllocs 48 maxValist 0 */
+	bp := tls.Alloc(48) /* tlsAllocs 48 maxVaListSize 0 */
 	defer tls.Free(48)
 	var day, month, z100, z4, z400, v2, v3 int32
 	var year, v1 int64
@@ -47840,7 +47776,7 @@ type Ttms = struct {
 //
 //	/* this function assumes 100 hz linux and corrects for it */
 func x_clock(tls *TLS) (r int64) {
-	bp := tls.Alloc(32) /* tlsAllocs 32 maxValist 0 */
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var _ /* tms at bp+0 */ Ttms
 	return int64(uint64(x_times(tls, bp)) * uint64(10000))
@@ -47857,7 +47793,7 @@ func x_ctime(tls *TLS, t uintptr) (r uintptr) {
 }
 
 func x_ctime_r(tls *TLS, t uintptr, buf uintptr) (r uintptr) {
-	bp := tls.Alloc(56) /* tlsAllocs 56 maxValist 0 */
+	bp := tls.Alloc(56) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(56)
 	var _ /* tm at bp+0 */ Ttm
 	x_localtime_r(tls, t, bp)
@@ -47933,16 +47869,12 @@ func x_nanosleep(tls *TLS, req uintptr, rem uintptr) (r int32) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	ret = int32(_syscall2(tls, int64(m___NR_nanosleep), int64(req), int64(rem)))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return ret
@@ -47960,7 +47892,7 @@ const m_T_FMT_AMPM = 131115
 // FIXME: integer overflows
 
 func x_strftime(tls *TLS, s uintptr, n uint64, f uintptr, tm uintptr) (r uint64) {
-	bp := tls.Alloc(24) /* tlsAllocs 0 maxValist 2 */
+	bp := tls.Alloc(24) /* tlsAllocs 0 maxVaListSize 16 */
 	defer tls.Free(24)
 	var fmt, v1 uintptr
 	var item, val, v3, v5, v6 int32
@@ -48162,7 +48094,7 @@ func x_strptime(tls *TLS, s uintptr, f uintptr, tm uintptr) (r uintptr) {
 }
 
 func x_time(tls *TLS, t uintptr) (r int64) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimeval
 	_syscall2(tls, int64(m___NR_gettimeofday), int64(bp), 0)
@@ -48175,7 +48107,7 @@ func x_time(tls *TLS, t uintptr) (r int64) {
 const m___NR_times = 100
 
 func x_times(tls *TLS, _tms uintptr) (r int64) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	*(*uintptr)(unsafe.Pointer(bp)) = _tms
 	return _syscall1(tls, int64(m___NR_times), int64(bp))
@@ -48277,7 +48209,7 @@ func _dstrule(tls *TLS, rule uintptr, s uintptr) (r int32) {
 }
 
 func x_tzset(tls *TLS) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxValist 0 */
+	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
 	var a, v1 uintptr
 	var _ /* z at bp+0 */ uintptr
@@ -48417,7 +48349,7 @@ type Tutimbuf = struct {
 }
 
 func x_utime(tls *TLS, path uintptr, times uintptr) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var v1 int64
 	var _ /* ktimes at bp+0 */ [2]int64
@@ -48467,15 +48399,11 @@ func x_close(tls *TLS, fd int32) (r int32) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return ret
@@ -48590,7 +48518,7 @@ func x_getgroups(tls *TLS, count int32, list uintptr) (r int32) {
 }
 
 func x_gethostname(tls *TLS, name uintptr, len1 uint64) (r int32) {
-	bp := tls.Alloc(392) /* tlsAllocs 392 maxValist 0 */
+	bp := tls.Alloc(392) /* tlsAllocs 392 maxVaListSize 0 */
 	defer tls.Free(392)
 	var i uint64
 	var v1 int8
@@ -48673,7 +48601,7 @@ func x_getuid(tls *TLS) (r uint32) {
 }
 
 func x_isatty(tls *TLS, fd int32) (r int32) {
-	bp := tls.Alloc(64) /* tlsAllocs 64 maxValist 0 */
+	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var _ /* t at bp+0 */ Ttermios
 	return BoolInt32(x_tcgetattr(tls, fd, bp) == 0)
@@ -48714,16 +48642,12 @@ func x_pause(tls *TLS) (r1 int32) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = int32(_syscall0(tls, int64(m___NR_pause)))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -48742,16 +48666,12 @@ func x_pread(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r1 int64)
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = _syscall5(tls, int64(m___NR_pread64), int64(fd), int64(buf), int64(size), ofs, 0)
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -48764,16 +48684,12 @@ func x_pwrite(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r1 int64
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = _syscall5(tls, int64(m___NR_pwrite64), int64(fd), int64(buf), int64(size), ofs, 0)
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -48784,16 +48700,12 @@ func x_read(tls *TLS, fd int32, buf uintptr, count uint64) (r1 int64) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = _syscall3(tls, m___NR_read, int64(fd), int64(buf), int64(count))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -48818,16 +48730,12 @@ func x_readv(tls *TLS, fd int32, iov uintptr, count int32) (r1 int64) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = _syscall3(tls, int64(m___NR_readv), int64(fd), int64(iov), int64(count))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
@@ -48906,7 +48814,7 @@ func x_setuid(tls *TLS, uid uint32) (r int32) {
 }
 
 func x_sleep(tls *TLS, seconds uint32) (r uint32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimespec
 	*(*Ttimespec)(unsafe.Pointer(bp)) = Ttimespec{Ftv_sec: int64(seconds), Ftv_nsec: uint64(0)}
@@ -48937,7 +48845,7 @@ func x_sync(tls *TLS) {
 const m_TIOCGPGRP = 21519
 
 func x_tcgetpgrp(tls *TLS, fd int32) (r int32) {
-	bp := tls.Alloc(24) /* tlsAllocs 8 maxValist 1 */
+	bp := tls.Alloc(24) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(24)
 	var _ /* pgrp at bp+0 */ int32
 	if x_ioctl(tls, fd, int32(m_TIOCGPGRP), VaList(bp+16, bp)) < 0 {
@@ -48949,7 +48857,7 @@ func x_tcgetpgrp(tls *TLS, fd int32) (r int32) {
 const m_TIOCSPGRP = 21520
 
 func x_tcsetpgrp(tls *TLS, fd int32, pgrp int32) (r int32) {
-	bp := tls.Alloc(24) /* tlsAllocs 8 maxValist 1 */
+	bp := tls.Alloc(24) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(24)
 	var _ /* pgrp_int at bp+0 */ int32
 	*(*int32)(unsafe.Pointer(bp)) = pgrp
@@ -48978,7 +48886,7 @@ var _buf11 [20]int8
 const m_ENOTTY = 25
 
 func x_ttyname_r(tls *TLS, fd int32, name uintptr, size uint64) (r int32) {
-	bp := tls.Alloc(48) /* tlsAllocs 32 maxValist 1 */
+	bp := tls.Alloc(48) /* tlsAllocs 32 maxVaListSize 8 */
 	defer tls.Free(48)
 	var l int64
 	var _ /* procname at bp+0 */ [29]int8
@@ -49019,7 +48927,7 @@ func x_unlinkat(tls *TLS, fd int32, path uintptr, flag int32) (r int32) {
 }
 
 func x_usleep(tls *TLS, useconds int64) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 16 maxValist 0 */
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimespec
 	*(*Ttimespec)(unsafe.Pointer(bp)) = Ttimespec{Ftv_sec: useconds / int64(1000000), Ftv_nsec: uint64(useconds % int64(1000000) * int64(1000))}
@@ -49031,16 +48939,12 @@ func x_write(tls *TLS, fd int32, buf uintptr, count uint64) (r1 int64) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = int32(_syscall3(tls, int64(m___NR_write), int64(fd), int64(buf), int64(count)))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return int64(r)
@@ -49053,16 +48957,12 @@ func x_writev(tls *TLS, fd int32, iov uintptr, count int32) (r1 int64) {
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
-	} else {
-		_ = Int32FromInt32(1)
 	}
 	_ = Int32FromInt32(0)
 	r = _syscall3(tls, int64(m___NR_writev), int64(fd), int64(iov), int64(count))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
-	} else {
-		_ = Int32FromInt32(0)
 	}
 	_ = Int32FromInt32(0)
 	return r
