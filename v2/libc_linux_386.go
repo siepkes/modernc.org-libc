@@ -32,14 +32,14 @@ var (
 // Start executes a transpilled main program.
 func Start(main func(*TLS, int32, uintptr) int32) {
 	tls := NewTLS()
-	argv := Xcalloc(tls, 1, uint64((len(os.Args)+1)*int(unsafe.Sizeof(uintptr(0)))))
+	argv := Xcalloc(tls, 1, uint32((len(os.Args)+1)*int(unsafe.Sizeof(uintptr(0)))))
 	if argv == 0 {
 		panic("OOM")
 	}
 
 	p := argv
 	for _, v := range os.Args {
-		s := Xcalloc(tls, 1, uint64(len(v)+1))
+		s := Xcalloc(tls, 1, uint32(len(v)+1))
 		if s == 0 {
 			panic("OOM")
 		}
@@ -52,24 +52,6 @@ func Start(main func(*TLS, int32, uintptr) int32) {
 	Xexit(tls, main(tls, int32(len(os.Args)), argv))
 }
 
-// musl-0.6.0/crt/x86_64/crt1.s
-//
-//	/* Written 2011 Nicholas J. Kain, released as Public Domain */
-//	.text
-//	.global _start
-//	_start:
-//		xor %rbp,%rbp   /* rbp:undefined -> mark as zero 0 (ABI) */
-//		mov %rdx,%r9    /* 6th arg: ptr to register with atexit() */
-//		pop %rsi        /* 2nd arg: argc */
-//		mov %rsp,%rdx   /* 3rd arg: argv */
-//		andq $-16,%rsp  /* align stack pointer */
-//		push %rax       /* 8th arg: glibc ABI compatible */
-//		push %rsp       /* 7th arg: glibc ABI compatible */
-//		xor %r8,%r8     /* 5th arg: always 0 */
-//		xor %rcx,%rcx   /* 4th arg: always 0 */
-//		mov $main,%rdi  /* 1st arg: application entry ip */
-//		call __libc_start_main /* musl init will run the program */
-//	.L0:	jmp .L0
 func initLibc() {
 	var argv []uintptr
 	for _, v := range os.Args {
@@ -86,14 +68,6 @@ func initLibc() {
 	argv = append(argv, 0)
 	argvP := mustPrivateCalloc(len(argv) * int(unsafe.Sizeof(uintptr(0))))
 	copy(unsafe.Slice((*uintptr)(unsafe.Pointer(argvP)), len(argv)), argv)
-
-	// mov $main,%rdi  /* 1st arg: application entry ip */
-	// pop %rsi        /* 2nd arg: argc */
-	// mov %rsp,%rdx   /* 3rd arg: argv */
-	// xor %rcx,%rcx   /* 4th arg: always 0 */
-	// xor %r8,%r8     /* 5th arg: always 0 */
-	// mov %rdx,%r9    /* 6th arg: ptr to register with atexit() */
-
 	tls1 = newTLS()
 	x___libc_start_main(tls1, 0, int32(len(os.Args)), argvP, 0, 0, 0)
 }
@@ -102,7 +76,7 @@ func initLibc() {
 // responsible for freeing the allocated memory using Xfree.
 func CString(s string) (uintptr, error) {
 	n := len(s)
-	p := Xmalloc(nil, uint64(n)+1)
+	p := Xmalloc(nil, uint32(n)+1)
 	if p == 0 {
 		return 0, fmt.Errorf("CString: cannot allocate %d bytes", n+1)
 	}
@@ -229,24 +203,6 @@ func newTLS() *TLS {
 // var nallocs, nmallocs, nreallocs int //TODO-
 
 func (t *TLS) Alloc(n int) (r uintptr) {
-	// shrink	stats									speedtest1
-	// -----------------------------------------------------------------------------------------------
-	//    0		total  2,544, nallocs 107,553,070, nmallocs 25, nreallocs 107,553,045	10.984s
-	//    1		total  2,544, nallocs 107,553,070, nmallocs 25, nreallocs  38,905,980	 9.597s
-	//    2		total  2,616, nallocs 107,553,070, nmallocs 25, nreallocs  18,201,284	 9.206s
-	//    3		total  2,624, nallocs 107,553,070, nmallocs 25, nreallocs  16,716,302	 9.155s
-	//    4		total  2,624, nallocs 107,553,070, nmallocs 25, nreallocs  16,156,102	 9.398s
-	//    8		total  3,408, nallocs 107,553,070, nmallocs 25, nreallocs  14,364,274	 9.198s
-	//   16		total  3,976, nallocs 107,553,070, nmallocs 25, nreallocs   6,219,602	 8.910s
-	// ---------------------------------------------------------------------------------------------
-	//   32		total  5,120, nallocs 107,553,070, nmallocs 25, nreallocs   1,089,037	 8.836s
-	// ---------------------------------------------------------------------------------------------
-	//   64		total  6,520, nallocs 107,553,070, nmallocs 25, nreallocs       1,788	 8.420s
-	//  128		total  8,848, nallocs 107,553,070, nmallocs 25, nreallocs       1,098	 8.833s
-	//  256		total  8,848, nallocs 107,553,070, nmallocs 25, nreallocs       1,049	 9.508s
-	//  512		total 33,336, nallocs 107,553,070, nmallocs 25, nreallocs          88	 8.667s
-	// none		total 33,336, nallocs 107,553,070, nmallocs 25, nreallocs          88	 8.408s
-
 	const shrinkSegment = 32
 	// nallocs++
 	sp := t.sp
@@ -336,10 +292,11 @@ func _a_and_64(tls *TLS, p uintptr, x uint64) {
 	a_and_64(p, x)
 }
 
-func a_cas_p(p uintptr, t, s uintptr) uintptr
+// func a_cas_p(p uintptr, t, s uintptr) uintptr
 
 func _a_cas_p(tls *TLS, p, test, s uintptr) uintptr {
-	return a_cas_p(p, test, s)
+	panic(todo(""))
+	// return a_cas_p(p, test, s)
 }
 
 // func a_or(p uintptr, v int32)
@@ -378,39 +335,39 @@ func ___pthread_self(tls *TLS) uintptr {
 	return tls.fs
 }
 
-func _syscall0(tls *TLS, n int64) int64 {
+func _syscall0(tls *TLS, n int32) int32 {
 	r1, _, _ := syscall.Syscall(uintptr(n), 0, 0, 0)
-	return int64(r1)
+	return int32(r1)
 }
 
-func _syscall1(tls *TLS, n, a1 int64) int64 {
+func _syscall1(tls *TLS, n, a1 int32) int32 {
 	r1, _, _ := syscall.Syscall(uintptr(n), uintptr(a1), 0, 0)
-	return int64(r1)
+	return int32(r1)
 }
 
-func _syscall2(tls *TLS, n, a1, a2 int64) int64 {
+func _syscall2(tls *TLS, n, a1, a2 int32) int32 {
 	r1, _, _ := syscall.Syscall(uintptr(n), uintptr(a1), uintptr(a2), 0)
-	return int64(r1)
+	return int32(r1)
 }
 
-func _syscall3(tls *TLS, n, a1, a2, a3 int64) int64 {
+func _syscall3(tls *TLS, n, a1, a2, a3 int32) int32 {
 	r1, _, _ := syscall.Syscall(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3))
-	return int64(r1)
+	return int32(r1)
 }
 
-func _syscall4(tls *TLS, n, a1, a2, a3, a4 int64) int64 {
+func _syscall4(tls *TLS, n, a1, a2, a3, a4 int32) int32 {
 	r1, _, _ := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), 0, 0)
-	return int64(r1)
+	return int32(r1)
 }
 
-func _syscall5(tls *TLS, n, a1, a2, a3, a4, a5 int64) int64 {
+func _syscall5(tls *TLS, n, a1, a2, a3, a4, a5 int32) int32 {
 	r1, _, _ := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), uintptr(a5), 0)
-	return int64(r1)
+	return int32(r1)
 }
 
-func _syscall6(tls *TLS, n, a1, a2, a3, a4, a5, a6 int64) int64 {
+func _syscall6(tls *TLS, n, a1, a2, a3, a4, a5, a6 int32) int32 {
 	r1, _, _ := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), uintptr(a5), uintptr(a6))
-	return int64(r1)
+	return int32(r1)
 }
 
 // This is not the set_thread_area syscall, but arch_prctl syscall with
@@ -424,7 +381,7 @@ func ___setjmp(tls *TLS, env uintptr) int32 {
 	panic(todo(""))
 }
 
-func ___unmapself(tls *TLS, base uintptr, size uint64) {
+func ___unmapself(tls *TLS, base uintptr, size uint32) {
 	panic(todo(""))
 }
 
@@ -463,27 +420,27 @@ func Xstrtod(tls *TLS, nptr, endptr uintptr) float64 {
 // Xrint rounds its argument to an integer value in floating-point format,
 // using the current rounding direction.
 func Xrint(tls *TLS, x float64) float64 {
-	return x_rint(tls, x)
+	return _rint(tls, x)
 }
 
 // Xmemset fills the first n bytes of the memory area pointed to by s with the constant byte c.
-func Xmemset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
+func Xmemset(tls *TLS, s uintptr, c int32, n uint32) uintptr {
 	return x_memset(tls, s, c, n)
 }
 
 // X__builtin_memset is equivalent to Xmemset
-func X__builtin_memset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
+func X__builtin_memset(tls *TLS, s uintptr, c int32, n uint32) uintptr {
 	return Xmemset(tls, s, c, n)
 }
 
 // Xsnprintf writes at most size bytes (including the terminating null byte
 // ('\0')) to str, according to a format and args.
-func Xsnprintf(tls *TLS, str uintptr, size uint64, format, args uintptr) int32 {
+func Xsnprintf(tls *TLS, str uintptr, size uint32, format, args uintptr) int32 {
 	return x_snprintf(tls, str, size, format, args)
 }
 
 // X__builtin_snprintf is equivalent to Xsnprintf.
-func X__builtin_snprintf(tls *TLS, str uintptr, size uint64, format, args uintptr) int32 {
+func X__builtin_snprintf(tls *TLS, str uintptr, size uint32, format, args uintptr) int32 {
 	return Xsnprintf(tls, str, size, format, args)
 }
 
@@ -501,7 +458,7 @@ func Xfdopen(tls *TLS, fd int32, mode uintptr) uintptr {
 
 // Xfread reads nmemb items of data, each size bytes long, from the stream
 // pointed to by stream, storing them at the location given by ptr.
-func Xfread(tls *TLS, ptr uintptr, size, nmemb uint64, stream uintptr) uint64 {
+func Xfread(tls *TLS, ptr uintptr, size, nmemb uint32, stream uintptr) uint32 {
 	return x_fread(tls, ptr, size, nmemb, stream)
 }
 
@@ -509,12 +466,12 @@ func Xfread(tls *TLS, ptr uintptr, size, nmemb uint64, stream uintptr) uint64 {
 // memory. The memory is not initialized. If size is 0, then Xmalloc returns
 // either NULL, or a unique pointer value that can later be successfully passed
 // to free().
-func Xmalloc(tls *TLS, n uint64) (r uintptr) {
+func Xmalloc(tls *TLS, n uint32) (r uintptr) {
 	return x_malloc(tls, n)
 }
 
 // X__builtin_malloc is equivalent to Xmalloc.
-func X__builtin_malloc(tls *TLS, n uint64) (r uintptr) {
+func X__builtin_malloc(tls *TLS, n uint32) (r uintptr) {
 	return Xmalloc(tls, n)
 }
 
@@ -541,7 +498,7 @@ func X__builtin_free(tls *TLS, p uintptr) {
 // of memory would be allocated:
 //
 //	Xmalloc(nmemb * size)
-func Xcalloc(tls *TLS, nmemb, size uint64) (r uintptr) {
+func Xcalloc(tls *TLS, nmemb, size uint32) (r uintptr) {
 	return x_calloc(tls, nmemb, size)
 }
 
@@ -583,7 +540,7 @@ func X__builtin_strcpy(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
 // Xstrncpy is line Xstrcpy, except that at most n bytes of src are copied.
 // Warning: If there is no null byte among the first n bytes of src, the string
 // placed in dest will not be null-terminated.
-func Xstrncpy(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
+func Xstrncpy(tls *TLS, dest uintptr, src uintptr, n uint32) (r uintptr) {
 	return x_strncpy(tls, dest, src, n)
 }
 
@@ -601,12 +558,12 @@ func X__builtin_strcmp(tls *TLS, s1 uintptr, s2 uintptr) (r int32) {
 
 // Xstrlen function calculates the length of the string pointed to by s,
 // excluding the terminating null byte ('\0').
-func Xstrlen(tls *TLS, s uintptr) (r uint64) {
+func Xstrlen(tls *TLS, s uintptr) (r uint32) {
 	return x_strlen(tls, s)
 }
 
 // X__builtin_strlen is equivalent to Xstrlen.
-func X__builtin_strlen(tls *TLS, s uintptr) (r uint64) {
+func X__builtin_strlen(tls *TLS, s uintptr) (r uint32) {
 	return Xstrlen(tls, s)
 }
 
@@ -622,7 +579,7 @@ func Xstrcat(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
 
 // Xstrncmp is line Xstrcmp, except it compares only the first (at most) n
 // bytes of s1 and s2.
-func Xstrncmp(tls *TLS, s1 uintptr, s2 uintptr, n uint64) (r1 int32) {
+func Xstrncmp(tls *TLS, s1 uintptr, s2 uintptr, n uint32) (r1 int32) {
 	return x_strncmp(tls, s1, s2, n)
 }
 
@@ -640,23 +597,23 @@ func Xstrrchr(tls *TLS, s uintptr, c int32) (r uintptr) {
 
 // Xmemcpy copies n bytes from memory area src to memory area dest. The memory
 // areas must not overlap. Use memmove(3) if the memory areas do overlap.
-func Xmemcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
+func Xmemcpy(tls *TLS, dest, src uintptr, n uint32) (r uintptr) {
 	return x_memcpy(tls, dest, src, n)
 }
 
 // X__builtin_memcpy is equivalent to Xmemcpy.
-func X__builtin_memcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
+func X__builtin_memcpy(tls *TLS, dest, src uintptr, n uint32) (r uintptr) {
 	return Xmemcpy(tls, dest, src, n)
 }
 
 // Xmemcmp compares the first n bytes (each interpreted as unsigned char) of
 // the memory areas s1 and s2.
-func Xmemcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint64) (r1 int32) {
+func Xmemcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint32) (r1 int32) {
 	return x_memcmp(tls, s1, s2, n)
 }
 
 // X__builtin_memcmp is equivalent to Xmemcmp.
-func X__builtin_memcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint64) (r1 int32) {
+func X__builtin_memcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint32) (r1 int32) {
 	return Xmemcmp(tls, s1, s2, n)
 }
 
@@ -714,7 +671,7 @@ func Xfopen(tls *TLS, pathname uintptr, mode uintptr) (r uintptr) {
 
 // Xfwrite writes nmemb items of data, each size bytes long, to the stream
 // pointed to by stream, obtaining them from the location given by ptr.
-func Xfwrite(tls *TLS, ptr uintptr, size uint64, nmemb uint64, stream uintptr) (r uint64) {
+func Xfwrite(tls *TLS, ptr uintptr, size, nmemb uint32, stream uintptr) (r uint32) {
 	return x_fwrite(tls, ptr, size, nmemb, stream)
 }
 
@@ -777,18 +734,18 @@ func Xtolower(tls *TLS, c int32) (r int32) {
 // equivalent to Xfree(ptr). Unless ptr is NULL, it must have been returned by
 // an earlier call to Xmalloc(), Xcalloc(), or Xrealloc(). If the area pointed
 // to was moved, a Xfree(ptr) is done.
-func Xrealloc(tls *TLS, ptr uintptr, size uint64) (r uintptr) {
+func Xrealloc(tls *TLS, ptr uintptr, size uint32) (r uintptr) {
 	return x_realloc(tls, ptr, size)
 }
 
 // Xfabs returns the absolute value of the floating-point number x.
 func Xfabs(tls *TLS, x float64) (r float64) {
-	return x_fabs(tls, x)
+	return _fabs(tls, x)
 }
 
 // Xfabsf returns the absolute value of the floating-point number x.
 func Xfabsf(tls *TLS, x float32) (r float32) {
-	return x_fabsf(tls, x)
+	return _fabsf(tls, x)
 }
 
 // X__assert_fail aborts a program.
@@ -812,7 +769,7 @@ func Xatoi(tls *TLS, nptr uintptr) (r int32) {
 //	strtol(nptr, NULL, 10);
 //
 // except that atol() does not detect errors.
-func Xatol(tls *TLS, nptr uintptr) (r int64) {
+func Xatol(tls *TLS, nptr uintptr) (r int32) {
 	return x_atol(tls, nptr)
 }
 
@@ -838,12 +795,12 @@ func Xputchar(tls *TLS, c int32) (r int32) {
 
 // Xfloor returns the largest integral value that is not greater than x.
 func Xfloor(tls *TLS, x float64) (r float64) {
-	return x_floor(tls, x)
+	return _floor(tls, x)
 }
 
 // Xfloorf returns the largest integral value that is not greater than x.
 func Xfloorf(tls *TLS, x float32) (r float32) {
-	return x_floorf(tls, x)
+	return _floorf(tls, x)
 }
 
 // Xpow returns the value of x raised to the power of y.
@@ -971,7 +928,7 @@ func Xperror(tls *TLS, s uintptr) {
 // comparison function via arg. In this way, the comparison function does not
 // need to use global variables to pass through arbitrary arguments, and is
 // therefore reentrant and safe to use in threads.
-func Xqsort(tls *TLS, array uintptr, nmemb uint64, size uint64, compar uintptr) {
+func Xqsort(tls *TLS, array uintptr, nmemb, size uint32, compar uintptr) {
 	x_qsort(tls, array, nmemb, size, compar)
 }
 
@@ -1026,7 +983,7 @@ func Xsscanf(tls *TLS, str uintptr, format uintptr, va uintptr) (r int32) {
 //
 // According to POSIX.1, if count is greater than SSIZE_MAX, the result is
 // implementation-defined; see NOTES for the upper limit on Linux.
-func Xwrite(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
+func Xwrite(tls *TLS, fd int32, buf uintptr, count uint32) (r int32) {
 	return x_write(tls, fd, buf, count)
 }
 
@@ -1034,14 +991,14 @@ func Xwrite(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
 // areas may overlap: copying takes place as though the bytes in src are first
 // copied into a temporary array that does not overlap src or dest, and the
 // bytes are then copied from the temporary array to dest.
-func Xmemmove(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
+func Xmemmove(tls *TLS, dest uintptr, src uintptr, n uint32) (r uintptr) {
 	return x_memmove(tls, dest, src, n)
 }
 
 // Xmemchr scans the initial n bytes of the memory area pointed to by s for the
 // first instance of c. Both c and the bytes of the memory area pointed to by s
 // are interpreted as unsigned char.
-func Xmemchr(tls *TLS, s uintptr, c int32, n uint64) (r uintptr) {
+func Xmemchr(tls *TLS, s uintptr, c int32, n uint32) (r uintptr) {
 	return x_memchr(tls, s, c, n)
 }
 
@@ -1067,7 +1024,7 @@ func Xfileno(tls *TLS, stream uintptr) (r int32) {
 //
 // According to POSIX.1, if count is greater than SSIZE_MAX, the result is
 // implementation-defined; see NOTES for the upper limit on Linux.
-func Xread(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
+func Xread(tls *TLS, fd int32, buf uintptr, count uint32) (r int32) {
 	return x_read(tls, fd, buf, count)
 }
 
@@ -1087,7 +1044,7 @@ func Xabs(tls *TLS, j int32) (r int32) {
 }
 
 // Xlabs computes the absolute value of the integer argument j.
-func Xlabs(tls *TLS, j int64) (r int64) {
+func Xlabs(tls *TLS, j int32) (r int32) {
 	return x_labs(tls, j)
 }
 
@@ -1310,13 +1267,13 @@ func Xstat(tls *TLS, pathname uintptr, buf uintptr) (r int32) {
 // position indicator, or end-of-file, respectively. A suc‐ cessful call to the
 // fseek() function clears the end-of-file indicator for the stream and undoes
 // any effects of the ungetc(3) function on the same stream.
-func Xfseek(tls *TLS, stream uintptr, offset int64, whence int32) (r int32) {
+func Xfseek(tls *TLS, stream uintptr, offset int32, whence int32) (r int32) {
 	return x_fseek(tls, stream, offset, whence)
 }
 
 // Xftell function obtains the current value of the file position indicator for
 // the stream pointed to by stream.
-func Xftell(tls *TLS, stream uintptr) (r int64) {
+func Xftell(tls *TLS, stream uintptr) (r int32) {
 	return x_ftell(tls, stream)
 }
 
@@ -1356,7 +1313,7 @@ func Xchmod(tls *TLS, pathname uintptr, mode uint32) (r int32) {
 
 // Xime() returns the time as the number of seconds since the Epoch, 1970-01-01
 // 00:00:00 +0000 (UTC).
-func Xtime(tls *TLS, tloc uintptr) (r int64) {
+func Xtime(tls *TLS, tloc uintptr) (r int32) {
 	return x_time(tls, tloc)
 }
 
@@ -1401,7 +1358,7 @@ func Xreaddir(tls *TLS, dirp uintptr) (r uintptr) {
 // buf, which has size bufsiz. readlink() does not append a null byte to buf.
 // It will (silently) truncate the contents (to a length of bufsiz characters),
 // in case the buffer is too small to hold all of the contents.
-func Xreadlink(tls *TLS, pathname uintptr, buf uintptr, bufsiz uint64) (r int32) {
+func Xreadlink(tls *TLS, pathname uintptr, buf uintptr, bufsiz uint32) (r int32) {
 	return x_readlink(tls, pathname, buf, bufsiz)
 }
 
@@ -1485,23 +1442,23 @@ func Xpopen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
 // Xstrtol converts the initial part of the string in nptr to a long integer
 // value according to the given base, which must be between 2 and 36 inclusive,
 // or be the special value 0.
-func Xstrtol(tls *TLS, nptr uintptr, endptr uintptr, base int32) (r int64) {
+func Xstrtol(tls *TLS, nptr uintptr, endptr uintptr, base int32) (r int32) {
 	return x_strtol(tls, nptr, endptr, base)
 }
 
 // Xgetuid returns the real user ID of the calling process.
-func Xgetuid(tls *TLS) (r uint32) {
+func Xgetuid(tls *TLS) (r int32) {
 	return x_getuid(tls)
 }
 
 // Xgetpwuid returns a pointer to a structure containing the broken-out fields
 // of the record in the password database that matches the user ID uid.
-func Xgetpwuid(tls *TLS, uid uint32) (r uintptr) {
+func Xgetpwuid(tls *TLS, uid int32) (r uintptr) {
 	return x_getpwuid(tls, uid)
 }
 
 // Xsetvbuf adjusts file buffering.
-func Xsetvbuf(tls *TLS, stream uintptr, buf uintptr, mode int32, size uint64) (r int32) {
+func Xsetvbuf(tls *TLS, stream uintptr, buf uintptr, mode int32, size uint32) (r int32) {
 	return x_setvbuf(tls, stream, buf, mode, size)
 }
 
@@ -1553,7 +1510,7 @@ func Xclose(tls *TLS, fd int32) (r int32) {
 
 // Xgetcwd copies an absolute pathname of the current working directory to the
 // array pointed to by buf, which is of length size.
-func Xgetcwd(tls *TLS, buf uintptr, size uint64) (r uintptr) {
+func Xgetcwd(tls *TLS, buf uintptr, size uint32) (r uintptr) {
 	return x_getcwd(tls, buf, size)
 }
 
@@ -1577,13 +1534,13 @@ func Xfcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r1 int32) {
 // Xpread reads up to count bytes from file descriptor fd at offset offset
 // (from the start of the file) into the buffer starting at buf. The file
 // offset is not changed.
-func Xpread(tls *TLS, fd int32, buf uintptr, count uint64, offset int64) (r int64) {
+func Xpread(tls *TLS, fd int32, buf uintptr, count uint32, offset int64) (r int32) {
 	return x_pread(tls, fd, buf, count, offset)
 }
 
 // Xpwrite writes up to count bytes from the buffer starting at buf to the file
 // descriptor fd at offset offset. The file offset is not changed.
-func Xpwrite(tls *TLS, fd int32, buf uintptr, count uint64, offset int64) (r int64) {
+func Xpwrite(tls *TLS, fd int32, buf uintptr, count uint32, offset int64) (r int32) {
 	return x_pwrite(tls, fd, buf, count, offset)
 }
 
@@ -1599,31 +1556,31 @@ func Xrmdir(tls *TLS, pathname uintptr) (r int32) {
 
 // Xfchown changes the ownership of the file referred to by the open file
 // descriptor fd.
-func Xfchown(tls *TLS, fd int32, uid uint32, gid uint32) (r int32) {
+func Xfchown(tls *TLS, fd int32, uid int32, gid int32) (r int32) {
 	return x_fchown(tls, fd, uid, gid)
 }
 
 // Xgeteuid returns the effective user ID of the calling process.
-func Xgeteuid(tls *TLS) (r uint32) {
+func Xgeteuid(tls *TLS) (r int32) {
 	return x_geteuid(tls)
 }
 
 // Xmmap creates a new mapping in the virtual address space of the calling
 // process.
-func Xmmap(tls *TLS, start uintptr, len uint64, prot int32, flags int32, fd int32, off int64) (r uintptr) {
+func Xmmap(tls *TLS, start uintptr, len uint32, prot int32, flags int32, fd int32, off int64) (r uintptr) {
 	return x___mmap(tls, start, len, prot, flags, fd, off)
 }
 
 // Xmunmap deletes the mappings for the specified address range, and causes
 // further references to addresses within the range to generate invalid memory
 // references.
-func Xmunmap(tls *TLS, start uintptr, len uint64) (r int32) {
+func Xmunmap(tls *TLS, start uintptr, len uint32) (r int32) {
 	return x___munmap(tls, start, len)
 }
 
 // Xmremap expands (or shrinks) an existing memory mapping, potentially moving
 // it at the same time
-func Xmremap(tls *TLS, old_addr uintptr, old_len uint64, new_len uint64, flags int32, va uintptr) (r uintptr) {
+func Xmremap(tls *TLS, old_addr uintptr, old_len uint32, new_len uint32, flags int32, va uintptr) (r uintptr) {
 	return x___mremap(tls, old_addr, old_len, new_len, flags, va)
 }
 
@@ -1642,7 +1599,7 @@ func Xfsync(tls *TLS, fd int32) (r int32) {
 }
 
 // Xsysconf gets configuration information at run time
-func Xsysconf(tls *TLS, name int32) (r int64) {
+func Xsysconf(tls *TLS, name int32) (r int32) {
 	return x_sysconf(tls, name)
 }
 
@@ -1689,7 +1646,7 @@ func Xgettimeofday(tls *TLS, tv uintptr, tz uintptr) (r int32) {
 
 // Xstrcspn calculates the length of the initial segment of s which consists
 // entirely of bytes not in reject.
-func Xstrcspn(tls *TLS, s uintptr, reject uintptr) (r uint64) {
+func Xstrcspn(tls *TLS, s uintptr, reject uintptr) (r uint32) {
 	return x_strcspn(tls, s, reject)
 }
 
@@ -1697,4 +1654,60 @@ func Xstrcspn(tls *TLS, s uintptr, reject uintptr) (r uint64) {
 // representation, expressed relative to the user's specified timezone.
 func Xlocaltime(tls *TLS, timep uintptr) (r uintptr) {
 	return x_localtime(tls, timep)
+}
+
+func _log(tls *TLS, x float64) float64 {
+	return math.Log(x)
+}
+
+func _logf(tls *TLS, x float32) float32 {
+	return float32(math.Log(float64(x)))
+}
+
+func _fabs(tls *TLS, x float64) float64 {
+	return math.Abs(x)
+}
+
+func _fabsf(tls *TLS, x float32) float32 {
+	return float32(math.Abs(float64(x)))
+}
+
+func _exp(tls *TLS, x float64) float64 {
+	return math.Exp(x)
+}
+
+func _expf(tls *TLS, x float32) float32 {
+	return float32(math.Exp(float64(x)))
+}
+
+func _scalbn(tls *TLS, x float64, n int32) float64 {
+	panic(todo(""))
+}
+
+func _scalbnf(tls *TLS, x float32, n int32) float32 {
+	panic(todo(""))
+}
+
+func _rint(tls *TLS, x float64) float64 {
+	panic(todo(""))
+}
+
+func _rintf(tls *TLS, x float32) float32 {
+	panic(todo(""))
+}
+
+func _floor(t *TLS, x float64) float64 {
+	panic(todo(""))
+}
+
+func _floorf(t *TLS, x float32) float32 {
+	panic(todo(""))
+}
+
+func _ceil(t *TLS, x float64) float64 {
+	panic(todo(""))
+}
+
+func _ceilf(t *TLS, x float32) float32 {
+	panic(todo(""))
 }
