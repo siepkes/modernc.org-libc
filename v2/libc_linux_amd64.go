@@ -9,7 +9,7 @@ import (
 	"math"
 	"math/bits"
 	"os"
-	"runtime"
+	"os/exec"
 	"sync"
 	"sync/atomic"
 	"syscall"
@@ -31,7 +31,6 @@ var (
 
 // Start executes a transpilled main program.
 func Start(main func(*TLS, int32, uintptr) int32) {
-	runtime.LockOSThread()
 	tls := NewTLS()
 	argv := Xcalloc(tls, 1, uint64((len(os.Args)+1)*int(unsafe.Sizeof(uintptr(0)))))
 	if argv == 0 {
@@ -78,11 +77,15 @@ func initLibc() {
 		copy(unsafe.Slice((*byte)(unsafe.Pointer(p)), len(v)), v)
 		argv = append(argv, p)
 	}
-	argv = append(argv, 0, 0, 0, 0) //TODO envp, auxv, ?
+	argv = append(argv, 0)
+	for _, v := range os.Environ() {
+		p := mustPrivateCalloc(len(v) + 1)
+		copy(unsafe.Slice((*byte)(unsafe.Pointer(p)), len(v)), v)
+		argv = append(argv, p)
+	}
+	argv = append(argv, 0)
 	argvP := mustPrivateCalloc(len(argv) * int(unsafe.Sizeof(uintptr(0))))
 	copy(unsafe.Slice((*uintptr)(unsafe.Pointer(argvP)), len(argv)), argv)
-
-	tls1 = newTLS()
 
 	// mov $main,%rdi  /* 1st arg: application entry ip */
 	// pop %rsi        /* 2nd arg: argc */
@@ -91,6 +94,7 @@ func initLibc() {
 	// xor %r8,%r8     /* 5th arg: always 0 */
 	// mov %rdx,%r9    /* 6th arg: ptr to register with atexit() */
 
+	tls1 = newTLS()
 	x___libc_start_main(tls1, 0, int32(len(os.Args)), argvP, 0, 0, 0)
 }
 
@@ -222,16 +226,39 @@ func newTLS() *TLS {
 	return t
 }
 
+// var nallocs, nmallocs, nreallocs int //TODO-
+
 func (t *TLS) Alloc(n int) (r uintptr) {
+	// shrink	stats									speedtest1
+	// -----------------------------------------------------------------------------------------------
+	//    0		total  2,544, nallocs 107,553,070, nmallocs 25, nreallocs 107,553,045	10.984s
+	//    1		total  2,544, nallocs 107,553,070, nmallocs 25, nreallocs  38,905,980	 9.597s
+	//    2		total  2,616, nallocs 107,553,070, nmallocs 25, nreallocs  18,201,284	 9.206s
+	//    3		total  2,624, nallocs 107,553,070, nmallocs 25, nreallocs  16,716,302	 9.155s
+	//    4		total  2,624, nallocs 107,553,070, nmallocs 25, nreallocs  16,156,102	 9.398s
+	//    8		total  3,408, nallocs 107,553,070, nmallocs 25, nreallocs  14,364,274	 9.198s
+	//   16		total  3,976, nallocs 107,553,070, nmallocs 25, nreallocs   6,219,602	 8.910s
+	// ---------------------------------------------------------------------------------------------
+	//   32		total  5,120, nallocs 107,553,070, nmallocs 25, nreallocs   1,089,037	 8.836s
+	// ---------------------------------------------------------------------------------------------
+	//   64		total  6,520, nallocs 107,553,070, nmallocs 25, nreallocs       1,788	 8.420s
+	//  128		total  8,848, nallocs 107,553,070, nmallocs 25, nreallocs       1,098	 8.833s
+	//  256		total  8,848, nallocs 107,553,070, nmallocs 25, nreallocs       1,049	 9.508s
+	//  512		total 33,336, nallocs 107,553,070, nmallocs 25, nreallocs          88	 8.667s
+	// none		total 33,336, nallocs 107,553,070, nmallocs 25, nreallocs          88	 8.408s
+
+	const shrinkSegment = 0
+	// nallocs++
 	sp := t.sp
 	if sp < len(t.stack) {
 		s := t.stack[sp]
-		if s.sz >= n {
+		if s.sz >= n && s.sz <= shrinkSegment*n {
 			t.sp++
 			return s.p
 		}
 
 		r = mustPrivateRealloc(s.p, n)
+		// nreallocs++
 		t.stack[sp].p = r
 		t.stack[sp].sz = n
 		t.sp++
@@ -240,6 +267,7 @@ func (t *TLS) Alloc(n int) (r uintptr) {
 	}
 
 	r = mustPrivateMalloc(n)
+	// nmallocs++
 	t.stack = append(t.stack, tlsStack{r, n})
 	t.sp++
 	return r
@@ -251,6 +279,12 @@ func (t *TLS) Free(n int) {
 }
 
 func (t *TLS) Close() {
+	// var sum int
+	// for i, v := range t.stack {
+	// 	sum += v.sz
+	// 	trc("%4d: %#0x, sz %v", i, v.p, v.sz)
+	// }
+	// trc("total %v, nallocs %v, nmallocs %v, nreallocs %v", sum, nallocs, nmallocs, nreallocs)
 	if t.ID == 1 { //TODO-
 		t.sp = 0
 		return
@@ -385,14 +419,6 @@ func ___set_thread_area(tls *TLS, p uintptr) int32 {
 	tls.fs = p
 	return 0
 }
-
-// func ___bswap_16(tls *TLS, __x uint16) uint16 {
-// 	return __x<<8 | __x>>8
-// }
-//
-// func ___bswap_32(tls *TLS, x uint32) uint32 {
-// 	return ___bswap32(tls, x)
-// }
 
 func ___setjmp(tls *TLS, env uintptr) int32 {
 	panic(todo(""))
@@ -726,6 +752,7 @@ func Xfgets(tls *TLS, s uintptr, size int32, stream uintptr) (r uintptr) {
 // Xexit causes normal process termination and the least significant byte of
 // status (i.e., status & 0xFF) is returned to the parent (see wait(2)).
 func Xexit(tls *TLS, code int32) {
+	tls.Close() //TODO-DBG
 	x_exit(tls, code)
 }
 
@@ -1085,11 +1112,20 @@ func X__builtin_add_overflowUint32(t *TLS, a, b uint32, res uintptr) int32 {
 	return Bool32(c != 0)
 }
 
-// bool __builtin_add_overflow (type1 a, type2 b, type3 *res)
+func X__builtin_add_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
+	r, ovf := mathutil.AddOverflowInt64(a, b)
+	*(*int64)(unsafe.Pointer(res)) = r
+	return Bool32(ovf)
+}
+
 func X__builtin_add_overflowUint64(t *TLS, a, b uint64, res uintptr) int32 {
 	s, c := bits.Add64(a, b, 0)
 	*(*uint64)(unsafe.Pointer(res)) = s
 	return Bool32(c != 0)
+}
+
+func X__builtin_bswap16(t *TLS, x uint16) uint16 {
+	return x<<8 | x>>8
 }
 
 func X__builtin_bswap32(tls *TLS, x uint32) uint32 {
@@ -1165,6 +1201,12 @@ func X__builtin_infl(t *TLS) float64 {
 
 func X__builtin_isunordered(t *TLS, a, b float64) int32 {
 	return Bool32(math.IsNaN(a) || math.IsNaN(b))
+}
+
+func X__builtin_sub_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
+	r, ovf := mathutil.SubOverflowInt64(a, b)
+	*(*int64)(unsafe.Pointer(res)) = r
+	return Bool32(ovf)
 }
 
 func X__builtin_mul_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
@@ -1249,4 +1291,410 @@ func Xvprintf(tls *TLS, fmt uintptr, ap uintptr) (r int32) {
 
 func X__builtin_trap(t *TLS) {
 	Xabort(t)
+}
+
+// Xgetrusage returns resource usage measures for who.
+func Xgetrusage(tls *TLS, who int32, ru uintptr) (r int32) {
+	return x_getrusage(tls, who, ru)
+}
+
+// Xstat retrieves information about the file pointed to by pathname.
+func Xstat(tls *TLS, pathname uintptr, buf uintptr) (r int32) {
+	return x_stat(tls, pathname, buf)
+}
+
+// Xfseek sets the file position indicator for the stream pointed to by stream.
+// The new position, measured in bytes, is obtained by adding offset bytes to
+// the position speci‐ fied by whence. If whence is set to SEEK_SET, SEEK_CUR,
+// or SEEK_END, the offset is relative to the start of the file, the current
+// position indicator, or end-of-file, respectively. A suc‐ cessful call to the
+// fseek() function clears the end-of-file indicator for the stream and undoes
+// any effects of the ungetc(3) function on the same stream.
+func Xfseek(tls *TLS, stream uintptr, offset int64, whence int32) (r int32) {
+	return x_fseek(tls, stream, offset, whence)
+}
+
+// Xftell function obtains the current value of the file position indicator for
+// the stream pointed to by stream.
+func Xftell(tls *TLS, stream uintptr) (r int64) {
+	return x_ftell(tls, stream)
+}
+
+// Xrewind sets the file position indicator for the stream pointed to by stream
+// to the beginning of the file.
+func Xrewind(tls *TLS, stream uintptr) {
+	x_rewind(tls, stream)
+}
+
+// Xlstat is identical to Xstat(), except that if pathname is a symbolic link,
+// then it returns information about the link itself, not the file that the
+// link refers to.
+func Xlstat(tls *TLS, pathname uintptr, buf uintptr) (r int32) {
+	return x_lstat(tls, pathname, buf)
+}
+
+// Xmkdir attempts to create a directory named pathname.
+func Xmkdir(tls *TLS, pathname uintptr, mode uint32) (r int32) {
+	return x_mkdir(tls, pathname, mode)
+}
+
+// Xsymlink creates a symbolic link named linkpath which contains the string
+// target.
+func Xsymlink(tls *TLS, target uintptr, linkpath uintptr) (r int32) {
+	return x_symlink(tls, target, linkpath)
+}
+
+func X__errno_location(tls *TLS) (r uintptr) {
+	return x___errno_location(tls)
+}
+
+// Xchmod changes the mode of the file specified whose pathname is given in
+// pathname, which is dereferenced if it is a symbolic link.
+func Xchmod(tls *TLS, pathname uintptr, mode uint32) (r int32) {
+	return x_chmod(tls, pathname, mode)
+}
+
+// Xime() returns the time as the number of seconds since the Epoch, 1970-01-01
+// 00:00:00 +0000 (UTC).
+func Xtime(tls *TLS, tloc uintptr) (r int64) {
+	return x_time(tls, tloc)
+}
+
+// Xutime changes the access and modification times of the inode specified by
+// filename to the actime and modtime fields of times respectively.
+//
+// If times is NULL, then the access and modification times of the file are set
+// to the current time.
+func Xutime(tls *TLS, filename uintptr, times uintptr) (r int32) {
+	return x_utime(tls, filename, times)
+}
+
+// Xutimes is similar to Xutime, but the times argument refers to an array
+// rather than a structure.
+func Xutimes(tls *TLS, filename uintptr, times uintptr) (r int32) {
+	return x_utimes(tls, filename, times)
+}
+
+// Xclosedir function closes the directory stream associated with dirp. A
+// successful call to closedir() also closes the underlying file descriptor
+// associated with dirp. The directory stream descriptor dirp is not available
+// after this call.
+func Xclosedir(tls *TLS, dirp uintptr) (r int32) {
+	return x_closedir(tls, dirp)
+}
+
+// Xopendir opens a directory stream corresponding to the directory name, and
+// returns a pointer to the directory stream. The stream is positioned at the
+// first entry in the directory.
+func Xopendir(tls *TLS, name uintptr) (r uintptr) {
+	return x_opendir(tls, name)
+}
+
+// Xreaddir returns a pointer to a dirent structure representing the next
+// directory entry in the directory stream pointed to by dirp. It returns NULL
+// on reaching the end of the directory stream or if an error occurred.
+func Xreaddir(tls *TLS, dirp uintptr) (r uintptr) {
+	return x_readdir(tls, dirp)
+}
+
+// Xreadlink places the contents of the symbolic link pathname in the buffer
+// buf, which has size bufsiz. readlink() does not append a null byte to buf.
+// It will (silently) truncate the contents (to a length of bufsiz characters),
+// in case the buffer is too small to hold all of the contents.
+func Xreadlink(tls *TLS, pathname uintptr, buf uintptr, bufsiz uint64) (r int32) {
+	return x_readlink(tls, pathname, buf, bufsiz)
+}
+
+// Xstrstr function finds the first occurrence of the substring needle in the
+// string haystack. The terminating null bytes ('\0') are not compared.
+func Xstrstr(tls *TLS, haystack uintptr, needle uintptr) (r uintptr) {
+	return x_strstr(tls, haystack, needle)
+}
+
+// Xgetenv function searches the environment list to find the environment
+// variable name, and returns a pointer to the corresponding value string.
+func Xgetenv(tls *TLS, name uintptr) (r uintptr) {
+	r = x_getenv(tls, name)
+	trc("getenv(%q): %q", GoString(name), GoString(r))
+	return r
+}
+
+// Xsystem eecutes the shell command specified in command in a child process.
+func Xsystem(t *TLS, command uintptr) int32 {
+	s := GoString(command)
+	if command == 0 {
+		_, err := exec.LookPath("sh")
+		return Bool32(err == nil)
+	}
+
+	cmd := exec.Command("sh", "-c", s)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
+	if err != nil {
+		ps := err.(*exec.ExitError)
+		return int32(ps.ExitCode())
+	}
+
+	return 0
+}
+
+// Xunlink deletes a name from the filesystem. If that name was the last link
+// to a file and no processes have the file open, the file is deleted and the
+// space it was using is made available for reuse.
+func Xunlink(tls *TLS, name uintptr) (r int32) {
+	return x_unlink(tls, name)
+}
+
+// Xgetpid returns the process ID (PID) of the calling process. (This is often
+// used by routines that generate unique temporary filenames.)
+func Xgetpid(tls *TLS) (r int32) {
+	return x_getpid(tls)
+}
+
+// Xaccess checks whether the calling process can access the file pathname. If
+// pathname is a symbolic link, it is dereferenced.
+func Xaccess(tls *TLS, pathname uintptr, mode int32) (r int32) {
+	return x_access(tls, pathname, mode)
+}
+
+// Xpclose waits for the associated process to terminate and returns the exit
+// status of the command as returned by wait4(2).
+func Xpclose(tls *TLS, stream uintptr) (r int32) {
+	return x_pclose(tls, stream)
+}
+
+// Xchdir changes the current working directory of the calling process to the
+// directory specified in path.
+func Xchdir(tls *TLS, path uintptr) (r int32) {
+	return x_chdir(tls, path)
+}
+
+// Xstrdup returns a pointer to a new string which is a duplicate of the string
+// s. Memory for the new string is obtained with malloc(3), and can be freed
+// with free(3).
+func Xstrdup(tls *TLS, s uintptr) (r uintptr) {
+	return x___strdup(tls, s)
+}
+
+// Xpopen opens a process by creating a pipe, forking, and invoking the shell.
+func Xpopen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
+	return x_popen(tls, cmd, mode)
+}
+
+// Xstrtol converts the initial part of the string in nptr to a long integer
+// value according to the given base, which must be between 2 and 36 inclusive,
+// or be the special value 0.
+func Xstrtol(tls *TLS, nptr uintptr, endptr uintptr, base int32) (r int64) {
+	return x_strtol(tls, nptr, endptr, base)
+}
+
+// Xgetuid returns the real user ID of the calling process.
+func Xgetuid(tls *TLS) (r uint32) {
+	return x_getuid(tls)
+}
+
+// Xgetpwuid returns a pointer to a structure containing the broken-out fields
+// of the record in the password database that matches the user ID uid.
+func Xgetpwuid(tls *TLS, uid uint32) (r uintptr) {
+	return x_getpwuid(tls, uid)
+}
+
+// Xsetvbuf adjusts file buffering.
+func Xsetvbuf(tls *TLS, stream uintptr, buf uintptr, mode int32, size uint64) (r int32) {
+	return x_setvbuf(tls, stream, buf, mode, size)
+}
+
+// Xisatty function tests whether fd is an open file descriptor referring to a
+// terminal.
+func Xisatty(tls *TLS, fd int32) (r int32) {
+	return x_isatty(tls, fd)
+}
+
+// The atexit() function registers the given function to be called at normal
+// process termination, either via exit(3) or via return from the program's
+// main(). Functions so registered are called in the reverse order of their
+// registration; no arguments are passed.
+func Xatexit(tls *TLS, function uintptr) (r int32) {
+	return x_atexit(tls, function)
+}
+
+// Xraise function sends a signal to the calling process or thread.
+func Xraise(tls *TLS, sig int32) (r int32) {
+	return x_raise(tls, sig)
+}
+
+func X__ctype_b_loc(tls *TLS) uintptr {
+	panic(todo("")) // Not provided in musl v0.6.0
+}
+
+// Xbacktrace returns a backtrace for the calling program, in the array pointed
+// to by buffer.
+func Xbacktrace(tls *TLS, buffer uintptr, size int32) int32 {
+	panic(todo("")) // Not provided in musl v0.6.0
+}
+
+// Xbacktrace_symbols_fd takes the same buffer and size arguments as
+// backtrace_symbols(), but instead of returning an array of strings to the
+// caller, it writes the strings, one per line, to the file descriptor fd.
+func Xbacktrace_symbols_fd(tls *TLS, buffer uintptr, size, fd int32) {
+	panic(todo("")) // Not provided in musl v0.6.0
+}
+
+func X__builtin_clzll(t *TLS, n uint64) int32 {
+	return int32(bits.LeadingZeros64(n))
+}
+
+// Xclose closes a file descriptor, so that it no longer refers to any file and
+// may be reused.
+func Xclose(tls *TLS, fd int32) (r int32) {
+	return x_close(tls, fd)
+}
+
+// Xgetcwd copies an absolute pathname of the current working directory to the
+// array pointed to by buf, which is of length size.
+func Xgetcwd(tls *TLS, buf uintptr, size uint64) (r uintptr) {
+	return x_getcwd(tls, buf, size)
+}
+
+// Xfstat is identical to Xstat, except that the file about which information
+// is to be retrieved is specified by the file descriptor fd.
+func Xfstat(tls *TLS, fd int32, buf uintptr) (r int32) {
+	return x_fstat(tls, fd, buf)
+}
+
+// Xftruncate causes the regular file referenced by fd to be truncated to a
+// size of precisely length bytes.
+func Xftruncate(tls *TLS, fd int32, length int64) (r int32) {
+	return x_ftruncate(tls, fd, length)
+}
+
+// Xfcntl performs an operation on the open file descriptor fd.
+func Xfcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r1 int32) {
+	return x_fcntl(tls, fd, cmd, va)
+}
+
+// Xpread reads up to count bytes from file descriptor fd at offset offset
+// (from the start of the file) into the buffer starting at buf. The file
+// offset is not changed.
+func Xpread(tls *TLS, fd int32, buf uintptr, count uint64, offset int64) (r int64) {
+	return x_pread(tls, fd, buf, count, offset)
+}
+
+// Xpwrite writes up to count bytes from the buffer starting at buf to the file
+// descriptor fd at offset offset. The file offset is not changed.
+func Xpwrite(tls *TLS, fd int32, buf uintptr, count uint64, offset int64) (r int64) {
+	return x_pwrite(tls, fd, buf, count, offset)
+}
+
+// Xfchmod changes file mode bits.
+func Xfchmod(tls *TLS, fd int32, mode uint32) (r int32) {
+	return x_fchmod(tls, fd, mode)
+}
+
+// Xrmdir deletes a directory, which must be empty.
+func Xrmdir(tls *TLS, pathname uintptr) (r int32) {
+	return x_rmdir(tls, pathname)
+}
+
+// Xfchown changes the ownership of the file referred to by the open file
+// descriptor fd.
+func Xfchown(tls *TLS, fd int32, uid uint32, gid uint32) (r int32) {
+	return x_fchown(tls, fd, uid, gid)
+}
+
+// Xgeteuid returns the effective user ID of the calling process.
+func Xgeteuid(tls *TLS) (r uint32) {
+	return x_geteuid(tls)
+}
+
+// Xmmap creates a new mapping in the virtual address space of the calling
+// process.
+func Xmmap(tls *TLS, start uintptr, len uint64, prot int32, flags int32, fd int32, off int64) (r uintptr) {
+	return x___mmap(tls, start, len, prot, flags, fd, off)
+}
+
+// Xmunmap deletes the mappings for the specified address range, and causes
+// further references to addresses within the range to generate invalid memory
+// references.
+func Xmunmap(tls *TLS, start uintptr, len uint64) (r int32) {
+	return x___munmap(tls, start, len)
+}
+
+// Xmremap expands (or shrinks) an existing memory mapping, potentially moving
+// it at the same time
+func Xmremap(tls *TLS, old_addr uintptr, old_len uint64, new_len uint64, flags int32, va uintptr) (r uintptr) {
+	return x___mremap(tls, old_addr, old_len, new_len, flags, va)
+}
+
+// Xstrerror function returns a pointer to a string that describes the error
+// code passed in the argument errnum,
+func Xstrerror(tls *TLS, errnum int32) (r uintptr) {
+	return x_strerror(tls, errnum)
+}
+
+// Xfsync transfers ("flushes") all modified in-core data of (i.e., modified
+// buffer cache pages for) the file referred to by the file descriptor fd to
+// the disk device (or other permanent storage device) so that all changed
+// information can be retrieved even if the system crashes or is rebooted.
+func Xfsync(tls *TLS, fd int32) (r int32) {
+	return x_fsync(tls, fd) //TODO nop in musl v0.6.0.
+}
+
+// Xsysconf gets configuration information at run time
+func Xsysconf(tls *TLS, name int32) (r int64) {
+	return x_sysconf(tls, name)
+}
+
+// Xdlopen() loads the dynamic shared object (shared library) file named by the
+// null-terminated string filename and returns an opaque "handle" for the
+// loaded object.
+func Xdlopen(tls *TLS, filename uintptr, flags int32) uintptr {
+	panic(todo(""))
+}
+
+// Xdlerror function returns a human-readable, null-terminated string
+// describing the most recent error that occurred from a call to one of the
+// functions in the dlopen API since the last call to dlerror(). The returned
+// string does not include a trailing newline.
+func Xdlerror(tls *TLS) uintptr {
+	panic(todo(""))
+}
+
+// Xdlsym takes a "handle" of a dynamic loaded shared object returned by
+// dlopen(3) along with a null-terminated symbol name, and returns the address
+// where that symbol is loaded into memory.
+func Xdlsym(tls *TLS, handle, symbol uintptr) uintptr {
+	panic(todo(""))
+}
+
+// Xdlclose decrements the reference count on the dynamically loaded shared
+// object referred to by handle.
+func Xdlclose(tls *TLS, handle uintptr) int32 {
+	panic(todo(""))
+}
+
+// Xnanosleep suspends the execution of the calling thread until either at
+// least the time specified in *req has elapsed, or the delivery of a signal
+// that triggers the invocation of a handler in the calling thread or that
+// terminates the process.
+func Xnanosleep(tls *TLS, req uintptr, rem uintptr) (r int32) {
+	return x_nanosleep(tls, req, rem)
+}
+
+// Xgettimeofday gets the time as well as a timezone.
+func Xgettimeofday(tls *TLS, tv uintptr, tz uintptr) (r int32) {
+	return x_gettimeofday(tls, tv, tz)
+}
+
+// Xstrcspn calculates the length of the initial segment of s which consists
+// entirely of bytes not in reject.
+func Xstrcspn(tls *TLS, s uintptr, reject uintptr) (r uint64) {
+	return x_strcspn(tls, s, reject)
+}
+
+// Xlocaltime function converts the calendar time timep to broken-down time
+// representation, expressed relative to the user's specified timezone.
+func Xlocaltime(tls *TLS, timep uintptr) (r uintptr) {
+	return x_localtime(tls, timep)
 }

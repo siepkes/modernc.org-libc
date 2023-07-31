@@ -178,6 +178,10 @@ func VaUintptr(app *uintptr) uintptr {
 	return v
 }
 
+func AtomicStoreNUint16(ptr uintptr, val uint16, memorder int32) {
+	panic(todo(""))
+}
+
 func AtomicStoreNInt32(ptr uintptr, val int32, memorder int32) {
 	atomic.StoreInt32((*int32)(unsafe.Pointer(ptr)), val)
 }
@@ -217,6 +221,7 @@ func AtomicLoadNUint64(ptr uintptr, memorder int32) uint64 {
 func AtomicLoadNUintptr(ptr uintptr, memorder int32) uintptr {
 	return atomic.LoadUintptr((*uintptr)(unsafe.Pointer(ptr)))
 }
+
 func AssignInt8(p *int8, v int8) int8                         { *p = v; return v }
 func AssignInt16(p *int16, v int16) int16                     { *p = v; return v }
 func AssignInt32(p *int32, v int32) int32                     { *p = v; return v }
