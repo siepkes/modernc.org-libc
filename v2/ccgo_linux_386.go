@@ -1,4 +1,4 @@
-// Code generated for linux/386 by 'cc --package-name=libc --prefix-enumerator=_ --prefix-external=x_ --prefix-field=F --prefix-macro=m_ --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-enum=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --prefix-undefined=_ -exec-cc cc -extended-errors -ignore-asm-errors -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -hide a_inc,a_dec,a_swap,a_store,a_ctz_64,a_and_64,a_or_64,a_spin,a_fetch_add,a_cas_p -hide syscall0,syscall1,syscall2,syscall3,syscall4,syscall5,syscall6 -hide __pthread_self,sqrt,system -nostdlib -shared -o lib/libc.so.go src/conf/confstr.lo.go src/conf/fpathconf.lo.go src/conf/pathconf.lo.go src/conf/sysconf.lo.go src/ctype/__ctype_get_mb_cur_max.lo.go src/ctype/isalnum.lo.go src/ctype/isalpha.lo.go src/ctype/isascii.lo.go src/ctype/isblank.lo.go src/ctype/iscntrl.lo.go src/ctype/isdigit.lo.go src/ctype/isgraph.lo.go src/ctype/islower.lo.go src/ctype/isprint.lo.go src/ctype/ispunct.lo.go src/ctype/isspace.lo.go src/ctype/isupper.lo.go src/ctype/iswalnum.lo.go src/ctype/iswalpha.lo.go src/ctype/iswblank.lo.go src/ctype/iswcntrl.lo.go src/ctype/iswctype.lo.go src/ctype/iswdigit.lo.go src/ctype/iswgraph.lo.go src/ctype/iswlower.lo.go src/ctype/iswprint.lo.go src/ctype/iswpunct.lo.go src/ctype/iswspace.lo.go src/ctype/iswupper.lo.go src/ctype/iswxdigit.lo.go src/ctype/isxdigit.lo.go src/ctype/toascii.lo.go src/ctype/tolower.lo.go src/ctype/toupper.lo.go src/ctype/towctrans.lo.go src/ctype/wcswidth.lo.go src/ctype/wctrans.lo.go src/ctype/wcwidth.lo.go src/dirent/__getdents.lo.go src/dirent/alphasort.lo.go src/dirent/closedir.lo.go src/dirent/dirfd.lo.go src/dirent/fdopendir.lo.go src/dirent/opendir.lo.go src/dirent/readdir.lo.go src/dirent/readdir_r.lo.go src/dirent/rewinddir.lo.go src/dirent/scandir.lo.go src/dirent/seekdir.lo.go src/dirent/telldir.lo.go src/env/__environ.lo.go src/env/__libc_start_main.lo.go src/env/clearenv.lo.go src/env/getenv.lo.go src/env/putenv.lo.go src/env/setenv.lo.go src/env/unsetenv.lo.go src/errno/__errno_location.lo.go src/errno/strerror.lo.go src/exit/_Exit.lo.go src/exit/abort.lo.go src/exit/assert.lo.go src/exit/atexit.lo.go src/exit/exit.lo.go src/fcntl/creat.lo.go src/fcntl/fcntl.lo.go src/fcntl/open.lo.go src/fcntl/openat.lo.go src/internal/libc.lo.go src/internal/syscall.lo.go src/ipc/ftok.lo.go src/ipc/semctl.lo.go src/ipc/semget.lo.go src/ipc/semop.lo.go src/ipc/shmat.lo.go src/ipc/shmctl.lo.go src/ipc/shmdt.lo.go src/ipc/shmget.lo.go src/linux/brk.lo.go src/linux/chroot.lo.go src/linux/daemon.lo.go src/linux/epoll_create.lo.go src/linux/epoll_create1.lo.go src/linux/epoll_ctl.lo.go src/linux/epoll_pwait.lo.go src/linux/epoll_wait.lo.go src/linux/getdtablesize.lo.go src/linux/gethostid.lo.go src/linux/getopt_long.lo.go src/linux/getpagesize.lo.go src/linux/getpass.lo.go src/linux/initgroups.lo.go src/linux/klogctl.lo.go src/linux/mntent.lo.go src/linux/mount.lo.go src/linux/prctl.lo.go src/linux/reboot.lo.go src/linux/sbrk.lo.go src/linux/sendfile.lo.go src/linux/setgroups.lo.go src/linux/sethostname.lo.go src/linux/settimeofday.lo.go src/linux/signalfd.lo.go src/linux/stime.lo.go src/linux/swapoff.lo.go src/linux/swapon.lo.go src/linux/sysinfo.lo.go src/linux/umount.lo.go src/linux/umount2.lo.go src/linux/utimes.lo.go src/linux/wait3.lo.go src/linux/wait4.lo.go src/locale/catclose.lo.go src/locale/catgets.lo.go src/locale/catopen.lo.go src/locale/duplocale.lo.go src/locale/freelocale.lo.go src/locale/iconv.lo.go src/locale/intl.lo.go src/locale/isalnum_l.lo.go src/locale/isalpha_l.lo.go src/locale/isblank_l.lo.go src/locale/iscntrl_l.lo.go src/locale/isdigit_l.lo.go src/locale/isgraph_l.lo.go src/locale/islower_l.lo.go src/locale/isprint_l.lo.go src/locale/ispunct_l.lo.go src/locale/isspace_l.lo.go src/locale/isupper_l.lo.go src/locale/isxdigit_l.lo.go src/locale/langinfo.lo.go src/locale/localeconv.lo.go src/locale/newlocale.lo.go src/locale/nl_langinfo.lo.go src/locale/setlocale.lo.go src/locale/strcoll.lo.go src/locale/strxfrm.lo.go src/locale/tolower_l.lo.go src/locale/toupper_l.lo.go src/locale/wcscoll.lo.go src/locale/wcsxfrm.lo.go src/malloc/__brk.lo.go src/malloc/__simple_malloc.lo.go src/malloc/calloc.lo.go src/malloc/malloc.lo.go src/malloc/memalign.lo.go src/malloc/posix_memalign.lo.go src/math/__fpclassify.lo.go src/math/__fpclassifyf.lo.go src/math/__fpclassifyl.lo.go src/math/e_acos.lo.go src/math/e_acosf.lo.go src/math/e_acosh.lo.go src/math/e_acoshf.lo.go src/math/e_asin.lo.go src/math/e_asinf.lo.go src/math/e_atan2.lo.go src/math/e_atan2f.lo.go src/math/e_atanh.lo.go src/math/e_atanhf.lo.go src/math/e_cosh.lo.go src/math/e_coshf.lo.go src/math/e_fmod.lo.go src/math/e_fmodf.lo.go src/math/e_hypot.lo.go src/math/e_hypotf.lo.go src/math/e_pow.lo.go src/math/e_powf.lo.go src/math/e_rem_pio2.lo.go src/math/e_rem_pio2f.lo.go src/math/e_scalb.lo.go src/math/e_scalbf.lo.go src/math/e_sinh.lo.go src/math/e_sinhf.lo.go src/math/k_cos.lo.go src/math/k_cosf.lo.go src/math/k_rem_pio2.lo.go src/math/k_rem_pio2f.lo.go src/math/k_sin.lo.go src/math/k_sinf.lo.go src/math/k_tan.lo.go src/math/k_tanf.lo.go src/math/s_asinh.lo.go src/math/s_asinhf.lo.go src/math/s_atan.lo.go src/math/s_atanf.lo.go src/math/s_cbrt.lo.go src/math/s_cbrtf.lo.go src/math/s_copysign.lo.go src/math/s_copysignf.lo.go src/math/s_cos.lo.go src/math/s_cosf.lo.go src/math/s_erf.lo.go src/math/s_erff.lo.go src/math/s_expm1.lo.go src/math/s_expm1f.lo.go src/math/s_ilogb.lo.go src/math/s_ilogbf.lo.go src/math/s_llrint.lo.go src/math/s_log1p.lo.go src/math/s_log1pf.lo.go src/math/s_logb.lo.go src/math/s_logbf.lo.go src/math/s_lrint.lo.go src/math/s_lrintf.lo.go src/math/s_modf.lo.go src/math/s_modff.lo.go src/math/s_nextafter.lo.go src/math/s_nextafterf.lo.go src/math/s_remquo.lo.go src/math/s_remquof.lo.go src/math/s_round.lo.go src/math/s_roundf.lo.go src/math/s_sin.lo.go src/math/s_sinf.lo.go src/math/s_tan.lo.go src/math/s_tanf.lo.go src/math/s_tanh.lo.go src/math/s_tanhf.lo.go src/misc/basename.lo.go src/misc/bswap_32.lo.go src/misc/bswap_64.lo.go src/misc/crypt.lo.go src/misc/cuserid.lo.go src/misc/dirname.lo.go src/misc/ffs.lo.go src/misc/ftw.lo.go src/misc/getdomainname.lo.go src/misc/getgrouplist.lo.go src/misc/getopt.lo.go src/misc/getpriority.lo.go src/misc/getrlimit.lo.go src/misc/getrusage.lo.go src/misc/getsubopt.lo.go src/misc/ioctl.lo.go src/misc/lockf.lo.go src/misc/nftw.lo.go src/misc/openpty.lo.go src/misc/pty.lo.go src/misc/realpath.lo.go src/misc/sched_yield.lo.go src/misc/setpriority.lo.go src/misc/setrlimit.lo.go src/misc/syslog.lo.go src/misc/uname.lo.go src/mman/madvise.lo.go src/mman/mlock.lo.go src/mman/mlockall.lo.go src/mman/mmap.lo.go src/mman/mprotect.lo.go src/mman/mremap.lo.go src/mman/msync.lo.go src/mman/munlock.lo.go src/mman/munlockall.lo.go src/mman/munmap.lo.go src/mman/posix_madvise.lo.go src/multibyte/btowc.lo.go src/multibyte/decode.lo.go src/multibyte/internal.lo.go src/multibyte/mblen.lo.go src/multibyte/mbrlen.lo.go src/multibyte/mbrtowc.lo.go src/multibyte/mbsinit.lo.go src/multibyte/mbsnrtowcs.lo.go src/multibyte/mbsrtowcs.lo.go src/multibyte/mbstowcs.lo.go src/multibyte/mbtowc.lo.go src/multibyte/wcrtomb.lo.go src/multibyte/wcsnrtombs.lo.go src/multibyte/wcsrtombs.lo.go src/multibyte/wcstombs.lo.go src/multibyte/wctob.lo.go src/multibyte/wctomb.lo.go src/network/__dns.lo.go src/network/__ipparse.lo.go src/network/accept.lo.go src/network/bind.lo.go src/network/connect.lo.go src/network/dn_expand.lo.go src/network/ent.lo.go src/network/freeaddrinfo.lo.go src/network/gai_strerror.lo.go src/network/getaddrinfo.lo.go src/network/gethostbyaddr.lo.go src/network/gethostbyaddr_r.lo.go src/network/gethostbyname.lo.go src/network/gethostbyname2.lo.go src/network/gethostbyname2_r.lo.go src/network/gethostbyname_r.lo.go src/network/getnameinfo.lo.go src/network/getpeername.lo.go src/network/getservbyname.lo.go src/network/getservbyname_r.lo.go src/network/getservbyport.lo.go src/network/getservbyport_r.lo.go src/network/getsockname.lo.go src/network/getsockopt.lo.go src/network/h_errno.lo.go src/network/hstrerror.lo.go src/network/htonl.lo.go src/network/htons.lo.go src/network/in6addr_any.lo.go src/network/in6addr_loopback.lo.go src/network/inet_addr.lo.go src/network/inet_aton.lo.go src/network/inet_ntoa.lo.go src/network/inet_ntop.lo.go src/network/inet_pton.lo.go src/network/listen.lo.go src/network/ntohl.lo.go src/network/ntohs.lo.go src/network/proto.lo.go src/network/recv.lo.go src/network/recvfrom.lo.go src/network/recvmsg.lo.go src/network/res_init.lo.go src/network/res_query.lo.go src/network/send.lo.go src/network/sendmsg.lo.go src/network/sendto.lo.go src/network/serv.lo.go src/network/setsockopt.lo.go src/network/shutdown.lo.go src/network/sockatmark.lo.go src/network/socket.lo.go src/network/socketpair.lo.go src/passwd/getgr_r.lo.go src/passwd/getgrent.lo.go src/passwd/getgrent_a.lo.go src/passwd/getpw_r.lo.go src/passwd/getpwent.lo.go src/passwd/getpwent_a.lo.go src/passwd/getspent.lo.go src/passwd/getspnam.lo.go src/passwd/getspnam_r.lo.go src/passwd/lckpwdf.lo.go src/prng/__rand48_step.lo.go src/prng/__seed48.lo.go src/prng/drand48.lo.go src/prng/lcong48.lo.go src/prng/lrand48.lo.go src/prng/mrand48.lo.go src/prng/rand.lo.go src/prng/rand_r.lo.go src/prng/random.lo.go src/prng/seed48.lo.go src/prng/srand48.lo.go src/prng/srandom.lo.go src/process/execl.lo.go src/process/execle.lo.go src/process/execlp.lo.go src/process/execv.lo.go src/process/execve.lo.go src/process/execvp.lo.go src/process/fork.lo.go src/process/system.lo.go src/process/vfork.lo.go src/process/wait.lo.go src/process/waitid.lo.go src/process/waitpid.lo.go src/regex/fnmatch.lo.go src/regex/glob.lo.go src/regex/regcomp.lo.go src/regex/regerror.lo.go src/regex/regexec.lo.go src/regex/tre-mem.lo.go src/select/poll.lo.go src/select/pselect.lo.go src/select/select.lo.go src/signal/getitimer.lo.go src/signal/kill.lo.go src/signal/killpg.lo.go src/signal/raise.lo.go src/signal/setitimer.lo.go src/signal/sigaction.lo.go src/signal/sigaddset.lo.go src/signal/sigaltstack.lo.go src/signal/sigdelset.lo.go src/signal/sigemptyset.lo.go src/signal/sigfillset.lo.go src/signal/sighold.lo.go src/signal/sigignore.lo.go src/signal/siginterrupt.lo.go src/signal/sigismember.lo.go src/signal/siglongjmp.lo.go src/signal/signal.lo.go src/signal/sigpause.lo.go src/signal/sigpending.lo.go src/signal/sigprocmask.lo.go src/signal/sigqueue.lo.go src/signal/sigrelse.lo.go src/signal/sigrtmax.lo.go src/signal/sigrtmin.lo.go src/signal/sigset.lo.go src/signal/sigsuspend.lo.go src/signal/sigtimedwait.lo.go src/signal/sigwait.lo.go src/signal/sigwaitinfo.lo.go src/stat/chmod.lo.go src/stat/fchmod.lo.go src/stat/fchmodat.lo.go src/stat/fstat.lo.go src/stat/fstatat.lo.go src/stat/fstatvfs.lo.go src/stat/lstat.lo.go src/stat/mkdir.lo.go src/stat/mkdirat.lo.go src/stat/mkfifo.lo.go src/stat/mkfifoat.lo.go src/stat/mknod.lo.go src/stat/mknodat.lo.go src/stat/stat.lo.go src/stat/statvfs.lo.go src/stat/umask.lo.go src/stdio/__fclose_ca.lo.go src/stdio/__fdopen.lo.go src/stdio/__fopen_rb_ca.lo.go src/stdio/__fpending.lo.go src/stdio/__ofl.lo.go src/stdio/__overflow.lo.go src/stdio/__scanf.lo.go src/stdio/__stdio_close.lo.go src/stdio/__stdio_read.lo.go src/stdio/__stdio_seek.lo.go src/stdio/__stdio_write.lo.go src/stdio/__uflow.lo.go src/stdio/__underflow.lo.go src/stdio/asprintf.lo.go src/stdio/clearerr.lo.go src/stdio/dprintf.lo.go src/stdio/fclose.lo.go src/stdio/feof.lo.go src/stdio/ferror.lo.go src/stdio/fflush.lo.go src/stdio/fgetc.lo.go src/stdio/fgetpos.lo.go src/stdio/fgets.lo.go src/stdio/fgetwc.lo.go src/stdio/fgetws.lo.go src/stdio/fileno.lo.go src/stdio/fmemopen.lo.go src/stdio/fopen.lo.go src/stdio/fprintf.lo.go src/stdio/fputc.lo.go src/stdio/fputs.lo.go src/stdio/fputwc.lo.go src/stdio/fputws.lo.go src/stdio/fread.lo.go src/stdio/freopen.lo.go src/stdio/fscanf.lo.go src/stdio/fseek.lo.go src/stdio/fsetpos.lo.go src/stdio/ftell.lo.go src/stdio/fwide.lo.go src/stdio/fwrite.lo.go src/stdio/fwscanf.lo.go src/stdio/getc.lo.go src/stdio/getc_unlocked.lo.go src/stdio/getchar.lo.go src/stdio/getchar_unlocked.lo.go src/stdio/getdelim.lo.go src/stdio/getline.lo.go src/stdio/gets.lo.go src/stdio/getw.lo.go src/stdio/getwc.lo.go src/stdio/getwchar.lo.go src/stdio/pclose.lo.go src/stdio/perror.lo.go src/stdio/popen.lo.go src/stdio/printf.lo.go src/stdio/putc.lo.go src/stdio/putc_unlocked.lo.go src/stdio/putchar.lo.go src/stdio/putchar_unlocked.lo.go src/stdio/puts.lo.go src/stdio/putw.lo.go src/stdio/putwc.lo.go src/stdio/putwchar.lo.go src/stdio/remove.lo.go src/stdio/rename.lo.go src/stdio/rewind.lo.go src/stdio/scanf.lo.go src/stdio/setbuf.lo.go src/stdio/setvbuf.lo.go src/stdio/snprintf.lo.go src/stdio/sprintf.lo.go src/stdio/sscanf.lo.go src/stdio/stderr.lo.go src/stdio/stdin.lo.go src/stdio/stdout.lo.go src/stdio/swscanf.lo.go src/stdio/tempnam.lo.go src/stdio/tmpfile.lo.go src/stdio/tmpnam.lo.go src/stdio/ungetc.lo.go src/stdio/ungetwc.lo.go src/stdio/vasprintf.lo.go src/stdio/vdprintf.lo.go src/stdio/vfprintf.lo.go src/stdio/vfscanf.lo.go src/stdio/vfwscanf.lo.go src/stdio/vprintf.lo.go src/stdio/vscanf.lo.go src/stdio/vsnprintf.lo.go src/stdio/vsprintf.lo.go src/stdio/vsscanf.lo.go src/stdio/vswscanf.lo.go src/stdio/vwscanf.lo.go src/stdio/wscanf.lo.go src/stdlib/abs.lo.go src/stdlib/atof.lo.go src/stdlib/atoi.lo.go src/stdlib/atol.lo.go src/stdlib/atoll.lo.go src/stdlib/bsearch.lo.go src/stdlib/div.lo.go src/stdlib/frexp.lo.go src/stdlib/frexpf.lo.go src/stdlib/frexpl.lo.go src/stdlib/imaxabs.lo.go src/stdlib/imaxdiv.lo.go src/stdlib/labs.lo.go src/stdlib/ldiv.lo.go src/stdlib/llabs.lo.go src/stdlib/lldiv.lo.go src/stdlib/qsort.lo.go src/stdlib/strtod.lo.go src/stdlib/strtof.lo.go src/stdlib/strtoimax.lo.go src/stdlib/strtol.lo.go src/stdlib/strtold.lo.go src/stdlib/strtoll.lo.go src/stdlib/strtoul.lo.go src/stdlib/strtoull.lo.go src/stdlib/strtoumax.lo.go src/stdlib/wcstoimax.lo.go src/stdlib/wcstol.lo.go src/stdlib/wcstoll.lo.go src/stdlib/wcstoul.lo.go src/stdlib/wcstoull.lo.go src/stdlib/wcstoumax.lo.go src/string/bcmp.lo.go src/string/bcopy.lo.go src/string/bzero.lo.go src/string/index.lo.go src/string/memchr.lo.go src/string/memcmp.lo.go src/string/memcpy.lo.go src/string/memmove.lo.go src/string/mempcpy.lo.go src/string/memset.lo.go src/string/rindex.lo.go src/string/stpcpy.lo.go src/string/stpncpy.lo.go src/string/strcasecmp.lo.go src/string/strcasestr.lo.go src/string/strcat.lo.go src/string/strchr.lo.go src/string/strchrnul.lo.go src/string/strcmp.lo.go src/string/strcpy.lo.go src/string/strcspn.lo.go src/string/strdup.lo.go src/string/strerror_r.lo.go src/string/strlcat.lo.go src/string/strlcpy.lo.go src/string/strlen.lo.go src/string/strncasecmp.lo.go src/string/strncat.lo.go src/string/strncmp.lo.go src/string/strncpy.lo.go src/string/strndup.lo.go src/string/strnlen.lo.go src/string/strpbrk.lo.go src/string/strrchr.lo.go src/string/strsep.lo.go src/string/strsignal.lo.go src/string/strspn.lo.go src/string/strstr.lo.go src/string/strtok.lo.go src/string/strtok_r.lo.go src/string/swab.lo.go src/string/wcscat.lo.go src/string/wcschr.lo.go src/string/wcscmp.lo.go src/string/wcscpy.lo.go src/string/wcscspn.lo.go src/string/wcslen.lo.go src/string/wcsncat.lo.go src/string/wcsncmp.lo.go src/string/wcsncpy.lo.go src/string/wcspbrk.lo.go src/string/wcsrchr.lo.go src/string/wcsspn.lo.go src/string/wcsstr.lo.go src/string/wcswcs.lo.go src/string/wmemchr.lo.go src/string/wmemcmp.lo.go src/string/wmemcpy.lo.go src/string/wmemmove.lo.go src/string/wmemset.lo.go src/stub/utmpx.lo.go src/temp/mkdtemp.lo.go src/temp/mkstemp.lo.go src/temp/mktemp.lo.go src/termios/cfgetospeed.lo.go src/termios/cfsetospeed.lo.go src/termios/tcdrain.lo.go src/termios/tcflow.lo.go src/termios/tcflush.lo.go src/termios/tcgetattr.lo.go src/termios/tcgetsid.lo.go src/termios/tcsendbreak.lo.go src/termios/tcsetattr.lo.go src/thread/__futex.lo.go src/thread/__lock.lo.go src/thread/__timedwait.lo.go src/thread/__wait.lo.go src/thread/__wake.lo.go src/thread/cancellation.lo.go src/thread/pthread_attr_destroy.lo.go src/thread/pthread_attr_getdetachstate.lo.go src/thread/pthread_attr_getguardsize.lo.go src/thread/pthread_attr_getscope.lo.go src/thread/pthread_attr_getstacksize.lo.go src/thread/pthread_attr_init.lo.go src/thread/pthread_attr_setdetachstate.lo.go src/thread/pthread_attr_setguardsize.lo.go src/thread/pthread_attr_setscope.lo.go src/thread/pthread_attr_setstacksize.lo.go src/thread/pthread_barrier_destroy.lo.go src/thread/pthread_barrier_init.lo.go src/thread/pthread_barrier_wait.lo.go src/thread/pthread_cancel.lo.go src/thread/pthread_cond_broadcast.lo.go src/thread/pthread_cond_destroy.lo.go src/thread/pthread_cond_init.lo.go src/thread/pthread_cond_signal.lo.go src/thread/pthread_cond_timedwait.lo.go src/thread/pthread_cond_wait.lo.go src/thread/pthread_create.lo.go src/thread/pthread_detach.lo.go src/thread/pthread_equal.lo.go src/thread/pthread_getspecific.lo.go src/thread/pthread_join.lo.go src/thread/pthread_key_create.lo.go src/thread/pthread_key_delete.lo.go src/thread/pthread_kill.lo.go src/thread/pthread_mutex_destroy.lo.go src/thread/pthread_mutex_init.lo.go src/thread/pthread_mutex_lock.lo.go src/thread/pthread_mutex_timedlock.lo.go src/thread/pthread_mutex_trylock.lo.go src/thread/pthread_mutex_unlock.lo.go src/thread/pthread_mutexattr_destroy.lo.go src/thread/pthread_mutexattr_gettype.lo.go src/thread/pthread_mutexattr_init.lo.go src/thread/pthread_mutexattr_settype.lo.go src/thread/pthread_once.lo.go src/thread/pthread_rwlock_destroy.lo.go src/thread/pthread_rwlock_init.lo.go src/thread/pthread_rwlock_rdlock.lo.go src/thread/pthread_rwlock_timedrdlock.lo.go src/thread/pthread_rwlock_timedwrlock.lo.go src/thread/pthread_rwlock_tryrdlock.lo.go src/thread/pthread_rwlock_trywrlock.lo.go src/thread/pthread_rwlock_unlock.lo.go src/thread/pthread_rwlock_wrlock.lo.go src/thread/pthread_self.lo.go src/thread/pthread_setcancelstate.lo.go src/thread/pthread_setcanceltype.lo.go src/thread/pthread_setspecific.lo.go src/thread/pthread_spin_destroy.lo.go src/thread/pthread_spin_init.lo.go src/thread/pthread_spin_lock.lo.go src/thread/pthread_spin_trylock.lo.go src/thread/pthread_spin_unlock.lo.go src/thread/pthread_testcancel.lo.go src/time/__asctime.lo.go src/time/__time_to_tm.lo.go src/time/__tm_to_time.lo.go src/time/asctime.lo.go src/time/asctime_r.lo.go src/time/clock.lo.go src/time/clock_gettime.lo.go src/time/ctime.lo.go src/time/ctime_r.lo.go src/time/difftime.lo.go src/time/gettimeofday.lo.go src/time/gmtime.lo.go src/time/gmtime_r.lo.go src/time/localtime.lo.go src/time/localtime_r.lo.go src/time/mktime.lo.go src/time/nanosleep.lo.go src/time/strftime.lo.go src/time/strptime.lo.go src/time/time.lo.go src/time/times.lo.go src/time/tzset.lo.go src/time/utime.lo.go src/unistd/_exit.lo.go src/unistd/access.lo.go src/unistd/alarm.lo.go src/unistd/chdir.lo.go src/unistd/chown.lo.go src/unistd/close.lo.go src/unistd/ctermid.lo.go src/unistd/dup.lo.go src/unistd/dup2.lo.go src/unistd/faccessat.lo.go src/unistd/fchdir.lo.go src/unistd/fchown.lo.go src/unistd/fchownat.lo.go src/unistd/fdatasync.lo.go src/unistd/fsync.lo.go src/unistd/ftruncate.lo.go src/unistd/getcwd.lo.go src/unistd/getegid.lo.go src/unistd/geteuid.lo.go src/unistd/getgid.lo.go src/unistd/getgroups.lo.go src/unistd/gethostname.lo.go src/unistd/getlogin.lo.go src/unistd/getlogin_r.lo.go src/unistd/getpgid.lo.go src/unistd/getpgrp.lo.go src/unistd/getpid.lo.go src/unistd/getppid.lo.go src/unistd/getsid.lo.go src/unistd/getuid.lo.go src/unistd/isatty.lo.go src/unistd/lchown.lo.go src/unistd/link.lo.go src/unistd/linkat.lo.go src/unistd/lseek.lo.go src/unistd/nice.lo.go src/unistd/pause.lo.go src/unistd/pipe.lo.go src/unistd/pread.lo.go src/unistd/pwrite.lo.go src/unistd/read.lo.go src/unistd/readlink.lo.go src/unistd/readlinkat.lo.go src/unistd/readv.lo.go src/unistd/renameat.lo.go src/unistd/rmdir.lo.go src/unistd/setegid.lo.go src/unistd/seteuid.lo.go src/unistd/setgid.lo.go src/unistd/setpgid.lo.go src/unistd/setpgrp.lo.go src/unistd/setregid.lo.go src/unistd/setreuid.lo.go src/unistd/setsid.lo.go src/unistd/setuid.lo.go src/unistd/sleep.lo.go src/unistd/symlink.lo.go src/unistd/symlinkat.lo.go src/unistd/sync.lo.go src/unistd/tcgetpgrp.lo.go src/unistd/tcsetpgrp.lo.go src/unistd/truncate.lo.go src/unistd/ttyname.lo.go src/unistd/ttyname_r.lo.go src/unistd/ualarm.lo.go src/unistd/unlink.lo.go src/unistd/unlinkat.lo.go src/unistd/usleep.lo.go src/unistd/write.lo.go src/unistd/writev.lo.go', DO NOT EDIT..
+// Code generated for linux/386 by 'cc --package-name=libc --prefix-enumerator=_ --prefix-external=x_ --prefix-field=F --prefix-macro=m_ --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-enum=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --prefix-undefined=_ -D__CCGO__ -exec-cc cc -extended-errors -ignore-asm-errors -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -hide a_inc,a_dec,a_swap,a_store,a_ctz_64,a_and_64,a_or_64,a_spin,a_fetch_add,a_cas_p -hide syscall0,syscall1,syscall2,syscall3,syscall4,syscall5,syscall6 -hide __pthread_self,sqrt,system -nostdlib -shared -o lib/libc.so.go src/conf/confstr.lo.go src/conf/fpathconf.lo.go src/conf/pathconf.lo.go src/conf/sysconf.lo.go src/ctype/__ctype_get_mb_cur_max.lo.go src/ctype/isalnum.lo.go src/ctype/isalpha.lo.go src/ctype/isascii.lo.go src/ctype/isblank.lo.go src/ctype/iscntrl.lo.go src/ctype/isdigit.lo.go src/ctype/isgraph.lo.go src/ctype/islower.lo.go src/ctype/isprint.lo.go src/ctype/ispunct.lo.go src/ctype/isspace.lo.go src/ctype/isupper.lo.go src/ctype/iswalnum.lo.go src/ctype/iswalpha.lo.go src/ctype/iswblank.lo.go src/ctype/iswcntrl.lo.go src/ctype/iswctype.lo.go src/ctype/iswdigit.lo.go src/ctype/iswgraph.lo.go src/ctype/iswlower.lo.go src/ctype/iswprint.lo.go src/ctype/iswpunct.lo.go src/ctype/iswspace.lo.go src/ctype/iswupper.lo.go src/ctype/iswxdigit.lo.go src/ctype/isxdigit.lo.go src/ctype/toascii.lo.go src/ctype/tolower.lo.go src/ctype/toupper.lo.go src/ctype/towctrans.lo.go src/ctype/wcswidth.lo.go src/ctype/wctrans.lo.go src/ctype/wcwidth.lo.go src/dirent/__getdents.lo.go src/dirent/alphasort.lo.go src/dirent/closedir.lo.go src/dirent/dirfd.lo.go src/dirent/fdopendir.lo.go src/dirent/opendir.lo.go src/dirent/readdir.lo.go src/dirent/readdir_r.lo.go src/dirent/rewinddir.lo.go src/dirent/scandir.lo.go src/dirent/seekdir.lo.go src/dirent/telldir.lo.go src/env/__environ.lo.go src/env/__libc_start_main.lo.go src/env/clearenv.lo.go src/env/getenv.lo.go src/env/putenv.lo.go src/env/setenv.lo.go src/env/unsetenv.lo.go src/errno/__errno_location.lo.go src/errno/strerror.lo.go src/exit/_Exit.lo.go src/exit/abort.lo.go src/exit/assert.lo.go src/exit/atexit.lo.go src/exit/exit.lo.go src/fcntl/creat.lo.go src/fcntl/fcntl.lo.go src/fcntl/open.lo.go src/fcntl/openat.lo.go src/internal/libc.lo.go src/internal/syscall.lo.go src/ipc/ftok.lo.go src/ipc/semctl.lo.go src/ipc/semget.lo.go src/ipc/semop.lo.go src/ipc/shmat.lo.go src/ipc/shmctl.lo.go src/ipc/shmdt.lo.go src/ipc/shmget.lo.go src/linux/brk.lo.go src/linux/chroot.lo.go src/linux/daemon.lo.go src/linux/epoll_create.lo.go src/linux/epoll_create1.lo.go src/linux/epoll_ctl.lo.go src/linux/epoll_pwait.lo.go src/linux/epoll_wait.lo.go src/linux/getdtablesize.lo.go src/linux/gethostid.lo.go src/linux/getopt_long.lo.go src/linux/getpagesize.lo.go src/linux/getpass.lo.go src/linux/initgroups.lo.go src/linux/klogctl.lo.go src/linux/mntent.lo.go src/linux/mount.lo.go src/linux/prctl.lo.go src/linux/reboot.lo.go src/linux/sbrk.lo.go src/linux/sendfile.lo.go src/linux/setgroups.lo.go src/linux/sethostname.lo.go src/linux/settimeofday.lo.go src/linux/signalfd.lo.go src/linux/stime.lo.go src/linux/swapoff.lo.go src/linux/swapon.lo.go src/linux/sysinfo.lo.go src/linux/umount.lo.go src/linux/umount2.lo.go src/linux/utimes.lo.go src/linux/wait3.lo.go src/linux/wait4.lo.go src/locale/catclose.lo.go src/locale/catgets.lo.go src/locale/catopen.lo.go src/locale/duplocale.lo.go src/locale/freelocale.lo.go src/locale/iconv.lo.go src/locale/intl.lo.go src/locale/isalnum_l.lo.go src/locale/isalpha_l.lo.go src/locale/isblank_l.lo.go src/locale/iscntrl_l.lo.go src/locale/isdigit_l.lo.go src/locale/isgraph_l.lo.go src/locale/islower_l.lo.go src/locale/isprint_l.lo.go src/locale/ispunct_l.lo.go src/locale/isspace_l.lo.go src/locale/isupper_l.lo.go src/locale/isxdigit_l.lo.go src/locale/langinfo.lo.go src/locale/localeconv.lo.go src/locale/newlocale.lo.go src/locale/nl_langinfo.lo.go src/locale/setlocale.lo.go src/locale/strcoll.lo.go src/locale/strxfrm.lo.go src/locale/tolower_l.lo.go src/locale/toupper_l.lo.go src/locale/wcscoll.lo.go src/locale/wcsxfrm.lo.go src/malloc/__brk.lo.go src/malloc/__simple_malloc.lo.go src/malloc/calloc.lo.go src/malloc/malloc.lo.go src/malloc/memalign.lo.go src/malloc/posix_memalign.lo.go src/math/__fpclassify.lo.go src/math/__fpclassifyf.lo.go src/math/__fpclassifyl.lo.go src/math/e_acos.lo.go src/math/e_acosf.lo.go src/math/e_acosh.lo.go src/math/e_acoshf.lo.go src/math/e_asin.lo.go src/math/e_asinf.lo.go src/math/e_atan2.lo.go src/math/e_atan2f.lo.go src/math/e_atanh.lo.go src/math/e_atanhf.lo.go src/math/e_cosh.lo.go src/math/e_coshf.lo.go src/math/e_fmod.lo.go src/math/e_fmodf.lo.go src/math/e_hypot.lo.go src/math/e_hypotf.lo.go src/math/e_pow.lo.go src/math/e_powf.lo.go src/math/e_rem_pio2.lo.go src/math/e_rem_pio2f.lo.go src/math/e_scalb.lo.go src/math/e_scalbf.lo.go src/math/e_sinh.lo.go src/math/e_sinhf.lo.go src/math/k_cos.lo.go src/math/k_cosf.lo.go src/math/k_rem_pio2.lo.go src/math/k_rem_pio2f.lo.go src/math/k_sin.lo.go src/math/k_sinf.lo.go src/math/k_tan.lo.go src/math/k_tanf.lo.go src/math/s_asinh.lo.go src/math/s_asinhf.lo.go src/math/s_atan.lo.go src/math/s_atanf.lo.go src/math/s_cbrt.lo.go src/math/s_cbrtf.lo.go src/math/s_copysign.lo.go src/math/s_copysignf.lo.go src/math/s_cos.lo.go src/math/s_cosf.lo.go src/math/s_erf.lo.go src/math/s_erff.lo.go src/math/s_expm1.lo.go src/math/s_expm1f.lo.go src/math/s_ilogb.lo.go src/math/s_ilogbf.lo.go src/math/s_llrint.lo.go src/math/s_log1p.lo.go src/math/s_log1pf.lo.go src/math/s_logb.lo.go src/math/s_logbf.lo.go src/math/s_lrint.lo.go src/math/s_lrintf.lo.go src/math/s_modf.lo.go src/math/s_modff.lo.go src/math/s_nextafter.lo.go src/math/s_nextafterf.lo.go src/math/s_remquo.lo.go src/math/s_remquof.lo.go src/math/s_round.lo.go src/math/s_roundf.lo.go src/math/s_sin.lo.go src/math/s_sinf.lo.go src/math/s_tan.lo.go src/math/s_tanf.lo.go src/math/s_tanh.lo.go src/math/s_tanhf.lo.go src/misc/basename.lo.go src/misc/bswap_32.lo.go src/misc/bswap_64.lo.go src/misc/crypt.lo.go src/misc/cuserid.lo.go src/misc/dirname.lo.go src/misc/ffs.lo.go src/misc/ftw.lo.go src/misc/getdomainname.lo.go src/misc/getgrouplist.lo.go src/misc/getopt.lo.go src/misc/getpriority.lo.go src/misc/getrlimit.lo.go src/misc/getrusage.lo.go src/misc/getsubopt.lo.go src/misc/ioctl.lo.go src/misc/lockf.lo.go src/misc/nftw.lo.go src/misc/openpty.lo.go src/misc/pty.lo.go src/misc/realpath.lo.go src/misc/sched_yield.lo.go src/misc/setpriority.lo.go src/misc/setrlimit.lo.go src/misc/syslog.lo.go src/misc/uname.lo.go src/mman/madvise.lo.go src/mman/mlock.lo.go src/mman/mlockall.lo.go src/mman/mmap.lo.go src/mman/mprotect.lo.go src/mman/mremap.lo.go src/mman/msync.lo.go src/mman/munlock.lo.go src/mman/munlockall.lo.go src/mman/munmap.lo.go src/mman/posix_madvise.lo.go src/multibyte/btowc.lo.go src/multibyte/decode.lo.go src/multibyte/internal.lo.go src/multibyte/mblen.lo.go src/multibyte/mbrlen.lo.go src/multibyte/mbrtowc.lo.go src/multibyte/mbsinit.lo.go src/multibyte/mbsnrtowcs.lo.go src/multibyte/mbsrtowcs.lo.go src/multibyte/mbstowcs.lo.go src/multibyte/mbtowc.lo.go src/multibyte/wcrtomb.lo.go src/multibyte/wcsnrtombs.lo.go src/multibyte/wcsrtombs.lo.go src/multibyte/wcstombs.lo.go src/multibyte/wctob.lo.go src/multibyte/wctomb.lo.go src/network/__dns.lo.go src/network/__ipparse.lo.go src/network/accept.lo.go src/network/bind.lo.go src/network/connect.lo.go src/network/dn_expand.lo.go src/network/ent.lo.go src/network/freeaddrinfo.lo.go src/network/gai_strerror.lo.go src/network/getaddrinfo.lo.go src/network/gethostbyaddr.lo.go src/network/gethostbyaddr_r.lo.go src/network/gethostbyname.lo.go src/network/gethostbyname2.lo.go src/network/gethostbyname2_r.lo.go src/network/gethostbyname_r.lo.go src/network/getnameinfo.lo.go src/network/getpeername.lo.go src/network/getservbyname.lo.go src/network/getservbyname_r.lo.go src/network/getservbyport.lo.go src/network/getservbyport_r.lo.go src/network/getsockname.lo.go src/network/getsockopt.lo.go src/network/h_errno.lo.go src/network/hstrerror.lo.go src/network/htonl.lo.go src/network/htons.lo.go src/network/in6addr_any.lo.go src/network/in6addr_loopback.lo.go src/network/inet_addr.lo.go src/network/inet_aton.lo.go src/network/inet_ntoa.lo.go src/network/inet_ntop.lo.go src/network/inet_pton.lo.go src/network/listen.lo.go src/network/ntohl.lo.go src/network/ntohs.lo.go src/network/proto.lo.go src/network/recv.lo.go src/network/recvfrom.lo.go src/network/recvmsg.lo.go src/network/res_init.lo.go src/network/res_query.lo.go src/network/send.lo.go src/network/sendmsg.lo.go src/network/sendto.lo.go src/network/serv.lo.go src/network/setsockopt.lo.go src/network/shutdown.lo.go src/network/sockatmark.lo.go src/network/socket.lo.go src/network/socketpair.lo.go src/passwd/getgr_r.lo.go src/passwd/getgrent.lo.go src/passwd/getgrent_a.lo.go src/passwd/getpw_r.lo.go src/passwd/getpwent.lo.go src/passwd/getpwent_a.lo.go src/passwd/getspent.lo.go src/passwd/getspnam.lo.go src/passwd/getspnam_r.lo.go src/passwd/lckpwdf.lo.go src/prng/__rand48_step.lo.go src/prng/__seed48.lo.go src/prng/drand48.lo.go src/prng/lcong48.lo.go src/prng/lrand48.lo.go src/prng/mrand48.lo.go src/prng/rand.lo.go src/prng/rand_r.lo.go src/prng/random.lo.go src/prng/seed48.lo.go src/prng/srand48.lo.go src/prng/srandom.lo.go src/process/execl.lo.go src/process/execle.lo.go src/process/execlp.lo.go src/process/execv.lo.go src/process/execve.lo.go src/process/execvp.lo.go src/process/fork.lo.go src/process/system.lo.go src/process/vfork.lo.go src/process/wait.lo.go src/process/waitid.lo.go src/process/waitpid.lo.go src/regex/fnmatch.lo.go src/regex/glob.lo.go src/regex/regcomp.lo.go src/regex/regerror.lo.go src/regex/regexec.lo.go src/regex/tre-mem.lo.go src/select/poll.lo.go src/select/pselect.lo.go src/select/select.lo.go src/signal/getitimer.lo.go src/signal/kill.lo.go src/signal/killpg.lo.go src/signal/raise.lo.go src/signal/setitimer.lo.go src/signal/sigaction.lo.go src/signal/sigaddset.lo.go src/signal/sigaltstack.lo.go src/signal/sigdelset.lo.go src/signal/sigemptyset.lo.go src/signal/sigfillset.lo.go src/signal/sighold.lo.go src/signal/sigignore.lo.go src/signal/siginterrupt.lo.go src/signal/sigismember.lo.go src/signal/siglongjmp.lo.go src/signal/signal.lo.go src/signal/sigpause.lo.go src/signal/sigpending.lo.go src/signal/sigprocmask.lo.go src/signal/sigqueue.lo.go src/signal/sigrelse.lo.go src/signal/sigrtmax.lo.go src/signal/sigrtmin.lo.go src/signal/sigset.lo.go src/signal/sigsuspend.lo.go src/signal/sigtimedwait.lo.go src/signal/sigwait.lo.go src/signal/sigwaitinfo.lo.go src/stat/chmod.lo.go src/stat/fchmod.lo.go src/stat/fchmodat.lo.go src/stat/fstat.lo.go src/stat/fstatat.lo.go src/stat/fstatvfs.lo.go src/stat/lstat.lo.go src/stat/mkdir.lo.go src/stat/mkdirat.lo.go src/stat/mkfifo.lo.go src/stat/mkfifoat.lo.go src/stat/mknod.lo.go src/stat/mknodat.lo.go src/stat/stat.lo.go src/stat/statvfs.lo.go src/stat/umask.lo.go src/stdio/__fclose_ca.lo.go src/stdio/__fdopen.lo.go src/stdio/__fopen_rb_ca.lo.go src/stdio/__fpending.lo.go src/stdio/__ofl.lo.go src/stdio/__overflow.lo.go src/stdio/__scanf.lo.go src/stdio/__stdio_close.lo.go src/stdio/__stdio_read.lo.go src/stdio/__stdio_seek.lo.go src/stdio/__stdio_write.lo.go src/stdio/__uflow.lo.go src/stdio/__underflow.lo.go src/stdio/asprintf.lo.go src/stdio/clearerr.lo.go src/stdio/dprintf.lo.go src/stdio/fclose.lo.go src/stdio/feof.lo.go src/stdio/ferror.lo.go src/stdio/fflush.lo.go src/stdio/fgetc.lo.go src/stdio/fgetpos.lo.go src/stdio/fgets.lo.go src/stdio/fgetwc.lo.go src/stdio/fgetws.lo.go src/stdio/fileno.lo.go src/stdio/fmemopen.lo.go src/stdio/fopen.lo.go src/stdio/fprintf.lo.go src/stdio/fputc.lo.go src/stdio/fputs.lo.go src/stdio/fputwc.lo.go src/stdio/fputws.lo.go src/stdio/fread.lo.go src/stdio/freopen.lo.go src/stdio/fscanf.lo.go src/stdio/fseek.lo.go src/stdio/fsetpos.lo.go src/stdio/ftell.lo.go src/stdio/fwide.lo.go src/stdio/fwrite.lo.go src/stdio/fwscanf.lo.go src/stdio/getc.lo.go src/stdio/getc_unlocked.lo.go src/stdio/getchar.lo.go src/stdio/getchar_unlocked.lo.go src/stdio/getdelim.lo.go src/stdio/getline.lo.go src/stdio/gets.lo.go src/stdio/getw.lo.go src/stdio/getwc.lo.go src/stdio/getwchar.lo.go src/stdio/pclose.lo.go src/stdio/perror.lo.go src/stdio/popen.lo.go src/stdio/printf.lo.go src/stdio/putc.lo.go src/stdio/putc_unlocked.lo.go src/stdio/putchar.lo.go src/stdio/putchar_unlocked.lo.go src/stdio/puts.lo.go src/stdio/putw.lo.go src/stdio/putwc.lo.go src/stdio/putwchar.lo.go src/stdio/remove.lo.go src/stdio/rename.lo.go src/stdio/rewind.lo.go src/stdio/scanf.lo.go src/stdio/setbuf.lo.go src/stdio/setvbuf.lo.go src/stdio/snprintf.lo.go src/stdio/sprintf.lo.go src/stdio/sscanf.lo.go src/stdio/stderr.lo.go src/stdio/stdin.lo.go src/stdio/stdout.lo.go src/stdio/swscanf.lo.go src/stdio/tempnam.lo.go src/stdio/tmpfile.lo.go src/stdio/tmpnam.lo.go src/stdio/ungetc.lo.go src/stdio/ungetwc.lo.go src/stdio/vasprintf.lo.go src/stdio/vdprintf.lo.go src/stdio/vfprintf.lo.go src/stdio/vfscanf.lo.go src/stdio/vfwscanf.lo.go src/stdio/vprintf.lo.go src/stdio/vscanf.lo.go src/stdio/vsnprintf.lo.go src/stdio/vsprintf.lo.go src/stdio/vsscanf.lo.go src/stdio/vswscanf.lo.go src/stdio/vwscanf.lo.go src/stdio/wscanf.lo.go src/stdlib/abs.lo.go src/stdlib/atof.lo.go src/stdlib/atoi.lo.go src/stdlib/atol.lo.go src/stdlib/atoll.lo.go src/stdlib/bsearch.lo.go src/stdlib/div.lo.go src/stdlib/frexp.lo.go src/stdlib/frexpf.lo.go src/stdlib/frexpl.lo.go src/stdlib/imaxabs.lo.go src/stdlib/imaxdiv.lo.go src/stdlib/labs.lo.go src/stdlib/ldiv.lo.go src/stdlib/llabs.lo.go src/stdlib/lldiv.lo.go src/stdlib/qsort.lo.go src/stdlib/strtod.lo.go src/stdlib/strtof.lo.go src/stdlib/strtoimax.lo.go src/stdlib/strtol.lo.go src/stdlib/strtold.lo.go src/stdlib/strtoll.lo.go src/stdlib/strtoul.lo.go src/stdlib/strtoull.lo.go src/stdlib/strtoumax.lo.go src/stdlib/wcstoimax.lo.go src/stdlib/wcstol.lo.go src/stdlib/wcstoll.lo.go src/stdlib/wcstoul.lo.go src/stdlib/wcstoull.lo.go src/stdlib/wcstoumax.lo.go src/string/bcmp.lo.go src/string/bcopy.lo.go src/string/bzero.lo.go src/string/index.lo.go src/string/memchr.lo.go src/string/memcmp.lo.go src/string/memcpy.lo.go src/string/memmove.lo.go src/string/mempcpy.lo.go src/string/memset.lo.go src/string/rindex.lo.go src/string/stpcpy.lo.go src/string/stpncpy.lo.go src/string/strcasecmp.lo.go src/string/strcasestr.lo.go src/string/strcat.lo.go src/string/strchr.lo.go src/string/strchrnul.lo.go src/string/strcmp.lo.go src/string/strcpy.lo.go src/string/strcspn.lo.go src/string/strdup.lo.go src/string/strerror_r.lo.go src/string/strlcat.lo.go src/string/strlcpy.lo.go src/string/strlen.lo.go src/string/strncasecmp.lo.go src/string/strncat.lo.go src/string/strncmp.lo.go src/string/strncpy.lo.go src/string/strndup.lo.go src/string/strnlen.lo.go src/string/strpbrk.lo.go src/string/strrchr.lo.go src/string/strsep.lo.go src/string/strsignal.lo.go src/string/strspn.lo.go src/string/strstr.lo.go src/string/strtok.lo.go src/string/strtok_r.lo.go src/string/swab.lo.go src/string/wcscat.lo.go src/string/wcschr.lo.go src/string/wcscmp.lo.go src/string/wcscpy.lo.go src/string/wcscspn.lo.go src/string/wcslen.lo.go src/string/wcsncat.lo.go src/string/wcsncmp.lo.go src/string/wcsncpy.lo.go src/string/wcspbrk.lo.go src/string/wcsrchr.lo.go src/string/wcsspn.lo.go src/string/wcsstr.lo.go src/string/wcswcs.lo.go src/string/wmemchr.lo.go src/string/wmemcmp.lo.go src/string/wmemcpy.lo.go src/string/wmemmove.lo.go src/string/wmemset.lo.go src/stub/utmpx.lo.go src/temp/mkdtemp.lo.go src/temp/mkstemp.lo.go src/temp/mktemp.lo.go src/termios/cfgetospeed.lo.go src/termios/cfsetospeed.lo.go src/termios/tcdrain.lo.go src/termios/tcflow.lo.go src/termios/tcflush.lo.go src/termios/tcgetattr.lo.go src/termios/tcgetsid.lo.go src/termios/tcsendbreak.lo.go src/termios/tcsetattr.lo.go src/thread/__futex.lo.go src/thread/__lock.lo.go src/thread/__timedwait.lo.go src/thread/__wait.lo.go src/thread/__wake.lo.go src/thread/cancellation.lo.go src/thread/pthread_attr_destroy.lo.go src/thread/pthread_attr_getdetachstate.lo.go src/thread/pthread_attr_getguardsize.lo.go src/thread/pthread_attr_getscope.lo.go src/thread/pthread_attr_getstacksize.lo.go src/thread/pthread_attr_init.lo.go src/thread/pthread_attr_setdetachstate.lo.go src/thread/pthread_attr_setguardsize.lo.go src/thread/pthread_attr_setscope.lo.go src/thread/pthread_attr_setstacksize.lo.go src/thread/pthread_barrier_destroy.lo.go src/thread/pthread_barrier_init.lo.go src/thread/pthread_barrier_wait.lo.go src/thread/pthread_cancel.lo.go src/thread/pthread_cond_broadcast.lo.go src/thread/pthread_cond_destroy.lo.go src/thread/pthread_cond_init.lo.go src/thread/pthread_cond_signal.lo.go src/thread/pthread_cond_timedwait.lo.go src/thread/pthread_cond_wait.lo.go src/thread/pthread_create.lo.go src/thread/pthread_detach.lo.go src/thread/pthread_equal.lo.go src/thread/pthread_getspecific.lo.go src/thread/pthread_join.lo.go src/thread/pthread_key_create.lo.go src/thread/pthread_key_delete.lo.go src/thread/pthread_kill.lo.go src/thread/pthread_mutex_destroy.lo.go src/thread/pthread_mutex_init.lo.go src/thread/pthread_mutex_lock.lo.go src/thread/pthread_mutex_timedlock.lo.go src/thread/pthread_mutex_trylock.lo.go src/thread/pthread_mutex_unlock.lo.go src/thread/pthread_mutexattr_destroy.lo.go src/thread/pthread_mutexattr_gettype.lo.go src/thread/pthread_mutexattr_init.lo.go src/thread/pthread_mutexattr_settype.lo.go src/thread/pthread_once.lo.go src/thread/pthread_rwlock_destroy.lo.go src/thread/pthread_rwlock_init.lo.go src/thread/pthread_rwlock_rdlock.lo.go src/thread/pthread_rwlock_timedrdlock.lo.go src/thread/pthread_rwlock_timedwrlock.lo.go src/thread/pthread_rwlock_tryrdlock.lo.go src/thread/pthread_rwlock_trywrlock.lo.go src/thread/pthread_rwlock_unlock.lo.go src/thread/pthread_rwlock_wrlock.lo.go src/thread/pthread_self.lo.go src/thread/pthread_setcancelstate.lo.go src/thread/pthread_setcanceltype.lo.go src/thread/pthread_setspecific.lo.go src/thread/pthread_spin_destroy.lo.go src/thread/pthread_spin_init.lo.go src/thread/pthread_spin_lock.lo.go src/thread/pthread_spin_trylock.lo.go src/thread/pthread_spin_unlock.lo.go src/thread/pthread_testcancel.lo.go src/time/__asctime.lo.go src/time/__time_to_tm.lo.go src/time/__tm_to_time.lo.go src/time/asctime.lo.go src/time/asctime_r.lo.go src/time/clock.lo.go src/time/clock_gettime.lo.go src/time/ctime.lo.go src/time/ctime_r.lo.go src/time/difftime.lo.go src/time/gettimeofday.lo.go src/time/gmtime.lo.go src/time/gmtime_r.lo.go src/time/localtime.lo.go src/time/localtime_r.lo.go src/time/mktime.lo.go src/time/nanosleep.lo.go src/time/strftime.lo.go src/time/strptime.lo.go src/time/time.lo.go src/time/times.lo.go src/time/tzset.lo.go src/time/utime.lo.go src/unistd/_exit.lo.go src/unistd/access.lo.go src/unistd/alarm.lo.go src/unistd/chdir.lo.go src/unistd/chown.lo.go src/unistd/close.lo.go src/unistd/ctermid.lo.go src/unistd/dup.lo.go src/unistd/dup2.lo.go src/unistd/faccessat.lo.go src/unistd/fchdir.lo.go src/unistd/fchown.lo.go src/unistd/fchownat.lo.go src/unistd/fdatasync.lo.go src/unistd/fsync.lo.go src/unistd/ftruncate.lo.go src/unistd/getcwd.lo.go src/unistd/getegid.lo.go src/unistd/geteuid.lo.go src/unistd/getgid.lo.go src/unistd/getgroups.lo.go src/unistd/gethostname.lo.go src/unistd/getlogin.lo.go src/unistd/getlogin_r.lo.go src/unistd/getpgid.lo.go src/unistd/getpgrp.lo.go src/unistd/getpid.lo.go src/unistd/getppid.lo.go src/unistd/getsid.lo.go src/unistd/getuid.lo.go src/unistd/isatty.lo.go src/unistd/lchown.lo.go src/unistd/link.lo.go src/unistd/linkat.lo.go src/unistd/lseek.lo.go src/unistd/nice.lo.go src/unistd/pause.lo.go src/unistd/pipe.lo.go src/unistd/pread.lo.go src/unistd/pwrite.lo.go src/unistd/read.lo.go src/unistd/readlink.lo.go src/unistd/readlinkat.lo.go src/unistd/readv.lo.go src/unistd/renameat.lo.go src/unistd/rmdir.lo.go src/unistd/setegid.lo.go src/unistd/seteuid.lo.go src/unistd/setgid.lo.go src/unistd/setpgid.lo.go src/unistd/setpgrp.lo.go src/unistd/setregid.lo.go src/unistd/setreuid.lo.go src/unistd/setsid.lo.go src/unistd/setuid.lo.go src/unistd/sleep.lo.go src/unistd/symlink.lo.go src/unistd/symlinkat.lo.go src/unistd/sync.lo.go src/unistd/tcgetpgrp.lo.go src/unistd/tcsetpgrp.lo.go src/unistd/truncate.lo.go src/unistd/ttyname.lo.go src/unistd/ttyname_r.lo.go src/unistd/ualarm.lo.go src/unistd/unlink.lo.go src/unistd/unlinkat.lo.go src/unistd/usleep.lo.go src/unistd/write.lo.go src/unistd/writev.lo.go', DO NOT EDIT..
 
 //go:build linux && 386
 // +build linux,386
@@ -2474,28 +2474,24 @@ const m_F_SETLKW = 14
 const m_O_LARGEFILE = 32768
 const m___NR_fcntl64 = 221
 
-func x_fcntl(tls *TLS, fd int32, _cmd int32, va uintptr) (r1 int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*int32)(unsafe.Pointer(bp)) = _cmd
+func x_fcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r1 int32) {
 	var ap uintptr
 	var arg, r int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	arg = *(*int32)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
-	_ = 0
-	if *(*int32)(unsafe.Pointer(bp)) == int32(m_F_SETFL) {
+	ap = va
+	arg = VaInt32(&ap)
+	_ = ap
+	if cmd == int32(m_F_SETFL) {
 		arg |= int32(m_O_LARGEFILE)
 	}
-	if *(*int32)(unsafe.Pointer(bp)) == int32(m_F_SETLKW) {
+	if cmd == int32(m_F_SETLKW) {
 		if x___libc.Fcancelpt != 0 {
 			(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 			_ = 0
 		}
 		_ = Int32FromInt32(0)
 	}
-	r = _syscall3(tls, int32(m___NR_fcntl64), fd, *(*int32)(unsafe.Pointer(bp)), arg)
-	if *(*int32)(unsafe.Pointer(bp)) == int32(m_F_SETLKW) {
+	r = _syscall3(tls, int32(m___NR_fcntl64), fd, cmd, arg)
+	if cmd == int32(m_F_SETLKW) {
 		if x___libc.Fcancelpt != 0 {
 			(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 			_ = 0
@@ -2507,23 +2503,19 @@ func x_fcntl(tls *TLS, fd int32, _cmd int32, va uintptr) (r1 int32) {
 
 const m___NR_open = 5
 
-func x_open(tls *TLS, filename uintptr, _flags int32, va uintptr) (r1 int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*int32)(unsafe.Pointer(bp)) = _flags
+func x_open(tls *TLS, filename uintptr, flags int32, va uintptr) (r1 int32) {
 	var ap uintptr
 	var mode uint32
 	var r int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	mode = *(*uint32)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
-	_ = 0
+	ap = va
+	mode = VaUint32(&ap)
+	_ = ap
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
 	}
 	_ = Int32FromInt32(0)
-	r = _syscall3(tls, int32(m___NR_open), int32(filename), *(*int32)(unsafe.Pointer(bp))|int32(m_O_LARGEFILE), int32(mode))
+	r = _syscall3(tls, int32(m___NR_open), int32(filename), flags|int32(m_O_LARGEFILE), int32(mode))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
@@ -2534,23 +2526,19 @@ func x_open(tls *TLS, filename uintptr, _flags int32, va uintptr) (r1 int32) {
 
 const m___NR_openat = 295
 
-func x_openat(tls *TLS, fd int32, filename uintptr, _flags int32, va uintptr) (r1 int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*int32)(unsafe.Pointer(bp)) = _flags
+func x_openat(tls *TLS, fd int32, filename uintptr, flags int32, va uintptr) (r1 int32) {
 	var ap uintptr
 	var mode uint32
 	var r int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	mode = *(*uint32)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
-	_ = 0
+	ap = va
+	mode = VaUint32(&ap)
+	_ = ap
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, int32(1))
 		_ = 0
 	}
 	_ = Int32FromInt32(0)
-	r = _syscall4(tls, int32(m___NR_openat), fd, int32(filename), *(*int32)(unsafe.Pointer(bp))|int32(m_O_LARGEFILE), int32(mode))
+	r = _syscall4(tls, int32(m___NR_openat), fd, int32(filename), flags|int32(m_O_LARGEFILE), int32(mode))
 	if x___libc.Fcancelpt != 0 {
 		(*(*func(*TLS, int32))(unsafe.Pointer(&struct{ uintptr }{x___libc.Fcancelpt})))(tls, 0)
 		_ = 0
@@ -2638,17 +2626,15 @@ type Tsembuf = struct {
 	Fsem_flg int16
 }
 
-func x_semctl(tls *TLS, id int32, num int32, _cmd int32, va uintptr) (r int32) {
+func x_semctl(tls *TLS, id int32, num int32, cmd int32, va uintptr) (r int32) {
 	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(8)
-	*(*int32)(unsafe.Pointer(bp)) = _cmd
 	var ap uintptr
-	var _ /* arg at bp+4 */ int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	*(*int32)(unsafe.Pointer(bp + 4)) = *(*int32)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
-	_ = 0
-	return _syscall5(tls, int32(m___NR_ipc), int32(m_IPCOP_semctl), id, num, *(*int32)(unsafe.Pointer(bp))|int32(0x100), int32(bp+4))
+	var _ /* arg at bp+0 */ int32
+	ap = va
+	*(*int32)(unsafe.Pointer(bp)) = VaInt32(&ap)
+	_ = ap
+	return _syscall5(tls, int32(m___NR_ipc), int32(m_IPCOP_semctl), id, num, cmd|int32(0x100), int32(bp))
 }
 
 const m_IPCOP_semget = 2
@@ -3188,19 +3174,15 @@ func x_mount(tls *TLS, special uintptr, dir uintptr, fstype uintptr, flags uint3
 
 const m___NR_prctl = 172
 
-func x_prctl(tls *TLS, _op int32, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*int32)(unsafe.Pointer(bp)) = _op
+func x_prctl(tls *TLS, op int32, va uintptr) (r int32) {
 	var ap uintptr
 	var i int32
 	var x [4]uint32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
+	ap = va
 	for i = 0; i < int32(4); i++ {
-		ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		x[i] = *(*uint32)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+		x[i] = VaUint32(&ap)
 	}
-	return _syscall5(tls, int32(m___NR_prctl), *(*int32)(unsafe.Pointer(bp)), int32(x[0]), int32(x[int32(1)]), int32(x[int32(2)]), int32(x[int32(3)]))
+	return _syscall5(tls, int32(m___NR_prctl), op, int32(x[0]), int32(x[int32(1)]), int32(x[int32(2)]), int32(x[int32(3)]))
 }
 
 const m_ENOSYS = 38
@@ -28657,16 +28639,12 @@ type Twinsize = struct {
 	Fws_ypixel uint16
 }
 
-func x_ioctl(tls *TLS, fd int32, _req int32, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*int32)(unsafe.Pointer(bp)) = _req
+func x_ioctl(tls *TLS, fd int32, req int32, va uintptr) (r int32) {
 	var ap, arg uintptr
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	arg = *(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
-	_ = 0
-	return _syscall3(tls, int32(m___NR_ioctl), fd, *(*int32)(unsafe.Pointer(bp)), int32(arg))
+	ap = va
+	arg = VaUintptr(&ap)
+	_ = ap
+	return _syscall3(tls, int32(m___NR_ioctl), fd, req, int32(arg))
 }
 
 const m_EACCES = 13
@@ -29129,15 +29107,14 @@ func x_openlog(tls *TLS, ident uintptr, opt int32, facility int32) {
 	*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&_lock4)))) = 0
 }
 
-func x_syslog(tls *TLS, priority int32, _message uintptr, va uintptr) {
+func x_syslog(tls *TLS, priority int32, message uintptr, va uintptr) {
 	bp := tls.Alloc(232) /* tlsAllocs 208 maxVaListSize 16 */
 	defer tls.Free(232)
-	*(*uintptr)(unsafe.Pointer(bp)) = _message
 	var ap uintptr
-	var _ /* now at bp+160 */ int32
-	var _ /* sa at bp+4 */ Tsigaction
-	var _ /* timebuf at bp+144 */ [16]int8
-	var _ /* tm at bp+164 */ Ttm
+	var _ /* now at bp+156 */ int32
+	var _ /* sa at bp+0 */ Tsigaction
+	var _ /* timebuf at bp+140 */ [16]int8
+	var _ /* tm at bp+160 */ Ttm
 	//const char *fmt, *ident, *sep;
 	//int i;
 	if !(_log_mask&(Int32FromInt32(1)<<(priority&Int32FromInt32(7))) != 0) || priority & ^Int32FromInt32(0x3ff) != 0 {
@@ -29157,17 +29134,17 @@ func x_syslog(tls *TLS, priority int32, _message uintptr, va uintptr) {
 		*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&_lock4)))) = 0
 		return
 	}
-	x_memset(tls, bp+4, 0, uint32(140))
-	*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp + 4))).F__sa_handler)))) = UintptrFromInt32(1)
-	if x___sigaction(tls, int32(m_SIGPIPE), bp+4, bp+4) < 0 {
+	x_memset(tls, bp, 0, uint32(140))
+	*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).F__sa_handler)))) = UintptrFromInt32(1)
+	if x___sigaction(tls, int32(m_SIGPIPE), bp, bp) < 0 {
 		// we must abandon logging or we might cause SIGPIPE
 		*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&_lock4)))) = 0
 		return
 	}
-	*(*int32)(unsafe.Pointer(bp + 160)) = x_time(tls, UintptrFromInt32(0))
-	x_gmtime_r(tls, bp+160, bp+164)
-	x_strftime(tls, bp+144, uint32(16), ts+252, bp+164)
-	x_fprintf(tls, _log_f, ts+261, VaList(bp+216, priority, bp+144))
+	*(*int32)(unsafe.Pointer(bp + 156)) = x_time(tls, UintptrFromInt32(0))
+	x_gmtime_r(tls, bp+156, bp+160)
+	x_strftime(tls, bp+140, uint32(16), ts+252, bp+160)
+	x_fprintf(tls, _log_f, ts+261, VaList(bp+216, priority, bp+140))
 	if _log_ident != 0 {
 		x_fprintf(tls, _log_f, ts+15, VaList(bp+216, _log_ident))
 	}
@@ -29177,14 +29154,14 @@ func x_syslog(tls *TLS, priority int32, _message uintptr, va uintptr) {
 	if _log_ident != 0 {
 		x_fprintf(tls, _log_f, ts+274, 0)
 	}
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	x_vfprintf(tls, _log_f, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	x_vfprintf(tls, _log_f, message, ap)
+	_ = ap
 	x_fputc(tls, 0, _log_f)
 	x_fflush(tls, _log_f)
 	// Note: LOG_CONS is not supported because it is annoying!!
 	// syslogd will send messages to console if it deems them appropriate!
-	x___sigaction(tls, int32(m_SIGPIPE), bp+4, UintptrFromInt32(0))
+	x___sigaction(tls, int32(m_SIGPIPE), bp, UintptrFromInt32(0))
 	*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&_lock4)))) = 0
 }
 
@@ -29231,16 +29208,12 @@ func x_mprotect(tls *TLS, addr uintptr, len1 uint32, prot int32) (r int32) {
 
 const m___NR_mremap = 163
 
-func x___mremap(tls *TLS, old_addr uintptr, old_len uint32, new_len uint32, _flags int32, va uintptr) (r uintptr) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*int32)(unsafe.Pointer(bp)) = _flags
+func x___mremap(tls *TLS, old_addr uintptr, old_len uint32, new_len uint32, flags int32, va uintptr) (r uintptr) {
 	var ap, new_addr uintptr
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	new_addr = *(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
-	_ = 0
-	return uintptr(_syscall5(tls, int32(m___NR_mremap), int32(old_addr), int32(old_len), int32(new_len), *(*int32)(unsafe.Pointer(bp)), int32(new_addr)))
+	ap = va
+	new_addr = VaUintptr(&ap)
+	_ = ap
+	return uintptr(_syscall5(tls, int32(m___NR_mremap), int32(old_addr), int32(old_len), int32(new_len), flags, int32(new_addr)))
 }
 
 const m___NR_msync = 144
@@ -32795,94 +32768,69 @@ func x_srandom(tls *TLS, seed uint32) {
 	return
 }
 
-func x_execl(tls *TLS, _path uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _path
+func x_execl(tls *TLS, path uintptr, va uintptr) (r int32) {
 	var ap, argv uintptr
 	var argc, i int32
 	var v1 uint32
 	defer func() { x_realloc(tls, argv, 0) }()
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	for argc = 0; ; argc++ {
-		ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		if !(*(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1))))) != 0) {
-			break
-		}
+	ap = va
+	for argc = 0; VaUintptr(&ap) != 0; argc++ {
 	}
-	_ = 0
+	_ = ap
 	{
 		v1 = uint32(argc+int32(1)) * 4
 		argv = x_realloc(tls, argv, v1)
-		ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
+		ap = va
 		for i = 0; i < argc; i++ {
-			ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-			*(*uintptr)(unsafe.Add(unsafe.Pointer(argv), i*4)) = *(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+			*(*uintptr)(unsafe.Add(unsafe.Pointer(argv), i*4)) = VaUintptr(&ap)
 		}
 		*(*uintptr)(unsafe.Add(unsafe.Pointer(argv), i*4)) = UintptrFromInt32(0)
-		return x_execv(tls, *(*uintptr)(unsafe.Pointer(bp)), argv)
+		return x_execv(tls, path, argv)
 	}
 	return r
 }
 
-func x_execle(tls *TLS, _path uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _path
+func x_execle(tls *TLS, path uintptr, va uintptr) (r int32) {
 	var ap, argv, envp uintptr
 	var argc, i int32
 	var v1 uint32
 	defer func() { x_realloc(tls, argv, 0) }()
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	for argc = 0; ; argc++ {
-		ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		if !(*(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1))))) != 0) {
-			break
-		}
+	ap = va
+	for argc = 0; VaUintptr(&ap) != 0; argc++ {
 	}
-	_ = 0
+	_ = ap
 	{
 		v1 = uint32(argc+int32(1)) * 4
 		argv = x_realloc(tls, argv, v1)
-		ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
+		ap = va
 		for i = 0; i < argc; i++ {
-			ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-			*(*uintptr)(unsafe.Add(unsafe.Pointer(argv), i*4)) = *(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+			*(*uintptr)(unsafe.Add(unsafe.Pointer(argv), i*4)) = VaUintptr(&ap)
 		}
 		*(*uintptr)(unsafe.Add(unsafe.Pointer(argv), i*4)) = UintptrFromInt32(0)
-		ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		envp = *(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
-		return x_execve(tls, *(*uintptr)(unsafe.Pointer(bp)), argv, envp)
+		envp = VaUintptr(&ap)
+		return x_execve(tls, path, argv, envp)
 	}
 	return r
 }
 
-func x_execlp(tls *TLS, _file uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _file
+func x_execlp(tls *TLS, file uintptr, va uintptr) (r int32) {
 	var ap, argv uintptr
 	var argc, i int32
 	var v1 uint32
 	defer func() { x_realloc(tls, argv, 0) }()
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	for argc = 0; ; argc++ {
-		ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		if !(*(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1))))) != 0) {
-			break
-		}
+	ap = va
+	for argc = 0; VaUintptr(&ap) != 0; argc++ {
 	}
-	_ = 0
+	_ = ap
 	{
 		v1 = uint32(argc+int32(1)) * 4
 		argv = x_realloc(tls, argv, v1)
-		ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
+		ap = va
 		for i = 0; i < argc; i++ {
-			ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-			*(*uintptr)(unsafe.Add(unsafe.Pointer(argv), i*4)) = *(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+			*(*uintptr)(unsafe.Add(unsafe.Pointer(argv), i*4)) = VaUintptr(&ap)
 		}
 		*(*uintptr)(unsafe.Add(unsafe.Pointer(argv), i*4)) = UintptrFromInt32(0)
-		return x_execvp(tls, *(*uintptr)(unsafe.Pointer(bp)), argv)
+		return x_execvp(tls, file, argv)
 	}
 	return r
 }
@@ -38742,12 +38690,10 @@ func _arg_n(tls *TLS, ap uintptr, n uint32) (r uintptr) {
 	var i uint32
 	ap2 = ap
 	for i = n; i > uint32(1); i-- {
-		ap2 = ap2 + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		_ = *(*uintptr)(unsafe.Pointer(ap2 - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+		_ = VaUintptr(&ap2)
 	}
-	ap2 = ap2 + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	p = *(*uintptr)(unsafe.Pointer(ap2 - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
-	_ = 0
+	p = VaUintptr(&ap2)
+	_ = ap2
 	return p
 }
 
@@ -38826,8 +38772,7 @@ _3:
 		dest = UintptrFromInt32(0)
 		p += 4
 	} else if mode == int32(1) {
-		ap = ap + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		dest = *(*uintptr)(unsafe.Pointer(ap - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+		dest = VaUintptr(&ap)
 	}
 	if !(*(*int32)(unsafe.Pointer(p)) != 0) {
 		goto fmt_fail
@@ -39738,15 +39683,12 @@ func x___underflow(tls *TLS, f uintptr) (r int32) {
 	return int32(*(*uint8)(unsafe.Pointer((*TFILE)(unsafe.Pointer(f)).Frpos)))
 }
 
-func x_asprintf(tls *TLS, s uintptr, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_asprintf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vasprintf(tls, s, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vasprintf(tls, s, fmt, ap)
+	_ = ap
 	return ret
 }
 
@@ -39762,15 +39704,12 @@ func x_clearerr(tls *TLS, f uintptr) {
 	*(*int32)(unsafe.Pointer(f + 76)) = 0
 }
 
-func x_dprintf(tls *TLS, fd int32, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_dprintf(tls *TLS, fd int32, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vdprintf(tls, fd, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vdprintf(tls, fd, fmt, ap)
+	_ = ap
 	return ret
 }
 
@@ -40120,15 +40059,12 @@ func x_fopen(tls *TLS, filename uintptr, mode uintptr) (r uintptr) {
 	return uintptr(0)
 }
 
-func x_fprintf(tls *TLS, f uintptr, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_fprintf(tls *TLS, f uintptr, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vfprintf(tls, f, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vfprintf(tls, f, fmt, ap)
+	_ = ap
 	return ret
 }
 
@@ -40340,15 +40276,12 @@ fail:
 	return UintptrFromInt32(0)
 }
 
-func x_fscanf(tls *TLS, f uintptr, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_fscanf(tls *TLS, f uintptr, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vfscanf(tls, f, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vfscanf(tls, f, fmt, ap)
+	_ = ap
 	return ret
 }
 
@@ -40508,15 +40441,12 @@ func x_fwrite(tls *TLS, src uintptr, size uint32, nmemb uint32, f uintptr) (r ui
 	return l / size
 }
 
-func x_fwscanf(tls *TLS, f uintptr, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_fwscanf(tls *TLS, f uintptr, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vfwscanf(tls, f, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vfwscanf(tls, f, fmt, ap)
+	_ = ap
 	return ret
 }
 
@@ -40724,15 +40654,12 @@ func x_popen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
 	return f
 }
 
-func x_printf(tls *TLS, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_printf(tls *TLS, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vprintf(tls, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vprintf(tls, fmt, ap)
+	_ = ap
 	return ret
 }
 
@@ -40819,15 +40746,12 @@ func x_rewind(tls *TLS, f uintptr) {
 	x_fseek(tls, f, 0, m_SEEK_SET)
 }
 
-func x_scanf(tls *TLS, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_scanf(tls *TLS, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vscanf(tls, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vscanf(tls, fmt, ap)
+	_ = ap
 	return ret
 }
 
@@ -40856,39 +40780,30 @@ func x_setvbuf(tls *TLS, f uintptr, buf uintptr, type1 int32, size uint32) (r in
 	return 0
 }
 
-func x_snprintf(tls *TLS, s uintptr, n uint32, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_snprintf(tls *TLS, s uintptr, n uint32, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vsnprintf(tls, s, n, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vsnprintf(tls, s, n, fmt, ap)
+	_ = ap
 	return ret
 }
 
-func x_sprintf(tls *TLS, s uintptr, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_sprintf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vsprintf(tls, s, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vsprintf(tls, s, fmt, ap)
+	_ = ap
 	return ret
 }
 
-func x_sscanf(tls *TLS, s uintptr, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_sscanf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vsscanf(tls, s, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vsscanf(tls, s, fmt, ap)
+	_ = ap
 	return ret
 }
 
@@ -40922,15 +40837,12 @@ func init() {
 	*(*uintptr)(unsafe.Add(p, 120)) = __ccgo_fp(x___stdio_close)
 }
 
-func x_swscanf(tls *TLS, s uintptr, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_swscanf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vswscanf(tls, s, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vswscanf(tls, s, fmt, ap)
+	_ = ap
 	return ret
 }
 
@@ -41176,7 +41088,7 @@ func x_vasprintf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
 	}
 	ap2 = ap
 	l = x_vsnprintf(tls, a, uint32(240), fmt, ap2)
-	_ = 0
+	_ = ap2
 	if uint32(l) < uint32(240) {
 		b = x_realloc(tls, a, uint32(l)+uint32(1))
 		if b != 0 {
@@ -41346,35 +41258,25 @@ func _pop_arg(tls *TLS, arg uintptr, type1 int32, ap uintptr) {
 	}
 	switch type1 {
 	case int32(_PTR):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		*(*uintptr)(unsafe.Pointer(arg)) = *(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+		*(*uintptr)(unsafe.Pointer(arg)) = VaUintptr(&*(*uintptr)(unsafe.Pointer(ap)))
 	case int32(_INT):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(*(*int32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1))))))
+		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt32(&*(*uintptr)(unsafe.Pointer(ap))))
 	case int32(_UINT):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(*(*uint32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1))))))
+		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaUint32(&*(*uintptr)(unsafe.Pointer(ap))))
 	case int32(_ULLONG):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(8)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		(*Targ)(unsafe.Pointer(arg)).Fi = *(*uint64)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(8)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+		(*Targ)(unsafe.Pointer(arg)).Fi = VaUint64(&*(*uintptr)(unsafe.Pointer(ap)))
 	case int32(_SHORT):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(int16(*(*int32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))))
+		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(int16(VaInt32(&*(*uintptr)(unsafe.Pointer(ap)))))
 	case int32(_USHORT):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(uint16(*(*int32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))))
+		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(uint16(VaInt32(&*(*uintptr)(unsafe.Pointer(ap)))))
 	case int32(_CHAR):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(int8(*(*int32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))))
+		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(int8(VaInt32(&*(*uintptr)(unsafe.Pointer(ap)))))
 	case int32(_UCHAR):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(uint8(*(*int32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))))
+		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(uint8(VaInt32(&*(*uintptr)(unsafe.Pointer(ap)))))
 	case int32(_DBL):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(8)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		*(*float64)(unsafe.Pointer(arg)) = *(*float64)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(8)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+		*(*float64)(unsafe.Pointer(arg)) = VaFloat64(&*(*uintptr)(unsafe.Pointer(ap)))
 	case int32(_LDBL):
-		*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(8)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-		*(*float64)(unsafe.Pointer(arg)) = *(*float64)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(8)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+		*(*float64)(unsafe.Pointer(arg)) = VaFloat64(&*(*uintptr)(unsafe.Pointer(ap)))
 	}
 }
 
@@ -42007,8 +41909,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 			} else {
 				if !(l10n != 0) {
 					if f != 0 {
-						*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-						v1 = *(*int32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+						v1 = VaInt32(&*(*uintptr)(unsafe.Pointer(ap)))
 					} else {
 						v1 = 0
 					}
@@ -42038,8 +41939,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 			} else {
 				if !(l10n != 0) {
 					if f != 0 {
-						*(*uintptr)(unsafe.Pointer(ap)) = *(*uintptr)(unsafe.Pointer(ap)) + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-						v3 = *(*int32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(ap)) - uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))))
+						v3 = VaInt32(&*(*uintptr)(unsafe.Pointer(ap)))
 					} else {
 						v3 = 0
 					}
@@ -42369,7 +42269,7 @@ func x_vfprintf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
 	}
 	ret = _printf_core(tls, f, fmt, bp, bp+40, bp+4)
 	*(*int32)(unsafe.Pointer(f + 76)) = 0
-	_ = 0
+	_ = *(*uintptr)(unsafe.Pointer(bp))
 	return ret
 }
 
@@ -42552,15 +42452,12 @@ func x_vwscanf(tls *TLS, fmt uintptr, ap uintptr) (r int32) {
 	return x_vfwscanf(tls, Xstdin, fmt, ap)
 }
 
-func x_wscanf(tls *TLS, _fmt uintptr, va uintptr) (r int32) {
-	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(8)
-	*(*uintptr)(unsafe.Pointer(bp)) = _fmt
+func x_wscanf(tls *TLS, fmt uintptr, va uintptr) (r int32) {
 	var ap uintptr
 	var ret int32
-	ap = bp + uintptr((Uint32FromInt64(4)+Uint32FromInt64(4)-Uint32FromInt32(1)) & ^(Uint32FromInt64(4)-Uint32FromInt32(1)))
-	ret = x_vwscanf(tls, *(*uintptr)(unsafe.Pointer(bp)), ap)
-	_ = 0
+	ap = va
+	ret = x_vwscanf(tls, fmt, ap)
+	_ = ap
 	return ret
 }
 

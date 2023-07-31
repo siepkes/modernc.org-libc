@@ -133,6 +133,7 @@ func main() {
 			"--prefix-tagged-union=T",
 			"--prefix-typename=T",
 			"--prefix-undefined=_",
+			"-D__CCGO__",
 			"-exec-cc", cCompiler,
 			"-extended-errors",
 			"-ignore-asm-errors",               //TODO- it is possible

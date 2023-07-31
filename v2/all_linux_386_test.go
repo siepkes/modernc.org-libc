@@ -139,8 +139,6 @@ var (
 )
 
 func TestSprintf(t *testing.T) {
-	t.Skip("TODO FAIL")
-
 	tls := NewTLS()
 
 	defer tls.Close()
