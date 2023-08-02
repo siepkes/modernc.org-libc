@@ -467,7 +467,7 @@ func Xfread(tls *TLS, ptr uintptr, size, nmemb uint32, stream uintptr) uint32 {
 // either NULL, or a unique pointer value that can later be successfully passed
 // to free().
 func Xmalloc(tls *TLS, n uint32) (r uintptr) {
-	return x_malloc(tls, n)
+	return _malloc(tls, n)
 }
 
 // X__builtin_malloc is equivalent to Xmalloc.
@@ -480,7 +480,7 @@ func X__builtin_malloc(tls *TLS, n uint32) (r uintptr) {
 // Otherwise, or if Xfree(ptr) has already been called before, undefined
 // behavior occurs. If ptr is NULL, no operation is performed.
 func Xfree(tls *TLS, p uintptr) {
-	x_free(tls, p)
+	_free(tls, p)
 }
 
 // The X__builtin_free is equivalent to Xfree.
@@ -499,7 +499,7 @@ func X__builtin_free(tls *TLS, p uintptr) {
 //
 //	Xmalloc(nmemb * size)
 func Xcalloc(tls *TLS, nmemb, size uint32) (r uintptr) {
-	return x_calloc(tls, nmemb, size)
+	return _calloc(tls, nmemb, size)
 }
 
 // Xprintf produces output according to a format. It writes output to stdout,
@@ -735,7 +735,7 @@ func Xtolower(tls *TLS, c int32) (r int32) {
 // an earlier call to Xmalloc(), Xcalloc(), or Xrealloc(). If the area pointed
 // to was moved, a Xfree(ptr) is done.
 func Xrealloc(tls *TLS, ptr uintptr, size uint32) (r uintptr) {
-	return x_realloc(tls, ptr, size)
+	return _realloc(tls, ptr, size)
 }
 
 // Xfabs returns the absolute value of the floating-point number x.
@@ -1372,7 +1372,6 @@ func Xstrstr(tls *TLS, haystack uintptr, needle uintptr) (r uintptr) {
 // variable name, and returns a pointer to the corresponding value string.
 func Xgetenv(tls *TLS, name uintptr) (r uintptr) {
 	r = x_getenv(tls, name)
-	trc("getenv(%q): %q", GoString(name), GoString(r))
 	return r
 }
 
@@ -1689,7 +1688,18 @@ func _scalbnf(tls *TLS, x float32, n int32) float32 {
 }
 
 func _rint(tls *TLS, x float64) float64 {
-	panic(todo(""))
+	switch {
+	case x == 0: // also +0 and -0
+		return 0
+	case math.IsInf(x, 0), math.IsNaN(x):
+		return x
+	case x >= math.MinInt64 && x <= math.MaxInt64 && float64(int64(x)) == x:
+		return x
+	case x >= 0:
+		return math.Floor(x + 0.5)
+	default:
+		return math.Ceil(x - 0.5)
+	}
 }
 
 func _rintf(tls *TLS, x float32) float32 {
@@ -1697,17 +1707,55 @@ func _rintf(tls *TLS, x float32) float32 {
 }
 
 func _floor(t *TLS, x float64) float64 {
-	panic(todo(""))
+	return math.Floor(x)
 }
 
 func _floorf(t *TLS, x float32) float32 {
-	panic(todo(""))
+	return float32(math.Floor(float64(x)))
 }
 
 func _ceil(t *TLS, x float64) float64 {
-	panic(todo(""))
+	return math.Ceil(x)
 }
 
 func _ceilf(t *TLS, x float32) float32 {
-	panic(todo(""))
+	return float32(math.Ceil(float64(x)))
+}
+
+func _free(tls *TLS, p uintptr) {
+	privateFree(p)
+}
+
+func _calloc(tls *TLS, m uint32, n uint32) (r uintptr) {
+	if sz := int(m * n); sz >= 0 {
+		if r, err := privateCalloc(sz); err == nil {
+			return r
+		}
+	}
+
+	return 0
+}
+
+func _realloc(tls *TLS, p uintptr, n uint32) (r uintptr) {
+	if int(n) >= 0 {
+		if r, err := privateRealloc(p, int(n)); err == nil {
+			return r
+		}
+	}
+
+	return 0
+}
+
+func ___simple_malloc(tls *TLS, n uint32) (r uintptr) {
+	return _malloc(tls, n)
+}
+
+func _malloc(tls *TLS, n uint32) (r uintptr) {
+	if int(n) >= 0 {
+		if r, err := privateMalloc(int(n)); err == nil {
+			return r
+		}
+	}
+
+	return 0
 }

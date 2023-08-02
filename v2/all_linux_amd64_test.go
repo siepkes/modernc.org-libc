@@ -18,10 +18,6 @@ func TestMain(m *testing.M) {
 	os.Exit(rc)
 }
 
-func Test(t *testing.T) {
-	t.Logf("TODO")
-}
-
 var (
 	testAtomicCASInt32  int32
 	testAtomicCASUint64 uint64

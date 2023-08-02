@@ -18,10 +18,6 @@ func TestMain(m *testing.M) {
 	os.Exit(rc)
 }
 
-func Test(t *testing.T) {
-	t.Logf("TODO")
-}
-
 var (
 	testAtomicCASInt32  int32
 	testAtomicCASUint64 uint64
@@ -49,27 +45,26 @@ var (
 // 	}
 // }
 
-func TestAtomicCASUintptr(t *testing.T) {
-	t.Skip("TODO")
-	// pp := uintptr(unsafe.Pointer(&testAtomicCASp))
-	// testAtomicCASp = 0
-	// j := a_cas_p(pp, 1, 2)
-	// if testAtomicCASp != 0 || j != 0 {
-	// 	t.Fatal(testAtomicCASp, j)
-	// }
-
-	// if j = a_cas_p(pp, 0, 3); testAtomicCASp != 3 || j != 0 {
-	// 	t.Fatal(testAtomicCASp, j)
-	// }
-
-	// if j = a_cas_p(pp, 4, 5); testAtomicCASp != 3 || j != 3 {
-	// 	t.Fatal(testAtomicCASp, j)
-	// }
-
-	// if j = a_cas_p(pp, 3, 6); testAtomicCASp != 6 || j != 3 {
-	// 	t.Fatal(testAtomicCASp, j)
-	// }
-}
+// func TestAtomicCASUintptr(t *testing.T) {
+// 	// pp := uintptr(unsafe.Pointer(&testAtomicCASp))
+// 	// testAtomicCASp = 0
+// 	// j := a_cas_p(pp, 1, 2)
+// 	// if testAtomicCASp != 0 || j != 0 {
+// 	// 	t.Fatal(testAtomicCASp, j)
+// 	// }
+// 
+// 	// if j = a_cas_p(pp, 0, 3); testAtomicCASp != 3 || j != 0 {
+// 	// 	t.Fatal(testAtomicCASp, j)
+// 	// }
+// 
+// 	// if j = a_cas_p(pp, 4, 5); testAtomicCASp != 3 || j != 3 {
+// 	// 	t.Fatal(testAtomicCASp, j)
+// 	// }
+// 
+// 	// if j = a_cas_p(pp, 3, 6); testAtomicCASp != 6 || j != 3 {
+// 	// 	t.Fatal(testAtomicCASp, j)
+// 	// }
+// }
 
 // func TestAtomicOrInt32(t *testing.T) {
 // 	pi := uintptr(unsafe.Pointer(&testAtomicCASInt32))
@@ -216,7 +211,6 @@ func TestStrtod(t *testing.T) {
 }
 
 func TestRint(t *testing.T) {
-	t.Skip("TODO")
 	tls := NewTLS()
 
 	defer tls.Close()

@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	quota = 1 << 19
+	quota = 128 << 20
 )
 
 var (

@@ -147,6 +147,10 @@ func main() {
 				"-hide", "syscall0,syscall1,syscall2,syscall3,syscall4,syscall5,syscall6",
 				"-hide", "__pthread_self,sqrt,system",
 			)
+			switch goarch {
+			case "386":
+				args = append(args, "-hide", "malloc,calloc,realloc,free,__simple_malloc")
+			}
 			return ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.so"), os.Stdout, os.Stderr, nil).Main()
 		// case "musl-1.2.4":
 		// 	// Arguments when archiving/linking static and dynamic musl libc
