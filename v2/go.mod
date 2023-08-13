@@ -1,6 +1,6 @@
 module modernc.org/libc/v2
 
-go 1.20
+go 1.21.0
 
 require (
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -15,7 +15,7 @@ require (
 	modernc.org/cc/v3 v3.41.0 // indirect
 	modernc.org/cc/v4 v4.11.4 // indirect
 	modernc.org/ccgo/v3 v3.16.14 // indirect
-	modernc.org/ccgo/v4 v4.0.0-20230802191715-12008018c9f8 // indirect
+	modernc.org/ccgo/v4 v4.0.0-20230813174514-cd6bdaeb46f7 // indirect
 	modernc.org/ccorpus2 v1.4.1 // indirect
 	modernc.org/gc/v2 v2.3.0 // indirect
 	modernc.org/libc v1.24.1 // indirect

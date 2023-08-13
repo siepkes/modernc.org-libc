@@ -441,6 +441,17 @@ func Xfmod(tls *TLS, x float64, y float64) (r float64) {
 	return x_fmod(tls, x, y)
 }
 
+// Xvsnprintf() produces output according to a format. Xvsnprintf writes to the
+// character string str.
+func Xvsnprintf(tls *TLS, str uintptr, n uint64, format uintptr, ap uintptr) (r int32) {
+	return x_vsnprintf(tls, str, n, format, ap)
+}
+
+// X__builtin_vsnprintf() is equivalent to Xvsnprintf.
+func X__builtin_vsnprintf(tls *TLS, str uintptr, n uint64, format uintptr, ap uintptr) (r int32) {
+	return Xvsnprintf(tls, str, n, format, ap)
+}
+
 // Xsprintf provides formatted output conversion. Xsprintf writes to the
 // character string str. Upon successful return, this functions returns the
 // number of characters printed (excluding the null byte used to end output to
@@ -1697,4 +1708,20 @@ func Xstrcspn(tls *TLS, s uintptr, reject uintptr) (r uint64) {
 // representation, expressed relative to the user's specified timezone.
 func Xlocaltime(tls *TLS, timep uintptr) (r uintptr) {
 	return x_localtime(tls, timep)
+}
+
+// Xgetopt parses the command-line arguments.
+func Xgetopt(tls *TLS, argc int32, argv uintptr, optstring uintptr) (r int32) {
+	return x_getopt(tls, argc, argv, optstring)
+}
+
+// Xungetc pushes c back to stream, cast to unsigned char, where it is
+// available for subsequent read operations
+func Xungetc(tls *TLS, c int32, stream uintptr) (r int32) {
+	return x_ungetc(tls, c, stream)
+}
+
+// Xfscanf scans input from stream according to format
+func Xfscanf(tls *TLS, stream uintptr, format uintptr, va uintptr) (r int32) {
+	return x_fscanf(tls, stream, format, va)
 }

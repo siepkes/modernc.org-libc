@@ -180,7 +180,15 @@ func main() {
 	})
 	fn := fmt.Sprintf("ccgo_%s_%s.go", goos, goarch)
 	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fn)
-	util.MustShell(true, "sed", "-i", "s/\\<x_stdout\\>/Xstdout/g", fn)
-	util.MustShell(true, "sed", "-i", "s/\\<x_stderr\\>/Xstderr/g", fn)
-	util.MustShell(true, "sed", "-i", "s/\\<x_stdin\\>/Xstdin/g", fn)
+	for _, v := range []string{
+		"optarg",
+		"opterr",
+		"optind",
+		"optopt",
+		"stderr",
+		"stdin",
+		"stdout",
+	} {
+		util.MustShell(true, "sed", "-i", fmt.Sprintf("s/\\<x_%s\\>/X%[1]s/g", v), fn)
+	}
 }

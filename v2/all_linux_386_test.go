@@ -52,15 +52,15 @@ var (
 // 	// if testAtomicCASp != 0 || j != 0 {
 // 	// 	t.Fatal(testAtomicCASp, j)
 // 	// }
-// 
+//
 // 	// if j = a_cas_p(pp, 0, 3); testAtomicCASp != 3 || j != 0 {
 // 	// 	t.Fatal(testAtomicCASp, j)
 // 	// }
-// 
+//
 // 	// if j = a_cas_p(pp, 4, 5); testAtomicCASp != 3 || j != 3 {
 // 	// 	t.Fatal(testAtomicCASp, j)
 // 	// }
-// 
+//
 // 	// if j = a_cas_p(pp, 3, 6); testAtomicCASp != 6 || j != 3 {
 // 	// 	t.Fatal(testAtomicCASp, j)
 // 	// }
