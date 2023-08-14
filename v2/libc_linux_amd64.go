@@ -48,7 +48,6 @@ func Start(main func(*TLS, int32, uintptr) int32) {
 		*(*uintptr)(unsafe.Pointer(p)) = s
 		p += unsafe.Sizeof(uintptr(0))
 	}
-	//TODO SetEnviron(tls, os.Environ())
 	Xexit(tls, main(tls, int32(len(os.Args)), argv))
 }
 
@@ -1082,7 +1081,7 @@ func Xread(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
 	return x_read(tls, fd, buf, count)
 }
 
-// Xabort abort the program.
+// Xabort aborts the program.
 func Xabort(tls *TLS) {
 	x_abort(tls)
 }

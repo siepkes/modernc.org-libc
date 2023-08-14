@@ -111,6 +111,8 @@ func main() {
 		switch extractedArchivePath {
 		case "musl-0.6.0":
 			cCompiler = "cc"
+		case "musl-0.7.0":
+			cCompiler = "cc"
 		case "musl-1.2.4":
 			util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static --disable-optimize", cCompiler, cflags))
 		default:
@@ -142,6 +144,17 @@ func main() {
 		)
 		switch extractedArchivePath {
 		case "musl-0.6.0":
+			args = append(args,
+				"-hide", "a_inc,a_dec,a_swap,a_store,a_ctz_64,a_and_64,a_or_64,a_spin,a_fetch_add,a_cas_p",
+				"-hide", "syscall0,syscall1,syscall2,syscall3,syscall4,syscall5,syscall6",
+				"-hide", "__pthread_self,sqrt,system",
+			)
+			switch goarch {
+			case "386":
+				args = append(args, "-hide", "malloc,calloc,realloc,free,__simple_malloc")
+			}
+			return ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.so"), os.Stdout, os.Stderr, nil).Main()
+		case "musl-0.7.0":
 			args = append(args,
 				"-hide", "a_inc,a_dec,a_swap,a_store,a_ctz_64,a_and_64,a_or_64,a_spin,a_fetch_add,a_cas_p",
 				"-hide", "syscall0,syscall1,syscall2,syscall3,syscall4,syscall5,syscall6",

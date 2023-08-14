@@ -55,6 +55,12 @@ musl-0.6.0:
 musl-0.6.0-dev:
 	GO_GENERATE_ARCHIVE=musl-0.6.0.tar.gz make dev
 
+musl-0.7.0:
+	GO_GENERATE_ARCHIVE=musl-0.7.0.tar.gz make generate
+
+musl-0.7.0-dev:
+	GO_GENERATE_ARCHIVE=musl-0.7.0.tar.gz make dev
+
 test:
 	go test -v -timeout 24h 2>&1 | tee log-test
 	grep -a 'TOTAL\|PASS' log-test || true 2>&1 | tee -a log-test

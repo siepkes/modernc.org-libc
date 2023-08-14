@@ -1028,7 +1028,7 @@ func Xread(tls *TLS, fd int32, buf uintptr, count uint32) (r int32) {
 	return x_read(tls, fd, buf, count)
 }
 
-// Xabort abort the program.
+// Xabort aborts the program.
 func Xabort(tls *TLS) {
 	x_abort(tls)
 }
