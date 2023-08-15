@@ -1761,3 +1761,21 @@ func _malloc(tls *TLS, n uint32) (r uintptr) {
 
 	return 0
 }
+
+// Xisspace checks for white-space characters.
+func Xisspace(tls *TLS, c int32) (r int32) {
+	return x_isspace(tls, c)
+}
+
+// Xsleep causes the calling thread to sleep either the number of real-time
+// seconds specified in 'seconds' have elapsed or until a signal arrives which
+// is not ignored.
+func Xsleep(tls *TLS, seconds uint32) (r uint32) {
+	return x_sleep(tls, seconds)
+}
+
+// Xusleep suspends execution of the calling thread for (at least) usec
+// microseconds.
+func Xusleep(tls *TLS, usec uint32) (r int32) {
+	return x_usleep(tls, usec)
+}
