@@ -10,6 +10,7 @@ import (
 	"math/bits"
 	"os"
 	"os/exec"
+	"runtime"
 	"sync"
 	"sync/atomic"
 	"syscall"
@@ -31,6 +32,7 @@ var (
 
 // Start executes a transpilled main program.
 func Start(main func(*TLS, int32, uintptr) int32) {
+	runtime.LockOSThread()
 	tls := NewTLS()
 	argv := Xcalloc(tls, 1, uint64((len(os.Args)+1)*int(unsafe.Sizeof(uintptr(0)))))
 	if argv == 0 {
@@ -802,8 +804,8 @@ func Xfabsf(tls *TLS, x float32) (r float32) {
 }
 
 // X__assert_fail aborts a program.
-func X__assert_fail(tls *TLS, expr uintptr, file uintptr, line uint32, func1 uintptr) {
-	x___assert_fail(tls, expr, file, int32(line), func1)
+func X__assert_fail(tls *TLS, expr uintptr, file uintptr, line int32, func1 uintptr) {
+	x___assert_fail(tls, expr, file, line, func1)
 }
 
 // Xatoi converts the initial portion of the string pointed to by nptr to int.
@@ -1521,6 +1523,12 @@ func Xisatty(tls *TLS, fd int32) (r int32) {
 	return x_isatty(tls, fd)
 }
 
+// Xisalnum checks for an alphanumeric character; it is equivalent to
+// (Xisalpha(c) || Xisdigit(c)).
+func Xisalnum(tls *TLS, c int32) (r int32) {
+	return x_isalnum(tls, c)
+}
+
 // The atexit() function registers the given function to be called at normal
 // process termination, either via exit(3) or via return from the program's
 // main(). Functions so registered are called in the reverse order of their
@@ -1724,3 +1732,33 @@ func Xungetc(tls *TLS, c int32, stream uintptr) (r int32) {
 func Xfscanf(tls *TLS, stream uintptr, format uintptr, va uintptr) (r int32) {
 	return x_fscanf(tls, stream, format, va)
 }
+
+// Xisspace checks for white-space characters.
+func Xisspace(tls *TLS, c int32) (r int32) {
+	return x_isspace(tls, c)
+}
+
+// Xsleep causes the calling thread to sleep either the number of real-time
+// seconds specified in 'seconds' have elapsed or until a signal arrives which
+// is not ignored.
+func Xsleep(tls *TLS, seconds uint32) (r uint32) {
+	return x_sleep(tls, seconds)
+}
+
+// Xusleep suspends execution of the calling thread for (at least) usec
+// microseconds.
+func Xusleep(tls *TLS, usec int64) (r int32) {
+	return x_usleep(tls, usec)
+}
+
+// // Xpthread_create function  starts a new simulated thread in the calling
+// // process. C threads are modelled by ccgo as Go goroutines.
+// func Xpthread_create(tls *TLS, res uintptr, attr uintptr, entry uintptr, arg uintptr) (r int32) {
+// 	return x_pthread_create(tls, res, attr, entry, arg)
+// }
+//
+// // Xpthread_join function waits for the simulated thread specified by 'thread'
+// // to terminate.
+// func Xpthread_join(tls *TLS, thread uintptr, res uintptr) (r int32) {
+// 	return x_pthread_join(tls, thread, res)
+// }

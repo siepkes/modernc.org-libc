@@ -100,6 +100,7 @@ func main() {
 
 	util.MustUntar(true, tempDir, f, nil)
 	muslRoot := filepath.Join(tempDir, extractedArchivePath)
+	util.MustCopyDir(true, filepath.Join(tempDir, extractedArchivePath), filepath.Join("overlay", extractedArchivePath, "all"), nil)
 	util.MustCopyDir(true, filepath.Join(tempDir, extractedArchivePath), filepath.Join("overlay", extractedArchivePath, goarch), nil)
 	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(muslRoot, "COPYRIGHT"), nil)
 	result := filepath.FromSlash("lib/libc.so.go")
@@ -120,7 +121,12 @@ func main() {
 		}
 		args := []string{os.Args[0]}
 		if dev {
-			args = append(args, "-absolute-paths", "-positions")
+			args = append(
+				args,
+				"-absolute-paths",
+				"-positions",
+				// "-verify-types",
+			)
 		}
 		args = append(args,
 			"--package-name=libc",
@@ -141,6 +147,7 @@ func main() {
 			"-ignore-asm-errors",               //TODO- it is possible
 			"-ignore-unsupported-alignment",    //TODO- only if possible
 			"-ignore-unsupported-atomic-sizes", //TODO- it is possible
+			"-isystem", "",
 		)
 		switch extractedArchivePath {
 		case "musl-0.6.0":
@@ -159,11 +166,14 @@ func main() {
 				"-hide", "a_inc,a_dec,a_swap,a_store,a_ctz_64,a_and_64,a_or_64,a_spin,a_fetch_add,a_cas_p",
 				"-hide", "syscall0,syscall1,syscall2,syscall3,syscall4,syscall5,syscall6",
 				"-hide", "__pthread_self,sqrt,system",
+				"-D__NEED_time_t",
 			)
 			switch goarch {
 			case "386":
 				args = append(args, "-hide", "malloc,calloc,realloc,free,__simple_malloc")
 			}
+			trc("173")                             //TODO-DBG
+			defer func() { trc("174: %v", err) }() //TODO-DBG
 			return ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.so"), os.Stdout, os.Stderr, nil).Main()
 		// case "musl-1.2.4":
 		// 	// Arguments when archiving/linking static and dynamic musl libc
@@ -191,6 +201,12 @@ func main() {
 		}
 		panic("unreachable")
 	})
+	switch goos {
+	case "linux":
+		util.MustCopyDir(true, filepath.Join("include", "musl", goarch), filepath.Join(tempDir, extractedArchivePath, "include"), nil)
+	default:
+		fail(1, "unsupported OS: %s", goos)
+	}
 	fn := fmt.Sprintf("ccgo_%s_%s.go", goos, goarch)
 	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fn)
 	for _, v := range []string{
@@ -204,4 +220,58 @@ func main() {
 	} {
 		util.MustShell(true, "sed", "-i", fmt.Sprintf("s/\\<x_%s\\>/X%[1]s/g", v), fn)
 	}
+}
+
+// origin returns caller's short position, skipping skip frames.
+func origin(skip int) string {
+	pc, fn, fl, _ := runtime.Caller(skip)
+	f := runtime.FuncForPC(pc)
+	var fns string
+	if f != nil {
+		fns = f.Name()
+		if x := strings.LastIndex(fns, "."); x > 0 {
+			fns = fns[x+1:]
+		}
+		if strings.HasPrefix(fns, "func") {
+			num := true
+			for _, c := range fns[len("func"):] {
+				if c < '0' || c > '9' {
+					num = false
+					break
+				}
+			}
+			if num {
+				return origin(skip + 2)
+			}
+		}
+	}
+	return fmt.Sprintf("%s:%d:%s", filepath.Base(fn), fl, fns)
+}
+
+// todo prints and return caller's position and an optional message tagged with TODO. Output goes to stderr.
+func todo(s string, args ...interface{}) string {
+	switch {
+	case s == "":
+		s = fmt.Sprintf(strings.Repeat("%v ", len(args)), args...)
+	default:
+		s = fmt.Sprintf(s, args...)
+	}
+	r := fmt.Sprintf("%s\n\tTODO %s", origin(2), s)
+	// fmt.Fprintf(os.Stderr, "%s\n", r)
+	// os.Stdout.Sync()
+	return r
+}
+
+// trc prints and return caller's position and an optional message tagged with TRC. Output goes to stderr.
+func trc(s string, args ...interface{}) string {
+	switch {
+	case s == "":
+		s = fmt.Sprintf(strings.Repeat("%v ", len(args)), args...)
+	default:
+		s = fmt.Sprintf(s, args...)
+	}
+	r := fmt.Sprintf("%s: TRC %s", origin(2), s)
+	fmt.Fprintf(os.Stderr, "%s\n", r)
+	os.Stderr.Sync()
+	return r
 }

@@ -35,7 +35,7 @@ generate:
 	# go install github.com/mdempsky/unconvert@latest
 	./unconvert.sh
 	go build -v ./...  | tee -a log-generate
-	go test -v ./... 2>&1 | tee -a log-generate
+	go test -v -count=1 ./... 2>&1 | tee -a log-generate
 	git status
 
 dev:
@@ -46,7 +46,7 @@ dev:
 	grep FAIL /tmp/ccgo.log
 	./unconvert.sh
 	go build -v ./...  | tee -a log-generate
-	go test -v ./... 2>&1 | tee -a log-generate
+	go test -v -count=1 ./... 2>&1 | tee -a log-generate
 	git status
 
 musl-0.6.0:
@@ -72,4 +72,5 @@ work:
 	go work init
 	go work use .
 	go work use ../../ccgo/v4
+	go work use ../../ccgo/v3
 	go work use ../../cc/v4

@@ -10,6 +10,7 @@ import (
 	"math/bits"
 	"os"
 	"os/exec"
+	"runtime"
 	"sync"
 	"sync/atomic"
 	"syscall"
@@ -31,6 +32,7 @@ var (
 
 // Start executes a transpilled main program.
 func Start(main func(*TLS, int32, uintptr) int32) {
+	runtime.LockOSThread()
 	tls := NewTLS()
 	argv := Xcalloc(tls, 1, uint32((len(os.Args)+1)*int(unsafe.Sizeof(uintptr(0)))))
 	if argv == 0 {
@@ -749,8 +751,8 @@ func Xfabsf(tls *TLS, x float32) (r float32) {
 }
 
 // X__assert_fail aborts a program.
-func X__assert_fail(tls *TLS, expr uintptr, file uintptr, line uint32, func1 uintptr) {
-	x___assert_fail(tls, expr, file, int32(line), func1)
+func X__assert_fail(tls *TLS, expr uintptr, file uintptr, line int32, func1 uintptr) {
+	x___assert_fail(tls, expr, file, line, func1)
 }
 
 // Xatoi converts the initial portion of the string pointed to by nptr to int.
