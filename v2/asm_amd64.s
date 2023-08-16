@@ -43,3 +43,8 @@ TEXT ·a_and_64(SB),NOSPLIT,$0-16
 	LOCK
 	ANDQ	AX, 0(BX)
 	RET
+
+// static inline void a_spin()
+TEXT ·a_spin(SB),NOSPLIT,$0-0
+	PAUSE
+	RET

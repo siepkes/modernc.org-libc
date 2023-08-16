@@ -171,8 +171,6 @@ func main() {
 			case "386":
 				args = append(args, "-hide", "malloc,calloc,realloc,free,__simple_malloc")
 			}
-			trc("173")                             //TODO-DBG
-			defer func() { trc("174: %v", err) }() //TODO-DBG
 			return ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.so"), os.Stdout, os.Stderr, nil).Main()
 		// case "musl-1.2.4":
 		// 	// Arguments when archiving/linking static and dynamic musl libc

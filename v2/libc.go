@@ -9,10 +9,6 @@
 //
 // A subset of musl v0.7.0, alpha version from 2011, is exported.
 //
-// Only a single instance of TLS exists. All calls to NewTLS return the same
-// instance. As a consequnce, there's no concurrency support yet.  All client
-// calls into libc must return before issuing any other call into libc.
-//
 // # libc API documentation copyright
 //
 // From [Linux man-pages Copyleft]

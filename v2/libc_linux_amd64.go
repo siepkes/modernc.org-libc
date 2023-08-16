@@ -26,8 +26,7 @@ var (
 	allocator   memory.Allocator
 	allocatorMu sync.Mutex
 
-	tid  atomic.Int32 // TLS Go ID
-	tls1 *TLS
+	tid atomic.Int32 // TLS Go ID
 )
 
 // Start executes a transpilled main program.
@@ -71,7 +70,7 @@ func Start(main func(*TLS, int32, uintptr) int32) {
 //		mov $main,%rdi  /* 1st arg: application entry ip */
 //		call __libc_start_main /* musl init will run the program */
 //	.L0:	jmp .L0
-func initLibc() {
+func initLibc(tls *TLS) {
 	var argv []uintptr
 	for _, v := range os.Args {
 		p := mustPrivateCalloc(len(v) + 1)
@@ -95,8 +94,7 @@ func initLibc() {
 	// xor %r8,%r8     /* 5th arg: always 0 */
 	// mov %rdx,%r9    /* 6th arg: ptr to register with atexit() */
 
-	tls1 = newTLS()
-	x___libc_start_main(tls1, 0, int32(len(os.Args)), argvP, 0, 0, 0)
+	x___libc_start_main(tls, 0, int32(len(os.Args)), argvP, 0, 0, 0)
 }
 
 // CString returns a pointer to a zero-terminated version of s. The caller is
@@ -206,25 +204,29 @@ type tlsStack struct {
 
 // TLS emulates thread local storage.
 type TLS struct {
-	fs    uintptr
-	sp    int
-	stack []tlsStack
+	freeFS         uintptr
+	fs             uintptr // *T__pthread
+	sp             int
+	stack          []tlsStack
+	threadFuncWait chan struct{}
 
 	ID int32
 }
 
 // NewTLS returns a newly created TLS that must be eventually closed to prevent
 // resource leaks.
-func NewTLS() *TLS {
-	initLibcOnce.Do(initLibc)
-	return tls1 //TODO
-}
-
-func newTLS() *TLS {
-	t := &TLS{
+func NewTLS() (r *TLS) {
+	r = &TLS{
 		ID: tid.Add(1),
+		fs: mustPrivateMalloc(int(unsafe.Sizeof(T__pthread{}))),
 	}
-	return t
+	r.freeFS = r.fs
+	*(*T__pthread)(unsafe.Pointer(r.fs)) = T__pthread{
+		Fpid: r.ID,
+		Ftid: r.ID,
+	}
+	initLibcOnce.Do(func() { initLibc(r) })
+	return r
 }
 
 // var nallocs, nmallocs, nreallocs int //TODO-
@@ -286,15 +288,13 @@ func (t *TLS) Close() {
 	// 	trc("%4d: %#0x, sz %v", i, v.p, v.sz)
 	// }
 	// trc("total %v, nallocs %v, nmallocs %v, nreallocs %v", sum, nallocs, nmallocs, nreallocs)
-	if t.ID == 1 { //TODO-
-		t.sp = 0
-		return
-	}
 
+	defer func() { *t = TLS{} }()
+
+	privateFree(t.freeFS)
 	for _, v := range t.stack[:t.sp] {
 		privateFree(v.p)
 	}
-	*t = TLS{}
 }
 
 func _sqrt(tls *TLS, x float64) float64 {
@@ -323,8 +323,10 @@ func _longjmp(tls *TLS, env uintptr, val int32) int64 {
 // 	return a_cas(p, test, s)
 // }
 
+func a_spin()
+
 func _a_spin(tls *TLS) {
-	panic(todo(""))
+	a_spin()
 }
 
 func _a_fetch_add(tls *TLS, p uintptr, v int32) int32 {
@@ -375,13 +377,15 @@ func _a_store(tls *TLS, p uintptr, v int32) {
 	atomic.StoreInt32((*int32)(unsafe.Pointer(p)), v)
 }
 
-func ___pthread_self(tls *TLS) uintptr {
-	return tls.fs
-}
-
 func _syscall0(tls *TLS, n int64) int64 {
-	r1, _, _ := syscall.Syscall(uintptr(n), 0, 0, 0)
-	return int64(r1)
+	switch n {
+	case m___NR_sched_yield:
+		runtime.Gosched()
+		return 0
+	default:
+		r1, _, _ := syscall.Syscall(uintptr(n), 0, 0, 0)
+		return int64(r1)
+	}
 }
 
 func _syscall1(tls *TLS, n, a1 int64) int64 {
@@ -412,13 +416,6 @@ func _syscall5(tls *TLS, n, a1, a2, a3, a4, a5 int64) int64 {
 func _syscall6(tls *TLS, n, a1, a2, a3, a4, a5, a6 int64) int64 {
 	r1, _, _ := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), uintptr(a5), uintptr(a6))
 	return int64(r1)
-}
-
-// This is not the set_thread_area syscall, but arch_prctl syscall with
-// subcommand ARCH_SET_FS.
-func ___set_thread_area(tls *TLS, p uintptr) int32 {
-	tls.fs = p
-	return 0
 }
 
 func ___setjmp(tls *TLS, env uintptr) int32 {
@@ -1357,7 +1354,7 @@ func Xsymlink(tls *TLS, target uintptr, linkpath uintptr) (r int32) {
 }
 
 func X__errno_location(tls *TLS) (r uintptr) {
-	return x___errno_location(tls)
+	return ___errno_location(tls)
 }
 
 // Xchmod changes the mode of the file specified whose pathname is given in
@@ -1427,7 +1424,6 @@ func Xstrstr(tls *TLS, haystack uintptr, needle uintptr) (r uintptr) {
 // variable name, and returns a pointer to the corresponding value string.
 func Xgetenv(tls *TLS, name uintptr) (r uintptr) {
 	r = x_getenv(tls, name)
-	trc("getenv(%q): %q", GoString(name), GoString(r))
 	return r
 }
 
@@ -1751,14 +1747,73 @@ func Xusleep(tls *TLS, usec int64) (r int32) {
 	return x_usleep(tls, usec)
 }
 
-// // Xpthread_create function  starts a new simulated thread in the calling
-// // process. C threads are modelled by ccgo as Go goroutines.
-// func Xpthread_create(tls *TLS, res uintptr, attr uintptr, entry uintptr, arg uintptr) (r int32) {
-// 	return x_pthread_create(tls, res, attr, entry, arg)
-// }
-//
-// // Xpthread_join function waits for the simulated thread specified by 'thread'
-// // to terminate.
-// func Xpthread_join(tls *TLS, thread uintptr, res uintptr) (r int32) {
-// 	return x_pthread_join(tls, thread, res)
-// }
+func ___pthread_self(tls *TLS) uintptr {
+	return uintptr(unsafe.Pointer(tls.fs))
+}
+
+// This is not the set_thread_area syscall, but arch_prctl syscall with
+// subcommand ARCH_SET_FS.
+func ___set_thread_area(tls *TLS, p uintptr) int32 {
+	tls.fs = p
+	return 0
+}
+
+func ___errno_location(tls *TLS) uintptr {
+	return (*T__pthread)(unsafe.Pointer(tls.fs)).Ferrno_ptr
+}
+
+// Xpthread_create function  starts a new simulated thread in the calling
+// process. C threads are simulated by Go goroutines.
+func Xpthread_create(tls *TLS, res uintptr, attr uintptr, entry uintptr, arg uintptr) (r int32) {
+	if tls.fs == 0 {
+		return m_ENOSYS
+	}
+
+	var v2 int32
+	var v3 bool
+	if v3 = !(_init1 != 0); v3 {
+		_init1++
+		v2 = _init1
+	}
+	if v3 && v2 != 0 {
+		_init_threads(tls)
+	}
+	if attr == 0 {
+		attr = uintptr(unsafe.Pointer(&_default_attr))
+	}
+
+	self := tls.fs
+	newTLS := NewTLS()
+	new1 := uintptr(unsafe.Pointer(newTLS.fs))
+	(*T__pthread)(unsafe.Pointer(new1)).Fpid = (*T__pthread)(unsafe.Pointer(self)).Fpid
+	(*T__pthread)(unsafe.Pointer(new1)).Ferrno_ptr = new1 + 52
+	(*T__pthread)(unsafe.Pointer(new1)).Fstart = entry
+	(*T__pthread)(unsafe.Pointer(new1)).Fstart_arg = arg
+	(*T__pthread)(unsafe.Pointer(new1)).Fself = uintptr(unsafe.Pointer(newTLS))
+	(*T__pthread)(unsafe.Pointer(new1)).Fdetached = *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*Tpthread_attr_t)(unsafe.Pointer(attr)).F__u.F__i)) + uintptr(Uint64FromInt32(2)*(Uint64FromInt64(8)/Uint64FromInt64(4))+Uint64FromInt32(0))*4))
+	(*T__pthread)(unsafe.Pointer(new1)).Fattr = *(*Tpthread_attr_t)(unsafe.Pointer(attr))
+	_a_inc(tls, uintptr(unsafe.Pointer(&x___libc.Fthreads_minus_1)))
+	newTLS.threadFuncWait = make(chan struct{})
+
+	go func() {
+
+		defer close(newTLS.threadFuncWait)
+
+		(*T__pthread)(unsafe.Pointer(new1)).Fresult = (*(*func(*TLS, uintptr) uintptr)(unsafe.Pointer(&struct{ uintptr }{entry})))(newTLS, arg)
+	}()
+
+	*(*uintptr)(unsafe.Pointer(res)) = new1
+	return 0
+}
+
+// Xpthread_join function waits for the simulated thread specified by 'thread'
+// to terminate.
+func Xpthread_join(tls *TLS, thread uintptr, res uintptr) (r int32) {
+	defer (*TLS)(unsafe.Pointer((*T__pthread)(unsafe.Pointer(thread)).Fself)).Close()
+
+	<-(*TLS)(unsafe.Pointer((*T__pthread)(unsafe.Pointer(thread)).Fself)).threadFuncWait
+	if res != 0 {
+		*(*uintptr)(unsafe.Pointer(res)) = (*T__pthread)(unsafe.Pointer(thread)).Fresult
+	}
+	return 0
+}

@@ -2,11 +2,15 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-.PHONY:	all check clean edit editor generate dev test tidy work
+.PHONY:	all build_all_targets check clean edit editor generate dev test tidy work
 
 all: editor
 	golint 2>&1
 	staticcheck 2>&1
+
+build_all_targets:
+	./build_all_targets.sh
+	echo done
 
 clean:
 	rm -f log-* cpu.test mem.test *.out go.work*

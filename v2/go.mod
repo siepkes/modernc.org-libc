@@ -13,15 +13,15 @@ require (
 	golang.org/x/tools v0.10.0 // indirect
 	lukechampine.com/uint128 v1.2.0 // indirect
 	modernc.org/cc/v3 v3.41.0 // indirect
-	modernc.org/cc/v4 v4.11.5 // indirect
+	modernc.org/cc/v4 v4.11.6 // indirect
 	modernc.org/ccgo/v3 v3.16.15 // indirect
-	modernc.org/ccgo/v4 v4.0.0-20230815191919-3e31f7c31cd1 // indirect
+	modernc.org/ccgo/v4 v4.0.0-20230816202409-bf1deaaf06f0 // indirect
 	modernc.org/ccorpus2 v1.4.1 // indirect
 	modernc.org/gc/v2 v2.3.0 // indirect
 	modernc.org/libc v1.24.1 // indirect
 	modernc.org/mathutil v1.6.0 // indirect
-	modernc.org/memory v1.6.0 // indirect
+	modernc.org/memory v1.7.0 // indirect
 	modernc.org/opt v0.1.3 // indirect
-	modernc.org/strutil v1.1.3 // indirect
+	modernc.org/strutil v1.2.0 // indirect
 	modernc.org/token v1.1.0 // indirect
 )
