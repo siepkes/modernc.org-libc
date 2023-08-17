@@ -1525,6 +1525,21 @@ func Xisalnum(tls *TLS, c int32) (r int32) {
 	return x_isalnum(tls, c)
 }
 
+// X__builtin_isalnum is equivalent to Xisalnum.
+func X__builtin_isalnum(tls *TLS, c int32) (r int32) {
+	return Xisalnum(tls, c)
+}
+
+// Xisblank checks for a blank character; that is, a space or a tab.
+func Xisblank(tls *TLS, c int32) (r int32) {
+	return x_isblank(tls, c)
+}
+
+// X__builtin_isblank is equivalent to Xisblank.
+func X__builtin_isblank(tls *TLS, c int32) (r int32) {
+	return Xisblank(tls, c)
+}
+
 // The atexit() function registers the given function to be called at normal
 // process termination, either via exit(3) or via return from the program's
 // main(). Functions so registered are called in the reverse order of their
@@ -1817,3 +1832,33 @@ func Xpthread_join(tls *TLS, thread uintptr, res uintptr) (r int32) {
 	}
 	return 0
 }
+
+// Xpthread_mutex_lock locks the given mutex.
+func Xpthread_mutex_lock(tls *TLS, mutex uintptr) (r int32) {
+	return x_pthread_mutex_lock(tls, mutex)
+}
+
+// Xpthread_mutex_unlock unlocks the given mutex.
+func Xpthread_mutex_unlock(tls *TLS, mutex uintptr) (r int32) {
+	return x_pthread_mutex_unlock(tls, mutex)
+}
+
+// Xpthread_self function returns the ID of the calling thread.
+func Xpthread_self(tls *TLS) (r uintptr) {
+	return x_pthread_self(tls)
+}
+
+// Xpthread_cond_wait atomically unlocks the mutex (as per
+// pthread_unlock_mutex) and waits for the condition variable cond to be
+// signaled.
+func Xpthread_cond_wait(tls *TLS, cond uintptr, mutex uintptr) (r int32) {
+	return x_pthread_cond_wait(tls, cond, mutex)
+}
+
+//TODO calls ___setjmp
+//
+//TODO // Xpthread_cond_signal restarts one of the threads that are waiting on the
+//TODO // condition variable cond.
+//TODO func Xpthread_cond_signal(tls *TLS, cond uintptr) (r int32) {
+//TODO 	return x_pthread_cond_signal(tls, cond)
+//TODO }
