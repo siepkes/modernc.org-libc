@@ -5,8 +5,6 @@
 //go:build ignore
 // +build ignore
 
-// ~/tmp/musl/musl-1.2.4/
-
 package main
 
 // https://posixtest.sourceforge.net/
@@ -37,6 +35,7 @@ var (
 	extractedArchivePath string
 	goarch               = runtime.GOARCH
 	goos                 = runtime.GOOS
+	muslArch             string
 
 	dev bool
 )
@@ -71,6 +70,12 @@ func main() {
 			fail(1, "cannot open tar file: %v\n", err)
 		}
 
+	}
+	switch goarch {
+	case "amd64":
+		muslArch = "x86_64"
+	default:
+		fail(1, "unsupported goarch: %s", goarch)
 	}
 	_, extractedArchivePath = filepath.Split(archivePath)
 	extractedArchivePath = extractedArchivePath[:len(extractedArchivePath)-len(".tar.gz")]
@@ -109,16 +114,7 @@ func main() {
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
 			cflags = fmt.Sprintf("CFLAGS=%s", s)
 		}
-		switch extractedArchivePath {
-		case "musl-0.6.0":
-			cCompiler = "cc"
-		case "musl-0.7.0":
-			cCompiler = "cc"
-		case "musl-1.2.4":
-			util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static --disable-optimize", cCompiler, cflags))
-		default:
-			fail(1, "unsupported musl version: %s", extractedArchivePath)
-		}
+		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static --disable-optimize", cCompiler, cflags))
 		args := []string{os.Args[0]}
 		if dev {
 			args = append(
@@ -148,62 +144,30 @@ func main() {
 			"-ignore-unsupported-atomic-sizes", //TODO- it is possible
 			"-isystem", "",
 		)
-		switch extractedArchivePath {
-		case "musl-0.6.0":
-			args = append(args,
-				"-hide", "a_inc,a_dec,a_swap,a_store,a_ctz_64,a_and_64,a_or_64,a_spin,a_fetch_add,a_cas_p",
-				"-hide", "syscall0,syscall1,syscall2,syscall3,syscall4,syscall5,syscall6",
-				"-hide", "__pthread_self,sqrt,system",
-			)
-			switch goarch {
-			case "386":
-				args = append(args, "-hide", "malloc,calloc,realloc,free,__simple_malloc")
-			}
-			return ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.so"), os.Stdout, os.Stderr, nil).Main()
-		case "musl-0.7.0":
-			args = append(args,
-				"-hide", "a_inc,a_dec,a_swap,a_store,a_ctz_64,a_and_64,a_or_64,a_spin,a_fetch_add,a_cas_p",
-				"-hide", "syscall0,syscall1,syscall2,syscall3,syscall4,syscall5,syscall6",
-				"-hide", "__pthread_self,sqrt,system",
-				"-D__NEED_time_t",
-			)
-			switch goarch {
-			case "386":
-				args = append(args, "-hide", "malloc,calloc,realloc,free,__simple_malloc")
-			}
-			return ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.so"), os.Stdout, os.Stderr, nil).Main()
-		// case "musl-1.2.4":
-		// 	// Arguments when archiving/linking static and dynamic musl libc
-		// 	//	$ diff -u static dynamic
-		// 	//	--- static	2023-07-23 13:40:26.325791570 +0200
-		// 	//	+++ dynamic	2023-07-23 13:42:18.021633710 +0200
-		// 	//	@@ -1339,3 +1339,5 @@
-		// 	//	 obj/src/unistd/usleep.lo
-		// 	//	 obj/src/unistd/write.lo
-		// 	//	 obj/src/unistd/writev.lo
-		// 	//	+obj/ldso/dlstart.lo
-		// 	//	+obj/ldso/dynlink.lo
-		// 	//	$
-		// 	args = append(args,
-		// 		"--predef=float __builtin_inff(void);",
-		// 		"--predef=long __builtin_expect(long, long);",
-		// 		"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS",
-		// 		"-hide", "a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32",
-		// 		"-hide", "fabs,fabsf,fabsl",
-		// 		"-ignore-file=obj/ldso/dlstart.lo.go,obj/ldso/dynlink.lo.go",
-		// 	)
-		// 	return ccgo.NewTask(goos, goarch, append(args, "-exec", "make"), os.Stdout, os.Stderr, nil).Main()
-		default:
-			fail(1, "unsupported musl version: %s", extractedArchivePath)
-		}
-		panic("unreachable")
+		// Arguments when archiving/linking static and dynamic musl libc
+		//	$ diff -u static dynamic
+		//	--- static	2023-07-23 13:40:26.325791570 +0200
+		//	+++ dynamic	2023-07-23 13:42:18.021633710 +0200
+		//	@@ -1339,3 +1339,5 @@
+		//	 obj/src/unistd/usleep.lo
+		//	 obj/src/unistd/write.lo
+		//	 obj/src/unistd/writev.lo
+		//	+obj/ldso/dlstart.lo
+		//	+obj/ldso/dynlink.lo
+		//	$
+		args = append(args,
+			"--predef=float __builtin_inff(void);",
+			"--predef=long __builtin_expect(long, long);",
+			"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS",
+			"-hide", "a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32",
+			"-hide", "fabs,fabsf,fabsl,fork",
+			"-ignore-file=obj/ldso/dlstart.lo.go,obj/ldso/dynlink.lo.go",
+		)
+		return ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.so"), os.Stdout, os.Stderr, nil).Main()
 	})
-	switch goos {
-	case "linux":
-		util.MustCopyDir(true, filepath.Join("include", "musl", goarch), filepath.Join(tempDir, extractedArchivePath, "include"), nil)
-	default:
-		fail(1, "unsupported OS: %s", goos)
-	}
+	util.MustCopyDir(true, filepath.Join("include", "musl", goarch), filepath.Join(tempDir, extractedArchivePath, "include"), nil)
+	util.MustCopyDir(true, filepath.Join("include", "musl", goarch, "bits"), filepath.Join(tempDir, extractedArchivePath, "obj", "include", "bits"), nil)
+	util.MustCopyDir(true, filepath.Join("include", "musl", goarch, "bits"), filepath.Join(tempDir, extractedArchivePath, "arch", muslArch, "bits"), nil)
 	fn := fmt.Sprintf("ccgo_%s_%s.go", goos, goarch)
 	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fn)
 	for _, v := range []string{

@@ -1,5 +1,5 @@
-#ifndef _RESOLV_H_
-#define _RESOLV_H_
+#ifndef _RESOLV_H
+#define _RESOLV_H
 
 #include <stdint.h>
 #include <arpa/nameser.h>
@@ -61,7 +61,7 @@ typedef struct __res_state {
 	} _u;
 } *res_state;
 
-#define	__RES	19991006
+#define	__RES	19960801
 
 #ifndef _PATH_RESCONF
 #define _PATH_RESCONF        "/etc/resolv.conf"
@@ -122,19 +122,18 @@ struct res_sym {
 #define RES_PRF_REPLY	0x00002000
 #define RES_PRF_INIT	0x00004000
 
-extern struct __res_state *__res_state(void);
+struct __res_state *__res_state(void);
 #define _res (*__res_state())
-
-struct rrec;
 
 int res_init(void);
 int res_query(const char *, int, int, unsigned char *, int);
 int res_querydomain(const char *, const char *, int, int, unsigned char *, int);
 int res_search(const char *, int, int, unsigned char *, int);
-int res_mkquery(int, const char *, int, int, char *, int, struct rrec *, char *, int);
-int res_send(const char *, int, char *, int);
-int dn_comp(unsigned char *, unsigned char *, int, unsigned char **, unsigned char *, unsigned char **);
-int dn_expand(unsigned char *, unsigned char *, unsigned char *, unsigned char *, int);
+int res_mkquery(int, const char *, int, int, const unsigned char *, int, const unsigned char*, unsigned char *, int);
+int res_send(const unsigned char *, int, unsigned char *, int);
+int dn_comp(const char *, unsigned char *, int, unsigned char **, unsigned char **);
+int dn_expand(const unsigned char *, const unsigned char *, const unsigned char *, char *, int);
+int dn_skipname(const unsigned char *, const unsigned char *);
 
 #ifdef __cplusplus
 }

@@ -1,77 +1,41 @@
 #undef __WORDSIZE
-#define __WORDSIZE 32
+#define __WORDSIZE 64
 
-struct user_fpregs_struct
-{
-	long int cwd;
-	long int swd;
-	long int twd;
-	long int fip;
-	long int fcs;
-	long int foo;
-	long int fos;
-	long int st_space[20];
+typedef struct user_fpregs_struct {
+	uint16_t cwd, swd, ftw, fop;
+	uint64_t rip, rdp;
+	uint32_t mxcsr, mxcr_mask;
+	uint32_t st_space[32], xmm_space[64], padding[24];
+} elf_fpregset_t;
+
+struct user_regs_struct {
+	unsigned long r15, r14, r13, r12, rbp, rbx, r11, r10, r9, r8;
+	unsigned long rax, rcx, rdx, rsi, rdi, orig_rax, rip;
+	unsigned long cs, eflags, rsp, ss, fs_base, gs_base, ds, es, fs, gs;
 };
+#define ELF_NGREG 27
+typedef unsigned long long elf_greg_t, elf_gregset_t[ELF_NGREG];
 
-struct user_fpxregs_struct
-{
-	unsigned short int cwd;
-	unsigned short int swd;
-	unsigned short int twd;
-	unsigned short int fop;
-	long int fip;
-	long int fcs;
-	long int foo;
-	long int fos;
-	long int mxcsr;
-	long int reserved;
-	long int st_space[32];
-	long int xmm_space[32];
-	long int padding[56];
-};
-
-struct user_regs_struct
-{
-	long int ebx;
-	long int ecx;
-	long int edx;
-	long int esi;
-	long int edi;
-	long int ebp;
-	long int eax;
-	long int xds;
-	long int xes;
-	long int xfs;
-	long int xgs;
-	long int orig_eax;
-	long int eip;
-	long int xcs;
-	long int eflags;
-	long int esp;
-	long int xss;
-};
-
-struct user
-{
+struct user {
 	struct user_regs_struct		regs;
 	int				u_fpvalid;
 	struct user_fpregs_struct	i387;
-	unsigned long int		u_tsize;
-	unsigned long int		u_dsize;
-	unsigned long int		u_ssize;
+	unsigned long			u_tsize;
+	unsigned long			u_dsize;
+	unsigned long			u_ssize;
 	unsigned long			start_code;
 	unsigned long			start_stack;
-	long int			signal;
+	long				signal;
 	int				reserved;
 	struct user_regs_struct		*u_ar0;
 	struct user_fpregs_struct	*u_fpstate;
-	unsigned long int		magic;
+	unsigned long			magic;
 	char				u_comm[32];
-	int				u_debugreg[8];
+	unsigned long			u_debugreg[8];
 };
 
-#define PAGE_MASK		(~(PAGE_SIZE-1))
-#define NBPG			PAGE_SIZE
+#define PAGE_MASK		(~(PAGESIZE-1))
+#define NBPG			PAGESIZE
 #define UPAGES			1
 #define HOST_TEXT_START_ADDR	(u.start_code)
 #define HOST_STACK_END_ADDR	(u.start_stack + u.u_ssize * NBPG)

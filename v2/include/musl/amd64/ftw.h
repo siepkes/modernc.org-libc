@@ -1,9 +1,11 @@
 #ifndef _FTW_H
 #define	_FTW_H
 
-/* Normally we do not nest header includes. However useless bloat
- * like ftw may be treated as a special case. Otherwise we would
- * have to deal with duplicating all the stat.h mess. */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <features.h>
 #include <sys/stat.h>
 
 #define FTW_F   1
@@ -19,13 +21,21 @@
 #define FTW_CHDIR 4
 #define FTW_DEPTH 8
 
-struct FTW
-{
+struct FTW {
 	int base;
 	int level;
 };
 
 int ftw(const char *, int (*)(const char *, const struct stat *, int), int);
 int nftw(const char *, int (*)(const char *, const struct stat *, int, struct FTW *), int, int);
+
+#if defined(_LARGEFILE64_SOURCE)
+#define ftw64 ftw
+#define nftw64 nftw
+#endif
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

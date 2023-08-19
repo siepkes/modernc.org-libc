@@ -6,10 +6,14 @@ extern "C" {
 #endif
 
 #include <stdint.h>
+#include <fcntl.h>
 
 #define __NEED_sigset_t
 
 #include <bits/alltypes.h>
+
+#define SFD_CLOEXEC O_CLOEXEC
+#define SFD_NONBLOCK O_NONBLOCK
 
 int signalfd(int, const sigset_t *, int);
 
@@ -26,11 +30,16 @@ struct signalfd_siginfo {
 	uint32_t  ssi_trapno;
 	int32_t   ssi_status;
 	int32_t   ssi_int;
-	uintptr_t ssi_ptr;
+	uint64_t  ssi_ptr;
 	uint64_t  ssi_utime;
 	uint64_t  ssi_stime;
 	uint64_t  ssi_addr;
-	uint8_t   pad[128-12*4-sizeof(void *)-3*8];
+	uint16_t  ssi_addr_lsb;
+	uint16_t  __pad2;
+	int32_t   ssi_syscall;
+	uint64_t  ssi_call_addr;
+	uint32_t  ssi_arch;
+	uint8_t   __pad[128-14*4-5*8-2*2];
 };
 
 #ifdef __cplusplus

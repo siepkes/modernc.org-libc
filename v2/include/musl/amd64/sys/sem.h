@@ -4,7 +4,14 @@
 extern "C" {
 #endif
 
+#include <features.h>
+
 #define __NEED_size_t
+#define __NEED_pid_t
+#define __NEED_time_t
+#ifdef _GNU_SOURCE
+#define __NEED_struct_timespec
+#endif
 #include <bits/alltypes.h>
 
 #include <sys/ipc.h>
@@ -18,21 +25,13 @@ extern "C" {
 #define SETVAL		16
 #define SETALL		17
 
-struct semid_ds {
-	struct ipc_perm sem_perm;
-	long sem_otime;
-	unsigned long __unused1;
-	long sem_ctime;
-	unsigned long __unused2;
-	unsigned long sem_nsems;
-	unsigned long __unused3;
-	unsigned long __unused4;
-};
+#include <bits/sem.h>
 
 #define _SEM_SEMUN_UNDEFINED 1
 
-#define SEM_STAT 18
+#define SEM_STAT (18 | (IPC_STAT & 0x100))
 #define SEM_INFO 19
+#define SEM_STAT_ANY (20 | (IPC_STAT & 0x100))
 
 struct  seminfo {
 	int semmap;
@@ -58,9 +57,13 @@ int semget(key_t, int, int);
 int semop(int, struct sembuf *, size_t);
 
 #ifdef _GNU_SOURCE
-#define __NEED_struct_timespec
-#include <bits/alltypes.h>
 int semtimedop(int, struct sembuf *, size_t, const struct timespec *);
+#endif
+
+#if _REDIR_TIME64
+#ifdef _GNU_SOURCE
+__REDIR(semtimedop, __semtimedop_time64);
+#endif
 #endif
 
 #ifdef __cplusplus

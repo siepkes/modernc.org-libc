@@ -4,16 +4,20 @@
 extern "C" {
 #endif
 
+#include <features.h>
+
 #include <signal.h>
 
-#ifdef _GNU_SOURCE
-#define ucontext __ucontext
+#if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
+#define NGREG (sizeof(gregset_t)/sizeof(greg_t))
 #endif
 
-int  getcontext(ucontext_t *);
-void makecontext(ucontext_t *, void (*)(void), int, ...);
-int  setcontext(const ucontext_t *);
-int  swapcontext(ucontext_t *, const ucontext_t *);
+struct __ucontext;
+
+int  getcontext(struct __ucontext *);
+void makecontext(struct __ucontext *, void (*)(), int, ...);
+int  setcontext(const struct __ucontext *);
+int  swapcontext(struct __ucontext *, const struct __ucontext *);
 
 #ifdef __cplusplus
 }

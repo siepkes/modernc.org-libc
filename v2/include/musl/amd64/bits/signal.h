@@ -1,17 +1,98 @@
 #if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) \
- || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE)
+ || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
 
-struct __fpstate {
-	unsigned long __x[4];
-	unsigned char __y[384];
-	unsigned long __z[12];
-};
+#if defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
+#define MINSIGSTKSZ 2048
+#define SIGSTKSZ 8192
+#endif
 
-typedef struct {
-	unsigned long __gregs[23];
-	void *__fpregs;
+#ifdef _GNU_SOURCE
+enum { REG_R8 = 0 };
+#define REG_R8 REG_R8
+enum { REG_R9 = 1 };
+#define REG_R9 REG_R9
+enum { REG_R10 = 2 };
+#define REG_R10 REG_R10
+enum { REG_R11 = 3 };
+#define REG_R11 REG_R11
+enum { REG_R12 = 4 };
+#define REG_R12 REG_R12
+enum { REG_R13 = 5 };
+#define REG_R13 REG_R13
+enum { REG_R14 = 6 };
+#define REG_R14 REG_R14
+enum { REG_R15 = 7 };
+#define REG_R15 REG_R15
+enum { REG_RDI = 8 };
+#define REG_RDI REG_RDI
+enum { REG_RSI = 9 };
+#define REG_RSI REG_RSI
+enum { REG_RBP = 10 };
+#define REG_RBP REG_RBP
+enum { REG_RBX = 11 };
+#define REG_RBX REG_RBX
+enum { REG_RDX = 12 };
+#define REG_RDX REG_RDX
+enum { REG_RAX = 13 };
+#define REG_RAX REG_RAX
+enum { REG_RCX = 14 };
+#define REG_RCX REG_RCX
+enum { REG_RSP = 15 };
+#define REG_RSP REG_RSP
+enum { REG_RIP = 16 };
+#define REG_RIP REG_RIP
+enum { REG_EFL = 17 };
+#define REG_EFL REG_EFL
+enum { REG_CSGSFS = 18 };
+#define REG_CSGSFS REG_CSGSFS
+enum { REG_ERR = 19 };
+#define REG_ERR REG_ERR
+enum { REG_TRAPNO = 20 };
+#define REG_TRAPNO REG_TRAPNO
+enum { REG_OLDMASK = 21 };
+#define REG_OLDMASK REG_OLDMASK
+enum { REG_CR2 = 22 };
+#define REG_CR2 REG_CR2
+#endif
+
+#if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
+typedef long long greg_t, gregset_t[23];
+typedef struct _fpstate {
+	unsigned short cwd, swd, ftw, fop;
+	unsigned long long rip, rdp;
+	unsigned mxcsr, mxcr_mask;
+	struct {
+		unsigned short significand[4], exponent, padding[3];
+	} _st[8];
+	struct {
+		unsigned element[4];
+	} _xmm[16];
+	unsigned padding[24];
+} *fpregset_t;
+struct sigcontext {
+	unsigned long r8, r9, r10, r11, r12, r13, r14, r15;
+	unsigned long rdi, rsi, rbp, rbx, rdx, rax, rcx, rsp, rip, eflags;
+	unsigned short cs, gs, fs, __pad0;
+	unsigned long err, trapno, oldmask, cr2;
+	struct _fpstate *fpstate;
 	unsigned long __reserved1[8];
+};
+typedef struct {
+	gregset_t gregs;
+	fpregset_t fpregs;
+	unsigned long long __reserved1[8];
 } mcontext_t;
+#else
+typedef struct {
+	unsigned long __space[32];
+} mcontext_t;
+#endif
+
+struct sigaltstack {
+	void *ss_sp;
+	int ss_flags;
+	size_t ss_size;
+};
 
 typedef struct __ucontext {
 	unsigned long uc_flags;
@@ -19,127 +100,8 @@ typedef struct __ucontext {
 	stack_t uc_stack;
 	mcontext_t uc_mcontext;
 	sigset_t uc_sigmask;
-	struct __fpstate __fpregs_mem;
+	unsigned long __fpregs_mem[64];
 } ucontext_t;
-
-#ifdef _GNU_SOURCE
-struct sigcontext {
-	unsigned long r8, r9, r10, r11, r12, r13, r14, r15;
-	unsigned long rdi, rsi, rbp, rbx, rdx, rax, rcx, rsp, rip, eflags;
-	unsigned short cs, gs, fs, __pad0;
-	unsigned long err, trapno, oldmask, cr2;
-	struct __fpstate *fpstate;
-	unsigned long __reserved1[8];
-};
-#endif
-
-struct __siginfo
-{
-	int si_signo;
-	int si_errno;
-	int si_code;
-	union
-	{
-		int __pad[(128 - 4*sizeof(int)) / sizeof(int)];
-		struct {
-			pid_t si_pid;
-			uid_t si_uid;
-		} __kill;
-		struct {
-			void *si_timerid;
-			int si_overrun;
-			char __pad[sizeof(uid_t) - sizeof(int)];
-			union sigval si_sigval;
-			int si_private;
-		} __timer;
-		struct {
-			pid_t si_pid;
-			uid_t si_uid;
-			union sigval si_sigval;
-		} __rt;
-		struct {
-			pid_t si_pid;
-			uid_t si_uid;
-			int si_status;
-			clock_t si_utime;
-			clock_t si_stime;
-		} __sigchld;
-		struct {
-			void *si_addr;
-			short addr_lsb;
-		} __sigfault;
-		struct {
-			long si_band;
-			int si_fd;
-		} __sigpoll;
-	} __si_fields;
-};
-
-#define si_pid     __si_fields.__sigchld.si_pid
-#define si_uid     __si_fields.__sigchld.si_uid
-#define si_status  __si_fields.__sigchld.si_status
-#define si_utime   __si_fields.__sigchld.si_utime
-#define si_stime   __si_fields.__sigchld.si_stime
-#define si_value   __si_fields.__rt.si_sigval
-#define si_addr    __si_fields.__sigfault.si_addr
-#define si_band    __si_fields.__sigpoll.si_band
-
-#define SI_ASYNCNL (-60)
-#define SI_TKILL (-6)
-#define SI_SIGIO (-5)
-#define SI_ASYNCIO (-4)
-#define SI_MESGQ (-3)
-#define SI_TIMER (-2)
-#define SI_QUEUE (-1)
-#define SI_USER 0
-#define SI_KERNEL 128
-
-#define FPE_INTDIV 1
-#define FPE_INTOVF 2
-#define FPE_FLTDIV 3
-#define FPE_FLTOVF 4
-#define FPE_FLTUNT 5
-#define FPE_FLTRES 6
-#define FPE_FLTINV 7
-#define FPE_FLTSUB 8
-
-#define ILL_ILLOPC 1
-#define ILL_ILLOPN 2
-#define ILL_ILLADR 3
-#define ILL_ILLTRP 4
-#define ILL_PRVOPC 5
-#define ILL_PRVREG 6
-#define ILL_COPROC 7
-#define ILL_BADSTK 8
-
-#define SEGV_MAPERR 1
-#define SEGV_ACCERR 2
-
-#define BUS_ADRALN 1
-#define BUS_ADRERR 2
-#define BUS_OBJERR 3
-
-#define CLD_EXITED 1
-#define CLD_KILLED 2
-#define CLD_DUMPED 3
-#define CLD_TRAPPED 4
-#define CLD_STOPPED 5
-#define CLD_CONTINUED 6
-
-#if defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE)
-#define TRAP_BRKPT 1
-#define TRAP_TRACE 2
-#define POLL_IN 1
-#define POLL_OUT 2
-#define POLL_MSG 3
-#define POLL_ERR 4
-#define POLL_PRI 5
-#define POLL_HUP 6
-#define SS_ONSTACK    1
-#define SS_DISABLE    2
-#define MINSIGSTKSZ 2048
-#define SIGSTKSZ 8192
-#endif
 
 #define SA_NOCLDSTOP  1
 #define SA_NOCLDWAIT  2
@@ -150,20 +112,7 @@ struct __siginfo
 #define SA_RESETHAND  0x80000000
 #define SA_RESTORER   0x04000000
 
-#define SIG_BLOCK     0
-#define SIG_UNBLOCK   1
-#define SIG_SETMASK   2
-
 #endif
-
-#ifdef _GNU_SOURCE
-#define NSIG      64
-#endif
-
-#define SIG_ERR  ((void (*)(int))-1)
-#define SIG_DFL  ((void (*)(int)) 0)
-#define SIG_IGN  ((void (*)(int)) 1)
-#define SIG_HOLD ((void (*)(int)) 2)
 
 #define SIGHUP    1
 #define SIGINT    2
@@ -171,6 +120,7 @@ struct __siginfo
 #define SIGILL    4
 #define SIGTRAP   5
 #define SIGABRT   6
+#define SIGIOT    SIGABRT
 #define SIGBUS    7
 #define SIGFPE    8
 #define SIGKILL   9
@@ -198,3 +148,6 @@ struct __siginfo
 #define SIGPWR    30
 #define SIGSYS    31
 #define SIGUNUSED SIGSYS
+
+#define _NSIG 65
+

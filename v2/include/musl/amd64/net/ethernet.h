@@ -1,5 +1,9 @@
-#ifndef __NET_ETHERNET_H
-#define __NET_ETHERNET_H 1
+#ifndef _NET_ETHERNET_H
+#define _NET_ETHERNET_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <stdint.h>
 #include <sys/types.h>
@@ -43,5 +47,9 @@ struct ether_header {
 
 #define	ETHERMTU	ETH_DATA_LEN
 #define	ETHERMIN	(ETHER_MIN_LEN - ETHER_HDR_LEN - ETHER_CRC_LEN)
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

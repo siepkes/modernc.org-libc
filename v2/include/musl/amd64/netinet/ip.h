@@ -7,7 +7,6 @@ extern "C" {
 
 #include <stdint.h>
 #include <netinet/in.h>
-#include <endian.h>
 
 struct timestamp {
 	uint8_t len;
@@ -104,6 +103,18 @@ struct ip_timestamp {
 #define	IPTOS_DSCP_AF43		0x98
 #define	IPTOS_DSCP_EF		0xb8
 
+#define	IPTOS_CLASS_MASK	0xe0
+#define	IPTOS_CLASS(x)		((x) & IPTOS_CLASS_MASK)
+#define	IPTOS_CLASS_CS0		0x00
+#define	IPTOS_CLASS_CS1		0x20
+#define	IPTOS_CLASS_CS2		0x40
+#define	IPTOS_CLASS_CS3		0x60
+#define	IPTOS_CLASS_CS4		0x80
+#define	IPTOS_CLASS_CS5		0xa0
+#define	IPTOS_CLASS_CS6		0xc0
+#define	IPTOS_CLASS_CS7		0xe0
+#define	IPTOS_CLASS_DEFAULT	IPTOS_CLASS_CS0
+
 #define	IPTOS_TOS_MASK		0x1E
 #define	IPTOS_TOS(tos)		((tos) & IPTOS_TOS_MASK)
 #define	IPTOS_LOWDELAY		0x10
@@ -178,6 +189,8 @@ struct ip_timestamp {
 #define	IPTTLDEC	1
 
 #define	IP_MSS		576
+
+#define __UAPI_DEF_IPHDR	0
 
 #ifdef __cplusplus
 }

@@ -5,20 +5,22 @@
 extern "C" {
 #endif
 
+#include <features.h>
+
 #define STDIN_FILENO  0
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2
 
-#undef SEEK_SET
-#undef SEEK_CUR
-#undef SEEK_END
 #define SEEK_SET 0
 #define SEEK_CUR 1
 #define SEEK_END 2
+#define SEEK_DATA 3
+#define SEEK_HOLE 4
 
-#undef NULL
-#ifdef __cplusplus
-#define NULL 0
+#if __cplusplus >= 201103L
+#define NULL nullptr
+#elif defined(__cplusplus)
+#define NULL 0L
 #else
 #define NULL ((void*)0)
 #endif
@@ -29,15 +31,18 @@ extern "C" {
 #define __NEED_gid_t
 #define __NEED_off_t
 #define __NEED_pid_t
-#define __NEED_useconds_t
 #define __NEED_intptr_t
+#define __NEED_useconds_t
 
 #include <bits/alltypes.h>
 
 int pipe(int [2]);
+int pipe2(int [2], int);
 int close(int);
+int posix_close(int, int);
 int dup(int);
 int dup2(int, int);
+int dup3(int, int, int);
 off_t lseek(int, off_t, int);
 int fsync(int);
 int fdatasync(int);
@@ -56,8 +61,8 @@ int link(const char *, const char *);
 int linkat(int, const char *, int, const char *, int);
 int symlink(const char *, const char *);
 int symlinkat(const char *, int, const char *);
-int readlink(const char *, char *, size_t);
-int readlinkat(int, const char *, char *, size_t);
+ssize_t readlink(const char *__restrict, char *__restrict, size_t);
+ssize_t readlinkat(int, const char *__restrict, char *__restrict, size_t);
 int unlink(const char *);
 int unlinkat(int, const char *, int);
 int rmdir(const char *);
@@ -68,6 +73,7 @@ int ftruncate(int, off_t);
 #define R_OK 4
 #define W_OK 2
 #define X_OK 1
+
 int access(const char *, int);
 int faccessat(int, const char *, int, int);
 
@@ -80,14 +86,15 @@ unsigned sleep(unsigned);
 int pause(void);
 
 pid_t fork(void);
+pid_t _Fork(void);
 int execve(const char *, char *const [], char *const []);
 int execv(const char *, char *const []);
-int execle(const char *, ...);
-int execl(const char *, ...);
+int execle(const char *, const char *, ...);
+int execl(const char *, const char *, ...);
 int execvp(const char *, char *const []);
-int execlp(const char *, ...);
+int execlp(const char *, const char *, ...);
 int fexecve(int, char *const [], char *const []);
-void _exit(int);
+_Noreturn void _exit(int);
 
 pid_t getpid(void);
 pid_t getppid(void);
@@ -108,10 +115,8 @@ gid_t getgid(void);
 gid_t getegid(void);
 int getgroups(int, gid_t []);
 int setuid(uid_t);
-int setreuid(uid_t, uid_t);
 int seteuid(uid_t);
 int setgid(gid_t);
-int setregid(gid_t, gid_t);
 int setegid(gid_t);
 
 char *getlogin(void);
@@ -128,34 +133,82 @@ long fpathconf(int, int);
 long sysconf(int);
 size_t confstr(int, char *, size_t);
 
+#if defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
 #define F_ULOCK 0
 #define F_LOCK  1
 #define F_TLOCK 2
 #define F_TEST  3
-
-#if defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE)
+int setreuid(uid_t, uid_t);
+int setregid(gid_t, gid_t);
 int lockf(int, int, off_t);
-int setpgrp(void);
-char *crypt(const char *, const char *);
-void encrypt(char *, int);
-void swab(const void *, void *, ssize_t);
 long gethostid(void);
 int nice(int);
 void sync(void);
+pid_t setpgrp(void);
+char *crypt(const char *, const char *);
+void encrypt(char *, int);
+void swab(const void *__restrict, void *__restrict, ssize_t);
 #endif
 
-#ifdef _GNU_SOURCE
+#if defined(_GNU_SOURCE) || defined(_BSD_SOURCE) \
+ || (defined(_XOPEN_SOURCE) && _XOPEN_SOURCE+0 < 700)
+int usleep(unsigned);
+unsigned ualarm(unsigned, unsigned);
+#endif
+
+#if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
+#define L_SET 0
+#define L_INCR 1
+#define L_XTND 2
 int brk(void *);
 void *sbrk(intptr_t);
 pid_t vfork(void);
 int vhangup(void);
 int chroot(const char *);
 int getpagesize(void);
+int getdtablesize(void);
 int sethostname(const char *, size_t);
-int usleep(useconds_t);
-useconds_t ualarm(useconds_t, useconds_t);
-int setgroups(size_t, const gid_t []);
+int getdomainname(char *, size_t);
+int setdomainname(const char *, size_t);
+int setgroups(size_t, const gid_t *);
+char *getpass(const char *);
+int daemon(int, int);
+void setusershell(void);
+void endusershell(void);
+char *getusershell(void);
+int acct(const char *);
+long syscall(long, ...);
+int execvpe(const char *, char *const [], char *const []);
+int issetugid(void);
+int getentropy(void *, size_t);
+extern int optreset;
 #endif
+
+#ifdef _GNU_SOURCE
+extern char **environ;
+int setresuid(uid_t, uid_t, uid_t);
+int setresgid(gid_t, gid_t, gid_t);
+int getresuid(uid_t *, uid_t *, uid_t *);
+int getresgid(gid_t *, gid_t *, gid_t *);
+char *get_current_dir_name(void);
+int syncfs(int);
+int euidaccess(const char *, int);
+int eaccess(const char *, int);
+ssize_t copy_file_range(int, off_t *, int, off_t *, size_t, unsigned);
+pid_t gettid(void);
+#endif
+
+#if defined(_LARGEFILE64_SOURCE)
+#define lseek64 lseek
+#define pread64 pread
+#define pwrite64 pwrite
+#define truncate64 truncate
+#define ftruncate64 ftruncate
+#define lockf64 lockf
+#define off64_t off_t
+#endif
+
+#define POSIX_CLOSE_RESTART     0
 
 #define _XOPEN_VERSION          700
 #define _XOPEN_UNIX             1
@@ -164,6 +217,7 @@ int setgroups(size_t, const gid_t []);
 #define _POSIX_VERSION          200809L
 #define _POSIX2_VERSION         _POSIX_VERSION
 
+#define _POSIX_ADVISORY_INFO    _POSIX_VERSION
 #define _POSIX_CHOWN_RESTRICTED 1
 #define _POSIX_IPV6             _POSIX_VERSION
 #define _POSIX_JOB_CONTROL      1
@@ -171,17 +225,24 @@ int setgroups(size_t, const gid_t []);
 #define _POSIX_MEMLOCK          _POSIX_VERSION
 #define _POSIX_MEMLOCK_RANGE    _POSIX_VERSION
 #define _POSIX_MEMORY_PROTECTION _POSIX_VERSION
+#define _POSIX_MESSAGE_PASSING  _POSIX_VERSION
+#define _POSIX_FSYNC            _POSIX_VERSION
 #define _POSIX_NO_TRUNC         1
 #define _POSIX_RAW_SOCKETS      _POSIX_VERSION
 #define _POSIX_REALTIME_SIGNALS _POSIX_VERSION
 #define _POSIX_REGEXP           1
 #define _POSIX_SAVED_IDS        1
 #define _POSIX_SHELL            1
+#define _POSIX_SPAWN            _POSIX_VERSION
 #define _POSIX_VDISABLE         0
 
 #define _POSIX_THREADS          _POSIX_VERSION
 #define _POSIX_THREAD_PROCESS_SHARED _POSIX_VERSION
 #define _POSIX_THREAD_SAFE_FUNCTIONS _POSIX_VERSION
+#define _POSIX_THREAD_ATTR_STACKADDR _POSIX_VERSION
+#define _POSIX_THREAD_ATTR_STACKSIZE _POSIX_VERSION
+#define _POSIX_THREAD_PRIORITY_SCHEDULING _POSIX_VERSION
+#define _POSIX_THREAD_CPUTIME   _POSIX_VERSION
 #define _POSIX_TIMERS           _POSIX_VERSION
 #define _POSIX_TIMEOUTS         _POSIX_VERSION
 #define _POSIX_MONOTONIC_CLOCK  _POSIX_VERSION
@@ -192,6 +253,7 @@ int setgroups(size_t, const gid_t []);
 #define _POSIX_READER_WRITER_LOCKS _POSIX_VERSION
 #define _POSIX_ASYNCHRONOUS_IO  _POSIX_VERSION
 #define _POSIX_SEMAPHORES       _POSIX_VERSION
+#define _POSIX_SHARED_MEMORY_OBJECTS _POSIX_VERSION
 
 #define _POSIX2_C_BIND          _POSIX_VERSION
 
@@ -263,11 +325,9 @@ int setgroups(size_t, const gid_t []);
 #define _SC_BC_SCALE_MAX	38
 #define _SC_BC_STRING_MAX	39
 #define _SC_COLL_WEIGHTS_MAX	40
-#define _SC_EQUIV_CLASS_MAX	41
 #define _SC_EXPR_NEST_MAX	42
 #define _SC_LINE_MAX	43
 #define _SC_RE_DUP_MAX	44
-#define _SC_CHARCLASS_NAME_MAX	45
 #define _SC_2_VERSION	46
 #define _SC_2_C_BIND	47
 #define _SC_2_C_DEV	48
@@ -275,21 +335,8 @@ int setgroups(size_t, const gid_t []);
 #define _SC_2_FORT_RUN	50
 #define _SC_2_SW_DEV	51
 #define _SC_2_LOCALEDEF	52
-#define _SC_PII	53
-#define _SC_PII_XTI	54
-#define _SC_PII_SOCKET	55
-#define _SC_PII_INTERNET	56
-#define _SC_PII_OSI	57
-#define _SC_POLL	58
-#define _SC_SELECT	59
 #define _SC_UIO_MAXIOV	60 /* !! */
 #define _SC_IOV_MAX	60
-#define _SC_PII_INTERNET_STREAM	61
-#define _SC_PII_INTERNET_DGRAM	62
-#define _SC_PII_OSI_COTS	63
-#define _SC_PII_OSI_CLTS	64
-#define _SC_PII_OSI_M	65
-#define _SC_T_IOV_MAX	66
 #define _SC_THREADS	67
 #define _SC_THREAD_SAFE_FUNCTIONS	68
 #define _SC_GETGR_R_SIZE_MAX	69
@@ -319,35 +366,11 @@ int setgroups(size_t, const gid_t []);
 #define _SC_XOPEN_ENH_I18N	93
 #define _SC_XOPEN_SHM	94
 #define _SC_2_CHAR_TERM	95
-#define _SC_2_C_VERSION	96
 #define _SC_2_UPE	97
 #define _SC_XOPEN_XPG2	98
 #define _SC_XOPEN_XPG3	99
 #define _SC_XOPEN_XPG4	100
-#define _SC_CHAR_BIT	101
-#define _SC_CHAR_MAX	102
-#define _SC_CHAR_MIN	103
-#define _SC_INT_MAX	104
-#define _SC_INT_MIN	105
-#define _SC_LONG_BIT	106
-#define _SC_WORD_BIT	107
-#define _SC_MB_LEN_MAX	108
 #define _SC_NZERO	109
-#define _SC_SSIZE_MAX	110
-#define _SC_SCHAR_MAX	111
-#define _SC_SCHAR_MIN	112
-#define _SC_SHRT_MAX	113
-#define _SC_SHRT_MIN	114
-#define _SC_UCHAR_MAX	115
-#define _SC_UINT_MAX	116
-#define _SC_ULONG_MAX	117
-#define _SC_USHRT_MAX	118
-#define _SC_NL_ARGMAX	119
-#define _SC_NL_LANGMAX	120
-#define _SC_NL_MSGMAX	121
-#define _SC_NL_NMAX	122
-#define _SC_NL_SETMAX	123
-#define _SC_NL_TEXTMAX	124
 #define _SC_XBS5_ILP32_OFF32	125
 #define _SC_XBS5_ILP32_OFFBIG	126
 #define _SC_XBS5_LP64_OFF64	127
@@ -357,40 +380,19 @@ int setgroups(size_t, const gid_t []);
 #define _SC_XOPEN_REALTIME_THREADS	131
 #define _SC_ADVISORY_INFO	132
 #define _SC_BARRIERS	133
-#define _SC_BASE	134
-#define _SC_C_LANG_SUPPORT	135
-#define _SC_C_LANG_SUPPORT_R	136
 #define _SC_CLOCK_SELECTION	137
 #define _SC_CPUTIME	138
 #define _SC_THREAD_CPUTIME	139
-#define _SC_DEVICE_IO	140
-#define _SC_DEVICE_SPECIFIC	141
-#define _SC_DEVICE_SPECIFIC_R	142
-#define _SC_FD_MGMT	143
-#define _SC_FIFO	144
-#define _SC_PIPE	145
-#define _SC_FILE_ATTRIBUTES	146
-#define _SC_FILE_LOCKING	147
-#define _SC_FILE_SYSTEM	148
 #define _SC_MONOTONIC_CLOCK	149
-#define _SC_MULTI_PROCESS	150
-#define _SC_SINGLE_PROCESS	151
-#define _SC_NETWORKING	152
 #define _SC_READER_WRITER_LOCKS	153
 #define _SC_SPIN_LOCKS	154
 #define _SC_REGEXP	155
-#define _SC_REGEX_VERSION	156
 #define _SC_SHELL	157
-#define _SC_SIGNALS	158
 #define _SC_SPAWN	159
 #define _SC_SPORADIC_SERVER	160
 #define _SC_THREAD_SPORADIC_SERVER	161
-#define _SC_SYSTEM_DATABASE	162
-#define _SC_SYSTEM_DATABASE_R	163
 #define _SC_TIMEOUTS	164
 #define _SC_TYPED_MEMORY_OBJECTS	165
-#define _SC_USER_GROUPS	166
-#define _SC_USER_GROUPS_R	167
 #define _SC_2_PBS	168
 #define _SC_2_PBS_ACCOUNTING	169
 #define _SC_2_PBS_LOCATE	170
@@ -423,6 +425,8 @@ int setgroups(size_t, const gid_t []);
 #define _SC_XOPEN_STREAMS	246
 #define _SC_THREAD_ROBUST_PRIO_INHERIT	247
 #define _SC_THREAD_ROBUST_PRIO_PROTECT	248
+#define _SC_MINSIGSTKSZ	249
+#define _SC_SIGSTKSZ	250
 
 #define _CS_PATH	0
 #define _CS_POSIX_V6_WIDTH_RESTRICTED_ENVS	1
@@ -463,6 +467,10 @@ int setgroups(size_t, const gid_t []);
 #define _CS_POSIX_V7_LPBIG_OFFBIG_LDFLAGS	1145
 #define _CS_POSIX_V7_LPBIG_OFFBIG_LIBS	1146
 #define _CS_POSIX_V7_LPBIG_OFFBIG_LINTFLAGS	1147
+#define _CS_V6_ENV	1148
+#define _CS_V7_ENV	1149
+#define _CS_POSIX_V7_THREADS_CFLAGS	1150
+#define _CS_POSIX_V7_THREADS_LDFLAGS	1151
 
 #ifdef __cplusplus
 }

@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+#include <features.h>
+
 #define __NEED_size_t
 
 #include <bits/alltypes.h>
@@ -16,8 +18,7 @@ extern "C" {
 #define WRDE_SHOWERR 16
 #define WRDE_UNDEF   32
 
-typedef struct
-{
+typedef struct {
 	size_t we_wordc;
 	char **we_wordv;
 	size_t we_offs;
@@ -30,7 +31,7 @@ typedef struct
 #define WRDE_CMDSUB  4
 #define WRDE_SYNTAX  5
 
-int wordexp (const char *, wordexp_t *, int);
+int wordexp (const char *__restrict, wordexp_t *__restrict, int);
 void wordfree (wordexp_t *);
 
 #ifdef __cplusplus

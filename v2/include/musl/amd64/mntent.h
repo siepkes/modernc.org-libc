@@ -20,8 +20,7 @@ extern "C" {
 #define MNTOPT_NOSUID	"nosuid"
 #define MNTOPT_NOAUTO	"noauto"
 
-struct mntent
-{
+struct mntent {
 	char *mnt_fsname;
 	char *mnt_dir;
 	char *mnt_type;
@@ -33,6 +32,7 @@ struct mntent
 FILE *setmntent(const char *, const char *);
 int endmntent(FILE *);
 struct mntent *getmntent(FILE *);
+struct mntent *getmntent_r(FILE *, struct mntent *, char *, int);
 int addmntent(FILE *, const struct mntent *);
 char *hasmntopt(const struct mntent *, const char *);
 

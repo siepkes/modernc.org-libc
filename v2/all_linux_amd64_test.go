@@ -24,26 +24,26 @@ var (
 	testAtomicCASp      uintptr
 )
 
-// func TestAtomicCASInt32(t *testing.T) {
-// 	pi := uintptr(unsafe.Pointer(&testAtomicCASInt32))
-// 	testAtomicCASInt32 = int32(0)
-// 	j := a_cas(pi, 1, 2)
-// 	if testAtomicCASInt32 != 0 || j != 0 {
-// 		t.Fatal(testAtomicCASInt32, j)
-// 	}
-//
-// 	if j = a_cas(pi, 0, 3); testAtomicCASInt32 != 3 || j != 0 {
-// 		t.Fatal(testAtomicCASInt32, j)
-// 	}
-//
-// 	if j = a_cas(pi, 4, 5); testAtomicCASInt32 != 3 || j != 3 {
-// 		t.Fatal(testAtomicCASInt32, j)
-// 	}
-//
-// 	if j = a_cas(pi, 3, 6); testAtomicCASInt32 != 6 || j != 3 {
-// 		t.Fatal(testAtomicCASInt32, j)
-// 	}
-// }
+func TestAtomicCASInt32(t *testing.T) {
+	pi := uintptr(unsafe.Pointer(&testAtomicCASInt32))
+	testAtomicCASInt32 = int32(0)
+	j := a_cas(pi, 1, 2)
+	if testAtomicCASInt32 != 0 || j != 0 {
+		t.Fatal(testAtomicCASInt32, j)
+	}
+
+	if j = a_cas(pi, 0, 3); testAtomicCASInt32 != 3 || j != 0 {
+		t.Fatal(testAtomicCASInt32, j)
+	}
+
+	if j = a_cas(pi, 4, 5); testAtomicCASInt32 != 3 || j != 3 {
+		t.Fatal(testAtomicCASInt32, j)
+	}
+
+	if j = a_cas(pi, 3, 6); testAtomicCASInt32 != 6 || j != 3 {
+		t.Fatal(testAtomicCASInt32, j)
+	}
+}
 
 func TestAtomicCASUintptr(t *testing.T) {
 	pp := uintptr(unsafe.Pointer(&testAtomicCASp))
@@ -66,24 +66,24 @@ func TestAtomicCASUintptr(t *testing.T) {
 	}
 }
 
-// func TestAtomicOrInt32(t *testing.T) {
-// 	pi := uintptr(unsafe.Pointer(&testAtomicCASInt32))
-// 	testAtomicCASInt32 = int32(0)
-// 	a_or(pi, 1)
-// 	if j := testAtomicCASInt32; j != 1 {
-// 		t.Fatalf("%032b", j)
-// 	}
-//
-// 	a_or(pi, 2)
-// 	if j := testAtomicCASInt32; j != 3 {
-// 		t.Fatalf("%032b", j)
-// 	}
-//
-// 	a_or(pi, Int32FromUint32(0x80000000))
-// 	if j := testAtomicCASInt32; j != Int32FromUint32(0x80000003) {
-// 		t.Fatalf("%032b", j)
-// 	}
-// }
+func TestAtomicOrInt32(t *testing.T) {
+	pi := uintptr(unsafe.Pointer(&testAtomicCASInt32))
+	testAtomicCASInt32 = int32(0)
+	a_or(pi, 1)
+	if j := testAtomicCASInt32; j != 1 {
+		t.Fatalf("%032b", j)
+	}
+
+	a_or(pi, 2)
+	if j := testAtomicCASInt32; j != 3 {
+		t.Fatalf("%032b", j)
+	}
+
+	a_or(pi, Int32FromUint32(0x80000000))
+	if j := testAtomicCASInt32; j != Int32FromUint32(0x80000003) {
+		t.Fatalf("%032b", j)
+	}
+}
 
 func TestAtomicOrUint64(t *testing.T) {
 	pi := uintptr(unsafe.Pointer(&testAtomicCASUint64))
@@ -266,41 +266,47 @@ func TestMemset(t *testing.T) {
 	}
 }
 
-//TODO N/A musl 0.6.0
-//TODO const testGetentropySize = 100
-//TODO
-//TODO var testGetentropyBuf [testGetentropySize]byte
-//TODO
-//TODO func TestGetentropy(t *testing.T) {
-//TODO 	Xgetentropy(tls, uintptr(unsafe.Pointer(&testGetentropyBuf[0])), testGetentropySize)
-//TODO 	t.Logf("\n%s", hex.Dump(testGetentropyBuf[:]))
-//TODO }
+const testGetentropySize = 100
 
-//TODO N/A musl 0.6.0
-// TODO func TestReallocArray(t *testing.T) {
-// TODO 	const size = 16
-// TODO 	p := Xmalloc(tls, size)
-// TODO 	if p == 0 {
-// TODO 		t.Fatal()
-// TODO 	}
-// TODO
-// TODO 	//TODO defer Xfree(tls, p), crashes
-// TODO
-// TODO 	for i := 0; i < size; i++ {
-// TODO 		unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i] = byte(i ^ 0x55)
-// TODO 	}
-// TODO
-// TODO 	q := Xreallocarray(tls, p, 2, size)
-// TODO 	if q == 0 {
-// TODO 		t.Fatal()
-// TODO 	}
-// TODO
-// TODO 	for i := 0; i < size; i++ {
-// TODO 		if g, e := unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i], byte(i^0x55); g != e {
-// TODO 			t.Fatal(i, g, e)
-// TODO 		}
-// TODO 	}
-// TODO }
+var testGetentropyBuf [testGetentropySize]byte
+
+func TestGetentropy(t *testing.T) {
+	tls := NewTLS()
+
+	defer tls.Close()
+
+	Xgetentropy(tls, uintptr(unsafe.Pointer(&testGetentropyBuf[0])), testGetentropySize)
+	t.Logf("\n%s", hex.Dump(testGetentropyBuf[:]))
+}
+
+func TestReallocArray(t *testing.T) {
+	tls := NewTLS()
+
+	defer tls.Close()
+
+	const size = 16
+	p := Xmalloc(tls, size)
+	if p == 0 {
+		t.Fatal()
+	}
+
+	//TODO defer Xfree(tls, p), crashes
+
+	for i := 0; i < size; i++ {
+		unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i] = byte(i ^ 0x55)
+	}
+
+	q := Xreallocarray(tls, p, 2, size)
+	if q == 0 {
+		t.Fatal()
+	}
+
+	for i := 0; i < size; i++ {
+		if g, e := unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i], byte(i^0x55); g != e {
+			t.Fatal(i, g, e)
+		}
+	}
+}
 
 func mustTestCString(s string) uintptr {
 	r, err := testCString(s)
