@@ -1223,7 +1223,11 @@ func _submit(tls *TLS, cb uintptr, op int32) (r int32) {
 	var _ /* td at bp+312 */ uintptr
 	ret = 0
 	q = ___aio_get_queue(tls, (*Taiocb)(unsafe.Pointer(cb)).Faio_fildes, int32(1))
-	*(*Taio_args)(unsafe.Pointer(bp + 320)) = Taio_args{Fcb: cb, Fq: q, Fop: op}
+	*(*Taio_args)(unsafe.Pointer(bp + 320)) = Taio_args{
+		Fcb: cb,
+		Fq:  q,
+		Fop: op,
+	}
 	x_sem_init(tls, uintptr(unsafe.Pointer(&(*(*Taio_args)(unsafe.Pointer(bp + 320))).Fsem)), 0, uint32(0))
 	if !(q != 0) {
 		if *(*int32)(unsafe.Pointer(x___errno_location(tls))) != int32(m_EBADF) {
@@ -1704,7 +1708,8 @@ func x___ldexp_cexp(tls *TLS, z complex128, expt int32) (r complex128) {
 	scale2 = *(*float64)(unsafe.Pointer(&v2))
 	v3 = [2]float64{
 		0: x_cos(tls, y) * exp_x * scale1 * scale2,
-		1: x_sin(tls, y) * exp_x * scale1 * scale2}
+		1: x_sin(tls, y) * exp_x * scale1 * scale2,
+	}
 	return *(*complex128)(unsafe.Pointer(&v3))
 }
 
@@ -1750,7 +1755,8 @@ func x___ldexp_cexpf(tls *TLS, z complex64, expt int32) (r complex64) {
 	scale2 = *(*float32)(unsafe.Pointer(&v2))
 	v3 = [2]float32{
 		0: x_cosf(tls, y) * exp_x * scale1 * scale2,
-		1: x_sinf(tls, y) * exp_x * scale1 * scale2}
+		1: x_sinf(tls, y) * exp_x * scale1 * scale2,
+	}
 	return *(*complex64)(unsafe.Pointer(&v3))
 }
 
@@ -1771,7 +1777,8 @@ func x_cacos(tls *TLS, z complex128) (r complex128) {
 	z = x_casin(tls, z)
 	v1 = [2]float64{
 		0: float64(1.5707963267948966) - Float64FromComplex128(z),
-		1: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]}
+		1: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
+	}
 	return *(*complex128)(unsafe.Pointer(&v1))
 }
 
@@ -1784,7 +1791,8 @@ func x_cacosf(tls *TLS, z complex64) (r complex64) {
 	z = x_casinf(tls, z)
 	v1 = [2]float32{
 		0: _float_pi_2 - Float32FromComplex64(z),
-		1: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)]}
+		1: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
+	}
 	return *(*complex64)(unsafe.Pointer(&v1))
 }
 
@@ -1796,12 +1804,14 @@ func x_cacosh(tls *TLS, z complex128) (r complex128) {
 	if zineg != 0 {
 		v1 = [2]float64{
 			0: +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-			1: -Float64FromComplex128(z)}
+			1: -Float64FromComplex128(z),
+		}
 		return *(*complex128)(unsafe.Pointer(&v1))
 	} else {
 		v2 = [2]float64{
 			0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-			1: Float64FromComplex128(z)}
+			1: Float64FromComplex128(z),
+		}
 		return *(*complex128)(unsafe.Pointer(&v2))
 	}
 	return r
@@ -1815,12 +1825,14 @@ func x_cacoshf(tls *TLS, z complex64) (r complex64) {
 	if zineg != 0 {
 		v1 = [2]float32{
 			0: +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-			1: -Float32FromComplex64(z)}
+			1: -Float32FromComplex64(z),
+		}
 		return *(*complex64)(unsafe.Pointer(&v1))
 	} else {
 		v2 = [2]float32{
 			0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-			1: Float32FromComplex64(z)}
+			1: Float32FromComplex64(z),
+		}
 		return *(*complex64)(unsafe.Pointer(&v2))
 	}
 	return r
@@ -1854,15 +1866,18 @@ func x_casin(tls *TLS, z complex128) (r1 complex128) {
 	y = +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]
 	v1 = [2]float64{
 		0: float64(1) - (x-y)*(x+y),
-		1: -Float64FromFloat64(2) * x * y}
+		1: -Float64FromFloat64(2) * x * y,
+	}
 	w = *(*complex128)(unsafe.Pointer(&v1))
 	v2 = [2]float64{
 		0: -y,
-		1: x}
+		1: x,
+	}
 	r = x_clog(tls, *(*complex128)(unsafe.Pointer(&v2))+x_csqrt(tls, w))
 	v3 = [2]float64{
 		0: +(*(*[2]float64)(unsafe.Pointer(&r)))[int32(1)],
-		1: -Float64FromComplex128(r)}
+		1: -Float64FromComplex128(r),
+	}
 	return *(*complex128)(unsafe.Pointer(&v3))
 }
 
@@ -1874,15 +1889,18 @@ func x_casinf(tls *TLS, z complex64) (r1 complex64) {
 	y = +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)]
 	v1 = [2]float32{
 		0: float32(Float64FromFloat64(1) - float64((x-y)*(x+y))),
-		1: float32(-Float64FromFloat64(2) * float64(x) * float64(y))}
+		1: float32(-Float64FromFloat64(2) * float64(x) * float64(y)),
+	}
 	w = *(*complex64)(unsafe.Pointer(&v1))
 	v2 = [2]float32{
 		0: -y,
-		1: x}
+		1: x,
+	}
 	r = x_clogf(tls, *(*complex64)(unsafe.Pointer(&v2))+x_csqrtf(tls, w))
 	v3 = [2]float32{
 		0: +(*(*[2]float32)(unsafe.Pointer(&r)))[int32(1)],
-		1: -Float32FromComplex64(r)}
+		1: -Float32FromComplex64(r),
+	}
 	return *(*complex64)(unsafe.Pointer(&v3))
 }
 
@@ -1890,11 +1908,13 @@ func x_casinh(tls *TLS, z complex128) (r complex128) {
 	var v1, v2 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float64FromComplex128(z)}
+		1: Float64FromComplex128(z),
+	}
 	z = x_casin(tls, *(*complex128)(unsafe.Pointer(&v1)))
 	v2 = [2]float64{
 		0: +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-		1: -Float64FromComplex128(z)}
+		1: -Float64FromComplex128(z),
+	}
 	return *(*complex128)(unsafe.Pointer(&v2))
 }
 
@@ -1902,11 +1922,13 @@ func x_casinhf(tls *TLS, z complex64) (r complex64) {
 	var v1, v2 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float32FromComplex64(z)}
+		1: Float32FromComplex64(z),
+	}
 	z = x_casinf(tls, *(*complex64)(unsafe.Pointer(&v1)))
 	v2 = [2]float32{
 		0: +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-		1: -Float32FromComplex64(z)}
+		1: -Float32FromComplex64(z),
+	}
 	return *(*complex64)(unsafe.Pointer(&v2))
 }
 
@@ -1953,7 +1975,8 @@ func x_catan(tls *TLS, z complex128) (r complex128) {
 	a = (x2 + t*t) / a
 	v1 = [2]float64{
 		0: Float64FromComplex128(w),
-		1: float64(0.25) * x_log(tls, a)}
+		1: float64(0.25) * x_log(tls, a),
+	}
 	w = *(*complex128)(unsafe.Pointer(&v1))
 	return w
 }
@@ -1996,7 +2019,8 @@ func x_catanf(tls *TLS, z complex64) (r complex64) {
 	a = (x2 + t*t) / a
 	v1 = [2]float32{
 		0: Float32FromComplex64(w),
-		1: Float32FromFloat32(0.25) * x_logf(tls, a)}
+		1: Float32FromFloat32(0.25) * x_logf(tls, a),
+	}
 	w = *(*complex64)(unsafe.Pointer(&v1))
 	return w
 }
@@ -2005,11 +2029,13 @@ func x_catanh(tls *TLS, z complex128) (r complex128) {
 	var v1, v2 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float64FromComplex128(z)}
+		1: Float64FromComplex128(z),
+	}
 	z = x_catan(tls, *(*complex128)(unsafe.Pointer(&v1)))
 	v2 = [2]float64{
 		0: +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-		1: -Float64FromComplex128(z)}
+		1: -Float64FromComplex128(z),
+	}
 	return *(*complex128)(unsafe.Pointer(&v2))
 }
 
@@ -2017,11 +2043,13 @@ func x_catanhf(tls *TLS, z complex64) (r complex64) {
 	var v1, v2 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float32FromComplex64(z)}
+		1: Float32FromComplex64(z),
+	}
 	z = x_catanf(tls, *(*complex64)(unsafe.Pointer(&v1)))
 	v2 = [2]float32{
 		0: +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-		1: -Float32FromComplex64(z)}
+		1: -Float32FromComplex64(z),
+	}
 	return *(*complex64)(unsafe.Pointer(&v2))
 }
 
@@ -2037,7 +2065,8 @@ func x_ccos(tls *TLS, z complex128) (r complex128) {
 	var v1 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float64FromComplex128(z)}
+		1: Float64FromComplex128(z),
+	}
 	return x_ccosh(tls, *(*complex128)(unsafe.Pointer(&v1)))
 }
 
@@ -2045,7 +2074,8 @@ func x_ccosf(tls *TLS, z complex64) (r complex64) {
 	var v1 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float32FromComplex64(z)}
+		1: Float32FromComplex64(z),
+	}
 	return x_ccoshf(tls, *(*complex64)(unsafe.Pointer(&v1)))
 }
 
@@ -2071,13 +2101,15 @@ func x_ccosh(tls *TLS, z complex128) (r complex128) {
 		if iy|ly == 0 {
 			v1 = [2]float64{
 				0: x_cosh(tls, x),
-				1: x * y}
+				1: x * y,
+			}
 			return *(*complex128)(unsafe.Pointer(&v1))
 		}
 		if ix < int32(0x40360000) { /* small x: normal case */
 			v2 = [2]float64{
 				0: x_cosh(tls, x) * x_cos(tls, y),
-				1: x_sinh(tls, x) * x_sin(tls, y)}
+				1: x_sinh(tls, x) * x_sin(tls, y),
+			}
 			return *(*complex128)(unsafe.Pointer(&v2))
 		}
 		/* |x| >= 22, so cosh(x) ~= exp(|x|) */
@@ -2086,25 +2118,29 @@ func x_ccosh(tls *TLS, z complex128) (r complex128) {
 			h = x_exp(tls, _fabs(tls, x)) * float64(0.5)
 			v3 = [2]float64{
 				0: h * x_cos(tls, y),
-				1: x_copysign(tls, h, x) * x_sin(tls, y)}
+				1: x_copysign(tls, h, x) * x_sin(tls, y),
+			}
 			return *(*complex128)(unsafe.Pointer(&v3))
 		} else {
 			if ix < int32(0x4096bbaa) {
 				/* x < 1455: scale to avoid overflow */
 				v4 = [2]float64{
 					0: _fabs(tls, x),
-					1: y}
+					1: y,
+				}
 				z = x___ldexp_cexp(tls, *(*complex128)(unsafe.Pointer(&v4)), -int32(1))
 				v5 = [2]float64{
 					0: Float64FromComplex128(z),
-					1: +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)] * x_copysign(tls, Float64FromInt32(1), x)}
+					1: +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)] * x_copysign(tls, Float64FromInt32(1), x),
+				}
 				return *(*complex128)(unsafe.Pointer(&v5))
 			} else {
 				/* x >= 1455: the result always overflows */
 				h = _huge * x
 				v6 = [2]float64{
 					0: h * h * x_cos(tls, y),
-					1: h * x_sin(tls, y)}
+					1: h * x_sin(tls, y),
+				}
 				return *(*complex128)(unsafe.Pointer(&v6))
 			}
 		}
@@ -2121,7 +2157,8 @@ func x_ccosh(tls *TLS, z complex128) (r complex128) {
 	if ix|lx == 0 && iy >= int32(0x7ff00000) {
 		v7 = [2]float64{
 			0: y - y,
-			1: x_copysign(tls, Float64FromInt32(0), x*(y-y))}
+			1: x_copysign(tls, Float64FromInt32(0), x*(y-y)),
+		}
 		return *(*complex128)(unsafe.Pointer(&v7))
 	}
 	/*
@@ -2134,12 +2171,14 @@ func x_ccosh(tls *TLS, z complex128) (r complex128) {
 		if hx&int32(0xfffff)|lx == 0 {
 			v8 = [2]float64{
 				0: x * x,
-				1: x_copysign(tls, Float64FromInt32(0), x) * y}
+				1: x_copysign(tls, Float64FromInt32(0), x) * y,
+			}
 			return *(*complex128)(unsafe.Pointer(&v8))
 		}
 		v9 = [2]float64{
 			0: x * x,
-			1: x_copysign(tls, Float64FromInt32(0), (x+x)*y)}
+			1: x_copysign(tls, Float64FromInt32(0), (x+x)*y),
+		}
 		return *(*complex128)(unsafe.Pointer(&v9))
 	}
 	/*
@@ -2153,7 +2192,8 @@ func x_ccosh(tls *TLS, z complex128) (r complex128) {
 	if ix < int32(0x7ff00000) && iy >= int32(0x7ff00000) {
 		v10 = [2]float64{
 			0: y - y,
-			1: x * (y - y)}
+			1: x * (y - y),
+		}
 		return *(*complex128)(unsafe.Pointer(&v10))
 	}
 	/*
@@ -2169,12 +2209,14 @@ func x_ccosh(tls *TLS, z complex128) (r complex128) {
 		if iy >= int32(0x7ff00000) {
 			v11 = [2]float64{
 				0: x * x,
-				1: x * (y - y)}
+				1: x * (y - y),
+			}
 			return *(*complex128)(unsafe.Pointer(&v11))
 		}
 		v12 = [2]float64{
 			0: x * x * x_cos(tls, y),
-			1: x * x_sin(tls, y)}
+			1: x * x_sin(tls, y),
+		}
 		return *(*complex128)(unsafe.Pointer(&v12))
 	}
 	/*
@@ -2190,7 +2232,8 @@ func x_ccosh(tls *TLS, z complex128) (r complex128) {
 	 */
 	v13 = [2]float64{
 		0: x * x * (y - y),
-		1: (x + x) * (y - y)}
+		1: (x + x) * (y - y),
+	}
 	return *(*complex128)(unsafe.Pointer(&v13))
 }
 
@@ -2210,13 +2253,15 @@ func x_ccoshf(tls *TLS, z complex64) (r complex64) {
 		if iy == 0 {
 			v1 = [2]float32{
 				0: x_coshf(tls, x),
-				1: x * y}
+				1: x * y,
+			}
 			return *(*complex64)(unsafe.Pointer(&v1))
 		}
 		if ix < int32(0x41100000) { /* small x: normal case */
 			v2 = [2]float32{
 				0: x_coshf(tls, x) * x_cosf(tls, y),
-				1: x_sinhf(tls, x) * x_sinf(tls, y)}
+				1: x_sinhf(tls, x) * x_sinf(tls, y),
+			}
 			return *(*complex64)(unsafe.Pointer(&v2))
 		}
 		/* |x| >= 9, so cosh(x) ~= exp(|x|) */
@@ -2225,25 +2270,29 @@ func x_ccoshf(tls *TLS, z complex64) (r complex64) {
 			h = x_expf(tls, _fabsf(tls, x)) * Float32FromFloat32(0.5)
 			v3 = [2]float32{
 				0: h * x_cosf(tls, y),
-				1: x_copysignf(tls, h, x) * x_sinf(tls, y)}
+				1: x_copysignf(tls, h, x) * x_sinf(tls, y),
+			}
 			return *(*complex64)(unsafe.Pointer(&v3))
 		} else {
 			if ix < int32(0x4340b1e7) {
 				/* x < 192.7: scale to avoid overflow */
 				v4 = [2]float32{
 					0: _fabsf(tls, x),
-					1: y}
+					1: y,
+				}
 				z = x___ldexp_cexpf(tls, *(*complex64)(unsafe.Pointer(&v4)), -int32(1))
 				v5 = [2]float32{
 					0: Float32FromComplex64(z),
-					1: +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)] * x_copysignf(tls, Float32FromInt32(1), x)}
+					1: +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)] * x_copysignf(tls, Float32FromInt32(1), x),
+				}
 				return *(*complex64)(unsafe.Pointer(&v5))
 			} else {
 				/* x >= 192.7: the result always overflows */
 				h = _huge1 * x
 				v6 = [2]float32{
 					0: h * h * x_cosf(tls, y),
-					1: h * x_sinf(tls, y)}
+					1: h * x_sinf(tls, y),
+				}
 				return *(*complex64)(unsafe.Pointer(&v6))
 			}
 		}
@@ -2251,42 +2300,49 @@ func x_ccoshf(tls *TLS, z complex64) (r complex64) {
 	if ix == 0 && iy >= int32(0x7f800000) {
 		v7 = [2]float32{
 			0: y - y,
-			1: x_copysignf(tls, Float32FromInt32(0), x*(y-y))}
+			1: x_copysignf(tls, Float32FromInt32(0), x*(y-y)),
+		}
 		return *(*complex64)(unsafe.Pointer(&v7))
 	}
 	if iy == 0 && ix >= int32(0x7f800000) {
 		if hx&int32(0x7fffff) == 0 {
 			v8 = [2]float32{
 				0: x * x,
-				1: x_copysignf(tls, Float32FromInt32(0), x) * y}
+				1: x_copysignf(tls, Float32FromInt32(0), x) * y,
+			}
 			return *(*complex64)(unsafe.Pointer(&v8))
 		}
 		v9 = [2]float32{
 			0: x * x,
-			1: x_copysignf(tls, Float32FromInt32(0), (x+x)*y)}
+			1: x_copysignf(tls, Float32FromInt32(0), (x+x)*y),
+		}
 		return *(*complex64)(unsafe.Pointer(&v9))
 	}
 	if ix < int32(0x7f800000) && iy >= int32(0x7f800000) {
 		v10 = [2]float32{
 			0: y - y,
-			1: x * (y - y)}
+			1: x * (y - y),
+		}
 		return *(*complex64)(unsafe.Pointer(&v10))
 	}
 	if ix >= int32(0x7f800000) && hx&int32(0x7fffff) == 0 {
 		if iy >= int32(0x7f800000) {
 			v11 = [2]float32{
 				0: x * x,
-				1: x * (y - y)}
+				1: x * (y - y),
+			}
 			return *(*complex64)(unsafe.Pointer(&v11))
 		}
 		v12 = [2]float32{
 			0: x * x * x_cosf(tls, y),
-			1: x * x_sinf(tls, y)}
+			1: x * x_sinf(tls, y),
+		}
 		return *(*complex64)(unsafe.Pointer(&v12))
 	}
 	v13 = [2]float32{
 		0: x * x * (y - y),
-		1: (x + x) * (y - y)}
+		1: (x + x) * (y - y),
+	}
 	return *(*complex64)(unsafe.Pointer(&v13))
 }
 
@@ -2319,7 +2375,8 @@ func x_cexp(tls *TLS, z complex128) (r complex128) {
 	if hy|ly == uint32(0) {
 		v1 = [2]float64{
 			0: x_exp(tls, x),
-			1: y}
+			1: y,
+		}
 		return *(*complex128)(unsafe.Pointer(&v1))
 	}
 	__u1 = *(*uint64)(unsafe.Pointer(&x))
@@ -2329,7 +2386,8 @@ func x_cexp(tls *TLS, z complex128) (r complex128) {
 	if hx&uint32(0x7fffffff)|lx == uint32(0) {
 		v2 = [2]float64{
 			0: x_cos(tls, y),
-			1: x_sin(tls, y)}
+			1: x_sin(tls, y),
+		}
 		return *(*complex128)(unsafe.Pointer(&v2))
 	}
 	if hy >= uint32(0x7ff00000) {
@@ -2337,7 +2395,8 @@ func x_cexp(tls *TLS, z complex128) (r complex128) {
 			/* cexp(finite|NaN +- I Inf|NaN) = NaN + I NaN */
 			v3 = [2]float64{
 				0: y - y,
-				1: y - y}
+				1: y - y,
+			}
 			return *(*complex128)(unsafe.Pointer(&v3))
 		} else {
 			if hx&uint32(0x80000000) != 0 {
@@ -2348,7 +2407,8 @@ func x_cexp(tls *TLS, z complex128) (r complex128) {
 				/* cexp(+Inf +- I Inf|NaN) = Inf + I NaN */
 				v5 = [2]float64{
 					0: x,
-					1: y - y}
+					1: y - y,
+				}
 				return *(*complex128)(unsafe.Pointer(&v5))
 			}
 		}
@@ -2370,7 +2430,8 @@ func x_cexp(tls *TLS, z complex128) (r complex128) {
 		exp_x = x_exp(tls, x)
 		v6 = [2]float64{
 			0: exp_x * x_cos(tls, y),
-			1: exp_x * x_sin(tls, y)}
+			1: exp_x * x_sin(tls, y),
+		}
 		return *(*complex128)(unsafe.Pointer(&v6))
 	}
 	return r
@@ -2391,7 +2452,8 @@ func x_cexpf(tls *TLS, z complex64) (r complex64) {
 	if hy == uint32(0) {
 		v1 = [2]float32{
 			0: x_expf(tls, x),
-			1: y}
+			1: y,
+		}
 		return *(*complex64)(unsafe.Pointer(&v1))
 	}
 	hx = *(*uint32)(unsafe.Pointer(&x))
@@ -2399,7 +2461,8 @@ func x_cexpf(tls *TLS, z complex64) (r complex64) {
 	if hx&uint32(0x7fffffff) == uint32(0) {
 		v2 = [2]float32{
 			0: x_cosf(tls, y),
-			1: x_sinf(tls, y)}
+			1: x_sinf(tls, y),
+		}
 		return *(*complex64)(unsafe.Pointer(&v2))
 	}
 	if hy >= uint32(0x7f800000) {
@@ -2407,7 +2470,8 @@ func x_cexpf(tls *TLS, z complex64) (r complex64) {
 			/* cexp(finite|NaN +- I Inf|NaN) = NaN + I NaN */
 			v3 = [2]float32{
 				0: y - y,
-				1: y - y}
+				1: y - y,
+			}
 			return *(*complex64)(unsafe.Pointer(&v3))
 		} else {
 			if hx&uint32(0x80000000) != 0 {
@@ -2418,7 +2482,8 @@ func x_cexpf(tls *TLS, z complex64) (r complex64) {
 				/* cexp(+Inf +- I Inf|NaN) = Inf + I NaN */
 				v5 = [2]float32{
 					0: x,
-					1: y - y}
+					1: y - y,
+				}
 				return *(*complex64)(unsafe.Pointer(&v5))
 			}
 		}
@@ -2440,7 +2505,8 @@ func x_cexpf(tls *TLS, z complex64) (r complex64) {
 		exp_x = x_expf(tls, x)
 		v6 = [2]float32{
 			0: exp_x * x_cosf(tls, y),
-			1: exp_x * x_sinf(tls, y)}
+			1: exp_x * x_sinf(tls, y),
+		}
 		return *(*complex64)(unsafe.Pointer(&v6))
 	}
 	return r
@@ -2472,7 +2538,8 @@ func x_clog(tls *TLS, z complex128) (r1 complex128) {
 	phi = x_carg(tls, z)
 	v1 = [2]float64{
 		0: x_log(tls, r),
-		1: phi}
+		1: phi,
+	}
 	return *(*complex128)(unsafe.Pointer(&v1))
 }
 
@@ -2483,7 +2550,8 @@ func x_clogf(tls *TLS, z complex64) (r1 complex64) {
 	phi = x_cargf(tls, z)
 	v1 = [2]float32{
 		0: x_logf(tls, r),
-		1: phi}
+		1: phi,
+	}
 	return *(*complex64)(unsafe.Pointer(&v1))
 }
 
@@ -2495,7 +2563,8 @@ func x_conj(tls *TLS, z complex128) (r complex128) {
 	var v1 [2]float64
 	v1 = [2]float64{
 		0: Float64FromComplex128(z),
-		1: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]}
+		1: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
+	}
 	return *(*complex128)(unsafe.Pointer(&v1))
 }
 
@@ -2503,7 +2572,8 @@ func x_conjf(tls *TLS, z complex64) (r complex64) {
 	var v1 [2]float32
 	v1 = [2]float32{
 		0: Float32FromComplex64(z),
-		1: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)]}
+		1: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
+	}
 	return *(*complex64)(unsafe.Pointer(&v1))
 }
 
@@ -2511,7 +2581,8 @@ func x_conjl(tls *TLS, z complex128) (r complex128) {
 	var v1 [2]float64
 	v1 = [2]float64{
 		0: Float64FromComplex128(z),
-		1: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]}
+		1: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
+	}
 	return *(*complex128)(unsafe.Pointer(&v1))
 }
 
@@ -2534,7 +2605,8 @@ func x_cproj(tls *TLS, z complex128) (r complex128) {
 	if BoolInt32(___DOUBLE_BITS(tls, Float64FromComplex128(z))&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 || BoolInt32(___DOUBLE_BITS(tls, +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)])&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 		v1 = [2]float64{
 			0: float64(___builtin_inff(tls)),
-			1: x_copysign(tls, float64(0), +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)])}
+			1: x_copysign(tls, float64(0), +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]),
+		}
 		return *(*complex128)(unsafe.Pointer(&v1))
 	}
 	return z
@@ -2545,7 +2617,8 @@ func x_cprojf(tls *TLS, z complex64) (r complex64) {
 	if BoolInt32(___FLOAT_BITS(tls, Float32FromComplex64(z))&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 || BoolInt32(___FLOAT_BITS(tls, +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)])&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 {
 		v1 = [2]float32{
 			0: ___builtin_inff(tls),
-			1: x_copysignf(tls, float32(0), +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)])}
+			1: x_copysignf(tls, float32(0), +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)]),
+		}
 		return *(*complex64)(unsafe.Pointer(&v1))
 	}
 	return z
@@ -2571,11 +2644,13 @@ func x_csin(tls *TLS, z complex128) (r complex128) {
 	var v1, v2 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float64FromComplex128(z)}
+		1: Float64FromComplex128(z),
+	}
 	z = x_csinh(tls, *(*complex128)(unsafe.Pointer(&v1)))
 	v2 = [2]float64{
 		0: +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-		1: -Float64FromComplex128(z)}
+		1: -Float64FromComplex128(z),
+	}
 	return *(*complex128)(unsafe.Pointer(&v2))
 }
 
@@ -2583,11 +2658,13 @@ func x_csinf(tls *TLS, z complex64) (r complex64) {
 	var v1, v2 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float32FromComplex64(z)}
+		1: Float32FromComplex64(z),
+	}
 	z = x_csinhf(tls, *(*complex64)(unsafe.Pointer(&v1)))
 	v2 = [2]float32{
 		0: +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-		1: -Float32FromComplex64(z)}
+		1: -Float32FromComplex64(z),
+	}
 	return *(*complex64)(unsafe.Pointer(&v2))
 }
 
@@ -2613,13 +2690,15 @@ func x_csinh(tls *TLS, z complex128) (r complex128) {
 		if iy|ly == 0 {
 			v1 = [2]float64{
 				0: x_sinh(tls, x),
-				1: y}
+				1: y,
+			}
 			return *(*complex128)(unsafe.Pointer(&v1))
 		}
 		if ix < int32(0x40360000) { /* small x: normal case */
 			v2 = [2]float64{
 				0: x_sinh(tls, x) * x_cos(tls, y),
-				1: x_cosh(tls, x) * x_sin(tls, y)}
+				1: x_cosh(tls, x) * x_sin(tls, y),
+			}
 			return *(*complex128)(unsafe.Pointer(&v2))
 		}
 		/* |x| >= 22, so cosh(x) ~= exp(|x|) */
@@ -2628,25 +2707,29 @@ func x_csinh(tls *TLS, z complex128) (r complex128) {
 			h = x_exp(tls, _fabs(tls, x)) * float64(0.5)
 			v3 = [2]float64{
 				0: x_copysign(tls, h, x) * x_cos(tls, y),
-				1: h * x_sin(tls, y)}
+				1: h * x_sin(tls, y),
+			}
 			return *(*complex128)(unsafe.Pointer(&v3))
 		} else {
 			if ix < int32(0x4096bbaa) {
 				/* x < 1455: scale to avoid overflow */
 				v4 = [2]float64{
 					0: _fabs(tls, x),
-					1: y}
+					1: y,
+				}
 				z = x___ldexp_cexp(tls, *(*complex128)(unsafe.Pointer(&v4)), -int32(1))
 				v5 = [2]float64{
 					0: Float64FromComplex128(z) * x_copysign(tls, Float64FromInt32(1), x),
-					1: +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]}
+					1: +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
+				}
 				return *(*complex128)(unsafe.Pointer(&v5))
 			} else {
 				/* x >= 1455: the result always overflows */
 				h = _huge2 * x
 				v6 = [2]float64{
 					0: h * x_cos(tls, y),
-					1: h * h * x_sin(tls, y)}
+					1: h * h * x_sin(tls, y),
+				}
 				return *(*complex128)(unsafe.Pointer(&v6))
 			}
 		}
@@ -2663,7 +2746,8 @@ func x_csinh(tls *TLS, z complex128) (r complex128) {
 	if ix|lx == 0 && iy >= int32(0x7ff00000) {
 		v7 = [2]float64{
 			0: x_copysign(tls, Float64FromInt32(0), x*(y-y)),
-			1: y - y}
+			1: y - y,
+		}
 		return *(*complex128)(unsafe.Pointer(&v7))
 	}
 	/*
@@ -2675,12 +2759,14 @@ func x_csinh(tls *TLS, z complex128) (r complex128) {
 		if hx&int32(0xfffff)|lx == 0 {
 			v8 = [2]float64{
 				0: x,
-				1: y}
+				1: y,
+			}
 			return *(*complex128)(unsafe.Pointer(&v8))
 		}
 		v9 = [2]float64{
 			0: x,
-			1: x_copysign(tls, Float64FromInt32(0), y)}
+			1: x_copysign(tls, Float64FromInt32(0), y),
+		}
 		return *(*complex128)(unsafe.Pointer(&v9))
 	}
 	/*
@@ -2694,7 +2780,8 @@ func x_csinh(tls *TLS, z complex128) (r complex128) {
 	if ix < int32(0x7ff00000) && iy >= int32(0x7ff00000) {
 		v10 = [2]float64{
 			0: y - y,
-			1: x * (y - y)}
+			1: x * (y - y),
+		}
 		return *(*complex128)(unsafe.Pointer(&v10))
 	}
 	/*
@@ -2712,12 +2799,14 @@ func x_csinh(tls *TLS, z complex128) (r complex128) {
 		if iy >= int32(0x7ff00000) {
 			v11 = [2]float64{
 				0: x * x,
-				1: x * (y - y)}
+				1: x * (y - y),
+			}
 			return *(*complex128)(unsafe.Pointer(&v11))
 		}
 		v12 = [2]float64{
 			0: x * x_cos(tls, y),
-			1: float64(___builtin_inff(tls)) * x_sin(tls, y)}
+			1: float64(___builtin_inff(tls)) * x_sin(tls, y),
+		}
 		return *(*complex128)(unsafe.Pointer(&v12))
 	}
 	/*
@@ -2733,7 +2822,8 @@ func x_csinh(tls *TLS, z complex128) (r complex128) {
 	 */
 	v13 = [2]float64{
 		0: x * x * (y - y),
-		1: (x + x) * (y - y)}
+		1: (x + x) * (y - y),
+	}
 	return *(*complex128)(unsafe.Pointer(&v13))
 }
 
@@ -2753,13 +2843,15 @@ func x_csinhf(tls *TLS, z complex64) (r complex64) {
 		if iy == 0 {
 			v1 = [2]float32{
 				0: x_sinhf(tls, x),
-				1: y}
+				1: y,
+			}
 			return *(*complex64)(unsafe.Pointer(&v1))
 		}
 		if ix < int32(0x41100000) { /* small x: normal case */
 			v2 = [2]float32{
 				0: x_sinhf(tls, x) * x_cosf(tls, y),
-				1: x_coshf(tls, x) * x_sinf(tls, y)}
+				1: x_coshf(tls, x) * x_sinf(tls, y),
+			}
 			return *(*complex64)(unsafe.Pointer(&v2))
 		}
 		/* |x| >= 9, so cosh(x) ~= exp(|x|) */
@@ -2768,25 +2860,29 @@ func x_csinhf(tls *TLS, z complex64) (r complex64) {
 			h = x_expf(tls, _fabsf(tls, x)) * Float32FromFloat32(0.5)
 			v3 = [2]float32{
 				0: x_copysignf(tls, h, x) * x_cosf(tls, y),
-				1: h * x_sinf(tls, y)}
+				1: h * x_sinf(tls, y),
+			}
 			return *(*complex64)(unsafe.Pointer(&v3))
 		} else {
 			if ix < int32(0x4340b1e7) {
 				/* x < 192.7: scale to avoid overflow */
 				v4 = [2]float32{
 					0: _fabsf(tls, x),
-					1: y}
+					1: y,
+				}
 				z = x___ldexp_cexpf(tls, *(*complex64)(unsafe.Pointer(&v4)), -int32(1))
 				v5 = [2]float32{
 					0: Float32FromComplex64(z) * x_copysignf(tls, Float32FromInt32(1), x),
-					1: +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)]}
+					1: +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
+				}
 				return *(*complex64)(unsafe.Pointer(&v5))
 			} else {
 				/* x >= 192.7: the result always overflows */
 				h = _huge3 * x
 				v6 = [2]float32{
 					0: h * x_cosf(tls, y),
-					1: h * h * x_sinf(tls, y)}
+					1: h * h * x_sinf(tls, y),
+				}
 				return *(*complex64)(unsafe.Pointer(&v6))
 			}
 		}
@@ -2794,42 +2890,49 @@ func x_csinhf(tls *TLS, z complex64) (r complex64) {
 	if ix == 0 && iy >= int32(0x7f800000) {
 		v7 = [2]float32{
 			0: x_copysignf(tls, Float32FromInt32(0), x*(y-y)),
-			1: y - y}
+			1: y - y,
+		}
 		return *(*complex64)(unsafe.Pointer(&v7))
 	}
 	if iy == 0 && ix >= int32(0x7f800000) {
 		if hx&int32(0x7fffff) == 0 {
 			v8 = [2]float32{
 				0: x,
-				1: y}
+				1: y,
+			}
 			return *(*complex64)(unsafe.Pointer(&v8))
 		}
 		v9 = [2]float32{
 			0: x,
-			1: x_copysignf(tls, Float32FromInt32(0), y)}
+			1: x_copysignf(tls, Float32FromInt32(0), y),
+		}
 		return *(*complex64)(unsafe.Pointer(&v9))
 	}
 	if ix < int32(0x7f800000) && iy >= int32(0x7f800000) {
 		v10 = [2]float32{
 			0: y - y,
-			1: x * (y - y)}
+			1: x * (y - y),
+		}
 		return *(*complex64)(unsafe.Pointer(&v10))
 	}
 	if ix >= int32(0x7f800000) && hx&int32(0x7fffff) == 0 {
 		if iy >= int32(0x7f800000) {
 			v11 = [2]float32{
 				0: x * x,
-				1: x * (y - y)}
+				1: x * (y - y),
+			}
 			return *(*complex64)(unsafe.Pointer(&v11))
 		}
 		v12 = [2]float32{
 			0: x * x_cosf(tls, y),
-			1: ___builtin_inff(tls) * x_sinf(tls, y)}
+			1: ___builtin_inff(tls) * x_sinf(tls, y),
+		}
 		return *(*complex64)(unsafe.Pointer(&v12))
 	}
 	v13 = [2]float32{
 		0: x * x * (y - y),
-		1: (x + x) * (y - y)}
+		1: (x + x) * (y - y),
+	}
 	return *(*complex64)(unsafe.Pointer(&v13))
 }
 
@@ -2855,20 +2958,23 @@ func x_csqrt(tls *TLS, z complex128) (r complex128) {
 	if z == Complex128FromInt32(0) {
 		v1 = [2]float64{
 			0: float64(Int32FromInt32(0)),
-			1: b}
+			1: b,
+		}
 		return *(*complex128)(unsafe.Pointer(&v1))
 	}
 	if BoolInt32(___DOUBLE_BITS(tls, b)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 		v2 = [2]float64{
 			0: float64(___builtin_inff(tls)),
-			1: b}
+			1: b,
+		}
 		return *(*complex128)(unsafe.Pointer(&v2))
 	}
 	if BoolInt32(___DOUBLE_BITS(tls, a)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) > Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 		t = (b - b) / (b - b) /* raise invalid if b is not a NaN */
 		v3 = [2]float64{
 			0: a,
-			1: t}
+			1: t,
+		}
 		return *(*complex128)(unsafe.Pointer(&v3)) /* return NaN + NaN i */
 	}
 	if BoolInt32(___DOUBLE_BITS(tls, a)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
@@ -2881,12 +2987,14 @@ func x_csqrt(tls *TLS, z complex128) (r complex128) {
 		if int32(___DOUBLE_BITS(tls, a)>>Int32FromInt32(63)) != 0 {
 			v4 = [2]float64{
 				0: _fabs(tls, b-b),
-				1: x_copysign(tls, a, b)}
+				1: x_copysign(tls, a, b),
+			}
 			return *(*complex128)(unsafe.Pointer(&v4))
 		} else {
 			v5 = [2]float64{
 				0: a,
-				1: x_copysign(tls, b-b, b)}
+				1: x_copysign(tls, b-b, b),
+			}
 			return *(*complex128)(unsafe.Pointer(&v5))
 		}
 	}
@@ -2907,13 +3015,15 @@ func x_csqrt(tls *TLS, z complex128) (r complex128) {
 		t = x_sqrt(tls, (a+x_hypot(tls, a, b))*float64(0.5))
 		v6 = [2]float64{
 			0: t,
-			1: b / (Float64FromInt32(2) * t)}
+			1: b / (Float64FromInt32(2) * t),
+		}
 		result = *(*complex128)(unsafe.Pointer(&v6))
 	} else {
 		t = x_sqrt(tls, (-a+x_hypot(tls, a, b))*float64(0.5))
 		v7 = [2]float64{
 			0: _fabs(tls, b) / (Float64FromInt32(2) * t),
-			1: x_copysign(tls, t, b)}
+			1: x_copysign(tls, t, b),
+		}
 		result = *(*complex128)(unsafe.Pointer(&v7))
 	}
 	/* Rescale. */
@@ -2933,20 +3043,23 @@ func x_csqrtf(tls *TLS, z complex64) (r complex64) {
 	if z == Complex64FromInt32(0) {
 		v1 = [2]float32{
 			0: float32(Int32FromInt32(0)),
-			1: b}
+			1: b,
+		}
 		return *(*complex64)(unsafe.Pointer(&v1))
 	}
 	if BoolInt32(___FLOAT_BITS(tls, b)&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 {
 		v2 = [2]float32{
 			0: ___builtin_inff(tls),
-			1: b}
+			1: b,
+		}
 		return *(*complex64)(unsafe.Pointer(&v2))
 	}
 	if BoolInt32(___FLOAT_BITS(tls, a)&uint32(0x7fffffff) > uint32(0x7f800000)) != 0 {
 		t = float64((b - b) / (b - b)) /* raise invalid if b is not a NaN */
 		v3 = [2]float32{
 			0: a,
-			1: float32(t)}
+			1: float32(t),
+		}
 		return *(*complex64)(unsafe.Pointer(&v3)) /* return NaN + NaN i */
 	}
 	if BoolInt32(___FLOAT_BITS(tls, a)&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 {
@@ -2959,12 +3072,14 @@ func x_csqrtf(tls *TLS, z complex64) (r complex64) {
 		if int32(___FLOAT_BITS(tls, a)>>Int32FromInt32(31)) != 0 {
 			v4 = [2]float32{
 				0: _fabsf(tls, b-b),
-				1: x_copysignf(tls, a, b)}
+				1: x_copysignf(tls, a, b),
+			}
 			return *(*complex64)(unsafe.Pointer(&v4))
 		} else {
 			v5 = [2]float32{
 				0: a,
-				1: x_copysignf(tls, b-b, b)}
+				1: x_copysignf(tls, b-b, b),
+			}
 			return *(*complex64)(unsafe.Pointer(&v5))
 		}
 	}
@@ -2981,13 +3096,15 @@ func x_csqrtf(tls *TLS, z complex64) (r complex64) {
 		t = x_sqrt(tls, (float64(a)+x_hypot(tls, float64(a), float64(b)))*float64(0.5))
 		v6 = [2]float32{
 			0: float32(t),
-			1: float32(float64(b) / (Float64FromFloat64(2) * t))}
+			1: float32(float64(b) / (Float64FromFloat64(2) * t)),
+		}
 		return *(*complex64)(unsafe.Pointer(&v6))
 	} else {
 		t = x_sqrt(tls, (float64(-a)+x_hypot(tls, float64(a), float64(b)))*float64(0.5))
 		v7 = [2]float32{
 			0: float32(float64(_fabsf(tls, b)) / (Float64FromFloat64(2) * t)),
-			1: x_copysignf(tls, float32(t), b)}
+			1: x_copysignf(tls, float32(t), b),
+		}
 		return *(*complex64)(unsafe.Pointer(&v7))
 	}
 	return r
@@ -3004,11 +3121,13 @@ func x_ctan(tls *TLS, z complex128) (r complex128) {
 	var v1, v2 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float64FromComplex128(z)}
+		1: Float64FromComplex128(z),
+	}
 	z = x_ctanh(tls, *(*complex128)(unsafe.Pointer(&v1)))
 	v2 = [2]float64{
 		0: +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
-		1: -Float64FromComplex128(z)}
+		1: -Float64FromComplex128(z),
+	}
 	return *(*complex128)(unsafe.Pointer(&v2))
 }
 
@@ -3016,11 +3135,13 @@ func x_ctanf(tls *TLS, z complex64) (r complex64) {
 	var v1, v2 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-		1: Float32FromComplex64(z)}
+		1: Float32FromComplex64(z),
+	}
 	z = x_ctanhf(tls, *(*complex64)(unsafe.Pointer(&v1)))
 	v2 = [2]float32{
 		0: +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
-		1: -Float32FromComplex64(z)}
+		1: -Float32FromComplex64(z),
+	}
 	return *(*complex64)(unsafe.Pointer(&v2))
 }
 
@@ -3060,7 +3181,8 @@ func x_ctanh(tls *TLS, z complex128) (r complex128) {
 			}
 			v1 = [2]float64{
 				0: x,
-				1: v2}
+				1: v2,
+			}
 			return *(*complex128)(unsafe.Pointer(&v1))
 		}
 		v3 = uint64(hx-Uint32FromInt32(0x40000000))<<Int32FromInt32(32) | uint64(uint32(*(*uint64)(unsafe.Pointer(&x))))
@@ -3072,7 +3194,8 @@ func x_ctanh(tls *TLS, z complex128) (r complex128) {
 		}
 		v4 = [2]float64{
 			0: x,
-			1: x_copysign(tls, Float64FromInt32(0), v5)}
+			1: x_copysign(tls, Float64FromInt32(0), v5),
+		}
 		return *(*complex128)(unsafe.Pointer(&v4))
 	}
 	/*
@@ -3089,7 +3212,8 @@ func x_ctanh(tls *TLS, z complex128) (r complex128) {
 		}
 		v6 = [2]float64{
 			0: v7,
-			1: y - y}
+			1: y - y,
+		}
 		return *(*complex128)(unsafe.Pointer(&v6))
 	}
 	/*
@@ -3102,7 +3226,8 @@ func x_ctanh(tls *TLS, z complex128) (r complex128) {
 		exp_mx = x_exp(tls, -_fabs(tls, x))
 		v8 = [2]float64{
 			0: x_copysign(tls, Float64FromInt32(1), x),
-			1: Float64FromInt32(4) * x_sin(tls, y) * x_cos(tls, y) * exp_mx * exp_mx}
+			1: Float64FromInt32(4) * x_sin(tls, y) * x_cos(tls, y) * exp_mx * exp_mx,
+		}
 		return *(*complex128)(unsafe.Pointer(&v8))
 	}
 	/* Kahan's algorithm */
@@ -3113,7 +3238,8 @@ func x_ctanh(tls *TLS, z complex128) (r complex128) {
 	denom = Float64FromInt32(1) + beta*s*s
 	v9 = [2]float64{
 		0: beta * rho * s / denom,
-		1: t / denom}
+		1: t / denom,
+	}
 	return *(*complex128)(unsafe.Pointer(&v9))
 }
 
@@ -3134,7 +3260,8 @@ func x_ctanhf(tls *TLS, z complex64) (r complex64) {
 			}
 			v1 = [2]float32{
 				0: x,
-				1: v2}
+				1: v2,
+			}
 			return *(*complex64)(unsafe.Pointer(&v1))
 		}
 		v3 = hx - uint32(0x40000000)
@@ -3146,7 +3273,8 @@ func x_ctanhf(tls *TLS, z complex64) (r complex64) {
 		}
 		v4 = [2]float32{
 			0: x,
-			1: x_copysignf(tls, Float32FromInt32(0), v5)}
+			1: x_copysignf(tls, Float32FromInt32(0), v5),
+		}
 		return *(*complex64)(unsafe.Pointer(&v4))
 	}
 	if !(BoolInt32(___FLOAT_BITS(tls, y)&Uint32FromInt32(0x7fffffff) < Uint32FromInt32(0x7f800000)) != 0) {
@@ -3157,7 +3285,8 @@ func x_ctanhf(tls *TLS, z complex64) (r complex64) {
 		}
 		v6 = [2]float32{
 			0: v7,
-			1: y - y}
+			1: y - y,
+		}
 		return *(*complex64)(unsafe.Pointer(&v6))
 	}
 	if ix >= uint32(0x41300000) {
@@ -3165,7 +3294,8 @@ func x_ctanhf(tls *TLS, z complex64) (r complex64) {
 		exp_mx = x_expf(tls, -_fabsf(tls, x))
 		v8 = [2]float32{
 			0: x_copysignf(tls, Float32FromInt32(1), x),
-			1: Float32FromInt32(4) * x_sinf(tls, y) * x_cosf(tls, y) * exp_mx * exp_mx}
+			1: Float32FromInt32(4) * x_sinf(tls, y) * x_cosf(tls, y) * exp_mx * exp_mx,
+		}
 		return *(*complex64)(unsafe.Pointer(&v8))
 	}
 	t = x_tanf(tls, y)
@@ -3175,7 +3305,8 @@ func x_ctanhf(tls *TLS, z complex64) (r complex64) {
 	denom = Float32FromInt32(1) + beta*s*s
 	v9 = [2]float32{
 		0: beta * rho * s / denom,
-		1: t / denom}
+		1: t / denom,
+	}
 	return *(*complex64)(unsafe.Pointer(&v9))
 }
 
@@ -3266,7 +3397,8 @@ var _values = [21]int16{
 	17: int16(4096),
 	18: int16(4096),
 	19: int16(-int32(1)),
-	20: int16(1)}
+	20: int16(1),
+}
 
 const m__SC_AVPHYS_PAGES = 86
 const m__SC_NPROCESSORS_CONF = 83
@@ -3571,7 +3703,8 @@ func x_sysconf(tls *TLS, name int32) (r int64) {
 		fallthrough
 	case (-Int32FromInt32(256) | Int32FromInt32(7)) & Int32FromInt32(255):
 		*(*[128]uint8)(unsafe.Pointer(bp + 16)) = [128]uint8{
-			0: uint8(1)}
+			0: uint8(1),
+		}
 		___syscall3(tls, int64(204), int64(Int32FromInt32(0)), int64(Uint64FromInt64(128)), int64(bp+16))
 		v2 = Int32FromInt32(0)
 		cnt = v2
@@ -3764,7 +3897,8 @@ var _values1 = [251]int16{
 	247: int16(-int32(1)),
 	248: int16(-int32(1)),
 	249: int16(-Int32FromInt32(256) | Int32FromInt32(12)),
-	250: int16(-Int32FromInt32(256) | Int32FromInt32(13))}
+	250: int16(-Int32FromInt32(256) | Int32FromInt32(13)),
+}
 
 type Tcrypt_data = struct {
 	Finitialized int32
@@ -3811,7 +3945,8 @@ var _BF_magic_w = [6]uint32{
 	2: uint32(0x65686F6C),
 	3: uint32(0x64657253),
 	4: uint32(0x63727944),
-	5: uint32(0x6F756274)}
+	5: uint32(0x6F756274),
+}
 
 /*
  * P-box and S-box tables initialized with digits of Pi.
@@ -3819,1053 +3954,1062 @@ var _BF_magic_w = [6]uint32{
 var _BF_init_state = *(*TBF_ctx)(unsafe.Pointer(&struct {
 	FP TBF_key
 	FS [4][256]uint32
-}{FP: TBF_key{
-	0:  uint32(0x243f6a88),
-	1:  uint32(0x85a308d3),
-	2:  uint32(0x13198a2e),
-	3:  uint32(0x03707344),
-	4:  uint32(0xa4093822),
-	5:  uint32(0x299f31d0),
-	6:  uint32(0x082efa98),
-	7:  uint32(0xec4e6c89),
-	8:  uint32(0x452821e6),
-	9:  uint32(0x38d01377),
-	10: uint32(0xbe5466cf),
-	11: uint32(0x34e90c6c),
-	12: uint32(0xc0ac29b7),
-	13: uint32(0xc97c50dd),
-	14: uint32(0x3f84d5b5),
-	15: uint32(0xb5470917),
-	16: uint32(0x9216d5d9),
-	17: uint32(0x8979fb1b)}, FS: [4][256]uint32{
-	0: {
-		0:   uint32(0xd1310ba6),
-		1:   uint32(0x98dfb5ac),
-		2:   uint32(0x2ffd72db),
-		3:   uint32(0xd01adfb7),
-		4:   uint32(0xb8e1afed),
-		5:   uint32(0x6a267e96),
-		6:   uint32(0xba7c9045),
-		7:   uint32(0xf12c7f99),
-		8:   uint32(0x24a19947),
-		9:   uint32(0xb3916cf7),
-		10:  uint32(0x0801f2e2),
-		11:  uint32(0x858efc16),
-		12:  uint32(0x636920d8),
-		13:  uint32(0x71574e69),
-		14:  uint32(0xa458fea3),
-		15:  uint32(0xf4933d7e),
-		16:  uint32(0x0d95748f),
-		17:  uint32(0x728eb658),
-		18:  uint32(0x718bcd58),
-		19:  uint32(0x82154aee),
-		20:  uint32(0x7b54a41d),
-		21:  uint32(0xc25a59b5),
-		22:  uint32(0x9c30d539),
-		23:  uint32(0x2af26013),
-		24:  uint32(0xc5d1b023),
-		25:  uint32(0x286085f0),
-		26:  uint32(0xca417918),
-		27:  uint32(0xb8db38ef),
-		28:  uint32(0x8e79dcb0),
-		29:  uint32(0x603a180e),
-		30:  uint32(0x6c9e0e8b),
-		31:  uint32(0xb01e8a3e),
-		32:  uint32(0xd71577c1),
-		33:  uint32(0xbd314b27),
-		34:  uint32(0x78af2fda),
-		35:  uint32(0x55605c60),
-		36:  uint32(0xe65525f3),
-		37:  uint32(0xaa55ab94),
-		38:  uint32(0x57489862),
-		39:  uint32(0x63e81440),
-		40:  uint32(0x55ca396a),
-		41:  uint32(0x2aab10b6),
-		42:  uint32(0xb4cc5c34),
-		43:  uint32(0x1141e8ce),
-		44:  uint32(0xa15486af),
-		45:  uint32(0x7c72e993),
-		46:  uint32(0xb3ee1411),
-		47:  uint32(0x636fbc2a),
-		48:  uint32(0x2ba9c55d),
-		49:  uint32(0x741831f6),
-		50:  uint32(0xce5c3e16),
-		51:  uint32(0x9b87931e),
-		52:  uint32(0xafd6ba33),
-		53:  uint32(0x6c24cf5c),
-		54:  uint32(0x7a325381),
-		55:  uint32(0x28958677),
-		56:  uint32(0x3b8f4898),
-		57:  uint32(0x6b4bb9af),
-		58:  uint32(0xc4bfe81b),
-		59:  uint32(0x66282193),
-		60:  uint32(0x61d809cc),
-		61:  uint32(0xfb21a991),
-		62:  uint32(0x487cac60),
-		63:  uint32(0x5dec8032),
-		64:  uint32(0xef845d5d),
-		65:  uint32(0xe98575b1),
-		66:  uint32(0xdc262302),
-		67:  uint32(0xeb651b88),
-		68:  uint32(0x23893e81),
-		69:  uint32(0xd396acc5),
-		70:  uint32(0x0f6d6ff3),
-		71:  uint32(0x83f44239),
-		72:  uint32(0x2e0b4482),
-		73:  uint32(0xa4842004),
-		74:  uint32(0x69c8f04a),
-		75:  uint32(0x9e1f9b5e),
-		76:  uint32(0x21c66842),
-		77:  uint32(0xf6e96c9a),
-		78:  uint32(0x670c9c61),
-		79:  uint32(0xabd388f0),
-		80:  uint32(0x6a51a0d2),
-		81:  uint32(0xd8542f68),
-		82:  uint32(0x960fa728),
-		83:  uint32(0xab5133a3),
-		84:  uint32(0x6eef0b6c),
-		85:  uint32(0x137a3be4),
-		86:  uint32(0xba3bf050),
-		87:  uint32(0x7efb2a98),
-		88:  uint32(0xa1f1651d),
-		89:  uint32(0x39af0176),
-		90:  uint32(0x66ca593e),
-		91:  uint32(0x82430e88),
-		92:  uint32(0x8cee8619),
-		93:  uint32(0x456f9fb4),
-		94:  uint32(0x7d84a5c3),
-		95:  uint32(0x3b8b5ebe),
-		96:  uint32(0xe06f75d8),
-		97:  uint32(0x85c12073),
-		98:  uint32(0x401a449f),
-		99:  uint32(0x56c16aa6),
-		100: uint32(0x4ed3aa62),
-		101: uint32(0x363f7706),
-		102: uint32(0x1bfedf72),
-		103: uint32(0x429b023d),
-		104: uint32(0x37d0d724),
-		105: uint32(0xd00a1248),
-		106: uint32(0xdb0fead3),
-		107: uint32(0x49f1c09b),
-		108: uint32(0x075372c9),
-		109: uint32(0x80991b7b),
-		110: uint32(0x25d479d8),
-		111: uint32(0xf6e8def7),
-		112: uint32(0xe3fe501a),
-		113: uint32(0xb6794c3b),
-		114: uint32(0x976ce0bd),
-		115: uint32(0x04c006ba),
-		116: uint32(0xc1a94fb6),
-		117: uint32(0x409f60c4),
-		118: uint32(0x5e5c9ec2),
-		119: uint32(0x196a2463),
-		120: uint32(0x68fb6faf),
-		121: uint32(0x3e6c53b5),
-		122: uint32(0x1339b2eb),
-		123: uint32(0x3b52ec6f),
-		124: uint32(0x6dfc511f),
-		125: uint32(0x9b30952c),
-		126: uint32(0xcc814544),
-		127: uint32(0xaf5ebd09),
-		128: uint32(0xbee3d004),
-		129: uint32(0xde334afd),
-		130: uint32(0x660f2807),
-		131: uint32(0x192e4bb3),
-		132: uint32(0xc0cba857),
-		133: uint32(0x45c8740f),
-		134: uint32(0xd20b5f39),
-		135: uint32(0xb9d3fbdb),
-		136: uint32(0x5579c0bd),
-		137: uint32(0x1a60320a),
-		138: uint32(0xd6a100c6),
-		139: uint32(0x402c7279),
-		140: uint32(0x679f25fe),
-		141: uint32(0xfb1fa3cc),
-		142: uint32(0x8ea5e9f8),
-		143: uint32(0xdb3222f8),
-		144: uint32(0x3c7516df),
-		145: uint32(0xfd616b15),
-		146: uint32(0x2f501ec8),
-		147: uint32(0xad0552ab),
-		148: uint32(0x323db5fa),
-		149: uint32(0xfd238760),
-		150: uint32(0x53317b48),
-		151: uint32(0x3e00df82),
-		152: uint32(0x9e5c57bb),
-		153: uint32(0xca6f8ca0),
-		154: uint32(0x1a87562e),
-		155: uint32(0xdf1769db),
-		156: uint32(0xd542a8f6),
-		157: uint32(0x287effc3),
-		158: uint32(0xac6732c6),
-		159: uint32(0x8c4f5573),
-		160: uint32(0x695b27b0),
-		161: uint32(0xbbca58c8),
-		162: uint32(0xe1ffa35d),
-		163: uint32(0xb8f011a0),
-		164: uint32(0x10fa3d98),
-		165: uint32(0xfd2183b8),
-		166: uint32(0x4afcb56c),
-		167: uint32(0x2dd1d35b),
-		168: uint32(0x9a53e479),
-		169: uint32(0xb6f84565),
-		170: uint32(0xd28e49bc),
-		171: uint32(0x4bfb9790),
-		172: uint32(0xe1ddf2da),
-		173: uint32(0xa4cb7e33),
-		174: uint32(0x62fb1341),
-		175: uint32(0xcee4c6e8),
-		176: uint32(0xef20cada),
-		177: uint32(0x36774c01),
-		178: uint32(0xd07e9efe),
-		179: uint32(0x2bf11fb4),
-		180: uint32(0x95dbda4d),
-		181: uint32(0xae909198),
-		182: uint32(0xeaad8e71),
-		183: uint32(0x6b93d5a0),
-		184: uint32(0xd08ed1d0),
-		185: uint32(0xafc725e0),
-		186: uint32(0x8e3c5b2f),
-		187: uint32(0x8e7594b7),
-		188: uint32(0x8ff6e2fb),
-		189: uint32(0xf2122b64),
-		190: uint32(0x8888b812),
-		191: uint32(0x900df01c),
-		192: uint32(0x4fad5ea0),
-		193: uint32(0x688fc31c),
-		194: uint32(0xd1cff191),
-		195: uint32(0xb3a8c1ad),
-		196: uint32(0x2f2f2218),
-		197: uint32(0xbe0e1777),
-		198: uint32(0xea752dfe),
-		199: uint32(0x8b021fa1),
-		200: uint32(0xe5a0cc0f),
-		201: uint32(0xb56f74e8),
-		202: uint32(0x18acf3d6),
-		203: uint32(0xce89e299),
-		204: uint32(0xb4a84fe0),
-		205: uint32(0xfd13e0b7),
-		206: uint32(0x7cc43b81),
-		207: uint32(0xd2ada8d9),
-		208: uint32(0x165fa266),
-		209: uint32(0x80957705),
-		210: uint32(0x93cc7314),
-		211: uint32(0x211a1477),
-		212: uint32(0xe6ad2065),
-		213: uint32(0x77b5fa86),
-		214: uint32(0xc75442f5),
-		215: uint32(0xfb9d35cf),
-		216: uint32(0xebcdaf0c),
-		217: uint32(0x7b3e89a0),
-		218: uint32(0xd6411bd3),
-		219: uint32(0xae1e7e49),
-		220: uint32(0x00250e2d),
-		221: uint32(0x2071b35e),
-		222: uint32(0x226800bb),
-		223: uint32(0x57b8e0af),
-		224: uint32(0x2464369b),
-		225: uint32(0xf009b91e),
-		226: uint32(0x5563911d),
-		227: uint32(0x59dfa6aa),
-		228: uint32(0x78c14389),
-		229: uint32(0xd95a537f),
-		230: uint32(0x207d5ba2),
-		231: uint32(0x02e5b9c5),
-		232: uint32(0x83260376),
-		233: uint32(0x6295cfa9),
-		234: uint32(0x11c81968),
-		235: uint32(0x4e734a41),
-		236: uint32(0xb3472dca),
-		237: uint32(0x7b14a94a),
-		238: uint32(0x1b510052),
-		239: uint32(0x9a532915),
-		240: uint32(0xd60f573f),
-		241: uint32(0xbc9bc6e4),
-		242: uint32(0x2b60a476),
-		243: uint32(0x81e67400),
-		244: uint32(0x08ba6fb5),
-		245: uint32(0x571be91f),
-		246: uint32(0xf296ec6b),
-		247: uint32(0x2a0dd915),
-		248: uint32(0xb6636521),
-		249: uint32(0xe7b9f9b6),
-		250: uint32(0xff34052e),
-		251: uint32(0xc5855664),
-		252: uint32(0x53b02d5d),
-		253: uint32(0xa99f8fa1),
-		254: uint32(0x08ba4799),
-		255: uint32(0x6e85076a)},
-	1: {
-		0:   uint32(0x4b7a70e9),
-		1:   uint32(0xb5b32944),
-		2:   uint32(0xdb75092e),
-		3:   uint32(0xc4192623),
-		4:   uint32(0xad6ea6b0),
-		5:   uint32(0x49a7df7d),
-		6:   uint32(0x9cee60b8),
-		7:   uint32(0x8fedb266),
-		8:   uint32(0xecaa8c71),
-		9:   uint32(0x699a17ff),
-		10:  uint32(0x5664526c),
-		11:  uint32(0xc2b19ee1),
-		12:  uint32(0x193602a5),
-		13:  uint32(0x75094c29),
-		14:  uint32(0xa0591340),
-		15:  uint32(0xe4183a3e),
-		16:  uint32(0x3f54989a),
-		17:  uint32(0x5b429d65),
-		18:  uint32(0x6b8fe4d6),
-		19:  uint32(0x99f73fd6),
-		20:  uint32(0xa1d29c07),
-		21:  uint32(0xefe830f5),
-		22:  uint32(0x4d2d38e6),
-		23:  uint32(0xf0255dc1),
-		24:  uint32(0x4cdd2086),
-		25:  uint32(0x8470eb26),
-		26:  uint32(0x6382e9c6),
-		27:  uint32(0x021ecc5e),
-		28:  uint32(0x09686b3f),
-		29:  uint32(0x3ebaefc9),
-		30:  uint32(0x3c971814),
-		31:  uint32(0x6b6a70a1),
-		32:  uint32(0x687f3584),
-		33:  uint32(0x52a0e286),
-		34:  uint32(0xb79c5305),
-		35:  uint32(0xaa500737),
-		36:  uint32(0x3e07841c),
-		37:  uint32(0x7fdeae5c),
-		38:  uint32(0x8e7d44ec),
-		39:  uint32(0x5716f2b8),
-		40:  uint32(0xb03ada37),
-		41:  uint32(0xf0500c0d),
-		42:  uint32(0xf01c1f04),
-		43:  uint32(0x0200b3ff),
-		44:  uint32(0xae0cf51a),
-		45:  uint32(0x3cb574b2),
-		46:  uint32(0x25837a58),
-		47:  uint32(0xdc0921bd),
-		48:  uint32(0xd19113f9),
-		49:  uint32(0x7ca92ff6),
-		50:  uint32(0x94324773),
-		51:  uint32(0x22f54701),
-		52:  uint32(0x3ae5e581),
-		53:  uint32(0x37c2dadc),
-		54:  uint32(0xc8b57634),
-		55:  uint32(0x9af3dda7),
-		56:  uint32(0xa9446146),
-		57:  uint32(0x0fd0030e),
-		58:  uint32(0xecc8c73e),
-		59:  uint32(0xa4751e41),
-		60:  uint32(0xe238cd99),
-		61:  uint32(0x3bea0e2f),
-		62:  uint32(0x3280bba1),
-		63:  uint32(0x183eb331),
-		64:  uint32(0x4e548b38),
-		65:  uint32(0x4f6db908),
-		66:  uint32(0x6f420d03),
-		67:  uint32(0xf60a04bf),
-		68:  uint32(0x2cb81290),
-		69:  uint32(0x24977c79),
-		70:  uint32(0x5679b072),
-		71:  uint32(0xbcaf89af),
-		72:  uint32(0xde9a771f),
-		73:  uint32(0xd9930810),
-		74:  uint32(0xb38bae12),
-		75:  uint32(0xdccf3f2e),
-		76:  uint32(0x5512721f),
-		77:  uint32(0x2e6b7124),
-		78:  uint32(0x501adde6),
-		79:  uint32(0x9f84cd87),
-		80:  uint32(0x7a584718),
-		81:  uint32(0x7408da17),
-		82:  uint32(0xbc9f9abc),
-		83:  uint32(0xe94b7d8c),
-		84:  uint32(0xec7aec3a),
-		85:  uint32(0xdb851dfa),
-		86:  uint32(0x63094366),
-		87:  uint32(0xc464c3d2),
-		88:  uint32(0xef1c1847),
-		89:  uint32(0x3215d908),
-		90:  uint32(0xdd433b37),
-		91:  uint32(0x24c2ba16),
-		92:  uint32(0x12a14d43),
-		93:  uint32(0x2a65c451),
-		94:  uint32(0x50940002),
-		95:  uint32(0x133ae4dd),
-		96:  uint32(0x71dff89e),
-		97:  uint32(0x10314e55),
-		98:  uint32(0x81ac77d6),
-		99:  uint32(0x5f11199b),
-		100: uint32(0x043556f1),
-		101: uint32(0xd7a3c76b),
-		102: uint32(0x3c11183b),
-		103: uint32(0x5924a509),
-		104: uint32(0xf28fe6ed),
-		105: uint32(0x97f1fbfa),
-		106: uint32(0x9ebabf2c),
-		107: uint32(0x1e153c6e),
-		108: uint32(0x86e34570),
-		109: uint32(0xeae96fb1),
-		110: uint32(0x860e5e0a),
-		111: uint32(0x5a3e2ab3),
-		112: uint32(0x771fe71c),
-		113: uint32(0x4e3d06fa),
-		114: uint32(0x2965dcb9),
-		115: uint32(0x99e71d0f),
-		116: uint32(0x803e89d6),
-		117: uint32(0x5266c825),
-		118: uint32(0x2e4cc978),
-		119: uint32(0x9c10b36a),
-		120: uint32(0xc6150eba),
-		121: uint32(0x94e2ea78),
-		122: uint32(0xa5fc3c53),
-		123: uint32(0x1e0a2df4),
-		124: uint32(0xf2f74ea7),
-		125: uint32(0x361d2b3d),
-		126: uint32(0x1939260f),
-		127: uint32(0x19c27960),
-		128: uint32(0x5223a708),
-		129: uint32(0xf71312b6),
-		130: uint32(0xebadfe6e),
-		131: uint32(0xeac31f66),
-		132: uint32(0xe3bc4595),
-		133: uint32(0xa67bc883),
-		134: uint32(0xb17f37d1),
-		135: uint32(0x018cff28),
-		136: uint32(0xc332ddef),
-		137: uint32(0xbe6c5aa5),
-		138: uint32(0x65582185),
-		139: uint32(0x68ab9802),
-		140: uint32(0xeecea50f),
-		141: uint32(0xdb2f953b),
-		142: uint32(0x2aef7dad),
-		143: uint32(0x5b6e2f84),
-		144: uint32(0x1521b628),
-		145: uint32(0x29076170),
-		146: uint32(0xecdd4775),
-		147: uint32(0x619f1510),
-		148: uint32(0x13cca830),
-		149: uint32(0xeb61bd96),
-		150: uint32(0x0334fe1e),
-		151: uint32(0xaa0363cf),
-		152: uint32(0xb5735c90),
-		153: uint32(0x4c70a239),
-		154: uint32(0xd59e9e0b),
-		155: uint32(0xcbaade14),
-		156: uint32(0xeecc86bc),
-		157: uint32(0x60622ca7),
-		158: uint32(0x9cab5cab),
-		159: uint32(0xb2f3846e),
-		160: uint32(0x648b1eaf),
-		161: uint32(0x19bdf0ca),
-		162: uint32(0xa02369b9),
-		163: uint32(0x655abb50),
-		164: uint32(0x40685a32),
-		165: uint32(0x3c2ab4b3),
-		166: uint32(0x319ee9d5),
-		167: uint32(0xc021b8f7),
-		168: uint32(0x9b540b19),
-		169: uint32(0x875fa099),
-		170: uint32(0x95f7997e),
-		171: uint32(0x623d7da8),
-		172: uint32(0xf837889a),
-		173: uint32(0x97e32d77),
-		174: uint32(0x11ed935f),
-		175: uint32(0x16681281),
-		176: uint32(0x0e358829),
-		177: uint32(0xc7e61fd6),
-		178: uint32(0x96dedfa1),
-		179: uint32(0x7858ba99),
-		180: uint32(0x57f584a5),
-		181: uint32(0x1b227263),
-		182: uint32(0x9b83c3ff),
-		183: uint32(0x1ac24696),
-		184: uint32(0xcdb30aeb),
-		185: uint32(0x532e3054),
-		186: uint32(0x8fd948e4),
-		187: uint32(0x6dbc3128),
-		188: uint32(0x58ebf2ef),
-		189: uint32(0x34c6ffea),
-		190: uint32(0xfe28ed61),
-		191: uint32(0xee7c3c73),
-		192: uint32(0x5d4a14d9),
-		193: uint32(0xe864b7e3),
-		194: uint32(0x42105d14),
-		195: uint32(0x203e13e0),
-		196: uint32(0x45eee2b6),
-		197: uint32(0xa3aaabea),
-		198: uint32(0xdb6c4f15),
-		199: uint32(0xfacb4fd0),
-		200: uint32(0xc742f442),
-		201: uint32(0xef6abbb5),
-		202: uint32(0x654f3b1d),
-		203: uint32(0x41cd2105),
-		204: uint32(0xd81e799e),
-		205: uint32(0x86854dc7),
-		206: uint32(0xe44b476a),
-		207: uint32(0x3d816250),
-		208: uint32(0xcf62a1f2),
-		209: uint32(0x5b8d2646),
-		210: uint32(0xfc8883a0),
-		211: uint32(0xc1c7b6a3),
-		212: uint32(0x7f1524c3),
-		213: uint32(0x69cb7492),
-		214: uint32(0x47848a0b),
-		215: uint32(0x5692b285),
-		216: uint32(0x095bbf00),
-		217: uint32(0xad19489d),
-		218: uint32(0x1462b174),
-		219: uint32(0x23820e00),
-		220: uint32(0x58428d2a),
-		221: uint32(0x0c55f5ea),
-		222: uint32(0x1dadf43e),
-		223: uint32(0x233f7061),
-		224: uint32(0x3372f092),
-		225: uint32(0x8d937e41),
-		226: uint32(0xd65fecf1),
-		227: uint32(0x6c223bdb),
-		228: uint32(0x7cde3759),
-		229: uint32(0xcbee7460),
-		230: uint32(0x4085f2a7),
-		231: uint32(0xce77326e),
-		232: uint32(0xa6078084),
-		233: uint32(0x19f8509e),
-		234: uint32(0xe8efd855),
-		235: uint32(0x61d99735),
-		236: uint32(0xa969a7aa),
-		237: uint32(0xc50c06c2),
-		238: uint32(0x5a04abfc),
-		239: uint32(0x800bcadc),
-		240: uint32(0x9e447a2e),
-		241: uint32(0xc3453484),
-		242: uint32(0xfdd56705),
-		243: uint32(0x0e1e9ec9),
-		244: uint32(0xdb73dbd3),
-		245: uint32(0x105588cd),
-		246: uint32(0x675fda79),
-		247: uint32(0xe3674340),
-		248: uint32(0xc5c43465),
-		249: uint32(0x713e38d8),
-		250: uint32(0x3d28f89e),
-		251: uint32(0xf16dff20),
-		252: uint32(0x153e21e7),
-		253: uint32(0x8fb03d4a),
-		254: uint32(0xe6e39f2b),
-		255: uint32(0xdb83adf7)},
-	2: {
-		0:   uint32(0xe93d5a68),
-		1:   uint32(0x948140f7),
-		2:   uint32(0xf64c261c),
-		3:   uint32(0x94692934),
-		4:   uint32(0x411520f7),
-		5:   uint32(0x7602d4f7),
-		6:   uint32(0xbcf46b2e),
-		7:   uint32(0xd4a20068),
-		8:   uint32(0xd4082471),
-		9:   uint32(0x3320f46a),
-		10:  uint32(0x43b7d4b7),
-		11:  uint32(0x500061af),
-		12:  uint32(0x1e39f62e),
-		13:  uint32(0x97244546),
-		14:  uint32(0x14214f74),
-		15:  uint32(0xbf8b8840),
-		16:  uint32(0x4d95fc1d),
-		17:  uint32(0x96b591af),
-		18:  uint32(0x70f4ddd3),
-		19:  uint32(0x66a02f45),
-		20:  uint32(0xbfbc09ec),
-		21:  uint32(0x03bd9785),
-		22:  uint32(0x7fac6dd0),
-		23:  uint32(0x31cb8504),
-		24:  uint32(0x96eb27b3),
-		25:  uint32(0x55fd3941),
-		26:  uint32(0xda2547e6),
-		27:  uint32(0xabca0a9a),
-		28:  uint32(0x28507825),
-		29:  uint32(0x530429f4),
-		30:  uint32(0x0a2c86da),
-		31:  uint32(0xe9b66dfb),
-		32:  uint32(0x68dc1462),
-		33:  uint32(0xd7486900),
-		34:  uint32(0x680ec0a4),
-		35:  uint32(0x27a18dee),
-		36:  uint32(0x4f3ffea2),
-		37:  uint32(0xe887ad8c),
-		38:  uint32(0xb58ce006),
-		39:  uint32(0x7af4d6b6),
-		40:  uint32(0xaace1e7c),
-		41:  uint32(0xd3375fec),
-		42:  uint32(0xce78a399),
-		43:  uint32(0x406b2a42),
-		44:  uint32(0x20fe9e35),
-		45:  uint32(0xd9f385b9),
-		46:  uint32(0xee39d7ab),
-		47:  uint32(0x3b124e8b),
-		48:  uint32(0x1dc9faf7),
-		49:  uint32(0x4b6d1856),
-		50:  uint32(0x26a36631),
-		51:  uint32(0xeae397b2),
-		52:  uint32(0x3a6efa74),
-		53:  uint32(0xdd5b4332),
-		54:  uint32(0x6841e7f7),
-		55:  uint32(0xca7820fb),
-		56:  uint32(0xfb0af54e),
-		57:  uint32(0xd8feb397),
-		58:  uint32(0x454056ac),
-		59:  uint32(0xba489527),
-		60:  uint32(0x55533a3a),
-		61:  uint32(0x20838d87),
-		62:  uint32(0xfe6ba9b7),
-		63:  uint32(0xd096954b),
-		64:  uint32(0x55a867bc),
-		65:  uint32(0xa1159a58),
-		66:  uint32(0xcca92963),
-		67:  uint32(0x99e1db33),
-		68:  uint32(0xa62a4a56),
-		69:  uint32(0x3f3125f9),
-		70:  uint32(0x5ef47e1c),
-		71:  uint32(0x9029317c),
-		72:  uint32(0xfdf8e802),
-		73:  uint32(0x04272f70),
-		74:  uint32(0x80bb155c),
-		75:  uint32(0x05282ce3),
-		76:  uint32(0x95c11548),
-		77:  uint32(0xe4c66d22),
-		78:  uint32(0x48c1133f),
-		79:  uint32(0xc70f86dc),
-		80:  uint32(0x07f9c9ee),
-		81:  uint32(0x41041f0f),
-		82:  uint32(0x404779a4),
-		83:  uint32(0x5d886e17),
-		84:  uint32(0x325f51eb),
-		85:  uint32(0xd59bc0d1),
-		86:  uint32(0xf2bcc18f),
-		87:  uint32(0x41113564),
-		88:  uint32(0x257b7834),
-		89:  uint32(0x602a9c60),
-		90:  uint32(0xdff8e8a3),
-		91:  uint32(0x1f636c1b),
-		92:  uint32(0x0e12b4c2),
-		93:  uint32(0x02e1329e),
-		94:  uint32(0xaf664fd1),
-		95:  uint32(0xcad18115),
-		96:  uint32(0x6b2395e0),
-		97:  uint32(0x333e92e1),
-		98:  uint32(0x3b240b62),
-		99:  uint32(0xeebeb922),
-		100: uint32(0x85b2a20e),
-		101: uint32(0xe6ba0d99),
-		102: uint32(0xde720c8c),
-		103: uint32(0x2da2f728),
-		104: uint32(0xd0127845),
-		105: uint32(0x95b794fd),
-		106: uint32(0x647d0862),
-		107: uint32(0xe7ccf5f0),
-		108: uint32(0x5449a36f),
-		109: uint32(0x877d48fa),
-		110: uint32(0xc39dfd27),
-		111: uint32(0xf33e8d1e),
-		112: uint32(0x0a476341),
-		113: uint32(0x992eff74),
-		114: uint32(0x3a6f6eab),
-		115: uint32(0xf4f8fd37),
-		116: uint32(0xa812dc60),
-		117: uint32(0xa1ebddf8),
-		118: uint32(0x991be14c),
-		119: uint32(0xdb6e6b0d),
-		120: uint32(0xc67b5510),
-		121: uint32(0x6d672c37),
-		122: uint32(0x2765d43b),
-		123: uint32(0xdcd0e804),
-		124: uint32(0xf1290dc7),
-		125: uint32(0xcc00ffa3),
-		126: uint32(0xb5390f92),
-		127: uint32(0x690fed0b),
-		128: uint32(0x667b9ffb),
-		129: uint32(0xcedb7d9c),
-		130: uint32(0xa091cf0b),
-		131: uint32(0xd9155ea3),
-		132: uint32(0xbb132f88),
-		133: uint32(0x515bad24),
-		134: uint32(0x7b9479bf),
-		135: uint32(0x763bd6eb),
-		136: uint32(0x37392eb3),
-		137: uint32(0xcc115979),
-		138: uint32(0x8026e297),
-		139: uint32(0xf42e312d),
-		140: uint32(0x6842ada7),
-		141: uint32(0xc66a2b3b),
-		142: uint32(0x12754ccc),
-		143: uint32(0x782ef11c),
-		144: uint32(0x6a124237),
-		145: uint32(0xb79251e7),
-		146: uint32(0x06a1bbe6),
-		147: uint32(0x4bfb6350),
-		148: uint32(0x1a6b1018),
-		149: uint32(0x11caedfa),
-		150: uint32(0x3d25bdd8),
-		151: uint32(0xe2e1c3c9),
-		152: uint32(0x44421659),
-		153: uint32(0x0a121386),
-		154: uint32(0xd90cec6e),
-		155: uint32(0xd5abea2a),
-		156: uint32(0x64af674e),
-		157: uint32(0xda86a85f),
-		158: uint32(0xbebfe988),
-		159: uint32(0x64e4c3fe),
-		160: uint32(0x9dbc8057),
-		161: uint32(0xf0f7c086),
-		162: uint32(0x60787bf8),
-		163: uint32(0x6003604d),
-		164: uint32(0xd1fd8346),
-		165: uint32(0xf6381fb0),
-		166: uint32(0x7745ae04),
-		167: uint32(0xd736fccc),
-		168: uint32(0x83426b33),
-		169: uint32(0xf01eab71),
-		170: uint32(0xb0804187),
-		171: uint32(0x3c005e5f),
-		172: uint32(0x77a057be),
-		173: uint32(0xbde8ae24),
-		174: uint32(0x55464299),
-		175: uint32(0xbf582e61),
-		176: uint32(0x4e58f48f),
-		177: uint32(0xf2ddfda2),
-		178: uint32(0xf474ef38),
-		179: uint32(0x8789bdc2),
-		180: uint32(0x5366f9c3),
-		181: uint32(0xc8b38e74),
-		182: uint32(0xb475f255),
-		183: uint32(0x46fcd9b9),
-		184: uint32(0x7aeb2661),
-		185: uint32(0x8b1ddf84),
-		186: uint32(0x846a0e79),
-		187: uint32(0x915f95e2),
-		188: uint32(0x466e598e),
-		189: uint32(0x20b45770),
-		190: uint32(0x8cd55591),
-		191: uint32(0xc902de4c),
-		192: uint32(0xb90bace1),
-		193: uint32(0xbb8205d0),
-		194: uint32(0x11a86248),
-		195: uint32(0x7574a99e),
-		196: uint32(0xb77f19b6),
-		197: uint32(0xe0a9dc09),
-		198: uint32(0x662d09a1),
-		199: uint32(0xc4324633),
-		200: uint32(0xe85a1f02),
-		201: uint32(0x09f0be8c),
-		202: uint32(0x4a99a025),
-		203: uint32(0x1d6efe10),
-		204: uint32(0x1ab93d1d),
-		205: uint32(0x0ba5a4df),
-		206: uint32(0xa186f20f),
-		207: uint32(0x2868f169),
-		208: uint32(0xdcb7da83),
-		209: uint32(0x573906fe),
-		210: uint32(0xa1e2ce9b),
-		211: uint32(0x4fcd7f52),
-		212: uint32(0x50115e01),
-		213: uint32(0xa70683fa),
-		214: uint32(0xa002b5c4),
-		215: uint32(0x0de6d027),
-		216: uint32(0x9af88c27),
-		217: uint32(0x773f8641),
-		218: uint32(0xc3604c06),
-		219: uint32(0x61a806b5),
-		220: uint32(0xf0177a28),
-		221: uint32(0xc0f586e0),
-		222: uint32(0x006058aa),
-		223: uint32(0x30dc7d62),
-		224: uint32(0x11e69ed7),
-		225: uint32(0x2338ea63),
-		226: uint32(0x53c2dd94),
-		227: uint32(0xc2c21634),
-		228: uint32(0xbbcbee56),
-		229: uint32(0x90bcb6de),
-		230: uint32(0xebfc7da1),
-		231: uint32(0xce591d76),
-		232: uint32(0x6f05e409),
-		233: uint32(0x4b7c0188),
-		234: uint32(0x39720a3d),
-		235: uint32(0x7c927c24),
-		236: uint32(0x86e3725f),
-		237: uint32(0x724d9db9),
-		238: uint32(0x1ac15bb4),
-		239: uint32(0xd39eb8fc),
-		240: uint32(0xed545578),
-		241: uint32(0x08fca5b5),
-		242: uint32(0xd83d7cd3),
-		243: uint32(0x4dad0fc4),
-		244: uint32(0x1e50ef5e),
-		245: uint32(0xb161e6f8),
-		246: uint32(0xa28514d9),
-		247: uint32(0x6c51133c),
-		248: uint32(0x6fd5c7e7),
-		249: uint32(0x56e14ec4),
-		250: uint32(0x362abfce),
-		251: uint32(0xddc6c837),
-		252: uint32(0xd79a3234),
-		253: uint32(0x92638212),
-		254: uint32(0x670efa8e),
-		255: uint32(0x406000e0)},
-	3: {
-		0:   uint32(0x3a39ce37),
-		1:   uint32(0xd3faf5cf),
-		2:   uint32(0xabc27737),
-		3:   uint32(0x5ac52d1b),
-		4:   uint32(0x5cb0679e),
-		5:   uint32(0x4fa33742),
-		6:   uint32(0xd3822740),
-		7:   uint32(0x99bc9bbe),
-		8:   uint32(0xd5118e9d),
-		9:   uint32(0xbf0f7315),
-		10:  uint32(0xd62d1c7e),
-		11:  uint32(0xc700c47b),
-		12:  uint32(0xb78c1b6b),
-		13:  uint32(0x21a19045),
-		14:  uint32(0xb26eb1be),
-		15:  uint32(0x6a366eb4),
-		16:  uint32(0x5748ab2f),
-		17:  uint32(0xbc946e79),
-		18:  uint32(0xc6a376d2),
-		19:  uint32(0x6549c2c8),
-		20:  uint32(0x530ff8ee),
-		21:  uint32(0x468dde7d),
-		22:  uint32(0xd5730a1d),
-		23:  uint32(0x4cd04dc6),
-		24:  uint32(0x2939bbdb),
-		25:  uint32(0xa9ba4650),
-		26:  uint32(0xac9526e8),
-		27:  uint32(0xbe5ee304),
-		28:  uint32(0xa1fad5f0),
-		29:  uint32(0x6a2d519a),
-		30:  uint32(0x63ef8ce2),
-		31:  uint32(0x9a86ee22),
-		32:  uint32(0xc089c2b8),
-		33:  uint32(0x43242ef6),
-		34:  uint32(0xa51e03aa),
-		35:  uint32(0x9cf2d0a4),
-		36:  uint32(0x83c061ba),
-		37:  uint32(0x9be96a4d),
-		38:  uint32(0x8fe51550),
-		39:  uint32(0xba645bd6),
-		40:  uint32(0x2826a2f9),
-		41:  uint32(0xa73a3ae1),
-		42:  uint32(0x4ba99586),
-		43:  uint32(0xef5562e9),
-		44:  uint32(0xc72fefd3),
-		45:  uint32(0xf752f7da),
-		46:  uint32(0x3f046f69),
-		47:  uint32(0x77fa0a59),
-		48:  uint32(0x80e4a915),
-		49:  uint32(0x87b08601),
-		50:  uint32(0x9b09e6ad),
-		51:  uint32(0x3b3ee593),
-		52:  uint32(0xe990fd5a),
-		53:  uint32(0x9e34d797),
-		54:  uint32(0x2cf0b7d9),
-		55:  uint32(0x022b8b51),
-		56:  uint32(0x96d5ac3a),
-		57:  uint32(0x017da67d),
-		58:  uint32(0xd1cf3ed6),
-		59:  uint32(0x7c7d2d28),
-		60:  uint32(0x1f9f25cf),
-		61:  uint32(0xadf2b89b),
-		62:  uint32(0x5ad6b472),
-		63:  uint32(0x5a88f54c),
-		64:  uint32(0xe029ac71),
-		65:  uint32(0xe019a5e6),
-		66:  uint32(0x47b0acfd),
-		67:  uint32(0xed93fa9b),
-		68:  uint32(0xe8d3c48d),
-		69:  uint32(0x283b57cc),
-		70:  uint32(0xf8d56629),
-		71:  uint32(0x79132e28),
-		72:  uint32(0x785f0191),
-		73:  uint32(0xed756055),
-		74:  uint32(0xf7960e44),
-		75:  uint32(0xe3d35e8c),
-		76:  uint32(0x15056dd4),
-		77:  uint32(0x88f46dba),
-		78:  uint32(0x03a16125),
-		79:  uint32(0x0564f0bd),
-		80:  uint32(0xc3eb9e15),
-		81:  uint32(0x3c9057a2),
-		82:  uint32(0x97271aec),
-		83:  uint32(0xa93a072a),
-		84:  uint32(0x1b3f6d9b),
-		85:  uint32(0x1e6321f5),
-		86:  uint32(0xf59c66fb),
-		87:  uint32(0x26dcf319),
-		88:  uint32(0x7533d928),
-		89:  uint32(0xb155fdf5),
-		90:  uint32(0x03563482),
-		91:  uint32(0x8aba3cbb),
-		92:  uint32(0x28517711),
-		93:  uint32(0xc20ad9f8),
-		94:  uint32(0xabcc5167),
-		95:  uint32(0xccad925f),
-		96:  uint32(0x4de81751),
-		97:  uint32(0x3830dc8e),
-		98:  uint32(0x379d5862),
-		99:  uint32(0x9320f991),
-		100: uint32(0xea7a90c2),
-		101: uint32(0xfb3e7bce),
-		102: uint32(0x5121ce64),
-		103: uint32(0x774fbe32),
-		104: uint32(0xa8b6e37e),
-		105: uint32(0xc3293d46),
-		106: uint32(0x48de5369),
-		107: uint32(0x6413e680),
-		108: uint32(0xa2ae0810),
-		109: uint32(0xdd6db224),
-		110: uint32(0x69852dfd),
-		111: uint32(0x09072166),
-		112: uint32(0xb39a460a),
-		113: uint32(0x6445c0dd),
-		114: uint32(0x586cdecf),
-		115: uint32(0x1c20c8ae),
-		116: uint32(0x5bbef7dd),
-		117: uint32(0x1b588d40),
-		118: uint32(0xccd2017f),
-		119: uint32(0x6bb4e3bb),
-		120: uint32(0xdda26a7e),
-		121: uint32(0x3a59ff45),
-		122: uint32(0x3e350a44),
-		123: uint32(0xbcb4cdd5),
-		124: uint32(0x72eacea8),
-		125: uint32(0xfa6484bb),
-		126: uint32(0x8d6612ae),
-		127: uint32(0xbf3c6f47),
-		128: uint32(0xd29be463),
-		129: uint32(0x542f5d9e),
-		130: uint32(0xaec2771b),
-		131: uint32(0xf64e6370),
-		132: uint32(0x740e0d8d),
-		133: uint32(0xe75b1357),
-		134: uint32(0xf8721671),
-		135: uint32(0xaf537d5d),
-		136: uint32(0x4040cb08),
-		137: uint32(0x4eb4e2cc),
-		138: uint32(0x34d2466a),
-		139: uint32(0x0115af84),
-		140: uint32(0xe1b00428),
-		141: uint32(0x95983a1d),
-		142: uint32(0x06b89fb4),
-		143: uint32(0xce6ea048),
-		144: uint32(0x6f3f3b82),
-		145: uint32(0x3520ab82),
-		146: uint32(0x011a1d4b),
-		147: uint32(0x277227f8),
-		148: uint32(0x611560b1),
-		149: uint32(0xe7933fdc),
-		150: uint32(0xbb3a792b),
-		151: uint32(0x344525bd),
-		152: uint32(0xa08839e1),
-		153: uint32(0x51ce794b),
-		154: uint32(0x2f32c9b7),
-		155: uint32(0xa01fbac9),
-		156: uint32(0xe01cc87e),
-		157: uint32(0xbcc7d1f6),
-		158: uint32(0xcf0111c3),
-		159: uint32(0xa1e8aac7),
-		160: uint32(0x1a908749),
-		161: uint32(0xd44fbd9a),
-		162: uint32(0xd0dadecb),
-		163: uint32(0xd50ada38),
-		164: uint32(0x0339c32a),
-		165: uint32(0xc6913667),
-		166: uint32(0x8df9317c),
-		167: uint32(0xe0b12b4f),
-		168: uint32(0xf79e59b7),
-		169: uint32(0x43f5bb3a),
-		170: uint32(0xf2d519ff),
-		171: uint32(0x27d9459c),
-		172: uint32(0xbf97222c),
-		173: uint32(0x15e6fc2a),
-		174: uint32(0x0f91fc71),
-		175: uint32(0x9b941525),
-		176: uint32(0xfae59361),
-		177: uint32(0xceb69ceb),
-		178: uint32(0xc2a86459),
-		179: uint32(0x12baa8d1),
-		180: uint32(0xb6c1075e),
-		181: uint32(0xe3056a0c),
-		182: uint32(0x10d25065),
-		183: uint32(0xcb03a442),
-		184: uint32(0xe0ec6e0e),
-		185: uint32(0x1698db3b),
-		186: uint32(0x4c98a0be),
-		187: uint32(0x3278e964),
-		188: uint32(0x9f1f9532),
-		189: uint32(0xe0d392df),
-		190: uint32(0xd3a0342b),
-		191: uint32(0x8971f21e),
-		192: uint32(0x1b0a7441),
-		193: uint32(0x4ba3348c),
-		194: uint32(0xc5be7120),
-		195: uint32(0xc37632d8),
-		196: uint32(0xdf359f8d),
-		197: uint32(0x9b992f2e),
-		198: uint32(0xe60b6f47),
-		199: uint32(0x0fe3f11d),
-		200: uint32(0xe54cda54),
-		201: uint32(0x1edad891),
-		202: uint32(0xce6279cf),
-		203: uint32(0xcd3e7e6f),
-		204: uint32(0x1618b166),
-		205: uint32(0xfd2c1d05),
-		206: uint32(0x848fd2c5),
-		207: uint32(0xf6fb2299),
-		208: uint32(0xf523f357),
-		209: uint32(0xa6327623),
-		210: uint32(0x93a83531),
-		211: uint32(0x56cccd02),
-		212: uint32(0xacf08162),
-		213: uint32(0x5a75ebb5),
-		214: uint32(0x6e163697),
-		215: uint32(0x88d273cc),
-		216: uint32(0xde966292),
-		217: uint32(0x81b949d0),
-		218: uint32(0x4c50901b),
-		219: uint32(0x71c65614),
-		220: uint32(0xe6c6c7bd),
-		221: uint32(0x327a140a),
-		222: uint32(0x45e1d006),
-		223: uint32(0xc3f27b9a),
-		224: uint32(0xc9aa53fd),
-		225: uint32(0x62a80f00),
-		226: uint32(0xbb25bfe2),
-		227: uint32(0x35bdd2f6),
-		228: uint32(0x71126905),
-		229: uint32(0xb2040222),
-		230: uint32(0xb6cbcf7c),
-		231: uint32(0xcd769c2b),
-		232: uint32(0x53113ec0),
-		233: uint32(0x1640e3d3),
-		234: uint32(0x38abbd60),
-		235: uint32(0x2547adf0),
-		236: uint32(0xba38209c),
-		237: uint32(0xf746ce76),
-		238: uint32(0x77afa1c5),
-		239: uint32(0x20756060),
-		240: uint32(0x85cbfe4e),
-		241: uint32(0x8ae88dd8),
-		242: uint32(0x7aaaf9b0),
-		243: uint32(0x4cf9aa7e),
-		244: uint32(0x1948c25c),
-		245: uint32(0x02fb8a8c),
-		246: uint32(0x01c36ae4),
-		247: uint32(0xd6ebe1f9),
-		248: uint32(0x90d4f869),
-		249: uint32(0xa65cdea0),
-		250: uint32(0x3f09252d),
-		251: uint32(0xc208e69f),
-		252: uint32(0xb74e6132),
-		253: uint32(0xce77e25b),
-		254: uint32(0x578fdfe3),
-		255: uint32(0x3ac372e6)}}}))
+}{
+	FP: TBF_key{
+		0:  uint32(0x243f6a88),
+		1:  uint32(0x85a308d3),
+		2:  uint32(0x13198a2e),
+		3:  uint32(0x03707344),
+		4:  uint32(0xa4093822),
+		5:  uint32(0x299f31d0),
+		6:  uint32(0x082efa98),
+		7:  uint32(0xec4e6c89),
+		8:  uint32(0x452821e6),
+		9:  uint32(0x38d01377),
+		10: uint32(0xbe5466cf),
+		11: uint32(0x34e90c6c),
+		12: uint32(0xc0ac29b7),
+		13: uint32(0xc97c50dd),
+		14: uint32(0x3f84d5b5),
+		15: uint32(0xb5470917),
+		16: uint32(0x9216d5d9),
+		17: uint32(0x8979fb1b),
+	},
+	FS: [4][256]uint32{
+		0: {
+			0:   uint32(0xd1310ba6),
+			1:   uint32(0x98dfb5ac),
+			2:   uint32(0x2ffd72db),
+			3:   uint32(0xd01adfb7),
+			4:   uint32(0xb8e1afed),
+			5:   uint32(0x6a267e96),
+			6:   uint32(0xba7c9045),
+			7:   uint32(0xf12c7f99),
+			8:   uint32(0x24a19947),
+			9:   uint32(0xb3916cf7),
+			10:  uint32(0x0801f2e2),
+			11:  uint32(0x858efc16),
+			12:  uint32(0x636920d8),
+			13:  uint32(0x71574e69),
+			14:  uint32(0xa458fea3),
+			15:  uint32(0xf4933d7e),
+			16:  uint32(0x0d95748f),
+			17:  uint32(0x728eb658),
+			18:  uint32(0x718bcd58),
+			19:  uint32(0x82154aee),
+			20:  uint32(0x7b54a41d),
+			21:  uint32(0xc25a59b5),
+			22:  uint32(0x9c30d539),
+			23:  uint32(0x2af26013),
+			24:  uint32(0xc5d1b023),
+			25:  uint32(0x286085f0),
+			26:  uint32(0xca417918),
+			27:  uint32(0xb8db38ef),
+			28:  uint32(0x8e79dcb0),
+			29:  uint32(0x603a180e),
+			30:  uint32(0x6c9e0e8b),
+			31:  uint32(0xb01e8a3e),
+			32:  uint32(0xd71577c1),
+			33:  uint32(0xbd314b27),
+			34:  uint32(0x78af2fda),
+			35:  uint32(0x55605c60),
+			36:  uint32(0xe65525f3),
+			37:  uint32(0xaa55ab94),
+			38:  uint32(0x57489862),
+			39:  uint32(0x63e81440),
+			40:  uint32(0x55ca396a),
+			41:  uint32(0x2aab10b6),
+			42:  uint32(0xb4cc5c34),
+			43:  uint32(0x1141e8ce),
+			44:  uint32(0xa15486af),
+			45:  uint32(0x7c72e993),
+			46:  uint32(0xb3ee1411),
+			47:  uint32(0x636fbc2a),
+			48:  uint32(0x2ba9c55d),
+			49:  uint32(0x741831f6),
+			50:  uint32(0xce5c3e16),
+			51:  uint32(0x9b87931e),
+			52:  uint32(0xafd6ba33),
+			53:  uint32(0x6c24cf5c),
+			54:  uint32(0x7a325381),
+			55:  uint32(0x28958677),
+			56:  uint32(0x3b8f4898),
+			57:  uint32(0x6b4bb9af),
+			58:  uint32(0xc4bfe81b),
+			59:  uint32(0x66282193),
+			60:  uint32(0x61d809cc),
+			61:  uint32(0xfb21a991),
+			62:  uint32(0x487cac60),
+			63:  uint32(0x5dec8032),
+			64:  uint32(0xef845d5d),
+			65:  uint32(0xe98575b1),
+			66:  uint32(0xdc262302),
+			67:  uint32(0xeb651b88),
+			68:  uint32(0x23893e81),
+			69:  uint32(0xd396acc5),
+			70:  uint32(0x0f6d6ff3),
+			71:  uint32(0x83f44239),
+			72:  uint32(0x2e0b4482),
+			73:  uint32(0xa4842004),
+			74:  uint32(0x69c8f04a),
+			75:  uint32(0x9e1f9b5e),
+			76:  uint32(0x21c66842),
+			77:  uint32(0xf6e96c9a),
+			78:  uint32(0x670c9c61),
+			79:  uint32(0xabd388f0),
+			80:  uint32(0x6a51a0d2),
+			81:  uint32(0xd8542f68),
+			82:  uint32(0x960fa728),
+			83:  uint32(0xab5133a3),
+			84:  uint32(0x6eef0b6c),
+			85:  uint32(0x137a3be4),
+			86:  uint32(0xba3bf050),
+			87:  uint32(0x7efb2a98),
+			88:  uint32(0xa1f1651d),
+			89:  uint32(0x39af0176),
+			90:  uint32(0x66ca593e),
+			91:  uint32(0x82430e88),
+			92:  uint32(0x8cee8619),
+			93:  uint32(0x456f9fb4),
+			94:  uint32(0x7d84a5c3),
+			95:  uint32(0x3b8b5ebe),
+			96:  uint32(0xe06f75d8),
+			97:  uint32(0x85c12073),
+			98:  uint32(0x401a449f),
+			99:  uint32(0x56c16aa6),
+			100: uint32(0x4ed3aa62),
+			101: uint32(0x363f7706),
+			102: uint32(0x1bfedf72),
+			103: uint32(0x429b023d),
+			104: uint32(0x37d0d724),
+			105: uint32(0xd00a1248),
+			106: uint32(0xdb0fead3),
+			107: uint32(0x49f1c09b),
+			108: uint32(0x075372c9),
+			109: uint32(0x80991b7b),
+			110: uint32(0x25d479d8),
+			111: uint32(0xf6e8def7),
+			112: uint32(0xe3fe501a),
+			113: uint32(0xb6794c3b),
+			114: uint32(0x976ce0bd),
+			115: uint32(0x04c006ba),
+			116: uint32(0xc1a94fb6),
+			117: uint32(0x409f60c4),
+			118: uint32(0x5e5c9ec2),
+			119: uint32(0x196a2463),
+			120: uint32(0x68fb6faf),
+			121: uint32(0x3e6c53b5),
+			122: uint32(0x1339b2eb),
+			123: uint32(0x3b52ec6f),
+			124: uint32(0x6dfc511f),
+			125: uint32(0x9b30952c),
+			126: uint32(0xcc814544),
+			127: uint32(0xaf5ebd09),
+			128: uint32(0xbee3d004),
+			129: uint32(0xde334afd),
+			130: uint32(0x660f2807),
+			131: uint32(0x192e4bb3),
+			132: uint32(0xc0cba857),
+			133: uint32(0x45c8740f),
+			134: uint32(0xd20b5f39),
+			135: uint32(0xb9d3fbdb),
+			136: uint32(0x5579c0bd),
+			137: uint32(0x1a60320a),
+			138: uint32(0xd6a100c6),
+			139: uint32(0x402c7279),
+			140: uint32(0x679f25fe),
+			141: uint32(0xfb1fa3cc),
+			142: uint32(0x8ea5e9f8),
+			143: uint32(0xdb3222f8),
+			144: uint32(0x3c7516df),
+			145: uint32(0xfd616b15),
+			146: uint32(0x2f501ec8),
+			147: uint32(0xad0552ab),
+			148: uint32(0x323db5fa),
+			149: uint32(0xfd238760),
+			150: uint32(0x53317b48),
+			151: uint32(0x3e00df82),
+			152: uint32(0x9e5c57bb),
+			153: uint32(0xca6f8ca0),
+			154: uint32(0x1a87562e),
+			155: uint32(0xdf1769db),
+			156: uint32(0xd542a8f6),
+			157: uint32(0x287effc3),
+			158: uint32(0xac6732c6),
+			159: uint32(0x8c4f5573),
+			160: uint32(0x695b27b0),
+			161: uint32(0xbbca58c8),
+			162: uint32(0xe1ffa35d),
+			163: uint32(0xb8f011a0),
+			164: uint32(0x10fa3d98),
+			165: uint32(0xfd2183b8),
+			166: uint32(0x4afcb56c),
+			167: uint32(0x2dd1d35b),
+			168: uint32(0x9a53e479),
+			169: uint32(0xb6f84565),
+			170: uint32(0xd28e49bc),
+			171: uint32(0x4bfb9790),
+			172: uint32(0xe1ddf2da),
+			173: uint32(0xa4cb7e33),
+			174: uint32(0x62fb1341),
+			175: uint32(0xcee4c6e8),
+			176: uint32(0xef20cada),
+			177: uint32(0x36774c01),
+			178: uint32(0xd07e9efe),
+			179: uint32(0x2bf11fb4),
+			180: uint32(0x95dbda4d),
+			181: uint32(0xae909198),
+			182: uint32(0xeaad8e71),
+			183: uint32(0x6b93d5a0),
+			184: uint32(0xd08ed1d0),
+			185: uint32(0xafc725e0),
+			186: uint32(0x8e3c5b2f),
+			187: uint32(0x8e7594b7),
+			188: uint32(0x8ff6e2fb),
+			189: uint32(0xf2122b64),
+			190: uint32(0x8888b812),
+			191: uint32(0x900df01c),
+			192: uint32(0x4fad5ea0),
+			193: uint32(0x688fc31c),
+			194: uint32(0xd1cff191),
+			195: uint32(0xb3a8c1ad),
+			196: uint32(0x2f2f2218),
+			197: uint32(0xbe0e1777),
+			198: uint32(0xea752dfe),
+			199: uint32(0x8b021fa1),
+			200: uint32(0xe5a0cc0f),
+			201: uint32(0xb56f74e8),
+			202: uint32(0x18acf3d6),
+			203: uint32(0xce89e299),
+			204: uint32(0xb4a84fe0),
+			205: uint32(0xfd13e0b7),
+			206: uint32(0x7cc43b81),
+			207: uint32(0xd2ada8d9),
+			208: uint32(0x165fa266),
+			209: uint32(0x80957705),
+			210: uint32(0x93cc7314),
+			211: uint32(0x211a1477),
+			212: uint32(0xe6ad2065),
+			213: uint32(0x77b5fa86),
+			214: uint32(0xc75442f5),
+			215: uint32(0xfb9d35cf),
+			216: uint32(0xebcdaf0c),
+			217: uint32(0x7b3e89a0),
+			218: uint32(0xd6411bd3),
+			219: uint32(0xae1e7e49),
+			220: uint32(0x00250e2d),
+			221: uint32(0x2071b35e),
+			222: uint32(0x226800bb),
+			223: uint32(0x57b8e0af),
+			224: uint32(0x2464369b),
+			225: uint32(0xf009b91e),
+			226: uint32(0x5563911d),
+			227: uint32(0x59dfa6aa),
+			228: uint32(0x78c14389),
+			229: uint32(0xd95a537f),
+			230: uint32(0x207d5ba2),
+			231: uint32(0x02e5b9c5),
+			232: uint32(0x83260376),
+			233: uint32(0x6295cfa9),
+			234: uint32(0x11c81968),
+			235: uint32(0x4e734a41),
+			236: uint32(0xb3472dca),
+			237: uint32(0x7b14a94a),
+			238: uint32(0x1b510052),
+			239: uint32(0x9a532915),
+			240: uint32(0xd60f573f),
+			241: uint32(0xbc9bc6e4),
+			242: uint32(0x2b60a476),
+			243: uint32(0x81e67400),
+			244: uint32(0x08ba6fb5),
+			245: uint32(0x571be91f),
+			246: uint32(0xf296ec6b),
+			247: uint32(0x2a0dd915),
+			248: uint32(0xb6636521),
+			249: uint32(0xe7b9f9b6),
+			250: uint32(0xff34052e),
+			251: uint32(0xc5855664),
+			252: uint32(0x53b02d5d),
+			253: uint32(0xa99f8fa1),
+			254: uint32(0x08ba4799),
+			255: uint32(0x6e85076a),
+		},
+		1: {
+			0:   uint32(0x4b7a70e9),
+			1:   uint32(0xb5b32944),
+			2:   uint32(0xdb75092e),
+			3:   uint32(0xc4192623),
+			4:   uint32(0xad6ea6b0),
+			5:   uint32(0x49a7df7d),
+			6:   uint32(0x9cee60b8),
+			7:   uint32(0x8fedb266),
+			8:   uint32(0xecaa8c71),
+			9:   uint32(0x699a17ff),
+			10:  uint32(0x5664526c),
+			11:  uint32(0xc2b19ee1),
+			12:  uint32(0x193602a5),
+			13:  uint32(0x75094c29),
+			14:  uint32(0xa0591340),
+			15:  uint32(0xe4183a3e),
+			16:  uint32(0x3f54989a),
+			17:  uint32(0x5b429d65),
+			18:  uint32(0x6b8fe4d6),
+			19:  uint32(0x99f73fd6),
+			20:  uint32(0xa1d29c07),
+			21:  uint32(0xefe830f5),
+			22:  uint32(0x4d2d38e6),
+			23:  uint32(0xf0255dc1),
+			24:  uint32(0x4cdd2086),
+			25:  uint32(0x8470eb26),
+			26:  uint32(0x6382e9c6),
+			27:  uint32(0x021ecc5e),
+			28:  uint32(0x09686b3f),
+			29:  uint32(0x3ebaefc9),
+			30:  uint32(0x3c971814),
+			31:  uint32(0x6b6a70a1),
+			32:  uint32(0x687f3584),
+			33:  uint32(0x52a0e286),
+			34:  uint32(0xb79c5305),
+			35:  uint32(0xaa500737),
+			36:  uint32(0x3e07841c),
+			37:  uint32(0x7fdeae5c),
+			38:  uint32(0x8e7d44ec),
+			39:  uint32(0x5716f2b8),
+			40:  uint32(0xb03ada37),
+			41:  uint32(0xf0500c0d),
+			42:  uint32(0xf01c1f04),
+			43:  uint32(0x0200b3ff),
+			44:  uint32(0xae0cf51a),
+			45:  uint32(0x3cb574b2),
+			46:  uint32(0x25837a58),
+			47:  uint32(0xdc0921bd),
+			48:  uint32(0xd19113f9),
+			49:  uint32(0x7ca92ff6),
+			50:  uint32(0x94324773),
+			51:  uint32(0x22f54701),
+			52:  uint32(0x3ae5e581),
+			53:  uint32(0x37c2dadc),
+			54:  uint32(0xc8b57634),
+			55:  uint32(0x9af3dda7),
+			56:  uint32(0xa9446146),
+			57:  uint32(0x0fd0030e),
+			58:  uint32(0xecc8c73e),
+			59:  uint32(0xa4751e41),
+			60:  uint32(0xe238cd99),
+			61:  uint32(0x3bea0e2f),
+			62:  uint32(0x3280bba1),
+			63:  uint32(0x183eb331),
+			64:  uint32(0x4e548b38),
+			65:  uint32(0x4f6db908),
+			66:  uint32(0x6f420d03),
+			67:  uint32(0xf60a04bf),
+			68:  uint32(0x2cb81290),
+			69:  uint32(0x24977c79),
+			70:  uint32(0x5679b072),
+			71:  uint32(0xbcaf89af),
+			72:  uint32(0xde9a771f),
+			73:  uint32(0xd9930810),
+			74:  uint32(0xb38bae12),
+			75:  uint32(0xdccf3f2e),
+			76:  uint32(0x5512721f),
+			77:  uint32(0x2e6b7124),
+			78:  uint32(0x501adde6),
+			79:  uint32(0x9f84cd87),
+			80:  uint32(0x7a584718),
+			81:  uint32(0x7408da17),
+			82:  uint32(0xbc9f9abc),
+			83:  uint32(0xe94b7d8c),
+			84:  uint32(0xec7aec3a),
+			85:  uint32(0xdb851dfa),
+			86:  uint32(0x63094366),
+			87:  uint32(0xc464c3d2),
+			88:  uint32(0xef1c1847),
+			89:  uint32(0x3215d908),
+			90:  uint32(0xdd433b37),
+			91:  uint32(0x24c2ba16),
+			92:  uint32(0x12a14d43),
+			93:  uint32(0x2a65c451),
+			94:  uint32(0x50940002),
+			95:  uint32(0x133ae4dd),
+			96:  uint32(0x71dff89e),
+			97:  uint32(0x10314e55),
+			98:  uint32(0x81ac77d6),
+			99:  uint32(0x5f11199b),
+			100: uint32(0x043556f1),
+			101: uint32(0xd7a3c76b),
+			102: uint32(0x3c11183b),
+			103: uint32(0x5924a509),
+			104: uint32(0xf28fe6ed),
+			105: uint32(0x97f1fbfa),
+			106: uint32(0x9ebabf2c),
+			107: uint32(0x1e153c6e),
+			108: uint32(0x86e34570),
+			109: uint32(0xeae96fb1),
+			110: uint32(0x860e5e0a),
+			111: uint32(0x5a3e2ab3),
+			112: uint32(0x771fe71c),
+			113: uint32(0x4e3d06fa),
+			114: uint32(0x2965dcb9),
+			115: uint32(0x99e71d0f),
+			116: uint32(0x803e89d6),
+			117: uint32(0x5266c825),
+			118: uint32(0x2e4cc978),
+			119: uint32(0x9c10b36a),
+			120: uint32(0xc6150eba),
+			121: uint32(0x94e2ea78),
+			122: uint32(0xa5fc3c53),
+			123: uint32(0x1e0a2df4),
+			124: uint32(0xf2f74ea7),
+			125: uint32(0x361d2b3d),
+			126: uint32(0x1939260f),
+			127: uint32(0x19c27960),
+			128: uint32(0x5223a708),
+			129: uint32(0xf71312b6),
+			130: uint32(0xebadfe6e),
+			131: uint32(0xeac31f66),
+			132: uint32(0xe3bc4595),
+			133: uint32(0xa67bc883),
+			134: uint32(0xb17f37d1),
+			135: uint32(0x018cff28),
+			136: uint32(0xc332ddef),
+			137: uint32(0xbe6c5aa5),
+			138: uint32(0x65582185),
+			139: uint32(0x68ab9802),
+			140: uint32(0xeecea50f),
+			141: uint32(0xdb2f953b),
+			142: uint32(0x2aef7dad),
+			143: uint32(0x5b6e2f84),
+			144: uint32(0x1521b628),
+			145: uint32(0x29076170),
+			146: uint32(0xecdd4775),
+			147: uint32(0x619f1510),
+			148: uint32(0x13cca830),
+			149: uint32(0xeb61bd96),
+			150: uint32(0x0334fe1e),
+			151: uint32(0xaa0363cf),
+			152: uint32(0xb5735c90),
+			153: uint32(0x4c70a239),
+			154: uint32(0xd59e9e0b),
+			155: uint32(0xcbaade14),
+			156: uint32(0xeecc86bc),
+			157: uint32(0x60622ca7),
+			158: uint32(0x9cab5cab),
+			159: uint32(0xb2f3846e),
+			160: uint32(0x648b1eaf),
+			161: uint32(0x19bdf0ca),
+			162: uint32(0xa02369b9),
+			163: uint32(0x655abb50),
+			164: uint32(0x40685a32),
+			165: uint32(0x3c2ab4b3),
+			166: uint32(0x319ee9d5),
+			167: uint32(0xc021b8f7),
+			168: uint32(0x9b540b19),
+			169: uint32(0x875fa099),
+			170: uint32(0x95f7997e),
+			171: uint32(0x623d7da8),
+			172: uint32(0xf837889a),
+			173: uint32(0x97e32d77),
+			174: uint32(0x11ed935f),
+			175: uint32(0x16681281),
+			176: uint32(0x0e358829),
+			177: uint32(0xc7e61fd6),
+			178: uint32(0x96dedfa1),
+			179: uint32(0x7858ba99),
+			180: uint32(0x57f584a5),
+			181: uint32(0x1b227263),
+			182: uint32(0x9b83c3ff),
+			183: uint32(0x1ac24696),
+			184: uint32(0xcdb30aeb),
+			185: uint32(0x532e3054),
+			186: uint32(0x8fd948e4),
+			187: uint32(0x6dbc3128),
+			188: uint32(0x58ebf2ef),
+			189: uint32(0x34c6ffea),
+			190: uint32(0xfe28ed61),
+			191: uint32(0xee7c3c73),
+			192: uint32(0x5d4a14d9),
+			193: uint32(0xe864b7e3),
+			194: uint32(0x42105d14),
+			195: uint32(0x203e13e0),
+			196: uint32(0x45eee2b6),
+			197: uint32(0xa3aaabea),
+			198: uint32(0xdb6c4f15),
+			199: uint32(0xfacb4fd0),
+			200: uint32(0xc742f442),
+			201: uint32(0xef6abbb5),
+			202: uint32(0x654f3b1d),
+			203: uint32(0x41cd2105),
+			204: uint32(0xd81e799e),
+			205: uint32(0x86854dc7),
+			206: uint32(0xe44b476a),
+			207: uint32(0x3d816250),
+			208: uint32(0xcf62a1f2),
+			209: uint32(0x5b8d2646),
+			210: uint32(0xfc8883a0),
+			211: uint32(0xc1c7b6a3),
+			212: uint32(0x7f1524c3),
+			213: uint32(0x69cb7492),
+			214: uint32(0x47848a0b),
+			215: uint32(0x5692b285),
+			216: uint32(0x095bbf00),
+			217: uint32(0xad19489d),
+			218: uint32(0x1462b174),
+			219: uint32(0x23820e00),
+			220: uint32(0x58428d2a),
+			221: uint32(0x0c55f5ea),
+			222: uint32(0x1dadf43e),
+			223: uint32(0x233f7061),
+			224: uint32(0x3372f092),
+			225: uint32(0x8d937e41),
+			226: uint32(0xd65fecf1),
+			227: uint32(0x6c223bdb),
+			228: uint32(0x7cde3759),
+			229: uint32(0xcbee7460),
+			230: uint32(0x4085f2a7),
+			231: uint32(0xce77326e),
+			232: uint32(0xa6078084),
+			233: uint32(0x19f8509e),
+			234: uint32(0xe8efd855),
+			235: uint32(0x61d99735),
+			236: uint32(0xa969a7aa),
+			237: uint32(0xc50c06c2),
+			238: uint32(0x5a04abfc),
+			239: uint32(0x800bcadc),
+			240: uint32(0x9e447a2e),
+			241: uint32(0xc3453484),
+			242: uint32(0xfdd56705),
+			243: uint32(0x0e1e9ec9),
+			244: uint32(0xdb73dbd3),
+			245: uint32(0x105588cd),
+			246: uint32(0x675fda79),
+			247: uint32(0xe3674340),
+			248: uint32(0xc5c43465),
+			249: uint32(0x713e38d8),
+			250: uint32(0x3d28f89e),
+			251: uint32(0xf16dff20),
+			252: uint32(0x153e21e7),
+			253: uint32(0x8fb03d4a),
+			254: uint32(0xe6e39f2b),
+			255: uint32(0xdb83adf7),
+		},
+		2: {
+			0:   uint32(0xe93d5a68),
+			1:   uint32(0x948140f7),
+			2:   uint32(0xf64c261c),
+			3:   uint32(0x94692934),
+			4:   uint32(0x411520f7),
+			5:   uint32(0x7602d4f7),
+			6:   uint32(0xbcf46b2e),
+			7:   uint32(0xd4a20068),
+			8:   uint32(0xd4082471),
+			9:   uint32(0x3320f46a),
+			10:  uint32(0x43b7d4b7),
+			11:  uint32(0x500061af),
+			12:  uint32(0x1e39f62e),
+			13:  uint32(0x97244546),
+			14:  uint32(0x14214f74),
+			15:  uint32(0xbf8b8840),
+			16:  uint32(0x4d95fc1d),
+			17:  uint32(0x96b591af),
+			18:  uint32(0x70f4ddd3),
+			19:  uint32(0x66a02f45),
+			20:  uint32(0xbfbc09ec),
+			21:  uint32(0x03bd9785),
+			22:  uint32(0x7fac6dd0),
+			23:  uint32(0x31cb8504),
+			24:  uint32(0x96eb27b3),
+			25:  uint32(0x55fd3941),
+			26:  uint32(0xda2547e6),
+			27:  uint32(0xabca0a9a),
+			28:  uint32(0x28507825),
+			29:  uint32(0x530429f4),
+			30:  uint32(0x0a2c86da),
+			31:  uint32(0xe9b66dfb),
+			32:  uint32(0x68dc1462),
+			33:  uint32(0xd7486900),
+			34:  uint32(0x680ec0a4),
+			35:  uint32(0x27a18dee),
+			36:  uint32(0x4f3ffea2),
+			37:  uint32(0xe887ad8c),
+			38:  uint32(0xb58ce006),
+			39:  uint32(0x7af4d6b6),
+			40:  uint32(0xaace1e7c),
+			41:  uint32(0xd3375fec),
+			42:  uint32(0xce78a399),
+			43:  uint32(0x406b2a42),
+			44:  uint32(0x20fe9e35),
+			45:  uint32(0xd9f385b9),
+			46:  uint32(0xee39d7ab),
+			47:  uint32(0x3b124e8b),
+			48:  uint32(0x1dc9faf7),
+			49:  uint32(0x4b6d1856),
+			50:  uint32(0x26a36631),
+			51:  uint32(0xeae397b2),
+			52:  uint32(0x3a6efa74),
+			53:  uint32(0xdd5b4332),
+			54:  uint32(0x6841e7f7),
+			55:  uint32(0xca7820fb),
+			56:  uint32(0xfb0af54e),
+			57:  uint32(0xd8feb397),
+			58:  uint32(0x454056ac),
+			59:  uint32(0xba489527),
+			60:  uint32(0x55533a3a),
+			61:  uint32(0x20838d87),
+			62:  uint32(0xfe6ba9b7),
+			63:  uint32(0xd096954b),
+			64:  uint32(0x55a867bc),
+			65:  uint32(0xa1159a58),
+			66:  uint32(0xcca92963),
+			67:  uint32(0x99e1db33),
+			68:  uint32(0xa62a4a56),
+			69:  uint32(0x3f3125f9),
+			70:  uint32(0x5ef47e1c),
+			71:  uint32(0x9029317c),
+			72:  uint32(0xfdf8e802),
+			73:  uint32(0x04272f70),
+			74:  uint32(0x80bb155c),
+			75:  uint32(0x05282ce3),
+			76:  uint32(0x95c11548),
+			77:  uint32(0xe4c66d22),
+			78:  uint32(0x48c1133f),
+			79:  uint32(0xc70f86dc),
+			80:  uint32(0x07f9c9ee),
+			81:  uint32(0x41041f0f),
+			82:  uint32(0x404779a4),
+			83:  uint32(0x5d886e17),
+			84:  uint32(0x325f51eb),
+			85:  uint32(0xd59bc0d1),
+			86:  uint32(0xf2bcc18f),
+			87:  uint32(0x41113564),
+			88:  uint32(0x257b7834),
+			89:  uint32(0x602a9c60),
+			90:  uint32(0xdff8e8a3),
+			91:  uint32(0x1f636c1b),
+			92:  uint32(0x0e12b4c2),
+			93:  uint32(0x02e1329e),
+			94:  uint32(0xaf664fd1),
+			95:  uint32(0xcad18115),
+			96:  uint32(0x6b2395e0),
+			97:  uint32(0x333e92e1),
+			98:  uint32(0x3b240b62),
+			99:  uint32(0xeebeb922),
+			100: uint32(0x85b2a20e),
+			101: uint32(0xe6ba0d99),
+			102: uint32(0xde720c8c),
+			103: uint32(0x2da2f728),
+			104: uint32(0xd0127845),
+			105: uint32(0x95b794fd),
+			106: uint32(0x647d0862),
+			107: uint32(0xe7ccf5f0),
+			108: uint32(0x5449a36f),
+			109: uint32(0x877d48fa),
+			110: uint32(0xc39dfd27),
+			111: uint32(0xf33e8d1e),
+			112: uint32(0x0a476341),
+			113: uint32(0x992eff74),
+			114: uint32(0x3a6f6eab),
+			115: uint32(0xf4f8fd37),
+			116: uint32(0xa812dc60),
+			117: uint32(0xa1ebddf8),
+			118: uint32(0x991be14c),
+			119: uint32(0xdb6e6b0d),
+			120: uint32(0xc67b5510),
+			121: uint32(0x6d672c37),
+			122: uint32(0x2765d43b),
+			123: uint32(0xdcd0e804),
+			124: uint32(0xf1290dc7),
+			125: uint32(0xcc00ffa3),
+			126: uint32(0xb5390f92),
+			127: uint32(0x690fed0b),
+			128: uint32(0x667b9ffb),
+			129: uint32(0xcedb7d9c),
+			130: uint32(0xa091cf0b),
+			131: uint32(0xd9155ea3),
+			132: uint32(0xbb132f88),
+			133: uint32(0x515bad24),
+			134: uint32(0x7b9479bf),
+			135: uint32(0x763bd6eb),
+			136: uint32(0x37392eb3),
+			137: uint32(0xcc115979),
+			138: uint32(0x8026e297),
+			139: uint32(0xf42e312d),
+			140: uint32(0x6842ada7),
+			141: uint32(0xc66a2b3b),
+			142: uint32(0x12754ccc),
+			143: uint32(0x782ef11c),
+			144: uint32(0x6a124237),
+			145: uint32(0xb79251e7),
+			146: uint32(0x06a1bbe6),
+			147: uint32(0x4bfb6350),
+			148: uint32(0x1a6b1018),
+			149: uint32(0x11caedfa),
+			150: uint32(0x3d25bdd8),
+			151: uint32(0xe2e1c3c9),
+			152: uint32(0x44421659),
+			153: uint32(0x0a121386),
+			154: uint32(0xd90cec6e),
+			155: uint32(0xd5abea2a),
+			156: uint32(0x64af674e),
+			157: uint32(0xda86a85f),
+			158: uint32(0xbebfe988),
+			159: uint32(0x64e4c3fe),
+			160: uint32(0x9dbc8057),
+			161: uint32(0xf0f7c086),
+			162: uint32(0x60787bf8),
+			163: uint32(0x6003604d),
+			164: uint32(0xd1fd8346),
+			165: uint32(0xf6381fb0),
+			166: uint32(0x7745ae04),
+			167: uint32(0xd736fccc),
+			168: uint32(0x83426b33),
+			169: uint32(0xf01eab71),
+			170: uint32(0xb0804187),
+			171: uint32(0x3c005e5f),
+			172: uint32(0x77a057be),
+			173: uint32(0xbde8ae24),
+			174: uint32(0x55464299),
+			175: uint32(0xbf582e61),
+			176: uint32(0x4e58f48f),
+			177: uint32(0xf2ddfda2),
+			178: uint32(0xf474ef38),
+			179: uint32(0x8789bdc2),
+			180: uint32(0x5366f9c3),
+			181: uint32(0xc8b38e74),
+			182: uint32(0xb475f255),
+			183: uint32(0x46fcd9b9),
+			184: uint32(0x7aeb2661),
+			185: uint32(0x8b1ddf84),
+			186: uint32(0x846a0e79),
+			187: uint32(0x915f95e2),
+			188: uint32(0x466e598e),
+			189: uint32(0x20b45770),
+			190: uint32(0x8cd55591),
+			191: uint32(0xc902de4c),
+			192: uint32(0xb90bace1),
+			193: uint32(0xbb8205d0),
+			194: uint32(0x11a86248),
+			195: uint32(0x7574a99e),
+			196: uint32(0xb77f19b6),
+			197: uint32(0xe0a9dc09),
+			198: uint32(0x662d09a1),
+			199: uint32(0xc4324633),
+			200: uint32(0xe85a1f02),
+			201: uint32(0x09f0be8c),
+			202: uint32(0x4a99a025),
+			203: uint32(0x1d6efe10),
+			204: uint32(0x1ab93d1d),
+			205: uint32(0x0ba5a4df),
+			206: uint32(0xa186f20f),
+			207: uint32(0x2868f169),
+			208: uint32(0xdcb7da83),
+			209: uint32(0x573906fe),
+			210: uint32(0xa1e2ce9b),
+			211: uint32(0x4fcd7f52),
+			212: uint32(0x50115e01),
+			213: uint32(0xa70683fa),
+			214: uint32(0xa002b5c4),
+			215: uint32(0x0de6d027),
+			216: uint32(0x9af88c27),
+			217: uint32(0x773f8641),
+			218: uint32(0xc3604c06),
+			219: uint32(0x61a806b5),
+			220: uint32(0xf0177a28),
+			221: uint32(0xc0f586e0),
+			222: uint32(0x006058aa),
+			223: uint32(0x30dc7d62),
+			224: uint32(0x11e69ed7),
+			225: uint32(0x2338ea63),
+			226: uint32(0x53c2dd94),
+			227: uint32(0xc2c21634),
+			228: uint32(0xbbcbee56),
+			229: uint32(0x90bcb6de),
+			230: uint32(0xebfc7da1),
+			231: uint32(0xce591d76),
+			232: uint32(0x6f05e409),
+			233: uint32(0x4b7c0188),
+			234: uint32(0x39720a3d),
+			235: uint32(0x7c927c24),
+			236: uint32(0x86e3725f),
+			237: uint32(0x724d9db9),
+			238: uint32(0x1ac15bb4),
+			239: uint32(0xd39eb8fc),
+			240: uint32(0xed545578),
+			241: uint32(0x08fca5b5),
+			242: uint32(0xd83d7cd3),
+			243: uint32(0x4dad0fc4),
+			244: uint32(0x1e50ef5e),
+			245: uint32(0xb161e6f8),
+			246: uint32(0xa28514d9),
+			247: uint32(0x6c51133c),
+			248: uint32(0x6fd5c7e7),
+			249: uint32(0x56e14ec4),
+			250: uint32(0x362abfce),
+			251: uint32(0xddc6c837),
+			252: uint32(0xd79a3234),
+			253: uint32(0x92638212),
+			254: uint32(0x670efa8e),
+			255: uint32(0x406000e0),
+		},
+		3: {
+			0:   uint32(0x3a39ce37),
+			1:   uint32(0xd3faf5cf),
+			2:   uint32(0xabc27737),
+			3:   uint32(0x5ac52d1b),
+			4:   uint32(0x5cb0679e),
+			5:   uint32(0x4fa33742),
+			6:   uint32(0xd3822740),
+			7:   uint32(0x99bc9bbe),
+			8:   uint32(0xd5118e9d),
+			9:   uint32(0xbf0f7315),
+			10:  uint32(0xd62d1c7e),
+			11:  uint32(0xc700c47b),
+			12:  uint32(0xb78c1b6b),
+			13:  uint32(0x21a19045),
+			14:  uint32(0xb26eb1be),
+			15:  uint32(0x6a366eb4),
+			16:  uint32(0x5748ab2f),
+			17:  uint32(0xbc946e79),
+			18:  uint32(0xc6a376d2),
+			19:  uint32(0x6549c2c8),
+			20:  uint32(0x530ff8ee),
+			21:  uint32(0x468dde7d),
+			22:  uint32(0xd5730a1d),
+			23:  uint32(0x4cd04dc6),
+			24:  uint32(0x2939bbdb),
+			25:  uint32(0xa9ba4650),
+			26:  uint32(0xac9526e8),
+			27:  uint32(0xbe5ee304),
+			28:  uint32(0xa1fad5f0),
+			29:  uint32(0x6a2d519a),
+			30:  uint32(0x63ef8ce2),
+			31:  uint32(0x9a86ee22),
+			32:  uint32(0xc089c2b8),
+			33:  uint32(0x43242ef6),
+			34:  uint32(0xa51e03aa),
+			35:  uint32(0x9cf2d0a4),
+			36:  uint32(0x83c061ba),
+			37:  uint32(0x9be96a4d),
+			38:  uint32(0x8fe51550),
+			39:  uint32(0xba645bd6),
+			40:  uint32(0x2826a2f9),
+			41:  uint32(0xa73a3ae1),
+			42:  uint32(0x4ba99586),
+			43:  uint32(0xef5562e9),
+			44:  uint32(0xc72fefd3),
+			45:  uint32(0xf752f7da),
+			46:  uint32(0x3f046f69),
+			47:  uint32(0x77fa0a59),
+			48:  uint32(0x80e4a915),
+			49:  uint32(0x87b08601),
+			50:  uint32(0x9b09e6ad),
+			51:  uint32(0x3b3ee593),
+			52:  uint32(0xe990fd5a),
+			53:  uint32(0x9e34d797),
+			54:  uint32(0x2cf0b7d9),
+			55:  uint32(0x022b8b51),
+			56:  uint32(0x96d5ac3a),
+			57:  uint32(0x017da67d),
+			58:  uint32(0xd1cf3ed6),
+			59:  uint32(0x7c7d2d28),
+			60:  uint32(0x1f9f25cf),
+			61:  uint32(0xadf2b89b),
+			62:  uint32(0x5ad6b472),
+			63:  uint32(0x5a88f54c),
+			64:  uint32(0xe029ac71),
+			65:  uint32(0xe019a5e6),
+			66:  uint32(0x47b0acfd),
+			67:  uint32(0xed93fa9b),
+			68:  uint32(0xe8d3c48d),
+			69:  uint32(0x283b57cc),
+			70:  uint32(0xf8d56629),
+			71:  uint32(0x79132e28),
+			72:  uint32(0x785f0191),
+			73:  uint32(0xed756055),
+			74:  uint32(0xf7960e44),
+			75:  uint32(0xe3d35e8c),
+			76:  uint32(0x15056dd4),
+			77:  uint32(0x88f46dba),
+			78:  uint32(0x03a16125),
+			79:  uint32(0x0564f0bd),
+			80:  uint32(0xc3eb9e15),
+			81:  uint32(0x3c9057a2),
+			82:  uint32(0x97271aec),
+			83:  uint32(0xa93a072a),
+			84:  uint32(0x1b3f6d9b),
+			85:  uint32(0x1e6321f5),
+			86:  uint32(0xf59c66fb),
+			87:  uint32(0x26dcf319),
+			88:  uint32(0x7533d928),
+			89:  uint32(0xb155fdf5),
+			90:  uint32(0x03563482),
+			91:  uint32(0x8aba3cbb),
+			92:  uint32(0x28517711),
+			93:  uint32(0xc20ad9f8),
+			94:  uint32(0xabcc5167),
+			95:  uint32(0xccad925f),
+			96:  uint32(0x4de81751),
+			97:  uint32(0x3830dc8e),
+			98:  uint32(0x379d5862),
+			99:  uint32(0x9320f991),
+			100: uint32(0xea7a90c2),
+			101: uint32(0xfb3e7bce),
+			102: uint32(0x5121ce64),
+			103: uint32(0x774fbe32),
+			104: uint32(0xa8b6e37e),
+			105: uint32(0xc3293d46),
+			106: uint32(0x48de5369),
+			107: uint32(0x6413e680),
+			108: uint32(0xa2ae0810),
+			109: uint32(0xdd6db224),
+			110: uint32(0x69852dfd),
+			111: uint32(0x09072166),
+			112: uint32(0xb39a460a),
+			113: uint32(0x6445c0dd),
+			114: uint32(0x586cdecf),
+			115: uint32(0x1c20c8ae),
+			116: uint32(0x5bbef7dd),
+			117: uint32(0x1b588d40),
+			118: uint32(0xccd2017f),
+			119: uint32(0x6bb4e3bb),
+			120: uint32(0xdda26a7e),
+			121: uint32(0x3a59ff45),
+			122: uint32(0x3e350a44),
+			123: uint32(0xbcb4cdd5),
+			124: uint32(0x72eacea8),
+			125: uint32(0xfa6484bb),
+			126: uint32(0x8d6612ae),
+			127: uint32(0xbf3c6f47),
+			128: uint32(0xd29be463),
+			129: uint32(0x542f5d9e),
+			130: uint32(0xaec2771b),
+			131: uint32(0xf64e6370),
+			132: uint32(0x740e0d8d),
+			133: uint32(0xe75b1357),
+			134: uint32(0xf8721671),
+			135: uint32(0xaf537d5d),
+			136: uint32(0x4040cb08),
+			137: uint32(0x4eb4e2cc),
+			138: uint32(0x34d2466a),
+			139: uint32(0x0115af84),
+			140: uint32(0xe1b00428),
+			141: uint32(0x95983a1d),
+			142: uint32(0x06b89fb4),
+			143: uint32(0xce6ea048),
+			144: uint32(0x6f3f3b82),
+			145: uint32(0x3520ab82),
+			146: uint32(0x011a1d4b),
+			147: uint32(0x277227f8),
+			148: uint32(0x611560b1),
+			149: uint32(0xe7933fdc),
+			150: uint32(0xbb3a792b),
+			151: uint32(0x344525bd),
+			152: uint32(0xa08839e1),
+			153: uint32(0x51ce794b),
+			154: uint32(0x2f32c9b7),
+			155: uint32(0xa01fbac9),
+			156: uint32(0xe01cc87e),
+			157: uint32(0xbcc7d1f6),
+			158: uint32(0xcf0111c3),
+			159: uint32(0xa1e8aac7),
+			160: uint32(0x1a908749),
+			161: uint32(0xd44fbd9a),
+			162: uint32(0xd0dadecb),
+			163: uint32(0xd50ada38),
+			164: uint32(0x0339c32a),
+			165: uint32(0xc6913667),
+			166: uint32(0x8df9317c),
+			167: uint32(0xe0b12b4f),
+			168: uint32(0xf79e59b7),
+			169: uint32(0x43f5bb3a),
+			170: uint32(0xf2d519ff),
+			171: uint32(0x27d9459c),
+			172: uint32(0xbf97222c),
+			173: uint32(0x15e6fc2a),
+			174: uint32(0x0f91fc71),
+			175: uint32(0x9b941525),
+			176: uint32(0xfae59361),
+			177: uint32(0xceb69ceb),
+			178: uint32(0xc2a86459),
+			179: uint32(0x12baa8d1),
+			180: uint32(0xb6c1075e),
+			181: uint32(0xe3056a0c),
+			182: uint32(0x10d25065),
+			183: uint32(0xcb03a442),
+			184: uint32(0xe0ec6e0e),
+			185: uint32(0x1698db3b),
+			186: uint32(0x4c98a0be),
+			187: uint32(0x3278e964),
+			188: uint32(0x9f1f9532),
+			189: uint32(0xe0d392df),
+			190: uint32(0xd3a0342b),
+			191: uint32(0x8971f21e),
+			192: uint32(0x1b0a7441),
+			193: uint32(0x4ba3348c),
+			194: uint32(0xc5be7120),
+			195: uint32(0xc37632d8),
+			196: uint32(0xdf359f8d),
+			197: uint32(0x9b992f2e),
+			198: uint32(0xe60b6f47),
+			199: uint32(0x0fe3f11d),
+			200: uint32(0xe54cda54),
+			201: uint32(0x1edad891),
+			202: uint32(0xce6279cf),
+			203: uint32(0xcd3e7e6f),
+			204: uint32(0x1618b166),
+			205: uint32(0xfd2c1d05),
+			206: uint32(0x848fd2c5),
+			207: uint32(0xf6fb2299),
+			208: uint32(0xf523f357),
+			209: uint32(0xa6327623),
+			210: uint32(0x93a83531),
+			211: uint32(0x56cccd02),
+			212: uint32(0xacf08162),
+			213: uint32(0x5a75ebb5),
+			214: uint32(0x6e163697),
+			215: uint32(0x88d273cc),
+			216: uint32(0xde966292),
+			217: uint32(0x81b949d0),
+			218: uint32(0x4c50901b),
+			219: uint32(0x71c65614),
+			220: uint32(0xe6c6c7bd),
+			221: uint32(0x327a140a),
+			222: uint32(0x45e1d006),
+			223: uint32(0xc3f27b9a),
+			224: uint32(0xc9aa53fd),
+			225: uint32(0x62a80f00),
+			226: uint32(0xbb25bfe2),
+			227: uint32(0x35bdd2f6),
+			228: uint32(0x71126905),
+			229: uint32(0xb2040222),
+			230: uint32(0xb6cbcf7c),
+			231: uint32(0xcd769c2b),
+			232: uint32(0x53113ec0),
+			233: uint32(0x1640e3d3),
+			234: uint32(0x38abbd60),
+			235: uint32(0x2547adf0),
+			236: uint32(0xba38209c),
+			237: uint32(0xf746ce76),
+			238: uint32(0x77afa1c5),
+			239: uint32(0x20756060),
+			240: uint32(0x85cbfe4e),
+			241: uint32(0x8ae88dd8),
+			242: uint32(0x7aaaf9b0),
+			243: uint32(0x4cf9aa7e),
+			244: uint32(0x1948c25c),
+			245: uint32(0x02fb8a8c),
+			246: uint32(0x01c36ae4),
+			247: uint32(0xd6ebe1f9),
+			248: uint32(0x90d4f869),
+			249: uint32(0xa65cdea0),
+			250: uint32(0x3f09252d),
+			251: uint32(0xc208e69f),
+			252: uint32(0xb74e6132),
+			253: uint32(0xce77e25b),
+			254: uint32(0x578fdfe3),
+			255: uint32(0x3ac372e6),
+		},
+	},
+}))
 
 var _BF_itoa64 = [65]uint8{'.', '/', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
@@ -4965,7 +5109,8 @@ var _BF_atoi64 = [96]uint8{
 	92: uint8(64),
 	93: uint8(64),
 	94: uint8(64),
-	95: uint8(64)}
+	95: uint8(64),
+}
 
 func _BF_decode(tls *TLS, dst uintptr, src uintptr, size int32) (r int32) {
 	var c1, c2, c3, c4, tmp uint32
@@ -5305,7 +5450,8 @@ var _flags_by_subtype = [26]uint8{
 	22: uint8(0),
 	23: uint8(1),
 	24: uint8(4),
-	25: uint8(0)}
+	25: uint8(0),
+}
 
 func _BF_crypt(tls *TLS, key uintptr, setting uintptr, output uintptr, min uint32) (r uintptr) {
 	bp := tls.Alloc(4272) /* tlsAllocs 4272 maxVaListSize 0 */
@@ -5830,7 +5976,8 @@ func x___crypt_blowfish(tls *TLS, key uintptr, setting uintptr, output uintptr) 
 
 var _test_hashes = [2][34]int8{
 	0: {'i', '1', 'D', '7', '0', '9', 'v', 'f', 'a', 'm', 'u', 'l', 'i', 'm', 'l', 'G', 'c', 'q', '0', 'q', 'q', '3', 'U', 'v', 'u', 'U', 'a', 's', 'v', 'E', 'a', 0, 'U'},
-	1: {'V', 'U', 'r', 'P', 'm', 'X', 'D', '6', 'q', '/', 'n', 'V', 'S', 'S', 'p', '7', 'p', 'N', 'D', 'h', 'C', 'R', '9', '0', '7', '1', 'I', 'f', 'I', 'R', 'e', 0, 'U'}}
+	1: {'V', 'U', 'r', 'P', 'm', 'X', 'D', '6', 'q', '/', 'n', 'V', 'S', 'S', 'p', '7', 'p', 'N', 'D', 'h', 'C', 'R', '9', '0', '7', '1', 'I', 'f', 'I', 'R', 'e', 0, 'U'},
+}
 
 const m__PASSWORD_EFMT1 = 95
 
@@ -5855,7 +6002,8 @@ var _key_shifts = [16]uint8{
 	12: uint8(2),
 	13: uint8(2),
 	14: uint8(2),
-	15: uint8(1)}
+	15: uint8(1),
+}
 
 var _psbox = [8][64]uint32{
 	0: {
@@ -5922,7 +6070,8 @@ var _psbox = [8][64]uint32{
 		60: uint32(0x00008002),
 		61: uint32(0x00008200),
 		62: uint32(0x00000000),
-		63: uint32(0x00808002)},
+		63: uint32(0x00808002),
+	},
 	1: {
 		0:  uint32(0x40084010),
 		1:  uint32(0x40004000),
@@ -5987,7 +6136,8 @@ var _psbox = [8][64]uint32{
 		60: uint32(0x40000000),
 		61: uint32(0x40080010),
 		62: uint32(0x40084010),
-		63: uint32(0x00084000)},
+		63: uint32(0x00084000),
+	},
 	2: {
 		0:  uint32(0x00000104),
 		1:  uint32(0x04010100),
@@ -6052,7 +6202,8 @@ var _psbox = [8][64]uint32{
 		60: uint32(0x00010104),
 		61: uint32(0x00000004),
 		62: uint32(0x04010004),
-		63: uint32(0x00010100)},
+		63: uint32(0x00010100),
+	},
 	3: {
 		0:  uint32(0x80401000),
 		1:  uint32(0x80001040),
@@ -6117,7 +6268,8 @@ var _psbox = [8][64]uint32{
 		60: uint32(0x00000040),
 		61: uint32(0x00400000),
 		62: uint32(0x00001000),
-		63: uint32(0x00401040)},
+		63: uint32(0x00401040),
+	},
 	4: {
 		0:  uint32(0x00000080),
 		1:  uint32(0x01040080),
@@ -6182,7 +6334,8 @@ var _psbox = [8][64]uint32{
 		60: uint32(0x00000000),
 		61: uint32(0x20040000),
 		62: uint32(0x01040080),
-		63: uint32(0x20000080)},
+		63: uint32(0x20000080),
+	},
 	5: {
 		0:  uint32(0x10000008),
 		1:  uint32(0x10200000),
@@ -6247,7 +6400,8 @@ var _psbox = [8][64]uint32{
 		60: uint32(0x10202000),
 		61: uint32(0x10000000),
 		62: uint32(0x00200008),
-		63: uint32(0x10002008)},
+		63: uint32(0x10002008),
+	},
 	6: {
 		0:  uint32(0x00100000),
 		1:  uint32(0x02100001),
@@ -6312,7 +6466,8 @@ var _psbox = [8][64]uint32{
 		60: uint32(0x02000001),
 		61: uint32(0x02000400),
 		62: uint32(0x00000400),
-		63: uint32(0x00100001)},
+		63: uint32(0x00100001),
+	},
 	7: {
 		0:  uint32(0x08000820),
 		1:  uint32(0x00000800),
@@ -6377,7 +6532,9 @@ var _psbox = [8][64]uint32{
 		60: uint32(0x00000820),
 		61: uint32(0x00020020),
 		62: uint32(0x08000000),
-		63: uint32(0x08020800)}}
+		63: uint32(0x08020800),
+	},
+}
 var _ip_maskl = [16][16]uint32{
 	0: {
 		0:  uint32(0x00000000),
@@ -6395,7 +6552,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x01000000),
 		13: uint32(0x01010000),
 		14: uint32(0x01000000),
-		15: uint32(0x01010000)},
+		15: uint32(0x01010000),
+	},
 	1: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000001),
@@ -6412,7 +6570,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x00000100),
 		13: uint32(0x00000101),
 		14: uint32(0x00000100),
-		15: uint32(0x00000101)},
+		15: uint32(0x00000101),
+	},
 	2: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00020000),
@@ -6429,7 +6588,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x02000000),
 		13: uint32(0x02020000),
 		14: uint32(0x02000000),
-		15: uint32(0x02020000)},
+		15: uint32(0x02020000),
+	},
 	3: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000002),
@@ -6446,7 +6606,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x00000200),
 		13: uint32(0x00000202),
 		14: uint32(0x00000200),
-		15: uint32(0x00000202)},
+		15: uint32(0x00000202),
+	},
 	4: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00040000),
@@ -6463,7 +6624,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x04000000),
 		13: uint32(0x04040000),
 		14: uint32(0x04000000),
-		15: uint32(0x04040000)},
+		15: uint32(0x04040000),
+	},
 	5: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000004),
@@ -6480,7 +6642,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x00000400),
 		13: uint32(0x00000404),
 		14: uint32(0x00000400),
-		15: uint32(0x00000404)},
+		15: uint32(0x00000404),
+	},
 	6: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00080000),
@@ -6497,7 +6660,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x08000000),
 		13: uint32(0x08080000),
 		14: uint32(0x08000000),
-		15: uint32(0x08080000)},
+		15: uint32(0x08080000),
+	},
 	7: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000008),
@@ -6514,7 +6678,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x00000800),
 		13: uint32(0x00000808),
 		14: uint32(0x00000800),
-		15: uint32(0x00000808)},
+		15: uint32(0x00000808),
+	},
 	8: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00100000),
@@ -6531,7 +6696,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x10000000),
 		13: uint32(0x10100000),
 		14: uint32(0x10000000),
-		15: uint32(0x10100000)},
+		15: uint32(0x10100000),
+	},
 	9: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000010),
@@ -6548,7 +6714,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x00001000),
 		13: uint32(0x00001010),
 		14: uint32(0x00001000),
-		15: uint32(0x00001010)},
+		15: uint32(0x00001010),
+	},
 	10: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00200000),
@@ -6565,7 +6732,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x20000000),
 		13: uint32(0x20200000),
 		14: uint32(0x20000000),
-		15: uint32(0x20200000)},
+		15: uint32(0x20200000),
+	},
 	11: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000020),
@@ -6582,7 +6750,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x00002000),
 		13: uint32(0x00002020),
 		14: uint32(0x00002000),
-		15: uint32(0x00002020)},
+		15: uint32(0x00002020),
+	},
 	12: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00400000),
@@ -6599,7 +6768,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x40000000),
 		13: uint32(0x40400000),
 		14: uint32(0x40000000),
-		15: uint32(0x40400000)},
+		15: uint32(0x40400000),
+	},
 	13: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000040),
@@ -6616,7 +6786,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x00004000),
 		13: uint32(0x00004040),
 		14: uint32(0x00004000),
-		15: uint32(0x00004040)},
+		15: uint32(0x00004040),
+	},
 	14: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00800000),
@@ -6633,7 +6804,8 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x80000000),
 		13: uint32(0x80800000),
 		14: uint32(0x80000000),
-		15: uint32(0x80800000)},
+		15: uint32(0x80800000),
+	},
 	15: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000080),
@@ -6650,7 +6822,9 @@ var _ip_maskl = [16][16]uint32{
 		12: uint32(0x00008000),
 		13: uint32(0x00008080),
 		14: uint32(0x00008000),
-		15: uint32(0x00008080)}}
+		15: uint32(0x00008080),
+	},
+}
 var _ip_maskr = [16][16]uint32{
 	0: {
 		0:  uint32(0x00000000),
@@ -6668,7 +6842,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x01000000),
 		13: uint32(0x01000000),
 		14: uint32(0x01010000),
-		15: uint32(0x01010000)},
+		15: uint32(0x01010000),
+	},
 	1: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6685,7 +6860,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x00000100),
 		13: uint32(0x00000100),
 		14: uint32(0x00000101),
-		15: uint32(0x00000101)},
+		15: uint32(0x00000101),
+	},
 	2: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6702,7 +6878,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x02000000),
 		13: uint32(0x02000000),
 		14: uint32(0x02020000),
-		15: uint32(0x02020000)},
+		15: uint32(0x02020000),
+	},
 	3: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6719,7 +6896,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x00000200),
 		13: uint32(0x00000200),
 		14: uint32(0x00000202),
-		15: uint32(0x00000202)},
+		15: uint32(0x00000202),
+	},
 	4: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6736,7 +6914,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x04000000),
 		13: uint32(0x04000000),
 		14: uint32(0x04040000),
-		15: uint32(0x04040000)},
+		15: uint32(0x04040000),
+	},
 	5: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6753,7 +6932,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x00000400),
 		13: uint32(0x00000400),
 		14: uint32(0x00000404),
-		15: uint32(0x00000404)},
+		15: uint32(0x00000404),
+	},
 	6: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6770,7 +6950,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x08000000),
 		13: uint32(0x08000000),
 		14: uint32(0x08080000),
-		15: uint32(0x08080000)},
+		15: uint32(0x08080000),
+	},
 	7: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6787,7 +6968,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x00000800),
 		13: uint32(0x00000800),
 		14: uint32(0x00000808),
-		15: uint32(0x00000808)},
+		15: uint32(0x00000808),
+	},
 	8: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6804,7 +6986,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x10000000),
 		13: uint32(0x10000000),
 		14: uint32(0x10100000),
-		15: uint32(0x10100000)},
+		15: uint32(0x10100000),
+	},
 	9: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6821,7 +7004,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x00001000),
 		13: uint32(0x00001000),
 		14: uint32(0x00001010),
-		15: uint32(0x00001010)},
+		15: uint32(0x00001010),
+	},
 	10: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6838,7 +7022,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x20000000),
 		13: uint32(0x20000000),
 		14: uint32(0x20200000),
-		15: uint32(0x20200000)},
+		15: uint32(0x20200000),
+	},
 	11: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6855,7 +7040,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x00002000),
 		13: uint32(0x00002000),
 		14: uint32(0x00002020),
-		15: uint32(0x00002020)},
+		15: uint32(0x00002020),
+	},
 	12: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6872,7 +7058,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x40000000),
 		13: uint32(0x40000000),
 		14: uint32(0x40400000),
-		15: uint32(0x40400000)},
+		15: uint32(0x40400000),
+	},
 	13: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6889,7 +7076,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x00004000),
 		13: uint32(0x00004000),
 		14: uint32(0x00004040),
-		15: uint32(0x00004040)},
+		15: uint32(0x00004040),
+	},
 	14: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6906,7 +7094,8 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x80000000),
 		13: uint32(0x80000000),
 		14: uint32(0x80800000),
-		15: uint32(0x80800000)},
+		15: uint32(0x80800000),
+	},
 	15: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -6923,7 +7112,9 @@ var _ip_maskr = [16][16]uint32{
 		12: uint32(0x00008000),
 		13: uint32(0x00008000),
 		14: uint32(0x00008080),
-		15: uint32(0x00008080)}}
+		15: uint32(0x00008080),
+	},
+}
 var _fp_maskl = [8][16]uint32{
 	0: {
 		0:  uint32(0x00000000),
@@ -6941,7 +7132,8 @@ var _fp_maskl = [8][16]uint32{
 		12: uint32(0x00004040),
 		13: uint32(0x40004040),
 		14: uint32(0x00404040),
-		15: uint32(0x40404040)},
+		15: uint32(0x40404040),
+	},
 	1: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x10000000),
@@ -6958,7 +7150,8 @@ var _fp_maskl = [8][16]uint32{
 		12: uint32(0x00001010),
 		13: uint32(0x10001010),
 		14: uint32(0x00101010),
-		15: uint32(0x10101010)},
+		15: uint32(0x10101010),
+	},
 	2: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x04000000),
@@ -6975,7 +7168,8 @@ var _fp_maskl = [8][16]uint32{
 		12: uint32(0x00000404),
 		13: uint32(0x04000404),
 		14: uint32(0x00040404),
-		15: uint32(0x04040404)},
+		15: uint32(0x04040404),
+	},
 	3: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x01000000),
@@ -6992,7 +7186,8 @@ var _fp_maskl = [8][16]uint32{
 		12: uint32(0x00000101),
 		13: uint32(0x01000101),
 		14: uint32(0x00010101),
-		15: uint32(0x01010101)},
+		15: uint32(0x01010101),
+	},
 	4: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x80000000),
@@ -7009,7 +7204,8 @@ var _fp_maskl = [8][16]uint32{
 		12: uint32(0x00008080),
 		13: uint32(0x80008080),
 		14: uint32(0x00808080),
-		15: uint32(0x80808080)},
+		15: uint32(0x80808080),
+	},
 	5: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x20000000),
@@ -7026,7 +7222,8 @@ var _fp_maskl = [8][16]uint32{
 		12: uint32(0x00002020),
 		13: uint32(0x20002020),
 		14: uint32(0x00202020),
-		15: uint32(0x20202020)},
+		15: uint32(0x20202020),
+	},
 	6: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x08000000),
@@ -7043,7 +7240,8 @@ var _fp_maskl = [8][16]uint32{
 		12: uint32(0x00000808),
 		13: uint32(0x08000808),
 		14: uint32(0x00080808),
-		15: uint32(0x08080808)},
+		15: uint32(0x08080808),
+	},
 	7: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x02000000),
@@ -7060,7 +7258,9 @@ var _fp_maskl = [8][16]uint32{
 		12: uint32(0x00000202),
 		13: uint32(0x02000202),
 		14: uint32(0x00020202),
-		15: uint32(0x02020202)}}
+		15: uint32(0x02020202),
+	},
+}
 var _fp_maskr = [8][16]uint32{
 	0: {
 		0:  uint32(0x00000000),
@@ -7078,7 +7278,8 @@ var _fp_maskr = [8][16]uint32{
 		12: uint32(0x00004040),
 		13: uint32(0x40004040),
 		14: uint32(0x00404040),
-		15: uint32(0x40404040)},
+		15: uint32(0x40404040),
+	},
 	1: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x10000000),
@@ -7095,7 +7296,8 @@ var _fp_maskr = [8][16]uint32{
 		12: uint32(0x00001010),
 		13: uint32(0x10001010),
 		14: uint32(0x00101010),
-		15: uint32(0x10101010)},
+		15: uint32(0x10101010),
+	},
 	2: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x04000000),
@@ -7112,7 +7314,8 @@ var _fp_maskr = [8][16]uint32{
 		12: uint32(0x00000404),
 		13: uint32(0x04000404),
 		14: uint32(0x00040404),
-		15: uint32(0x04040404)},
+		15: uint32(0x04040404),
+	},
 	3: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x01000000),
@@ -7129,7 +7332,8 @@ var _fp_maskr = [8][16]uint32{
 		12: uint32(0x00000101),
 		13: uint32(0x01000101),
 		14: uint32(0x00010101),
-		15: uint32(0x01010101)},
+		15: uint32(0x01010101),
+	},
 	4: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x80000000),
@@ -7146,7 +7350,8 @@ var _fp_maskr = [8][16]uint32{
 		12: uint32(0x00008080),
 		13: uint32(0x80008080),
 		14: uint32(0x00808080),
-		15: uint32(0x80808080)},
+		15: uint32(0x80808080),
+	},
 	5: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x20000000),
@@ -7163,7 +7368,8 @@ var _fp_maskr = [8][16]uint32{
 		12: uint32(0x00002020),
 		13: uint32(0x20002020),
 		14: uint32(0x00202020),
-		15: uint32(0x20202020)},
+		15: uint32(0x20202020),
+	},
 	6: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x08000000),
@@ -7180,7 +7386,8 @@ var _fp_maskr = [8][16]uint32{
 		12: uint32(0x00000808),
 		13: uint32(0x08000808),
 		14: uint32(0x00080808),
-		15: uint32(0x08080808)},
+		15: uint32(0x08080808),
+	},
 	7: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x02000000),
@@ -7197,7 +7404,9 @@ var _fp_maskr = [8][16]uint32{
 		12: uint32(0x00000202),
 		13: uint32(0x02000202),
 		14: uint32(0x00020202),
-		15: uint32(0x02020202)}}
+		15: uint32(0x02020202),
+	},
+}
 var _key_perm_maskl = [8][16]uint32{
 	0: {
 		0:  uint32(0x00000000),
@@ -7215,7 +7424,8 @@ var _key_perm_maskl = [8][16]uint32{
 		12: uint32(0x00101000),
 		13: uint32(0x00101000),
 		14: uint32(0x00101010),
-		15: uint32(0x00101010)},
+		15: uint32(0x00101010),
+	},
 	1: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7232,7 +7442,8 @@ var _key_perm_maskl = [8][16]uint32{
 		12: uint32(0x00202000),
 		13: uint32(0x00202000),
 		14: uint32(0x00202020),
-		15: uint32(0x00202020)},
+		15: uint32(0x00202020),
+	},
 	2: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7249,7 +7460,8 @@ var _key_perm_maskl = [8][16]uint32{
 		12: uint32(0x00404000),
 		13: uint32(0x00404000),
 		14: uint32(0x00404040),
-		15: uint32(0x00404040)},
+		15: uint32(0x00404040),
+	},
 	3: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7266,7 +7478,8 @@ var _key_perm_maskl = [8][16]uint32{
 		12: uint32(0x00808000),
 		13: uint32(0x00808000),
 		14: uint32(0x00808080),
-		15: uint32(0x00808080)},
+		15: uint32(0x00808080),
+	},
 	4: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000001),
@@ -7283,7 +7496,8 @@ var _key_perm_maskl = [8][16]uint32{
 		12: uint32(0x01010000),
 		13: uint32(0x01010001),
 		14: uint32(0x01010100),
-		15: uint32(0x01010101)},
+		15: uint32(0x01010101),
+	},
 	5: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000002),
@@ -7300,7 +7514,8 @@ var _key_perm_maskl = [8][16]uint32{
 		12: uint32(0x02020000),
 		13: uint32(0x02020002),
 		14: uint32(0x02020200),
-		15: uint32(0x02020202)},
+		15: uint32(0x02020202),
+	},
 	6: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000004),
@@ -7317,7 +7532,8 @@ var _key_perm_maskl = [8][16]uint32{
 		12: uint32(0x04040000),
 		13: uint32(0x04040004),
 		14: uint32(0x04040400),
-		15: uint32(0x04040404)},
+		15: uint32(0x04040404),
+	},
 	7: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000008),
@@ -7334,7 +7550,9 @@ var _key_perm_maskl = [8][16]uint32{
 		12: uint32(0x08080000),
 		13: uint32(0x08080008),
 		14: uint32(0x08080800),
-		15: uint32(0x08080808)}}
+		15: uint32(0x08080808),
+	},
+}
 var _key_perm_maskr = [12][16]uint32{
 	0: {
 		0:  uint32(0x00000000),
@@ -7352,7 +7570,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00000000),
 		13: uint32(0x00000001),
 		14: uint32(0x00000000),
-		15: uint32(0x00000001)},
+		15: uint32(0x00000001),
+	},
 	1: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7369,7 +7588,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00001010),
 		13: uint32(0x00001010),
 		14: uint32(0x00101010),
-		15: uint32(0x00101010)},
+		15: uint32(0x00101010),
+	},
 	2: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000002),
@@ -7386,7 +7606,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00000000),
 		13: uint32(0x00000002),
 		14: uint32(0x00000000),
-		15: uint32(0x00000002)},
+		15: uint32(0x00000002),
+	},
 	3: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7403,7 +7624,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00002020),
 		13: uint32(0x00002020),
 		14: uint32(0x00202020),
-		15: uint32(0x00202020)},
+		15: uint32(0x00202020),
+	},
 	4: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000004),
@@ -7420,7 +7642,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00000000),
 		13: uint32(0x00000004),
 		14: uint32(0x00000000),
-		15: uint32(0x00000004)},
+		15: uint32(0x00000004),
+	},
 	5: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7437,7 +7660,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00004040),
 		13: uint32(0x00004040),
 		14: uint32(0x00404040),
-		15: uint32(0x00404040)},
+		15: uint32(0x00404040),
+	},
 	6: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000008),
@@ -7454,7 +7678,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00000000),
 		13: uint32(0x00000008),
 		14: uint32(0x00000000),
-		15: uint32(0x00000008)},
+		15: uint32(0x00000008),
+	},
 	7: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7471,7 +7696,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00008080),
 		13: uint32(0x00008080),
 		14: uint32(0x00808080),
-		15: uint32(0x00808080)},
+		15: uint32(0x00808080),
+	},
 	8: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7488,7 +7714,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00010100),
 		13: uint32(0x00010100),
 		14: uint32(0x01010100),
-		15: uint32(0x01010100)},
+		15: uint32(0x01010100),
+	},
 	9: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7505,7 +7732,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00020200),
 		13: uint32(0x00020200),
 		14: uint32(0x02020200),
-		15: uint32(0x02020200)},
+		15: uint32(0x02020200),
+	},
 	10: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7522,7 +7750,8 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00040400),
 		13: uint32(0x00040400),
 		14: uint32(0x04040400),
-		15: uint32(0x04040400)},
+		15: uint32(0x04040400),
+	},
 	11: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000000),
@@ -7539,7 +7768,9 @@ var _key_perm_maskr = [12][16]uint32{
 		12: uint32(0x00080800),
 		13: uint32(0x00080800),
 		14: uint32(0x08080800),
-		15: uint32(0x08080800)}}
+		15: uint32(0x08080800),
+	},
+}
 var _comp_maskl0 = [4][8]uint32{
 	0: {
 		0: uint32(0x00000000),
@@ -7549,7 +7780,8 @@ var _comp_maskl0 = [4][8]uint32{
 		4: uint32(0x00080000),
 		5: uint32(0x000a0000),
 		6: uint32(0x00080001),
-		7: uint32(0x000a0001)},
+		7: uint32(0x000a0001),
+	},
 	1: {
 		0: uint32(0x00000000),
 		1: uint32(0x00001000),
@@ -7558,7 +7790,8 @@ var _comp_maskl0 = [4][8]uint32{
 		4: uint32(0x00000040),
 		5: uint32(0x00001040),
 		6: uint32(0x00000040),
-		7: uint32(0x00001040)},
+		7: uint32(0x00001040),
+	},
 	2: {
 		0: uint32(0x00000000),
 		1: uint32(0x00400000),
@@ -7567,7 +7800,8 @@ var _comp_maskl0 = [4][8]uint32{
 		4: uint32(0x00008000),
 		5: uint32(0x00408000),
 		6: uint32(0x00008020),
-		7: uint32(0x00408020)},
+		7: uint32(0x00408020),
+	},
 	3: {
 		0: uint32(0x00000000),
 		1: uint32(0x00100000),
@@ -7576,7 +7810,9 @@ var _comp_maskl0 = [4][8]uint32{
 		4: uint32(0x00000000),
 		5: uint32(0x00100000),
 		6: uint32(0x00000800),
-		7: uint32(0x00100800)}}
+		7: uint32(0x00100800),
+	},
+}
 var _comp_maskr0 = [4][8]uint32{
 	0: {
 		0: uint32(0x00000000),
@@ -7586,7 +7822,8 @@ var _comp_maskr0 = [4][8]uint32{
 		4: uint32(0x00000002),
 		5: uint32(0x00200002),
 		6: uint32(0x00020002),
-		7: uint32(0x00220002)},
+		7: uint32(0x00220002),
+	},
 	1: {
 		0: uint32(0x00000000),
 		1: uint32(0x00000000),
@@ -7595,7 +7832,8 @@ var _comp_maskr0 = [4][8]uint32{
 		4: uint32(0x00000004),
 		5: uint32(0x00000004),
 		6: uint32(0x00100004),
-		7: uint32(0x00100004)},
+		7: uint32(0x00100004),
+	},
 	2: {
 		0: uint32(0x00000000),
 		1: uint32(0x00004000),
@@ -7604,7 +7842,8 @@ var _comp_maskr0 = [4][8]uint32{
 		4: uint32(0x00000000),
 		5: uint32(0x00004000),
 		6: uint32(0x00000800),
-		7: uint32(0x00004800)},
+		7: uint32(0x00004800),
+	},
 	3: {
 		0: uint32(0x00000000),
 		1: uint32(0x00400000),
@@ -7613,7 +7852,9 @@ var _comp_maskr0 = [4][8]uint32{
 		4: uint32(0x00000008),
 		5: uint32(0x00400008),
 		6: uint32(0x00008008),
-		7: uint32(0x00408008)}}
+		7: uint32(0x00408008),
+	},
+}
 var _comp_maskl1 = [4][16]uint32{
 	0: {
 		0:  uint32(0x00000000),
@@ -7631,7 +7872,8 @@ var _comp_maskl1 = [4][16]uint32{
 		12: uint32(0x00040100),
 		13: uint32(0x00040110),
 		14: uint32(0x00044100),
-		15: uint32(0x00044110)},
+		15: uint32(0x00044110),
+	},
 	1: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00800000),
@@ -7648,7 +7890,8 @@ var _comp_maskl1 = [4][16]uint32{
 		12: uint32(0x00200200),
 		13: uint32(0x00a00200),
 		14: uint32(0x00200202),
-		15: uint32(0x00a00202)},
+		15: uint32(0x00a00202),
+	},
 	2: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00002000),
@@ -7665,7 +7908,8 @@ var _comp_maskl1 = [4][16]uint32{
 		12: uint32(0x00000400),
 		13: uint32(0x00002400),
 		14: uint32(0x00000404),
-		15: uint32(0x00002404)},
+		15: uint32(0x00002404),
+	},
 	3: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00010000),
@@ -7682,7 +7926,9 @@ var _comp_maskl1 = [4][16]uint32{
 		12: uint32(0x00000080),
 		13: uint32(0x00010080),
 		14: uint32(0x00000088),
-		15: uint32(0x00010088)}}
+		15: uint32(0x00010088),
+	},
+}
 var _comp_maskr1 = [4][16]uint32{
 	0: {
 		0:  uint32(0x00000000),
@@ -7700,7 +7946,8 @@ var _comp_maskr1 = [4][16]uint32{
 		12: uint32(0x00002001),
 		13: uint32(0x00002001),
 		14: uint32(0x00002081),
-		15: uint32(0x00002081)},
+		15: uint32(0x00002081),
+	},
 	1: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000010),
@@ -7717,7 +7964,8 @@ var _comp_maskr1 = [4][16]uint32{
 		12: uint32(0x00010200),
 		13: uint32(0x00010210),
 		14: uint32(0x00810200),
-		15: uint32(0x00810210)},
+		15: uint32(0x00810210),
+	},
 	2: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000400),
@@ -7734,7 +7982,8 @@ var _comp_maskr1 = [4][16]uint32{
 		12: uint32(0x00080020),
 		13: uint32(0x00080420),
 		14: uint32(0x00081020),
-		15: uint32(0x00081420)},
+		15: uint32(0x00081420),
+	},
 	3: {
 		0:  uint32(0x00000000),
 		1:  uint32(0x00000100),
@@ -7751,7 +8000,9 @@ var _comp_maskr1 = [4][16]uint32{
 		12: uint32(0x00000040),
 		13: uint32(0x00000140),
 		14: uint32(0x00040040),
-		15: uint32(0x00040140)}}
+		15: uint32(0x00040140),
+	},
+}
 
 var _ascii64 = [65]uint8{'.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
@@ -8223,7 +8474,8 @@ var _tab = [64]uint32{
 	60: uint32(0xf7537e82),
 	61: uint32(0xbd3af235),
 	62: uint32(0x2ad7d2bb),
-	63: uint32(0xeb86d391)}
+	63: uint32(0xeb86d391),
+}
 
 func _processblock(tls *TLS, s uintptr, buf uintptr) {
 	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
@@ -8507,23 +8759,29 @@ var _perm = [5][3]uint8{
 	0: {
 		0: uint8(0),
 		1: uint8(6),
-		2: uint8(12)},
+		2: uint8(12),
+	},
 	1: {
 		0: uint8(1),
 		1: uint8(7),
-		2: uint8(13)},
+		2: uint8(13),
+	},
 	2: {
 		0: uint8(2),
 		1: uint8(8),
-		2: uint8(14)},
+		2: uint8(14),
+	},
 	3: {
 		0: uint8(3),
 		1: uint8(9),
-		2: uint8(15)},
+		2: uint8(15),
+	},
 	4: {
 		0: uint8(4),
 		1: uint8(10),
-		2: uint8(5)}}
+		2: uint8(5),
+	},
+}
 
 func x___crypt_md5(tls *TLS, key uintptr, setting uintptr, output uintptr) (r uintptr) {
 	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
@@ -8651,7 +8909,8 @@ var _K = [64]uint32{
 	60: uint32(0x90befffa),
 	61: uint32(0xa4506ceb),
 	62: uint32(0xbef9a3f7),
-	63: uint32(0xc67178f2)}
+	63: uint32(0xc67178f2),
+}
 
 func _processblock1(tls *TLS, s uintptr, buf uintptr) {
 	bp := tls.Alloc(256) /* tlsAllocs 256 maxVaListSize 0 */
@@ -8943,43 +9202,54 @@ var _perm1 = [10][3]uint8{
 	0: {
 		0: uint8(0),
 		1: uint8(10),
-		2: uint8(20)},
+		2: uint8(20),
+	},
 	1: {
 		0: uint8(21),
 		1: uint8(1),
-		2: uint8(11)},
+		2: uint8(11),
+	},
 	2: {
 		0: uint8(12),
 		1: uint8(22),
-		2: uint8(2)},
+		2: uint8(2),
+	},
 	3: {
 		0: uint8(3),
 		1: uint8(13),
-		2: uint8(23)},
+		2: uint8(23),
+	},
 	4: {
 		0: uint8(24),
 		1: uint8(4),
-		2: uint8(14)},
+		2: uint8(14),
+	},
 	5: {
 		0: uint8(15),
 		1: uint8(25),
-		2: uint8(5)},
+		2: uint8(5),
+	},
 	6: {
 		0: uint8(6),
 		1: uint8(16),
-		2: uint8(26)},
+		2: uint8(26),
+	},
 	7: {
 		0: uint8(27),
 		1: uint8(7),
-		2: uint8(17)},
+		2: uint8(17),
+	},
 	8: {
 		0: uint8(18),
 		1: uint8(28),
-		2: uint8(8)},
+		2: uint8(8),
+	},
 	9: {
 		0: uint8(9),
 		1: uint8(19),
-		2: uint8(29)}}
+		2: uint8(29),
+	},
+}
 
 func x___crypt_sha256(tls *TLS, key uintptr, setting uintptr, output uintptr) (r uintptr) {
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
@@ -9094,7 +9364,8 @@ var _K1 = [80]uint64{
 	76: uint64(0x4cc5d4becb3e42b6),
 	77: uint64(0x597f299cfc657e2a),
 	78: uint64(0x5fcb6fab3ad6faec),
-	79: uint64(0x6c44198c4a475817)}
+	79: uint64(0x6c44198c4a475817),
+}
 
 func _processblock2(tls *TLS, s uintptr, buf uintptr) {
 	bp := tls.Alloc(640) /* tlsAllocs 640 maxVaListSize 0 */
@@ -9396,87 +9667,109 @@ var _perm2 = [21][3]uint8{
 	0: {
 		0: uint8(0),
 		1: uint8(21),
-		2: uint8(42)},
+		2: uint8(42),
+	},
 	1: {
 		0: uint8(22),
 		1: uint8(43),
-		2: uint8(1)},
+		2: uint8(1),
+	},
 	2: {
 		0: uint8(44),
 		1: uint8(2),
-		2: uint8(23)},
+		2: uint8(23),
+	},
 	3: {
 		0: uint8(3),
 		1: uint8(24),
-		2: uint8(45)},
+		2: uint8(45),
+	},
 	4: {
 		0: uint8(25),
 		1: uint8(46),
-		2: uint8(4)},
+		2: uint8(4),
+	},
 	5: {
 		0: uint8(47),
 		1: uint8(5),
-		2: uint8(26)},
+		2: uint8(26),
+	},
 	6: {
 		0: uint8(6),
 		1: uint8(27),
-		2: uint8(48)},
+		2: uint8(48),
+	},
 	7: {
 		0: uint8(28),
 		1: uint8(49),
-		2: uint8(7)},
+		2: uint8(7),
+	},
 	8: {
 		0: uint8(50),
 		1: uint8(8),
-		2: uint8(29)},
+		2: uint8(29),
+	},
 	9: {
 		0: uint8(9),
 		1: uint8(30),
-		2: uint8(51)},
+		2: uint8(51),
+	},
 	10: {
 		0: uint8(31),
 		1: uint8(52),
-		2: uint8(10)},
+		2: uint8(10),
+	},
 	11: {
 		0: uint8(53),
 		1: uint8(11),
-		2: uint8(32)},
+		2: uint8(32),
+	},
 	12: {
 		0: uint8(12),
 		1: uint8(33),
-		2: uint8(54)},
+		2: uint8(54),
+	},
 	13: {
 		0: uint8(34),
 		1: uint8(55),
-		2: uint8(13)},
+		2: uint8(13),
+	},
 	14: {
 		0: uint8(56),
 		1: uint8(14),
-		2: uint8(35)},
+		2: uint8(35),
+	},
 	15: {
 		0: uint8(15),
 		1: uint8(36),
-		2: uint8(57)},
+		2: uint8(57),
+	},
 	16: {
 		0: uint8(37),
 		1: uint8(58),
-		2: uint8(16)},
+		2: uint8(16),
+	},
 	17: {
 		0: uint8(59),
 		1: uint8(17),
-		2: uint8(38)},
+		2: uint8(38),
+	},
 	18: {
 		0: uint8(18),
 		1: uint8(39),
-		2: uint8(60)},
+		2: uint8(60),
+	},
 	19: {
 		0: uint8(40),
 		1: uint8(61),
-		2: uint8(19)},
+		2: uint8(19),
+	},
 	20: {
 		0: uint8(62),
 		1: uint8(20),
-		2: uint8(41)}}
+		2: uint8(41),
+	},
+}
 
 func x___crypt_sha512(tls *TLS, key uintptr, setting uintptr, output uintptr) (r uintptr) {
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
@@ -9941,7 +10234,8 @@ var _table = [384]uint16{
 	380: uint16(0),
 	381: uint16(0),
 	382: uint16(0),
-	383: uint16(0)}
+	383: uint16(0),
+}
 
 var _ptable = uintptr(unsafe.Pointer(&_table)) + uintptr(128)*2
 
@@ -10381,7 +10675,8 @@ var _table1 = [384]int32{
 	380: int32(0),
 	381: int32(0),
 	382: int32(0),
-	383: int32(0)}
+	383: int32(0),
+}
 
 var _ptable1 = uintptr(unsafe.Pointer(&_table1)) + uintptr(128)*4
 
@@ -10773,7 +11068,8 @@ var _table2 = [384]int32{
 	380: int32(0),
 	381: int32(0),
 	382: int32(0),
-	383: int32(0)}
+	383: int32(0),
+}
 
 var _ptable2 = uintptr(unsafe.Pointer(&_table2)) + uintptr(128)*4
 
@@ -14791,7 +15087,8 @@ var _table3 = [3904]uint8{
 	3900: uint8(0),
 	3901: uint8(0),
 	3902: uint8(0),
-	3903: uint8(0)}
+	3903: uint8(0),
+}
 
 func x_iswalpha(tls *TLS, wc uint32) (r int32) {
 	if wc < uint32(0x20000) {
@@ -18936,7 +19233,8 @@ var _table4 = [4000]uint8{
 	3996: uint8(0),
 	3997: uint8(0),
 	3998: uint8(0),
-	3999: uint8(0)}
+	3999: uint8(0),
+}
 
 func x_iswpunct(tls *TLS, wc uint32) (r int32) {
 	if wc < uint32(0x20000) {
@@ -18982,7 +19280,8 @@ var _spaces = [22]int32{
 	18: int32(0x2029),
 	19: int32(0x205f),
 	20: int32(0x3000),
-	21: 0}
+	21: 0,
+}
 
 func x___iswspace_l(tls *TLS, c uint32, l uintptr) (r int32) {
 	return x_iswspace(tls, c)
@@ -21707,7 +22006,8 @@ var _tab1 = [2666]uint8{
 	2662: uint8(0),
 	2663: uint8(0),
 	2664: uint8(0),
-	2665: uint8(0)}
+	2665: uint8(0),
+}
 var _rules = [240]int32{
 	0:   int32(0x0),
 	1:   int32(0x2001),
@@ -21948,7 +22248,8 @@ var _rules = [240]int32{
 	236: -int32(0x2000),
 	237: int32(0x0),
 	238: int32(0x2201),
-	239: -int32(0x2200)}
+	239: -int32(0x2200),
+}
 var _rulebases = [512]uint8{
 	0:   uint8(0),
 	1:   uint8(6),
@@ -22461,608 +22762,810 @@ var _rulebases = [512]uint8{
 	508: uint8(0),
 	509: uint8(0),
 	510: uint8(0),
-	511: uint8(0)}
+	511: uint8(0),
+}
 var _exceptions = [200][2]uint8{
 	0: {
 		0: uint8(48),
-		1: uint8(12)},
+		1: uint8(12),
+	},
 	1: {
 		0: uint8(49),
-		1: uint8(13)},
+		1: uint8(13),
+	},
 	2: {
 		0: uint8(120),
-		1: uint8(14)},
+		1: uint8(14),
+	},
 	3: {
 		0: uint8(127),
-		1: uint8(15)},
+		1: uint8(15),
+	},
 	4: {
 		0: uint8(128),
-		1: uint8(16)},
+		1: uint8(16),
+	},
 	5: {
 		0: uint8(129),
-		1: uint8(17)},
+		1: uint8(17),
+	},
 	6: {
 		0: uint8(134),
-		1: uint8(18)},
+		1: uint8(18),
+	},
 	7: {
 		0: uint8(137),
-		1: uint8(19)},
+		1: uint8(19),
+	},
 	8: {
 		0: uint8(138),
-		1: uint8(19)},
+		1: uint8(19),
+	},
 	9: {
 		0: uint8(142),
-		1: uint8(20)},
+		1: uint8(20),
+	},
 	10: {
 		0: uint8(143),
-		1: uint8(21)},
+		1: uint8(21),
+	},
 	11: {
 		0: uint8(144),
-		1: uint8(22)},
+		1: uint8(22),
+	},
 	12: {
 		0: uint8(147),
-		1: uint8(19)},
+		1: uint8(19),
+	},
 	13: {
 		0: uint8(148),
-		1: uint8(23)},
+		1: uint8(23),
+	},
 	14: {
 		0: uint8(149),
-		1: uint8(24)},
+		1: uint8(24),
+	},
 	15: {
 		0: uint8(150),
-		1: uint8(25)},
+		1: uint8(25),
+	},
 	16: {
 		0: uint8(151),
-		1: uint8(26)},
+		1: uint8(26),
+	},
 	17: {
 		0: uint8(154),
-		1: uint8(27)},
+		1: uint8(27),
+	},
 	18: {
 		0: uint8(156),
-		1: uint8(25)},
+		1: uint8(25),
+	},
 	19: {
 		0: uint8(157),
-		1: uint8(28)},
+		1: uint8(28),
+	},
 	20: {
 		0: uint8(158),
-		1: uint8(29)},
+		1: uint8(29),
+	},
 	21: {
 		0: uint8(159),
-		1: uint8(30)},
+		1: uint8(30),
+	},
 	22: {
 		0: uint8(166),
-		1: uint8(31)},
+		1: uint8(31),
+	},
 	23: {
 		0: uint8(169),
-		1: uint8(31)},
+		1: uint8(31),
+	},
 	24: {
 		0: uint8(174),
-		1: uint8(31)},
+		1: uint8(31),
+	},
 	25: {
 		0: uint8(177),
-		1: uint8(32)},
+		1: uint8(32),
+	},
 	26: {
 		0: uint8(178),
-		1: uint8(32)},
+		1: uint8(32),
+	},
 	27: {
 		0: uint8(183),
-		1: uint8(33)},
+		1: uint8(33),
+	},
 	28: {
 		0: uint8(191),
-		1: uint8(34)},
+		1: uint8(34),
+	},
 	29: {
 		0: uint8(197),
-		1: uint8(35)},
+		1: uint8(35),
+	},
 	30: {
 		0: uint8(200),
-		1: uint8(35)},
+		1: uint8(35),
+	},
 	31: {
 		0: uint8(203),
-		1: uint8(35)},
+		1: uint8(35),
+	},
 	32: {
 		0: uint8(221),
-		1: uint8(36)},
+		1: uint8(36),
+	},
 	33: {
 		0: uint8(242),
-		1: uint8(35)},
+		1: uint8(35),
+	},
 	34: {
 		0: uint8(246),
-		1: uint8(37)},
+		1: uint8(37),
+	},
 	35: {
 		0: uint8(247),
-		1: uint8(38)},
+		1: uint8(38),
+	},
 	36: {
 		0: uint8(32),
-		1: uint8(45)},
+		1: uint8(45),
+	},
 	37: {
 		0: uint8(58),
-		1: uint8(46)},
+		1: uint8(46),
+	},
 	38: {
 		0: uint8(61),
-		1: uint8(47)},
+		1: uint8(47),
+	},
 	39: {
 		0: uint8(62),
-		1: uint8(48)},
+		1: uint8(48),
+	},
 	40: {
 		0: uint8(63),
-		1: uint8(49)},
+		1: uint8(49),
+	},
 	41: {
 		0: uint8(64),
-		1: uint8(49)},
+		1: uint8(49),
+	},
 	42: {
 		0: uint8(67),
-		1: uint8(50)},
+		1: uint8(50),
+	},
 	43: {
 		0: uint8(68),
-		1: uint8(51)},
+		1: uint8(51),
+	},
 	44: {
 		0: uint8(69),
-		1: uint8(52)},
+		1: uint8(52),
+	},
 	45: {
 		0: uint8(80),
-		1: uint8(53)},
+		1: uint8(53),
+	},
 	46: {
 		0: uint8(81),
-		1: uint8(54)},
+		1: uint8(54),
+	},
 	47: {
 		0: uint8(82),
-		1: uint8(55)},
+		1: uint8(55),
+	},
 	48: {
 		0: uint8(83),
-		1: uint8(56)},
+		1: uint8(56),
+	},
 	49: {
 		0: uint8(84),
-		1: uint8(57)},
+		1: uint8(57),
+	},
 	50: {
 		0: uint8(89),
-		1: uint8(58)},
+		1: uint8(58),
+	},
 	51: {
 		0: uint8(91),
-		1: uint8(59)},
+		1: uint8(59),
+	},
 	52: {
 		0: uint8(92),
-		1: uint8(60)},
+		1: uint8(60),
+	},
 	53: {
 		0: uint8(97),
-		1: uint8(61)},
+		1: uint8(61),
+	},
 	54: {
 		0: uint8(99),
-		1: uint8(62)},
+		1: uint8(62),
+	},
 	55: {
 		0: uint8(101),
-		1: uint8(63)},
+		1: uint8(63),
+	},
 	56: {
 		0: uint8(102),
-		1: uint8(64)},
+		1: uint8(64),
+	},
 	57: {
 		0: uint8(104),
-		1: uint8(65)},
+		1: uint8(65),
+	},
 	58: {
 		0: uint8(105),
-		1: uint8(66)},
+		1: uint8(66),
+	},
 	59: {
 		0: uint8(106),
-		1: uint8(64)},
+		1: uint8(64),
+	},
 	60: {
 		0: uint8(107),
-		1: uint8(67)},
+		1: uint8(67),
+	},
 	61: {
 		0: uint8(108),
-		1: uint8(68)},
+		1: uint8(68),
+	},
 	62: {
 		0: uint8(111),
-		1: uint8(66)},
+		1: uint8(66),
+	},
 	63: {
 		0: uint8(113),
-		1: uint8(69)},
+		1: uint8(69),
+	},
 	64: {
 		0: uint8(114),
-		1: uint8(70)},
+		1: uint8(70),
+	},
 	65: {
 		0: uint8(117),
-		1: uint8(71)},
+		1: uint8(71),
+	},
 	66: {
 		0: uint8(125),
-		1: uint8(72)},
+		1: uint8(72),
+	},
 	67: {
 		0: uint8(130),
-		1: uint8(73)},
+		1: uint8(73),
+	},
 	68: {
 		0: uint8(135),
-		1: uint8(74)},
+		1: uint8(74),
+	},
 	69: {
 		0: uint8(137),
-		1: uint8(75)},
+		1: uint8(75),
+	},
 	70: {
 		0: uint8(138),
-		1: uint8(76)},
+		1: uint8(76),
+	},
 	71: {
 		0: uint8(139),
-		1: uint8(76)},
+		1: uint8(76),
+	},
 	72: {
 		0: uint8(140),
-		1: uint8(77)},
+		1: uint8(77),
+	},
 	73: {
 		0: uint8(146),
-		1: uint8(78)},
+		1: uint8(78),
+	},
 	74: {
 		0: uint8(157),
-		1: uint8(79)},
+		1: uint8(79),
+	},
 	75: {
 		0: uint8(158),
-		1: uint8(80)},
+		1: uint8(80),
+	},
 	76: {
 		0: uint8(69),
-		1: uint8(87)},
+		1: uint8(87),
+	},
 	77: {
 		0: uint8(123),
-		1: uint8(29)},
+		1: uint8(29),
+	},
 	78: {
 		0: uint8(124),
-		1: uint8(29)},
+		1: uint8(29),
+	},
 	79: {
 		0: uint8(125),
-		1: uint8(29)},
+		1: uint8(29),
+	},
 	80: {
 		0: uint8(127),
-		1: uint8(88)},
+		1: uint8(88),
+	},
 	81: {
 		0: uint8(134),
-		1: uint8(89)},
+		1: uint8(89),
+	},
 	82: {
 		0: uint8(136),
-		1: uint8(90)},
+		1: uint8(90),
+	},
 	83: {
 		0: uint8(137),
-		1: uint8(90)},
+		1: uint8(90),
+	},
 	84: {
 		0: uint8(138),
-		1: uint8(90)},
+		1: uint8(90),
+	},
 	85: {
 		0: uint8(140),
-		1: uint8(91)},
+		1: uint8(91),
+	},
 	86: {
 		0: uint8(142),
-		1: uint8(92)},
+		1: uint8(92),
+	},
 	87: {
 		0: uint8(143),
-		1: uint8(92)},
+		1: uint8(92),
+	},
 	88: {
 		0: uint8(172),
-		1: uint8(93)},
+		1: uint8(93),
+	},
 	89: {
 		0: uint8(173),
-		1: uint8(94)},
+		1: uint8(94),
+	},
 	90: {
 		0: uint8(174),
-		1: uint8(94)},
+		1: uint8(94),
+	},
 	91: {
 		0: uint8(175),
-		1: uint8(94)},
+		1: uint8(94),
+	},
 	92: {
 		0: uint8(194),
-		1: uint8(95)},
+		1: uint8(95),
+	},
 	93: {
 		0: uint8(204),
-		1: uint8(96)},
+		1: uint8(96),
+	},
 	94: {
 		0: uint8(205),
-		1: uint8(97)},
+		1: uint8(97),
+	},
 	95: {
 		0: uint8(206),
-		1: uint8(97)},
+		1: uint8(97),
+	},
 	96: {
 		0: uint8(207),
-		1: uint8(98)},
+		1: uint8(98),
+	},
 	97: {
 		0: uint8(208),
-		1: uint8(99)},
+		1: uint8(99),
+	},
 	98: {
 		0: uint8(209),
-		1: uint8(100)},
+		1: uint8(100),
+	},
 	99: {
 		0: uint8(213),
-		1: uint8(101)},
+		1: uint8(101),
+	},
 	100: {
 		0: uint8(214),
-		1: uint8(102)},
+		1: uint8(102),
+	},
 	101: {
 		0: uint8(215),
-		1: uint8(103)},
+		1: uint8(103),
+	},
 	102: {
 		0: uint8(240),
-		1: uint8(104)},
+		1: uint8(104),
+	},
 	103: {
 		0: uint8(241),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	104: {
 		0: uint8(242),
-		1: uint8(106)},
+		1: uint8(106),
+	},
 	105: {
 		0: uint8(243),
-		1: uint8(107)},
+		1: uint8(107),
+	},
 	106: {
 		0: uint8(244),
-		1: uint8(108)},
+		1: uint8(108),
+	},
 	107: {
 		0: uint8(245),
-		1: uint8(109)},
+		1: uint8(109),
+	},
 	108: {
 		0: uint8(249),
-		1: uint8(110)},
+		1: uint8(110),
+	},
 	109: {
 		0: uint8(253),
-		1: uint8(45)},
+		1: uint8(45),
+	},
 	110: {
 		0: uint8(254),
-		1: uint8(45)},
+		1: uint8(45),
+	},
 	111: {
 		0: uint8(255),
-		1: uint8(45)},
+		1: uint8(45),
+	},
 	112: {
 		0: uint8(80),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	113: {
 		0: uint8(81),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	114: {
 		0: uint8(82),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	115: {
 		0: uint8(83),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	116: {
 		0: uint8(84),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	117: {
 		0: uint8(85),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	118: {
 		0: uint8(86),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	119: {
 		0: uint8(87),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	120: {
 		0: uint8(88),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	121: {
 		0: uint8(89),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	122: {
 		0: uint8(90),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	123: {
 		0: uint8(91),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	124: {
 		0: uint8(92),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	125: {
 		0: uint8(93),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	126: {
 		0: uint8(94),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	127: {
 		0: uint8(95),
-		1: uint8(105)},
+		1: uint8(105),
+	},
 	128: {
 		0: uint8(130),
-		1: uint8(0)},
+		1: uint8(0),
+	},
 	129: {
 		0: uint8(131),
-		1: uint8(0)},
+		1: uint8(0),
+	},
 	130: {
 		0: uint8(132),
-		1: uint8(0)},
+		1: uint8(0),
+	},
 	131: {
 		0: uint8(133),
-		1: uint8(0)},
+		1: uint8(0),
+	},
 	132: {
 		0: uint8(134),
-		1: uint8(0)},
+		1: uint8(0),
+	},
 	133: {
 		0: uint8(135),
-		1: uint8(0)},
+		1: uint8(0),
+	},
 	134: {
 		0: uint8(136),
-		1: uint8(0)},
+		1: uint8(0),
+	},
 	135: {
 		0: uint8(137),
-		1: uint8(0)},
+		1: uint8(0),
+	},
 	136: {
 		0: uint8(192),
-		1: uint8(117)},
+		1: uint8(117),
+	},
 	137: {
 		0: uint8(207),
-		1: uint8(118)},
+		1: uint8(118),
+	},
 	138: {
 		0: uint8(128),
-		1: uint8(137)},
+		1: uint8(137),
+	},
 	139: {
 		0: uint8(129),
-		1: uint8(138)},
+		1: uint8(138),
+	},
 	140: {
 		0: uint8(130),
-		1: uint8(139)},
+		1: uint8(139),
+	},
 	141: {
 		0: uint8(133),
-		1: uint8(140)},
+		1: uint8(140),
+	},
 	142: {
 		0: uint8(134),
-		1: uint8(141)},
+		1: uint8(141),
+	},
 	143: {
 		0: uint8(112),
-		1: uint8(157)},
+		1: uint8(157),
+	},
 	144: {
 		0: uint8(113),
-		1: uint8(157)},
+		1: uint8(157),
+	},
 	145: {
 		0: uint8(118),
-		1: uint8(158)},
+		1: uint8(158),
+	},
 	146: {
 		0: uint8(119),
-		1: uint8(158)},
+		1: uint8(158),
+	},
 	147: {
 		0: uint8(120),
-		1: uint8(159)},
+		1: uint8(159),
+	},
 	148: {
 		0: uint8(121),
-		1: uint8(159)},
+		1: uint8(159),
+	},
 	149: {
 		0: uint8(122),
-		1: uint8(160)},
+		1: uint8(160),
+	},
 	150: {
 		0: uint8(123),
-		1: uint8(160)},
+		1: uint8(160),
+	},
 	151: {
 		0: uint8(124),
-		1: uint8(161)},
+		1: uint8(161),
+	},
 	152: {
 		0: uint8(125),
-		1: uint8(161)},
+		1: uint8(161),
+	},
 	153: {
 		0: uint8(179),
-		1: uint8(162)},
+		1: uint8(162),
+	},
 	154: {
 		0: uint8(186),
-		1: uint8(163)},
+		1: uint8(163),
+	},
 	155: {
 		0: uint8(187),
-		1: uint8(163)},
+		1: uint8(163),
+	},
 	156: {
 		0: uint8(188),
-		1: uint8(164)},
+		1: uint8(164),
+	},
 	157: {
 		0: uint8(190),
-		1: uint8(165)},
+		1: uint8(165),
+	},
 	158: {
 		0: uint8(195),
-		1: uint8(162)},
+		1: uint8(162),
+	},
 	159: {
 		0: uint8(204),
-		1: uint8(164)},
+		1: uint8(164),
+	},
 	160: {
 		0: uint8(218),
-		1: uint8(166)},
+		1: uint8(166),
+	},
 	161: {
 		0: uint8(219),
-		1: uint8(166)},
+		1: uint8(166),
+	},
 	162: {
 		0: uint8(229),
-		1: uint8(106)},
+		1: uint8(106),
+	},
 	163: {
 		0: uint8(234),
-		1: uint8(167)},
+		1: uint8(167),
+	},
 	164: {
 		0: uint8(235),
-		1: uint8(167)},
+		1: uint8(167),
+	},
 	165: {
 		0: uint8(236),
-		1: uint8(110)},
+		1: uint8(110),
+	},
 	166: {
 		0: uint8(243),
-		1: uint8(162)},
+		1: uint8(162),
+	},
 	167: {
 		0: uint8(248),
-		1: uint8(168)},
+		1: uint8(168),
+	},
 	168: {
 		0: uint8(249),
-		1: uint8(168)},
+		1: uint8(168),
+	},
 	169: {
 		0: uint8(250),
-		1: uint8(169)},
+		1: uint8(169),
+	},
 	170: {
 		0: uint8(251),
-		1: uint8(169)},
+		1: uint8(169),
+	},
 	171: {
 		0: uint8(252),
-		1: uint8(164)},
+		1: uint8(164),
+	},
 	172: {
 		0: uint8(38),
-		1: uint8(176)},
+		1: uint8(176),
+	},
 	173: {
 		0: uint8(42),
-		1: uint8(177)},
+		1: uint8(177),
+	},
 	174: {
 		0: uint8(43),
-		1: uint8(178)},
+		1: uint8(178),
+	},
 	175: {
 		0: uint8(78),
-		1: uint8(179)},
+		1: uint8(179),
+	},
 	176: {
 		0: uint8(132),
-		1: uint8(8)},
+		1: uint8(8),
+	},
 	177: {
 		0: uint8(98),
-		1: uint8(186)},
+		1: uint8(186),
+	},
 	178: {
 		0: uint8(99),
-		1: uint8(187)},
+		1: uint8(187),
+	},
 	179: {
 		0: uint8(100),
-		1: uint8(188)},
+		1: uint8(188),
+	},
 	180: {
 		0: uint8(101),
-		1: uint8(189)},
+		1: uint8(189),
+	},
 	181: {
 		0: uint8(102),
-		1: uint8(190)},
+		1: uint8(190),
+	},
 	182: {
 		0: uint8(109),
-		1: uint8(191)},
+		1: uint8(191),
+	},
 	183: {
 		0: uint8(110),
-		1: uint8(192)},
+		1: uint8(192),
+	},
 	184: {
 		0: uint8(111),
-		1: uint8(193)},
+		1: uint8(193),
+	},
 	185: {
 		0: uint8(112),
-		1: uint8(194)},
+		1: uint8(194),
+	},
 	186: {
 		0: uint8(126),
-		1: uint8(195)},
+		1: uint8(195),
+	},
 	187: {
 		0: uint8(127),
-		1: uint8(195)},
+		1: uint8(195),
+	},
 	188: {
 		0: uint8(125),
-		1: uint8(207)},
+		1: uint8(207),
+	},
 	189: {
 		0: uint8(141),
-		1: uint8(208)},
+		1: uint8(208),
+	},
 	190: {
 		0: uint8(148),
-		1: uint8(209)},
+		1: uint8(209),
+	},
 	191: {
 		0: uint8(171),
-		1: uint8(210)},
+		1: uint8(210),
+	},
 	192: {
 		0: uint8(172),
-		1: uint8(211)},
+		1: uint8(211),
+	},
 	193: {
 		0: uint8(173),
-		1: uint8(212)},
+		1: uint8(212),
+	},
 	194: {
 		0: uint8(176),
-		1: uint8(213)},
+		1: uint8(213),
+	},
 	195: {
 		0: uint8(177),
-		1: uint8(214)},
+		1: uint8(214),
+	},
 	196: {
 		0: uint8(178),
-		1: uint8(215)},
+		1: uint8(215),
+	},
 	197: {
 		0: uint8(196),
-		1: uint8(216)},
+		1: uint8(216),
+	},
 	198: {
 		0: uint8(197),
-		1: uint8(217)},
+		1: uint8(217),
+	},
 	199: {
 		0: uint8(198),
-		1: uint8(218)}}
+		1: uint8(218),
+	},
+}
 
 func _casemap(tls *TLS, c uint32, dir int32) (r1 int32) {
 	var b, rt, try, v, x, xb, xn, y uint32
@@ -23124,7 +23627,8 @@ func _casemap(tls *TLS, c uint32, dir int32) (r1 int32) {
 var _mt = [3]int32{
 	0: int32(2048),
 	1: int32(342),
-	2: int32(57)}
+	2: int32(57),
+}
 
 func x_towlower(tls *TLS, wc uint32) (r uint32) {
 	return uint32(_casemap(tls, wc, 0))
@@ -25983,7 +26487,8 @@ var _table5 = [2784]uint8{
 	2780: uint8(0),
 	2781: uint8(0),
 	2782: uint8(0),
-	2783: uint8(0)}
+	2783: uint8(0),
+}
 
 var _wtable = [1600]uint8{
 	0:    uint8(16),
@@ -27585,7 +28090,8 @@ var _wtable = [1600]uint8{
 	1596: uint8(0),
 	1597: uint8(0),
 	1598: uint8(0),
-	1599: uint8(0)}
+	1599: uint8(0),
+}
 
 func x_wcwidth(tls *TLS, wc int32) (r int32) {
 	var v1, v2 int32
@@ -28109,8 +28615,13 @@ func x___init_libc(tls *TLS, envp uintptr, pn uintptr) {
 	}
 	*(*[3]Tpollfd)(unsafe.Pointer(bp + 304)) = [3]Tpollfd{
 		0: {},
-		1: {Ffd: int32(1)},
-		2: {Ffd: int32(2)}}
+		1: {
+			Ffd: int32(1),
+		},
+		2: {
+			Ffd: int32(2),
+		},
+	}
 	r = int32(___syscall3(tls, int64(7), int64(bp+304), int64(Int32FromInt32(3)), int64(Int32FromInt32(0))))
 	if r < 0 {
 		_a_crash(tls)
@@ -28504,7 +29015,101 @@ type Terrmsgstr_t = struct {
 	FstrEKEYREJECTED    [28]int8
 }
 
-var _errmsgstr = Terrmsgstr_t{Fstr0: [21]int8{'N', 'o', ' ', 'e', 'r', 'r', 'o', 'r', ' ', 'i', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n'}, FstrEILSEQ: [22]int8{'I', 'l', 'l', 'e', 'g', 'a', 'l', ' ', 'b', 'y', 't', 'e', ' ', 's', 'e', 'q', 'u', 'e', 'n', 'c', 'e'}, FstrEDOM: [13]int8{'D', 'o', 'm', 'a', 'i', 'n', ' ', 'e', 'r', 'r', 'o', 'r'}, FstrERANGE: [25]int8{'R', 'e', 's', 'u', 'l', 't', ' ', 'n', 'o', 't', ' ', 'r', 'e', 'p', 'r', 'e', 's', 'e', 'n', 't', 'a', 'b', 'l', 'e'}, FstrENOTTY: [10]int8{'N', 'o', 't', ' ', 'a', ' ', 't', 't', 'y'}, FstrEACCES: [18]int8{'P', 'e', 'r', 'm', 'i', 's', 's', 'i', 'o', 'n', ' ', 'd', 'e', 'n', 'i', 'e', 'd'}, FstrEPERM: [24]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'n', 'o', 't', ' ', 'p', 'e', 'r', 'm', 'i', 't', 't', 'e', 'd'}, FstrENOENT: [26]int8{'N', 'o', ' ', 's', 'u', 'c', 'h', ' ', 'f', 'i', 'l', 'e', ' ', 'o', 'r', ' ', 'd', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y'}, FstrESRCH: [16]int8{'N', 'o', ' ', 's', 'u', 'c', 'h', ' ', 'p', 'r', 'o', 'c', 'e', 's', 's'}, FstrEEXIST: [12]int8{'F', 'i', 'l', 'e', ' ', 'e', 'x', 'i', 's', 't', 's'}, FstrEOVERFLOW: [30]int8{'V', 'a', 'l', 'u', 'e', ' ', 't', 'o', 'o', ' ', 'l', 'a', 'r', 'g', 'e', ' ', 'f', 'o', 'r', ' ', 'd', 'a', 't', 'a', ' ', 't', 'y', 'p', 'e'}, FstrENOSPC: [24]int8{'N', 'o', ' ', 's', 'p', 'a', 'c', 'e', ' ', 'l', 'e', 'f', 't', ' ', 'o', 'n', ' ', 'd', 'e', 'v', 'i', 'c', 'e'}, FstrENOMEM: [14]int8{'O', 'u', 't', ' ', 'o', 'f', ' ', 'm', 'e', 'm', 'o', 'r', 'y'}, FstrEBUSY: [14]int8{'R', 'e', 's', 'o', 'u', 'r', 'c', 'e', ' ', 'b', 'u', 's', 'y'}, FstrEINTR: [24]int8{'I', 'n', 't', 'e', 'r', 'r', 'u', 'p', 't', 'e', 'd', ' ', 's', 'y', 's', 't', 'e', 'm', ' ', 'c', 'a', 'l', 'l'}, FstrEAGAIN: [33]int8{'R', 'e', 's', 'o', 'u', 'r', 'c', 'e', ' ', 't', 'e', 'm', 'p', 'o', 'r', 'a', 'r', 'i', 'l', 'y', ' ', 'u', 'n', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'}, FstrESPIPE: [13]int8{'I', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 's', 'e', 'e', 'k'}, FstrEXDEV: [18]int8{'C', 'r', 'o', 's', 's', '-', 'd', 'e', 'v', 'i', 'c', 'e', ' ', 'l', 'i', 'n', 'k'}, FstrEROFS: [22]int8{'R', 'e', 'a', 'd', '-', 'o', 'n', 'l', 'y', ' ', 'f', 'i', 'l', 'e', ' ', 's', 'y', 's', 't', 'e', 'm'}, FstrENOTEMPTY: [20]int8{'D', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y', ' ', 'n', 'o', 't', ' ', 'e', 'm', 'p', 't', 'y'}, FstrECONNRESET: [25]int8{'C', 'o', 'n', 'n', 'e', 'c', 't', 'i', 'o', 'n', ' ', 'r', 'e', 's', 'e', 't', ' ', 'b', 'y', ' ', 'p', 'e', 'e', 'r'}, FstrETIMEDOUT: [20]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 't', 'i', 'm', 'e', 'd', ' ', 'o', 'u', 't'}, FstrECONNREFUSED: [19]int8{'C', 'o', 'n', 'n', 'e', 'c', 't', 'i', 'o', 'n', ' ', 'r', 'e', 'f', 'u', 's', 'e', 'd'}, FstrEHOSTDOWN: [13]int8{'H', 'o', 's', 't', ' ', 'i', 's', ' ', 'd', 'o', 'w', 'n'}, FstrEHOSTUNREACH: [20]int8{'H', 'o', 's', 't', ' ', 'i', 's', ' ', 'u', 'n', 'r', 'e', 'a', 'c', 'h', 'a', 'b', 'l', 'e'}, FstrEADDRINUSE: [15]int8{'A', 'd', 'd', 'r', 'e', 's', 's', ' ', 'i', 'n', ' ', 'u', 's', 'e'}, FstrEPIPE: [12]int8{'B', 'r', 'o', 'k', 'e', 'n', ' ', 'p', 'i', 'p', 'e'}, FstrEIO: [10]int8{'I', '/', 'O', ' ', 'e', 'r', 'r', 'o', 'r'}, FstrENXIO: [26]int8{'N', 'o', ' ', 's', 'u', 'c', 'h', ' ', 'd', 'e', 'v', 'i', 'c', 'e', ' ', 'o', 'r', ' ', 'a', 'd', 'd', 'r', 'e', 's', 's'}, FstrENOTBLK: [22]int8{'B', 'l', 'o', 'c', 'k', ' ', 'd', 'e', 'v', 'i', 'c', 'e', ' ', 'r', 'e', 'q', 'u', 'i', 'r', 'e', 'd'}, FstrENODEV: [15]int8{'N', 'o', ' ', 's', 'u', 'c', 'h', ' ', 'd', 'e', 'v', 'i', 'c', 'e'}, FstrENOTDIR: [16]int8{'N', 'o', 't', ' ', 'a', ' ', 'd', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y'}, FstrEISDIR: [15]int8{'I', 's', ' ', 'a', ' ', 'd', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y'}, FstrETXTBSY: [15]int8{'T', 'e', 'x', 't', ' ', 'f', 'i', 'l', 'e', ' ', 'b', 'u', 's', 'y'}, FstrENOEXEC: [18]int8{'E', 'x', 'e', 'c', ' ', 'f', 'o', 'r', 'm', 'a', 't', ' ', 'e', 'r', 'r', 'o', 'r'}, FstrEINVAL: [17]int8{'I', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 'a', 'r', 'g', 'u', 'm', 'e', 'n', 't'}, FstrE2BIG: [23]int8{'A', 'r', 'g', 'u', 'm', 'e', 'n', 't', ' ', 'l', 'i', 's', 't', ' ', 't', 'o', 'o', ' ', 'l', 'o', 'n', 'g'}, FstrELOOP: [19]int8{'S', 'y', 'm', 'b', 'o', 'l', 'i', 'c', ' ', 'l', 'i', 'n', 'k', ' ', 'l', 'o', 'o', 'p'}, FstrENAMETOOLONG: [18]int8{'F', 'i', 'l', 'e', 'n', 'a', 'm', 'e', ' ', 't', 'o', 'o', ' ', 'l', 'o', 'n', 'g'}, FstrENFILE: [30]int8{'T', 'o', 'o', ' ', 'm', 'a', 'n', 'y', ' ', 'o', 'p', 'e', 'n', ' ', 'f', 'i', 'l', 'e', 's', ' ', 'i', 'n', ' ', 's', 'y', 's', 't', 'e', 'm'}, FstrEMFILE: [30]int8{'N', 'o', ' ', 'f', 'i', 'l', 'e', ' ', 'd', 'e', 's', 'c', 'r', 'i', 'p', 't', 'o', 'r', 's', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'}, FstrEBADF: [20]int8{'B', 'a', 'd', ' ', 'f', 'i', 'l', 'e', ' ', 'd', 'e', 's', 'c', 'r', 'i', 'p', 't', 'o', 'r'}, FstrECHILD: [17]int8{'N', 'o', ' ', 'c', 'h', 'i', 'l', 'd', ' ', 'p', 'r', 'o', 'c', 'e', 's', 's'}, FstrEFAULT: [12]int8{'B', 'a', 'd', ' ', 'a', 'd', 'd', 'r', 'e', 's', 's'}, FstrEFBIG: [15]int8{'F', 'i', 'l', 'e', ' ', 't', 'o', 'o', ' ', 'l', 'a', 'r', 'g', 'e'}, FstrEMLINK: [15]int8{'T', 'o', 'o', ' ', 'm', 'a', 'n', 'y', ' ', 'l', 'i', 'n', 'k', 's'}, FstrENOLCK: [19]int8{'N', 'o', ' ', 'l', 'o', 'c', 'k', 's', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'}, FstrEDEADLK: [30]int8{'R', 'e', 's', 'o', 'u', 'r', 'c', 'e', ' ', 'd', 'e', 'a', 'd', 'l', 'o', 'c', 'k', ' ', 'w', 'o', 'u', 'l', 'd', ' ', 'o', 'c', 'c', 'u', 'r'}, FstrENOTRECOVERABLE: [22]int8{'S', 't', 'a', 't', 'e', ' ', 'n', 'o', 't', ' ', 'r', 'e', 'c', 'o', 'v', 'e', 'r', 'a', 'b', 'l', 'e'}, FstrEOWNERDEAD: [20]int8{'P', 'r', 'e', 'v', 'i', 'o', 'u', 's', ' ', 'o', 'w', 'n', 'e', 'r', ' ', 'd', 'i', 'e', 'd'}, FstrECANCELED: [19]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'c', 'a', 'n', 'c', 'e', 'l', 'e', 'd'}, FstrENOSYS: [25]int8{'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', ' ', 'n', 'o', 't', ' ', 'i', 'm', 'p', 'l', 'e', 'm', 'e', 'n', 't', 'e', 'd'}, FstrENOMSG: [27]int8{'N', 'o', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', ' ', 'o', 'f', ' ', 'd', 'e', 's', 'i', 'r', 'e', 'd', ' ', 't', 'y', 'p', 'e'}, FstrEIDRM: [19]int8{'I', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'e', 'r', ' ', 'r', 'e', 'm', 'o', 'v', 'e', 'd'}, FstrENOSTR: [20]int8{'D', 'e', 'v', 'i', 'c', 'e', ' ', 'n', 'o', 't', ' ', 'a', ' ', 's', 't', 'r', 'e', 'a', 'm'}, FstrENODATA: [18]int8{'N', 'o', ' ', 'd', 'a', 't', 'a', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'}, FstrETIME: [15]int8{'D', 'e', 'v', 'i', 'c', 'e', ' ', 't', 'i', 'm', 'e', 'o', 'u', 't'}, FstrENOSR: [25]int8{'O', 'u', 't', ' ', 'o', 'f', ' ', 's', 't', 'r', 'e', 'a', 'm', 's', ' ', 'r', 'e', 's', 'o', 'u', 'r', 'c', 'e', 's'}, FstrENOLINK: [22]int8{'L', 'i', 'n', 'k', ' ', 'h', 'a', 's', ' ', 'b', 'e', 'e', 'n', ' ', 's', 'e', 'v', 'e', 'r', 'e', 'd'}, FstrEPROTO: [15]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'e', 'r', 'r', 'o', 'r'}, FstrEBADMSG: [12]int8{'B', 'a', 'd', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e'}, FstrEBADFD: [29]int8{'F', 'i', 'l', 'e', ' ', 'd', 'e', 's', 'c', 'r', 'i', 'p', 't', 'o', 'r', ' ', 'i', 'n', ' ', 'b', 'a', 'd', ' ', 's', 't', 'a', 't', 'e'}, FstrENOTSOCK: [13]int8{'N', 'o', 't', ' ', 'a', ' ', 's', 'o', 'c', 'k', 'e', 't'}, FstrEDESTADDRREQ: [29]int8{'D', 'e', 's', 't', 'i', 'n', 'a', 't', 'i', 'o', 'n', ' ', 'a', 'd', 'd', 'r', 'e', 's', 's', ' ', 'r', 'e', 'q', 'u', 'i', 'r', 'e', 'd'}, FstrEMSGSIZE: [18]int8{'M', 'e', 's', 's', 'a', 'g', 'e', ' ', 't', 'o', 'o', ' ', 'l', 'a', 'r', 'g', 'e'}, FstrEPROTOTYPE: [31]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'w', 'r', 'o', 'n', 'g', ' ', 't', 'y', 'p', 'e', ' ', 'f', 'o', 'r', ' ', 's', 'o', 'c', 'k', 'e', 't'}, FstrENOPROTOOPT: [23]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'n', 'o', 't', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'}, FstrEPROTONOSUPPORT: [23]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'n', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd'}, FstrESOCKTNOSUPPORT: [26]int8{'S', 'o', 'c', 'k', 'e', 't', ' ', 't', 'y', 'p', 'e', ' ', 'n', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd'}, FstrENOTSUP: [14]int8{'N', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd'}, FstrEPFNOSUPPORT: [30]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'f', 'a', 'm', 'i', 'l', 'y', ' ', 'n', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd'}, FstrEAFNOSUPPORT: [41]int8{'A', 'd', 'd', 'r', 'e', 's', 's', ' ', 'f', 'a', 'm', 'i', 'l', 'y', ' ', 'n', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd', ' ', 'b', 'y', ' ', 'p', 'r', 'o', 't', 'o', 'c', 'o', 'l'}, FstrEADDRNOTAVAIL: [22]int8{'A', 'd', 'd', 'r', 'e', 's', 's', ' ', 'n', 'o', 't', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'}, FstrENETDOWN: [16]int8{'N', 'e', 't', 'w', 'o', 'r', 'k', ' ', 'i', 's', ' ', 'd', 'o', 'w', 'n'}, FstrENETUNREACH: [20]int8{'N', 'e', 't', 'w', 'o', 'r', 'k', ' ', 'u', 'n', 'r', 'e', 'a', 'c', 'h', 'a', 'b', 'l', 'e'}, FstrENETRESET: [28]int8{'C', 'o', 'n', 'n', 'e', 'c', 't', 'i', 'o', 'n', ' ', 'r', 'e', 's', 'e', 't', ' ', 'b', 'y', ' ', 'n', 'e', 't', 'w', 'o', 'r', 'k'}, FstrECONNABORTED: [19]int8{'C', 'o', 'n', 'n', 'e', 'c', 't', 'i', 'o', 'n', ' ', 'a', 'b', 'o', 'r', 't', 'e', 'd'}, FstrENOBUFS: [26]int8{'N', 'o', ' ', 'b', 'u', 'f', 'f', 'e', 'r', ' ', 's', 'p', 'a', 'c', 'e', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'}, FstrEISCONN: [20]int8{'S', 'o', 'c', 'k', 'e', 't', ' ', 'i', 's', ' ', 'c', 'o', 'n', 'n', 'e', 'c', 't', 'e', 'd'}, FstrENOTCONN: [21]int8{'S', 'o', 'c', 'k', 'e', 't', ' ', 'n', 'o', 't', ' ', 'c', 'o', 'n', 'n', 'e', 'c', 't', 'e', 'd'}, FstrESHUTDOWN: [34]int8{'C', 'a', 'n', 'n', 'o', 't', ' ', 's', 'e', 'n', 'd', ' ', 'a', 'f', 't', 'e', 'r', ' ', 's', 'o', 'c', 'k', 'e', 't', ' ', 's', 'h', 'u', 't', 'd', 'o', 'w', 'n'}, FstrEALREADY: [30]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'a', 'l', 'r', 'e', 'a', 'd', 'y', ' ', 'i', 'n', ' ', 'p', 'r', 'o', 'g', 'r', 'e', 's', 's'}, FstrEINPROGRESS: [22]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'i', 'n', ' ', 'p', 'r', 'o', 'g', 'r', 'e', 's', 's'}, FstrESTALE: [18]int8{'S', 't', 'a', 'l', 'e', ' ', 'f', 'i', 'l', 'e', ' ', 'h', 'a', 'n', 'd', 'l', 'e'}, FstrEREMOTEIO: [17]int8{'R', 'e', 'm', 'o', 't', 'e', ' ', 'I', '/', 'O', ' ', 'e', 'r', 'r', 'o', 'r'}, FstrEDQUOT: [15]int8{'Q', 'u', 'o', 't', 'a', ' ', 'e', 'x', 'c', 'e', 'e', 'd', 'e', 'd'}, FstrENOMEDIUM: [16]int8{'N', 'o', ' ', 'm', 'e', 'd', 'i', 'u', 'm', ' ', 'f', 'o', 'u', 'n', 'd'}, FstrEMEDIUMTYPE: [18]int8{'W', 'r', 'o', 'n', 'g', ' ', 'm', 'e', 'd', 'i', 'u', 'm', ' ', 't', 'y', 'p', 'e'}, FstrEMULTIHOP: [19]int8{'M', 'u', 'l', 't', 'i', 'h', 'o', 'p', ' ', 'a', 't', 't', 'e', 'm', 'p', 't', 'e', 'd'}, FstrENOKEY: [27]int8{'R', 'e', 'q', 'u', 'i', 'r', 'e', 'd', ' ', 'k', 'e', 'y', ' ', 'n', 'o', 't', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'}, FstrEKEYEXPIRED: [16]int8{'K', 'e', 'y', ' ', 'h', 'a', 's', ' ', 'e', 'x', 'p', 'i', 'r', 'e', 'd'}, FstrEKEYREVOKED: [21]int8{'K', 'e', 'y', ' ', 'h', 'a', 's', ' ', 'b', 'e', 'e', 'n', ' ', 'r', 'e', 'v', 'o', 'k', 'e', 'd'}, FstrEKEYREJECTED: [28]int8{'K', 'e', 'y', ' ', 'w', 'a', 's', ' ', 'r', 'e', 'j', 'e', 'c', 't', 'e', 'd', ' ', 'b', 'y', ' ', 's', 'e', 'r', 'v', 'i', 'c', 'e'}}
+var _errmsgstr = Terrmsgstr_t{
+	Fstr0:               [21]int8{'N', 'o', ' ', 'e', 'r', 'r', 'o', 'r', ' ', 'i', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n'},
+	FstrEILSEQ:          [22]int8{'I', 'l', 'l', 'e', 'g', 'a', 'l', ' ', 'b', 'y', 't', 'e', ' ', 's', 'e', 'q', 'u', 'e', 'n', 'c', 'e'},
+	FstrEDOM:            [13]int8{'D', 'o', 'm', 'a', 'i', 'n', ' ', 'e', 'r', 'r', 'o', 'r'},
+	FstrERANGE:          [25]int8{'R', 'e', 's', 'u', 'l', 't', ' ', 'n', 'o', 't', ' ', 'r', 'e', 'p', 'r', 'e', 's', 'e', 'n', 't', 'a', 'b', 'l', 'e'},
+	FstrENOTTY:          [10]int8{'N', 'o', 't', ' ', 'a', ' ', 't', 't', 'y'},
+	FstrEACCES:          [18]int8{'P', 'e', 'r', 'm', 'i', 's', 's', 'i', 'o', 'n', ' ', 'd', 'e', 'n', 'i', 'e', 'd'},
+	FstrEPERM:           [24]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'n', 'o', 't', ' ', 'p', 'e', 'r', 'm', 'i', 't', 't', 'e', 'd'},
+	FstrENOENT:          [26]int8{'N', 'o', ' ', 's', 'u', 'c', 'h', ' ', 'f', 'i', 'l', 'e', ' ', 'o', 'r', ' ', 'd', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y'},
+	FstrESRCH:           [16]int8{'N', 'o', ' ', 's', 'u', 'c', 'h', ' ', 'p', 'r', 'o', 'c', 'e', 's', 's'},
+	FstrEEXIST:          [12]int8{'F', 'i', 'l', 'e', ' ', 'e', 'x', 'i', 's', 't', 's'},
+	FstrEOVERFLOW:       [30]int8{'V', 'a', 'l', 'u', 'e', ' ', 't', 'o', 'o', ' ', 'l', 'a', 'r', 'g', 'e', ' ', 'f', 'o', 'r', ' ', 'd', 'a', 't', 'a', ' ', 't', 'y', 'p', 'e'},
+	FstrENOSPC:          [24]int8{'N', 'o', ' ', 's', 'p', 'a', 'c', 'e', ' ', 'l', 'e', 'f', 't', ' ', 'o', 'n', ' ', 'd', 'e', 'v', 'i', 'c', 'e'},
+	FstrENOMEM:          [14]int8{'O', 'u', 't', ' ', 'o', 'f', ' ', 'm', 'e', 'm', 'o', 'r', 'y'},
+	FstrEBUSY:           [14]int8{'R', 'e', 's', 'o', 'u', 'r', 'c', 'e', ' ', 'b', 'u', 's', 'y'},
+	FstrEINTR:           [24]int8{'I', 'n', 't', 'e', 'r', 'r', 'u', 'p', 't', 'e', 'd', ' ', 's', 'y', 's', 't', 'e', 'm', ' ', 'c', 'a', 'l', 'l'},
+	FstrEAGAIN:          [33]int8{'R', 'e', 's', 'o', 'u', 'r', 'c', 'e', ' ', 't', 'e', 'm', 'p', 'o', 'r', 'a', 'r', 'i', 'l', 'y', ' ', 'u', 'n', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'},
+	FstrESPIPE:          [13]int8{'I', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 's', 'e', 'e', 'k'},
+	FstrEXDEV:           [18]int8{'C', 'r', 'o', 's', 's', '-', 'd', 'e', 'v', 'i', 'c', 'e', ' ', 'l', 'i', 'n', 'k'},
+	FstrEROFS:           [22]int8{'R', 'e', 'a', 'd', '-', 'o', 'n', 'l', 'y', ' ', 'f', 'i', 'l', 'e', ' ', 's', 'y', 's', 't', 'e', 'm'},
+	FstrENOTEMPTY:       [20]int8{'D', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y', ' ', 'n', 'o', 't', ' ', 'e', 'm', 'p', 't', 'y'},
+	FstrECONNRESET:      [25]int8{'C', 'o', 'n', 'n', 'e', 'c', 't', 'i', 'o', 'n', ' ', 'r', 'e', 's', 'e', 't', ' ', 'b', 'y', ' ', 'p', 'e', 'e', 'r'},
+	FstrETIMEDOUT:       [20]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 't', 'i', 'm', 'e', 'd', ' ', 'o', 'u', 't'},
+	FstrECONNREFUSED:    [19]int8{'C', 'o', 'n', 'n', 'e', 'c', 't', 'i', 'o', 'n', ' ', 'r', 'e', 'f', 'u', 's', 'e', 'd'},
+	FstrEHOSTDOWN:       [13]int8{'H', 'o', 's', 't', ' ', 'i', 's', ' ', 'd', 'o', 'w', 'n'},
+	FstrEHOSTUNREACH:    [20]int8{'H', 'o', 's', 't', ' ', 'i', 's', ' ', 'u', 'n', 'r', 'e', 'a', 'c', 'h', 'a', 'b', 'l', 'e'},
+	FstrEADDRINUSE:      [15]int8{'A', 'd', 'd', 'r', 'e', 's', 's', ' ', 'i', 'n', ' ', 'u', 's', 'e'},
+	FstrEPIPE:           [12]int8{'B', 'r', 'o', 'k', 'e', 'n', ' ', 'p', 'i', 'p', 'e'},
+	FstrEIO:             [10]int8{'I', '/', 'O', ' ', 'e', 'r', 'r', 'o', 'r'},
+	FstrENXIO:           [26]int8{'N', 'o', ' ', 's', 'u', 'c', 'h', ' ', 'd', 'e', 'v', 'i', 'c', 'e', ' ', 'o', 'r', ' ', 'a', 'd', 'd', 'r', 'e', 's', 's'},
+	FstrENOTBLK:         [22]int8{'B', 'l', 'o', 'c', 'k', ' ', 'd', 'e', 'v', 'i', 'c', 'e', ' ', 'r', 'e', 'q', 'u', 'i', 'r', 'e', 'd'},
+	FstrENODEV:          [15]int8{'N', 'o', ' ', 's', 'u', 'c', 'h', ' ', 'd', 'e', 'v', 'i', 'c', 'e'},
+	FstrENOTDIR:         [16]int8{'N', 'o', 't', ' ', 'a', ' ', 'd', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y'},
+	FstrEISDIR:          [15]int8{'I', 's', ' ', 'a', ' ', 'd', 'i', 'r', 'e', 'c', 't', 'o', 'r', 'y'},
+	FstrETXTBSY:         [15]int8{'T', 'e', 'x', 't', ' ', 'f', 'i', 'l', 'e', ' ', 'b', 'u', 's', 'y'},
+	FstrENOEXEC:         [18]int8{'E', 'x', 'e', 'c', ' ', 'f', 'o', 'r', 'm', 'a', 't', ' ', 'e', 'r', 'r', 'o', 'r'},
+	FstrEINVAL:          [17]int8{'I', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 'a', 'r', 'g', 'u', 'm', 'e', 'n', 't'},
+	FstrE2BIG:           [23]int8{'A', 'r', 'g', 'u', 'm', 'e', 'n', 't', ' ', 'l', 'i', 's', 't', ' ', 't', 'o', 'o', ' ', 'l', 'o', 'n', 'g'},
+	FstrELOOP:           [19]int8{'S', 'y', 'm', 'b', 'o', 'l', 'i', 'c', ' ', 'l', 'i', 'n', 'k', ' ', 'l', 'o', 'o', 'p'},
+	FstrENAMETOOLONG:    [18]int8{'F', 'i', 'l', 'e', 'n', 'a', 'm', 'e', ' ', 't', 'o', 'o', ' ', 'l', 'o', 'n', 'g'},
+	FstrENFILE:          [30]int8{'T', 'o', 'o', ' ', 'm', 'a', 'n', 'y', ' ', 'o', 'p', 'e', 'n', ' ', 'f', 'i', 'l', 'e', 's', ' ', 'i', 'n', ' ', 's', 'y', 's', 't', 'e', 'm'},
+	FstrEMFILE:          [30]int8{'N', 'o', ' ', 'f', 'i', 'l', 'e', ' ', 'd', 'e', 's', 'c', 'r', 'i', 'p', 't', 'o', 'r', 's', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'},
+	FstrEBADF:           [20]int8{'B', 'a', 'd', ' ', 'f', 'i', 'l', 'e', ' ', 'd', 'e', 's', 'c', 'r', 'i', 'p', 't', 'o', 'r'},
+	FstrECHILD:          [17]int8{'N', 'o', ' ', 'c', 'h', 'i', 'l', 'd', ' ', 'p', 'r', 'o', 'c', 'e', 's', 's'},
+	FstrEFAULT:          [12]int8{'B', 'a', 'd', ' ', 'a', 'd', 'd', 'r', 'e', 's', 's'},
+	FstrEFBIG:           [15]int8{'F', 'i', 'l', 'e', ' ', 't', 'o', 'o', ' ', 'l', 'a', 'r', 'g', 'e'},
+	FstrEMLINK:          [15]int8{'T', 'o', 'o', ' ', 'm', 'a', 'n', 'y', ' ', 'l', 'i', 'n', 'k', 's'},
+	FstrENOLCK:          [19]int8{'N', 'o', ' ', 'l', 'o', 'c', 'k', 's', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'},
+	FstrEDEADLK:         [30]int8{'R', 'e', 's', 'o', 'u', 'r', 'c', 'e', ' ', 'd', 'e', 'a', 'd', 'l', 'o', 'c', 'k', ' ', 'w', 'o', 'u', 'l', 'd', ' ', 'o', 'c', 'c', 'u', 'r'},
+	FstrENOTRECOVERABLE: [22]int8{'S', 't', 'a', 't', 'e', ' ', 'n', 'o', 't', ' ', 'r', 'e', 'c', 'o', 'v', 'e', 'r', 'a', 'b', 'l', 'e'},
+	FstrEOWNERDEAD:      [20]int8{'P', 'r', 'e', 'v', 'i', 'o', 'u', 's', ' ', 'o', 'w', 'n', 'e', 'r', ' ', 'd', 'i', 'e', 'd'},
+	FstrECANCELED:       [19]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'c', 'a', 'n', 'c', 'e', 'l', 'e', 'd'},
+	FstrENOSYS:          [25]int8{'F', 'u', 'n', 'c', 't', 'i', 'o', 'n', ' ', 'n', 'o', 't', ' ', 'i', 'm', 'p', 'l', 'e', 'm', 'e', 'n', 't', 'e', 'd'},
+	FstrENOMSG:          [27]int8{'N', 'o', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', ' ', 'o', 'f', ' ', 'd', 'e', 's', 'i', 'r', 'e', 'd', ' ', 't', 'y', 'p', 'e'},
+	FstrEIDRM:           [19]int8{'I', 'd', 'e', 'n', 't', 'i', 'f', 'i', 'e', 'r', ' ', 'r', 'e', 'm', 'o', 'v', 'e', 'd'},
+	FstrENOSTR:          [20]int8{'D', 'e', 'v', 'i', 'c', 'e', ' ', 'n', 'o', 't', ' ', 'a', ' ', 's', 't', 'r', 'e', 'a', 'm'},
+	FstrENODATA:         [18]int8{'N', 'o', ' ', 'd', 'a', 't', 'a', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'},
+	FstrETIME:           [15]int8{'D', 'e', 'v', 'i', 'c', 'e', ' ', 't', 'i', 'm', 'e', 'o', 'u', 't'},
+	FstrENOSR:           [25]int8{'O', 'u', 't', ' ', 'o', 'f', ' ', 's', 't', 'r', 'e', 'a', 'm', 's', ' ', 'r', 'e', 's', 'o', 'u', 'r', 'c', 'e', 's'},
+	FstrENOLINK:         [22]int8{'L', 'i', 'n', 'k', ' ', 'h', 'a', 's', ' ', 'b', 'e', 'e', 'n', ' ', 's', 'e', 'v', 'e', 'r', 'e', 'd'},
+	FstrEPROTO:          [15]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'e', 'r', 'r', 'o', 'r'},
+	FstrEBADMSG:         [12]int8{'B', 'a', 'd', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e'},
+	FstrEBADFD:          [29]int8{'F', 'i', 'l', 'e', ' ', 'd', 'e', 's', 'c', 'r', 'i', 'p', 't', 'o', 'r', ' ', 'i', 'n', ' ', 'b', 'a', 'd', ' ', 's', 't', 'a', 't', 'e'},
+	FstrENOTSOCK:        [13]int8{'N', 'o', 't', ' ', 'a', ' ', 's', 'o', 'c', 'k', 'e', 't'},
+	FstrEDESTADDRREQ:    [29]int8{'D', 'e', 's', 't', 'i', 'n', 'a', 't', 'i', 'o', 'n', ' ', 'a', 'd', 'd', 'r', 'e', 's', 's', ' ', 'r', 'e', 'q', 'u', 'i', 'r', 'e', 'd'},
+	FstrEMSGSIZE:        [18]int8{'M', 'e', 's', 's', 'a', 'g', 'e', ' ', 't', 'o', 'o', ' ', 'l', 'a', 'r', 'g', 'e'},
+	FstrEPROTOTYPE:      [31]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'w', 'r', 'o', 'n', 'g', ' ', 't', 'y', 'p', 'e', ' ', 'f', 'o', 'r', ' ', 's', 'o', 'c', 'k', 'e', 't'},
+	FstrENOPROTOOPT:     [23]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'n', 'o', 't', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'},
+	FstrEPROTONOSUPPORT: [23]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'n', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd'},
+	FstrESOCKTNOSUPPORT: [26]int8{'S', 'o', 'c', 'k', 'e', 't', ' ', 't', 'y', 'p', 'e', ' ', 'n', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd'},
+	FstrENOTSUP:         [14]int8{'N', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd'},
+	FstrEPFNOSUPPORT:    [30]int8{'P', 'r', 'o', 't', 'o', 'c', 'o', 'l', ' ', 'f', 'a', 'm', 'i', 'l', 'y', ' ', 'n', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd'},
+	FstrEAFNOSUPPORT:    [41]int8{'A', 'd', 'd', 'r', 'e', 's', 's', ' ', 'f', 'a', 'm', 'i', 'l', 'y', ' ', 'n', 'o', 't', ' ', 's', 'u', 'p', 'p', 'o', 'r', 't', 'e', 'd', ' ', 'b', 'y', ' ', 'p', 'r', 'o', 't', 'o', 'c', 'o', 'l'},
+	FstrEADDRNOTAVAIL:   [22]int8{'A', 'd', 'd', 'r', 'e', 's', 's', ' ', 'n', 'o', 't', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'},
+	FstrENETDOWN:        [16]int8{'N', 'e', 't', 'w', 'o', 'r', 'k', ' ', 'i', 's', ' ', 'd', 'o', 'w', 'n'},
+	FstrENETUNREACH:     [20]int8{'N', 'e', 't', 'w', 'o', 'r', 'k', ' ', 'u', 'n', 'r', 'e', 'a', 'c', 'h', 'a', 'b', 'l', 'e'},
+	FstrENETRESET:       [28]int8{'C', 'o', 'n', 'n', 'e', 'c', 't', 'i', 'o', 'n', ' ', 'r', 'e', 's', 'e', 't', ' ', 'b', 'y', ' ', 'n', 'e', 't', 'w', 'o', 'r', 'k'},
+	FstrECONNABORTED:    [19]int8{'C', 'o', 'n', 'n', 'e', 'c', 't', 'i', 'o', 'n', ' ', 'a', 'b', 'o', 'r', 't', 'e', 'd'},
+	FstrENOBUFS:         [26]int8{'N', 'o', ' ', 'b', 'u', 'f', 'f', 'e', 'r', ' ', 's', 'p', 'a', 'c', 'e', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'},
+	FstrEISCONN:         [20]int8{'S', 'o', 'c', 'k', 'e', 't', ' ', 'i', 's', ' ', 'c', 'o', 'n', 'n', 'e', 'c', 't', 'e', 'd'},
+	FstrENOTCONN:        [21]int8{'S', 'o', 'c', 'k', 'e', 't', ' ', 'n', 'o', 't', ' ', 'c', 'o', 'n', 'n', 'e', 'c', 't', 'e', 'd'},
+	FstrESHUTDOWN:       [34]int8{'C', 'a', 'n', 'n', 'o', 't', ' ', 's', 'e', 'n', 'd', ' ', 'a', 'f', 't', 'e', 'r', ' ', 's', 'o', 'c', 'k', 'e', 't', ' ', 's', 'h', 'u', 't', 'd', 'o', 'w', 'n'},
+	FstrEALREADY:        [30]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'a', 'l', 'r', 'e', 'a', 'd', 'y', ' ', 'i', 'n', ' ', 'p', 'r', 'o', 'g', 'r', 'e', 's', 's'},
+	FstrEINPROGRESS:     [22]int8{'O', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 'i', 'n', ' ', 'p', 'r', 'o', 'g', 'r', 'e', 's', 's'},
+	FstrESTALE:          [18]int8{'S', 't', 'a', 'l', 'e', ' ', 'f', 'i', 'l', 'e', ' ', 'h', 'a', 'n', 'd', 'l', 'e'},
+	FstrEREMOTEIO:       [17]int8{'R', 'e', 'm', 'o', 't', 'e', ' ', 'I', '/', 'O', ' ', 'e', 'r', 'r', 'o', 'r'},
+	FstrEDQUOT:          [15]int8{'Q', 'u', 'o', 't', 'a', ' ', 'e', 'x', 'c', 'e', 'e', 'd', 'e', 'd'},
+	FstrENOMEDIUM:       [16]int8{'N', 'o', ' ', 'm', 'e', 'd', 'i', 'u', 'm', ' ', 'f', 'o', 'u', 'n', 'd'},
+	FstrEMEDIUMTYPE:     [18]int8{'W', 'r', 'o', 'n', 'g', ' ', 'm', 'e', 'd', 'i', 'u', 'm', ' ', 't', 'y', 'p', 'e'},
+	FstrEMULTIHOP:       [19]int8{'M', 'u', 'l', 't', 'i', 'h', 'o', 'p', ' ', 'a', 't', 't', 'e', 'm', 'p', 't', 'e', 'd'},
+	FstrENOKEY:          [27]int8{'R', 'e', 'q', 'u', 'i', 'r', 'e', 'd', ' ', 'k', 'e', 'y', ' ', 'n', 'o', 't', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e'},
+	FstrEKEYEXPIRED:     [16]int8{'K', 'e', 'y', ' ', 'h', 'a', 's', ' ', 'e', 'x', 'p', 'i', 'r', 'e', 'd'},
+	FstrEKEYREVOKED:     [21]int8{'K', 'e', 'y', ' ', 'h', 'a', 's', ' ', 'b', 'e', 'e', 'n', ' ', 'r', 'e', 'v', 'o', 'k', 'e', 'd'},
+	FstrEKEYREJECTED:    [28]int8{'K', 'e', 'y', ' ', 'w', 'a', 's', ' ', 'r', 'e', 'j', 'e', 'c', 't', 'e', 'd', ' ', 'b', 'y', ' ', 's', 'e', 'r', 'v', 'i', 'c', 'e'},
+}
 
 var _errmsgidx = [132]uint16{
 	0:   uint16(uint64(UintptrFromInt32(0))),
@@ -28599,7 +29204,8 @@ var _errmsgidx = [132]uint16{
 	128: uint16(uint64(UintptrFromInt32(0) + 1865)),
 	129: uint16(uint64(UintptrFromInt32(0) + 1886)),
 	130: uint16(uint64(UintptrFromInt32(0) + 947)),
-	131: uint16(uint64(UintptrFromInt32(0) + 925))}
+	131: uint16(uint64(UintptrFromInt32(0) + 925)),
+}
 
 func x___strerror_l(tls *TLS, e int32, loc uintptr) (r uintptr) {
 	var s uintptr
@@ -28646,7 +29252,8 @@ func x_abort(tls *TLS) {
 	___syscall4(tls, int64(13), int64(Int32FromInt32(6)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
 	___syscall2(tls, int64(200), int64((*T__pthread)(unsafe.Pointer(___get_tp(tls))).Ftid), int64(Int32FromInt32(6)))
 	*(*[1]int64)(unsafe.Pointer(bp + 32)) = [1]int64{
-		0: int64(Uint64FromUint64(1) << (Int32FromInt32(6) - Int32FromInt32(1)))}
+		0: int64(Uint64FromUint64(1) << (Int32FromInt32(6) - Int32FromInt32(1))),
+	}
 	___syscall4(tls, int64(14), int64(Int32FromInt32(1)), int64(bp+32), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
 	/* Beyond this point should be unreachable. */
 	_a_crash(tls)
@@ -29477,7 +30084,8 @@ func _decfloat(tls *TLS, f uintptr, c int32, bits int32, emin int32, sign int32,
 
 var _th = [2]uint32{
 	0: uint32(9007199),
-	1: uint32(254740991)}
+	1: uint32(254740991),
+}
 
 var _p10s = [8]int32{
 	0: int32(10),
@@ -29487,7 +30095,8 @@ var _p10s = [8]int32{
 	4: int32(100000),
 	5: int32(1000000),
 	6: int32(10000000),
-	7: int32(100000000)}
+	7: int32(100000000),
+}
 
 func _hexfloat(tls *TLS, f uintptr, bits int32, emin int32, sign int32, pok int32) (r float64) {
 	var bias, scale, y float64
@@ -30116,7 +30725,8 @@ var _table6 = [257]uint8{
 	253: uint8(-Int32FromInt32(1)),
 	254: uint8(-Int32FromInt32(1)),
 	255: uint8(-Int32FromInt32(1)),
-	256: uint8(-Int32FromInt32(1))}
+	256: uint8(-Int32FromInt32(1)),
+}
 
 func x___intscan(tls *TLS, f uintptr, base uint32, pok int32, lim uint64) (r uint64) {
 	var bs, c, neg, v1, v11, v14, v2, v20, v24, v28, v32, v36, v40, v44, v5, v6, v8 int32
@@ -30952,7 +31562,8 @@ func _static_dl_iterate_phdr(tls *TLS, callback uintptr, data uintptr) (r int32)
 		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_tls_modid = uint64(1)
 		*(*[2]uint64)(unsafe.Pointer(bp)) = [2]uint64{
 			0: uint64(1),
-			1: uint64(0)}
+			1: uint64(0),
+		}
 		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_tls_data = x___tls_get_addr(tls, bp)
 	} else {
 		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_tls_modid = uint64(0)
@@ -31729,7 +32340,29 @@ func x_clock_adjtime(tls *TLS, clock_id int32, utx uintptr) (r1 int32) {
 	var _ /* ktx at bp+0 */ Tktimex
 	r = -int32(m_ENOSYS)
 	if uint64(8) > uint64(8) {
-		*(*Tktimex)(unsafe.Pointer(bp)) = Tktimex{Fmodes: (*Ttimex)(unsafe.Pointer(utx)).Fmodes, Foffset: (*Ttimex)(unsafe.Pointer(utx)).Foffset, Ffreq: (*Ttimex)(unsafe.Pointer(utx)).Ffreq, Fmaxerror: (*Ttimex)(unsafe.Pointer(utx)).Fmaxerror, Festerror: (*Ttimex)(unsafe.Pointer(utx)).Festerror, Fstatus: (*Ttimex)(unsafe.Pointer(utx)).Fstatus, Fconstant: (*Ttimex)(unsafe.Pointer(utx)).Fconstant, Fprecision: (*Ttimex)(unsafe.Pointer(utx)).Fprecision, Ftolerance: (*Ttimex)(unsafe.Pointer(utx)).Ftolerance, Ftime_sec: (*Ttimex)(unsafe.Pointer(utx)).Ftime.Ftv_sec, Ftime_usec: (*Ttimex)(unsafe.Pointer(utx)).Ftime.Ftv_usec, Ftick: (*Ttimex)(unsafe.Pointer(utx)).Ftick, Fppsfreq: (*Ttimex)(unsafe.Pointer(utx)).Fppsfreq, Fjitter: (*Ttimex)(unsafe.Pointer(utx)).Fjitter, Fshift: (*Ttimex)(unsafe.Pointer(utx)).Fshift, Fstabil: (*Ttimex)(unsafe.Pointer(utx)).Fstabil, Fjitcnt: (*Ttimex)(unsafe.Pointer(utx)).Fjitcnt, Fcalcnt: (*Ttimex)(unsafe.Pointer(utx)).Fcalcnt, Ferrcnt: (*Ttimex)(unsafe.Pointer(utx)).Ferrcnt, Fstbcnt: (*Ttimex)(unsafe.Pointer(utx)).Fstbcnt, Ftai: (*Ttimex)(unsafe.Pointer(utx)).Ftai}
+		*(*Tktimex)(unsafe.Pointer(bp)) = Tktimex{
+			Fmodes:     (*Ttimex)(unsafe.Pointer(utx)).Fmodes,
+			Foffset:    (*Ttimex)(unsafe.Pointer(utx)).Foffset,
+			Ffreq:      (*Ttimex)(unsafe.Pointer(utx)).Ffreq,
+			Fmaxerror:  (*Ttimex)(unsafe.Pointer(utx)).Fmaxerror,
+			Festerror:  (*Ttimex)(unsafe.Pointer(utx)).Festerror,
+			Fstatus:    (*Ttimex)(unsafe.Pointer(utx)).Fstatus,
+			Fconstant:  (*Ttimex)(unsafe.Pointer(utx)).Fconstant,
+			Fprecision: (*Ttimex)(unsafe.Pointer(utx)).Fprecision,
+			Ftolerance: (*Ttimex)(unsafe.Pointer(utx)).Ftolerance,
+			Ftime_sec:  (*Ttimex)(unsafe.Pointer(utx)).Ftime.Ftv_sec,
+			Ftime_usec: (*Ttimex)(unsafe.Pointer(utx)).Ftime.Ftv_usec,
+			Ftick:      (*Ttimex)(unsafe.Pointer(utx)).Ftick,
+			Fppsfreq:   (*Ttimex)(unsafe.Pointer(utx)).Fppsfreq,
+			Fjitter:    (*Ttimex)(unsafe.Pointer(utx)).Fjitter,
+			Fshift:     (*Ttimex)(unsafe.Pointer(utx)).Fshift,
+			Fstabil:    (*Ttimex)(unsafe.Pointer(utx)).Fstabil,
+			Fjitcnt:    (*Ttimex)(unsafe.Pointer(utx)).Fjitcnt,
+			Fcalcnt:    (*Ttimex)(unsafe.Pointer(utx)).Fcalcnt,
+			Ferrcnt:    (*Ttimex)(unsafe.Pointer(utx)).Ferrcnt,
+			Fstbcnt:    (*Ttimex)(unsafe.Pointer(utx)).Fstbcnt,
+			Ftai:       (*Ttimex)(unsafe.Pointer(utx)).Ftai,
+		}
 		if clock_id == m_CLOCK_REALTIME {
 			r = int32(___syscall1(tls, int64(159), int64(bp)))
 		} else {
@@ -32278,7 +32911,8 @@ func x_ppoll(tls *TLS, fds uintptr, n uint64, to uintptr, mask uintptr) (r int32
 	if to != 0 {
 		*(*[2]int64)(unsafe.Pointer(bp)) = [2]int64{
 			0: s,
-			1: ns}
+			1: ns,
+		}
 		v3 = bp
 	} else {
 		v3 = uintptr(0)
@@ -32506,7 +33140,11 @@ func x_setgroups(tls *TLS, count uint64, list uintptr) (r int32) {
 	var _ /* c at bp+0 */ Tctx
 	/* ret is initially nonzero so that failure of the first thread does not
 	 * trigger the safety kill above. */
-	*(*Tctx)(unsafe.Pointer(bp)) = Tctx{Fcount: count, Flist: list, Fret: int32(1)}
+	*(*Tctx)(unsafe.Pointer(bp)) = Tctx{
+		Fcount: count,
+		Flist:  list,
+		Fret:   int32(1),
+	}
 	x___synccall(tls, __ccgo_fp(_do_setgroups), bp)
 	return int32(x___syscall_ret(tls, uint64((*(*Tctx)(unsafe.Pointer(bp))).Fret)))
 }
@@ -32528,7 +33166,10 @@ func x_settimeofday(tls *TLS, tv uintptr, tz uintptr) (r int32) {
 	if uint64((*Ttimeval)(unsafe.Pointer(tv)).Ftv_usec) >= uint64(1000000) {
 		return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EINVAL))))
 	}
-	*(*Ttimespec)(unsafe.Pointer(bp)) = Ttimespec{Ftv_sec: (*Ttimeval)(unsafe.Pointer(tv)).Ftv_sec, Ftv_nsec: (*Ttimeval)(unsafe.Pointer(tv)).Ftv_usec * int64(1000)}
+	*(*Ttimespec)(unsafe.Pointer(bp)) = Ttimespec{
+		Ftv_sec:  (*Ttimeval)(unsafe.Pointer(tv)).Ftv_sec,
+		Ftv_nsec: (*Ttimeval)(unsafe.Pointer(tv)).Ftv_usec * int64(1000),
+	}
 	return x_clock_settime(tls, m_CLOCK_REALTIME, bp)
 }
 
@@ -32585,7 +33226,10 @@ func x_stime(tls *TLS, t uintptr) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimeval
-	*(*Ttimeval)(unsafe.Pointer(bp)) = Ttimeval{Ftv_sec: *(*int64)(unsafe.Pointer(t)), Ftv_usec: 0}
+	*(*Ttimeval)(unsafe.Pointer(bp)) = Ttimeval{
+		Ftv_sec:  *(*int64)(unsafe.Pointer(t)),
+		Ftv_usec: 0,
+	}
 	return x_settimeofday(tls, bp, UintptrFromInt32(0))
 }
 
@@ -32667,8 +33311,14 @@ func x_wait4(tls *TLS, pid int32, status uintptr, options int32, ru uintptr) (r1
 	r = int32(___syscall4(tls, int64(61), int64(pid), int64(status), int64(options), int64(dest)))
 	if r > 0 && ru != 0 && uint64(8) > uint64(8) {
 		_memcpy(tls, bp, dest, Uint64FromInt32(4)*Uint64FromInt64(8))
-		(*Trusage)(unsafe.Pointer(ru)).Fru_utime = Ttimeval{Ftv_sec: (*(*[4]int64)(unsafe.Pointer(bp)))[0], Ftv_usec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(1)]}
-		(*Trusage)(unsafe.Pointer(ru)).Fru_stime = Ttimeval{Ftv_sec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(2)], Ftv_usec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(3)]}
+		(*Trusage)(unsafe.Pointer(ru)).Fru_utime = Ttimeval{
+			Ftv_sec:  (*(*[4]int64)(unsafe.Pointer(bp)))[0],
+			Ftv_usec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(1)],
+		}
+		(*Trusage)(unsafe.Pointer(ru)).Fru_stime = Ttimeval{
+			Ftv_sec:  (*(*[4]int64)(unsafe.Pointer(bp)))[int32(2)],
+			Ftv_usec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(3)],
+		}
 	}
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
@@ -32802,7 +33452,8 @@ var _empty_mo = [5]uint32{
 	1: uint32(0),
 	2: uint32(-Int32FromInt32(1)),
 	3: uint32(-Int32FromInt32(1)),
-	4: uint32(-Int32FromInt32(1))}
+	4: uint32(-Int32FromInt32(1)),
+}
 
 type Tnl_item = int32
 
@@ -33114,7 +33765,8 @@ var _catnames = [6][12]int8{
 	2: {'L', 'C', '_', 'T', 'I', 'M', 'E'},
 	3: {'L', 'C', '_', 'C', 'O', 'L', 'L', 'A', 'T', 'E'},
 	4: {'L', 'C', '_', 'M', 'O', 'N', 'E', 'T', 'A', 'R', 'Y'},
-	5: {'L', 'C', '_', 'M', 'E', 'S', 'S', 'A', 'G', 'E', 'S'}}
+	5: {'L', 'C', '_', 'M', 'E', 'S', 'S', 'A', 'G', 'E', 'S'},
+}
 
 var _catlens = [6]int8{
 	0: int8(8),
@@ -33122,7 +33774,8 @@ var _catlens = [6]int8{
 	2: int8(7),
 	3: int8(10),
 	4: int8(11),
-	5: int8(11)}
+	5: int8(11),
+}
 
 type Tmsgcat = struct {
 	Fnext        uintptr
@@ -34014,7 +34667,8 @@ var _legacy_chars = [612]uint16{
 	608: uint16(9617),
 	609: uint16(9618),
 	610: uint16(9619),
-	611: uint16(9632)}
+	611: uint16(9632),
+}
 
 var _jis0208 = [84][94]uint16{
 	0: {
@@ -34111,7 +34765,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(9675),
 		91: uint16(9679),
 		92: uint16(9678),
-		93: uint16(9671)},
+		93: uint16(9671),
+	},
 	1: {
 		0:  uint16(9670),
 		1:  uint16(9633),
@@ -34206,7 +34861,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(9711)},
+		93: uint16(9711),
+	},
 	2: {
 		0:  uint16(0),
 		1:  uint16(0),
@@ -34301,7 +34957,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	3: {
 		0:  uint16(12353),
 		1:  uint16(12354),
@@ -34396,7 +35053,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	4: {
 		0:  uint16(12449),
 		1:  uint16(12450),
@@ -34491,7 +35149,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	5: {
 		0:  uint16(913),
 		1:  uint16(914),
@@ -34586,7 +35245,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	6: {
 		0:  uint16(1040),
 		1:  uint16(1041),
@@ -34681,7 +35341,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	7: {
 		0:  uint16(9472),
 		1:  uint16(9474),
@@ -34776,7 +35437,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	8:  {},
 	9:  {},
 	10: {},
@@ -34878,7 +35540,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(39154),
 		91: uint16(28139),
 		92: uint16(32996),
-		93: uint16(34093)},
+		93: uint16(34093),
+	},
 	16: {
 		0:  uint16(38498),
 		1:  uint16(38512),
@@ -34973,7 +35636,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(22830),
 		91: uint16(22885),
 		92: uint16(24448),
-		93: uint16(24540)},
+		93: uint16(24540),
+	},
 	17: {
 		0:  uint16(25276),
 		1:  uint16(26106),
@@ -35068,7 +35732,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(25040),
 		91: uint16(25106),
 		92: uint16(25296),
-		93: uint16(25913)},
+		93: uint16(25913),
+	},
 	18: {
 		0:  uint16(39745),
 		1:  uint16(26214),
@@ -35163,7 +35828,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(40232),
 		91: uint16(26658),
 		92: uint16(33541),
-		93: uint16(33841)},
+		93: uint16(33841),
+	},
 	19: {
 		0:  uint16(31909),
 		1:  uint16(21000),
@@ -35258,7 +35924,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(26082),
 		91: uint16(26399),
 		92: uint16(26827),
-		93: uint16(26820)},
+		93: uint16(26820),
+	},
 	20: {
 		0:  uint16(27231),
 		1:  uint16(24112),
@@ -35353,7 +36020,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(39770),
 		91: uint16(20136),
 		92: uint16(20139),
-		93: uint16(20140)},
+		93: uint16(20140),
+	},
 	21: {
 		0:  uint16(20379),
 		1:  uint16(20384),
@@ -35448,7 +36116,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(27355),
 		91: uint16(37351),
 		92: uint16(23633),
-		93: uint16(23624)},
+		93: uint16(23624),
+	},
 	22: {
 		0:  uint16(25496),
 		1:  uint16(31391),
@@ -35543,7 +36212,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(25010),
 		91: uint16(25080),
 		92: uint16(25331),
-		93: uint16(25458)},
+		93: uint16(25458),
+	},
 	23: {
 		0:  uint16(26908),
 		1:  uint16(27177),
@@ -35638,7 +36308,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(21246),
 		91: uint16(21402),
 		92: uint16(21475),
-		93: uint16(21521)},
+		93: uint16(21521),
+	},
 	24: {
 		0:  uint16(21518),
 		1:  uint16(21897),
@@ -35733,7 +36404,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(24794),
 		91: uint16(39592),
 		92: uint16(29403),
-		93: uint16(36796)},
+		93: uint16(36796),
+	},
 	25: {
 		0:  uint16(27492),
 		1:  uint16(38915),
@@ -35828,7 +36500,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(31545),
 		91: uint16(21273),
 		92: uint16(20874),
-		93: uint16(21047)},
+		93: uint16(21047),
+	},
 	26: {
 		0:  uint16(23519),
 		1:  uint16(25334),
@@ -35923,7 +36596,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(23546),
 		91: uint16(24904),
 		92: uint16(25345),
-		93: uint16(26178)},
+		93: uint16(26178),
+	},
 	27: {
 		0:  uint16(27425),
 		1:  uint16(28363),
@@ -36018,7 +36692,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(38656),
 		91: uint16(22234),
 		92: uint16(21454),
-		93: uint16(21608)},
+		93: uint16(21608),
+	},
 	28: {
 		0:  uint16(23447),
 		1:  uint16(23601),
@@ -36113,7 +36788,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(37604),
 		91: uint16(38500),
 		92: uint16(20663),
-		93: uint16(20767)},
+		93: uint16(20767),
+	},
 	29: {
 		0:  uint16(21213),
 		1:  uint16(21280),
@@ -36208,7 +36884,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(37664),
 		91: uint16(22065),
 		92: uint16(22516),
-		93: uint16(39166)},
+		93: uint16(39166),
+	},
 	30: {
 		0:  uint16(25325),
 		1:  uint16(26893),
@@ -36303,7 +36980,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(33733),
 		91: uint16(38935),
 		92: uint16(38592),
-		93: uint16(35070)},
+		93: uint16(35070),
+	},
 	31: {
 		0:  uint16(28548),
 		1:  uint16(25722),
@@ -36398,7 +37076,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(26059),
 		91: uint16(31359),
 		92: uint16(31661),
-		93: uint16(32218)},
+		93: uint16(32218),
+	},
 	32: {
 		0:  uint16(32330),
 		1:  uint16(32680),
@@ -36493,7 +37172,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(39442),
 		91: uint16(20687),
 		92: uint16(22679),
-		93: uint16(24974)},
+		93: uint16(24974),
+	},
 	33: {
 		0:  uint16(33235),
 		1:  uint16(34101),
@@ -36588,7 +37268,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(33592),
 		91: uint16(20967),
 		92: uint16(34552),
-		93: uint16(21482)},
+		93: uint16(21482),
+	},
 	34: {
 		0:  uint16(21481),
 		1:  uint16(20294),
@@ -36683,7 +37364,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(20806),
 		91: uint16(20939),
 		92: uint16(21899),
-		93: uint16(23541)},
+		93: uint16(23541),
+	},
 	35: {
 		0:  uint16(24086),
 		1:  uint16(24115),
@@ -36778,7 +37460,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(35330),
 		91: uint16(35558),
 		92: uint16(36420),
-		93: uint16(36883)},
+		93: uint16(36883),
+	},
 	36: {
 		0:  uint16(37048),
 		1:  uint16(37165),
@@ -36873,7 +37556,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(31570),
 		91: uint16(31958),
 		92: uint16(32113),
-		93: uint16(21040)},
+		93: uint16(21040),
+	},
 	37: {
 		0:  uint16(33891),
 		1:  uint16(34153),
@@ -36968,7 +37652,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(24319),
 		91: uint16(26085),
 		92: uint16(20083),
-		93: uint16(20837)},
+		93: uint16(20837),
+	},
 	38: {
 		0:  uint16(22914),
 		1:  uint16(23615),
@@ -37063,7 +37748,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(32283),
 		91: uint16(33707),
 		92: uint16(39361),
-		93: uint16(40614)},
+		93: uint16(40614),
+	},
 	39: {
 		0:  uint16(20989),
 		1:  uint16(31665),
@@ -37158,7 +37844,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(27608),
 		91: uint16(29749),
 		92: uint16(30473),
-		93: uint16(32654)},
+		93: uint16(32654),
+	},
 	40: {
 		0:  uint16(40763),
 		1:  uint16(26570),
@@ -37253,7 +37940,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(21103),
 		91: uint16(24489),
 		92: uint16(24133),
-		93: uint16(26381)},
+		93: uint16(26381),
+	},
 	41: {
 		0:  uint16(31119),
 		1:  uint16(33145),
@@ -37348,7 +38036,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(25447),
 		91: uint16(25918),
 		92: uint16(26041),
-		93: uint16(26379)},
+		93: uint16(26379),
+	},
 	42: {
 		0:  uint16(27861),
 		1:  uint16(27873),
@@ -37443,7 +38132,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(40639),
 		91: uint16(19975),
 		92: uint16(24930),
-		93: uint16(28288)},
+		93: uint16(28288),
+	},
 	43: {
 		0:  uint16(28459),
 		1:  uint16(34067),
@@ -37538,7 +38228,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(24841),
 		91: uint16(24840),
 		92: uint16(27833),
-		93: uint16(30290)},
+		93: uint16(30290),
+	},
 	44: {
 		0:  uint16(35565),
 		1:  uint16(36664),
@@ -37633,7 +38324,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(26446),
 		91: uint16(26792),
 		92: uint16(29702),
-		93: uint16(29827)},
+		93: uint16(29827),
+	},
 	45: {
 		0:  uint16(30178),
 		1:  uint16(35023),
@@ -37728,7 +38420,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(29001),
 		91: uint16(31806),
 		92: uint16(32244),
-		93: uint16(32879)},
+		93: uint16(32879),
+	},
 	46: {
 		0:  uint16(34030),
 		1:  uint16(36899),
@@ -37823,7 +38516,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	47: {
 		0:  uint16(24332),
 		1:  uint16(19984),
@@ -37918,7 +38612,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(20634),
 		91: uint16(20613),
 		92: uint16(20660),
-		93: uint16(20658)},
+		93: uint16(20658),
+	},
 	48: {
 		0:  uint16(20681),
 		1:  uint16(20682),
@@ -38013,7 +38708,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(21105),
 		91: uint16(21128),
 		92: uint16(21137),
-		93: uint16(36776)},
+		93: uint16(36776),
+	},
 	49: {
 		0:  uint16(36775),
 		1:  uint16(21164),
@@ -38108,7 +38804,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(21676),
 		91: uint16(21700),
 		92: uint16(21704),
-		93: uint16(21672)},
+		93: uint16(21672),
+	},
 	50: {
 		0:  uint16(21675),
 		1:  uint16(21698),
@@ -38203,7 +38900,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(22272),
 		91: uint16(22271),
 		92: uint16(22276),
-		93: uint16(22281)},
+		93: uint16(22281),
+	},
 	51: {
 		0:  uint16(22280),
 		1:  uint16(22283),
@@ -38298,7 +38996,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(22880),
 		91: uint16(22887),
 		92: uint16(22892),
-		93: uint16(22889)},
+		93: uint16(22889),
+	},
 	52: {
 		0:  uint16(22904),
 		1:  uint16(22913),
@@ -38393,7 +39092,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(23617),
 		91: uint16(23622),
 		92: uint16(23630),
-		93: uint16(23635)},
+		93: uint16(23635),
+	},
 	53: {
 		0:  uint16(23632),
 		1:  uint16(23631),
@@ -38488,7 +39188,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(24258),
 		91: uint16(24264),
 		92: uint16(24272),
-		93: uint16(24271)},
+		93: uint16(24271),
+	},
 	54: {
 		0:  uint16(24278),
 		1:  uint16(24291),
@@ -38583,7 +39284,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(24717),
 		91: uint16(24807),
 		92: uint16(24707),
-		93: uint16(24730)},
+		93: uint16(24730),
+	},
 	55: {
 		0:  uint16(24708),
 		1:  uint16(24731),
@@ -38678,7 +39380,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(25101),
 		91: uint16(25100),
 		92: uint16(25108),
-		93: uint16(25115)},
+		93: uint16(25115),
+	},
 	56: {
 		0:  uint16(25118),
 		1:  uint16(25121),
@@ -38773,7 +39476,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(25765),
 		91: uint16(25769),
 		92: uint16(25736),
-		93: uint16(25788)},
+		93: uint16(25788),
+	},
 	57: {
 		0:  uint16(25818),
 		1:  uint16(25810),
@@ -38868,7 +39572,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(26297),
 		91: uint16(26313),
 		92: uint16(26302),
-		93: uint16(26300)},
+		93: uint16(26300),
+	},
 	58: {
 		0:  uint16(26308),
 		1:  uint16(26296),
@@ -38963,7 +39668,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(26918),
 		91: uint16(26849),
 		92: uint16(26892),
-		93: uint16(26829)},
+		93: uint16(26829),
+	},
 	59: {
 		0:  uint16(26836),
 		1:  uint16(26855),
@@ -39058,7 +39764,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(27296),
 		91: uint16(27268),
 		92: uint16(27298),
-		93: uint16(27299)},
+		93: uint16(27299),
+	},
 	60: {
 		0:  uint16(27287),
 		1:  uint16(34327),
@@ -39153,7 +39860,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(27869),
 		91: uint16(27822),
 		92: uint16(27825),
-		93: uint16(27838)},
+		93: uint16(27838),
+	},
 	61: {
 		0:  uint16(27834),
 		1:  uint16(27867),
@@ -39248,7 +39956,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(28465),
 		91: uint16(28399),
 		92: uint16(28466),
-		93: uint16(28364)},
+		93: uint16(28364),
+	},
 	62: {
 		0:  uint16(28478),
 		1:  uint16(28435),
@@ -39343,7 +40052,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(29164),
 		91: uint16(29159),
 		92: uint16(29173),
-		93: uint16(29180)},
+		93: uint16(29180),
+	},
 	63: {
 		0:  uint16(29177),
 		1:  uint16(29183),
@@ -39438,7 +40148,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(29898),
 		91: uint16(29903),
 		92: uint16(29908),
-		93: uint16(29681)},
+		93: uint16(29681),
+	},
 	64: {
 		0:  uint16(29920),
 		1:  uint16(29923),
@@ -39533,7 +40244,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(30314),
 		91: uint16(30311),
 		92: uint16(30316),
-		93: uint16(30320)},
+		93: uint16(30320),
+	},
 	65: {
 		0:  uint16(30322),
 		1:  uint16(30326),
@@ -39628,7 +40340,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(30908),
 		91: uint16(30917),
 		92: uint16(30922),
-		93: uint16(30956)},
+		93: uint16(30956),
+	},
 	66: {
 		0:  uint16(30951),
 		1:  uint16(30938),
@@ -39723,7 +40436,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(31541),
 		91: uint16(31528),
 		92: uint16(31542),
-		93: uint16(31568)},
+		93: uint16(31568),
+	},
 	67: {
 		0:  uint16(31610),
 		1:  uint16(31492),
@@ -39818,7 +40532,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(31988),
 		91: uint16(31990),
 		92: uint16(31994),
-		93: uint16(32006)},
+		93: uint16(32006),
+	},
 	68: {
 		0:  uint16(32002),
 		1:  uint16(32028),
@@ -39913,7 +40628,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(32411),
 		91: uint16(32412),
 		92: uint16(32568),
-		93: uint16(32570)},
+		93: uint16(32570),
+	},
 	69: {
 		0:  uint16(32581),
 		1:  uint16(32588),
@@ -40008,7 +40724,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(33065),
 		91: uint16(33059),
 		92: uint16(33071),
-		93: uint16(33099)},
+		93: uint16(33099),
+	},
 	70: {
 		0:  uint16(38539),
 		1:  uint16(33094),
@@ -40103,7 +40820,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(33542),
 		91: uint16(33500),
 		92: uint16(33545),
-		93: uint16(33497)},
+		93: uint16(33497),
+	},
 	71: {
 		0:  uint16(33589),
 		1:  uint16(33588),
@@ -40198,7 +40916,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(34112),
 		91: uint16(34147),
 		92: uint16(34136),
-		93: uint16(34120)},
+		93: uint16(34120),
+	},
 	72: {
 		0:  uint16(34113),
 		1:  uint16(34306),
@@ -40293,7 +41012,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(34647),
 		91: uint16(34664),
 		92: uint16(34670),
-		93: uint16(34649)},
+		93: uint16(34649),
+	},
 	73: {
 		0:  uint16(34643),
 		1:  uint16(34659),
@@ -40388,7 +41108,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(35148),
 		91: uint16(35101),
 		92: uint16(35168),
-		93: uint16(35166)},
+		93: uint16(35166),
+	},
 	74: {
 		0:  uint16(35174),
 		1:  uint16(35172),
@@ -40483,7 +41204,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(35670),
 		91: uint16(35675),
 		92: uint16(35674),
-		93: uint16(35691)},
+		93: uint16(35691),
+	},
 	75: {
 		0:  uint16(35679),
 		1:  uint16(35692),
@@ -40578,7 +41300,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(36405),
 		91: uint16(36400),
 		92: uint16(36404),
-		93: uint16(36426)},
+		93: uint16(36426),
+	},
 	76: {
 		0:  uint16(36423),
 		1:  uint16(36425),
@@ -40673,7 +41396,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(36918),
 		91: uint16(36917),
 		92: uint16(36921),
-		93: uint16(36856)},
+		93: uint16(36856),
+	},
 	77: {
 		0:  uint16(36943),
 		1:  uint16(36944),
@@ -40768,7 +41492,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(37647),
 		91: uint16(37626),
 		92: uint16(37700),
-		93: uint16(37678)},
+		93: uint16(37678),
+	},
 	78: {
 		0:  uint16(37657),
 		1:  uint16(37666),
@@ -40863,7 +41588,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(38475),
 		91: uint16(38519),
 		92: uint16(38492),
-		93: uint16(38494)},
+		93: uint16(38494),
+	},
 	79: {
 		0:  uint16(38493),
 		1:  uint16(38495),
@@ -40958,7 +41684,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(38987),
 		91: uint16(39019),
 		92: uint16(39023),
-		93: uint16(39024)},
+		93: uint16(39024),
+	},
 	80: {
 		0:  uint16(39025),
 		1:  uint16(39028),
@@ -41053,7 +41780,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(39662),
 		91: uint16(39668),
 		92: uint16(39665),
-		93: uint16(39671)},
+		93: uint16(39671),
+	},
 	81: {
 		0:  uint16(39675),
 		1:  uint16(39686),
@@ -41148,7 +41876,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(40255),
 		91: uint16(40254),
 		92: uint16(40262),
-		93: uint16(40264)},
+		93: uint16(40264),
+	},
 	82: {
 		0:  uint16(40285),
 		1:  uint16(40286),
@@ -41243,7 +41972,8 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(40822),
 		91: uint16(40853),
 		92: uint16(40860),
-		93: uint16(40864)},
+		93: uint16(40864),
+	},
 	83: {
 		0:  uint16(22575),
 		1:  uint16(27079),
@@ -41338,7 +42068,9 @@ var _jis0208 = [84][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)}}
+		93: uint16(0),
+	},
+}
 
 var _gb18030 = [126][190]uint16{
 	0: {
@@ -41531,7 +42263,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(20382),
 		187: uint16(20383),
 		188: uint16(20385),
-		189: uint16(20386)},
+		189: uint16(20386),
+	},
 	1: {
 		0:   uint16(20388),
 		1:   uint16(20395),
@@ -41722,7 +42455,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(20663),
 		187: uint16(20664),
 		188: uint16(20665),
-		189: uint16(20668)},
+		189: uint16(20668),
+	},
 	2: {
 		0:   uint16(20669),
 		1:   uint16(20670),
@@ -41913,7 +42647,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(20948),
 		187: uint16(20949),
 		188: uint16(20950),
-		189: uint16(20951)},
+		189: uint16(20951),
+	},
 	3: {
 		0:   uint16(20952),
 		1:   uint16(20953),
@@ -42104,7 +42839,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(21258),
 		187: uint16(21259),
 		188: uint16(21260),
-		189: uint16(21262)},
+		189: uint16(21262),
+	},
 	4: {
 		0:   uint16(21265),
 		1:   uint16(21266),
@@ -42295,7 +43031,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(21662),
 		187: uint16(21663),
 		188: uint16(21664),
-		189: uint16(21665)},
+		189: uint16(21665),
+	},
 	5: {
 		0:   uint16(21666),
 		1:   uint16(21669),
@@ -42486,7 +43223,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(22018),
 		187: uint16(22019),
 		188: uint16(22020),
-		189: uint16(22021)},
+		189: uint16(22021),
+	},
 	6: {
 		0:   uint16(22022),
 		1:   uint16(22023),
@@ -42677,7 +43415,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(22286),
 		187: uint16(22287),
 		188: uint16(22288),
-		189: uint16(22289)},
+		189: uint16(22289),
+	},
 	7: {
 		0:   uint16(22290),
 		1:   uint16(22291),
@@ -42868,7 +43607,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(22586),
 		187: uint16(22587),
 		188: uint16(22588),
-		189: uint16(22589)},
+		189: uint16(22589),
+	},
 	8: {
 		0:   uint16(22590),
 		1:   uint16(22591),
@@ -43059,7 +43799,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(22835),
 		187: uint16(22837),
 		188: uint16(22838),
-		189: uint16(22843)},
+		189: uint16(22843),
+	},
 	9: {
 		0:   uint16(22845),
 		1:   uint16(22846),
@@ -43250,7 +43991,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(23133),
 		187: uint16(23134),
 		188: uint16(23135),
-		189: uint16(23136)},
+		189: uint16(23136),
+	},
 	10: {
 		0:   uint16(23137),
 		1:   uint16(23139),
@@ -43441,7 +44183,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(23364),
 		187: uint16(23365),
 		188: uint16(23366),
-		189: uint16(23367)},
+		189: uint16(23367),
+	},
 	11: {
 		0:   uint16(23368),
 		1:   uint16(23369),
@@ -43632,7 +44375,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(23717),
 		187: uint16(23718),
 		188: uint16(23719),
-		189: uint16(23720)},
+		189: uint16(23720),
+	},
 	12: {
 		0:   uint16(23722),
 		1:   uint16(23726),
@@ -43823,7 +44567,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(23964),
 		187: uint16(23966),
 		188: uint16(23967),
-		189: uint16(23968)},
+		189: uint16(23968),
+	},
 	13: {
 		0:   uint16(23969),
 		1:   uint16(23970),
@@ -44014,7 +44759,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(24258),
 		187: uint16(24259),
 		188: uint16(24260),
-		189: uint16(24261)},
+		189: uint16(24261),
+	},
 	14: {
 		0:   uint16(24262),
 		1:   uint16(24263),
@@ -44205,7 +44951,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(24569),
 		187: uint16(24570),
 		188: uint16(24572),
-		189: uint16(24583)},
+		189: uint16(24583),
+	},
 	15: {
 		0:   uint16(24584),
 		1:   uint16(24585),
@@ -44396,7 +45143,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(24899),
 		187: uint16(24900),
 		188: uint16(24901),
-		189: uint16(24902)},
+		189: uint16(24902),
+	},
 	16: {
 		0:   uint16(24903),
 		1:   uint16(24905),
@@ -44587,7 +45335,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(25156),
 		187: uint16(25157),
 		188: uint16(25158),
-		189: uint16(25162)},
+		189: uint16(25162),
+	},
 	17: {
 		0:   uint16(25167),
 		1:   uint16(25168),
@@ -44778,7 +45527,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(25531),
 		187: uint16(25533),
 		188: uint16(25535),
-		189: uint16(25536)},
+		189: uint16(25536),
+	},
 	18: {
 		0:   uint16(25537),
 		1:   uint16(25538),
@@ -44969,7 +45719,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(25813),
 		187: uint16(25814),
 		188: uint16(25817),
-		189: uint16(25818)},
+		189: uint16(25818),
+	},
 	19: {
 		0:   uint16(25819),
 		1:   uint16(25820),
@@ -45160,7 +45911,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(26083),
 		187: uint16(26084),
 		188: uint16(26090),
-		189: uint16(26091)},
+		189: uint16(26091),
+	},
 	20: {
 		0:   uint16(26098),
 		1:   uint16(26099),
@@ -45351,7 +46103,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(26365),
 		187: uint16(26369),
 		188: uint16(26370),
-		189: uint16(26371)},
+		189: uint16(26371),
+	},
 	21: {
 		0:   uint16(26372),
 		1:   uint16(26373),
@@ -45542,7 +46295,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(26712),
 		187: uint16(26713),
 		188: uint16(26714),
-		189: uint16(26715)},
+		189: uint16(26715),
+	},
 	22: {
 		0:   uint16(26716),
 		1:   uint16(26717),
@@ -45733,7 +46487,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(26969),
 		187: uint16(26971),
 		188: uint16(26972),
-		189: uint16(26975)},
+		189: uint16(26975),
+	},
 	23: {
 		0:   uint16(26977),
 		1:   uint16(26978),
@@ -45924,7 +46679,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(27221),
 		187: uint16(27222),
 		188: uint16(27223),
-		189: uint16(27226)},
+		189: uint16(27226),
+	},
 	24: {
 		0:   uint16(27228),
 		1:   uint16(27229),
@@ -46115,7 +46871,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(27435),
 		187: uint16(27436),
 		188: uint16(27437),
-		189: uint16(27438)},
+		189: uint16(27438),
+	},
 	25: {
 		0:   uint16(27439),
 		1:   uint16(27440),
@@ -46306,7 +47063,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(27730),
 		187: uint16(27731),
 		188: uint16(27734),
-		189: uint16(27736)},
+		189: uint16(27736),
+	},
 	26: {
 		0:   uint16(27737),
 		1:   uint16(27738),
@@ -46497,7 +47255,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(28099),
 		187: uint16(28104),
 		188: uint16(28105),
-		189: uint16(28106)},
+		189: uint16(28106),
+	},
 	27: {
 		0:   uint16(28109),
 		1:   uint16(28110),
@@ -46688,7 +47447,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(28396),
 		187: uint16(28397),
 		188: uint16(28398),
-		189: uint16(28399)},
+		189: uint16(28399),
+	},
 	28: {
 		0:   uint16(28400),
 		1:   uint16(28401),
@@ -46879,7 +47639,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(28642),
 		187: uint16(28643),
 		188: uint16(28644),
-		189: uint16(28645)},
+		189: uint16(28645),
+	},
 	29: {
 		0:   uint16(28646),
 		1:   uint16(28647),
@@ -47070,7 +47831,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(28885),
 		187: uint16(28886),
 		188: uint16(28887),
-		189: uint16(28890)},
+		189: uint16(28890),
+	},
 	30: {
 		0:   uint16(28892),
 		1:   uint16(28893),
@@ -47261,7 +48023,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(29136),
 		187: uint16(29137),
 		188: uint16(29138),
-		189: uint16(29139)},
+		189: uint16(29139),
+	},
 	31: {
 		0:   uint16(29142),
 		1:   uint16(29143),
@@ -47452,7 +48215,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(29398),
 		187: uint16(29400),
 		188: uint16(29402),
-		189: uint16(29403)},
+		189: uint16(29403),
+	},
 	32: {
 		0:   uint16(58566),
 		1:   uint16(58567),
@@ -47643,7 +48407,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(8592),
 		187: uint16(8593),
 		188: uint16(8595),
-		189: uint16(12307)},
+		189: uint16(12307),
+	},
 	33: {
 		0:   uint16(58662),
 		1:   uint16(58663),
@@ -47834,7 +48599,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(8554),
 		187: uint16(8555),
 		188: uint16(59248),
-		189: uint16(59249)},
+		189: uint16(59249),
+	},
 	34: {
 		0:   uint16(58758),
 		1:   uint16(58759),
@@ -48025,7 +48791,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(65371),
 		187: uint16(65372),
 		188: uint16(65373),
-		189: uint16(65507)},
+		189: uint16(65507),
+	},
 	35: {
 		0:   uint16(58854),
 		1:   uint16(58855),
@@ -48216,7 +48983,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(59257),
 		187: uint16(59258),
 		188: uint16(59259),
-		189: uint16(59260)},
+		189: uint16(59260),
+	},
 	36: {
 		0:   uint16(58950),
 		1:   uint16(58951),
@@ -48407,7 +49175,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(59265),
 		187: uint16(59266),
 		188: uint16(59267),
-		189: uint16(59268)},
+		189: uint16(59268),
+	},
 	37: {
 		0:   uint16(59046),
 		1:   uint16(59047),
@@ -48598,7 +49367,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(59292),
 		187: uint16(59293),
 		188: uint16(59294),
-		189: uint16(59295)},
+		189: uint16(59295),
+	},
 	38: {
 		0:   uint16(59142),
 		1:   uint16(59143),
@@ -48789,7 +49559,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(59320),
 		187: uint16(59321),
 		188: uint16(59322),
-		189: uint16(59323)},
+		189: uint16(59323),
+	},
 	39: {
 		0:   uint16(714),
 		1:   uint16(715),
@@ -48980,7 +49751,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(59358),
 		187: uint16(59359),
 		188: uint16(59360),
-		189: uint16(59361)},
+		189: uint16(59361),
+	},
 	40: {
 		0:   uint16(12321),
 		1:   uint16(12322),
@@ -49171,7 +49943,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(59404),
 		187: uint16(59405),
 		188: uint16(59406),
-		189: uint16(59407)},
+		189: uint16(59407),
+	},
 	41: {
 		0:   uint16(29404),
 		1:   uint16(29405),
@@ -49362,7 +50135,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(57434),
 		187: uint16(57435),
 		188: uint16(57436),
-		189: uint16(57437)},
+		189: uint16(57437),
+	},
 	42: {
 		0:   uint16(29554),
 		1:   uint16(29555),
@@ -49553,7 +50327,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(57528),
 		187: uint16(57529),
 		188: uint16(57530),
-		189: uint16(57531)},
+		189: uint16(57531),
+	},
 	43: {
 		0:   uint16(29688),
 		1:   uint16(29689),
@@ -49744,7 +50519,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(57622),
 		187: uint16(57623),
 		188: uint16(57624),
-		189: uint16(57625)},
+		189: uint16(57625),
+	},
 	44: {
 		0:   uint16(29819),
 		1:   uint16(29820),
@@ -49935,7 +50711,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(57716),
 		187: uint16(57717),
 		188: uint16(57718),
-		189: uint16(57719)},
+		189: uint16(57719),
+	},
 	45: {
 		0:   uint16(29939),
 		1:   uint16(29941),
@@ -50126,7 +50903,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(57810),
 		187: uint16(57811),
 		188: uint16(57812),
-		189: uint16(57813)},
+		189: uint16(57813),
+	},
 	46: {
 		0:   uint16(30088),
 		1:   uint16(30089),
@@ -50317,7 +51095,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(57904),
 		187: uint16(57905),
 		188: uint16(57906),
-		189: uint16(57907)},
+		189: uint16(57907),
+	},
 	47: {
 		0:   uint16(30277),
 		1:   uint16(30278),
@@ -50508,7 +51287,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(32990),
 		187: uint16(21253),
 		188: uint16(35090),
-		189: uint16(21093)},
+		189: uint16(21093),
+	},
 	48: {
 		0:   uint16(30404),
 		1:   uint16(30407),
@@ -50699,7 +51479,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(19993),
 		187: uint16(31177),
 		188: uint16(39292),
-		189: uint16(28851)},
+		189: uint16(28851),
+	},
 	49: {
 		0:   uint16(30557),
 		1:   uint16(30558),
@@ -50890,7 +51671,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(38416),
 		187: uint16(39076),
 		188: uint16(26124),
-		189: uint16(29462)},
+		189: uint16(29462),
+	},
 	50: {
 		0:   uint16(30694),
 		1:   uint16(30696),
@@ -51081,7 +51863,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(38607),
 		187: uint16(28353),
 		188: uint16(38500),
-		189: uint16(26970)},
+		189: uint16(26970),
+	},
 	51: {
 		0:   uint16(30852),
 		1:   uint16(30853),
@@ -51272,7 +52055,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(36151),
 		187: uint16(34955),
 		188: uint16(24453),
-		189: uint16(36910)},
+		189: uint16(36910),
+	},
 	52: {
 		0:   uint16(30989),
 		1:   uint16(30990),
@@ -51463,7 +52247,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(34678),
 		187: uint16(36845),
 		188: uint16(35853),
-		189: uint16(21472)},
+		189: uint16(21472),
+	},
 	53: {
 		0:   uint16(31123),
 		1:   uint16(31124),
@@ -51654,7 +52439,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(23572),
 		187: uint16(39285),
 		188: uint16(27953),
-		189: uint16(20108)},
+		189: uint16(20108),
+	},
 	54: {
 		0:   uint16(31261),
 		1:   uint16(31263),
@@ -51845,7 +52631,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(31526),
 		187: uint16(20239),
 		188: uint16(20440),
-		189: uint16(26381)},
+		189: uint16(26381),
+	},
 	55: {
 		0:   uint16(31395),
 		1:   uint16(31396),
@@ -52036,7 +52823,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(32789),
 		187: uint16(26356),
 		188: uint16(24218),
-		189: uint16(32697)},
+		189: uint16(32697),
+	},
 	56: {
 		0:   uint16(31535),
 		1:   uint16(31536),
@@ -52227,7 +53015,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(26524),
 		187: uint16(35065),
 		188: uint16(36807),
-		189: uint16(21704)},
+		189: uint16(21704),
+	},
 	57: {
 		0:   uint16(31685),
 		1:   uint16(31688),
@@ -52418,7 +53207,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(34676),
 		187: uint16(29392),
 		188: uint16(31946),
-		189: uint16(28246)},
+		189: uint16(28246),
+	},
 	58: {
 		0:   uint16(31811),
 		1:   uint16(31812),
@@ -52609,7 +53399,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(30072),
 		187: uint16(31293),
 		188: uint16(31215),
-		189: uint16(31637)},
+		189: uint16(31637),
+	},
 	59: {
 		0:   uint16(31935),
 		1:   uint16(31936),
@@ -52800,7 +53591,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(35265),
 		187: uint16(38190),
 		188: uint16(31661),
-		189: uint16(20214)},
+		189: uint16(20214),
+	},
 	60: {
 		0:   uint16(32055),
 		1:   uint16(32056),
@@ -52991,7 +53783,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(31105),
 		187: uint16(36817),
 		188: uint16(28908),
-		189: uint16(28024)},
+		189: uint16(28024),
+	},
 	61: {
 		0:   uint16(32153),
 		1:   uint16(32154),
@@ -53182,7 +53975,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(38055),
 		187: uint16(20891),
 		188: uint16(21531),
-		189: uint16(23803)},
+		189: uint16(23803),
+	},
 	62: {
 		0:   uint16(32251),
 		1:   uint16(32252),
@@ -53373,7 +54167,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(33909),
 		187: uint16(22862),
 		188: uint16(39745),
-		189: uint16(20608)},
+		189: uint16(20608),
+	},
 	63: {
 		0:   uint16(32350),
 		1:   uint16(32351),
@@ -53564,7 +54359,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(21033),
 		187: uint16(20616),
 		188: uint16(20363),
-		189: uint16(20432)},
+		189: uint16(20432),
+	},
 	64: {
 		0:   uint16(32598),
 		1:   uint16(32601),
@@ -53755,7 +54551,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(32843),
 		187: uint16(21657),
 		188: uint16(31548),
-		189: uint16(31423)},
+		189: uint16(31423),
+	},
 	65: {
 		0:   uint16(32740),
 		1:   uint16(32743),
@@ -53946,7 +54743,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(34067),
 		187: uint16(26364),
 		188: uint16(24930),
-		189: uint16(28459)},
+		189: uint16(28459),
+	},
 	66: {
 		0:   uint16(32894),
 		1:   uint16(32897),
@@ -54137,7 +54935,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(21517),
 		187: uint16(21629),
 		188: uint16(35884),
-		189: uint16(25720)},
+		189: uint16(25720),
+	},
 	67: {
 		0:   uint16(33088),
 		1:   uint16(33089),
@@ -54328,7 +55127,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(26592),
 		187: uint16(29406),
 		188: uint16(20957),
-		189: uint16(23425)},
+		189: uint16(23425),
+	},
 	68: {
 		0:   uint16(33236),
 		1:   uint16(33237),
@@ -54519,7 +55319,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(25259),
 		187: uint16(21128),
 		188: uint16(29749),
-		189: uint16(27607)},
+		189: uint16(27607),
+	},
 	69: {
 		0:   uint16(33386),
 		1:   uint16(33387),
@@ -54710,7 +55511,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(27773),
 		187: uint16(27875),
 		188: uint16(35755),
-		189: uint16(25488)},
+		189: uint16(25488),
+	},
 	70: {
 		0:   uint16(33598),
 		1:   uint16(33599),
@@ -54901,7 +55703,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(36527),
 		187: uint16(23624),
 		188: uint16(39537),
-		189: uint16(28192)},
+		189: uint16(28192),
+	},
 	71: {
 		0:   uint16(33774),
 		1:   uint16(33775),
@@ -55092,7 +55895,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(22622),
 		187: uint16(36187),
 		188: uint16(19977),
-		189: uint16(21441)},
+		189: uint16(21441),
+	},
 	72: {
 		0:   uint16(33917),
 		1:   uint16(33918),
@@ -55283,7 +56087,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(29989),
 		187: uint16(29298),
 		188: uint16(21319),
-		189: uint16(32499)},
+		189: uint16(32499),
+	},
 	73: {
 		0:   uint16(34051),
 		1:   uint16(34052),
@@ -55474,7 +56279,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(22661),
 		187: uint16(24246),
 		188: uint16(25968),
-		189: uint16(28465)},
+		189: uint16(28465),
+	},
 	74: {
 		0:   uint16(34178),
 		1:   uint16(34179),
@@ -55665,7 +56471,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(20182),
 		187: uint16(23427),
 		188: uint16(22905),
-		189: uint16(22612)},
+		189: uint16(22612),
+	},
 	75: {
 		0:   uint16(34297),
 		1:   uint16(34298),
@@ -55856,7 +56663,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(24086),
 		187: uint16(21381),
 		188: uint16(21548),
-		189: uint16(28867)},
+		189: uint16(28867),
+	},
 	76: {
 		0:   uint16(34413),
 		1:   uint16(34415),
@@ -56047,7 +56855,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(26395),
 		187: uint16(24536),
 		188: uint16(22916),
-		189: uint16(23041)},
+		189: uint16(23041),
+	},
 	77: {
 		0:   uint16(34585),
 		1:   uint16(34587),
@@ -56238,7 +57047,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(22075),
 		187: uint16(21560),
 		188: uint16(38177),
-		189: uint16(29306)},
+		189: uint16(29306),
+	},
 	78: {
 		0:   uint16(34725),
 		1:   uint16(34726),
@@ -56429,7 +57239,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(28040),
 		187: uint16(23477),
 		188: uint16(28102),
-		189: uint16(26195)},
+		189: uint16(26195),
+	},
 	79: {
 		0:   uint16(34852),
 		1:   uint16(34853),
@@ -56620,7 +57431,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(23459),
 		187: uint16(24748),
 		188: uint16(26059),
-		189: uint16(29572)},
+		189: uint16(29572),
+	},
 	80: {
 		0:   uint16(34988),
 		1:   uint16(34990),
@@ -56811,7 +57623,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(36992),
 		187: uint16(33136),
 		188: uint16(22934),
-		189: uint16(29814)},
+		189: uint16(29814),
+	},
 	81: {
 		0:   uint16(35128),
 		1:   uint16(35129),
@@ -57002,7 +57815,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(39278),
 		187: uint16(23609),
 		188: uint16(24341),
-		189: uint16(38544)},
+		189: uint16(38544),
+	},
 	82: {
 		0:   uint16(35234),
 		1:   uint16(35235),
@@ -57193,7 +58007,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(27442),
 		187: uint16(29425),
 		188: uint16(32946),
-		189: uint16(35465)},
+		189: uint16(35465),
+	},
 	83: {
 		0:   uint16(35358),
 		1:   uint16(35359),
@@ -57384,7 +58199,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(21939),
 		187: uint16(28195),
 		188: uint16(26413),
-		189: uint16(36711)},
+		189: uint16(36711),
+	},
 	84: {
 		0:   uint16(35457),
 		1:   uint16(35458),
@@ -57575,7 +58391,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(25972),
 		187: uint16(25327),
 		188: uint16(27491),
-		189: uint16(25919)},
+		189: uint16(25919),
+	},
 	85: {
 		0:   uint16(35556),
 		1:   uint16(35557),
@@ -57766,7 +58583,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(34496),
 		187: uint16(36142),
 		188: uint16(38136),
-		189: uint16(31569)},
+		189: uint16(31569),
+	},
 	86: {
 		0:   uint16(35654),
 		1:   uint16(35655),
@@ -57957,7 +58775,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(59409),
 		187: uint16(59410),
 		188: uint16(59411),
-		189: uint16(59412)},
+		189: uint16(59412),
+	},
 	87: {
 		0:   uint16(35896),
 		1:   uint16(35897),
@@ -58148,7 +58967,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(20327),
 		187: uint16(25912),
 		188: uint16(20314),
-		189: uint16(20317)},
+		189: uint16(20317),
+	},
 	88: {
 		0:   uint16(36014),
 		1:   uint16(36015),
@@ -58339,7 +59159,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(20907),
 		187: uint16(20913),
 		188: uint16(20925),
-		189: uint16(20924)},
+		189: uint16(20924),
+	},
 	89: {
 		0:   uint16(36110),
 		1:   uint16(36111),
@@ -58530,7 +59351,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(37044),
 		187: uint16(37043),
 		188: uint16(37046),
-		189: uint16(37050)},
+		189: uint16(37050),
+	},
 	90: {
 		0:   uint16(36309),
 		1:   uint16(36312),
@@ -58721,7 +59543,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(22511),
 		187: uint16(22520),
 		188: uint16(22500),
-		189: uint16(22493)},
+		189: uint16(22493),
+	},
 	91: {
 		0:   uint16(36467),
 		1:   uint16(36469),
@@ -58912,7 +59735,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(33594),
 		187: uint16(33587),
 		188: uint16(33638),
-		189: uint16(33637)},
+		189: uint16(33637),
+	},
 	92: {
 		0:   uint16(36581),
 		1:   uint16(36582),
@@ -59103,7 +59927,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(34032),
 		187: uint16(34105),
 		188: uint16(34079),
-		189: uint16(34106)},
+		189: uint16(34106),
+	},
 	93: {
 		0:   uint16(36677),
 		1:   uint16(36678),
@@ -59294,7 +60119,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(25694),
 		187: uint16(25732),
 		188: uint16(25709),
-		189: uint16(25750)},
+		189: uint16(25750),
+	},
 	94: {
 		0:   uint16(36889),
 		1:   uint16(36892),
@@ -59485,7 +60311,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(21845),
 		187: uint16(21823),
 		188: uint16(21840),
-		189: uint16(21820)},
+		189: uint16(21820),
+	},
 	95: {
 		0:   uint16(37058),
 		1:   uint16(37059),
@@ -59676,7 +60503,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(24081),
 		187: uint16(24113),
 		188: uint16(24123),
-		189: uint16(24124)},
+		189: uint16(24124),
+	},
 	96: {
 		0:   uint16(37189),
 		1:   uint16(37191),
@@ -59867,7 +60695,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(29441),
 		187: uint16(29427),
 		188: uint16(29443),
-		189: uint16(29434)},
+		189: uint16(29434),
+	},
 	97: {
 		0:   uint16(37350),
 		1:   uint16(37351),
@@ -60058,7 +60887,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(24697),
 		187: uint16(24699),
 		188: uint16(24698),
-		189: uint16(24642)},
+		189: uint16(24642),
+	},
 	98: {
 		0:   uint16(37446),
 		1:   uint16(37447),
@@ -60249,7 +61079,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(27825),
 		187: uint16(27859),
 		188: uint16(27887),
-		189: uint16(27902)},
+		189: uint16(27902),
+	},
 	99: {
 		0:   uint16(37544),
 		1:   uint16(37545),
@@ -60440,7 +61271,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(28530),
 		187: uint16(28540),
 		188: uint16(28538),
-		189: uint16(28625)},
+		189: uint16(28625),
+	},
 	100: {
 		0:   uint16(37642),
 		1:   uint16(37643),
@@ -60631,7 +61463,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(22925),
 		187: uint16(22953),
 		188: uint16(22954),
-		189: uint16(22947)},
+		189: uint16(22947),
+	},
 	101: {
 		0:   uint16(37740),
 		1:   uint16(37741),
@@ -60822,7 +61655,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(32419),
 		187: uint16(32421),
 		188: uint16(32424),
-		189: uint16(32425)},
+		189: uint16(32425),
+	},
 	102: {
 		0:   uint16(37838),
 		1:   uint16(37839),
@@ -61013,7 +61847,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(29736),
 		187: uint16(29744),
 		188: uint16(29742),
-		189: uint16(29740)},
+		189: uint16(29740),
+	},
 	103: {
 		0:   uint16(37935),
 		1:   uint16(37936),
@@ -61204,7 +62039,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(26876),
 		187: uint16(26911),
 		188: uint16(26912),
-		189: uint16(26873)},
+		189: uint16(26873),
+	},
 	104: {
 		0:   uint16(38183),
 		1:   uint16(38195),
@@ -61395,7 +62231,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(36738),
 		187: uint16(36740),
 		188: uint16(36743),
-		189: uint16(36747)},
+		189: uint16(36747),
+	},
 	105: {
 		0:   uint16(38348),
 		1:   uint16(38349),
@@ -61586,7 +62423,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(29330),
 		187: uint16(25352),
 		188: uint16(25394),
-		189: uint16(25520)},
+		189: uint16(25520),
+	},
 	106: {
 		0:   uint16(38540),
 		1:   uint16(38542),
@@ -61777,7 +62615,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(33228),
 		187: uint16(26406),
 		188: uint16(33226),
-		189: uint16(33211)},
+		189: uint16(33211),
+	},
 	107: {
 		0:   uint16(38689),
 		1:   uint16(38690),
@@ -61968,7 +62807,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(31143),
 		187: uint16(31155),
 		188: uint16(24529),
-		189: uint16(24528)},
+		189: uint16(24528),
+	},
 	108: {
 		0:   uint16(38814),
 		1:   uint16(38815),
@@ -62159,7 +62999,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(30535),
 		187: uint16(30531),
 		188: uint16(30554),
-		189: uint16(30568)},
+		189: uint16(30568),
+	},
 	109: {
 		0:   uint16(38927),
 		1:   uint16(38928),
@@ -62350,7 +63191,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(38117),
 		187: uint16(38119),
 		188: uint16(38120),
-		189: uint16(38122)},
+		189: uint16(38122),
+	},
 	110: {
 		0:   uint16(39023),
 		1:   uint16(39024),
@@ -62541,7 +63383,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(31235),
 		187: uint16(31234),
 		188: uint16(31262),
-		189: uint16(31252)},
+		189: uint16(31252),
+	},
 	111: {
 		0:   uint16(39176),
 		1:   uint16(39177),
@@ -62732,7 +63575,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(30245),
 		187: uint16(30232),
 		188: uint16(30229),
-		189: uint16(30233)},
+		189: uint16(30233),
+	},
 	112: {
 		0:   uint16(39308),
 		1:   uint16(39310),
@@ -62923,7 +63767,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(35203),
 		187: uint16(39032),
 		188: uint16(39040),
-		189: uint16(39043)},
+		189: uint16(39043),
+	},
 	113: {
 		0:   uint16(39418),
 		1:   uint16(39419),
@@ -63114,7 +63959,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(34707),
 		187: uint16(34735),
 		188: uint16(34728),
-		189: uint16(34770)},
+		189: uint16(34770),
+	},
 	114: {
 		0:   uint16(39514),
 		1:   uint16(39515),
@@ -63305,7 +64151,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(31740),
 		187: uint16(31759),
 		188: uint16(31766),
-		189: uint16(31755)},
+		189: uint16(31755),
+	},
 	115: {
 		0:   uint16(39687),
 		1:   uint16(39689),
@@ -63496,7 +64343,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(37200),
 		187: uint16(37198),
 		188: uint16(37199),
-		189: uint16(37220)},
+		189: uint16(37220),
+	},
 	116: {
 		0:   uint16(39804),
 		1:   uint16(39805),
@@ -63687,7 +64535,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(35286),
 		187: uint16(35294),
 		188: uint16(35290),
-		189: uint16(35292)},
+		189: uint16(35292),
+	},
 	117: {
 		0:   uint16(39900),
 		1:   uint16(39901),
@@ -63878,7 +64727,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(40134),
 		187: uint16(40135),
 		188: uint16(40138),
-		189: uint16(40139)},
+		189: uint16(40139),
+	},
 	118: {
 		0:   uint16(39996),
 		1:   uint16(39997),
@@ -64069,7 +64919,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(40759),
 		187: uint16(40765),
 		188: uint16(40766),
-		189: uint16(40772)},
+		189: uint16(40772),
+	},
 	119: {
 		0:   uint16(40163),
 		1:   uint16(40164),
@@ -64260,7 +65111,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(57998),
 		187: uint16(57999),
 		188: uint16(58000),
-		189: uint16(58001)},
+		189: uint16(58001),
+	},
 	120: {
 		0:   uint16(40259),
 		1:   uint16(40260),
@@ -64451,7 +65303,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(58092),
 		187: uint16(58093),
 		188: uint16(58094),
-		189: uint16(58095)},
+		189: uint16(58095),
+	},
 	121: {
 		0:   uint16(40355),
 		1:   uint16(40356),
@@ -64642,7 +65495,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(58186),
 		187: uint16(58187),
 		188: uint16(58188),
-		189: uint16(58189)},
+		189: uint16(58189),
+	},
 	122: {
 		0:   uint16(40451),
 		1:   uint16(40452),
@@ -64833,7 +65687,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(58280),
 		187: uint16(58281),
 		188: uint16(58282),
-		189: uint16(58283)},
+		189: uint16(58283),
+	},
 	123: {
 		0:   uint16(40619),
 		1:   uint16(40620),
@@ -65024,7 +65879,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(58374),
 		187: uint16(58375),
 		188: uint16(58376),
-		189: uint16(58377)},
+		189: uint16(58377),
+	},
 	124: {
 		0:   uint16(40754),
 		1:   uint16(40755),
@@ -65215,7 +66071,8 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(58468),
 		187: uint16(58469),
 		188: uint16(58470),
-		189: uint16(58471)},
+		189: uint16(58471),
+	},
 	125: {
 		0:   uint16(64012),
 		1:   uint16(64013),
@@ -65406,7 +66263,9 @@ var _gb18030 = [126][190]uint16{
 		186: uint16(58562),
 		187: uint16(58563),
 		188: uint16(58564),
-		189: uint16(58565)}}
+		189: uint16(58565),
+	},
+}
 
 var _big5 = [89][157]uint16{
 	0: {
@@ -65566,7 +66425,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(8600),
 		154: uint16(8741),
 		155: uint16(8739),
-		156: uint16(65295)},
+		156: uint16(65295),
+	},
 	1: {
 		0:   uint16(65340),
 		1:   uint16(8725),
@@ -65724,7 +66584,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(65363),
 		154: uint16(65364),
 		155: uint16(65365),
-		156: uint16(65366)},
+		156: uint16(65366),
+	},
 	2: {
 		0:   uint16(65367),
 		1:   uint16(65368),
@@ -65882,7 +66743,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(0),
 		154: uint16(0),
 		155: uint16(0),
-		156: uint16(0)},
+		156: uint16(0),
+	},
 	3: {
 		0:   uint16(19968),
 		1:   uint16(20057),
@@ -66040,7 +66902,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(29275),
 		154: uint16(29356),
 		155: uint16(29579),
-		156: uint16(19993)},
+		156: uint16(19993),
+	},
 	4: {
 		0:   uint16(19990),
 		1:   uint16(19989),
@@ -66198,7 +67061,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(20807),
 		154: uint16(20806),
 		155: uint16(20808),
-		156: uint16(20840)},
+		156: uint16(20840),
+	},
 	5: {
 		0:   uint16(20849),
 		1:   uint16(20877),
@@ -66356,7 +67220,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(20308),
 		154: uint16(20284),
 		155: uint16(20294),
-		156: uint16(20323)},
+		156: uint16(20323),
+	},
 	6: {
 		0:   uint16(20316),
 		1:   uint16(20320),
@@ -66514,7 +67379,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(26462),
 		154: uint16(26441),
 		155: uint16(26438),
-		156: uint16(26464)},
+		156: uint16(26464),
+	},
 	7: {
 		0:   uint16(26451),
 		1:   uint16(26455),
@@ -66672,7 +67538,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(21460),
 		154: uint16(21463),
 		155: uint16(21619),
-		156: uint16(21621)},
+		156: uint16(21621),
+	},
 	8: {
 		0:   uint16(21654),
 		1:   uint16(21624),
@@ -66830,7 +67697,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(26112),
 		154: uint16(26127),
 		155: uint16(26133),
-		156: uint16(26122)},
+		156: uint16(26122),
+	},
 	9: {
 		0:   uint16(26119),
 		1:   uint16(26381),
@@ -66988,7 +67856,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(38464),
 		154: uint16(38463),
 		155: uint16(38459),
-		156: uint16(38468)},
+		156: uint16(38468),
+	},
 	10: {
 		0:   uint16(38466),
 		1:   uint16(38585),
@@ -67146,7 +68015,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(25341),
 		154: uint16(25351),
 		155: uint16(25329),
-		156: uint16(25335)},
+		156: uint16(25335),
+	},
 	11: {
 		0:   uint16(25327),
 		1:   uint16(25324),
@@ -67304,7 +68174,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(32568),
 		154: uint16(32654),
 		155: uint16(32703),
-		156: uint16(32772)},
+		156: uint16(32772),
+	},
 	12: {
 		0:   uint16(32784),
 		1:   uint16(32781),
@@ -67462,7 +68333,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(21729),
 		154: uint16(21769),
 		155: uint16(21742),
-		156: uint16(21738)},
+		156: uint16(21738),
+	},
 	13: {
 		0:   uint16(21734),
 		1:   uint16(21799),
@@ -67620,7 +68492,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(28024),
 		154: uint16(28023),
 		155: uint16(27993),
-		156: uint16(28051)},
+		156: uint16(28051),
+	},
 	14: {
 		0:   uint16(28012),
 		1:   uint16(28041),
@@ -67778,7 +68651,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(33600),
 		154: uint16(33585),
 		155: uint16(33576),
-		156: uint16(33603)},
+		156: uint16(33603),
+	},
 	15: {
 		0:   uint16(34388),
 		1:   uint16(34442),
@@ -67936,7 +68810,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(23113),
 		154: uint16(23142),
 		155: uint16(23146),
-		156: uint16(23104)},
+		156: uint16(23104),
+	},
 	16: {
 		0:   uint16(23100),
 		1:   uint16(23138),
@@ -68094,7 +68969,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(26785),
 		154: uint16(26754),
 		155: uint16(27442),
-		156: uint16(27578)},
+		156: uint16(27578),
+	},
 	17: {
 		0:   uint16(27627),
 		1:   uint16(27628),
@@ -68252,7 +69128,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(33696),
 		154: uint16(33655),
 		155: uint16(33659),
-		156: uint16(33660)},
+		156: uint16(33660),
+	},
 	18: {
 		0:   uint16(33670),
 		1:   uint16(33703),
@@ -68410,7 +69287,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(22560),
 		154: uint16(22777),
 		155: uint16(22778),
-		156: uint16(22880)},
+		156: uint16(22880),
+	},
 	19: {
 		0:   uint16(23159),
 		1:   uint16(23194),
@@ -68568,7 +69446,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(28227),
 		154: uint16(28189),
 		155: uint16(28222),
-		156: uint16(28363)},
+		156: uint16(28363),
+	},
 	20: {
 		0:   uint16(28297),
 		1:   uint16(28185),
@@ -68726,7 +69605,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(35413),
 		154: uint16(35422),
 		155: uint16(35388),
-		156: uint16(35393)},
+		156: uint16(35393),
+	},
 	21: {
 		0:   uint16(35412),
 		1:   uint16(35419),
@@ -68884,7 +69764,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(23244),
 		154: uint16(23230),
 		155: uint16(23229),
-		156: uint16(23228)},
+		156: uint16(23228),
+	},
 	22: {
 		0:   uint16(23219),
 		1:   uint16(23234),
@@ -69042,7 +69923,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(30571),
 		154: uint16(30566),
 		155: uint16(30558),
-		156: uint16(30563)},
+		156: uint16(30563),
+	},
 	23: {
 		0:   uint16(30585),
 		1:   uint16(30570),
@@ -69200,7 +70082,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(36611),
 		154: uint16(36617),
 		155: uint16(36606),
-		156: uint16(36618)},
+		156: uint16(36618),
+	},
 	24: {
 		0:   uint16(36767),
 		1:   uint16(36786),
@@ -69358,7 +70241,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(24390),
 		154: uint16(24432),
 		155: uint16(24505),
-		156: uint16(24903)},
+		156: uint16(24903),
+	},
 	25: {
 		0:   uint16(24895),
 		1:   uint16(24907),
@@ -69516,7 +70400,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(32173),
 		154: uint16(32210),
 		155: uint16(32199),
-		156: uint16(32172)},
+		156: uint16(32172),
+	},
 	26: {
 		0:   uint16(32624),
 		1:   uint16(32736),
@@ -69674,7 +70559,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(20744),
 		154: uint16(20745),
 		155: uint16(20741),
-		156: uint16(20956)},
+		156: uint16(20956),
+	},
 	27: {
 		0:   uint16(21127),
 		1:   uint16(21128),
@@ -69832,7 +70718,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(29527),
 		154: uint16(29801),
 		155: uint16(29835),
-		156: uint16(29827)},
+		156: uint16(29827),
+	},
 	28: {
 		0:   uint16(29822),
 		1:   uint16(29824),
@@ -69990,7 +70877,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(36646),
 		154: uint16(36650),
 		155: uint16(36636),
-		156: uint16(36638)},
+		156: uint16(36638),
+	},
 	29: {
 		0:   uint16(36645),
 		1:   uint16(36969),
@@ -70148,7 +71036,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(27653),
 		154: uint16(28610),
 		155: uint16(28593),
-		156: uint16(28577)},
+		156: uint16(28577),
+	},
 	30: {
 		0:   uint16(28611),
 		1:   uint16(28580),
@@ -70306,7 +71195,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(37628),
 		154: uint16(37675),
 		155: uint16(37636),
-		156: uint16(37658)},
+		156: uint16(37658),
+	},
 	31: {
 		0:   uint16(37648),
 		1:   uint16(37670),
@@ -70464,7 +71354,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(30643),
 		154: uint16(30634),
 		155: uint16(30640),
-		156: uint16(30636)},
+		156: uint16(30636),
+	},
 	32: {
 		0:   uint16(30631),
 		1:   uint16(30637),
@@ -70622,7 +71513,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(38982),
 		154: uint16(39094),
 		155: uint16(39221),
-		156: uint16(39425)},
+		156: uint16(39425),
+	},
 	33: {
 		0:   uint16(39423),
 		1:   uint16(39854),
@@ -70780,7 +71672,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(38622),
 		154: uint16(38692),
 		155: uint16(38819),
-		156: uint16(38822)},
+		156: uint16(38822),
+	},
 	34: {
 		0:   uint16(38829),
 		1:   uint16(38905),
@@ -70938,7 +71831,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(38753),
 		154: uint16(38876),
 		155: uint16(38907),
-		156: uint16(39006)},
+		156: uint16(39006),
+	},
 	35: {
 		0:   uint16(39000),
 		1:   uint16(39003),
@@ -71096,7 +71990,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(35178),
 		154: uint16(35180),
 		155: uint16(35261),
-		156: uint16(35700)},
+		156: uint16(35700),
+	},
 	36: {
 		0:   uint16(35703),
 		1:   uint16(35709),
@@ -71254,7 +72149,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(34873),
 		154: uint16(34914),
 		155: uint16(35731),
-		156: uint16(35730)},
+		156: uint16(35730),
+	},
 	37: {
 		0:   uint16(35734),
 		1:   uint16(33399),
@@ -71412,7 +72308,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(12373),
 		154: uint16(12374),
 		155: uint16(12375),
-		156: uint16(12376)},
+		156: uint16(12376),
+	},
 	38: {
 		0:   uint16(12377),
 		1:   uint16(12378),
@@ -71570,7 +72467,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(1047),
 		154: uint16(1048),
 		155: uint16(1049),
-		156: uint16(1050)},
+		156: uint16(1050),
+	},
 	39: {
 		0:   uint16(1051),
 		1:   uint16(1052),
@@ -71728,7 +72626,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(248),
 		154: uint16(331),
 		155: uint16(650),
-		156: uint16(618)},
+		156: uint16(618),
+	},
 	40: {
 		0:   uint16(20034),
 		1:   uint16(20060),
@@ -71886,7 +72785,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(27727),
 		154: uint16(27722),
 		155: uint16(27732),
-		156: uint16(27723)},
+		156: uint16(27723),
+	},
 	41: {
 		0:   uint16(27724),
 		1:   uint16(28785),
@@ -72044,7 +72944,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(26098),
 		154: uint16(26101),
 		155: uint16(26437),
-		156: uint16(26439)},
+		156: uint16(26439),
+	},
 	42: {
 		0:   uint16(26457),
 		1:   uint16(26453),
@@ -72202,7 +73103,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(22395),
 		154: uint16(22387),
 		155: uint16(22388),
-		156: uint16(22370)},
+		156: uint16(22370),
+	},
 	43: {
 		0:   uint16(22376),
 		1:   uint16(22397),
@@ -72360,7 +73262,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(27843),
 		154: uint16(27846),
 		155: uint16(27885),
-		156: uint16(27890)},
+		156: uint16(27890),
+	},
 	44: {
 		0:   uint16(27858),
 		1:   uint16(27869),
@@ -72518,7 +73421,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(21665),
 		154: uint16(21677),
 		155: uint16(21669),
-		156: uint16(21711)},
+		156: uint16(21711),
+	},
 	45: {
 		0:   uint16(21699),
 		1:   uint16(33549),
@@ -72676,7 +73580,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(26561),
 		154: uint16(26610),
 		155: uint16(26568),
-		156: uint16(26554)},
+		156: uint16(26554),
+	},
 	46: {
 		0:   uint16(26588),
 		1:   uint16(26555),
@@ -72834,7 +73739,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(31183),
 		154: uint16(31190),
 		155: uint16(31182),
-		156: uint16(31360)},
+		156: uint16(31360),
+	},
 	47: {
 		0:   uint16(31358),
 		1:   uint16(31441),
@@ -72992,7 +73898,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(21739),
 		154: uint16(21777),
 		155: uint16(21765),
-		156: uint16(21745)},
+		156: uint16(21745),
+	},
 	48: {
 		0:   uint16(21770),
 		1:   uint16(21755),
@@ -73150,7 +74057,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(32898),
 		154: uint16(27528),
 		155: uint16(27622),
-		156: uint16(27620)},
+		156: uint16(27620),
+	},
 	49: {
 		0:   uint16(27624),
 		1:   uint16(27619),
@@ -73308,7 +74216,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(31370),
 		154: uint16(31367),
 		155: uint16(31448),
-		156: uint16(31504)},
+		156: uint16(31504),
+	},
 	50: {
 		0:   uint16(31492),
 		1:   uint16(31507),
@@ -73466,7 +74375,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(37079),
 		154: uint16(37084),
 		155: uint16(37092),
-		156: uint16(37200)},
+		156: uint16(37200),
+	},
 	51: {
 		0:   uint16(37198),
 		1:   uint16(37199),
@@ -73624,7 +74534,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(23821),
 		154: uint16(23846),
 		155: uint16(23845),
-		156: uint16(23823)},
+		156: uint16(23823),
+	},
 	52: {
 		0:   uint16(23856),
 		1:   uint16(23826),
@@ -73782,7 +74693,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(28117),
 		154: uint16(28098),
 		155: uint16(28111),
-		156: uint16(28105)},
+		156: uint16(28105),
+	},
 	53: {
 		0:   uint16(28112),
 		1:   uint16(28146),
@@ -73940,7 +74852,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(32711),
 		154: uint16(32719),
 		155: uint16(32713),
-		156: uint16(32799)},
+		156: uint16(32799),
+	},
 	54: {
 		0:   uint16(32798),
 		1:   uint16(32795),
@@ -74098,7 +75011,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(37368),
 		154: uint16(37348),
 		155: uint16(37369),
-		156: uint16(37354)},
+		156: uint16(37354),
+	},
 	55: {
 		0:   uint16(37355),
 		1:   uint16(37367),
@@ -74256,7 +75170,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(24802),
 		154: uint16(24782),
 		155: uint16(24772),
-		156: uint16(24852)},
+		156: uint16(24852),
+	},
 	56: {
 		0:   uint16(24818),
 		1:   uint16(24842),
@@ -74414,7 +75329,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(28219),
 		154: uint16(28163),
 		155: uint16(28206),
-		156: uint16(28254)},
+		156: uint16(28254),
+	},
 	57: {
 		0:   uint16(28264),
 		1:   uint16(28252),
@@ -74572,7 +75488,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(32078),
 		154: uint16(32574),
 		155: uint16(32575),
-		156: uint16(32613)},
+		156: uint16(32613),
+	},
 	58: {
 		0:   uint16(32614),
 		1:   uint16(32674),
@@ -74730,7 +75647,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(36293),
 		154: uint16(36591),
 		155: uint16(36599),
-		156: uint16(36602)},
+		156: uint16(36602),
+	},
 	59: {
 		0:   uint16(36601),
 		1:   uint16(36582),
@@ -74888,7 +75806,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(23231),
 		154: uint16(23240),
 		155: uint16(23227),
-		156: uint16(23238)},
+		156: uint16(23238),
+	},
 	60: {
 		0:   uint16(23223),
 		1:   uint16(23232),
@@ -75046,7 +75965,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(27547),
 		154: uint16(64013),
 		155: uint16(27643),
-		156: uint16(27644)},
+		156: uint16(27644),
+	},
 	61: {
 		0:   uint16(27641),
 		1:   uint16(27639),
@@ -75204,7 +76124,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(31255),
 		154: uint16(31253),
 		155: uint16(31266),
-		156: uint16(31251)},
+		156: uint16(31251),
+	},
 	62: {
 		0:   uint16(31259),
 		1:   uint16(31248),
@@ -75362,7 +76283,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(35227),
 		154: uint16(35295),
 		155: uint16(35301),
-		156: uint16(35300)},
+		156: uint16(35300),
+	},
 	63: {
 		0:   uint16(35297),
 		1:   uint16(35296),
@@ -75520,7 +76442,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(20720),
 		154: uint16(20719),
 		155: uint16(20707),
-		156: uint16(20704)},
+		156: uint16(20704),
+	},
 	64: {
 		0:   uint16(20952),
 		1:   uint16(21120),
@@ -75678,7 +76601,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(26402),
 		154: uint16(27057),
 		155: uint16(27062),
-		156: uint16(27081)},
+		156: uint16(27081),
+	},
 	65: {
 		0:   uint16(27040),
 		1:   uint16(27086),
@@ -75836,7 +76760,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(31126),
 		154: uint16(31125),
 		155: uint16(31124),
-		156: uint16(31123)},
+		156: uint16(31123),
+	},
 	66: {
 		0:   uint16(31127),
 		1:   uint16(31112),
@@ -75994,7 +76919,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(35054),
 		154: uint16(35068),
 		155: uint16(35062),
-		156: uint16(35067)},
+		156: uint16(35067),
+	},
 	67: {
 		0:   uint16(35056),
 		1:   uint16(35052),
@@ -76152,7 +77078,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(22090),
 		154: uint16(22089),
 		155: uint16(22086),
-		156: uint16(22104)},
+		156: uint16(22104),
+	},
 	68: {
 		0:   uint16(22106),
 		1:   uint16(22080),
@@ -76310,7 +77237,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(28542),
 		154: uint16(28551),
 		155: uint16(28614),
-		156: uint16(28562)},
+		156: uint16(28562),
+	},
 	69: {
 		0:   uint16(28557),
 		1:   uint16(28553),
@@ -76468,7 +77396,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(32868),
 		154: uint16(32871),
 		155: uint16(33187),
-		156: uint16(33183)},
+		156: uint16(33183),
+	},
 	70: {
 		0:   uint16(33182),
 		1:   uint16(33173),
@@ -76626,7 +77555,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(36369),
 		154: uint16(36377),
 		155: uint16(36390),
-		156: uint16(36391)},
+		156: uint16(36391),
+	},
 	71: {
 		0:   uint16(36372),
 		1:   uint16(36370),
@@ -76784,7 +77714,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(21473),
 		154: uint16(22128),
 		155: uint16(22112),
-		156: uint16(22126)},
+		156: uint16(22126),
+	},
 	72: {
 		0:   uint16(22131),
 		1:   uint16(22118),
@@ -76942,7 +77873,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(28586),
 		154: uint16(28623),
 		155: uint16(28607),
-		156: uint16(28600)},
+		156: uint16(28600),
+	},
 	73: {
 		0:   uint16(28578),
 		1:   uint16(28617),
@@ -77100,7 +78032,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(34125),
 		154: uint16(34131),
 		155: uint16(34145),
-		156: uint16(34136)},
+		156: uint16(34136),
+	},
 	74: {
 		0:   uint16(34112),
 		1:   uint16(34118),
@@ -77258,7 +78191,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(37685),
 		154: uint16(37674),
 		155: uint16(37652),
-		156: uint16(37644)},
+		156: uint16(37644),
+	},
 	75: {
 		0:   uint16(37643),
 		1:   uint16(37630),
@@ -77416,7 +78350,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(27294),
 		154: uint16(27271),
 		155: uint16(27283),
-		156: uint16(27278)},
+		156: uint16(27278),
+	},
 	76: {
 		0:   uint16(27285),
 		1:   uint16(27267),
@@ -77574,7 +78509,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(34171),
 		154: uint16(34212),
 		155: uint16(34202),
-		156: uint16(34206)},
+		156: uint16(34206),
+	},
 	77: {
 		0:   uint16(34167),
 		1:   uint16(34172),
@@ -77732,7 +78668,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(38681),
 		154: uint16(38810),
 		155: uint16(38817),
-		156: uint16(38812)},
+		156: uint16(38812),
+	},
 	78: {
 		0:   uint16(38814),
 		1:   uint16(38813),
@@ -77890,7 +78827,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(29177),
 		154: uint16(29187),
 		155: uint16(29181),
-		156: uint16(29558)},
+		156: uint16(29558),
+	},
 	79: {
 		0:   uint16(29880),
 		1:   uint16(29888),
@@ -78048,7 +78986,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(36438),
 		154: uint16(36446),
 		155: uint16(36453),
-		156: uint16(36455)},
+		156: uint16(36455),
+	},
 	80: {
 		0:   uint16(36443),
 		1:   uint16(36442),
@@ -78206,7 +79145,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(23358),
 		154: uint16(23359),
 		155: uint16(24003),
-		156: uint16(24176)},
+		156: uint16(24176),
+	},
 	81: {
 		0:   uint16(24511),
 		1:   uint16(25083),
@@ -78364,7 +79304,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(35670),
 		154: uint16(35668),
 		155: uint16(35659),
-		156: uint16(35669)},
+		156: uint16(35669),
+	},
 	82: {
 		0:   uint16(35665),
 		1:   uint16(35650),
@@ -78522,7 +79463,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(40791),
 		154: uint16(40792),
 		155: uint16(21303),
-		156: uint16(22194)},
+		156: uint16(22194),
+	},
 	83: {
 		0:   uint16(22197),
 		1:   uint16(22195),
@@ -78680,7 +79622,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(37897),
 		154: uint16(37880),
 		155: uint16(37898),
-		156: uint16(37887)},
+		156: uint16(37887),
+	},
 	84: {
 		0:   uint16(37884),
 		1:   uint16(37900),
@@ -78838,7 +79781,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(34336),
 		154: uint16(34345),
 		155: uint16(34334),
-		156: uint16(34341)},
+		156: uint16(34341),
+	},
 	85: {
 		0:   uint16(34857),
 		1:   uint16(34845),
@@ -78996,7 +79940,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(31836),
 		154: uint16(31833),
 		155: uint16(31835),
-		156: uint16(31834)},
+		156: uint16(31834),
+	},
 	86: {
 		0:   uint16(31988),
 		1:   uint16(31985),
@@ -79154,7 +80099,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(35190),
 		154: uint16(35188),
 		155: uint16(35187),
-		156: uint16(35326)},
+		156: uint16(35326),
+	},
 	87: {
 		0:   uint16(35724),
 		1:   uint16(35726),
@@ -79312,7 +80258,8 @@ var _big5 = [89][157]uint16{
 		153: uint16(31849),
 		154: uint16(31851),
 		155: uint16(31990),
-		156: uint16(32410)},
+		156: uint16(32410),
+	},
 	88: {
 		0:   uint16(32408),
 		1:   uint16(32411),
@@ -79470,7 +80417,9 @@ var _big5 = [89][157]uint16{
 		153: uint16(9582),
 		154: uint16(9584),
 		155: uint16(9583),
-		156: uint16(9619)}}
+		156: uint16(9619),
+	},
+}
 
 var _hkscs = [5172]uint16{
 	0:    uint16(17392),
@@ -84644,7 +85593,8 @@ var _hkscs = [5172]uint16{
 	5168: uint16(59933),
 	5169: uint16(17420),
 	5170: uint16(17678),
-	5171: uint16(2)}
+	5171: uint16(2),
+}
 
 var _ksc = [93][94]uint16{
 	0: {
@@ -84741,7 +85691,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(8745),
 		91: uint16(8743),
 		92: uint16(8744),
-		93: uint16(65506)},
+		93: uint16(65506),
+	},
 	1: {
 		0:  uint16(8658),
 		1:  uint16(8660),
@@ -84836,7 +85787,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	2: {
 		0:  uint16(65281),
 		1:  uint16(65282),
@@ -84931,7 +85883,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(65371),
 		91: uint16(65372),
 		92: uint16(65373),
-		93: uint16(65507)},
+		93: uint16(65507),
+	},
 	3: {
 		0:  uint16(12593),
 		1:  uint16(12594),
@@ -85026,7 +85979,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(12683),
 		91: uint16(12684),
 		92: uint16(12685),
-		93: uint16(12686)},
+		93: uint16(12686),
+	},
 	4: {
 		0:  uint16(8560),
 		1:  uint16(8561),
@@ -85121,7 +86075,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	5: {
 		0:  uint16(9472),
 		1:  uint16(9474),
@@ -85216,7 +86171,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	6: {
 		0:  uint16(13205),
 		1:  uint16(13206),
@@ -85311,7 +86267,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	7: {
 		0:  uint16(198),
 		1:  uint16(208),
@@ -85406,7 +86363,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(8539),
 		91: uint16(8540),
 		92: uint16(8541),
-		93: uint16(8542)},
+		93: uint16(8542),
+	},
 	8: {
 		0:  uint16(230),
 		1:  uint16(273),
@@ -85501,7 +86459,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(8321),
 		91: uint16(8322),
 		92: uint16(8323),
-		93: uint16(8324)},
+		93: uint16(8324),
+	},
 	9: {
 		0:  uint16(12353),
 		1:  uint16(12354),
@@ -85596,7 +86555,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	10: {
 		0:  uint16(12449),
 		1:  uint16(12450),
@@ -85691,7 +86651,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	11: {
 		0:  uint16(1040),
 		1:  uint16(1041),
@@ -85786,7 +86747,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(0),
 		91: uint16(0),
 		92: uint16(0),
-		93: uint16(0)},
+		93: uint16(0),
+	},
 	12: {},
 	13: {},
 	14: {},
@@ -85884,7 +86846,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(44285),
 		91: uint16(44288),
 		92: uint16(44292),
-		93: uint16(44294)},
+		93: uint16(44294),
+	},
 	16: {
 		0:  uint16(44300),
 		1:  uint16(44301),
@@ -85979,7 +86942,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(44649),
 		91: uint16(44652),
 		92: uint16(44656),
-		93: uint16(44664)},
+		93: uint16(44664),
+	},
 	17: {
 		0:  uint16(44665),
 		1:  uint16(44667),
@@ -86074,7 +87038,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(45140),
 		91: uint16(45141),
 		92: uint16(45143),
-		93: uint16(45145)},
+		93: uint16(45145),
+	},
 	18: {
 		0:  uint16(45149),
 		1:  uint16(45180),
@@ -86169,7 +87134,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(45520),
 		91: uint16(45524),
 		92: uint16(45532),
-		93: uint16(45533)},
+		93: uint16(45533),
+	},
 	19: {
 		0:  uint16(45535),
 		1:  uint16(45544),
@@ -86264,7 +87230,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(45918),
 		91: uint16(45919),
 		92: uint16(45924),
-		93: uint16(45925)},
+		93: uint16(45925),
+	},
 	20: {
 		0:  uint16(45927),
 		1:  uint16(45929),
@@ -86359,7 +87326,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(46384),
 		91: uint16(46385),
 		92: uint16(46388),
-		93: uint16(46392)},
+		93: uint16(46392),
+	},
 	21: {
 		0:  uint16(46400),
 		1:  uint16(46401),
@@ -86454,7 +87422,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(46993),
 		91: uint16(46994),
 		92: uint16(46998),
-		93: uint16(46999)},
+		93: uint16(46999),
+	},
 	22: {
 		0:  uint16(47000),
 		1:  uint16(47001),
@@ -86549,7 +87518,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(47452),
 		91: uint16(47456),
 		92: uint16(47464),
-		93: uint16(47465)},
+		93: uint16(47465),
+	},
 	23: {
 		0:  uint16(47467),
 		1:  uint16(47469),
@@ -86644,7 +87614,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(47816),
 		91: uint16(47832),
 		92: uint16(47833),
-		93: uint16(47868)},
+		93: uint16(47868),
+	},
 	24: {
 		0:  uint16(47872),
 		1:  uint16(47876),
@@ -86739,7 +87710,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(48270),
 		91: uint16(48276),
 		92: uint16(48277),
-		93: uint16(48279)},
+		93: uint16(48279),
+	},
 	25: {
 		0:  uint16(48281),
 		1:  uint16(48282),
@@ -86834,7 +87806,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(48731),
 		91: uint16(48736),
 		92: uint16(48737),
-		93: uint16(48740)},
+		93: uint16(48740),
+	},
 	26: {
 		0:  uint16(48744),
 		1:  uint16(48746),
@@ -86929,7 +87902,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(49371),
 		91: uint16(49372),
 		92: uint16(49373),
-		93: uint16(49380)},
+		93: uint16(49380),
+	},
 	27: {
 		0:  uint16(49381),
 		1:  uint16(49384),
@@ -87024,7 +87998,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(49704),
 		91: uint16(49705),
 		92: uint16(49707),
-		93: uint16(49709)},
+		93: uint16(49709),
+	},
 	28: {
 		0:  uint16(49711),
 		1:  uint16(49713),
@@ -87119,7 +88094,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(50192),
 		91: uint16(50212),
 		92: uint16(50220),
-		93: uint16(50224)},
+		93: uint16(50224),
+	},
 	29: {
 		0:  uint16(50228),
 		1:  uint16(50236),
@@ -87214,7 +88190,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(50633),
 		91: uint16(50634),
 		92: uint16(50636),
-		93: uint16(50638)},
+		93: uint16(50638),
+	},
 	30: {
 		0:  uint16(50640),
 		1:  uint16(50641),
@@ -87309,7 +88286,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(50909),
 		91: uint16(50912),
 		92: uint16(50913),
-		93: uint16(50920)},
+		93: uint16(50920),
+	},
 	31: {
 		0:  uint16(50921),
 		1:  uint16(50924),
@@ -87404,7 +88382,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(51201),
 		91: uint16(51204),
 		92: uint16(51208),
-		93: uint16(51210)},
+		93: uint16(51210),
+	},
 	32: {
 		0:  uint16(51216),
 		1:  uint16(51217),
@@ -87499,7 +88478,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(51658),
 		91: uint16(51664),
 		92: uint16(51665),
-		93: uint16(51667)},
+		93: uint16(51667),
+	},
 	33: {
 		0:  uint16(51669),
 		1:  uint16(51670),
@@ -87594,7 +88574,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(52272),
 		91: uint16(52280),
 		92: uint16(52281),
-		93: uint16(52283)},
+		93: uint16(52283),
+	},
 	34: {
 		0:  uint16(52284),
 		1:  uint16(52285),
@@ -87689,7 +88670,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(52784),
 		91: uint16(52785),
 		92: uint16(52787),
-		93: uint16(52789)},
+		93: uint16(52789),
+	},
 	35: {
 		0:  uint16(52824),
 		1:  uint16(52825),
@@ -87784,7 +88766,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(53300),
 		91: uint16(53301),
 		92: uint16(53304),
-		93: uint16(53308)},
+		93: uint16(53308),
+	},
 	36: {
 		0:  uint16(53316),
 		1:  uint16(53317),
@@ -87879,7 +88862,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(53823),
 		91: uint16(53825),
 		92: uint16(53832),
-		93: uint16(53852)},
+		93: uint16(53852),
+	},
 	37: {
 		0:  uint16(53860),
 		1:  uint16(53888),
@@ -87974,7 +88958,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(54268),
 		91: uint16(54269),
 		92: uint16(54271),
-		93: uint16(54273)},
+		93: uint16(54273),
+	},
 	38: {
 		0:  uint16(54280),
 		1:  uint16(54301),
@@ -88069,7 +89054,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(54804),
 		91: uint16(54805),
 		92: uint16(54812),
-		93: uint16(54816)},
+		93: uint16(54816),
+	},
 	39: {
 		0:  uint16(54820),
 		1:  uint16(54829),
@@ -88164,7 +89150,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(55192),
 		91: uint16(55193),
 		92: uint16(55195),
-		93: uint16(55197)},
+		93: uint16(55197),
+	},
 	40: {},
 	41: {
 		0:  uint16(20285),
@@ -88260,7 +89247,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(37039),
 		91: uint16(37969),
 		92: uint16(37970),
-		93: uint16(40853)},
+		93: uint16(40853),
+	},
 	42: {
 		0:  uint16(21283),
 		1:  uint16(23724),
@@ -88355,7 +89343,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(20745),
 		91: uint16(21133),
 		92: uint16(21138),
-		93: uint16(27298)},
+		93: uint16(27298),
+	},
 	43: {
 		0:  uint16(30652),
 		1:  uint16(37392),
@@ -88450,7 +89439,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(24760),
 		91: uint16(25106),
 		92: uint16(26690),
-		93: uint16(26800)},
+		93: uint16(26800),
+	},
 	44: {
 		0:  uint16(26856),
 		1:  uint16(28330),
@@ -88545,7 +89535,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(23521),
 		91: uint16(25096),
 		92: uint16(26524),
-		93: uint16(29916)},
+		93: uint16(29916),
+	},
 	45: {
 		0:  uint16(31185),
 		1:  uint16(33747),
@@ -88640,7 +89631,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(20167),
 		91: uint16(20465),
 		92: uint16(20855),
-		93: uint16(21246)},
+		93: uint16(21246),
+	},
 	46: {
 		0:  uint16(21312),
 		1:  uint16(21475),
@@ -88735,7 +89727,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(63750),
 		91: uint16(26231),
 		92: uint16(27512),
-		93: uint16(36020)},
+		93: uint16(36020),
+	},
 	47: {
 		0:  uint16(39740),
 		1:  uint16(63751),
@@ -88830,7 +89823,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(24524),
 		91: uint16(25216),
 		92: uint16(26071),
-		93: uint16(26083)},
+		93: uint16(26083),
+	},
 	48: {
 		0:  uint16(26398),
 		1:  uint16(26399),
@@ -88925,7 +89919,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(30007),
 		91: uint16(63779),
 		92: uint16(63780),
-		93: uint16(63781)},
+		93: uint16(63781),
+	},
 	49: {
 		0:  uint16(32013),
 		1:  uint16(63782),
@@ -89020,7 +90015,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(21311),
 		91: uint16(28346),
 		92: uint16(22810),
-		93: uint16(33590)},
+		93: uint16(33590),
+	},
 	50: {
 		0:  uint16(20025),
 		1:  uint16(20150),
@@ -89115,7 +90111,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(25361),
 		91: uint16(25481),
 		92: uint16(25623),
-		93: uint16(26691)},
+		93: uint16(26691),
+	},
 	51: {
 		0:  uint16(26873),
 		1:  uint16(27330),
@@ -89210,7 +90207,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(25078),
 		91: uint16(63835),
 		92: uint16(30313),
-		93: uint16(32645)},
+		93: uint16(32645),
+	},
 	52: {
 		0:  uint16(34367),
 		1:  uint16(34746),
@@ -89305,7 +90303,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(24976),
 		91: uint16(25088),
 		92: uint16(25891),
-		93: uint16(28451)},
+		93: uint16(28451),
+	},
 	53: {
 		0:  uint16(29001),
 		1:  uint16(29833),
@@ -89400,7 +90399,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(30274),
 		91: uint16(30637),
 		92: uint16(32842),
-		93: uint16(34044)},
+		93: uint16(34044),
+	},
 	54: {
 		0:  uint16(36988),
 		1:  uint16(39719),
@@ -89495,7 +90495,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(29747),
 		91: uint16(33256),
 		92: uint16(38678),
-		93: uint16(30764)},
+		93: uint16(30764),
+	},
 	55: {
 		0:  uint16(31435),
 		1:  uint16(31520),
@@ -89590,7 +90591,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(32236),
 		91: uint16(38754),
 		92: uint16(40629),
-		93: uint16(28357)},
+		93: uint16(28357),
+	},
 	56: {
 		0:  uint16(34065),
 		1:  uint16(20901),
@@ -89685,7 +90687,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(21006),
 		91: uint16(21563),
 		92: uint16(21839),
-		93: uint16(25991)},
+		93: uint16(25991),
+	},
 	57: {
 		0:  uint16(27766),
 		1:  uint16(32010),
@@ -89780,7 +90783,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(25300),
 		91: uint16(25765),
 		92: uint16(28196),
-		93: uint16(28497)},
+		93: uint16(28497),
+	},
 	58: {
 		0:  uint16(30332),
 		1:  uint16(36299),
@@ -89875,7 +90879,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(25816),
 		91: uint16(27287),
 		92: uint16(29863),
-		93: uint16(30294)},
+		93: uint16(30294),
+	},
 	59: {
 		0:  uint16(30887),
 		1:  uint16(34327),
@@ -89970,7 +90975,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(21648),
 		91: uint16(22496),
 		92: uint16(22827),
-		93: uint16(23142)},
+		93: uint16(23142),
+	},
 	60: {
 		0:  uint16(23386),
 		1:  uint16(23413),
@@ -90065,7 +91071,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(31875),
 		91: uint16(32203),
 		92: uint16(32737),
-		93: uint16(32933)},
+		93: uint16(32933),
+	},
 	61: {
 		0:  uint16(33086),
 		1:  uint16(33218),
@@ -90160,7 +91167,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(21066),
 		91: uint16(63849),
 		92: uint16(26388),
-		93: uint16(63850)},
+		93: uint16(63850),
+	},
 	62: {
 		0:  uint16(20632),
 		1:  uint16(21034),
@@ -90255,7 +91263,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(31598),
 		91: uint16(32110),
 		92: uint16(32214),
-		93: uint16(32626)},
+		93: uint16(32626),
+	},
 	63: {
 		0:  uint16(32997),
 		1:  uint16(33298),
@@ -90350,7 +91359,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(29689),
 		91: uint16(30427),
 		92: uint16(30465),
-		93: uint16(31596)},
+		93: uint16(31596),
+	},
 	64: {
 		0:  uint16(32854),
 		1:  uint16(32882),
@@ -90445,7 +91455,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(23723),
 		91: uint16(23744),
 		92: uint16(24101),
-		93: uint16(24833)},
+		93: uint16(24833),
+	},
 	65: {
 		0:  uint16(25101),
 		1:  uint16(25163),
@@ -90540,7 +91551,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(36848),
 		91: uint16(37477),
 		92: uint16(23815),
-		93: uint16(23847)},
+		93: uint16(23847),
+	},
 	66: {
 		0:  uint16(23913),
 		1:  uint16(29791),
@@ -90635,7 +91647,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(23529),
 		91: uint16(23563),
 		92: uint16(24515),
-		93: uint16(27777)},
+		93: uint16(27777),
+	},
 	67: {
 		0:  uint16(63858),
 		1:  uint16(28145),
@@ -90730,7 +91743,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(28082),
 		91: uint16(32266),
 		92: uint16(33099),
-		93: uint16(38989)},
+		93: uint16(38989),
+	},
 	68: {
 		0:  uint16(27387),
 		1:  uint16(32588),
@@ -90825,7 +91839,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(63872),
 		91: uint16(63873),
 		92: uint16(22914),
-		93: uint16(63874)},
+		93: uint16(63874),
+	},
 	69: {
 		0:  uint16(63875),
 		1:  uint16(27487),
@@ -90920,7 +91935,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(28976),
 		91: uint16(29744),
 		92: uint16(33398),
-		93: uint16(33490)},
+		93: uint16(33490),
+	},
 	70: {
 		0:  uint16(63910),
 		1:  uint16(38331),
@@ -91015,7 +92031,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(26212),
 		91: uint16(26791),
 		92: uint16(27738),
-		93: uint16(28595)},
+		93: uint16(28595),
+	},
 	71: {
 		0:  uint16(28879),
 		1:  uint16(29100),
@@ -91110,7 +92127,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(63936),
 		91: uint16(29183),
 		92: uint16(29796),
-		93: uint16(63937)},
+		93: uint16(63937),
+	},
 	72: {
 		0:  uint16(31368),
 		1:  uint16(31407),
@@ -91205,7 +92223,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(29065),
 		91: uint16(32792),
 		92: uint16(33464),
-		93: uint16(34131)},
+		93: uint16(34131),
+	},
 	73: {
 		0:  uint16(36939),
 		1:  uint16(38549),
@@ -91300,7 +92319,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(27943),
 		91: uint16(63946),
 		92: uint16(28216),
-		93: uint16(63947)},
+		93: uint16(63947),
+	},
 	74: {
 		0:  uint16(28641),
 		1:  uint16(29494),
@@ -91395,7 +92415,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(34191),
 		91: uint16(34811),
 		92: uint16(34915),
-		93: uint16(35516)},
+		93: uint16(35516),
+	},
 	75: {
 		0:  uint16(35696),
 		1:  uint16(37291),
@@ -91490,7 +92511,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(33615),
 		91: uint16(36035),
 		92: uint16(20837),
-		93: uint16(21316)},
+		93: uint16(21316),
+	},
 	76: {
 		0:  uint16(63991),
 		1:  uint16(63992),
@@ -91585,7 +92607,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(35037),
 		91: uint16(36115),
 		92: uint16(37292),
-		93: uint16(38263)},
+		93: uint16(38263),
+	},
 	77: {
 		0:  uint16(38556),
 		1:  uint16(20877),
@@ -91680,7 +92703,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(26643),
 		91: uint16(27583),
 		92: uint16(27656),
-		93: uint16(28593)},
+		93: uint16(28593),
+	},
 	78: {
 		0:  uint16(29006),
 		1:  uint16(29728),
@@ -91775,7 +92799,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(37580),
 		91: uint16(37664),
 		92: uint16(38662),
-		93: uint16(38742)},
+		93: uint16(38742),
+	},
 	79: {
 		0:  uint16(38748),
 		1:  uint16(38914),
@@ -91870,7 +92895,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(32066),
 		91: uint16(32156),
 		92: uint16(32305),
-		93: uint16(33131)},
+		93: uint16(33131),
+	},
 	80: {
 		0:  uint16(36394),
 		1:  uint16(36405),
@@ -91965,7 +92991,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(35657),
 		91: uint16(36104),
 		92: uint16(20043),
-		93: uint16(21482)},
+		93: uint16(21482),
+	},
 	81: {
 		0:  uint16(21675),
 		1:  uint16(22320),
@@ -92060,7 +93087,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(22519),
 		91: uint16(28503),
 		92: uint16(32221),
-		93: uint16(36655)},
+		93: uint16(36655),
+	},
 	82: {
 		0:  uint16(37878),
 		1:  uint16(38598),
@@ -92155,7 +93183,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(37365),
 		91: uint16(20874),
 		92: uint16(26613),
-		93: uint16(31574)},
+		93: uint16(31574),
+	},
 	83: {
 		0:  uint16(36012),
 		1:  uint16(20932),
@@ -92250,7 +93279,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(24980),
 		91: uint16(25220),
 		92: uint16(25307),
-		93: uint16(26786)},
+		93: uint16(26786),
+	},
 	84: {
 		0:  uint16(26898),
 		1:  uint16(26970),
@@ -92345,7 +93375,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(34935),
 		91: uint16(24756),
 		92: uint16(33205),
-		93: uint16(33795)},
+		93: uint16(33795),
+	},
 	85: {
 		0:  uint16(36101),
 		1:  uint16(21462),
@@ -92440,7 +93471,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(28655),
 		91: uint16(29730),
 		92: uint16(29752),
-		93: uint16(35351)},
+		93: uint16(35351),
+	},
 	86: {
 		0:  uint16(37944),
 		1:  uint16(21585),
@@ -92535,7 +93567,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(29923),
 		91: uint16(36009),
 		92: uint16(36774),
-		93: uint16(37393)},
+		93: uint16(37393),
+	},
 	87: {
 		0:  uint16(38442),
 		1:  uint16(20843),
@@ -92630,7 +93663,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(35961),
 		91: uint16(39111),
 		92: uint16(39108),
-		93: uint16(39491)},
+		93: uint16(39491),
+	},
 	88: {
 		0:  uint16(21697),
 		1:  uint16(31263),
@@ -92725,7 +93759,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(28207),
 		91: uint16(32568),
 		92: uint16(32923),
-		93: uint16(33322)},
+		93: uint16(33322),
+	},
 	89: {
 		0:  uint16(64008),
 		1:  uint16(64009),
@@ -92820,7 +93855,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(20136),
 		91: uint16(20804),
 		92: uint16(21009),
-		93: uint16(22411)},
+		93: uint16(22411),
+	},
 	90: {
 		0:  uint16(24418),
 		1:  uint16(27842),
@@ -92915,7 +93951,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(23301),
 		91: uint16(27194),
 		92: uint16(28779),
-		93: uint16(30069)},
+		93: uint16(30069),
+	},
 	91: {
 		0:  uint16(31117),
 		1:  uint16(31166),
@@ -93010,7 +94047,8 @@ var _ksc = [93][94]uint16{
 		90: uint16(26313),
 		91: uint16(26783),
 		92: uint16(28045),
-		93: uint16(28102)},
+		93: uint16(28102),
+	},
 	92: {
 		0:  uint16(29243),
 		1:  uint16(32948),
@@ -93105,7 +94143,9 @@ var _ksc = [93][94]uint16{
 		90: uint16(31143),
 		91: uint16(31232),
 		92: uint16(32690),
-		93: uint16(35440)}}
+		93: uint16(35440),
+	},
+}
 
 var _rev_jis = [6879]uint16{
 	0:    uint16(31),
@@ -99986,7 +101026,8 @@ var _rev_jis = [6879]uint16{
 	6875: uint16(34),
 	6876: uint16(48),
 	6877: uint16(16),
-	6878: uint16(78)}
+	6878: uint16(78),
+}
 
 func _fuzzycmp(tls *TLS, a uintptr, b uintptr) (r int32) {
 	for *(*uint8)(unsafe.Pointer(a)) != 0 && *(*uint8)(unsafe.Pointer(b)) != 0 {
@@ -101105,7 +102146,8 @@ var _envvars = [6][12]int8{
 	2: {'L', 'C', '_', 'T', 'I', 'M', 'E'},
 	3: {'L', 'C', '_', 'C', 'O', 'L', 'L', 'A', 'T', 'E'},
 	4: {'L', 'C', '_', 'M', 'O', 'N', 'E', 'T', 'A', 'R', 'Y'},
-	5: {'L', 'C', '_', 'M', 'E', 'S', 'S', 'A', 'G', 'E', 'S'}}
+	5: {'L', 'C', '_', 'M', 'E', 'S', 'S', 'A', 'G', 'E', 'S'},
+}
 
 func x___get_locale(tls *TLS, cat int32, val uintptr) (r uintptr) {
 	bp := tls.Alloc(264) /* tlsAllocs 264 maxVaListSize 0 */
@@ -101222,7 +102264,32 @@ const m_CHAR_MAX = 255
 /* POSIX/SUS requirements follow. These numbers come directly
  * from SUS and have nothing to do with the host system. */
 
-var _posix_lconv = Tlconv{Fdecimal_point: ts + 664, Fthousands_sep: ts, Fgrouping: ts, Fint_curr_symbol: ts, Fcurrency_symbol: ts, Fmon_decimal_point: ts, Fmon_thousands_sep: ts, Fmon_grouping: ts, Fpositive_sign: ts, Fnegative_sign: ts, Fint_frac_digits: Int8FromInt32(m_CHAR_MAX), Ffrac_digits: Int8FromInt32(m_CHAR_MAX), Fp_cs_precedes: Int8FromInt32(m_CHAR_MAX), Fp_sep_by_space: Int8FromInt32(m_CHAR_MAX), Fn_cs_precedes: Int8FromInt32(m_CHAR_MAX), Fn_sep_by_space: Int8FromInt32(m_CHAR_MAX), Fp_sign_posn: Int8FromInt32(m_CHAR_MAX), Fn_sign_posn: Int8FromInt32(m_CHAR_MAX), Fint_p_cs_precedes: Int8FromInt32(m_CHAR_MAX), Fint_p_sep_by_space: Int8FromInt32(m_CHAR_MAX), Fint_n_cs_precedes: Int8FromInt32(m_CHAR_MAX), Fint_n_sep_by_space: Int8FromInt32(m_CHAR_MAX), Fint_p_sign_posn: Int8FromInt32(m_CHAR_MAX), Fint_n_sign_posn: Int8FromInt32(m_CHAR_MAX)}
+var _posix_lconv = Tlconv{
+	Fdecimal_point:      ts + 664,
+	Fthousands_sep:      ts,
+	Fgrouping:           ts,
+	Fint_curr_symbol:    ts,
+	Fcurrency_symbol:    ts,
+	Fmon_decimal_point:  ts,
+	Fmon_thousands_sep:  ts,
+	Fmon_grouping:       ts,
+	Fpositive_sign:      ts,
+	Fnegative_sign:      ts,
+	Fint_frac_digits:    Int8FromInt32(m_CHAR_MAX),
+	Ffrac_digits:        Int8FromInt32(m_CHAR_MAX),
+	Fp_cs_precedes:      Int8FromInt32(m_CHAR_MAX),
+	Fp_sep_by_space:     Int8FromInt32(m_CHAR_MAX),
+	Fn_cs_precedes:      Int8FromInt32(m_CHAR_MAX),
+	Fn_sep_by_space:     Int8FromInt32(m_CHAR_MAX),
+	Fp_sign_posn:        Int8FromInt32(m_CHAR_MAX),
+	Fn_sign_posn:        Int8FromInt32(m_CHAR_MAX),
+	Fint_p_cs_precedes:  Int8FromInt32(m_CHAR_MAX),
+	Fint_p_sep_by_space: Int8FromInt32(m_CHAR_MAX),
+	Fint_n_cs_precedes:  Int8FromInt32(m_CHAR_MAX),
+	Fint_n_sep_by_space: Int8FromInt32(m_CHAR_MAX),
+	Fint_p_sign_posn:    Int8FromInt32(m_CHAR_MAX),
+	Fint_n_sign_posn:    Int8FromInt32(m_CHAR_MAX),
+}
 
 func x_localeconv(tls *TLS) (r uintptr) {
 	return uintptr(unsafe.Pointer(&_posix_lconv))
@@ -101502,7 +102569,8 @@ var _prec = [14]int8{
 	10: int8(6),
 	11: int8(6),
 	12: int8(6),
-	13: 0}
+	13: 0,
+}
 
 func _evalexpr(tls *TLS, st uintptr, s uintptr, d int32) (r uintptr) {
 	var a, b, v2 uint64
@@ -102803,45 +103871,56 @@ var _small_cnt_tab = [9][3]uint8{
 	0: {
 		0: uint8(30),
 		1: uint8(30),
-		2: uint8(30)},
+		2: uint8(30),
+	},
 	1: {
 		0: uint8(31),
 		1: uint8(15),
-		2: uint8(15)},
+		2: uint8(15),
+	},
 	2: {
 		0: uint8(20),
 		1: uint8(10),
-		2: uint8(10)},
+		2: uint8(10),
+	},
 	3: {
 		0: uint8(31),
 		1: uint8(15),
-		2: uint8(7)},
+		2: uint8(7),
+	},
 	4: {
 		0: uint8(25),
 		1: uint8(12),
-		2: uint8(6)},
+		2: uint8(6),
+	},
 	5: {
 		0: uint8(21),
 		1: uint8(10),
-		2: uint8(5)},
+		2: uint8(5),
+	},
 	6: {
 		0: uint8(18),
 		1: uint8(8),
-		2: uint8(4)},
+		2: uint8(4),
+	},
 	7: {
 		0: uint8(31),
 		1: uint8(15),
-		2: uint8(7)},
+		2: uint8(7),
+	},
 	8: {
 		0: uint8(28),
 		1: uint8(14),
-		2: uint8(6)}}
+		2: uint8(6),
+	},
+}
 
 var _med_cnt_tab = [4]uint8{
 	0: uint8(28),
 	1: uint8(24),
 	2: uint8(20),
-	3: uint8(32)}
+	3: uint8(32),
+}
 
 func x___malloc_alloc_meta(tls *TLS) (r uintptr) {
 	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
@@ -104421,7 +105500,8 @@ var _init_jk = [4]int32{
 	0: int32(3),
 	1: int32(4),
 	2: int32(4),
-	3: int32(6)} /* initial value for jk */
+	3: int32(6),
+} /* initial value for jk */
 
 /*
  * Table of constants for 2/pi, 396 Hex digits (476 decimal) of 2/pi
@@ -104501,7 +105581,8 @@ var _ipio2 = [66]int32{
 	62: int32(0x1556CA),
 	63: int32(0x73A8C9),
 	64: int32(0x60E27B),
-	65: int32(0xC08C6B)}
+	65: int32(0xC08C6B),
+}
 
 var _PIo2 = [8]float64{
 	0: float64(1.570796251296997),
@@ -104511,7 +105592,8 @@ var _PIo2 = [8]float64{
 	4: float64(1.270655753080676e-29),
 	5: float64(1.2293330898111133e-36),
 	6: float64(2.7337005381646456e-44),
-	7: float64(2.1674168387780482e-51)}
+	7: float64(2.1674168387780482e-51),
+}
 
 func x___rem_pio2_large(tls *TLS, x uintptr, y uintptr, e0 int32, nx int32, prec int32) (r int32) {
 	bp := tls.Alloc(240) /* tlsAllocs 240 maxVaListSize 0 */
@@ -104900,19 +105982,20 @@ func x___sindf(tls *TLS, x float64) (r1 float32) {
 }
 
 var _T = [13]float64{
-						0:  float64(0.3333333333333341),
-						1:  float64(0.13333333333320124),
-						2:  float64(0.05396825397622605),
-						3:  float64(0.021869488294859542),
-						4:  float64(0.0088632398235993),
-						5:  float64(0.0035920791075913124),
-						6:  float64(0.0014562094543252903),
-						7:  float64(0.0005880412408202641),
-						8:  float64(0.0002464631348184699),
-						9:  float64(7.817944429395571e-05),
-						10: float64(7.140724913826082e-05),
-						11: -Float64FromFloat64(1.8558637485527546e-05),
-						12: float64(2.590730518636337e-05)}
+	0:  float64(0.3333333333333341),
+	1:  float64(0.13333333333320124),
+	2:  float64(0.05396825397622605),
+	3:  float64(0.021869488294859542),
+	4:  float64(0.0088632398235993),
+	5:  float64(0.0035920791075913124),
+	6:  float64(0.0014562094543252903),
+	7:  float64(0.0005880412408202641),
+	8:  float64(0.0002464631348184699),
+	9:  float64(7.817944429395571e-05),
+	10: float64(7.140724913826082e-05),
+	11: -Float64FromFloat64(1.8558637485527546e-05),
+	12: float64(2.590730518636337e-05),
+}
 var _pio42 = float64(0.7853981633974483) /* 3FE921FB, 54442D18 */
 var _pio4lo = float64(3.061616997868383e-17)
 
@@ -104977,7 +106060,8 @@ var _T1 = [6]float64{
 	2: float64(0.05338123784456704),
 	3: float64(0.024528318116654728),
 	4: float64(0.002974357433599673),
-	5: float64(0.009465647849436732)}
+	5: float64(0.009465647849436732),
+}
 
 func x___tandf(tls *TLS, x float64, odd int32) (r1 float32) {
 	var r, s, t, u, w, z, v1 float64
@@ -105413,13 +106497,15 @@ var _atanhi = [4]float64{
 	0: float64(0.4636476090008061),
 	1: float64(0.7853981633974483),
 	2: float64(0.982793723247329),
-	3: float64(1.5707963267948966)}
+	3: float64(1.5707963267948966),
+}
 
 var _atanlo = [4]float64{
 	0: float64(2.2698777452961687e-17),
 	1: float64(3.061616997868383e-17),
 	2: float64(1.3903311031230998e-17),
-	3: float64(6.123233995736766e-17)}
+	3: float64(6.123233995736766e-17),
+}
 
 var _aT = [11]float64{
 	0:  float64(0.3333333333333293),
@@ -105432,7 +106518,8 @@ var _aT = [11]float64{
 	7:  -Float64FromFloat64(0.058335701337905735),
 	8:  float64(0.049768779946159324),
 	9:  -Float64FromFloat64(0.036531572744216916),
-	10: float64(0.016285820115365782)}
+	10: float64(0.016285820115365782),
+}
 
 func x_atan(tls *TLS, x float64) (r float64) {
 	var id int32
@@ -105709,20 +106796,23 @@ var _atanhi1 = [4]float32{
 	0: float32(0.46364760399),
 	1: float32(0.78539812565),
 	2: float32(0.98279368877),
-	3: float32(1.5707962513)}
+	3: float32(1.5707962513),
+}
 
 var _atanlo1 = [4]float32{
 	0: float32(5.012158244e-09),
 	1: float32(3.7748947079e-08),
 	2: float32(3.447321717e-08),
-	3: float32(7.5497894159e-08)}
+	3: float32(7.5497894159e-08),
+}
 
 var _aT1 = [5]float32{
 	0: float32(0.33333328366),
 	1: float32(-Float64FromFloat64(0.19999158382)),
 	2: float32(0.14253635705),
 	3: float32(-Float64FromFloat64(0.10648017377)),
-	4: float32(0.061687607318)}
+	4: float32(0.061687607318),
+}
 
 func x_atanf(tls *TLS, x float32) (r float32) {
 	var id int32
@@ -107003,7 +108093,8 @@ var _p10 = [31]float64{
 	27: float64(1e+12),
 	28: float64(1e+13),
 	29: float64(1e+14),
-	30: float64(1e+15)}
+	30: float64(1e+15),
+}
 
 func x_exp10f(tls *TLS, x float32) (r float32) {
 	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
@@ -107042,7 +108133,8 @@ var _p101 = [15]float32{
 	11: float32(10000),
 	12: float32(100000),
 	13: float32(1e+06),
-	14: float32(1e+07)}
+	14: float32(1e+07),
+}
 
 func x_exp10l(tls *TLS, x float64) (r float64) {
 	return x_exp10(tls, x)
@@ -108514,13 +109606,15 @@ var _pR8 = [6]float64{
 	2: -Float64FromFloat64(8.081670412753498),
 	3: -Float64FromFloat64(257.06310567970485),
 	4: -Float64FromFloat64(2485.216410094288),
-	5: -Float64FromFloat64(5253.043804907295)}
+	5: -Float64FromFloat64(5253.043804907295),
+}
 var _pS8 = [5]float64{
 	0: float64(116.53436461966818),
 	1: float64(3833.7447536412183),
 	2: float64(40597.857264847255),
 	3: float64(116752.97256437592),
-	4: float64(47627.728414673096)}
+	4: float64(47627.728414673096),
+}
 
 var _pR5 = [6]float64{
 	0: -Float64FromFloat64(1.141254646918945e-11),
@@ -108528,13 +109622,15 @@ var _pR5 = [6]float64{
 	2: -Float64FromFloat64(4.159610644705878),
 	3: -Float64FromFloat64(67.67476522651673),
 	4: -Float64FromFloat64(331.23129964917297),
-	5: -Float64FromFloat64(346.4333883656049)}
+	5: -Float64FromFloat64(346.4333883656049),
+}
 var _pS52 = [5]float64{
 	0: float64(60.753938269230034),
 	1: float64(1051.2523059570458),
 	2: float64(5978.970943338558),
 	3: float64(9625.445143577745),
-	4: float64(2406.058159229391)}
+	4: float64(2406.058159229391),
+}
 
 var _pR3 = [6]float64{
 	0: -Float64FromFloat64(2.547046017719519e-09),
@@ -108542,13 +109638,15 @@ var _pR3 = [6]float64{
 	2: -Float64FromFloat64(2.409032215495296),
 	3: -Float64FromFloat64(21.96597747348831),
 	4: -Float64FromFloat64(58.07917047017376),
-	5: -Float64FromFloat64(31.44794705948885)}
+	5: -Float64FromFloat64(31.44794705948885),
+}
 var _pS32 = [5]float64{
 	0: float64(35.85603380552097),
 	1: float64(361.51398305030386),
 	2: float64(1193.6078379211153),
 	3: float64(1127.9967985690741),
-	4: float64(173.58093081333575)}
+	4: float64(173.58093081333575),
+}
 
 var _pR2 = [6]float64{
 	0: -Float64FromFloat64(8.875343330325264e-08),
@@ -108556,13 +109654,15 @@ var _pR2 = [6]float64{
 	2: -Float64FromFloat64(1.4507384678095299),
 	3: -Float64FromFloat64(7.635696138235278),
 	4: -Float64FromFloat64(11.193166886035675),
-	5: -Float64FromFloat64(3.2336457935133534)}
+	5: -Float64FromFloat64(3.2336457935133534),
+}
 var _pS24 = [5]float64{
 	0: float64(22.22029975320888),
 	1: float64(136.2067942182152),
 	2: float64(270.4702786580835),
 	3: float64(153.87539420832033),
-	4: float64(14.65761769482562)}
+	4: float64(14.65761769482562),
+}
 
 func _pzero(tls *TLS, x float64) (r1 float64) {
 	var ix uint32
@@ -108608,14 +109708,16 @@ var _qR8 = [6]float64{
 	2: float64(11.76820646822527),
 	3: float64(557.6733802564019),
 	4: float64(8859.197207564686),
-	5: float64(37014.62677768878)}
+	5: float64(37014.62677768878),
+}
 var _qS8 = [6]float64{
 	0: float64(163.77602689568982),
 	1: float64(8098.344946564498),
 	2: float64(142538.29141912048),
 	3: float64(803309.2571195144),
 	4: float64(840501.5798190605),
-	5: -Float64FromFloat64(343899.2935378666)}
+	5: -Float64FromFloat64(343899.2935378666),
+}
 
 var _qR5 = [6]float64{
 	0: float64(1.8408596359451553e-11),
@@ -108623,14 +109725,16 @@ var _qR5 = [6]float64{
 	2: float64(5.8356350896205695),
 	3: float64(135.11157728644983),
 	4: float64(1027.243765961641),
-	5: float64(1989.9778586460538)}
+	5: float64(1989.9778586460538),
+}
 var _qS5 = [6]float64{
 	0: float64(82.77661022365378),
 	1: float64(2077.81416421393),
 	2: float64(18847.28877857181),
 	3: float64(56751.11228949473),
 	4: float64(35976.75384251145),
-	5: -Float64FromFloat64(5354.342756019448)}
+	5: -Float64FromFloat64(5354.342756019448),
+}
 
 var _qR3 = [6]float64{
 	0: float64(4.377410140897386e-09),
@@ -108638,14 +109742,16 @@ var _qR3 = [6]float64{
 	2: float64(3.344231375161707),
 	3: float64(42.621844074541265),
 	4: float64(170.8080913405656),
-	5: float64(166.73394869665117)}
+	5: float64(166.73394869665117),
+}
 var _qS32 = [6]float64{
 	0: float64(48.75887297245872),
 	1: float64(709.689221056606),
 	2: float64(3704.1482262011136),
 	3: float64(6460.425167525689),
 	4: float64(2516.3336892036896),
-	5: -Float64FromFloat64(149.2474518361564)}
+	5: -Float64FromFloat64(149.2474518361564),
+}
 
 var _qR2 = [6]float64{
 	0: float64(1.5044444488698327e-07),
@@ -108653,14 +109759,16 @@ var _qR2 = [6]float64{
 	2: float64(1.99819174093816),
 	3: float64(14.495602934788574),
 	4: float64(31.666231750478154),
-	5: float64(16.252707571092927)}
+	5: float64(16.252707571092927),
+}
 var _qS22 = [6]float64{
 	0: float64(30.36558483552192),
 	1: float64(269.34811860804984),
 	2: float64(844.7837575953201),
 	3: float64(882.9358451124886),
 	4: float64(212.66638851179883),
-	5: -Float64FromFloat64(5.3109549388266695)}
+	5: -Float64FromFloat64(5.3109549388266695),
+}
 
 func _qzero(tls *TLS, x float64) (r1 float64) {
 	var ix uint32
@@ -108819,26 +109927,30 @@ var _pR81 = [6]float32{
 	2: float32(-Float64FromFloat64(8.0816707611)),
 	3: float32(-Float64FromFloat64(257.06311035)),
 	4: float32(-Float64FromFloat64(2485.2163086)),
-	5: float32(-Float64FromFloat64(5253.0439453))}
+	5: float32(-Float64FromFloat64(5253.0439453)),
+}
 var _pS81 = [5]float32{
 	0: float32(116.53436279),
 	1: float32(3833.744873),
 	2: float32(40597.855469),
 	3: float32(116752.96875),
-	4: float32(47627.726562)}
+	4: float32(47627.726562),
+}
 var _pR51 = [6]float32{
 	0: float32(-Float64FromFloat64(1.1412546255e-11)),
 	1: float32(-Float64FromFloat64(0.070312492549)),
 	2: float32(-Float64FromFloat64(4.1596107483)),
 	3: float32(-Float64FromFloat64(67.674766541)),
 	4: float32(-Float64FromFloat64(331.23129272)),
-	5: float32(-Float64FromFloat64(346.43338013))}
+	5: float32(-Float64FromFloat64(346.43338013)),
+}
 var _pS53 = [5]float32{
 	0: float32(60.753936768),
 	1: float32(1051.2523193),
 	2: float32(5978.9707031),
 	3: float32(9625.4453125),
-	4: float32(2406.0581055)}
+	4: float32(2406.0581055),
+}
 
 var _pR31 = [6]float32{
 	0: float32(-Float64FromFloat64(2.5470459075e-09)),
@@ -108846,13 +109958,15 @@ var _pR31 = [6]float32{
 	2: float32(-Float64FromFloat64(2.4090321064)),
 	3: float32(-Float64FromFloat64(21.965976715)),
 	4: float32(-Float64FromFloat64(58.079170227)),
-	5: float32(-Float64FromFloat64(31.447946548))}
+	5: float32(-Float64FromFloat64(31.447946548)),
+}
 var _pS33 = [5]float32{
 	0: float32(35.856033325),
 	1: float32(361.51397705),
 	2: float32(1193.6077881),
 	3: float32(1127.9968262),
-	4: float32(173.58093262)}
+	4: float32(173.58093262),
+}
 
 var _pR21 = [6]float32{
 	0: float32(-Float64FromFloat64(8.8753431271e-08)),
@@ -108860,13 +109974,15 @@ var _pR21 = [6]float32{
 	2: float32(-Float64FromFloat64(1.45073843)),
 	3: float32(-Float64FromFloat64(7.6356959343)),
 	4: float32(-Float64FromFloat64(11.193166733)),
-	5: float32(-Float64FromFloat64(3.2336456776))}
+	5: float32(-Float64FromFloat64(3.2336456776)),
+}
 var _pS25 = [5]float32{
 	0: float32(22.220300674),
 	1: float32(136.20678711),
 	2: float32(270.47027588),
 	3: float32(153.87539673),
-	4: float32(14.657617569)}
+	4: float32(14.657617569),
+}
 
 func _pzerof(tls *TLS, x float32) (r1 float32) {
 	var ix uint32
@@ -108912,14 +110028,16 @@ var _qR81 = [6]float32{
 	2: float32(11.768206596),
 	3: float32(557.67340088),
 	4: float32(8859.1972656),
-	5: float32(37014.625)}
+	5: float32(37014.625),
+}
 var _qS81 = [6]float32{
 	0: float32(163.77603149),
 	1: float32(8098.3447266),
 	2: float32(142538.29688),
 	3: float32(803309.25),
 	4: float32(840501.5625),
-	5: float32(-Float64FromFloat64(343899.28125))}
+	5: float32(-Float64FromFloat64(343899.28125)),
+}
 
 var _qR51 = [6]float32{
 	0: float32(1.8408595828e-11),
@@ -108927,14 +110045,16 @@ var _qR51 = [6]float32{
 	2: float32(5.8356351852),
 	3: float32(135.11157227),
 	4: float32(1027.2437744),
-	5: float32(1989.9779053)}
+	5: float32(1989.9779053),
+}
 var _qS51 = [6]float32{
 	0: float32(82.776611328),
 	1: float32(2077.814209),
 	2: float32(18847.289062),
 	3: float32(56751.113281),
 	4: float32(35976.753906),
-	5: float32(-Float64FromFloat64(5354.3427734))}
+	5: float32(-Float64FromFloat64(5354.3427734)),
+}
 
 var _qR31 = [6]float32{
 	0: float32(4.37740999e-09),
@@ -108942,14 +110062,16 @@ var _qR31 = [6]float32{
 	2: float32(3.3442313671),
 	3: float32(42.621845245),
 	4: float32(170.80809021),
-	5: float32(166.73394775)}
+	5: float32(166.73394775),
+}
 var _qS33 = [6]float32{
 	0: float32(48.758872986),
 	1: float32(709.68920898),
 	2: float32(3704.1481934),
 	3: float32(6460.425293),
 	4: float32(2516.3337402),
-	5: float32(-Float64FromFloat64(149.24745178))}
+	5: float32(-Float64FromFloat64(149.24745178)),
+}
 
 var _qR21 = [6]float32{
 	0: float32(1.5044444979e-07),
@@ -108957,14 +110079,16 @@ var _qR21 = [6]float32{
 	2: float32(1.9981917143),
 	3: float32(14.495602608),
 	4: float32(31.666231155),
-	5: float32(16.252708435)}
+	5: float32(16.252708435),
+}
 var _qS23 = [6]float32{
 	0: float32(30.365585327),
 	1: float32(269.34811401),
 	2: float32(844.78375244),
 	3: float32(882.93585205),
 	4: float32(212.66638184),
-	5: float32(-Float64FromFloat64(5.3109550476))}
+	5: float32(-Float64FromFloat64(5.3109550476)),
+}
 
 func _qzerof(tls *TLS, x float32) (r1 float32) {
 	var ix uint32
@@ -109078,13 +110202,15 @@ var _U0 = [5]float64{
 	1: float64(0.05044387166398113),
 	2: -Float64FromFloat64(0.0019125689587576355),
 	3: float64(2.352526005616105e-05),
-	4: -Float64FromFloat64(9.190991580398789e-08)}
+	4: -Float64FromFloat64(9.190991580398789e-08),
+}
 var _V0 = [5]float64{
 	0: float64(0.01991673182366499),
 	1: float64(0.00020255258102513517),
 	2: float64(1.3560880109751623e-06),
 	3: float64(6.227414523646215e-09),
-	4: float64(1.6655924620799208e-11)}
+	4: float64(1.6655924620799208e-11),
+}
 
 func x_y1(tls *TLS, x float64) (r float64) {
 	var __u uint64
@@ -109131,13 +110257,15 @@ var _pr8 = [6]float64{
 	2: float64(13.239480659307358),
 	3: float64(412.05185430737856),
 	4: float64(3874.7453891396053),
-	5: float64(7914.479540318917)}
+	5: float64(7914.479540318917),
+}
 var _ps8 = [5]float64{
 	0: float64(114.20737037567841),
 	1: float64(3650.9308342085346),
 	2: float64(36956.206026903346),
 	3: float64(97602.79359349508),
-	4: float64(30804.27206278888)}
+	4: float64(30804.27206278888),
+}
 
 var _pr5 = [6]float64{
 	0: float64(1.3199051955624352e-11),
@@ -109145,13 +110273,15 @@ var _pr5 = [6]float64{
 	2: float64(6.802751278684329),
 	3: float64(108.30818299018911),
 	4: float64(517.6361395331998),
-	5: float64(528.7152013633375)}
+	5: float64(528.7152013633375),
+}
 var _ps5 = [5]float64{
 	0: float64(59.28059872211313),
 	1: float64(991.4014187336144),
 	2: float64(5353.26695291488),
 	3: float64(7844.690317495512),
-	4: float64(1504.0468881036106)}
+	4: float64(1504.0468881036106),
+}
 
 var _pr3 = [6]float64{
 	0: float64(3.025039161373736e-09),
@@ -109159,13 +110289,15 @@ var _pr3 = [6]float64{
 	2: float64(3.9329775003331564),
 	3: float64(35.11940355916369),
 	4: float64(91.05501107507813),
-	5: float64(48.55906851973649)}
+	5: float64(48.55906851973649),
+}
 var _ps3 = [5]float64{
 	0: float64(34.79130950012515),
 	1: float64(336.76245874782575),
 	2: float64(1046.8713997577513),
 	3: float64(890.8113463982564),
-	4: float64(103.78793243963928)}
+	4: float64(103.78793243963928),
+}
 
 var _pr2 = [6]float64{
 	0: float64(1.0771083010687374e-07),
@@ -109173,13 +110305,15 @@ var _pr2 = [6]float64{
 	2: float64(2.368514966676088),
 	3: float64(12.242610914826123),
 	4: float64(17.693971127168773),
-	5: float64(5.073523125888185)}
+	5: float64(5.073523125888185),
+}
 var _ps2 = [5]float64{
 	0: float64(21.43648593638214),
 	1: float64(125.29022716840275),
 	2: float64(232.2764690571628),
 	3: float64(117.6793732871471),
-	4: float64(8.364638933716183)}
+	4: float64(8.364638933716183),
+}
 
 func _pone(tls *TLS, x float64) (r1 float64) {
 	var ix uint32
@@ -109226,14 +110360,16 @@ var _qr8 = [6]float64{
 	2: -Float64FromFloat64(16.271753454459),
 	3: -Float64FromFloat64(759.6017225139501),
 	4: -Float64FromFloat64(11849.806670242959),
-	5: -Float64FromFloat64(48438.512428575035)}
+	5: -Float64FromFloat64(48438.512428575035),
+}
 var _qs8 = [6]float64{
 	0: float64(161.3953697007229),
 	1: float64(7825.385999233485),
 	2: float64(133875.33628724958),
 	3: float64(719657.7236832409),
 	4: float64(666601.2326177764),
-	5: -Float64FromFloat64(294490.26430383464)}
+	5: -Float64FromFloat64(294490.26430383464),
+}
 
 var _qr5 = [6]float64{
 	0: -Float64FromFloat64(2.089799311417641e-11),
@@ -109241,14 +110377,16 @@ var _qr5 = [6]float64{
 	2: -Float64FromFloat64(8.05644828123936),
 	3: -Float64FromFloat64(183.66960747488838),
 	4: -Float64FromFloat64(1373.1937606550816),
-	5: -Float64FromFloat64(2612.4444045321566)}
+	5: -Float64FromFloat64(2612.4444045321566),
+}
 var _qs5 = [6]float64{
 	0: float64(81.27655013843358),
 	1: float64(1991.7987346048596),
 	2: float64(17468.48519249089),
 	3: float64(49851.42709103523),
 	4: float64(27948.075163891812),
-	5: -Float64FromFloat64(4719.183547951285)}
+	5: -Float64FromFloat64(4719.183547951285),
+}
 
 var _qr3 = [6]float64{
 	0: -Float64FromFloat64(5.078312264617666e-09),
@@ -109256,14 +110394,16 @@ var _qr3 = [6]float64{
 	2: -Float64FromFloat64(4.610115811394734),
 	3: -Float64FromFloat64(57.847221656278364),
 	4: -Float64FromFloat64(228.2445407376317),
-	5: -Float64FromFloat64(219.21012847890933)}
+	5: -Float64FromFloat64(219.21012847890933),
+}
 var _qs3 = [6]float64{
 	0: float64(47.66515503237295),
 	1: float64(673.8651126766997),
 	2: float64(3380.1528667952634),
 	3: float64(5547.729097207228),
 	4: float64(1903.119193388108),
-	5: -Float64FromFloat64(135.20119144430734)}
+	5: -Float64FromFloat64(135.20119144430734),
+}
 
 var _qr2 = [6]float64{
 	0: -Float64FromFloat64(1.7838172751095887e-07),
@@ -109271,14 +110411,16 @@ var _qr2 = [6]float64{
 	2: -Float64FromFloat64(2.7522056827818746),
 	3: -Float64FromFloat64(19.663616264370372),
 	4: -Float64FromFloat64(42.32531333728305),
-	5: -Float64FromFloat64(21.371921170370406)}
+	5: -Float64FromFloat64(21.371921170370406),
+}
 var _qs2 = [6]float64{
 	0: float64(29.533362906052385),
 	1: float64(252.98154998219053),
 	2: float64(757.5028348686454),
 	3: float64(739.3932053204672),
 	4: float64(155.94900333666612),
-	5: -Float64FromFloat64(4.959498988226282)}
+	5: -Float64FromFloat64(4.959498988226282),
+}
 
 func _qone(tls *TLS, x float64) (r1 float64) {
 	var ix uint32
@@ -109382,13 +110524,15 @@ var _U01 = [5]float32{
 	1: float32(0.050443872809),
 	2: float32(-Float64FromFloat64(0.0019125689287)),
 	3: float32(2.3525259166e-05),
-	4: float32(-Float64FromFloat64(9.1909917899e-08))}
+	4: float32(-Float64FromFloat64(9.1909917899e-08)),
+}
 var _V01 = [5]float32{
 	0: float32(0.019916731864),
 	1: float32(0.0002025525755),
 	2: float32(1.3560879779e-06),
 	3: float32(6.227414584e-09),
-	4: float32(1.6655924903e-11)}
+	4: float32(1.6655924903e-11),
+}
 
 func x_y1f(tls *TLS, x float32) (r float32) {
 	var ix uint32
@@ -109431,13 +110575,15 @@ var _pr81 = [6]float32{
 	2: float32(13.239480972),
 	3: float32(412.05184937),
 	4: float32(3874.7453613),
-	5: float32(7914.4794922)}
+	5: float32(7914.4794922),
+}
 var _ps81 = [5]float32{
 	0: float32(114.20736694),
 	1: float32(3650.9309082),
 	2: float32(36956.207031),
 	3: float32(97602.796875),
-	4: float32(30804.271484)}
+	4: float32(30804.271484),
+}
 
 var _pr51 = [6]float32{
 	0: float32(1.3199052094e-11),
@@ -109445,13 +110591,15 @@ var _pr51 = [6]float32{
 	2: float32(6.8027510643),
 	3: float32(108.30818176),
 	4: float32(517.63616943),
-	5: float32(528.71520996)}
+	5: float32(528.71520996),
+}
 var _ps51 = [5]float32{
 	0: float32(59.280597687),
 	1: float32(991.40142822),
 	2: float32(5353.2670898),
 	3: float32(7844.6904297),
-	4: float32(1504.046875)}
+	4: float32(1504.046875),
+}
 
 var _pr31 = [6]float32{
 	0: float32(3.0250391081e-09),
@@ -109459,13 +110607,15 @@ var _pr31 = [6]float32{
 	2: float32(3.932977438),
 	3: float32(35.119403839),
 	4: float32(91.055007935),
-	5: float32(48.559066772)}
+	5: float32(48.559066772),
+}
 var _ps31 = [5]float32{
 	0: float32(34.791309357),
 	1: float32(336.76245117),
 	2: float32(1046.87146),
 	3: float32(890.81134033),
-	4: float32(103.78793335)}
+	4: float32(103.78793335),
+}
 
 var _pr21 = [6]float32{
 	0: float32(1.0771083225e-07),
@@ -109473,13 +110623,15 @@ var _pr21 = [6]float32{
 	2: float32(2.3685150146),
 	3: float32(12.242610931),
 	4: float32(17.693971634),
-	5: float32(5.0735230446)}
+	5: float32(5.0735230446),
+}
 var _ps21 = [5]float32{
 	0: float32(21.436485291),
 	1: float32(125.2902298),
 	2: float32(232.276474),
 	3: float32(117.67937469),
-	4: float32(8.3646392822)}
+	4: float32(8.3646392822),
+}
 
 func _ponef(tls *TLS, x float32) (r1 float32) {
 	var ix uint32
@@ -109526,14 +110678,16 @@ var _qr81 = [6]float32{
 	2: float32(-Float64FromFloat64(16.271753311)),
 	3: float32(-Float64FromFloat64(759.60174561)),
 	4: float32(-Float64FromFloat64(11849.806641)),
-	5: float32(-Float64FromFloat64(48438.511719))}
+	5: float32(-Float64FromFloat64(48438.511719)),
+}
 var _qs81 = [6]float32{
 	0: float32(161.39537048),
 	1: float32(7825.3862305),
 	2: float32(133875.34375),
 	3: float32(719657.75),
 	4: float32(666601.25),
-	5: float32(-Float64FromFloat64(294490.25))}
+	5: float32(-Float64FromFloat64(294490.25)),
+}
 
 var _qr51 = [6]float32{
 	0: float32(-Float64FromFloat64(2.0897993405e-11)),
@@ -109541,14 +110695,16 @@ var _qr51 = [6]float32{
 	2: float32(-Float64FromFloat64(8.0564479828)),
 	3: float32(-Float64FromFloat64(183.66960144)),
 	4: float32(-Float64FromFloat64(1373.1937256)),
-	5: float32(-Float64FromFloat64(2612.4443359))}
+	5: float32(-Float64FromFloat64(2612.4443359)),
+}
 var _qs51 = [6]float32{
 	0: float32(81.276550293),
 	1: float32(1991.7987061),
 	2: float32(17468.484375),
 	3: float32(49851.425781),
 	4: float32(27948.074219),
-	5: float32(-Float64FromFloat64(4719.1835938))}
+	5: float32(-Float64FromFloat64(4719.1835938)),
+}
 
 var _qr31 = [6]float32{
 	0: float32(-Float64FromFloat64(5.0783124372e-09)),
@@ -109556,14 +110712,16 @@ var _qr31 = [6]float32{
 	2: float32(-Float64FromFloat64(4.6101160049)),
 	3: float32(-Float64FromFloat64(57.847221375)),
 	4: float32(-Float64FromFloat64(228.24453735)),
-	5: float32(-Float64FromFloat64(219.21012878))}
+	5: float32(-Float64FromFloat64(219.21012878)),
+}
 var _qs31 = [6]float32{
 	0: float32(47.665153503),
 	1: float32(673.8651123),
 	2: float32(3380.152832),
 	3: float32(5547.7290039),
 	4: float32(1903.1191406),
-	5: float32(-Float64FromFloat64(135.20118713))}
+	5: float32(-Float64FromFloat64(135.20118713)),
+}
 
 var _qr21 = [6]float32{
 	0: float32(-Float64FromFloat64(1.7838172539e-07)),
@@ -109571,14 +110729,16 @@ var _qr21 = [6]float32{
 	2: float32(-Float64FromFloat64(2.7522056103)),
 	3: float32(-Float64FromFloat64(19.66361618)),
 	4: float32(-Float64FromFloat64(42.325313568)),
-	5: float32(-Float64FromFloat64(21.371921539))}
+	5: float32(-Float64FromFloat64(21.371921539)),
+}
 var _qs21 = [6]float32{
 	0: float32(29.533363342),
 	1: float32(252.98155212),
 	2: float32(757.50280762),
 	3: float32(739.39318848),
 	4: float32(155.94900513),
-	5: float32(-Float64FromFloat64(4.9594988823))}
+	5: float32(-Float64FromFloat64(4.9594988823)),
+}
 
 func _qonef(tls *TLS, x float32) (r1 float32) {
 	var ix uint32
@@ -113728,7 +114888,8 @@ var _Snum = [13]float64{
 	9:  float64(186056.26539522348),
 	10: float64(8071.672002365816),
 	11: float64(210.82427775157936),
-	12: float64(2.5066282746310002)}
+	12: float64(2.5066282746310002),
+}
 var _Sden = [13]float64{
 	0:  Float64FromInt32(0),
 	1:  Float64FromInt32(39916800),
@@ -113742,7 +114903,8 @@ var _Sden = [13]float64{
 	9:  Float64FromInt32(32670),
 	10: Float64FromInt32(1925),
 	11: Float64FromInt32(66),
-	12: Float64FromInt32(1)}
+	12: Float64FromInt32(1),
+}
 
 /* n! for small integer n */
 var _fact = [23]float64{
@@ -113768,7 +114930,8 @@ var _fact = [23]float64{
 	19: float64(1.21645100408832e+17),
 	20: float64(2.43290200817664e+18),
 	21: float64(5.109094217170944e+19),
-	22: float64(1.1240007277776077e+21)}
+	22: float64(1.1240007277776077e+21),
+}
 
 // C documentation
 //
@@ -113996,7 +115159,11 @@ func _normalize(tls *TLS, x float64) (r Tnum) {
 	ix = ix | Uint64FromUint64(1)<<Int32FromInt32(52)
 	ix <<= uint64(1)
 	e -= Int32FromInt32(0x3ff) + Int32FromInt32(52) + Int32FromInt32(1)
-	return Tnum{Fm: ix, Fe: e, Fsign: sign}
+	return Tnum{
+		Fm:    ix,
+		Fe:    e,
+		Fsign: sign,
+	}
 }
 
 func _mul(tls *TLS, hi uintptr, lo uintptr, x uint64, y uint64) {
@@ -114530,7 +115697,8 @@ func x_fmtmsg(tls *TLS, classification int64, label uintptr, severity int32, tex
 		2: ts + 938,
 		3: ts + 943,
 		4: ts + 950,
-		5: UintptrFromInt32(0)}
+		5: UintptrFromInt32(0),
+	}
 	x___pthread_setcancelstate(tls, int32(m_PTHREAD_CANCEL_DISABLE), bp)
 	if severity == int32(m_MM_HALT) {
 		errstring = ts + 954
@@ -115163,8 +116331,14 @@ func x_getrusage(tls *TLS, who int32, ru uintptr) (r1 int32) {
 	r = int32(___syscall2(tls, int64(98), int64(who), int64(dest)))
 	if !(r != 0) && uint64(8) > uint64(8) {
 		_memcpy(tls, bp, dest, Uint64FromInt32(4)*Uint64FromInt64(8))
-		(*Trusage)(unsafe.Pointer(ru)).Fru_utime = Ttimeval{Ftv_sec: (*(*[4]int64)(unsafe.Pointer(bp)))[0], Ftv_usec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(1)]}
-		(*Trusage)(unsafe.Pointer(ru)).Fru_stime = Ttimeval{Ftv_sec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(2)], Ftv_usec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(3)]}
+		(*Trusage)(unsafe.Pointer(ru)).Fru_utime = Ttimeval{
+			Ftv_sec:  (*(*[4]int64)(unsafe.Pointer(bp)))[0],
+			Ftv_usec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(1)],
+		}
+		(*Trusage)(unsafe.Pointer(ru)).Fru_stime = Ttimeval{
+			Ftv_sec:  (*(*[4]int64)(unsafe.Pointer(bp)))[int32(2)],
+			Ftv_usec: (*(*[4]int64)(unsafe.Pointer(bp)))[int32(3)],
+		}
 	}
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
@@ -115256,75 +116430,250 @@ type Tv4l2_event = struct {
 }
 
 var _compat_map = [20]Tioctl_compat_map{
-	0: {Fnew_req: int32(m_SIOCGSTAMP), Fold_req: int32(m_SIOCGSTAMP_OLD), Fold_size: uint8(8), Fdir: uint8(m_R), Fforce_align: uint8(0), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(0),
-		1: uint8(4)}},
-	1: {Fnew_req: int32(m_SIOCGSTAMPNS), Fold_req: int32(m_SIOCGSTAMPNS_OLD), Fold_size: uint8(8), Fdir: uint8(m_R), Fforce_align: uint8(0), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(0),
-		1: uint8(4)}},
-	2: {Fnew_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('T')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x14))) | Uint64FromInt64(96)<<Int32FromInt32(16)), Fold_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('T')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x14))) | Uint64FromInt64(4)<<Int32FromInt32(16)), Fold_size: uint8(88), Fdir: uint8(m_R), Fforce_align: uint8(0), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(0),
-		1: uint8(4)}},
-	3: {Fnew_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x20))) | Uint64FromInt64(128)<<Int32FromInt32(16)), Fold_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x20))) | Uint64FromInt64(108)<<Int32FromInt32(16)), Fold_size: uint8(108), Fdir: uint8(m_R), Fforce_align: uint8(1), Fnoffs: uint8(8), Foffsets: [8]uint8{
-		0: uint8(4),
-		1: uint8(8),
-		2: uint8(12),
-		3: uint8(16),
-		4: uint8(52),
-		5: uint8(56),
-		6: uint8(60),
-		7: uint8(64)}},
-	4: {Fnew_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x24))) | Uint64FromInt64(128)<<Int32FromInt32(16)), Fold_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x24))) | Uint64FromInt64(108)<<Int32FromInt32(16)), Fold_size: uint8(108), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(8), Foffsets: [8]uint8{
-		0: uint8(4),
-		1: uint8(8),
-		2: uint8(12),
-		3: uint8(16),
-		4: uint8(52),
-		5: uint8(56),
-		6: uint8(60),
-		7: uint8(64)}},
-	5: {Fnew_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('W')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x20))) | Uint64FromInt64(48)<<Int32FromInt32(16)), Fold_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('W')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x20))) | Uint64FromInt64(36)<<Int32FromInt32(16)), Fold_size: uint8(36), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(4),
-		1: uint8(8)}},
-	6: {Fnew_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x23))) | Uint64FromInt64(136)<<Int32FromInt32(16)), Fold_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x23))) | Uint64FromInt64(132)<<Int32FromInt32(16)), Fold_size: uint8(0), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(0)},
-	7: {Fnew_req: int32(0), Fold_req: int32(0), Fold_size: uint8(4), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(0)},
-	8: {Fnew_req: int32(0), Fold_req: int32(0), Fold_size: uint8(32), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(5), Foffsets: [8]uint8{
-		0: uint8(8),
-		1: uint8(12),
-		2: uint8(16),
-		3: uint8(24),
-		4: uint8(28)}},
-	9: {Fnew_req: int32(0), Fold_req: int32(0), Fold_size: uint8(4), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(0)},
-	10: {Fnew_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(9))) | Uint64FromInt64(80)<<Int32FromInt32(16)), Fold_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(9))) | Uint64FromInt64(68)<<Int32FromInt32(16)), Fold_size: uint8(68), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(20),
-		1: uint8(24)}},
-	11: {Fnew_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(15))) | Uint64FromInt64(80)<<Int32FromInt32(16)), Fold_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(15))) | Uint64FromInt64(68)<<Int32FromInt32(16)), Fold_size: uint8(68), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(20),
-		1: uint8(24)}},
-	12: {Fnew_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(17))) | Uint64FromInt64(80)<<Int32FromInt32(16)), Fold_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(17))) | Uint64FromInt64(68)<<Int32FromInt32(16)), Fold_size: uint8(68), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(20),
-		1: uint8(24)}},
-	13: {Fnew_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(93))) | Uint64FromInt64(80)<<Int32FromInt32(16)), Fold_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(93))) | Uint64FromInt64(68)<<Int32FromInt32(16)), Fold_size: uint8(68), Fdir: uint8(m_WR), Fforce_align: uint8(1), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(20),
-		1: uint8(24)}},
-	14: {Fnew_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(89))) | Uint64FromInt64(136)<<Int32FromInt32(16)), Fold_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(89))) | Uint64FromInt64(128)<<Int32FromInt32(16)), Fold_size: uint8(128), Fdir: uint8(m_R), Fforce_align: uint8(0), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(uint64(UintptrFromInt32(0) + 80)),
-		1: uint8(uint64(UintptrFromInt32(0) + 80 + 1*4))}},
-	15: {Fnew_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(192)+Int32FromInt32(6))) | Uint64FromInt64(32)<<Int32FromInt32(16)), Fold_req: int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(192)+Int32FromInt32(6))) | Uint64FromInt64(24)<<Int32FromInt32(16)), Fold_size: uint8(22), Fdir: uint8(m_WR), Fforce_align: uint8(0), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(0),
-		1: uint8(4)}},
-	16: {Fnew_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('t')<<Int32FromInt32(8))|uint32(Int32FromInt32(63))) | Uint64FromInt64(16)<<Int32FromInt32(16)), Fold_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('t')<<Int32FromInt32(8))|uint32(Int32FromInt32(63))) | Uint64FromInt64(8)<<Int32FromInt32(16)), Fold_size: uint8(8), Fdir: uint8(m_R), Fforce_align: uint8(0), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(0),
-		1: uint8(4)}},
-	17: {Fnew_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('p')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x95))) | Uint64FromInt64(16)<<Int32FromInt32(16)), Fold_req: int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('p')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x95))) | Uint64FromInt64(8)<<Int32FromInt32(16)), Fold_size: uint8(8), Fdir: uint8(m_R), Fforce_align: uint8(0), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(0),
-		1: uint8(4)}},
-	18: {Fnew_req: int32(uint64(Uint32FromUint32(1)<<Int32FromInt32(30)|uint32(Int32FromUint8('p')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x96))) | Uint64FromInt64(16)<<Int32FromInt32(16)), Fold_req: int32(uint64(Uint32FromUint32(1)<<Int32FromInt32(30)|uint32(Int32FromUint8('p')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x96))) | Uint64FromInt64(8)<<Int32FromInt32(16)), Fold_size: uint8(8), Fdir: uint8(m_W), Fforce_align: uint8(0), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(0),
-		1: uint8(4)}},
-	19: {Fnew_req: int32(uint64(Uint32FromUint32(1)<<Int32FromInt32(30)|uint32(Int32FromInt32(0x6)<<Int32FromInt32(8))|uint32(Int32FromInt32(0xf))) | Uint64FromInt64(16)<<Int32FromInt32(16)), Fold_req: int32(0x060f), Fold_size: uint8(8), Fdir: uint8(m_W), Fforce_align: uint8(0), Fnoffs: uint8(2), Foffsets: [8]uint8{
-		0: uint8(0),
-		1: uint8(4)}}}
+	0: {
+		Fnew_req:     int32(m_SIOCGSTAMP),
+		Fold_req:     int32(m_SIOCGSTAMP_OLD),
+		Fold_size:    uint8(8),
+		Fdir:         uint8(m_R),
+		Fforce_align: uint8(0),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(0),
+			1: uint8(4),
+		},
+	},
+	1: {
+		Fnew_req:     int32(m_SIOCGSTAMPNS),
+		Fold_req:     int32(m_SIOCGSTAMPNS_OLD),
+		Fold_size:    uint8(8),
+		Fdir:         uint8(m_R),
+		Fforce_align: uint8(0),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(0),
+			1: uint8(4),
+		},
+	},
+	2: {
+		Fnew_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('T')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x14))) | Uint64FromInt64(96)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('T')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x14))) | Uint64FromInt64(4)<<Int32FromInt32(16)),
+		Fold_size:    uint8(88),
+		Fdir:         uint8(m_R),
+		Fforce_align: uint8(0),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(0),
+			1: uint8(4),
+		},
+	},
+	3: {
+		Fnew_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x20))) | Uint64FromInt64(128)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x20))) | Uint64FromInt64(108)<<Int32FromInt32(16)),
+		Fold_size:    uint8(108),
+		Fdir:         uint8(m_R),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(8),
+		Foffsets: [8]uint8{
+			0: uint8(4),
+			1: uint8(8),
+			2: uint8(12),
+			3: uint8(16),
+			4: uint8(52),
+			5: uint8(56),
+			6: uint8(60),
+			7: uint8(64),
+		},
+	},
+	4: {
+		Fnew_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x24))) | Uint64FromInt64(128)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x24))) | Uint64FromInt64(108)<<Int32FromInt32(16)),
+		Fold_size:    uint8(108),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(8),
+		Foffsets: [8]uint8{
+			0: uint8(4),
+			1: uint8(8),
+			2: uint8(12),
+			3: uint8(16),
+			4: uint8(52),
+			5: uint8(56),
+			6: uint8(60),
+			7: uint8(64),
+		},
+	},
+	5: {
+		Fnew_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('W')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x20))) | Uint64FromInt64(48)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('W')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x20))) | Uint64FromInt64(36)<<Int32FromInt32(16)),
+		Fold_size:    uint8(36),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(4),
+			1: uint8(8),
+		},
+	},
+	6: {
+		Fnew_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x23))) | Uint64FromInt64(136)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('A')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x23))) | Uint64FromInt64(132)<<Int32FromInt32(16)),
+		Fold_size:    uint8(0),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(0),
+	},
+	7: {
+		Fnew_req:     int32(0),
+		Fold_req:     int32(0),
+		Fold_size:    uint8(4),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(0),
+	},
+	8: {
+		Fnew_req:     int32(0),
+		Fold_req:     int32(0),
+		Fold_size:    uint8(32),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(5),
+		Foffsets: [8]uint8{
+			0: uint8(8),
+			1: uint8(12),
+			2: uint8(16),
+			3: uint8(24),
+			4: uint8(28),
+		},
+	},
+	9: {
+		Fnew_req:     int32(0),
+		Fold_req:     int32(0),
+		Fold_size:    uint8(4),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(0),
+	},
+	10: {
+		Fnew_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(9))) | Uint64FromInt64(80)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(9))) | Uint64FromInt64(68)<<Int32FromInt32(16)),
+		Fold_size:    uint8(68),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(20),
+			1: uint8(24),
+		},
+	},
+	11: {
+		Fnew_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(15))) | Uint64FromInt64(80)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(15))) | Uint64FromInt64(68)<<Int32FromInt32(16)),
+		Fold_size:    uint8(68),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(20),
+			1: uint8(24),
+		},
+	},
+	12: {
+		Fnew_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(17))) | Uint64FromInt64(80)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(17))) | Uint64FromInt64(68)<<Int32FromInt32(16)),
+		Fold_size:    uint8(68),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(20),
+			1: uint8(24),
+		},
+	},
+	13: {
+		Fnew_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(93))) | Uint64FromInt64(80)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(93))) | Uint64FromInt64(68)<<Int32FromInt32(16)),
+		Fold_size:    uint8(68),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(1),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(20),
+			1: uint8(24),
+		},
+	},
+	14: {
+		Fnew_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(89))) | Uint64FromInt64(136)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(89))) | Uint64FromInt64(128)<<Int32FromInt32(16)),
+		Fold_size:    uint8(128),
+		Fdir:         uint8(m_R),
+		Fforce_align: uint8(0),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(uint64(UintptrFromInt32(0) + 80)),
+			1: uint8(uint64(UintptrFromInt32(0) + 80 + 1*4)),
+		},
+	},
+	15: {
+		Fnew_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(192)+Int32FromInt32(6))) | Uint64FromInt64(32)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64((Uint32FromUint32(2)|Uint32FromUint32(1))<<Int32FromInt32(30)|uint32(Int32FromUint8('V')<<Int32FromInt32(8))|uint32(Int32FromInt32(192)+Int32FromInt32(6))) | Uint64FromInt64(24)<<Int32FromInt32(16)),
+		Fold_size:    uint8(22),
+		Fdir:         uint8(m_WR),
+		Fforce_align: uint8(0),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(0),
+			1: uint8(4),
+		},
+	},
+	16: {
+		Fnew_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('t')<<Int32FromInt32(8))|uint32(Int32FromInt32(63))) | Uint64FromInt64(16)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('t')<<Int32FromInt32(8))|uint32(Int32FromInt32(63))) | Uint64FromInt64(8)<<Int32FromInt32(16)),
+		Fold_size:    uint8(8),
+		Fdir:         uint8(m_R),
+		Fforce_align: uint8(0),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(0),
+			1: uint8(4),
+		},
+	},
+	17: {
+		Fnew_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('p')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x95))) | Uint64FromInt64(16)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64(Uint32FromUint32(2)<<Int32FromInt32(30)|uint32(Int32FromUint8('p')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x95))) | Uint64FromInt64(8)<<Int32FromInt32(16)),
+		Fold_size:    uint8(8),
+		Fdir:         uint8(m_R),
+		Fforce_align: uint8(0),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(0),
+			1: uint8(4),
+		},
+	},
+	18: {
+		Fnew_req:     int32(uint64(Uint32FromUint32(1)<<Int32FromInt32(30)|uint32(Int32FromUint8('p')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x96))) | Uint64FromInt64(16)<<Int32FromInt32(16)),
+		Fold_req:     int32(uint64(Uint32FromUint32(1)<<Int32FromInt32(30)|uint32(Int32FromUint8('p')<<Int32FromInt32(8))|uint32(Int32FromInt32(0x96))) | Uint64FromInt64(8)<<Int32FromInt32(16)),
+		Fold_size:    uint8(8),
+		Fdir:         uint8(m_W),
+		Fforce_align: uint8(0),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(0),
+			1: uint8(4),
+		},
+	},
+	19: {
+		Fnew_req:     int32(uint64(Uint32FromUint32(1)<<Int32FromInt32(30)|uint32(Int32FromInt32(0x6)<<Int32FromInt32(8))|uint32(Int32FromInt32(0xf))) | Uint64FromInt64(16)<<Int32FromInt32(16)),
+		Fold_req:     int32(0x060f),
+		Fold_size:    uint8(8),
+		Fdir:         uint8(m_W),
+		Fforce_align: uint8(0),
+		Fnoffs:       uint8(2),
+		Foffsets: [8]uint8{
+			0: uint8(0),
+			1: uint8(4),
+		},
+	},
+}
 
 func _convert_ioctl_struct(tls *TLS, map1 uintptr, old uintptr, new1 uintptr, dir int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
@@ -115437,7 +116786,11 @@ func x_lockf(tls *TLS, fd int32, op int32, size int64) (r int32) {
 	bp := tls.Alloc(48) /* tlsAllocs 32 maxVaListSize 8 */
 	defer tls.Free(48)
 	var _ /* l at bp+0 */ Tflock
-	*(*Tflock)(unsafe.Pointer(bp)) = Tflock{Fl_type: int16(m_F_WRLCK), Fl_whence: int16(m_SEEK_CUR), Fl_len: size}
+	*(*Tflock)(unsafe.Pointer(bp)) = Tflock{
+		Fl_type:   int16(m_F_WRLCK),
+		Fl_whence: int16(m_SEEK_CUR),
+		Fl_len:    size,
+	}
 	switch op {
 	case int32(m_F_TEST):
 		(*(*Tflock)(unsafe.Pointer(bp))).Fl_type = m_F_RDLCK
@@ -116130,9 +117483,14 @@ func x_setrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 	} else {
 		v2 = ^Uint64FromUint64(0)
 	}
-	*(*Tctx1)(unsafe.Pointer(bp + 16)) = Tctx1{Flim: [2]uint64{
-		0: v1,
-		1: v2}, Fres: resource, Ferr: -int32(1)}
+	*(*Tctx1)(unsafe.Pointer(bp + 16)) = Tctx1{
+		Flim: [2]uint64{
+			0: v1,
+			1: v2,
+		},
+		Fres: resource,
+		Ferr: -int32(1),
+	}
 	x___synccall(tls, __ccgo_fp(_do_setrlimit), bp+16)
 	if (*(*Tctx1)(unsafe.Pointer(bp + 16))).Ferr != 0 {
 		if (*(*Tctx1)(unsafe.Pointer(bp + 16))).Ferr > 0 {
@@ -116234,7 +117592,10 @@ var _log_addr = struct {
 	Fsun_family  int16
 	Fsun_path    [9]int8
 	F__ccgo_pad2 [1]byte
-}{Fsun_family: int16(m_PF_LOCAL), Fsun_path: [9]int8{'/', 'd', 'e', 'v', '/', 'l', 'o', 'g'}}
+}{
+	Fsun_family: int16(m_PF_LOCAL),
+	Fsun_path:   [9]int8{'/', 'd', 'e', 'v', '/', 'l', 'o', 'g'},
+}
 
 func x_closelog(tls *TLS) {
 	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
@@ -116865,7 +118226,9 @@ func x_mq_notify(tls *TLS, mqd int32, sev uintptr) (r int32) {
 	var _ /* cs at bp+120 */ int32
 	var _ /* origmask at bp+256 */ Tsigset_t
 	var _ /* td at bp+112 */ uintptr
-	*(*Targs)(unsafe.Pointer(bp)) = Targs{Fsev: sev}
+	*(*Targs)(unsafe.Pointer(bp)) = Targs{
+		Fsev: sev,
+	}
 	if !(sev != 0) || (*Tsigevent)(unsafe.Pointer(sev)).Fsigev_notify != int32(m_SIGEV_THREAD) {
 		return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(244), int64(mqd), int64(sev)))))
 	}
@@ -118913,13 +120276,16 @@ func x_getaddrinfo(tls *TLS, host uintptr, serv uintptr, hint uintptr, res uintp
 	if flags&int32(m_AI_ADDRCONFIG) != 0 {
 		tf = [2]int32{
 			0: int32(m_PF_INET),
-			1: int32(m_PF_INET6)}
+			1: int32(m_PF_INET6),
+		}
 		ta = [2]uintptr{
 			0: uintptr(unsafe.Pointer(&_lo4)),
-			1: uintptr(unsafe.Pointer(&_lo6))}
+			1: uintptr(unsafe.Pointer(&_lo6)),
+		}
 		tl = [2]uint32{
 			0: uint32(16),
-			1: uint32(28)}
+			1: uint32(28),
+		}
 		for i = 0; i < int32(2); i++ {
 			if family == tf[int32(1)-i] {
 				continue
@@ -118989,7 +120355,14 @@ func x_getaddrinfo(tls *TLS, host uintptr, serv uintptr, hint uintptr, res uintp
 			} else {
 				v3 = uint64(28)
 			}
-			(*(*Taibuf)(unsafe.Pointer(out + uintptr(k)*88))).Fai = Taddrinfo{Fai_family: (*(*[48]Taddress)(unsafe.Pointer(bp + 8)))[i].Ffamily, Fai_socktype: int32((*(*[2]Tservice)(unsafe.Pointer(bp)))[j].Fsocktype), Fai_protocol: int32((*(*[2]Tservice)(unsafe.Pointer(bp)))[j].Fproto), Fai_addrlen: uint32(v3), Fai_addr: uintptr(unsafe.Pointer(&(*(*Taibuf)(unsafe.Pointer(out + uintptr(k)*88))).Fsa)), Fai_canonname: outcanon}
+			(*(*Taibuf)(unsafe.Pointer(out + uintptr(k)*88))).Fai = Taddrinfo{
+				Fai_family:    (*(*[48]Taddress)(unsafe.Pointer(bp + 8)))[i].Ffamily,
+				Fai_socktype:  int32((*(*[2]Tservice)(unsafe.Pointer(bp)))[j].Fsocktype),
+				Fai_protocol:  int32((*(*[2]Tservice)(unsafe.Pointer(bp)))[j].Fproto),
+				Fai_addrlen:   uint32(v3),
+				Fai_addr:      uintptr(unsafe.Pointer(&(*(*Taibuf)(unsafe.Pointer(out + uintptr(k)*88))).Fsa)),
+				Fai_canonname: outcanon,
+			}
 			if k != 0 {
 				(*(*Taibuf)(unsafe.Pointer(out + uintptr(k-int32(1))*88))).Fai.Fai_next = uintptr(unsafe.Pointer(&(*(*Taibuf)(unsafe.Pointer(out + uintptr(k)*88))).Fai))
 			}
@@ -119019,29 +120392,42 @@ func x_getaddrinfo(tls *TLS, host uintptr, serv uintptr, hint uintptr, res uintp
 /* Define the "an address is configured" condition for address
  * families via ability to create a socket for the family plus
  * routability of the loopback address for the family. */
-var _lo4 = Tsockaddr_in{Fsin_family: uint16(m_PF_INET), Fsin_port: uint16(65535), Fsin_addr: Tin_addr{Fs_addr: uint32(0x0100007f)}}
+var _lo4 = Tsockaddr_in{
+	Fsin_family: uint16(m_PF_INET),
+	Fsin_port:   uint16(65535),
+	Fsin_addr: Tin_addr{
+		Fs_addr: uint32(0x0100007f),
+	},
+}
 
-var _lo6 = Tsockaddr_in6{Fsin6_family: uint16(m_PF_INET6), Fsin6_port: uint16(65535), Fsin6_addr: Tin6_addr{F__in6_union: *(*struct {
-	F__s6_addr16 [0][8]uint16
-	F__s6_addr32 [0][4]uint32
-	F__s6_addr   [16]uint8
-})(unsafe.Pointer(&[16]uint8{
-	0:  uint8(0),
-	1:  uint8(0),
-	2:  uint8(0),
-	3:  uint8(0),
-	4:  uint8(0),
-	5:  uint8(0),
-	6:  uint8(0),
-	7:  uint8(0),
-	8:  uint8(0),
-	9:  uint8(0),
-	10: uint8(0),
-	11: uint8(0),
-	12: uint8(0),
-	13: uint8(0),
-	14: uint8(0),
-	15: uint8(1)}))}}
+var _lo6 = Tsockaddr_in6{
+	Fsin6_family: uint16(m_PF_INET6),
+	Fsin6_port:   uint16(65535),
+	Fsin6_addr: Tin6_addr{
+		F__in6_union: *(*struct {
+			F__s6_addr16 [0][8]uint16
+			F__s6_addr32 [0][4]uint32
+			F__s6_addr   [16]uint8
+		})(unsafe.Pointer(&[16]uint8{
+			0:  uint8(0),
+			1:  uint8(0),
+			2:  uint8(0),
+			3:  uint8(0),
+			4:  uint8(0),
+			5:  uint8(0),
+			6:  uint8(0),
+			7:  uint8(0),
+			8:  uint8(0),
+			9:  uint8(0),
+			10: uint8(0),
+			11: uint8(0),
+			12: uint8(0),
+			13: uint8(0),
+			14: uint8(0),
+			15: uint8(1),
+		})),
+	},
+}
 
 const m_NO_RECOVERY = 3
 
@@ -120079,7 +121465,10 @@ func x_getservbyport_r(tls *TLS, port int32, prots uintptr, se uintptr, buf uint
 	var i, r, v2 int32
 	var v1 uintptr
 	var _ /* sin at bp+0 */ Tsockaddr_in
-	*(*Tsockaddr_in)(unsafe.Pointer(bp)) = Tsockaddr_in{Fsin_family: uint16(m_PF_INET), Fsin_port: uint16(port)}
+	*(*Tsockaddr_in)(unsafe.Pointer(bp)) = Tsockaddr_in{
+		Fsin_family: uint16(m_PF_INET),
+		Fsin_port:   uint16(port),
+	}
 	if !(prots != 0) {
 		r = x_getservbyport_r(tls, port, ts+1443, se, buf, buflen, res)
 		if r != 0 {
@@ -120225,7 +121614,8 @@ _9:
 					optname = int32(m_SO_SNDTIMEO_OLD)
 				}
 				*(*[1]uint32)(unsafe.Pointer(bp)) = [1]uint32{
-					0: uint32(16)}
+					0: uint32(16),
+				}
 				v10 = int32(m_SYS_getsockopt)
 				_ = int32(m___SC_getsockopt)
 				v11 = int64(fd)
@@ -120642,7 +122032,9 @@ func x_inet_makeaddr(tls *TLS, n uint32, h uint32) (r Tin_addr) {
 			h |= n << int32(8)
 		}
 	}
-	return Tin_addr{Fs_addr: h}
+	return Tin_addr{
+		Fs_addr: h,
+	}
 }
 
 func x_inet_lnaof(tls *TLS, in Tin_addr) (r uint32) {
@@ -120973,28 +122365,40 @@ func _name_from_null(tls *TLS, buf uintptr, name uintptr, family int32, flags in
 		if family != int32(m_PF_INET6) {
 			v1 = cnt
 			cnt++
-			*(*Taddress)(unsafe.Pointer(buf + uintptr(v1)*28)) = Taddress{Ffamily: int32(m_PF_INET)}
+			*(*Taddress)(unsafe.Pointer(buf + uintptr(v1)*28)) = Taddress{
+				Ffamily: int32(m_PF_INET),
+			}
 		}
 		if family != int32(m_PF_INET) {
 			v2 = cnt
 			cnt++
-			*(*Taddress)(unsafe.Pointer(buf + uintptr(v2)*28)) = Taddress{Ffamily: int32(m_PF_INET6)}
+			*(*Taddress)(unsafe.Pointer(buf + uintptr(v2)*28)) = Taddress{
+				Ffamily: int32(m_PF_INET6),
+			}
 		}
 	} else {
 		if family != int32(m_PF_INET6) {
 			v3 = cnt
 			cnt++
-			*(*Taddress)(unsafe.Pointer(buf + uintptr(v3)*28)) = Taddress{Ffamily: int32(m_PF_INET), Faddr: [16]uint8{
-				0: uint8(127),
-				1: uint8(0),
-				2: uint8(0),
-				3: uint8(1)}}
+			*(*Taddress)(unsafe.Pointer(buf + uintptr(v3)*28)) = Taddress{
+				Ffamily: int32(m_PF_INET),
+				Faddr: [16]uint8{
+					0: uint8(127),
+					1: uint8(0),
+					2: uint8(0),
+					3: uint8(1),
+				},
+			}
 		}
 		if family != int32(m_PF_INET) {
 			v4 = cnt
 			cnt++
-			*(*Taddress)(unsafe.Pointer(buf + uintptr(v4)*28)) = Taddress{Ffamily: int32(m_PF_INET6), Faddr: [16]uint8{
-				15: uint8(1)}}
+			*(*Taddress)(unsafe.Pointer(buf + uintptr(v4)*28)) = Taddress{
+				Ffamily: int32(m_PF_INET6),
+				Faddr: [16]uint8{
+					15: uint8(1),
+				},
+			}
 		}
 	}
 	return cnt
@@ -121189,12 +122593,17 @@ func _name_from_dns(tls *TLS, buf uintptr, canon uintptr, name uintptr, family i
 	var _ /* qp at bp+2096 */ [2]uintptr
 	*(*[2]uintptr)(unsafe.Pointer(bp + 2096)) = [2]uintptr{
 		0: bp,
-		1: bp + 1*280}
+		1: bp + 1*280,
+	}
 	*(*[2]uintptr)(unsafe.Pointer(bp + 2112)) = [2]uintptr{
 		0: bp + 560,
-		1: bp + 560 + 1*768}
+		1: bp + 560 + 1*768,
+	}
 	nq = 0
-	*(*Tdpc_ctx)(unsafe.Pointer(bp + 2144)) = Tdpc_ctx{Faddrs: buf, Fcanon: canon}
+	*(*Tdpc_ctx)(unsafe.Pointer(bp + 2144)) = Tdpc_ctx{
+		Faddrs: buf,
+		Fcanon: canon,
+	}
 	for i = 0; i < int32(2); i++ {
 		if family != _afrr[i].Faf {
 			(*(*[2]int32)(unsafe.Pointer(bp + 2128)))[nq] = x___res_mkquery(tls, 0, name, int32(1), _afrr[i].Frr, uintptr(0), 0, uintptr(0), bp+uintptr(nq)*280, int32(280))
@@ -121241,8 +122650,15 @@ var _afrr = [2]struct {
 	Faf int32
 	Frr int32
 }{
-	0: {Faf: int32(m_PF_INET6), Frr: int32(m_RR_A)},
-	1: {Faf: int32(m_PF_INET), Frr: int32(m_RR_AAAA)}}
+	0: {
+		Faf: int32(m_PF_INET6),
+		Frr: int32(m_RR_A),
+	},
+	1: {
+		Faf: int32(m_PF_INET),
+		Frr: int32(m_RR_AAAA),
+	},
+}
 
 func _name_from_dns_search(tls *TLS, buf uintptr, canon uintptr, name uintptr, family int32) (r int32) {
 	bp := tls.Alloc(360) /* tlsAllocs 360 maxVaListSize 0 */
@@ -121332,12 +122748,49 @@ type Tpolicy = struct {
 }
 
 var _defpolicy = [6]Tpolicy{
-	0: {Faddr: [16]uint8{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, Flen1: uint8(15), Fmask: uint8(0xff), Fprec: uint8(50), Flabel: uint8(0)},
-	1: {Faddr: [16]uint8{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255}, Flen1: uint8(11), Fmask: uint8(0xff), Fprec: uint8(35), Flabel: uint8(4)},
-	2: {Faddr: [16]uint8{' ', 2}, Flen1: uint8(1), Fmask: uint8(0xff), Fprec: uint8(30), Flabel: uint8(2)},
-	3: {Faddr: [16]uint8{' ', 1}, Flen1: uint8(3), Fmask: uint8(0xff), Fprec: uint8(5), Flabel: uint8(5)},
-	4: {Faddr: [16]uint8{252}, Flen1: uint8(0), Fmask: uint8(0xfe), Fprec: uint8(3), Flabel: uint8(13)},
-	5: {Faddr: [16]uint8{}, Flen1: uint8(0), Fmask: uint8(0), Fprec: uint8(40), Flabel: uint8(1)}}
+	0: {
+		Faddr:  [16]uint8{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		Flen1:  uint8(15),
+		Fmask:  uint8(0xff),
+		Fprec:  uint8(50),
+		Flabel: uint8(0),
+	},
+	1: {
+		Faddr:  [16]uint8{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255},
+		Flen1:  uint8(11),
+		Fmask:  uint8(0xff),
+		Fprec:  uint8(35),
+		Flabel: uint8(4),
+	},
+	2: {
+		Faddr:  [16]uint8{' ', 2},
+		Flen1:  uint8(1),
+		Fmask:  uint8(0xff),
+		Fprec:  uint8(30),
+		Flabel: uint8(2),
+	},
+	3: {
+		Faddr:  [16]uint8{' ', 1},
+		Flen1:  uint8(3),
+		Fmask:  uint8(0xff),
+		Fprec:  uint8(5),
+		Flabel: uint8(5),
+	},
+	4: {
+		Faddr:  [16]uint8{252},
+		Flen1:  uint8(0),
+		Fmask:  uint8(0xfe),
+		Fprec:  uint8(3),
+		Flabel: uint8(13),
+	},
+	5: {
+		Faddr:  [16]uint8{},
+		Flen1:  uint8(0),
+		Fmask:  uint8(0),
+		Fprec:  uint8(40),
+		Flabel: uint8(1),
+	},
+}
 
 func _policyof(tls *TLS, a uintptr) (r uintptr) {
 	var i int32
@@ -121495,9 +122948,16 @@ func x___lookup_name(tls *TLS, buf uintptr, canon uintptr, name uintptr, family 
 		family1 = (*(*Taddress)(unsafe.Pointer(buf + uintptr(i)*28))).Ffamily
 		key = 0
 		*(*Tsockaddr_in6)(unsafe.Pointer(bp + 4)) = Tsockaddr_in6{}
-		*(*Tsockaddr_in6)(unsafe.Pointer(bp + 32)) = Tsockaddr_in6{Fsin6_family: uint16(m_PF_INET6), Fsin6_port: uint16(65535), Fsin6_scope_id: (*(*Taddress)(unsafe.Pointer(buf + uintptr(i)*28))).Fscopeid}
+		*(*Tsockaddr_in6)(unsafe.Pointer(bp + 32)) = Tsockaddr_in6{
+			Fsin6_family:   uint16(m_PF_INET6),
+			Fsin6_port:     uint16(65535),
+			Fsin6_scope_id: (*(*Taddress)(unsafe.Pointer(buf + uintptr(i)*28))).Fscopeid,
+		}
 		*(*Tsockaddr_in)(unsafe.Pointer(bp + 60)) = Tsockaddr_in{}
-		*(*Tsockaddr_in)(unsafe.Pointer(bp + 76)) = Tsockaddr_in{Fsin_family: uint16(m_PF_INET), Fsin_port: uint16(65535)}
+		*(*Tsockaddr_in)(unsafe.Pointer(bp + 76)) = Tsockaddr_in{
+			Fsin_family: uint16(m_PF_INET),
+			Fsin_port:   uint16(65535),
+		}
 		if family1 == int32(m_PF_INET6) {
 			_memcpy(tls, uintptr(unsafe.Pointer(&(*(*Tsockaddr_in6)(unsafe.Pointer(bp + 32))).Fsin6_addr.F__in6_union.F__s6_addr)), uintptr(unsafe.Pointer(&(*(*Taddress)(unsafe.Pointer(buf + uintptr(i)*28))).Faddr)), uint64(16))
 			da = bp + 32
@@ -122463,11 +123923,24 @@ func _start_tcp(tls *TLS, pfd uintptr, family int32, sa uintptr, sl uint32, q ui
 	var _ /* mh at bp+40 */ Tmsghdr
 	*(*[2]uint8)(unsafe.Pointer(bp + 32)) = [2]uint8{
 		0: uint8(ql >> int32(8)),
-		1: uint8(ql)}
+		1: uint8(ql),
+	}
 	*(*[2]Tiovec)(unsafe.Pointer(bp)) = [2]Tiovec{
-		0: {Fiov_base: bp + 32, Fiov_len: uint64(2)},
-		1: {Fiov_base: q, Fiov_len: uint64(ql)}}
-	*(*Tmsghdr)(unsafe.Pointer(bp + 40)) = Tmsghdr{Fmsg_name: sa, Fmsg_namelen: sl, Fmsg_iov: bp, Fmsg_iovlen: int32(2)}
+		0: {
+			Fiov_base: bp + 32,
+			Fiov_len:  uint64(2),
+		},
+		1: {
+			Fiov_base: q,
+			Fiov_len:  uint64(ql),
+		},
+	}
+	*(*Tmsghdr)(unsafe.Pointer(bp + 40)) = Tmsghdr{
+		Fmsg_name:    sa,
+		Fmsg_namelen: sl,
+		Fmsg_iov:     bp,
+		Fmsg_iovlen:  int32(2),
+	}
 	fd = x_socket(tls, family, Int32FromInt32(m_SOCK_STREAM)|Int32FromInt32(m_SOCK_CLOEXEC)|Int32FromInt32(m_SOCK_NONBLOCK), 0)
 	(*Tpollfd)(unsafe.Pointer(pfd)).Ffd = fd
 	(*Tpollfd)(unsafe.Pointer(pfd)).Fevents = int16(m_POLLOUT)
@@ -122681,8 +124154,17 @@ func x___res_msend_rc(tls *TLS, nqueries int32, queries uintptr, qlens uintptr, 
 		}
 		for next < nqueries {
 			*(*[1]Tiovec)(unsafe.Pointer(bp + 8)) = [1]Tiovec{
-				0: {Fiov_base: *(*uintptr)(unsafe.Pointer(answers + uintptr(next)*8)), Fiov_len: uint64(asize)}}
-			*(*Tmsghdr)(unsafe.Pointer(bp + 232)) = Tmsghdr{Fmsg_name: bp + 88, Fmsg_namelen: sl, Fmsg_iov: bp + 8, Fmsg_iovlen: int32(1)}
+				0: {
+					Fiov_base: *(*uintptr)(unsafe.Pointer(answers + uintptr(next)*8)),
+					Fiov_len:  uint64(asize),
+				},
+			}
+			*(*Tmsghdr)(unsafe.Pointer(bp + 232)) = Tmsghdr{
+				Fmsg_name:    bp + 88,
+				Fmsg_namelen: sl,
+				Fmsg_iov:     bp + 8,
+				Fmsg_iovlen:  int32(1),
+			}
 			rlen = int32(x_recvmsg(tls, fd, bp+232, 0))
 			if rlen < 0 {
 				break
@@ -122755,11 +124237,22 @@ func x___res_msend_rc(tls *TLS, nqueries int32, queries uintptr, qlens uintptr, 
 			if int32((*(*Tpollfd)(unsafe.Add(unsafe.Pointer(pfd), i*8))).Frevents)&int32(m_POLLOUT) != 0 {
 				*(*[2]uint8)(unsafe.Pointer(bp + 52)) = [2]uint8{
 					0: uint8(*(*int32)(unsafe.Pointer(qlens + uintptr(i)*4)) >> int32(8)),
-					1: uint8(*(*int32)(unsafe.Pointer(qlens + uintptr(i)*4)))}
+					1: uint8(*(*int32)(unsafe.Pointer(qlens + uintptr(i)*4))),
+				}
 				*(*[2]Tiovec)(unsafe.Pointer(bp + 24)) = [2]Tiovec{
-					0: {Fiov_base: bp + 52, Fiov_len: uint64(2)},
-					1: {Fiov_base: *(*uintptr)(unsafe.Pointer(queries + uintptr(i)*8)), Fiov_len: uint64(*(*int32)(unsafe.Pointer(qlens + uintptr(i)*4)))}}
-				*(*Tmsghdr)(unsafe.Pointer(bp + 288)) = Tmsghdr{Fmsg_iov: bp + 24, Fmsg_iovlen: int32(2)}
+					0: {
+						Fiov_base: bp + 52,
+						Fiov_len:  uint64(2),
+					},
+					1: {
+						Fiov_base: *(*uintptr)(unsafe.Pointer(queries + uintptr(i)*8)),
+						Fiov_len:  uint64(*(*int32)(unsafe.Pointer(qlens + uintptr(i)*4))),
+					},
+				}
+				*(*Tmsghdr)(unsafe.Pointer(bp + 288)) = Tmsghdr{
+					Fmsg_iov:    bp + 24,
+					Fmsg_iovlen: int32(2),
+				}
 				_step_mh(tls, bp+288, uint64(*(*int32)(unsafe.Add(unsafe.Pointer(qpos), i*4))))
 				r = int32(x_sendmsg(tls, (*(*Tpollfd)(unsafe.Add(unsafe.Pointer(pfd), i*8))).Ffd, bp+288, int32(m_MSG_NOSIGNAL)))
 				if r < 0 {
@@ -122774,9 +124267,19 @@ func x___res_msend_rc(tls *TLS, nqueries int32, queries uintptr, qlens uintptr, 
 		for i = 0; i < nqueries; i++ {
 			if int32((*(*Tpollfd)(unsafe.Add(unsafe.Pointer(pfd), i*8))).Frevents)&int32(m_POLLIN) != 0 {
 				*(*[2]Tiovec)(unsafe.Pointer(bp + 56)) = [2]Tiovec{
-					0: {Fiov_base: alen_buf + uintptr(i)*2, Fiov_len: uint64(2)},
-					1: {Fiov_base: *(*uintptr)(unsafe.Pointer(answers + uintptr(i)*8)), Fiov_len: uint64(asize)}}
-				*(*Tmsghdr)(unsafe.Pointer(bp + 344)) = Tmsghdr{Fmsg_iov: bp + 56, Fmsg_iovlen: int32(2)}
+					0: {
+						Fiov_base: alen_buf + uintptr(i)*2,
+						Fiov_len:  uint64(2),
+					},
+					1: {
+						Fiov_base: *(*uintptr)(unsafe.Pointer(answers + uintptr(i)*8)),
+						Fiov_len:  uint64(asize),
+					},
+				}
+				*(*Tmsghdr)(unsafe.Pointer(bp + 344)) = Tmsghdr{
+					Fmsg_iov:    bp + 56,
+					Fmsg_iovlen: int32(2),
+				}
 				_step_mh(tls, bp+344, uint64(*(*int32)(unsafe.Add(unsafe.Pointer(apos), i*4))))
 				r = int32(x_recvmsg(tls, (*(*Tpollfd)(unsafe.Add(unsafe.Pointer(pfd), i*8))).Ffd, bp+344, 0))
 				if r <= 0 {
@@ -123276,7 +124779,8 @@ _9:
 				}
 				*(*[2]int64)(unsafe.Pointer(bp)) = [2]int64{
 					0: s,
-					1: int64(int32(v10))}
+					1: int64(int32(v10)),
+				}
 				v11 = int32(m_SYS_setsockopt)
 				_ = int32(m___SC_setsockopt)
 				v12 = int64(fd)
@@ -124662,7 +126166,10 @@ var _addr = struct {
 	Fsun_family  int16
 	Fsun_path    [21]int8
 	F__ccgo_pad2 [1]byte
-}{Fsun_family: int16(m_PF_LOCAL), Fsun_path: [21]int8{'/', 'v', 'a', 'r', '/', 'r', 'u', 'n', '/', 'n', 's', 'c', 'd', '/', 's', 'o', 'c', 'k', 'e', 't'}}
+}{
+	Fsun_family: int16(m_PF_LOCAL),
+	Fsun_path:   [21]int8{'/', 'v', 'a', 'r', '/', 'r', 'u', 'n', '/', 'n', 's', 'c', 'd', '/', 's', 'o', 'c', 'k', 'e', 't'},
+}
 
 func x___nscd_query(tls *TLS, req int32, key uintptr, buf uintptr, len1 uint64, swap uintptr) (r uintptr) {
 	bp := tls.Alloc(104) /* tlsAllocs 104 maxVaListSize 0 */
@@ -124677,11 +126184,22 @@ func x___nscd_query(tls *TLS, req int32, key uintptr, buf uintptr, len1 uint64, 
 	*(*[3]int32)(unsafe.Pointer(bp + 32)) = [3]int32{
 		0: int32(m_NSCDVERSION),
 		1: req,
-		2: int32(x_strnlen(tls, key, uint64(m_LOGIN_NAME_MAX)) + uint64(1))}
+		2: int32(x_strnlen(tls, key, uint64(m_LOGIN_NAME_MAX)) + uint64(1)),
+	}
 	*(*[2]Tiovec)(unsafe.Pointer(bp)) = [2]Tiovec{
-		0: {Fiov_base: bp + 32, Fiov_len: uint64(12)},
-		1: {Fiov_base: key, Fiov_len: x_strlen(tls, key) + uint64(1)}}
-	*(*Tmsghdr)(unsafe.Pointer(bp + 48)) = Tmsghdr{Fmsg_iov: bp, Fmsg_iovlen: int32(2)}
+		0: {
+			Fiov_base: bp + 32,
+			Fiov_len:  uint64(12),
+		},
+		1: {
+			Fiov_base: key,
+			Fiov_len:  x_strlen(tls, key) + uint64(1),
+		},
+	}
+	*(*Tmsghdr)(unsafe.Pointer(bp + 48)) = Tmsghdr{
+		Fmsg_iov:    bp,
+		Fmsg_iovlen: int32(2),
+	}
 	errno_save = *(*int32)(unsafe.Pointer(x___errno_location(tls)))
 	*(*int32)(unsafe.Pointer(swap)) = 0
 retry:
@@ -125023,7 +126541,8 @@ var _init = [32]uint32{
 	28: uint32(0x0cab8628),
 	29: uint32(0xf043bfa4),
 	30: uint32(0x398150e9),
-	31: uint32(0x37521657)}
+	31: uint32(0x37521657),
+}
 
 var _n = int32(31)
 var _i = int32(3)
@@ -125162,7 +126681,8 @@ func x_srand48(tls *TLS, seed int64) {
 	*(*[3]uint16)(unsafe.Pointer(bp)) = [3]uint16{
 		0: uint16(0x330e),
 		1: uint16(seed),
-		2: uint16(seed >> int32(16))}
+		2: uint16(seed >> int32(16)),
+	}
 	x_seed48(tls, bp)
 }
 
@@ -125373,6 +126893,19 @@ func x_fexecve(tls *TLS, fd int32, argv uintptr, envp uintptr) (r1 int32) {
 }
 
 var _dummy_lockptr = uintptr(0)
+
+var _atfork_locks = [10]uintptr{
+	0: uintptr(unsafe.Pointer(&x___at_quick_exit_lockptr)),
+	1: uintptr(unsafe.Pointer(&x___atexit_lockptr)),
+	2: uintptr(unsafe.Pointer(&x___gettext_lockptr)),
+	3: uintptr(unsafe.Pointer(&x___locale_lockptr)),
+	4: uintptr(unsafe.Pointer(&x___random_lockptr)),
+	5: uintptr(unsafe.Pointer(&x___sem_open_lockptr)),
+	6: uintptr(unsafe.Pointer(&x___stdio_ofl_lockptr)),
+	7: uintptr(unsafe.Pointer(&x___syslog_lockptr)),
+	8: uintptr(unsafe.Pointer(&x___timezone_lockptr)),
+	9: uintptr(unsafe.Pointer(&x___bump_lockptr)),
+}
 
 func _dummy12(tls *TLS, x int32) {
 }
@@ -125637,7 +127170,8 @@ func x_posix_spawn(tls *TLS, res uintptr, path uintptr, fa uintptr, attr uintptr
 	(*(*Targs1)(unsafe.Pointer(bp + 5488))).Fenvp = envp
 	*(*[2]uint64)(unsafe.Pointer(bp + 336)) = [2]uint64{
 		0: uint64(-Int32FromInt32(1)),
-		1: uint64(-Int32FromInt32(1))}
+		1: uint64(-Int32FromInt32(1)),
+	}
 	x_pthread_sigmask(tls, m_SIG_BLOCK, bp+336, uintptr(unsafe.Pointer(&(*(*Targs1)(unsafe.Pointer(bp + 5488))).Foldmask)))
 	/* The lock guards both against seeing a SIGABRT disposition change
 	 * by abort and against leaking the pipe fd to fork-without-exec. */
@@ -125919,7 +127453,8 @@ func x_system(tls *TLS, cmd uintptr) (r int32) {
 		0: ts + 1302,
 		1: ts + 1305,
 		2: cmd,
-		3: uintptr(0)}
+		3: uintptr(0),
+	}
 	ret = x_posix_spawn(tls, bp+32, ts+1294, uintptr(0), bp+760, bp, x___environ)
 	x_posix_spawnattr_destroy(tls, bp+760)
 	if !(ret != 0) {
@@ -127268,19 +128803,56 @@ var _tre_macros = [13]struct {
 	Fc         int8
 	Fexpansion uintptr
 }{
-	0:  {Fc: int8('t'), Fexpansion: ts + 1837},
-	1:  {Fc: int8('n'), Fexpansion: ts + 482},
-	2:  {Fc: int8('r'), Fexpansion: ts + 1839},
-	3:  {Fc: int8('f'), Fexpansion: ts + 1841},
-	4:  {Fc: int8('a'), Fexpansion: ts + 1843},
-	5:  {Fc: int8('e'), Fexpansion: ts + 1845},
-	6:  {Fc: int8('w'), Fexpansion: ts + 1847},
-	7:  {Fc: int8('W'), Fexpansion: ts + 1860},
-	8:  {Fc: int8('s'), Fexpansion: ts + 1874},
-	9:  {Fc: int8('S'), Fexpansion: ts + 1886},
-	10: {Fc: int8('d'), Fexpansion: ts + 1899},
-	11: {Fc: int8('D'), Fexpansion: ts + 1911},
-	12: {}}
+	0: {
+		Fc:         int8('t'),
+		Fexpansion: ts + 1837,
+	},
+	1: {
+		Fc:         int8('n'),
+		Fexpansion: ts + 482,
+	},
+	2: {
+		Fc:         int8('r'),
+		Fexpansion: ts + 1839,
+	},
+	3: {
+		Fc:         int8('f'),
+		Fexpansion: ts + 1841,
+	},
+	4: {
+		Fc:         int8('a'),
+		Fexpansion: ts + 1843,
+	},
+	5: {
+		Fc:         int8('e'),
+		Fexpansion: ts + 1845,
+	},
+	6: {
+		Fc:         int8('w'),
+		Fexpansion: ts + 1847,
+	},
+	7: {
+		Fc:         int8('W'),
+		Fexpansion: ts + 1860,
+	},
+	8: {
+		Fc:         int8('s'),
+		Fexpansion: ts + 1874,
+	},
+	9: {
+		Fc:         int8('S'),
+		Fexpansion: ts + 1886,
+	},
+	10: {
+		Fc:         int8('d'),
+		Fexpansion: ts + 1899,
+	},
+	11: {
+		Fc:         int8('D'),
+		Fexpansion: ts + 1911,
+	},
+	12: {},
+}
 
 // C documentation
 //
@@ -131849,7 +133421,8 @@ func x_pselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, ts u
 	var _ /* data at bp+16 */ [2]int64
 	*(*[2]int64)(unsafe.Pointer(bp + 16)) = [2]int64{
 		0: int64(uint64(mask)),
-		1: int64(Int32FromInt32(m__NSIG) / Int32FromInt32(8))}
+		1: int64(Int32FromInt32(m__NSIG) / Int32FromInt32(8)),
+	}
 	if ts != 0 {
 		v1 = (*Ttimespec)(unsafe.Pointer(ts)).Ftv_sec
 	} else {
@@ -131865,7 +133438,8 @@ func x_pselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, ts u
 	if ts != 0 {
 		*(*[2]int64)(unsafe.Pointer(bp)) = [2]int64{
 			0: s,
-			1: ns}
+			1: ns,
+		}
 		v3 = bp
 	} else {
 		v3 = uintptr(0)
@@ -131907,7 +133481,8 @@ func x_select(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, tv ui
 	if tv != 0 {
 		*(*[2]int64)(unsafe.Pointer(bp)) = [2]int64{
 			0: s,
-			1: us}
+			1: us,
+		}
 		v3 = bp
 	} else {
 		v3 = uintptr(0)
@@ -131916,10 +133491,12 @@ func x_select(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, tv ui
 }
 
 var _all_mask = [1]uint64{
-	0: -Uint64FromUint64(1)}
+	0: -Uint64FromUint64(1),
+}
 
 var _app_mask = [1]uint64{
-	0: uint64(0xfffffffc7fffffff)}
+	0: uint64(0xfffffffc7fffffff),
+}
 
 func x___block_all_sigs(tls *TLS, set uintptr) {
 	___syscall4(tls, int64(14), int64(Int32FromInt32(0)), int64(uintptr(unsafe.Pointer(&_all_mask))), int64(set), int64(Int32FromInt32(65)/Int32FromInt32(8)))
@@ -132036,7 +133613,8 @@ func x_setitimer(tls *TLS, which int32, new1 uintptr, old uintptr) (r1 int32) {
 			0: is,
 			1: ius,
 			2: vs,
-			3: vus}
+			3: vus,
+		}
 		r = int32(___syscall3(tls, int64(38), int64(which), int64(bp), int64(bp+32)))
 		if !(r != 0) && old != 0 {
 			(*Titimerval)(unsafe.Pointer(old)).Fit_interval.Ftv_sec = (*(*[4]int64)(unsafe.Pointer(bp + 32)))[0]
@@ -132086,7 +133664,8 @@ func x___libc_sigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r1 int32)
 			 * to the signal handler. */
 			if !(x___libc.Fthreaded != 0) && !(_unmask_done != 0) {
 				*(*[1]uint64)(unsafe.Pointer(bp)) = [1]uint64{
-					0: Uint64FromUint64(3) << (Int32FromInt32(32) * BoolInt32(Uint64FromInt64(8) > Uint64FromInt32(4)))}
+					0: Uint64FromUint64(3) << (Int32FromInt32(32) * BoolInt32(Uint64FromInt64(8) > Uint64FromInt32(4))),
+				}
 				___syscall4(tls, int64(14), int64(Int32FromInt32(1)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
 				_unmask_done = int32(1)
 			}
@@ -132602,7 +134181,30 @@ func _fstatat_statx(tls *TLS, fd int32, path uintptr, st uintptr, flag int32) (r
 	if ret != 0 {
 		return ret
 	}
-	*(*Tstat)(unsafe.Pointer(st)) = Tstat{Fst_dev: uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_dev_major)&Uint64FromUint64(0xfffff000)<<Int32FromInt32(32) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_dev_major)&Uint64FromUint64(0x00000fff)<<Int32FromInt32(8) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_dev_minor)&Uint64FromUint64(0xffffff00)<<Int32FromInt32(12) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_dev_minor)&Uint64FromUint64(0x000000ff), Fst_ino: (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_ino, Fst_nlink: uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_nlink), Fst_mode: uint32((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_mode), Fst_uid: (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_uid, Fst_gid: (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_gid, Fst_rdev: uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_rdev_major)&Uint64FromUint64(0xfffff000)<<Int32FromInt32(32) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_rdev_major)&Uint64FromUint64(0x00000fff)<<Int32FromInt32(8) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_rdev_minor)&Uint64FromUint64(0xffffff00)<<Int32FromInt32(12) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_rdev_minor)&Uint64FromUint64(0x000000ff), Fst_size: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_size), Fst_blksize: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_blksize), Fst_blocks: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_blocks), Fst_atim: Ttimespec{Ftv_sec: (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_atime.Ftv_sec, Ftv_nsec: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_atime.Ftv_nsec)}, Fst_mtim: Ttimespec{Ftv_sec: (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_mtime.Ftv_sec, Ftv_nsec: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_mtime.Ftv_nsec)}, Fst_ctim: Ttimespec{Ftv_sec: (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_ctime.Ftv_sec, Ftv_nsec: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_ctime.Ftv_nsec)}}
+	*(*Tstat)(unsafe.Pointer(st)) = Tstat{
+		Fst_dev:     uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_dev_major)&Uint64FromUint64(0xfffff000)<<Int32FromInt32(32) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_dev_major)&Uint64FromUint64(0x00000fff)<<Int32FromInt32(8) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_dev_minor)&Uint64FromUint64(0xffffff00)<<Int32FromInt32(12) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_dev_minor)&Uint64FromUint64(0x000000ff),
+		Fst_ino:     (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_ino,
+		Fst_nlink:   uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_nlink),
+		Fst_mode:    uint32((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_mode),
+		Fst_uid:     (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_uid,
+		Fst_gid:     (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_gid,
+		Fst_rdev:    uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_rdev_major)&Uint64FromUint64(0xfffff000)<<Int32FromInt32(32) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_rdev_major)&Uint64FromUint64(0x00000fff)<<Int32FromInt32(8) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_rdev_minor)&Uint64FromUint64(0xffffff00)<<Int32FromInt32(12) | uint64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_rdev_minor)&Uint64FromUint64(0x000000ff),
+		Fst_size:    int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_size),
+		Fst_blksize: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_blksize),
+		Fst_blocks:  int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_blocks),
+		Fst_atim: Ttimespec{
+			Ftv_sec:  (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_atime.Ftv_sec,
+			Ftv_nsec: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_atime.Ftv_nsec),
+		},
+		Fst_mtim: Ttimespec{
+			Ftv_sec:  (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_mtime.Ftv_sec,
+			Ftv_nsec: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_mtime.Ftv_nsec),
+		},
+		Fst_ctim: Ttimespec{
+			Ftv_sec:  (*(*Tstatx)(unsafe.Pointer(bp))).Fstx_ctime.Ftv_sec,
+			Ftv_nsec: int64((*(*Tstatx)(unsafe.Pointer(bp))).Fstx_ctime.Ftv_nsec),
+		},
+	}
 	return 0
 }
 
@@ -132656,7 +134258,30 @@ func _fstatat_kstat(tls *TLS, fd int32, path uintptr, st uintptr, flag int32) (r
 	if ret != 0 {
 		return ret
 	}
-	*(*Tstat)(unsafe.Pointer(st)) = Tstat{Fst_dev: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_dev, Fst_ino: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_ino, Fst_nlink: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_nlink, Fst_mode: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_mode, Fst_uid: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_uid, Fst_gid: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_gid, Fst_rdev: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_rdev, Fst_size: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_size, Fst_blksize: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_blksize, Fst_blocks: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_blocks, Fst_atim: Ttimespec{Ftv_sec: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_atime_sec, Ftv_nsec: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_atime_nsec}, Fst_mtim: Ttimespec{Ftv_sec: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_mtime_sec, Ftv_nsec: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_mtime_nsec}, Fst_ctim: Ttimespec{Ftv_sec: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_ctime_sec, Ftv_nsec: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_ctime_nsec}}
+	*(*Tstat)(unsafe.Pointer(st)) = Tstat{
+		Fst_dev:     (*(*Tkstat)(unsafe.Pointer(bp))).Fst_dev,
+		Fst_ino:     (*(*Tkstat)(unsafe.Pointer(bp))).Fst_ino,
+		Fst_nlink:   (*(*Tkstat)(unsafe.Pointer(bp))).Fst_nlink,
+		Fst_mode:    (*(*Tkstat)(unsafe.Pointer(bp))).Fst_mode,
+		Fst_uid:     (*(*Tkstat)(unsafe.Pointer(bp))).Fst_uid,
+		Fst_gid:     (*(*Tkstat)(unsafe.Pointer(bp))).Fst_gid,
+		Fst_rdev:    (*(*Tkstat)(unsafe.Pointer(bp))).Fst_rdev,
+		Fst_size:    (*(*Tkstat)(unsafe.Pointer(bp))).Fst_size,
+		Fst_blksize: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_blksize,
+		Fst_blocks:  (*(*Tkstat)(unsafe.Pointer(bp))).Fst_blocks,
+		Fst_atim: Ttimespec{
+			Ftv_sec:  (*(*Tkstat)(unsafe.Pointer(bp))).Fst_atime_sec,
+			Ftv_nsec: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_atime_nsec,
+		},
+		Fst_mtim: Ttimespec{
+			Ftv_sec:  (*(*Tkstat)(unsafe.Pointer(bp))).Fst_mtime_sec,
+			Ftv_nsec: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_mtime_nsec,
+		},
+		Fst_ctim: Ttimespec{
+			Ftv_sec:  (*(*Tkstat)(unsafe.Pointer(bp))).Fst_ctime_sec,
+			Ftv_nsec: (*(*Tkstat)(unsafe.Pointer(bp))).Fst_ctime_nsec,
+		},
+	}
 	return 0
 }
 
@@ -133072,8 +134697,15 @@ func x___stdio_read(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 	var v3, v4 uintptr
 	var _ /* iov at bp+0 */ [2]Tiovec
 	*(*[2]Tiovec)(unsafe.Pointer(bp)) = [2]Tiovec{
-		0: {Fiov_base: buf, Fiov_len: len1 - BoolUint64(!!((*TFILE)(unsafe.Pointer(f)).Fbuf_size != 0))},
-		1: {Fiov_base: (*TFILE)(unsafe.Pointer(f)).Fbuf, Fiov_len: (*TFILE)(unsafe.Pointer(f)).Fbuf_size}}
+		0: {
+			Fiov_base: buf,
+			Fiov_len:  len1 - BoolUint64(!!((*TFILE)(unsafe.Pointer(f)).Fbuf_size != 0)),
+		},
+		1: {
+			Fiov_base: (*TFILE)(unsafe.Pointer(f)).Fbuf,
+			Fiov_len:  (*TFILE)(unsafe.Pointer(f)).Fbuf_size,
+		},
+	}
 	if (*(*[2]Tiovec)(unsafe.Pointer(bp)))[0].Fiov_len != 0 {
 		v1 = x___syscall_ret(tls, uint64(___syscall3(tls, int64(19), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(bp), int64(Int32FromInt32(2)))))
 	} else {
@@ -133117,8 +134749,15 @@ func x___stdio_write(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 	var rem, v4 uint64
 	var _ /* iovs at bp+0 */ [2]Tiovec
 	*(*[2]Tiovec)(unsafe.Pointer(bp)) = [2]Tiovec{
-		0: {Fiov_base: (*TFILE)(unsafe.Pointer(f)).Fwbase, Fiov_len: uint64(int64((*TFILE)(unsafe.Pointer(f)).Fwpos) - int64((*TFILE)(unsafe.Pointer(f)).Fwbase))},
-		1: {Fiov_base: buf, Fiov_len: len1}}
+		0: {
+			Fiov_base: (*TFILE)(unsafe.Pointer(f)).Fwbase,
+			Fiov_len:  uint64(int64((*TFILE)(unsafe.Pointer(f)).Fwpos) - int64((*TFILE)(unsafe.Pointer(f)).Fwbase)),
+		},
+		1: {
+			Fiov_base: buf,
+			Fiov_len:  len1,
+		},
+	}
 	iov = bp
 	rem = (*(*Tiovec)(unsafe.Pointer(iov))).Fiov_len + (*(*Tiovec)(unsafe.Pointer(iov + 1*16))).Fiov_len
 	iovcnt = int32(2)
@@ -133864,7 +135503,8 @@ _1:
 	*(*[3]uint64)(unsafe.Pointer(bp)) = [3]uint64{
 		0: uint64(0),
 		1: (*Tcookie)(unsafe.Pointer(c)).Fpos,
-		2: (*Tcookie)(unsafe.Pointer(c)).Flen1}
+		2: (*Tcookie)(unsafe.Pointer(c)).Flen1,
+	}
 	base = int64(*(*uint64)(unsafe.Pointer(bp + uintptr(whence)*8)))
 	if off < -base || off > int64((*Tcookie)(unsafe.Pointer(c)).Fsize)-base {
 		goto fail
@@ -135132,7 +136772,8 @@ _1:
 	*(*[3]uint64)(unsafe.Pointer(bp)) = [3]uint64{
 		0: uint64(0),
 		1: (*Tcookie1)(unsafe.Pointer(c)).Fpos,
-		2: (*Tcookie1)(unsafe.Pointer(c)).Flen1}
+		2: (*Tcookie1)(unsafe.Pointer(c)).Flen1,
+	}
 	base = int64(*(*uint64)(unsafe.Pointer(bp + uintptr(whence)*8)))
 	if off < -base || off > int64(0x7fffffffffffffff)-base {
 		goto fail
@@ -135257,7 +136898,8 @@ _1:
 	*(*[3]uint64)(unsafe.Pointer(bp)) = [3]uint64{
 		0: uint64(0),
 		1: (*Tcookie2)(unsafe.Pointer(c)).Fpos,
-		2: (*Tcookie2)(unsafe.Pointer(c)).Flen1}
+		2: (*Tcookie2)(unsafe.Pointer(c)).Flen1,
+	}
 	base = int64(*(*uint64)(unsafe.Pointer(bp + uintptr(whence)*8)))
 	if off < -base || off > Int64FromInt64(0x7fffffffffffffff)/Int64FromInt32(4)-base {
 		goto fail
@@ -135447,7 +137089,8 @@ func x_popen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
 				0: ts + 1302,
 				1: ts + 1305,
 				2: cmd,
-				3: uintptr(0)}
+				3: uintptr(0),
+			}
 			v1 = x_posix_spawn(tls, bp+40, ts+1294, bp+48, uintptr(0), bp, x___environ)
 			e = v1
 			if !(v1 != 0) {
@@ -136033,7 +137676,14 @@ func x_vdprintf(tls *TLS, fd int32, fmt uintptr, ap uintptr) (r int32) {
 	bp := tls.Alloc(232) /* tlsAllocs 232 maxVaListSize 0 */
 	defer tls.Free(232)
 	var _ /* f at bp+0 */ TFILE
-	*(*TFILE)(unsafe.Pointer(bp)) = TFILE{Fwrite: __ccgo_fp(x___stdio_write), Fbuf: fmt, Fbuf_size: uint64(0), Ffd: fd, Flock: -int32(1), Flbf: -int32(1)}
+	*(*TFILE)(unsafe.Pointer(bp)) = TFILE{
+		Fwrite:    __ccgo_fp(x___stdio_write),
+		Fbuf:      fmt,
+		Fbuf_size: uint64(0),
+		Ffd:       fd,
+		Flock:     -int32(1),
+		Flbf:      -int32(1),
+	}
 	return x_vfprintf(tls, bp, fmt, ap)
 }
 
@@ -136100,7 +137750,8 @@ var _states = [8][58]uint8{
 		51: uint8(_ZTPRE),
 		52: uint8(_UINT),
 		55: uint8(_UINT),
-		57: uint8(_ZTPRE)},
+		57: uint8(_ZTPRE),
+	},
 	1: {
 		0:  uint8(_DBL),
 		4:  uint8(_DBL),
@@ -136119,7 +137770,8 @@ var _states = [8][58]uint8{
 		46: uint8(_ULONG),
 		50: uint8(_PTR),
 		52: uint8(_ULONG),
-		55: uint8(_ULONG)},
+		55: uint8(_ULONG),
+	},
 	2: {
 		23: uint8(_ULLONG),
 		35: uint8(_LLONG),
@@ -136127,7 +137779,8 @@ var _states = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_ULLONG),
 		52: uint8(_ULLONG),
-		55: uint8(_ULLONG)},
+		55: uint8(_ULLONG),
+	},
 	3: {
 		23: uint8(_USHORT),
 		35: uint8(_SHORT),
@@ -136136,7 +137789,8 @@ var _states = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_USHORT),
 		52: uint8(_USHORT),
-		55: uint8(_USHORT)},
+		55: uint8(_USHORT),
+	},
 	4: {
 		23: uint8(_UCHAR),
 		35: uint8(_CHAR),
@@ -136144,7 +137798,8 @@ var _states = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_UCHAR),
 		52: uint8(_UCHAR),
-		55: uint8(_UCHAR)},
+		55: uint8(_UCHAR),
+	},
 	5: {
 		0:  uint8(_LDBL),
 		4:  uint8(_LDBL),
@@ -136154,7 +137809,8 @@ var _states = [8][58]uint8{
 		36: uint8(_LDBL),
 		37: uint8(_LDBL),
 		38: uint8(_LDBL),
-		45: uint8(_PTR)},
+		45: uint8(_PTR),
+	},
 	6: {
 		23: uint8(_SIZET),
 		35: uint8(_PDIFF),
@@ -136162,7 +137818,8 @@ var _states = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_SIZET),
 		52: uint8(_SIZET),
-		55: uint8(_SIZET)},
+		55: uint8(_SIZET),
+	},
 	7: {
 		23: uint8(_UMAX),
 		35: uint8(_IMAX),
@@ -136170,7 +137827,9 @@ var _states = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_UMAX),
 		52: uint8(_UMAX),
-		55: uint8(_UMAX)}}
+		55: uint8(_UMAX),
+	},
+}
 
 type Targ = struct {
 	Ff [0]float64
@@ -137993,7 +139652,8 @@ var _states1 = [8][58]uint8{
 		51: uint8(_ZTPRE),
 		52: uint8(_UINT),
 		55: uint8(_UINT),
-		57: uint8(_ZTPRE)},
+		57: uint8(_ZTPRE),
+	},
 	1: {
 		0:  uint8(_DBL),
 		4:  uint8(_DBL),
@@ -138012,7 +139672,8 @@ var _states1 = [8][58]uint8{
 		46: uint8(_ULONG),
 		50: uint8(_PTR),
 		52: uint8(_ULONG),
-		55: uint8(_ULONG)},
+		55: uint8(_ULONG),
+	},
 	2: {
 		23: uint8(_ULLONG),
 		35: uint8(_LLONG),
@@ -138020,7 +139681,8 @@ var _states1 = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_ULLONG),
 		52: uint8(_ULLONG),
-		55: uint8(_ULLONG)},
+		55: uint8(_ULLONG),
+	},
 	3: {
 		23: uint8(_USHORT),
 		35: uint8(_SHORT),
@@ -138029,7 +139691,8 @@ var _states1 = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_USHORT),
 		52: uint8(_USHORT),
-		55: uint8(_USHORT)},
+		55: uint8(_USHORT),
+	},
 	4: {
 		23: uint8(_UCHAR),
 		35: uint8(_CHAR),
@@ -138037,7 +139700,8 @@ var _states1 = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_UCHAR),
 		52: uint8(_UCHAR),
-		55: uint8(_UCHAR)},
+		55: uint8(_UCHAR),
+	},
 	5: {
 		0:  uint8(_LDBL),
 		4:  uint8(_LDBL),
@@ -138047,7 +139711,8 @@ var _states1 = [8][58]uint8{
 		36: uint8(_LDBL),
 		37: uint8(_LDBL),
 		38: uint8(_LDBL),
-		45: uint8(_PTR)},
+		45: uint8(_PTR),
+	},
 	6: {
 		23: uint8(_SIZET),
 		35: uint8(_PDIFF),
@@ -138055,7 +139720,8 @@ var _states1 = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_SIZET),
 		52: uint8(_SIZET),
-		55: uint8(_SIZET)},
+		55: uint8(_SIZET),
+	},
 	7: {
 		23: uint8(_UMAX),
 		35: uint8(_IMAX),
@@ -138063,7 +139729,9 @@ var _states1 = [8][58]uint8{
 		45: uint8(_PTR),
 		46: uint8(_UMAX),
 		52: uint8(_UMAX),
-		55: uint8(_UMAX)}}
+		55: uint8(_UMAX),
+	},
+}
 
 func _pop_arg1(tls *TLS, arg uintptr, type1 int32, ap uintptr) {
 	switch type1 {
@@ -138152,7 +139820,8 @@ var _sizeprefix = [24]int8{
 	14: int8('j'),
 	15: int8('j'),
 	20: int8('j'),
-	23: int8('j')}
+	23: int8('j'),
+}
 
 func _wprintf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, nl_type uintptr) (r int32) {
 	bp := tls.Alloc(112) /* tlsAllocs 48 maxVaListSize 56 */
@@ -139055,7 +140724,8 @@ var _size_pfx = [6][3]int8{
 	2: {},
 	3: {'l'},
 	4: {'L'},
-	5: {'l', 'l'}}
+	5: {'l', 'l'},
+}
 
 var _spaces1 = [22]int32{
 	0:  int32(' '),
@@ -139079,7 +140749,8 @@ var _spaces1 = [22]int32{
 	18: int32(0x2029),
 	19: int32(0x205f),
 	20: int32(0x3000),
-	21: 0}
+	21: 0,
+}
 
 func x_vprintf(tls *TLS, fmt uintptr, ap uintptr) (r int32) {
 	return x_vfprintf(tls, uintptr(unsafe.Pointer(&x___stdout_FILE)), fmt, ap)
@@ -139147,8 +140818,17 @@ func x_vsnprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, ap uintptr) (r int3
 	} else {
 		v2 = uint64(0)
 	}
-	*(*Tcookie3)(unsafe.Pointer(bp + 8)) = Tcookie3{Fs: v1, Fn: v2}
-	*(*TFILE)(unsafe.Pointer(bp + 24)) = TFILE{Fwrite: __ccgo_fp(_sn_write), Fbuf: bp, Flock: -int32(1), Flbf: -int32(1), Fcookie: bp + 8}
+	*(*Tcookie3)(unsafe.Pointer(bp + 8)) = Tcookie3{
+		Fs: v1,
+		Fn: v2,
+	}
+	*(*TFILE)(unsafe.Pointer(bp + 24)) = TFILE{
+		Fwrite:  __ccgo_fp(_sn_write),
+		Fbuf:    bp,
+		Flock:   -int32(1),
+		Flbf:    -int32(1),
+		Fcookie: bp + 8,
+	}
 	if n > uint64(m_INT_MAX) {
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_EOVERFLOW)
 		return -int32(1)
@@ -139184,7 +140864,12 @@ func x_vsscanf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
 	bp := tls.Alloc(232) /* tlsAllocs 232 maxVaListSize 0 */
 	defer tls.Free(232)
 	var _ /* f at bp+0 */ TFILE
-	*(*TFILE)(unsafe.Pointer(bp)) = TFILE{Fread: __ccgo_fp(_string_read), Fbuf: s, Flock: -int32(1), Fcookie: s}
+	*(*TFILE)(unsafe.Pointer(bp)) = TFILE{
+		Fread:   __ccgo_fp(_string_read),
+		Fbuf:    s,
+		Flock:   -int32(1),
+		Fcookie: s,
+	}
 	return x_vfscanf(tls, bp, fmt, ap)
 }
 
@@ -139244,8 +140929,18 @@ func x_vswprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, ap uintptr) (r1 int
 	var _ /* buf at bp+0 */ [256]uint8
 	var _ /* c at bp+256 */ Tcookie4
 	var _ /* f at bp+272 */ TFILE
-	*(*Tcookie4)(unsafe.Pointer(bp + 256)) = Tcookie4{Fws: s, Fl: n - uint64(1)}
-	*(*TFILE)(unsafe.Pointer(bp + 272)) = TFILE{Fwrite: __ccgo_fp(_sw_write), Fbuf: bp, Fbuf_size: uint64(256), Flock: -int32(1), Flbf: -int32(1), Fcookie: bp + 256}
+	*(*Tcookie4)(unsafe.Pointer(bp + 256)) = Tcookie4{
+		Fws: s,
+		Fl:  n - uint64(1),
+	}
+	*(*TFILE)(unsafe.Pointer(bp + 272)) = TFILE{
+		Fwrite:    __ccgo_fp(_sw_write),
+		Fbuf:      bp,
+		Fbuf_size: uint64(256),
+		Flock:     -int32(1),
+		Flbf:      -int32(1),
+		Fcookie:   bp + 256,
+	}
 	if !(n != 0) {
 		return -int32(1)
 	} else if n > uint64(m_INT_MAX) {
@@ -139297,7 +140992,13 @@ func x_vswscanf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
 	defer tls.Free(488)
 	var _ /* buf at bp+0 */ [256]uint8
 	var _ /* f at bp+256 */ TFILE
-	*(*TFILE)(unsafe.Pointer(bp + 256)) = TFILE{Fread: __ccgo_fp(_wstring_read), Fbuf: bp, Fbuf_size: uint64(256), Flock: -int32(1), Fcookie: s}
+	*(*TFILE)(unsafe.Pointer(bp + 256)) = TFILE{
+		Fread:     __ccgo_fp(_wstring_read),
+		Fbuf:      bp,
+		Fbuf_size: uint64(256),
+		Flock:     -int32(1),
+		Fcookie:   s,
+	}
 	return x_vfwscanf(tls, bp+256, fmt, ap)
 }
 
@@ -139472,7 +141173,10 @@ func x_bsearch(tls *TLS, key uintptr, base uintptr, nel uint64, width uint64, cm
 }
 
 func x_div(tls *TLS, num int32, den int32) (r Tdiv_t) {
-	return Tdiv_t{Fquot: num / den, Frem: num % den}
+	return Tdiv_t{
+		Fquot: num / den,
+		Frem:  num % den,
+	}
 }
 
 func x_ecvt(tls *TLS, x float64, n int32, dp uintptr, sign uintptr) (r uintptr) {
@@ -139546,7 +141250,10 @@ func x_imaxabs(tls *TLS, a int64) (r int64) {
 }
 
 func x_imaxdiv(tls *TLS, num int64, den int64) (r Timaxdiv_t) {
-	return Timaxdiv_t{Fquot: num / den, Frem: num % den}
+	return Timaxdiv_t{
+		Fquot: num / den,
+		Frem:  num % den,
+	}
 }
 
 func x_labs(tls *TLS, a int64) (r int64) {
@@ -139560,7 +141267,10 @@ func x_labs(tls *TLS, a int64) (r int64) {
 }
 
 func x_ldiv(tls *TLS, num int64, den int64) (r Tldiv_t) {
-	return Tldiv_t{Fquot: num / den, Frem: num % den}
+	return Tldiv_t{
+		Fquot: num / den,
+		Frem:  num % den,
+	}
 }
 
 func x_llabs(tls *TLS, a int64) (r int64) {
@@ -139574,7 +141284,10 @@ func x_llabs(tls *TLS, a int64) (r int64) {
 }
 
 func x_lldiv(tls *TLS, num int64, den int64) (r Tlldiv_t) {
-	return Tlldiv_t{Fquot: num / den, Frem: num % den}
+	return Tlldiv_t{
+		Fquot: num / den,
+		Frem:  num % den,
+	}
 }
 
 type Tcmpfun = uintptr
@@ -139733,7 +141446,8 @@ func x___qsort_r(tls *TLS, base uintptr, nel uint64, width uint64, cmp uintptr, 
 	size = width * nel
 	*(*[2]uint64)(unsafe.Pointer(bp + 768)) = [2]uint64{
 		0: uint64(1),
-		1: uint64(0)}
+		1: uint64(0),
+	}
 	pshift = int32(1)
 	if !(size != 0) {
 		return
@@ -142385,14 +144099,16 @@ func x_mtx_init(tls *TLS, m uintptr, type1 int32) (r int32) {
 	} else {
 		v1 = m_PTHREAD_MUTEX_NORMAL
 	}
-	*(*Tmtx_t)(unsafe.Pointer(m)) = Tmtx_t{F__u: *(*struct {
-		F__vi [0][10]int32
-		F__p  [0][5]uintptr
-		F__i  [10]int32
-	})(unsafe.Pointer(&struct {
-		f int32
-		_ [36]byte
-	}{f: v1}))}
+	*(*Tmtx_t)(unsafe.Pointer(m)) = Tmtx_t{
+		F__u: *(*struct {
+			F__vi [0][10]int32
+			F__p  [0][5]uintptr
+			F__i  [10]int32
+		})(unsafe.Pointer(&struct {
+			f int32
+			_ [36]byte
+		}{f: v1})),
+	}
 	return int32(_thrd_success)
 }
 
@@ -142703,15 +144419,17 @@ func x_pthread_barrier_init(tls *TLS, b uintptr, a uintptr, count uint32) (r int
 	} else {
 		v1 = uint32(0)
 	}
-	*(*Tpthread_barrier_t)(unsafe.Pointer(b)) = Tpthread_barrier_t{F__u: *(*struct {
-		F__vi [0][8]int32
-		F__p  [0][4]uintptr
-		F__i  [8]int32
-	})(unsafe.Pointer(&struct {
-		_ [8]byte
-		f int32
-		_ [20]byte
-	}{f: int32(count - Uint32FromInt32(1) | v1)}))}
+	*(*Tpthread_barrier_t)(unsafe.Pointer(b)) = Tpthread_barrier_t{
+		F__u: *(*struct {
+			F__vi [0][8]int32
+			F__p  [0][4]uintptr
+			F__i  [8]int32
+		})(unsafe.Pointer(&struct {
+			_ [8]byte
+			f int32
+			_ [20]byte
+		}{f: int32(count - Uint32FromInt32(1) | v1)})),
+	}
 	return 0
 }
 
@@ -143789,7 +145507,8 @@ func x___pthread_create(tls *TLS, res uintptr, attrp uintptr, entry uintptr, arg
 		_init_file_lock(tls, x___stdout_used)
 		_init_file_lock(tls, x___stderr_used)
 		*(*[1]uint64)(unsafe.Pointer(bp)) = [1]uint64{
-			0: Uint64FromUint64(3) << (Int32FromInt32(32) * BoolInt32(Uint64FromInt64(8) > Uint64FromInt32(4)))}
+			0: Uint64FromUint64(3) << (Int32FromInt32(32) * BoolInt32(Uint64FromInt64(8) > Uint64FromInt32(4))),
+		}
 		___syscall4(tls, int64(14), int64(Int32FromInt32(1)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
 		(*T__pthread)(unsafe.Pointer(self)).Ftsd = uintptr(unsafe.Pointer(&x___pthread_tsd_main))
 		x___membarrier_init(tls)
@@ -144955,15 +146674,17 @@ func x_pthread_setattr_default_np(tls *TLS, attrp uintptr) (r int32) {
 func x_pthread_getattr_default_np(tls *TLS, attrp uintptr) (r int32) {
 	x___acquire_ptc(tls)
 	panic(ts + 2601)
-	*(*Tpthread_attr_t)(unsafe.Pointer(attrp)) = Tpthread_attr_t{F__u: *(*struct {
-		F__vi [0][14]int32
-		F__s  [0][7]uint64
-		F__i  [14]int32
-	})(unsafe.Pointer(&struct {
-		F__vi [0][14]int32
-		F__s  [0][7]uint64
-		F__i  [14]int32
-	}{}))}
+	*(*Tpthread_attr_t)(unsafe.Pointer(attrp)) = Tpthread_attr_t{
+		F__u: *(*struct {
+			F__vi [0][14]int32
+			F__s  [0][7]uint64
+			F__i  [14]int32
+		})(unsafe.Pointer(&struct {
+			F__vi [0][14]int32
+			F__s  [0][7]uint64
+			F__i  [14]int32
+		}{})),
+	}
 	x___release_ptc(tls)
 	return 0
 }
@@ -145799,7 +147520,8 @@ var _secs_through_month = [12]int32{
 	8:  Int32FromInt32(243) * Int32FromInt32(86400),
 	9:  Int32FromInt32(273) * Int32FromInt32(86400),
 	10: Int32FromInt32(304) * Int32FromInt32(86400),
-	11: Int32FromInt32(334) * Int32FromInt32(86400)}
+	11: Int32FromInt32(334) * Int32FromInt32(86400),
+}
 
 func x___secs_to_tm(tls *TLS, t int64, tm uintptr) (r int32) {
 	var c_cycles, leap, months, q_cycles, qc_cycles, remdays, remsecs, remyears, wday, yday int32
@@ -145879,7 +147601,8 @@ var _days_in_month = [12]int8{
 	8:  int8(30),
 	9:  int8(31),
 	10: int8(31),
-	11: int8(29)}
+	11: int8(29),
+}
 
 func x___tm_to_secs(tls *TLS, tm uintptr) (r int64) {
 	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
@@ -146142,7 +147865,8 @@ func _do_tzset(tls *TLS) {
 				2: uint8(8),
 				3: uint8(5),
 				4: uint8(6),
-				5: uint8(1)}
+				5: uint8(1),
+			}
 			skip = _zi_dotprod(tls, _zi+uintptr(20), bp, uint64(6))
 			_trans = _zi + uintptr(skip) + uintptr(44) + uintptr(44)
 			scale++
@@ -147624,7 +149348,8 @@ func _start2(tls *TLS, arg uintptr) (r uintptr) {
 	for {
 		for {
 			*(*[1]uint64)(unsafe.Pointer(bp)) = [1]uint64{
-				0: uint64(0x80000000)}
+				0: uint64(0x80000000),
+			}
 			if !(x_sigwaitinfo(tls, bp, bp+208) < 0) {
 				break
 			}
@@ -147703,7 +149428,8 @@ func x_timer_create(tls *TLS, clk int32, evp uintptr, res uintptr) (r1 int32) {
 		(*(*Tstart_args1)(unsafe.Pointer(bp + 72))).Fsev = evp
 		x___block_app_sigs(tls, bp+144)
 		*(*[1]uint64)(unsafe.Pointer(bp)) = [1]uint64{
-			0: uint64(0x80000000)}
+			0: uint64(0x80000000),
+		}
 		___syscall4(tls, int64(14), int64(Int32FromInt32(0)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
 		r = x___pthread_create(tls, bp+8, bp+16, __ccgo_fp(_start2), bp+72)
 		x___restore_sigs(tls, bp+144)
@@ -147814,8 +149540,13 @@ func x_utime(tls *TLS, path uintptr, times uintptr) (r int32) {
 	var v1 uintptr
 	if times != 0 {
 		*(*[2]Ttimespec)(unsafe.Pointer(bp)) = [2]Ttimespec{
-			0: {Ftv_sec: (*Tutimbuf)(unsafe.Pointer(times)).Factime},
-			1: {Ftv_sec: (*Tutimbuf)(unsafe.Pointer(times)).Fmodtime}}
+			0: {
+				Ftv_sec: (*Tutimbuf)(unsafe.Pointer(times)).Factime,
+			},
+			1: {
+				Ftv_sec: (*Tutimbuf)(unsafe.Pointer(times)).Fmodtime,
+			},
+		}
 		v1 = bp
 	} else {
 		v1 = uintptr(0)
@@ -147942,7 +149673,11 @@ func x_alarm(tls *TLS, seconds uint32) (r uint32) {
 	defer tls.Free(64)
 	var _ /* it at bp+0 */ Titimerval
 	var _ /* old at bp+32 */ Titimerval
-	*(*Titimerval)(unsafe.Pointer(bp)) = Titimerval{Fit_value: Ttimeval{Ftv_sec: int64(seconds)}}
+	*(*Titimerval)(unsafe.Pointer(bp)) = Titimerval{
+		Fit_value: Ttimeval{
+			Ftv_sec: int64(seconds),
+		},
+	}
 	*(*Titimerval)(unsafe.Pointer(bp + 32)) = Titimerval{}
 	x_setitimer(tls, m_ITIMER_REAL, bp, bp+32)
 	return uint32((*(*Titimerval)(unsafe.Pointer(bp + 32))).Fit_value.Ftv_sec + BoolInt64(!!((*(*Titimerval)(unsafe.Pointer(bp + 32))).Fit_value.Ftv_usec != 0)))
@@ -148075,7 +149810,12 @@ func x_faccessat(tls *TLS, fd int32, filename uintptr, amode int32, flag int32) 
 	if x_pipe2(tls, bp+1160, int32(m_O_CLOEXEC)) != 0 {
 		return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EBUSY))))
 	}
-	*(*Tctx2)(unsafe.Pointer(bp + 1168)) = Tctx2{Ffd: fd, Ffilename: filename, Famode: amode, Fp: (*(*[2]int32)(unsafe.Pointer(bp + 1160)))[int32(1)]}
+	*(*Tctx2)(unsafe.Pointer(bp + 1168)) = Tctx2{
+		Ffd:       fd,
+		Ffilename: filename,
+		Famode:    amode,
+		Fp:        (*(*[2]int32)(unsafe.Pointer(bp + 1160)))[int32(1)],
+	}
 	x___block_all_sigs(tls, bp+1024)
 	pid = ___clone(tls, __ccgo_fp(_checker), bp+uintptr(1024), 0, bp+1168, 0)
 	___syscall1(tls, int64(3), int64((*(*[2]int32)(unsafe.Pointer(bp + 1160)))[int32(1)]))
@@ -148501,7 +150241,13 @@ func x___setxid(tls *TLS, nr int32, id int32, eid int32, sid int32) (r int32) {
 	var _ /* c at bp+0 */ Tctx3
 	/* ret is initially nonzero so that failure of the first thread does not
 	 * trigger the safety kill above. */
-	*(*Tctx3)(unsafe.Pointer(bp)) = Tctx3{Fid: id, Feid: eid, Fsid: sid, Fnr: nr, Fret: int32(1)}
+	*(*Tctx3)(unsafe.Pointer(bp)) = Tctx3{
+		Fid:  id,
+		Feid: eid,
+		Fsid: sid,
+		Fnr:  nr,
+		Fret: int32(1),
+	}
 	x___synccall(tls, __ccgo_fp(_do_setxid), bp)
 	return int32(x___syscall_ret(tls, uint64((*(*Tctx3)(unsafe.Pointer(bp))).Fret)))
 }
@@ -148510,7 +150256,10 @@ func x_sleep(tls *TLS, seconds uint32) (r uint32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimespec
-	*(*Ttimespec)(unsafe.Pointer(bp)) = Ttimespec{Ftv_sec: int64(seconds), Ftv_nsec: 0}
+	*(*Ttimespec)(unsafe.Pointer(bp)) = Ttimespec{
+		Ftv_sec:  int64(seconds),
+		Ftv_nsec: 0,
+	}
 	if x_nanosleep(tls, bp, bp) != 0 {
 		return uint32((*(*Ttimespec)(unsafe.Pointer(bp))).Ftv_sec)
 	}
@@ -148600,7 +150349,14 @@ func x_ualarm(tls *TLS, value uint32, interval uint32) (r uint32) {
 	defer tls.Free(64)
 	var _ /* it at bp+0 */ Titimerval
 	var _ /* it_old at bp+32 */ Titimerval
-	*(*Titimerval)(unsafe.Pointer(bp)) = Titimerval{Fit_interval: Ttimeval{Ftv_usec: int64(interval)}, Fit_value: Ttimeval{Ftv_usec: int64(value)}}
+	*(*Titimerval)(unsafe.Pointer(bp)) = Titimerval{
+		Fit_interval: Ttimeval{
+			Ftv_usec: int64(interval),
+		},
+		Fit_value: Ttimeval{
+			Ftv_usec: int64(value),
+		},
+	}
 	x_setitimer(tls, m_ITIMER_REAL, bp, bp+32)
 	return uint32((*(*Titimerval)(unsafe.Pointer(bp + 32))).Fit_value.Ftv_sec*int64(1000000) + (*(*Titimerval)(unsafe.Pointer(bp + 32))).Fit_value.Ftv_usec)
 }
@@ -148617,7 +150373,10 @@ func x_usleep(tls *TLS, useconds uint32) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimespec
-	*(*Ttimespec)(unsafe.Pointer(bp)) = Ttimespec{Ftv_sec: int64(useconds / uint32(1000000)), Ftv_nsec: int64(useconds % uint32(1000000) * uint32(1000))}
+	*(*Ttimespec)(unsafe.Pointer(bp)) = Ttimespec{
+		Ftv_sec:  int64(useconds / uint32(1000000)),
+		Ftv_nsec: int64(useconds % uint32(1000000) * uint32(1000)),
+	}
 	return x_nanosleep(tls, bp, bp)
 }
 
@@ -148646,10 +150405,17 @@ var x___atexit_lockptr = uintptr(unsafe.Pointer(&_lock1))
 
 var x___bump_lockptr = uintptr(unsafe.Pointer(&_lock3))
 
-var x___c_dot_utf8 = T__locale_map{Fmap1: uintptr(unsafe.Pointer(&_empty_mo)), Fmap_size: uint64(20), Fname: [24]int8{'C', '.', 'U', 'T', 'F', '-', '8'}}
+var x___c_dot_utf8 = T__locale_map{
+	Fmap1:     uintptr(unsafe.Pointer(&_empty_mo)),
+	Fmap_size: uint64(20),
+	Fname:     [24]int8{'C', '.', 'U', 'T', 'F', '-', '8'},
+}
 
-var x___c_dot_utf8_locale = T__locale_struct{Fcat: [6]uintptr{
-	0: uintptr(unsafe.Pointer(&x___c_dot_utf8))}}
+var x___c_dot_utf8_locale = T__locale_struct{
+	Fcat: [6]uintptr{
+		0: uintptr(unsafe.Pointer(&x___c_dot_utf8)),
+	},
+}
 
 var x___c_locale = T__locale_struct{}
 
@@ -148663,312 +150429,334 @@ var x___eintr_valid_flag int32
 
 var x___environ uintptr
 
-var x___exp2f_data = Texp2f_data{Ftab: [32]uint64{
-	0:  uint64(0x3ff0000000000000),
-	1:  uint64(0x3fefd9b0d3158574),
-	2:  uint64(0x3fefb5586cf9890f),
-	3:  uint64(0x3fef9301d0125b51),
-	4:  uint64(0x3fef72b83c7d517b),
-	5:  uint64(0x3fef54873168b9aa),
-	6:  uint64(0x3fef387a6e756238),
-	7:  uint64(0x3fef1e9df51fdee1),
-	8:  uint64(0x3fef06fe0a31b715),
-	9:  uint64(0x3feef1a7373aa9cb),
-	10: uint64(0x3feedea64c123422),
-	11: uint64(0x3feece086061892d),
-	12: uint64(0x3feebfdad5362a27),
-	13: uint64(0x3feeb42b569d4f82),
-	14: uint64(0x3feeab07dd485429),
-	15: uint64(0x3feea47eb03a5585),
-	16: uint64(0x3feea09e667f3bcd),
-	17: uint64(0x3fee9f75e8ec5f74),
-	18: uint64(0x3feea11473eb0187),
-	19: uint64(0x3feea589994cce13),
-	20: uint64(0x3feeace5422aa0db),
-	21: uint64(0x3feeb737b0cdc5e5),
-	22: uint64(0x3feec49182a3f090),
-	23: uint64(0x3feed503b23e255d),
-	24: uint64(0x3feee89f995ad3ad),
-	25: uint64(0x3feeff76f2fb5e47),
-	26: uint64(0x3fef199bdd85529c),
-	27: uint64(0x3fef3720dcef9069),
-	28: uint64(0x3fef5818dcfba487),
-	29: uint64(0x3fef7c97337b9b5f),
-	30: uint64(0x3fefa4afa2a490da),
-	31: uint64(0x3fefd0765b6e4540)}, Fshift_scaled: Float64FromFloat64(6.755399441055744e+15) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)), Fpoly: [3]float64{
-	0: float64(0.05550361559341535),
-	1: float64(0.2402284522445722),
-	2: float64(0.6931471806916203)}, Fshift: float64(6.755399441055744e+15), Finvln2_scaled: Float64FromFloat64(1.4426950408889634) * float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)), Fpoly_scaled: [3]float64{
-	0: Float64FromFloat64(0.05550361559341535) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)),
-	1: Float64FromFloat64(0.2402284522445722) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)),
-	2: Float64FromFloat64(0.6931471806916203) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS))}}
+var x___exp2f_data = Texp2f_data{
+	Ftab: [32]uint64{
+		0:  uint64(0x3ff0000000000000),
+		1:  uint64(0x3fefd9b0d3158574),
+		2:  uint64(0x3fefb5586cf9890f),
+		3:  uint64(0x3fef9301d0125b51),
+		4:  uint64(0x3fef72b83c7d517b),
+		5:  uint64(0x3fef54873168b9aa),
+		6:  uint64(0x3fef387a6e756238),
+		7:  uint64(0x3fef1e9df51fdee1),
+		8:  uint64(0x3fef06fe0a31b715),
+		9:  uint64(0x3feef1a7373aa9cb),
+		10: uint64(0x3feedea64c123422),
+		11: uint64(0x3feece086061892d),
+		12: uint64(0x3feebfdad5362a27),
+		13: uint64(0x3feeb42b569d4f82),
+		14: uint64(0x3feeab07dd485429),
+		15: uint64(0x3feea47eb03a5585),
+		16: uint64(0x3feea09e667f3bcd),
+		17: uint64(0x3fee9f75e8ec5f74),
+		18: uint64(0x3feea11473eb0187),
+		19: uint64(0x3feea589994cce13),
+		20: uint64(0x3feeace5422aa0db),
+		21: uint64(0x3feeb737b0cdc5e5),
+		22: uint64(0x3feec49182a3f090),
+		23: uint64(0x3feed503b23e255d),
+		24: uint64(0x3feee89f995ad3ad),
+		25: uint64(0x3feeff76f2fb5e47),
+		26: uint64(0x3fef199bdd85529c),
+		27: uint64(0x3fef3720dcef9069),
+		28: uint64(0x3fef5818dcfba487),
+		29: uint64(0x3fef7c97337b9b5f),
+		30: uint64(0x3fefa4afa2a490da),
+		31: uint64(0x3fefd0765b6e4540),
+	},
+	Fshift_scaled: Float64FromFloat64(6.755399441055744e+15) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)),
+	Fpoly: [3]float64{
+		0: float64(0.05550361559341535),
+		1: float64(0.2402284522445722),
+		2: float64(0.6931471806916203),
+	},
+	Fshift:         float64(6.755399441055744e+15),
+	Finvln2_scaled: Float64FromFloat64(1.4426950408889634) * float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)),
+	Fpoly_scaled: [3]float64{
+		0: Float64FromFloat64(0.05550361559341535) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)),
+		1: Float64FromFloat64(0.2402284522445722) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)),
+		2: Float64FromFloat64(0.6931471806916203) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP2F_TABLE_BITS)),
+	},
+}
 
-var x___exp_data = Texp_data{Finvln2N: Float64FromFloat64(1.4426950408889634) * float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP_TABLE_BITS)), Fshift: float64(6.755399441055744e+15), Fnegln2hiN: -Float64FromFloat64(0.005415212348111709), Fnegln2loN: -Float64FromFloat64(1.2864023111638346e-14), Fpoly: [4]float64{
-	0: float64(0.49999999999996786),
-	1: float64(0.16666666666665886),
-	2: float64(0.0416666808410674),
-	3: float64(0.008333335853059549)}, Fexp2_shift: Float64FromFloat64(6.755399441055744e+15) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP_TABLE_BITS)), Fexp2_poly: [5]float64{
-	0: float64(0.6931471805599453),
-	1: float64(0.24022650695909065),
-	2: float64(0.0555041086686087),
-	3: float64(0.009618131975721055),
-	4: float64(0.0013332074570119598)}, Ftab: [256]uint64{
-	0:   uint64(0x0),
-	1:   uint64(0x3ff0000000000000),
-	2:   uint64(0x3c9b3b4f1a88bf6e),
-	3:   uint64(0x3feff63da9fb3335),
-	4:   uint64(0xbc7160139cd8dc5d),
-	5:   uint64(0x3fefec9a3e778061),
-	6:   uint64(0xbc905e7a108766d1),
-	7:   uint64(0x3fefe315e86e7f85),
-	8:   uint64(0x3c8cd2523567f613),
-	9:   uint64(0x3fefd9b0d3158574),
-	10:  uint64(0xbc8bce8023f98efa),
-	11:  uint64(0x3fefd06b29ddf6de),
-	12:  uint64(0x3c60f74e61e6c861),
-	13:  uint64(0x3fefc74518759bc8),
-	14:  uint64(0x3c90a3e45b33d399),
-	15:  uint64(0x3fefbe3ecac6f383),
-	16:  uint64(0x3c979aa65d837b6d),
-	17:  uint64(0x3fefb5586cf9890f),
-	18:  uint64(0x3c8eb51a92fdeffc),
-	19:  uint64(0x3fefac922b7247f7),
-	20:  uint64(0x3c3ebe3d702f9cd1),
-	21:  uint64(0x3fefa3ec32d3d1a2),
-	22:  uint64(0xbc6a033489906e0b),
-	23:  uint64(0x3fef9b66affed31b),
-	24:  uint64(0xbc9556522a2fbd0e),
-	25:  uint64(0x3fef9301d0125b51),
-	26:  uint64(0xbc5080ef8c4eea55),
-	27:  uint64(0x3fef8abdc06c31cc),
-	28:  uint64(0xbc91c923b9d5f416),
-	29:  uint64(0x3fef829aaea92de0),
-	30:  uint64(0x3c80d3e3e95c55af),
-	31:  uint64(0x3fef7a98c8a58e51),
-	32:  uint64(0xbc801b15eaa59348),
-	33:  uint64(0x3fef72b83c7d517b),
-	34:  uint64(0xbc8f1ff055de323d),
-	35:  uint64(0x3fef6af9388c8dea),
-	36:  uint64(0x3c8b898c3f1353bf),
-	37:  uint64(0x3fef635beb6fcb75),
-	38:  uint64(0xbc96d99c7611eb26),
-	39:  uint64(0x3fef5be084045cd4),
-	40:  uint64(0x3c9aecf73e3a2f60),
-	41:  uint64(0x3fef54873168b9aa),
-	42:  uint64(0xbc8fe782cb86389d),
-	43:  uint64(0x3fef4d5022fcd91d),
-	44:  uint64(0x3c8a6f4144a6c38d),
-	45:  uint64(0x3fef463b88628cd6),
-	46:  uint64(0x3c807a05b0e4047d),
-	47:  uint64(0x3fef3f49917ddc96),
-	48:  uint64(0x3c968efde3a8a894),
-	49:  uint64(0x3fef387a6e756238),
-	50:  uint64(0x3c875e18f274487d),
-	51:  uint64(0x3fef31ce4fb2a63f),
-	52:  uint64(0x3c80472b981fe7f2),
-	53:  uint64(0x3fef2b4565e27cdd),
-	54:  uint64(0xbc96b87b3f71085e),
-	55:  uint64(0x3fef24dfe1f56381),
-	56:  uint64(0x3c82f7e16d09ab31),
-	57:  uint64(0x3fef1e9df51fdee1),
-	58:  uint64(0xbc3d219b1a6fbffa),
-	59:  uint64(0x3fef187fd0dad990),
-	60:  uint64(0x3c8b3782720c0ab4),
-	61:  uint64(0x3fef1285a6e4030b),
-	62:  uint64(0x3c6e149289cecb8f),
-	63:  uint64(0x3fef0cafa93e2f56),
-	64:  uint64(0x3c834d754db0abb6),
-	65:  uint64(0x3fef06fe0a31b715),
-	66:  uint64(0x3c864201e2ac744c),
-	67:  uint64(0x3fef0170fc4cd831),
-	68:  uint64(0x3c8fdd395dd3f84a),
-	69:  uint64(0x3feefc08b26416ff),
-	70:  uint64(0xbc86a3803b8e5b04),
-	71:  uint64(0x3feef6c55f929ff1),
-	72:  uint64(0xbc924aedcc4b5068),
-	73:  uint64(0x3feef1a7373aa9cb),
-	74:  uint64(0xbc9907f81b512d8e),
-	75:  uint64(0x3feeecae6d05d866),
-	76:  uint64(0xbc71d1e83e9436d2),
-	77:  uint64(0x3feee7db34e59ff7),
-	78:  uint64(0xbc991919b3ce1b15),
-	79:  uint64(0x3feee32dc313a8e5),
-	80:  uint64(0x3c859f48a72a4c6d),
-	81:  uint64(0x3feedea64c123422),
-	82:  uint64(0xbc9312607a28698a),
-	83:  uint64(0x3feeda4504ac801c),
-	84:  uint64(0xbc58a78f4817895b),
-	85:  uint64(0x3feed60a21f72e2a),
-	86:  uint64(0xbc7c2c9b67499a1b),
-	87:  uint64(0x3feed1f5d950a897),
-	88:  uint64(0x3c4363ed60c2ac11),
-	89:  uint64(0x3feece086061892d),
-	90:  uint64(0x3c9666093b0664ef),
-	91:  uint64(0x3feeca41ed1d0057),
-	92:  uint64(0x3c6ecce1daa10379),
-	93:  uint64(0x3feec6a2b5c13cd0),
-	94:  uint64(0x3c93ff8e3f0f1230),
-	95:  uint64(0x3feec32af0d7d3de),
-	96:  uint64(0x3c7690cebb7aafb0),
-	97:  uint64(0x3feebfdad5362a27),
-	98:  uint64(0x3c931dbdeb54e077),
-	99:  uint64(0x3feebcb299fddd0d),
-	100: uint64(0xbc8f94340071a38e),
-	101: uint64(0x3feeb9b2769d2ca7),
-	102: uint64(0xbc87deccdc93a349),
-	103: uint64(0x3feeb6daa2cf6642),
-	104: uint64(0xbc78dec6bd0f385f),
-	105: uint64(0x3feeb42b569d4f82),
-	106: uint64(0xbc861246ec7b5cf6),
-	107: uint64(0x3feeb1a4ca5d920f),
-	108: uint64(0x3c93350518fdd78e),
-	109: uint64(0x3feeaf4736b527da),
-	110: uint64(0x3c7b98b72f8a9b05),
-	111: uint64(0x3feead12d497c7fd),
-	112: uint64(0x3c9063e1e21c5409),
-	113: uint64(0x3feeab07dd485429),
-	114: uint64(0x3c34c7855019c6ea),
-	115: uint64(0x3feea9268a5946b7),
-	116: uint64(0x3c9432e62b64c035),
-	117: uint64(0x3feea76f15ad2148),
-	118: uint64(0xbc8ce44a6199769f),
-	119: uint64(0x3feea5e1b976dc09),
-	120: uint64(0xbc8c33c53bef4da8),
-	121: uint64(0x3feea47eb03a5585),
-	122: uint64(0xbc845378892be9ae),
-	123: uint64(0x3feea34634ccc320),
-	124: uint64(0xbc93cedd78565858),
-	125: uint64(0x3feea23882552225),
-	126: uint64(0x3c5710aa807e1964),
-	127: uint64(0x3feea155d44ca973),
-	128: uint64(0xbc93b3efbf5e2228),
-	129: uint64(0x3feea09e667f3bcd),
-	130: uint64(0xbc6a12ad8734b982),
-	131: uint64(0x3feea012750bdabf),
-	132: uint64(0xbc6367efb86da9ee),
-	133: uint64(0x3fee9fb23c651a2f),
-	134: uint64(0xbc80dc3d54e08851),
-	135: uint64(0x3fee9f7df9519484),
-	136: uint64(0xbc781f647e5a3ecf),
-	137: uint64(0x3fee9f75e8ec5f74),
-	138: uint64(0xbc86ee4ac08b7db0),
-	139: uint64(0x3fee9f9a48a58174),
-	140: uint64(0xbc8619321e55e68a),
-	141: uint64(0x3fee9feb564267c9),
-	142: uint64(0x3c909ccb5e09d4d3),
-	143: uint64(0x3feea0694fde5d3f),
-	144: uint64(0xbc7b32dcb94da51d),
-	145: uint64(0x3feea11473eb0187),
-	146: uint64(0x3c94ecfd5467c06b),
-	147: uint64(0x3feea1ed0130c132),
-	148: uint64(0x3c65ebe1abd66c55),
-	149: uint64(0x3feea2f336cf4e62),
-	150: uint64(0xbc88a1c52fb3cf42),
-	151: uint64(0x3feea427543e1a12),
-	152: uint64(0xbc9369b6f13b3734),
-	153: uint64(0x3feea589994cce13),
-	154: uint64(0xbc805e843a19ff1e),
-	155: uint64(0x3feea71a4623c7ad),
-	156: uint64(0xbc94d450d872576e),
-	157: uint64(0x3feea8d99b4492ed),
-	158: uint64(0x3c90ad675b0e8a00),
-	159: uint64(0x3feeaac7d98a6699),
-	160: uint64(0x3c8db72fc1f0eab4),
-	161: uint64(0x3feeace5422aa0db),
-	162: uint64(0xbc65b6609cc5e7ff),
-	163: uint64(0x3feeaf3216b5448c),
-	164: uint64(0x3c7bf68359f35f44),
-	165: uint64(0x3feeb1ae99157736),
-	166: uint64(0xbc93091fa71e3d83),
-	167: uint64(0x3feeb45b0b91ffc6),
-	168: uint64(0xbc5da9b88b6c1e29),
-	169: uint64(0x3feeb737b0cdc5e5),
-	170: uint64(0xbc6c23f97c90b959),
-	171: uint64(0x3feeba44cbc8520f),
-	172: uint64(0xbc92434322f4f9aa),
-	173: uint64(0x3feebd829fde4e50),
-	174: uint64(0xbc85ca6cd7668e4b),
-	175: uint64(0x3feec0f170ca07ba),
-	176: uint64(0x3c71affc2b91ce27),
-	177: uint64(0x3feec49182a3f090),
-	178: uint64(0x3c6dd235e10a73bb),
-	179: uint64(0x3feec86319e32323),
-	180: uint64(0xbc87c50422622263),
-	181: uint64(0x3feecc667b5de565),
-	182: uint64(0x3c8b1c86e3e231d5),
-	183: uint64(0x3feed09bec4a2d33),
-	184: uint64(0xbc91bbd1d3bcbb15),
-	185: uint64(0x3feed503b23e255d),
-	186: uint64(0x3c90cc319cee31d2),
-	187: uint64(0x3feed99e1330b358),
-	188: uint64(0x3c8469846e735ab3),
-	189: uint64(0x3feede6b5579fdbf),
-	190: uint64(0xbc82dfcd978e9db4),
-	191: uint64(0x3feee36bbfd3f37a),
-	192: uint64(0x3c8c1a7792cb3387),
-	193: uint64(0x3feee89f995ad3ad),
-	194: uint64(0xbc907b8f4ad1d9fa),
-	195: uint64(0x3feeee07298db666),
-	196: uint64(0xbc55c3d956dcaeba),
-	197: uint64(0x3feef3a2b84f15fb),
-	198: uint64(0xbc90a40e3da6f640),
-	199: uint64(0x3feef9728de5593a),
-	200: uint64(0xbc68d6f438ad9334),
-	201: uint64(0x3feeff76f2fb5e47),
-	202: uint64(0xbc91eee26b588a35),
-	203: uint64(0x3fef05b030a1064a),
-	204: uint64(0x3c74ffd70a5fddcd),
-	205: uint64(0x3fef0c1e904bc1d2),
-	206: uint64(0xbc91bdfbfa9298ac),
-	207: uint64(0x3fef12c25bd71e09),
-	208: uint64(0x3c736eae30af0cb3),
-	209: uint64(0x3fef199bdd85529c),
-	210: uint64(0x3c8ee3325c9ffd94),
-	211: uint64(0x3fef20ab5fffd07a),
-	212: uint64(0x3c84e08fd10959ac),
-	213: uint64(0x3fef27f12e57d14b),
-	214: uint64(0x3c63cdaf384e1a67),
-	215: uint64(0x3fef2f6d9406e7b5),
-	216: uint64(0x3c676b2c6c921968),
-	217: uint64(0x3fef3720dcef9069),
-	218: uint64(0xbc808a1883ccb5d2),
-	219: uint64(0x3fef3f0b555dc3fa),
-	220: uint64(0xbc8fad5d3ffffa6f),
-	221: uint64(0x3fef472d4a07897c),
-	222: uint64(0xbc900dae3875a949),
-	223: uint64(0x3fef4f87080d89f2),
-	224: uint64(0x3c74a385a63d07a7),
-	225: uint64(0x3fef5818dcfba487),
-	226: uint64(0xbc82919e2040220f),
-	227: uint64(0x3fef60e316c98398),
-	228: uint64(0x3c8e5a50d5c192ac),
-	229: uint64(0x3fef69e603db3285),
-	230: uint64(0x3c843a59ac016b4b),
-	231: uint64(0x3fef7321f301b460),
-	232: uint64(0xbc82d52107b43e1f),
-	233: uint64(0x3fef7c97337b9b5f),
-	234: uint64(0xbc892ab93b470dc9),
-	235: uint64(0x3fef864614f5a129),
-	236: uint64(0x3c74b604603a88d3),
-	237: uint64(0x3fef902ee78b3ff6),
-	238: uint64(0x3c83c5ec519d7271),
-	239: uint64(0x3fef9a51fbc74c83),
-	240: uint64(0xbc8ff7128fd391f0),
-	241: uint64(0x3fefa4afa2a490da),
-	242: uint64(0xbc8dae98e223747d),
-	243: uint64(0x3fefaf482d8e67f1),
-	244: uint64(0x3c8ec3bc41aa2008),
-	245: uint64(0x3fefba1bee615a27),
-	246: uint64(0x3c842b94c3a9eb32),
-	247: uint64(0x3fefc52b376bba97),
-	248: uint64(0x3c8a64a931d185ee),
-	249: uint64(0x3fefd0765b6e4540),
-	250: uint64(0xbc8e37bae43be3ed),
-	251: uint64(0x3fefdbfdad9cbe14),
-	252: uint64(0x3c77893b4d91cd9d),
-	253: uint64(0x3fefe7c1819e90d8),
-	254: uint64(0x3c5305c14160cc89),
-	255: uint64(0x3feff3c22b8f71f1)}}
+var x___exp_data = Texp_data{
+	Finvln2N:   Float64FromFloat64(1.4426950408889634) * float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP_TABLE_BITS)),
+	Fshift:     float64(6.755399441055744e+15),
+	Fnegln2hiN: -Float64FromFloat64(0.005415212348111709),
+	Fnegln2loN: -Float64FromFloat64(1.2864023111638346e-14),
+	Fpoly: [4]float64{
+		0: float64(0.49999999999996786),
+		1: float64(0.16666666666665886),
+		2: float64(0.0416666808410674),
+		3: float64(0.008333335853059549),
+	},
+	Fexp2_shift: Float64FromFloat64(6.755399441055744e+15) / float64(Int32FromInt32(1)<<Int32FromInt32(m_EXP_TABLE_BITS)),
+	Fexp2_poly: [5]float64{
+		0: float64(0.6931471805599453),
+		1: float64(0.24022650695909065),
+		2: float64(0.0555041086686087),
+		3: float64(0.009618131975721055),
+		4: float64(0.0013332074570119598),
+	},
+	Ftab: [256]uint64{
+		0:   uint64(0x0),
+		1:   uint64(0x3ff0000000000000),
+		2:   uint64(0x3c9b3b4f1a88bf6e),
+		3:   uint64(0x3feff63da9fb3335),
+		4:   uint64(0xbc7160139cd8dc5d),
+		5:   uint64(0x3fefec9a3e778061),
+		6:   uint64(0xbc905e7a108766d1),
+		7:   uint64(0x3fefe315e86e7f85),
+		8:   uint64(0x3c8cd2523567f613),
+		9:   uint64(0x3fefd9b0d3158574),
+		10:  uint64(0xbc8bce8023f98efa),
+		11:  uint64(0x3fefd06b29ddf6de),
+		12:  uint64(0x3c60f74e61e6c861),
+		13:  uint64(0x3fefc74518759bc8),
+		14:  uint64(0x3c90a3e45b33d399),
+		15:  uint64(0x3fefbe3ecac6f383),
+		16:  uint64(0x3c979aa65d837b6d),
+		17:  uint64(0x3fefb5586cf9890f),
+		18:  uint64(0x3c8eb51a92fdeffc),
+		19:  uint64(0x3fefac922b7247f7),
+		20:  uint64(0x3c3ebe3d702f9cd1),
+		21:  uint64(0x3fefa3ec32d3d1a2),
+		22:  uint64(0xbc6a033489906e0b),
+		23:  uint64(0x3fef9b66affed31b),
+		24:  uint64(0xbc9556522a2fbd0e),
+		25:  uint64(0x3fef9301d0125b51),
+		26:  uint64(0xbc5080ef8c4eea55),
+		27:  uint64(0x3fef8abdc06c31cc),
+		28:  uint64(0xbc91c923b9d5f416),
+		29:  uint64(0x3fef829aaea92de0),
+		30:  uint64(0x3c80d3e3e95c55af),
+		31:  uint64(0x3fef7a98c8a58e51),
+		32:  uint64(0xbc801b15eaa59348),
+		33:  uint64(0x3fef72b83c7d517b),
+		34:  uint64(0xbc8f1ff055de323d),
+		35:  uint64(0x3fef6af9388c8dea),
+		36:  uint64(0x3c8b898c3f1353bf),
+		37:  uint64(0x3fef635beb6fcb75),
+		38:  uint64(0xbc96d99c7611eb26),
+		39:  uint64(0x3fef5be084045cd4),
+		40:  uint64(0x3c9aecf73e3a2f60),
+		41:  uint64(0x3fef54873168b9aa),
+		42:  uint64(0xbc8fe782cb86389d),
+		43:  uint64(0x3fef4d5022fcd91d),
+		44:  uint64(0x3c8a6f4144a6c38d),
+		45:  uint64(0x3fef463b88628cd6),
+		46:  uint64(0x3c807a05b0e4047d),
+		47:  uint64(0x3fef3f49917ddc96),
+		48:  uint64(0x3c968efde3a8a894),
+		49:  uint64(0x3fef387a6e756238),
+		50:  uint64(0x3c875e18f274487d),
+		51:  uint64(0x3fef31ce4fb2a63f),
+		52:  uint64(0x3c80472b981fe7f2),
+		53:  uint64(0x3fef2b4565e27cdd),
+		54:  uint64(0xbc96b87b3f71085e),
+		55:  uint64(0x3fef24dfe1f56381),
+		56:  uint64(0x3c82f7e16d09ab31),
+		57:  uint64(0x3fef1e9df51fdee1),
+		58:  uint64(0xbc3d219b1a6fbffa),
+		59:  uint64(0x3fef187fd0dad990),
+		60:  uint64(0x3c8b3782720c0ab4),
+		61:  uint64(0x3fef1285a6e4030b),
+		62:  uint64(0x3c6e149289cecb8f),
+		63:  uint64(0x3fef0cafa93e2f56),
+		64:  uint64(0x3c834d754db0abb6),
+		65:  uint64(0x3fef06fe0a31b715),
+		66:  uint64(0x3c864201e2ac744c),
+		67:  uint64(0x3fef0170fc4cd831),
+		68:  uint64(0x3c8fdd395dd3f84a),
+		69:  uint64(0x3feefc08b26416ff),
+		70:  uint64(0xbc86a3803b8e5b04),
+		71:  uint64(0x3feef6c55f929ff1),
+		72:  uint64(0xbc924aedcc4b5068),
+		73:  uint64(0x3feef1a7373aa9cb),
+		74:  uint64(0xbc9907f81b512d8e),
+		75:  uint64(0x3feeecae6d05d866),
+		76:  uint64(0xbc71d1e83e9436d2),
+		77:  uint64(0x3feee7db34e59ff7),
+		78:  uint64(0xbc991919b3ce1b15),
+		79:  uint64(0x3feee32dc313a8e5),
+		80:  uint64(0x3c859f48a72a4c6d),
+		81:  uint64(0x3feedea64c123422),
+		82:  uint64(0xbc9312607a28698a),
+		83:  uint64(0x3feeda4504ac801c),
+		84:  uint64(0xbc58a78f4817895b),
+		85:  uint64(0x3feed60a21f72e2a),
+		86:  uint64(0xbc7c2c9b67499a1b),
+		87:  uint64(0x3feed1f5d950a897),
+		88:  uint64(0x3c4363ed60c2ac11),
+		89:  uint64(0x3feece086061892d),
+		90:  uint64(0x3c9666093b0664ef),
+		91:  uint64(0x3feeca41ed1d0057),
+		92:  uint64(0x3c6ecce1daa10379),
+		93:  uint64(0x3feec6a2b5c13cd0),
+		94:  uint64(0x3c93ff8e3f0f1230),
+		95:  uint64(0x3feec32af0d7d3de),
+		96:  uint64(0x3c7690cebb7aafb0),
+		97:  uint64(0x3feebfdad5362a27),
+		98:  uint64(0x3c931dbdeb54e077),
+		99:  uint64(0x3feebcb299fddd0d),
+		100: uint64(0xbc8f94340071a38e),
+		101: uint64(0x3feeb9b2769d2ca7),
+		102: uint64(0xbc87deccdc93a349),
+		103: uint64(0x3feeb6daa2cf6642),
+		104: uint64(0xbc78dec6bd0f385f),
+		105: uint64(0x3feeb42b569d4f82),
+		106: uint64(0xbc861246ec7b5cf6),
+		107: uint64(0x3feeb1a4ca5d920f),
+		108: uint64(0x3c93350518fdd78e),
+		109: uint64(0x3feeaf4736b527da),
+		110: uint64(0x3c7b98b72f8a9b05),
+		111: uint64(0x3feead12d497c7fd),
+		112: uint64(0x3c9063e1e21c5409),
+		113: uint64(0x3feeab07dd485429),
+		114: uint64(0x3c34c7855019c6ea),
+		115: uint64(0x3feea9268a5946b7),
+		116: uint64(0x3c9432e62b64c035),
+		117: uint64(0x3feea76f15ad2148),
+		118: uint64(0xbc8ce44a6199769f),
+		119: uint64(0x3feea5e1b976dc09),
+		120: uint64(0xbc8c33c53bef4da8),
+		121: uint64(0x3feea47eb03a5585),
+		122: uint64(0xbc845378892be9ae),
+		123: uint64(0x3feea34634ccc320),
+		124: uint64(0xbc93cedd78565858),
+		125: uint64(0x3feea23882552225),
+		126: uint64(0x3c5710aa807e1964),
+		127: uint64(0x3feea155d44ca973),
+		128: uint64(0xbc93b3efbf5e2228),
+		129: uint64(0x3feea09e667f3bcd),
+		130: uint64(0xbc6a12ad8734b982),
+		131: uint64(0x3feea012750bdabf),
+		132: uint64(0xbc6367efb86da9ee),
+		133: uint64(0x3fee9fb23c651a2f),
+		134: uint64(0xbc80dc3d54e08851),
+		135: uint64(0x3fee9f7df9519484),
+		136: uint64(0xbc781f647e5a3ecf),
+		137: uint64(0x3fee9f75e8ec5f74),
+		138: uint64(0xbc86ee4ac08b7db0),
+		139: uint64(0x3fee9f9a48a58174),
+		140: uint64(0xbc8619321e55e68a),
+		141: uint64(0x3fee9feb564267c9),
+		142: uint64(0x3c909ccb5e09d4d3),
+		143: uint64(0x3feea0694fde5d3f),
+		144: uint64(0xbc7b32dcb94da51d),
+		145: uint64(0x3feea11473eb0187),
+		146: uint64(0x3c94ecfd5467c06b),
+		147: uint64(0x3feea1ed0130c132),
+		148: uint64(0x3c65ebe1abd66c55),
+		149: uint64(0x3feea2f336cf4e62),
+		150: uint64(0xbc88a1c52fb3cf42),
+		151: uint64(0x3feea427543e1a12),
+		152: uint64(0xbc9369b6f13b3734),
+		153: uint64(0x3feea589994cce13),
+		154: uint64(0xbc805e843a19ff1e),
+		155: uint64(0x3feea71a4623c7ad),
+		156: uint64(0xbc94d450d872576e),
+		157: uint64(0x3feea8d99b4492ed),
+		158: uint64(0x3c90ad675b0e8a00),
+		159: uint64(0x3feeaac7d98a6699),
+		160: uint64(0x3c8db72fc1f0eab4),
+		161: uint64(0x3feeace5422aa0db),
+		162: uint64(0xbc65b6609cc5e7ff),
+		163: uint64(0x3feeaf3216b5448c),
+		164: uint64(0x3c7bf68359f35f44),
+		165: uint64(0x3feeb1ae99157736),
+		166: uint64(0xbc93091fa71e3d83),
+		167: uint64(0x3feeb45b0b91ffc6),
+		168: uint64(0xbc5da9b88b6c1e29),
+		169: uint64(0x3feeb737b0cdc5e5),
+		170: uint64(0xbc6c23f97c90b959),
+		171: uint64(0x3feeba44cbc8520f),
+		172: uint64(0xbc92434322f4f9aa),
+		173: uint64(0x3feebd829fde4e50),
+		174: uint64(0xbc85ca6cd7668e4b),
+		175: uint64(0x3feec0f170ca07ba),
+		176: uint64(0x3c71affc2b91ce27),
+		177: uint64(0x3feec49182a3f090),
+		178: uint64(0x3c6dd235e10a73bb),
+		179: uint64(0x3feec86319e32323),
+		180: uint64(0xbc87c50422622263),
+		181: uint64(0x3feecc667b5de565),
+		182: uint64(0x3c8b1c86e3e231d5),
+		183: uint64(0x3feed09bec4a2d33),
+		184: uint64(0xbc91bbd1d3bcbb15),
+		185: uint64(0x3feed503b23e255d),
+		186: uint64(0x3c90cc319cee31d2),
+		187: uint64(0x3feed99e1330b358),
+		188: uint64(0x3c8469846e735ab3),
+		189: uint64(0x3feede6b5579fdbf),
+		190: uint64(0xbc82dfcd978e9db4),
+		191: uint64(0x3feee36bbfd3f37a),
+		192: uint64(0x3c8c1a7792cb3387),
+		193: uint64(0x3feee89f995ad3ad),
+		194: uint64(0xbc907b8f4ad1d9fa),
+		195: uint64(0x3feeee07298db666),
+		196: uint64(0xbc55c3d956dcaeba),
+		197: uint64(0x3feef3a2b84f15fb),
+		198: uint64(0xbc90a40e3da6f640),
+		199: uint64(0x3feef9728de5593a),
+		200: uint64(0xbc68d6f438ad9334),
+		201: uint64(0x3feeff76f2fb5e47),
+		202: uint64(0xbc91eee26b588a35),
+		203: uint64(0x3fef05b030a1064a),
+		204: uint64(0x3c74ffd70a5fddcd),
+		205: uint64(0x3fef0c1e904bc1d2),
+		206: uint64(0xbc91bdfbfa9298ac),
+		207: uint64(0x3fef12c25bd71e09),
+		208: uint64(0x3c736eae30af0cb3),
+		209: uint64(0x3fef199bdd85529c),
+		210: uint64(0x3c8ee3325c9ffd94),
+		211: uint64(0x3fef20ab5fffd07a),
+		212: uint64(0x3c84e08fd10959ac),
+		213: uint64(0x3fef27f12e57d14b),
+		214: uint64(0x3c63cdaf384e1a67),
+		215: uint64(0x3fef2f6d9406e7b5),
+		216: uint64(0x3c676b2c6c921968),
+		217: uint64(0x3fef3720dcef9069),
+		218: uint64(0xbc808a1883ccb5d2),
+		219: uint64(0x3fef3f0b555dc3fa),
+		220: uint64(0xbc8fad5d3ffffa6f),
+		221: uint64(0x3fef472d4a07897c),
+		222: uint64(0xbc900dae3875a949),
+		223: uint64(0x3fef4f87080d89f2),
+		224: uint64(0x3c74a385a63d07a7),
+		225: uint64(0x3fef5818dcfba487),
+		226: uint64(0xbc82919e2040220f),
+		227: uint64(0x3fef60e316c98398),
+		228: uint64(0x3c8e5a50d5c192ac),
+		229: uint64(0x3fef69e603db3285),
+		230: uint64(0x3c843a59ac016b4b),
+		231: uint64(0x3fef7321f301b460),
+		232: uint64(0xbc82d52107b43e1f),
+		233: uint64(0x3fef7c97337b9b5f),
+		234: uint64(0xbc892ab93b470dc9),
+		235: uint64(0x3fef864614f5a129),
+		236: uint64(0x3c74b604603a88d3),
+		237: uint64(0x3fef902ee78b3ff6),
+		238: uint64(0x3c83c5ec519d7271),
+		239: uint64(0x3fef9a51fbc74c83),
+		240: uint64(0xbc8ff7128fd391f0),
+		241: uint64(0x3fefa4afa2a490da),
+		242: uint64(0xbc8dae98e223747d),
+		243: uint64(0x3fefaf482d8e67f1),
+		244: uint64(0x3c8ec3bc41aa2008),
+		245: uint64(0x3fefba1bee615a27),
+		246: uint64(0x3c842b94c3a9eb32),
+		247: uint64(0x3fefc52b376bba97),
+		248: uint64(0x3c8a64a931d185ee),
+		249: uint64(0x3fefd0765b6e4540),
+		250: uint64(0xbc8e37bae43be3ed),
+		251: uint64(0x3fefdbfdad9cbe14),
+		252: uint64(0x3c77893b4d91cd9d),
+		253: uint64(0x3fefe7c1819e90d8),
+		254: uint64(0x3c5305c14160cc89),
+		255: uint64(0x3feff3c22b8f71f1),
+	},
+}
 
 var x___fsmu8 = [51]uint32{
 	0:  (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23) | Uint32FromInt32(0x2),
@@ -149021,7 +150809,8 @@ var x___fsmu8 = [51]uint32{
 	47: (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(6) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(12) | Uint32FromInt32(0x1),
 	48: (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(6) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(12) | Uint32FromInt32(0x2),
 	49: (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(6) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(12) | Uint32FromInt32(0x3),
-	50: (Uint32FromUint32(0x40)-Uint32FromInt32(0x90))<<Int32FromInt32(23) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(6) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(12) | Uint32FromInt32(0x4)}
+	50: (Uint32FromUint32(0x40)-Uint32FromInt32(0x90))<<Int32FromInt32(23) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(6) | (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23)>>Int32FromInt32(12) | Uint32FromInt32(0x4),
+}
 
 var x___gettext_lockptr = uintptr(unsafe.Pointer(&_lock2))
 
@@ -149035,486 +150824,1767 @@ var x___locale_lock [1]int32
 
 var x___locale_lockptr = uintptr(unsafe.Pointer(&x___locale_lock))
 
-var x___log2_data = Tlog2_data{Finvln2hi: float64(1.4426950407214463), Finvln2lo: float64(1.6751713164886512e-10), Fpoly: [6]float64{
-	0: -Float64FromFloat64(0.7213475204444882),
-	1: float64(0.4808983469629985),
-	2: -Float64FromFloat64(0.36067375954075914),
-	3: float64(0.2885390073180969),
-	4: -Float64FromFloat64(0.2404693555628422),
-	5: float64(0.2061202382173603)}, Fpoly1: [10]float64{
-	0: -Float64FromFloat64(0.7213475204444817),
-	1: float64(0.48089834696298744),
-	2: -Float64FromFloat64(0.360673760222145),
-	3: float64(0.2885390081805197),
-	4: -Float64FromFloat64(0.24044917405728863),
-	5: float64(0.2060992861022954),
-	6: -Float64FromFloat64(0.18033596705327856),
-	7: float64(0.1603032746063156),
-	8: -Float64FromFloat64(0.14483316576701266),
-	9: float64(0.13046826811283835)}, Ftab: [64]struct {
-	Finvc float64
-	Flogc float64
-}{
-	0:  {Finvc: float64(1.4463276106642393), Flogc: -Float64FromFloat64(0.5323943771486483)},
-	1:  {Finvc: float64(1.4301675812282968), Flogc: -Float64FromFloat64(0.516184206053822)},
-	2:  {Finvc: float64(1.4143648676229383), Flogc: -Float64FromFloat64(0.5001543441974263)},
-	3:  {Finvc: float64(1.3989068970611538), Flogc: -Float64FromFloat64(0.4842999484799293)},
-	4:  {Finvc: float64(1.3837838957784339), Flogc: -Float64FromFloat64(0.46861865624623533)},
-	5:  {Finvc: float64(1.368983882697786), Flogc: -Float64FromFloat64(0.4531054615783887)},
-	6:  {Finvc: float64(1.3544972916324536), Flogc: -Float64FromFloat64(0.43775750882059583)},
-	7:  {Finvc: float64(1.3403139676437443), Flogc: -Float64FromFloat64(0.4225709906127122)},
-	8:  {Finvc: float64(1.3264249304188642), Flogc: -Float64FromFloat64(0.40754302793970965)},
-	9:  {Finvc: float64(1.3128203652112156), Flogc: -Float64FromFloat64(0.3926695240384106)},
-	10: {Finvc: float64(1.299492412370217), Flogc: -Float64FromFloat64(0.3779482100565019)},
-	11: {Finvc: float64(1.28643198385998), Flogc: -Float64FromFloat64(0.36337518101890964)},
-	12: {Finvc: float64(1.2736319291846832), Flogc: -Float64FromFloat64(0.3489484089425332)},
-	13: {Finvc: float64(1.2610838968062879), Flogc: -Float64FromFloat64(0.33466425780738973)},
-	14: {Finvc: float64(1.248780314313572), Flogc: -Float64FromFloat64(0.3205197000629596)},
-	15: {Finvc: float64(1.2367150450059063), Flogc: -Float64FromFloat64(0.3065131231801388)},
-	16: {Finvc: float64(1.2248804968401878), Flogc: -Float64FromFloat64(0.2926410022678283)},
-	17: {Finvc: float64(1.2132702353497795), Flogc: -Float64FromFloat64(0.2789009220805383)},
-	18: {Finvc: float64(1.2018780785715362), Flogc: -Float64FromFloat64(0.2652905529862437)},
-	19: {Finvc: float64(1.190697765061355), Flogc: -Float64FromFloat64(0.2518072602367738)},
-	20: {Finvc: float64(1.1797235410550593), Flogc: -Float64FromFloat64(0.23844881494437686)},
-	21: {Finvc: float64(1.1689498986205256), Flogc: -Float64FromFloat64(0.22521309705462045)},
-	22: {Finvc: float64(1.158371137408455), Flogc: -Float64FromFloat64(0.21209756102439314)},
-	23: {Finvc: float64(1.1479820146386086), Flogc: -Float64FromFloat64(0.1991000395789797)},
-	24: {Finvc: float64(1.1377775576851088), Flogc: -Float64FromFloat64(0.18621852970682085)},
-	25: {Finvc: float64(1.127753150630225), Flogc: -Float64FromFloat64(0.17345131655361)},
-	26: {Finvc: float64(1.1179037012282074), Flogc: -Float64FromFloat64(0.16079591649577196)},
-	27: {Finvc: float64(1.1082251967632821), Flogc: -Float64FromFloat64(0.14825107384353942)},
-	28: {Finvc: float64(1.098712461056607), Flogc: -Float64FromFloat64(0.13581387465410444)},
-	29: {Finvc: float64(1.0893619091634283), Flogc: -Float64FromFloat64(0.12348332762257996)},
-	30: {Finvc: float64(1.0801689912316736), Flogc: -Float64FromFloat64(0.11125703807351783)},
-	31: {Finvc: float64(1.071129489697672), Flogc: -Float64FromFloat64(0.09913289918449664)},
-	32: {Finvc: float64(1.0622406576750423), Flogc: -Float64FromFloat64(0.08711065531497297)},
-	33: {Finvc: float64(1.0534977607927976), Flogc: -Float64FromFloat64(0.07518724771330199)},
-	34: {Finvc: float64(1.044897877982342), Flogc: -Float64FromFloat64(0.06336194888240243)},
-	35: {Finvc: float64(1.0364370289499079), Flogc: -Float64FromFloat64(0.0516324649456692)},
-	36: {Finvc: float64(1.0281122132034575), Flogc: -Float64FromFloat64(0.039997735929773626)},
-	37: {Finvc: float64(1.0199202450036955), Flogc: -Float64FromFloat64(0.028456341769015125)},
-	38: {Finvc: float64(1.0118577522306755), Flogc: -Float64FromFloat64(0.017006489068080555)},
-	39: {Finvc: float64(1.003921649236766), Flogc: -Float64FromFloat64(0.005646678981520381)},
-	40: {Finvc: float64(0.9922480467550775), Flogc: float64(0.011227277611396858)},
-	41: {Finvc: float64(0.9770993366178549), Flogc: float64(0.033422853921138085)},
-	42: {Finvc: float64(0.9624059787315814), Flogc: float64(0.05528248992573026)},
-	43: {Finvc: float64(0.9481480598286369), Flogc: float64(0.07681573143713649)},
-	44: {Finvc: float64(0.9343065931261065), Flogc: float64(0.09803204623631245)},
-	45: {Finvc: float64(0.9208633936884979), Flogc: float64(0.11894094059630334)},
-	46: {Finvc: float64(0.9078013641840602), Flogc: float64(0.13955143862290242)},
-	47: {Finvc: float64(0.8951048181512927), Flogc: float64(0.15987146080919956)},
-	48: {Finvc: float64(0.882758574260473), Flogc: float64(0.17990916589428707)},
-	49: {Finvc: float64(0.8707481902241709), Flogc: float64(0.19967252559081317)},
-	50: {Finvc: float64(0.8590602881746972), Flogc: float64(0.2191687127685782)},
-	51: {Finvc: float64(0.8476822044336688), Flogc: float64(0.23840459427242422)},
-	52: {Finvc: float64(0.8366013284053287), Flogc: float64(0.25738780610663525)},
-	53: {Finvc: float64(0.8258064913621258), Flogc: float64(0.27612433583180973)},
-	54: {Finvc: float64(0.8152865101579193), Flogc: float64(0.2946209507022104)},
-	55: {Finvc: float64(0.8050314363208223), Flogc: float64(0.31288297359969874)},
-	56: {Finvc: float64(0.7950310492640542), Flogc: float64(0.33091689015759584)},
-	57: {Finvc: float64(0.7852760432487271), Flogc: float64(0.3487282100279572)},
-	58: {Finvc: float64(0.7757575660314712), Flogc: float64(0.36632223233368677)},
-	59: {Finvc: float64(0.7664670566588946), Flogc: float64(0.383704309808536)},
-	60: {Finvc: float64(0.7573965608078645), Flogc: float64(0.4008792246509074)},
-	61: {Finvc: float64(0.7485380168514022), Flogc: float64(0.41785250494945103)},
-	62: {Finvc: float64(0.7398844213755009), Flogc: float64(0.4346281724315304)},
-	63: {Finvc: float64(0.7314286113178112), Flogc: float64(0.45121103315341315)}}, Ftab2: [64]struct {
-	Fchi float64
-	Fclo float64
-}{
-	0:  {Fchi: float64(0.6914062848739648), Fclo: float64(4.339971893418182e-17)},
-	1:  {Fchi: float64(0.6992187580850853), Fclo: float64(7.805593338712074e-18)},
-	2:  {Fchi: float64(0.7070311366547563), Fclo: float64(3.20843320369626e-17)},
-	3:  {Fchi: float64(0.7148438556567389), Fclo: float64(4.336491946473985e-17)},
-	4:  {Fchi: float64(0.7226561915128084), Fclo: float64(4.681890319761607e-17)},
-	5:  {Fchi: float64(0.730468789763508), Fclo: -Float64FromFloat64(1.647126642147294e-17)},
-	6:  {Fchi: float64(0.7382812842650944), Fclo: float64(2.0846837208642192e-17)},
-	7:  {Fchi: float64(0.7460938437864584), Fclo: -Float64FromFloat64(7.82131795361932e-18)},
-	8:  {Fchi: float64(0.7539062159244969), Fclo: -Float64FromFloat64(3.470987810015201e-17)},
-	9:  {Fchi: float64(0.761718835645205), Fclo: float64(1.2996798345429576e-17)},
-	10: {Fchi: float64(0.7695312342578777), Fclo: -Float64FromFloat64(5.2071007285622585e-17)},
-	11: {Fchi: float64(0.7773438569208053), Fclo: -Float64FromFloat64(4.513636731226183e-17)},
-	12: {Fchi: float64(0.7851561955110148), Fclo: -Float64FromFloat64(2.0797044446832382e-17)},
-	13: {Fchi: float64(0.7929686538163826), Fclo: -Float64FromFloat64(1.9947626198727574e-17)},
-	14: {Fchi: float64(0.8007813612514213), Fclo: float64(1.472064871061342e-17)},
-	15: {Fchi: float64(0.8085937047812207), Fclo: float64(5.290804109377209e-17)},
-	16: {Fchi: float64(0.816406173973453), Fclo: -Float64FromFloat64(1.129659587857177e-17)},
-	17: {Fchi: float64(0.8242186867064328), Fclo: float64(3.901543738154691e-17)},
-	18: {Fchi: float64(0.8320311501051142), Fclo: -Float64FromFloat64(3.212482853127187e-17)},
-	19: {Fchi: float64(0.8398436860662717), Fclo: float64(5.220081794706035e-18)},
-	20: {Fchi: float64(0.8476562221566525), Fclo: -Float64FromFloat64(5.37416378988278e-17)},
-	21: {Fchi: float64(0.8554686571084844), Fclo: float64(4.291992377471359e-18)},
-	22: {Fchi: float64(0.8632811779454657), Fclo: float64(1.7319616935225806e-17)},
-	23: {Fchi: float64(0.8710937865301015), Fclo: float64(1.8251073579011692e-17)},
-	24: {Fchi: float64(0.8789064200163806), Fclo: float64(1.2113671810693101e-17)},
-	25: {Fchi: float64(0.8867188705623812), Fclo: -Float64FromFloat64(2.431195196496269e-17)},
-	26: {Fchi: float64(0.894531433164887), Fclo: -Float64FromFloat64(2.258952781769403e-17)},
-	27: {Fchi: float64(0.9023436779100781), Fclo: float64(4.3322028821617186e-17)},
-	28: {Fchi: float64(0.9101562378188762), Fclo: -Float64FromFloat64(5.2414676705491076e-18)},
-	29: {Fchi: float64(0.9179685755379005), Fclo: -Float64FromFloat64(2.3432856904274634e-17)},
-	30: {Fchi: float64(0.9257810658494647), Fclo: float64(3.9914341909758727e-17)},
-	31: {Fchi: float64(0.9335939394986237), Fclo: -Float64FromFloat64(1.8218382846902827e-17)},
-	32: {Fchi: float64(0.9414062555172099), Fclo: float64(4.423669374431538e-17)},
-	33: {Fchi: float64(0.9492189136192009), Fclo: -Float64FromFloat64(2.6059674623550364e-17)},
-	34: {Fchi: float64(0.9570313243730211), Fclo: -Float64FromFloat64(4.947019261946595e-17)},
-	35: {Fchi: float64(0.9648439529540691), Fclo: -Float64FromFloat64(5.4644837229582306e-17)},
-	36: {Fchi: float64(0.9726564738338594), Fclo: -Float64FromFloat64(5.4656321533328614e-17)},
-	37: {Fchi: float64(0.9804688208697894), Fclo: -Float64FromFloat64(1.782581090537996e-18)},
-	38: {Fchi: float64(0.98828120632121), Fclo: -Float64FromFloat64(5.2277711573086786e-18)},
-	39: {Fchi: float64(0.9960936700192217), Fclo: float64(4.1586638841164565e-17)},
-	40: {Fchi: float64(1.007812515499802), Fclo: float64(9.540912389137736e-17)},
-	41: {Fchi: float64(1.0234373952820537), Fclo: float64(3.985821704561347e-17)},
-	42: {Fchi: float64(1.0390625391978199), Fclo: -Float64FromFloat64(5.179495640960355e-18)},
-	43: {Fchi: float64(1.0546875982436061), Fclo: -Float64FromFloat64(6.074512782488841e-17)},
-	44: {Fchi: float64(1.07031247275489), Fclo: -Float64FromFloat64(4.853656019321416e-17)},
-	45: {Fchi: float64(1.0859374005459401), Fclo: -Float64FromFloat64(1.0233609026899023e-16)},
-	46: {Fchi: float64(1.101562565835984), Fclo: float64(9.714504510281668e-17)},
-	47: {Fchi: float64(1.1171875960464082), Fclo: -Float64FromFloat64(5.728631491659617e-17)},
-	48: {Fchi: float64(1.1328125595809087), Fclo: -Float64FromFloat64(4.3353271744463366e-17)},
-	49: {Fchi: float64(1.1484376438870962), Fclo: float64(5.029455257812864e-17)},
-	50: {Fchi: float64(1.1640626551656426), Fclo: -Float64FromFloat64(1.3886091944776072e-17)},
-	51: {Fchi: float64(1.179687381390876), Fclo: float64(9.535864385063222e-17)},
-	52: {Fchi: float64(1.19531246968748), Fclo: float64(2.5970710873556995e-17)},
-	53: {Fchi: float64(1.2109374417129501), Fclo: -Float64FromFloat64(1.0412863482435496e-16)},
-	54: {Fchi: float64(1.2265626715770166), Fclo: float64(1.903080930681457e-17)},
-	55: {Fchi: float64(1.2421875157698543), Fclo: float64(9.884933154288451e-17)},
-	56: {Fchi: float64(1.2578125104996614), Fclo: float64(2.605028401046449e-17)},
-	57: {Fchi: float64(1.273437549250769), Fclo: float64(3.128070230699857e-17)},
-	58: {Fchi: float64(1.2890625161616944), Fclo: -Float64FromFloat64(4.506460293510891e-17)},
-	59: {Fchi: float64(1.3046875156762752), Fclo: -Float64FromFloat64(2.0874781900380847e-17)},
-	60: {Fchi: float64(1.3203123063212308), Fclo: float64(8.50535702424751e-17)},
-	61: {Fchi: float64(1.3359374907988373), Fclo: -Float64FromFloat64(3.99657459893118e-17)},
-	62: {Fchi: float64(1.351562448282023), Fclo: float64(4.1576596545784e-17)},
-	63: {Fchi: float64(1.3671874254389709), Fclo: -Float64FromFloat64(6.072295450780066e-17)}}}
+var x___log2_data = Tlog2_data{
+	Finvln2hi: float64(1.4426950407214463),
+	Finvln2lo: float64(1.6751713164886512e-10),
+	Fpoly: [6]float64{
+		0: -Float64FromFloat64(0.7213475204444882),
+		1: float64(0.4808983469629985),
+		2: -Float64FromFloat64(0.36067375954075914),
+		3: float64(0.2885390073180969),
+		4: -Float64FromFloat64(0.2404693555628422),
+		5: float64(0.2061202382173603),
+	},
+	Fpoly1: [10]float64{
+		0: -Float64FromFloat64(0.7213475204444817),
+		1: float64(0.48089834696298744),
+		2: -Float64FromFloat64(0.360673760222145),
+		3: float64(0.2885390081805197),
+		4: -Float64FromFloat64(0.24044917405728863),
+		5: float64(0.2060992861022954),
+		6: -Float64FromFloat64(0.18033596705327856),
+		7: float64(0.1603032746063156),
+		8: -Float64FromFloat64(0.14483316576701266),
+		9: float64(0.13046826811283835),
+	},
+	Ftab: [64]struct {
+		Finvc float64
+		Flogc float64
+	}{
+		0: {
+			Finvc: float64(1.4463276106642393),
+			Flogc: -Float64FromFloat64(0.5323943771486483),
+		},
+		1: {
+			Finvc: float64(1.4301675812282968),
+			Flogc: -Float64FromFloat64(0.516184206053822),
+		},
+		2: {
+			Finvc: float64(1.4143648676229383),
+			Flogc: -Float64FromFloat64(0.5001543441974263),
+		},
+		3: {
+			Finvc: float64(1.3989068970611538),
+			Flogc: -Float64FromFloat64(0.4842999484799293),
+		},
+		4: {
+			Finvc: float64(1.3837838957784339),
+			Flogc: -Float64FromFloat64(0.46861865624623533),
+		},
+		5: {
+			Finvc: float64(1.368983882697786),
+			Flogc: -Float64FromFloat64(0.4531054615783887),
+		},
+		6: {
+			Finvc: float64(1.3544972916324536),
+			Flogc: -Float64FromFloat64(0.43775750882059583),
+		},
+		7: {
+			Finvc: float64(1.3403139676437443),
+			Flogc: -Float64FromFloat64(0.4225709906127122),
+		},
+		8: {
+			Finvc: float64(1.3264249304188642),
+			Flogc: -Float64FromFloat64(0.40754302793970965),
+		},
+		9: {
+			Finvc: float64(1.3128203652112156),
+			Flogc: -Float64FromFloat64(0.3926695240384106),
+		},
+		10: {
+			Finvc: float64(1.299492412370217),
+			Flogc: -Float64FromFloat64(0.3779482100565019),
+		},
+		11: {
+			Finvc: float64(1.28643198385998),
+			Flogc: -Float64FromFloat64(0.36337518101890964),
+		},
+		12: {
+			Finvc: float64(1.2736319291846832),
+			Flogc: -Float64FromFloat64(0.3489484089425332),
+		},
+		13: {
+			Finvc: float64(1.2610838968062879),
+			Flogc: -Float64FromFloat64(0.33466425780738973),
+		},
+		14: {
+			Finvc: float64(1.248780314313572),
+			Flogc: -Float64FromFloat64(0.3205197000629596),
+		},
+		15: {
+			Finvc: float64(1.2367150450059063),
+			Flogc: -Float64FromFloat64(0.3065131231801388),
+		},
+		16: {
+			Finvc: float64(1.2248804968401878),
+			Flogc: -Float64FromFloat64(0.2926410022678283),
+		},
+		17: {
+			Finvc: float64(1.2132702353497795),
+			Flogc: -Float64FromFloat64(0.2789009220805383),
+		},
+		18: {
+			Finvc: float64(1.2018780785715362),
+			Flogc: -Float64FromFloat64(0.2652905529862437),
+		},
+		19: {
+			Finvc: float64(1.190697765061355),
+			Flogc: -Float64FromFloat64(0.2518072602367738),
+		},
+		20: {
+			Finvc: float64(1.1797235410550593),
+			Flogc: -Float64FromFloat64(0.23844881494437686),
+		},
+		21: {
+			Finvc: float64(1.1689498986205256),
+			Flogc: -Float64FromFloat64(0.22521309705462045),
+		},
+		22: {
+			Finvc: float64(1.158371137408455),
+			Flogc: -Float64FromFloat64(0.21209756102439314),
+		},
+		23: {
+			Finvc: float64(1.1479820146386086),
+			Flogc: -Float64FromFloat64(0.1991000395789797),
+		},
+		24: {
+			Finvc: float64(1.1377775576851088),
+			Flogc: -Float64FromFloat64(0.18621852970682085),
+		},
+		25: {
+			Finvc: float64(1.127753150630225),
+			Flogc: -Float64FromFloat64(0.17345131655361),
+		},
+		26: {
+			Finvc: float64(1.1179037012282074),
+			Flogc: -Float64FromFloat64(0.16079591649577196),
+		},
+		27: {
+			Finvc: float64(1.1082251967632821),
+			Flogc: -Float64FromFloat64(0.14825107384353942),
+		},
+		28: {
+			Finvc: float64(1.098712461056607),
+			Flogc: -Float64FromFloat64(0.13581387465410444),
+		},
+		29: {
+			Finvc: float64(1.0893619091634283),
+			Flogc: -Float64FromFloat64(0.12348332762257996),
+		},
+		30: {
+			Finvc: float64(1.0801689912316736),
+			Flogc: -Float64FromFloat64(0.11125703807351783),
+		},
+		31: {
+			Finvc: float64(1.071129489697672),
+			Flogc: -Float64FromFloat64(0.09913289918449664),
+		},
+		32: {
+			Finvc: float64(1.0622406576750423),
+			Flogc: -Float64FromFloat64(0.08711065531497297),
+		},
+		33: {
+			Finvc: float64(1.0534977607927976),
+			Flogc: -Float64FromFloat64(0.07518724771330199),
+		},
+		34: {
+			Finvc: float64(1.044897877982342),
+			Flogc: -Float64FromFloat64(0.06336194888240243),
+		},
+		35: {
+			Finvc: float64(1.0364370289499079),
+			Flogc: -Float64FromFloat64(0.0516324649456692),
+		},
+		36: {
+			Finvc: float64(1.0281122132034575),
+			Flogc: -Float64FromFloat64(0.039997735929773626),
+		},
+		37: {
+			Finvc: float64(1.0199202450036955),
+			Flogc: -Float64FromFloat64(0.028456341769015125),
+		},
+		38: {
+			Finvc: float64(1.0118577522306755),
+			Flogc: -Float64FromFloat64(0.017006489068080555),
+		},
+		39: {
+			Finvc: float64(1.003921649236766),
+			Flogc: -Float64FromFloat64(0.005646678981520381),
+		},
+		40: {
+			Finvc: float64(0.9922480467550775),
+			Flogc: float64(0.011227277611396858),
+		},
+		41: {
+			Finvc: float64(0.9770993366178549),
+			Flogc: float64(0.033422853921138085),
+		},
+		42: {
+			Finvc: float64(0.9624059787315814),
+			Flogc: float64(0.05528248992573026),
+		},
+		43: {
+			Finvc: float64(0.9481480598286369),
+			Flogc: float64(0.07681573143713649),
+		},
+		44: {
+			Finvc: float64(0.9343065931261065),
+			Flogc: float64(0.09803204623631245),
+		},
+		45: {
+			Finvc: float64(0.9208633936884979),
+			Flogc: float64(0.11894094059630334),
+		},
+		46: {
+			Finvc: float64(0.9078013641840602),
+			Flogc: float64(0.13955143862290242),
+		},
+		47: {
+			Finvc: float64(0.8951048181512927),
+			Flogc: float64(0.15987146080919956),
+		},
+		48: {
+			Finvc: float64(0.882758574260473),
+			Flogc: float64(0.17990916589428707),
+		},
+		49: {
+			Finvc: float64(0.8707481902241709),
+			Flogc: float64(0.19967252559081317),
+		},
+		50: {
+			Finvc: float64(0.8590602881746972),
+			Flogc: float64(0.2191687127685782),
+		},
+		51: {
+			Finvc: float64(0.8476822044336688),
+			Flogc: float64(0.23840459427242422),
+		},
+		52: {
+			Finvc: float64(0.8366013284053287),
+			Flogc: float64(0.25738780610663525),
+		},
+		53: {
+			Finvc: float64(0.8258064913621258),
+			Flogc: float64(0.27612433583180973),
+		},
+		54: {
+			Finvc: float64(0.8152865101579193),
+			Flogc: float64(0.2946209507022104),
+		},
+		55: {
+			Finvc: float64(0.8050314363208223),
+			Flogc: float64(0.31288297359969874),
+		},
+		56: {
+			Finvc: float64(0.7950310492640542),
+			Flogc: float64(0.33091689015759584),
+		},
+		57: {
+			Finvc: float64(0.7852760432487271),
+			Flogc: float64(0.3487282100279572),
+		},
+		58: {
+			Finvc: float64(0.7757575660314712),
+			Flogc: float64(0.36632223233368677),
+		},
+		59: {
+			Finvc: float64(0.7664670566588946),
+			Flogc: float64(0.383704309808536),
+		},
+		60: {
+			Finvc: float64(0.7573965608078645),
+			Flogc: float64(0.4008792246509074),
+		},
+		61: {
+			Finvc: float64(0.7485380168514022),
+			Flogc: float64(0.41785250494945103),
+		},
+		62: {
+			Finvc: float64(0.7398844213755009),
+			Flogc: float64(0.4346281724315304),
+		},
+		63: {
+			Finvc: float64(0.7314286113178112),
+			Flogc: float64(0.45121103315341315),
+		},
+	},
+	Ftab2: [64]struct {
+		Fchi float64
+		Fclo float64
+	}{
+		0: {
+			Fchi: float64(0.6914062848739648),
+			Fclo: float64(4.339971893418182e-17),
+		},
+		1: {
+			Fchi: float64(0.6992187580850853),
+			Fclo: float64(7.805593338712074e-18),
+		},
+		2: {
+			Fchi: float64(0.7070311366547563),
+			Fclo: float64(3.20843320369626e-17),
+		},
+		3: {
+			Fchi: float64(0.7148438556567389),
+			Fclo: float64(4.336491946473985e-17),
+		},
+		4: {
+			Fchi: float64(0.7226561915128084),
+			Fclo: float64(4.681890319761607e-17),
+		},
+		5: {
+			Fchi: float64(0.730468789763508),
+			Fclo: -Float64FromFloat64(1.647126642147294e-17),
+		},
+		6: {
+			Fchi: float64(0.7382812842650944),
+			Fclo: float64(2.0846837208642192e-17),
+		},
+		7: {
+			Fchi: float64(0.7460938437864584),
+			Fclo: -Float64FromFloat64(7.82131795361932e-18),
+		},
+		8: {
+			Fchi: float64(0.7539062159244969),
+			Fclo: -Float64FromFloat64(3.470987810015201e-17),
+		},
+		9: {
+			Fchi: float64(0.761718835645205),
+			Fclo: float64(1.2996798345429576e-17),
+		},
+		10: {
+			Fchi: float64(0.7695312342578777),
+			Fclo: -Float64FromFloat64(5.2071007285622585e-17),
+		},
+		11: {
+			Fchi: float64(0.7773438569208053),
+			Fclo: -Float64FromFloat64(4.513636731226183e-17),
+		},
+		12: {
+			Fchi: float64(0.7851561955110148),
+			Fclo: -Float64FromFloat64(2.0797044446832382e-17),
+		},
+		13: {
+			Fchi: float64(0.7929686538163826),
+			Fclo: -Float64FromFloat64(1.9947626198727574e-17),
+		},
+		14: {
+			Fchi: float64(0.8007813612514213),
+			Fclo: float64(1.472064871061342e-17),
+		},
+		15: {
+			Fchi: float64(0.8085937047812207),
+			Fclo: float64(5.290804109377209e-17),
+		},
+		16: {
+			Fchi: float64(0.816406173973453),
+			Fclo: -Float64FromFloat64(1.129659587857177e-17),
+		},
+		17: {
+			Fchi: float64(0.8242186867064328),
+			Fclo: float64(3.901543738154691e-17),
+		},
+		18: {
+			Fchi: float64(0.8320311501051142),
+			Fclo: -Float64FromFloat64(3.212482853127187e-17),
+		},
+		19: {
+			Fchi: float64(0.8398436860662717),
+			Fclo: float64(5.220081794706035e-18),
+		},
+		20: {
+			Fchi: float64(0.8476562221566525),
+			Fclo: -Float64FromFloat64(5.37416378988278e-17),
+		},
+		21: {
+			Fchi: float64(0.8554686571084844),
+			Fclo: float64(4.291992377471359e-18),
+		},
+		22: {
+			Fchi: float64(0.8632811779454657),
+			Fclo: float64(1.7319616935225806e-17),
+		},
+		23: {
+			Fchi: float64(0.8710937865301015),
+			Fclo: float64(1.8251073579011692e-17),
+		},
+		24: {
+			Fchi: float64(0.8789064200163806),
+			Fclo: float64(1.2113671810693101e-17),
+		},
+		25: {
+			Fchi: float64(0.8867188705623812),
+			Fclo: -Float64FromFloat64(2.431195196496269e-17),
+		},
+		26: {
+			Fchi: float64(0.894531433164887),
+			Fclo: -Float64FromFloat64(2.258952781769403e-17),
+		},
+		27: {
+			Fchi: float64(0.9023436779100781),
+			Fclo: float64(4.3322028821617186e-17),
+		},
+		28: {
+			Fchi: float64(0.9101562378188762),
+			Fclo: -Float64FromFloat64(5.2414676705491076e-18),
+		},
+		29: {
+			Fchi: float64(0.9179685755379005),
+			Fclo: -Float64FromFloat64(2.3432856904274634e-17),
+		},
+		30: {
+			Fchi: float64(0.9257810658494647),
+			Fclo: float64(3.9914341909758727e-17),
+		},
+		31: {
+			Fchi: float64(0.9335939394986237),
+			Fclo: -Float64FromFloat64(1.8218382846902827e-17),
+		},
+		32: {
+			Fchi: float64(0.9414062555172099),
+			Fclo: float64(4.423669374431538e-17),
+		},
+		33: {
+			Fchi: float64(0.9492189136192009),
+			Fclo: -Float64FromFloat64(2.6059674623550364e-17),
+		},
+		34: {
+			Fchi: float64(0.9570313243730211),
+			Fclo: -Float64FromFloat64(4.947019261946595e-17),
+		},
+		35: {
+			Fchi: float64(0.9648439529540691),
+			Fclo: -Float64FromFloat64(5.4644837229582306e-17),
+		},
+		36: {
+			Fchi: float64(0.9726564738338594),
+			Fclo: -Float64FromFloat64(5.4656321533328614e-17),
+		},
+		37: {
+			Fchi: float64(0.9804688208697894),
+			Fclo: -Float64FromFloat64(1.782581090537996e-18),
+		},
+		38: {
+			Fchi: float64(0.98828120632121),
+			Fclo: -Float64FromFloat64(5.2277711573086786e-18),
+		},
+		39: {
+			Fchi: float64(0.9960936700192217),
+			Fclo: float64(4.1586638841164565e-17),
+		},
+		40: {
+			Fchi: float64(1.007812515499802),
+			Fclo: float64(9.540912389137736e-17),
+		},
+		41: {
+			Fchi: float64(1.0234373952820537),
+			Fclo: float64(3.985821704561347e-17),
+		},
+		42: {
+			Fchi: float64(1.0390625391978199),
+			Fclo: -Float64FromFloat64(5.179495640960355e-18),
+		},
+		43: {
+			Fchi: float64(1.0546875982436061),
+			Fclo: -Float64FromFloat64(6.074512782488841e-17),
+		},
+		44: {
+			Fchi: float64(1.07031247275489),
+			Fclo: -Float64FromFloat64(4.853656019321416e-17),
+		},
+		45: {
+			Fchi: float64(1.0859374005459401),
+			Fclo: -Float64FromFloat64(1.0233609026899023e-16),
+		},
+		46: {
+			Fchi: float64(1.101562565835984),
+			Fclo: float64(9.714504510281668e-17),
+		},
+		47: {
+			Fchi: float64(1.1171875960464082),
+			Fclo: -Float64FromFloat64(5.728631491659617e-17),
+		},
+		48: {
+			Fchi: float64(1.1328125595809087),
+			Fclo: -Float64FromFloat64(4.3353271744463366e-17),
+		},
+		49: {
+			Fchi: float64(1.1484376438870962),
+			Fclo: float64(5.029455257812864e-17),
+		},
+		50: {
+			Fchi: float64(1.1640626551656426),
+			Fclo: -Float64FromFloat64(1.3886091944776072e-17),
+		},
+		51: {
+			Fchi: float64(1.179687381390876),
+			Fclo: float64(9.535864385063222e-17),
+		},
+		52: {
+			Fchi: float64(1.19531246968748),
+			Fclo: float64(2.5970710873556995e-17),
+		},
+		53: {
+			Fchi: float64(1.2109374417129501),
+			Fclo: -Float64FromFloat64(1.0412863482435496e-16),
+		},
+		54: {
+			Fchi: float64(1.2265626715770166),
+			Fclo: float64(1.903080930681457e-17),
+		},
+		55: {
+			Fchi: float64(1.2421875157698543),
+			Fclo: float64(9.884933154288451e-17),
+		},
+		56: {
+			Fchi: float64(1.2578125104996614),
+			Fclo: float64(2.605028401046449e-17),
+		},
+		57: {
+			Fchi: float64(1.273437549250769),
+			Fclo: float64(3.128070230699857e-17),
+		},
+		58: {
+			Fchi: float64(1.2890625161616944),
+			Fclo: -Float64FromFloat64(4.506460293510891e-17),
+		},
+		59: {
+			Fchi: float64(1.3046875156762752),
+			Fclo: -Float64FromFloat64(2.0874781900380847e-17),
+		},
+		60: {
+			Fchi: float64(1.3203123063212308),
+			Fclo: float64(8.50535702424751e-17),
+		},
+		61: {
+			Fchi: float64(1.3359374907988373),
+			Fclo: -Float64FromFloat64(3.99657459893118e-17),
+		},
+		62: {
+			Fchi: float64(1.351562448282023),
+			Fclo: float64(4.1576596545784e-17),
+		},
+		63: {
+			Fchi: float64(1.3671874254389709),
+			Fclo: -Float64FromFloat64(6.072295450780066e-17),
+		},
+	},
+}
 
-var x___log2f_data = Tlog2f_data{Ftab: [16]struct {
-	Finvc float64
-	Flogc float64
-}{
-	0:  {Finvc: float64(1.398907162146528), Flogc: -Float64FromFloat64(0.48430022186289673)},
-	1:  {Finvc: float64(1.3403141896637998), Flogc: -Float64FromFloat64(0.42257122959194704)},
-	2:  {Finvc: float64(1.286432210124115), Flogc: -Float64FromFloat64(0.3633754347673556)},
-	3:  {Finvc: float64(1.2367150214269895), Flogc: -Float64FromFloat64(0.30651309567405577)},
-	4:  {Finvc: float64(1.1906977166711752), Flogc: -Float64FromFloat64(0.25180720160537634)},
-	5:  {Finvc: float64(1.1479821020556429), Flogc: -Float64FromFloat64(0.19910014943794563)},
-	6:  {Finvc: float64(1.1082251448272158), Flogc: -Float64FromFloat64(0.14825100623281615)},
-	7:  {Finvc: float64(1.0711297413057381), Flogc: -Float64FromFloat64(0.09913323807318392)},
-	8:  {Finvc: float64(1.036437278977283), Flogc: -Float64FromFloat64(0.051632812977629436)},
-	9:  {Finvc: float64(1), Flogc: float64(0)},
-	10: {Finvc: float64(0.9492859795739057), Flogc: float64(0.07508531937943004)},
-	11: {Finvc: float64(0.8951049428609004), Flogc: float64(0.15987125980713107)},
-	12: {Finvc: float64(0.8476821620351103), Flogc: float64(0.2384046664317681)},
-	13: {Finvc: float64(0.8050314851692001), Flogc: float64(0.31288288605863257)},
-	14: {Finvc: float64(0.7664671008843108), Flogc: float64(0.38370422656453185)},
-	15: {Finvc: float64(0.731428603316328), Flogc: float64(0.451211048935815)}}, Fpoly: [4]float64{
-	0: -Float64FromFloat64(0.36051725506874704),
-	1: float64(0.4811247078767291),
-	2: -Float64FromFloat64(0.7213476299867769),
-	3: float64(1.4426950186867042)}}
+var x___log2f_data = Tlog2f_data{
+	Ftab: [16]struct {
+		Finvc float64
+		Flogc float64
+	}{
+		0: {
+			Finvc: float64(1.398907162146528),
+			Flogc: -Float64FromFloat64(0.48430022186289673),
+		},
+		1: {
+			Finvc: float64(1.3403141896637998),
+			Flogc: -Float64FromFloat64(0.42257122959194704),
+		},
+		2: {
+			Finvc: float64(1.286432210124115),
+			Flogc: -Float64FromFloat64(0.3633754347673556),
+		},
+		3: {
+			Finvc: float64(1.2367150214269895),
+			Flogc: -Float64FromFloat64(0.30651309567405577),
+		},
+		4: {
+			Finvc: float64(1.1906977166711752),
+			Flogc: -Float64FromFloat64(0.25180720160537634),
+		},
+		5: {
+			Finvc: float64(1.1479821020556429),
+			Flogc: -Float64FromFloat64(0.19910014943794563),
+		},
+		6: {
+			Finvc: float64(1.1082251448272158),
+			Flogc: -Float64FromFloat64(0.14825100623281615),
+		},
+		7: {
+			Finvc: float64(1.0711297413057381),
+			Flogc: -Float64FromFloat64(0.09913323807318392),
+		},
+		8: {
+			Finvc: float64(1.036437278977283),
+			Flogc: -Float64FromFloat64(0.051632812977629436),
+		},
+		9: {
+			Finvc: float64(1),
+			Flogc: float64(0),
+		},
+		10: {
+			Finvc: float64(0.9492859795739057),
+			Flogc: float64(0.07508531937943004),
+		},
+		11: {
+			Finvc: float64(0.8951049428609004),
+			Flogc: float64(0.15987125980713107),
+		},
+		12: {
+			Finvc: float64(0.8476821620351103),
+			Flogc: float64(0.2384046664317681),
+		},
+		13: {
+			Finvc: float64(0.8050314851692001),
+			Flogc: float64(0.31288288605863257),
+		},
+		14: {
+			Finvc: float64(0.7664671008843108),
+			Flogc: float64(0.38370422656453185),
+		},
+		15: {
+			Finvc: float64(0.731428603316328),
+			Flogc: float64(0.451211048935815),
+		},
+	},
+	Fpoly: [4]float64{
+		0: -Float64FromFloat64(0.36051725506874704),
+		1: float64(0.4811247078767291),
+		2: -Float64FromFloat64(0.7213476299867769),
+		3: float64(1.4426950186867042),
+	},
+}
 
-var x___log_data = Tlog_data{Fln2hi: float64(0.6931471805598903), Fln2lo: float64(5.497923018708371e-14), Fpoly: [5]float64{
-	0: -Float64FromFloat64(0.5000000000000001),
-	1: float64(0.33333333331825593),
-	2: -Float64FromFloat64(0.2499999999622955),
-	3: float64(0.20000304511814496),
-	4: -Float64FromFloat64(0.16667054827627667)}, Fpoly1: [11]float64{
-	0:  -Float64FromFloat64(0.5),
-	1:  float64(0.3333333333333352),
-	2:  -Float64FromFloat64(0.24999999999998432),
-	3:  float64(0.19999999999320328),
-	4:  -Float64FromFloat64(0.16666666669929706),
-	5:  float64(0.14285715076560868),
-	6:  -Float64FromFloat64(0.12499997863982555),
-	7:  float64(0.11110712032936046),
-	8:  -Float64FromFloat64(0.10000486757818193),
-	9:  float64(0.09181994006195467),
-	10: -Float64FromFloat64(0.08328363062289341)}, Ftab: [128]struct {
-	Finvc float64
-	Flogc float64
-}{
-	0:   {Finvc: float64(1.4504249240398293), Flogc: -Float64FromFloat64(0.3718565645633589)},
-	1:   {Finvc: float64(1.442253508327276), Flogc: -Float64FromFloat64(0.36620682668944937)},
-	2:   {Finvc: float64(1.4341736174350004), Flogc: -Float64FromFloat64(0.3605888069791945)},
-	3:   {Finvc: float64(1.426183816329995), Flogc: -Float64FromFloat64(0.3550022171419869)},
-	4:   {Finvc: float64(1.4182825527052965), Flogc: -Float64FromFloat64(0.34944666968829097)},
-	5:   {Finvc: float64(1.4104682921759335), Flogc: -Float64FromFloat64(0.3439217713603284)},
-	6:   {Finvc: float64(1.4027396147468003), Flogc: -Float64FromFloat64(0.3384271921261188)},
-	7:   {Finvc: float64(1.3950954438932313), Flogc: -Float64FromFloat64(0.332962831494342)},
-	8:   {Finvc: float64(1.3875338232485754), Flogc: -Float64FromFloat64(0.32752794345742586)},
-	9:   {Finvc: float64(1.3800539211058593), Flogc: -Float64FromFloat64(0.32212257167088865)},
-	10:  {Finvc: float64(1.3726542695419708), Flogc: -Float64FromFloat64(0.3167462884799761)},
-	11:  {Finvc: float64(1.3653332798446802), Flogc: -Float64FromFloat64(0.3113985598928366)},
-	12:  {Finvc: float64(1.358090204587874), Flogc: -Float64FromFloat64(0.3060794515165526)},
-	13:  {Finvc: float64(1.3509234892132138), Flogc: -Float64FromFloat64(0.300788424667644)},
-	14:  {Finvc: float64(1.3438320840699889), Flogc: -Float64FromFloat64(0.2955252968476998)},
-	15:  {Finvc: float64(1.3368146974742003), Flogc: -Float64FromFloat64(0.29028969275850613)},
-	16:  {Finvc: float64(1.329870114677736), Flogc: -Float64FromFloat64(0.2850812793277555)},
-	17:  {Finvc: float64(1.322997339161106), Flogc: -Float64FromFloat64(0.27989987391470095)},
-	18:  {Finvc: float64(1.316195352741367), Flogc: -Float64FromFloat64(0.27474526621870154)},
-	19:  {Finvc: float64(1.3094628125672239), Flogc: -Float64FromFloat64(0.2696169863701243)},
-	20:  {Finvc: float64(1.3027990455471041), Flogc: -Float64FromFloat64(0.26451506180308115)},
-	21:  {Finvc: float64(1.2962024229438942), Flogc: -Float64FromFloat64(0.2594387762767383)},
-	22:  {Finvc: float64(1.2896726275815547), Flogc: -Float64FromFloat64(0.2543884090981692)},
-	23:  {Finvc: float64(1.2832080305745537), Flogc: -Float64FromFloat64(0.24936321635129843)},
-	24:  {Finvc: float64(1.276807885983376), Flogc: -Float64FromFloat64(0.24436312405975968)},
-	25:  {Finvc: float64(1.2704714060687552), Flogc: -Float64FromFloat64(0.23938801747897287)},
-	26:  {Finvc: float64(1.2641976054949482), Flogc: -Float64FromFloat64(0.23443761696705678)},
-	27:  {Finvc: float64(1.257985357514882), Flogc: -Float64FromFloat64(0.22951151871518505)},
-	28:  {Finvc: float64(1.2518337750655457), Flogc: -Float64FromFloat64(0.2246094963439873)},
-	29:  {Finvc: float64(1.2457421919097305), Flogc: -Float64FromFloat64(0.21973149037705753)},
-	30:  {Finvc: float64(1.2397094966625508), Flogc: -Float64FromFloat64(0.2148770752847895)},
-	31:  {Finvc: float64(1.2337348463589233), Flogc: -Float64FromFloat64(0.210046029103637)},
-	32:  {Finvc: float64(1.2278176973028803), Flogc: -Float64FromFloat64(0.20523836373934046)},
-	33:  {Finvc: float64(1.2219570190618474), Flogc: -Float64FromFloat64(0.20045368751368642)},
-	34:  {Finvc: float64(1.2161519732977757), Flogc: -Float64FromFloat64(0.1956917537758045)},
-	35:  {Finvc: float64(1.2104018095009725), Flogc: -Float64FromFloat64(0.19095237845203883)},
-	36:  {Finvc: float64(1.204705805718973), Flogc: -Float64FromFloat64(0.18623539250290833)},
-	37:  {Finvc: float64(1.1990631185441964), Flogc: -Float64FromFloat64(0.18154051731551135)},
-	38:  {Finvc: float64(1.1934733004462308), Flogc: -Float64FromFloat64(0.1768677957431919)},
-	39:  {Finvc: float64(1.1879350812847385), Flogc: -Float64FromFloat64(0.17221657406412305)},
-	40:  {Finvc: float64(1.1824481322833125), Flogc: -Float64FromFloat64(0.16758697765942543)},
-	41:  {Finvc: float64(1.1770114976921955), Flogc: -Float64FromFloat64(0.16297859687290384)},
-	42:  {Finvc: float64(1.1716248121809465), Flogc: -Float64FromFloat64(0.15839151377804228)},
-	43:  {Finvc: float64(1.1662869231674715), Flogc: -Float64FromFloat64(0.15382513241456763)},
-	44:  {Finvc: float64(1.1609977486762766), Flogc: -Float64FromFloat64(0.14927976358922024)},
-	45:  {Finvc: float64(1.1557563220795803), Flogc: -Float64FromFloat64(0.14475495398119165)},
-	46:  {Finvc: float64(1.1505619105480347), Flogc: -Float64FromFloat64(0.14025044090817573)},
-	47:  {Finvc: float64(1.1454138888505974), Flogc: -Float64FromFloat64(0.1357660466685502)},
-	48:  {Finvc: float64(1.140311877374656), Flogc: -Float64FromFloat64(0.1313018016355727)},
-	49:  {Finvc: float64(1.1352550225747513), Flogc: -Float64FromFloat64(0.12685731518763532)},
-	50:  {Finvc: float64(1.1302429094831266), Flogc: -Float64FromFloat64(0.1224325737671279)},
-	51:  {Finvc: float64(1.1252747693068048), Flogc: -Float64FromFloat64(0.11802724521862729)},
-	52:  {Finvc: float64(1.1203501571039876), Flogc: -Float64FromFloat64(0.11364127671663482)},
-	53:  {Finvc: float64(1.1154683327680124), Flogc: -Float64FromFloat64(0.10927434611278386)},
-	54:  {Finvc: float64(1.1106291463292157), Flogc: -Float64FromFloat64(0.10492665324943573)},
-	55:  {Finvc: float64(1.1058315813301596), Flogc: -Float64FromFloat64(0.10059761422644442)},
-	56:  {Finvc: float64(1.1010752177696026), Flogc: -Float64FromFloat64(0.09628717309055901)},
-	57:  {Finvc: float64(1.0963597137952512), Flogc: -Float64FromFloat64(0.09199534069557558)},
-	58:  {Finvc: float64(1.0916844827550398), Flogc: -Float64FromFloat64(0.08772190036688698)},
-	59:  {Finvc: float64(1.0870487291277784), Flogc: -Float64FromFloat64(0.08346643613867855)},
-	60:  {Finvc: float64(1.082452357388312), Flogc: -Float64FromFloat64(0.07922916827544668)},
-	61:  {Finvc: float64(1.0778948225025884), Flogc: -Float64FromFloat64(0.0750099004750382)},
-	62:  {Finvc: float64(1.0733751731601076), Flogc: -Float64FromFloat64(0.07080805133352897)},
-	63:  {Finvc: float64(1.068893585073351), Flogc: -Float64FromFloat64(0.06662408085151128)},
-	64:  {Finvc: float64(1.0644491706655506), Flogc: -Float64FromFloat64(0.06245745471915143)},
-	65:  {Finvc: float64(1.0600414846328305), Flogc: -Float64FromFloat64(0.0583080438042316)},
-	66:  {Finvc: float64(1.0556701316181605), Flogc: -Float64FromFloat64(0.05417576112313327)},
-	67:  {Finvc: float64(1.051334750556926), Flogc: -Float64FromFloat64(0.050060547896805474)},
-	68:  {Finvc: float64(1.0470347288442157), Flogc: -Float64FromFloat64(0.045962101199052086)},
-	69:  {Finvc: float64(1.0427699229652954), Flogc: -Float64FromFloat64(0.04188056008865715)},
-	70:  {Finvc: float64(1.0385395013738175), Flogc: -Float64FromFloat64(0.03781540056183985)},
-	71:  {Finvc: float64(1.034343418940345), Flogc: -Float64FromFloat64(0.03376684757915882)},
-	72:  {Finvc: float64(1.0301811073173315), Flogc: -Float64FromFloat64(0.029734619131772888)},
-	73:  {Finvc: float64(1.026052043621297), Flogc: -Float64FromFloat64(0.025718470239212365)},
-	74:  {Finvc: float64(1.0219561082336197), Flogc: -Float64FromFloat64(0.021718543925430822)},
-	75:  {Finvc: float64(1.0178926505784922), Flogc: -Float64FromFloat64(0.01773446126981071)},
-	76:  {Finvc: float64(1.0138614436244586), Flogc: -Float64FromFloat64(0.013766252464051831)},
-	77:  {Finvc: float64(1.0098620186501341), Flogc: -Float64FromFloat64(0.009813706322574944)},
-	78:  {Finvc: float64(1.0058938559734134), Flogc: -Float64FromFloat64(0.005876555150052809)},
-	79:  {Finvc: float64(1.00195696235014), Flogc: -Float64FromFloat64(0.0019550499938532084)},
-	80:  {Finvc: float64(0.9961089923088509), Flogc: float64(0.0038985973556009412)},
-	81:  {Finvc: float64(0.9884170338185201), Flogc: float64(0.011650571286395461)},
-	82:  {Finvc: float64(0.9808429191005297), Flogc: float64(0.019342955478919066)},
-	83:  {Finvc: float64(0.9733840169987446), Flogc: float64(0.0269766014846482)},
-	84:  {Finvc: float64(0.9660377568876556), Flogc: float64(0.034552359728422744)},
-	85:  {Finvc: float64(0.9588014945307369), Flogc: float64(0.04207121767183253)},
-	86:  {Finvc: float64(0.9516728569073111), Flogc: float64(0.049533940950141186)},
-	87:  {Finvc: float64(0.9446494635965822), Flogc: float64(0.056941358295944156)},
-	88:  {Finvc: float64(0.9377288993026223), Flogc: float64(0.06429439168346107)},
-	89:  {Finvc: float64(0.9309091073790681), Flogc: float64(0.0715936354946507)},
-	90:  {Finvc: float64(0.924187681612722), Flogc: float64(0.07884010933776153)},
-	91:  {Finvc: float64(0.9175626765599192), Flogc: float64(0.08603438905970506)},
-	92:  {Finvc: float64(0.9110320403624034), Flogc: float64(0.09317721180013905)},
-	93:  {Finvc: float64(0.9045935839762024), Flogc: float64(0.10026951462748457)},
-	94:  {Finvc: float64(0.8982456375922825), Flogc: float64(0.10731170956330516)},
-	95:  {Finvc: float64(0.8919860966782501), Flogc: float64(0.11430473320717738)},
-	96:  {Finvc: float64(0.8858131121185129), Flogc: float64(0.12124928503033061)},
-	97:  {Finvc: float64(0.879725075760676), Flogc: float64(0.12814583422959913)},
-	98:  {Finvc: float64(0.8737201372634685), Flogc: float64(0.1349951636851756)},
-	99:  {Finvc: float64(0.8677966405782273), Flogc: float64(0.1417978768189414)},
-	100: {Finvc: float64(0.8619528050060739), Flogc: float64(0.14855476039031146)},
-	101: {Finvc: float64(0.8561872354420692), Flogc: float64(0.1552661937658968)},
-	102: {Finvc: float64(0.8504983927816893), Flogc: float64(0.16193275688146969)},
-	103: {Finvc: float64(0.8448844572790304), Flogc: float64(0.16855539792220497)},
-	104: {Finvc: float64(0.8393442741575965), Flogc: float64(0.1751343179947753)},
-	105: {Finvc: float64(0.8338762249349438), Flogc: float64(0.1816702989864325)},
-	106: {Finvc: float64(0.8284789320557778), Flogc: float64(0.18816387146023317)},
-	107: {Finvc: float64(0.8231510800065832), Flogc: float64(0.1946155228479256)},
-	108: {Finvc: float64(0.8178913903778707), Flogc: float64(0.20102572579389744)},
-	109: {Finvc: float64(0.8126984007245374), Flogc: float64(0.2073952090795501)},
-	110: {Finvc: float64(0.8075710029460227), Flogc: float64(0.21372429840596396)},
-	111: {Finvc: float64(0.8025078881160415), Flogc: float64(0.2200135945981856)},
-	112: {Finvc: float64(0.7975077379364331), Flogc: float64(0.22626374162859975)},
-	113: {Finvc: float64(0.792569604966373), Flogc: float64(0.23247494747693054)},
-	114: {Finvc: float64(0.7876923641254114), Flogc: float64(0.23864766620658884)},
-	115: {Finvc: float64(0.7828746724940998), Flogc: float64(0.24478265647405806)},
-	116: {Finvc: float64(0.7781155388790811), Flogc: float64(0.25088025827324145)},
-	117: {Finvc: float64(0.7734139557869777), Flogc: float64(0.2569408552510595)},
-	118: {Finvc: float64(0.7687687179914933), Flogc: float64(0.26296511155101143)},
-	119: {Finvc: float64(0.7641790698041854), Flogc: float64(0.2689531327189343)},
-	120: {Finvc: float64(0.7596438763692399), Flogc: float64(0.27490553924610595)},
-	121: {Finvc: float64(0.7551621951078668), Flogc: float64(0.2808227248478943)},
-	122: {Finvc: float64(0.7507331780216866), Flogc: float64(0.286704979267256)},
-	123: {Finvc: float64(0.7463557196361751), Flogc: float64(0.29255295645509705)},
-	124: {Finvc: float64(0.7420289364869653), Flogc: float64(0.2983670386142876)},
-	125: {Finvc: float64(0.7377521537065876), Flogc: float64(0.30414734587282055)},
-	126: {Finvc: float64(0.7335242966002608), Flogc: float64(0.30989455774829366)},
-	127: {Finvc: float64(0.729344777457841), Flogc: float64(0.31560871301871884)}}, Ftab2: [128]struct {
-	Fchi float64
-	Fclo float64
-}{
-	0:   {Fchi: float64(0.6894531274426304), Fclo: float64(2.60290652810535e-17)},
-	1:   {Fchi: float64(0.6933593811533166), Fclo: float64(5.1607448519931415e-17)},
-	2:   {Fchi: float64(0.6972656502972674), Fclo: float64(5.290672414887869e-17)},
-	3:   {Fchi: float64(0.7011718886092148), Fclo: float64(7.801030634806013e-18)},
-	4:   {Fchi: float64(0.7050781228976939), Fclo: -Float64FromFloat64(2.471355337688684e-17)},
-	5:   {Fchi: float64(0.7089843887644558), Fclo: -Float64FromFloat64(4.6413389636862956e-17)},
-	6:   {Fchi: float64(0.7128906815542553), Fclo: float64(3.3387408065940366e-17)},
-	7:   {Fchi: float64(0.7167968359278303), Fclo: -Float64FromFloat64(2.6454587338050098e-17)},
-	8:   {Fchi: float64(0.7207031520563163), Fclo: float64(2.4284096334522285e-17)},
-	9:   {Fchi: float64(0.7246093683054673), Fclo: float64(4.85782435031982e-17)},
-	10:  {Fchi: float64(0.7285155644718035), Fclo: -Float64FromFloat64(1.3014776598894487e-17)},
-	11:  {Fchi: float64(0.7324219036935506), Fclo: -Float64FromFloat64(1.0402317671225898e-17)},
-	12:  {Fchi: float64(0.73632811474659), Fclo: float64(3.078291427467431e-17)},
-	13:  {Fchi: float64(0.7402343715130797), Fclo: -Float64FromFloat64(1.4304998976623033e-17)},
-	14:  {Fchi: float64(0.7441405900738403), Fclo: -Float64FromFloat64(2.8625955785571303e-17)},
-	15:  {Fchi: float64(0.7480468324364), Fclo: float64(5.1609093535635645e-17)},
-	16:  {Fchi: float64(0.7519531335902885), Fclo: float64(4.423423949536319e-17)},
-	17:  {Fchi: float64(0.7558594189116706), Fclo: -Float64FromFloat64(4.683016762099508e-17)},
-	18:  {Fchi: float64(0.7597656365502305), Fclo: float64(4.466742007514772e-17)},
-	19:  {Fchi: float64(0.7636719350887737), Fclo: -Float64FromFloat64(4.8134498775190266e-17)},
-	20:  {Fchi: float64(0.767578087670501), Fclo: -Float64FromFloat64(4.3371015350542286e-17)},
-	21:  {Fchi: float64(0.7714844396979536), Fclo: -Float64FromFloat64(2.515644472251707e-17)},
-	22:  {Fchi: float64(0.7753905747966752), Fclo: -Float64FromFloat64(4.163636184961329e-17)},
-	23:  {Fchi: float64(0.7792968686084766), Fclo: float64(3.3837161384165165e-17)},
-	24:  {Fchi: float64(0.783203182701066), Fclo: float64(4.379206565056758e-17)},
-	25:  {Fchi: float64(0.7871094109030913), Fclo: float64(2.7322930976146396e-17)},
-	26:  {Fchi: float64(0.7910155783031153), Fclo: -Float64FromFloat64(5.463661225364046e-17)},
-	27:  {Fchi: float64(0.7949218121071572), Fclo: -Float64FromFloat64(1.4320502634189868e-17)},
-	28:  {Fchi: float64(0.7988281031542229), Fclo: -Float64FromFloat64(4.0766731402809024e-17)},
-	29:  {Fchi: float64(0.8027343109146796), Fclo: -Float64FromFloat64(4.0338264352540086e-17)},
-	30:  {Fchi: float64(0.8066405901480322), Fclo: float64(1.7241428071650815e-18)},
-	31:  {Fchi: float64(0.8105469363625933), Fclo: -Float64FromFloat64(4.5534218930924523e-17)},
-	32:  {Fchi: float64(0.8144531571720115), Fclo: float64(1.821216920589142e-17)},
-	33:  {Fchi: float64(0.8183593894061396), Fclo: float64(4.9864288025894273e-17)},
-	34:  {Fchi: float64(0.8222656559018297), Fclo: float64(4.335990416726689e-17)},
-	35:  {Fchi: float64(0.8261719308006343), Fclo: -Float64FromFloat64(5.422001471661127e-17)},
-	36:  {Fchi: float64(0.830078177803083), Fclo: -Float64FromFloat64(5.333603728929035e-17)},
-	37:  {Fchi: float64(0.8339844538076674), Fclo: -Float64FromFloat64(1.1270648442682386e-17)},
-	38:  {Fchi: float64(0.8378905498984414), Fclo: -Float64FromFloat64(3.165126734800398e-17)},
-	39:  {Fchi: float64(0.8417968420618669), Fclo: float64(1.1286283062565865e-17)},
-	40:  {Fchi: float64(0.8457030568173808), Fclo: float64(5.643595964448442e-18)},
-	41:  {Fchi: float64(0.8496093725173733), Fclo: -Float64FromFloat64(2.1687834632368187e-17)},
-	42:  {Fchi: float64(0.8535155534462677), Fclo: -Float64FromFloat64(2.2548234217914977e-17)},
-	43:  {Fchi: float64(0.8574219432077146), Fclo: float64(4.683260556353139e-17)},
-	44:  {Fchi: float64(0.8613281129443706), Fclo: float64(2.5148296884122795e-17)},
-	45:  {Fchi: float64(0.8652342893532053), Fclo: -Float64FromFloat64(8.672187570949467e-18)},
-	46:  {Fchi: float64(0.8691405397938828), Fclo: -Float64FromFloat64(1.2576268285559751e-17)},
-	47:  {Fchi: float64(0.8730468608194392), Fclo: -Float64FromFloat64(2.9930851265148e-17)},
-	48:  {Fchi: float64(0.8769530685783117), Fclo: float64(4.814801507681644e-17)},
-	49:  {Fchi: float64(0.8808593488818101), Fclo: -Float64FromFloat64(9.10549533611022e-18)},
-	50:  {Fchi: float64(0.8847655593409667), Fclo: -Float64FromFloat64(3.512414651620766e-17)},
-	51:  {Fchi: float64(0.888671840226208), Fclo: float64(3.555261815374023e-17)},
-	52:  {Fchi: float64(0.8925780870017613), Fclo: float64(1.692380503540994e-17)},
-	53:  {Fchi: float64(0.8964844367374554), Fclo: -Float64FromFloat64(1.0837881791715702e-17)},
-	54:  {Fchi: float64(0.9003905608862683), Fclo: float64(5.2900545724138363e-17)},
-	55:  {Fchi: float64(0.9042968358682077), Fclo: float64(5.3330721088784517e-17)},
-	56:  {Fchi: float64(0.9082031671057441), Fclo: float64(1.8640040753232978e-17)},
-	57:  {Fchi: float64(0.9121093993305497), Fclo: float64(4.467972832054075e-17)},
-	58:  {Fchi: float64(0.9160155849026457), Fclo: -Float64FromFloat64(5.216213419585033e-18)},
-	59:  {Fchi: float64(0.9199219622862499), Fclo: -Float64FromFloat64(2.7324731032846873e-17)},
-	60:  {Fchi: float64(0.9238281880717143), Fclo: -Float64FromFloat64(1.7769263393434193e-17)},
-	61:  {Fchi: float64(0.9277343012727929), Fclo: float64(4.943363080817441e-17)},
-	62:  {Fchi: float64(0.9316407021562788), Fclo: float64(4.164434042024055e-17)},
-	63:  {Fchi: float64(0.935546825207466), Fclo: float64(1.3011820859795741e-17)},
-	64:  {Fchi: float64(0.9394530312562943), Fclo: -Float64FromFloat64(2.7332907838481398e-17)},
-	65:  {Fchi: float64(0.9433593066844669), Fclo: float64(2.342133170803292e-17)},
-	66:  {Fchi: float64(0.9472655994038329), Fclo: float64(1.6478717480487438e-17)},
-	67:  {Fchi: float64(0.9511718313032721), Fclo: -Float64FromFloat64(5.19608290131499e-18)},
-	68:  {Fchi: float64(0.9550781578218178), Fclo: -Float64FromFloat64(3.5565573220579e-17)},
-	69:  {Fchi: float64(0.9589843147339043), Fclo: float64(2.0816772146458738e-17)},
-	70:  {Fchi: float64(0.9628906735633685), Fclo: -Float64FromFloat64(3.471962826146841e-18)},
-	71:  {Fchi: float64(0.9667968893972092), Fclo: -Float64FromFloat64(3.68646834472642e-17)},
-	72:  {Fchi: float64(0.9707031054025779), Fclo: -Float64FromFloat64(3.4674108076868834e-18)},
-	73:  {Fchi: float64(0.9746094325494931), Fclo: float64(4.598152624774392e-17)},
-	74:  {Fchi: float64(0.9785156054582722), Fclo: float64(4.553145752392568e-17)},
-	75:  {Fchi: float64(0.9824218687812282), Fclo: -Float64FromFloat64(7.811259169418978e-18)},
-	76:  {Fchi: float64(0.9863280690752917), Fclo: float64(2.0375615178047467e-17)},
-	77:  {Fchi: float64(0.9902342909546034), Fclo: -Float64FromFloat64(1.344597043422914e-17)},
-	78:  {Fchi: float64(0.9941406780264008), Fclo: float64(1.51853723695054e-17)},
-	79:  {Fchi: float64(0.9980468598715558), Fclo: -Float64FromFloat64(1.301926039598001e-17)},
-	80:  {Fchi: float64(1.0039062067717412), Fclo: -Float64FromFloat64(4.596120641744973e-17)},
-	81:  {Fchi: float64(1.0117187035281372), Fclo: -Float64FromFloat64(8.152405002665349e-17)},
-	82:  {Fchi: float64(1.0195312424919558), Fclo: float64(8.239927014757811e-17)},
-	83:  {Fchi: float64(1.0273437641634193), Fclo: float64(3.122851005327045e-17)},
-	84:  {Fchi: float64(1.0351562274561221), Fclo: -Float64FromFloat64(1.3010212611128995e-17)},
-	85:  {Fchi: float64(1.0429687539123276), Fclo: -Float64FromFloat64(5.984116688633458e-17)},
-	86:  {Fchi: float64(1.0507812561238108), Fclo: float64(2.860923854822335e-17)},
-	87:  {Fchi: float64(1.0585937308350133), Fclo: -Float64FromFloat64(1.9962944508904598e-17)},
-	88:  {Fchi: float64(1.0664062936992642), Fclo: float64(5.291469130309099e-17)},
-	89:  {Fchi: float64(1.0742187309945372), Fclo: float64(1.0321575006732523e-16)},
-	90:  {Fchi: float64(1.082031301537134), Fclo: float64(9.021194373419119e-17)},
-	91:  {Fchi: float64(1.0898438063644336), Fclo: float64(5.202798992357953e-17)},
-	92:  {Fchi: float64(1.0976562356711468), Fclo: float64(5.898318482500785e-17)},
-	93:  {Fchi: float64(1.1054688179463226), Fclo: float64(8.846377690653252e-17)},
-	94:  {Fchi: float64(1.113281220803328), Fclo: -Float64FromFloat64(9.529455965212574e-18)},
-	95:  {Fchi: float64(1.1210937073167315), Fclo: float64(6.765080709377787e-17)},
-	96:  {Fchi: float64(1.1289062967338532), Fclo: float64(1.0929327370933015e-16)},
-	97:  {Fchi: float64(1.1367187631150848), Fclo: float64(6.938570551230516e-17)},
-	98:  {Fchi: float64(1.1445312490244826), Fclo: float64(1.908841015045148e-17)},
-	99:  {Fchi: float64(1.1523437096203593), Fclo: float64(2.7744504138979832e-17)},
-	100: {Fchi: float64(1.1601563266482477), Fclo: -Float64FromFloat64(1.5621964097491672e-17)},
-	101: {Fchi: float64(1.1679688257483505), Fclo: -Float64FromFloat64(6.4191661495975e-17)},
-	102: {Fchi: float64(1.1757811754697645), Fclo: -Float64FromFloat64(4.336465165059268e-17)},
-	103: {Fchi: float64(1.183593793665613), Fclo: -Float64FromFloat64(3.8159292551356396e-17)},
-	104: {Fchi: float64(1.1914062331617676), Fclo: -Float64FromFloat64(2.94933042768015e-17)},
-	105: {Fchi: float64(1.1992187450577771), Fclo: -Float64FromFloat64(6.244142916351348e-17)},
-	106: {Fchi: float64(1.2070312971249755), Fclo: float64(7.458644622627413e-17)},
-	107: {Fchi: float64(1.2148438169965134), Fclo: float64(2.7760519266147807e-17)},
-	108: {Fchi: float64(1.222656225220801), Fclo: -Float64FromFloat64(7.025106921079665e-17)},
-	109: {Fchi: float64(1.2304687681290862), Fclo: float64(3.7292622364618835e-17)},
-	110: {Fchi: float64(1.2382812116234925), Fclo: float64(2.2558949940652082e-17)},
-	111: {Fchi: float64(1.2460936706149877), Fclo: float64(8.499368944400665e-17)},
-	112: {Fchi: float64(1.2539063289686938), Fclo: float64(1.039515474644361e-17)},
-	113: {Fchi: float64(1.2617188367227732), Fclo: float64(3.297262223275499e-17)},
-	114: {Fchi: float64(1.2695311590462317), Fclo: float64(4.509883253594155e-17)},
-	115: {Fchi: float64(1.277343660657941), Fclo: -Float64FromFloat64(7.546987371769545e-17)},
-	116: {Fchi: float64(1.2851561882963496), Fclo: float64(9.454295598818184e-17)},
-	117: {Fchi: float64(1.2929686521915196), Fclo: -Float64FromFloat64(7.28545609119749e-17)},
-	118: {Fchi: float64(1.3007813359167737), Fclo: -Float64FromFloat64(8.934357651462802e-17)},
-	119: {Fchi: float64(1.3085938093753886), Fclo: float64(8.15257059458102e-17)},
-	120: {Fchi: float64(1.3164063202609564), Fclo: float64(6.946341460765881e-18)},
-	121: {Fchi: float64(1.3242188320313901), Fclo: -Float64FromFloat64(7.892731380721676e-17)},
-	122: {Fchi: float64(1.3320311786874468), Fclo: -Float64FromFloat64(4.3384657500713545e-17)},
-	123: {Fchi: float64(1.3398436880573092), Fclo: float64(9.627577954598792e-17)},
-	124: {Fchi: float64(1.3476563390295309), Fclo: float64(4.2492400590204517e-17)},
-	125: {Fchi: float64(1.3554687641043626), Fclo: -Float64FromFloat64(1.0843419551446047e-16)},
-	126: {Fchi: float64(1.3632813590971713), Fclo: -Float64FromFloat64(8.50172782472025e-17)},
-	127: {Fchi: float64(1.3710936595522603), Fclo: -Float64FromFloat64(7.110627206162922e-17)}}}
+var x___log_data = Tlog_data{
+	Fln2hi: float64(0.6931471805598903),
+	Fln2lo: float64(5.497923018708371e-14),
+	Fpoly: [5]float64{
+		0: -Float64FromFloat64(0.5000000000000001),
+		1: float64(0.33333333331825593),
+		2: -Float64FromFloat64(0.2499999999622955),
+		3: float64(0.20000304511814496),
+		4: -Float64FromFloat64(0.16667054827627667),
+	},
+	Fpoly1: [11]float64{
+		0:  -Float64FromFloat64(0.5),
+		1:  float64(0.3333333333333352),
+		2:  -Float64FromFloat64(0.24999999999998432),
+		3:  float64(0.19999999999320328),
+		4:  -Float64FromFloat64(0.16666666669929706),
+		5:  float64(0.14285715076560868),
+		6:  -Float64FromFloat64(0.12499997863982555),
+		7:  float64(0.11110712032936046),
+		8:  -Float64FromFloat64(0.10000486757818193),
+		9:  float64(0.09181994006195467),
+		10: -Float64FromFloat64(0.08328363062289341),
+	},
+	Ftab: [128]struct {
+		Finvc float64
+		Flogc float64
+	}{
+		0: {
+			Finvc: float64(1.4504249240398293),
+			Flogc: -Float64FromFloat64(0.3718565645633589),
+		},
+		1: {
+			Finvc: float64(1.442253508327276),
+			Flogc: -Float64FromFloat64(0.36620682668944937),
+		},
+		2: {
+			Finvc: float64(1.4341736174350004),
+			Flogc: -Float64FromFloat64(0.3605888069791945),
+		},
+		3: {
+			Finvc: float64(1.426183816329995),
+			Flogc: -Float64FromFloat64(0.3550022171419869),
+		},
+		4: {
+			Finvc: float64(1.4182825527052965),
+			Flogc: -Float64FromFloat64(0.34944666968829097),
+		},
+		5: {
+			Finvc: float64(1.4104682921759335),
+			Flogc: -Float64FromFloat64(0.3439217713603284),
+		},
+		6: {
+			Finvc: float64(1.4027396147468003),
+			Flogc: -Float64FromFloat64(0.3384271921261188),
+		},
+		7: {
+			Finvc: float64(1.3950954438932313),
+			Flogc: -Float64FromFloat64(0.332962831494342),
+		},
+		8: {
+			Finvc: float64(1.3875338232485754),
+			Flogc: -Float64FromFloat64(0.32752794345742586),
+		},
+		9: {
+			Finvc: float64(1.3800539211058593),
+			Flogc: -Float64FromFloat64(0.32212257167088865),
+		},
+		10: {
+			Finvc: float64(1.3726542695419708),
+			Flogc: -Float64FromFloat64(0.3167462884799761),
+		},
+		11: {
+			Finvc: float64(1.3653332798446802),
+			Flogc: -Float64FromFloat64(0.3113985598928366),
+		},
+		12: {
+			Finvc: float64(1.358090204587874),
+			Flogc: -Float64FromFloat64(0.3060794515165526),
+		},
+		13: {
+			Finvc: float64(1.3509234892132138),
+			Flogc: -Float64FromFloat64(0.300788424667644),
+		},
+		14: {
+			Finvc: float64(1.3438320840699889),
+			Flogc: -Float64FromFloat64(0.2955252968476998),
+		},
+		15: {
+			Finvc: float64(1.3368146974742003),
+			Flogc: -Float64FromFloat64(0.29028969275850613),
+		},
+		16: {
+			Finvc: float64(1.329870114677736),
+			Flogc: -Float64FromFloat64(0.2850812793277555),
+		},
+		17: {
+			Finvc: float64(1.322997339161106),
+			Flogc: -Float64FromFloat64(0.27989987391470095),
+		},
+		18: {
+			Finvc: float64(1.316195352741367),
+			Flogc: -Float64FromFloat64(0.27474526621870154),
+		},
+		19: {
+			Finvc: float64(1.3094628125672239),
+			Flogc: -Float64FromFloat64(0.2696169863701243),
+		},
+		20: {
+			Finvc: float64(1.3027990455471041),
+			Flogc: -Float64FromFloat64(0.26451506180308115),
+		},
+		21: {
+			Finvc: float64(1.2962024229438942),
+			Flogc: -Float64FromFloat64(0.2594387762767383),
+		},
+		22: {
+			Finvc: float64(1.2896726275815547),
+			Flogc: -Float64FromFloat64(0.2543884090981692),
+		},
+		23: {
+			Finvc: float64(1.2832080305745537),
+			Flogc: -Float64FromFloat64(0.24936321635129843),
+		},
+		24: {
+			Finvc: float64(1.276807885983376),
+			Flogc: -Float64FromFloat64(0.24436312405975968),
+		},
+		25: {
+			Finvc: float64(1.2704714060687552),
+			Flogc: -Float64FromFloat64(0.23938801747897287),
+		},
+		26: {
+			Finvc: float64(1.2641976054949482),
+			Flogc: -Float64FromFloat64(0.23443761696705678),
+		},
+		27: {
+			Finvc: float64(1.257985357514882),
+			Flogc: -Float64FromFloat64(0.22951151871518505),
+		},
+		28: {
+			Finvc: float64(1.2518337750655457),
+			Flogc: -Float64FromFloat64(0.2246094963439873),
+		},
+		29: {
+			Finvc: float64(1.2457421919097305),
+			Flogc: -Float64FromFloat64(0.21973149037705753),
+		},
+		30: {
+			Finvc: float64(1.2397094966625508),
+			Flogc: -Float64FromFloat64(0.2148770752847895),
+		},
+		31: {
+			Finvc: float64(1.2337348463589233),
+			Flogc: -Float64FromFloat64(0.210046029103637),
+		},
+		32: {
+			Finvc: float64(1.2278176973028803),
+			Flogc: -Float64FromFloat64(0.20523836373934046),
+		},
+		33: {
+			Finvc: float64(1.2219570190618474),
+			Flogc: -Float64FromFloat64(0.20045368751368642),
+		},
+		34: {
+			Finvc: float64(1.2161519732977757),
+			Flogc: -Float64FromFloat64(0.1956917537758045),
+		},
+		35: {
+			Finvc: float64(1.2104018095009725),
+			Flogc: -Float64FromFloat64(0.19095237845203883),
+		},
+		36: {
+			Finvc: float64(1.204705805718973),
+			Flogc: -Float64FromFloat64(0.18623539250290833),
+		},
+		37: {
+			Finvc: float64(1.1990631185441964),
+			Flogc: -Float64FromFloat64(0.18154051731551135),
+		},
+		38: {
+			Finvc: float64(1.1934733004462308),
+			Flogc: -Float64FromFloat64(0.1768677957431919),
+		},
+		39: {
+			Finvc: float64(1.1879350812847385),
+			Flogc: -Float64FromFloat64(0.17221657406412305),
+		},
+		40: {
+			Finvc: float64(1.1824481322833125),
+			Flogc: -Float64FromFloat64(0.16758697765942543),
+		},
+		41: {
+			Finvc: float64(1.1770114976921955),
+			Flogc: -Float64FromFloat64(0.16297859687290384),
+		},
+		42: {
+			Finvc: float64(1.1716248121809465),
+			Flogc: -Float64FromFloat64(0.15839151377804228),
+		},
+		43: {
+			Finvc: float64(1.1662869231674715),
+			Flogc: -Float64FromFloat64(0.15382513241456763),
+		},
+		44: {
+			Finvc: float64(1.1609977486762766),
+			Flogc: -Float64FromFloat64(0.14927976358922024),
+		},
+		45: {
+			Finvc: float64(1.1557563220795803),
+			Flogc: -Float64FromFloat64(0.14475495398119165),
+		},
+		46: {
+			Finvc: float64(1.1505619105480347),
+			Flogc: -Float64FromFloat64(0.14025044090817573),
+		},
+		47: {
+			Finvc: float64(1.1454138888505974),
+			Flogc: -Float64FromFloat64(0.1357660466685502),
+		},
+		48: {
+			Finvc: float64(1.140311877374656),
+			Flogc: -Float64FromFloat64(0.1313018016355727),
+		},
+		49: {
+			Finvc: float64(1.1352550225747513),
+			Flogc: -Float64FromFloat64(0.12685731518763532),
+		},
+		50: {
+			Finvc: float64(1.1302429094831266),
+			Flogc: -Float64FromFloat64(0.1224325737671279),
+		},
+		51: {
+			Finvc: float64(1.1252747693068048),
+			Flogc: -Float64FromFloat64(0.11802724521862729),
+		},
+		52: {
+			Finvc: float64(1.1203501571039876),
+			Flogc: -Float64FromFloat64(0.11364127671663482),
+		},
+		53: {
+			Finvc: float64(1.1154683327680124),
+			Flogc: -Float64FromFloat64(0.10927434611278386),
+		},
+		54: {
+			Finvc: float64(1.1106291463292157),
+			Flogc: -Float64FromFloat64(0.10492665324943573),
+		},
+		55: {
+			Finvc: float64(1.1058315813301596),
+			Flogc: -Float64FromFloat64(0.10059761422644442),
+		},
+		56: {
+			Finvc: float64(1.1010752177696026),
+			Flogc: -Float64FromFloat64(0.09628717309055901),
+		},
+		57: {
+			Finvc: float64(1.0963597137952512),
+			Flogc: -Float64FromFloat64(0.09199534069557558),
+		},
+		58: {
+			Finvc: float64(1.0916844827550398),
+			Flogc: -Float64FromFloat64(0.08772190036688698),
+		},
+		59: {
+			Finvc: float64(1.0870487291277784),
+			Flogc: -Float64FromFloat64(0.08346643613867855),
+		},
+		60: {
+			Finvc: float64(1.082452357388312),
+			Flogc: -Float64FromFloat64(0.07922916827544668),
+		},
+		61: {
+			Finvc: float64(1.0778948225025884),
+			Flogc: -Float64FromFloat64(0.0750099004750382),
+		},
+		62: {
+			Finvc: float64(1.0733751731601076),
+			Flogc: -Float64FromFloat64(0.07080805133352897),
+		},
+		63: {
+			Finvc: float64(1.068893585073351),
+			Flogc: -Float64FromFloat64(0.06662408085151128),
+		},
+		64: {
+			Finvc: float64(1.0644491706655506),
+			Flogc: -Float64FromFloat64(0.06245745471915143),
+		},
+		65: {
+			Finvc: float64(1.0600414846328305),
+			Flogc: -Float64FromFloat64(0.0583080438042316),
+		},
+		66: {
+			Finvc: float64(1.0556701316181605),
+			Flogc: -Float64FromFloat64(0.05417576112313327),
+		},
+		67: {
+			Finvc: float64(1.051334750556926),
+			Flogc: -Float64FromFloat64(0.050060547896805474),
+		},
+		68: {
+			Finvc: float64(1.0470347288442157),
+			Flogc: -Float64FromFloat64(0.045962101199052086),
+		},
+		69: {
+			Finvc: float64(1.0427699229652954),
+			Flogc: -Float64FromFloat64(0.04188056008865715),
+		},
+		70: {
+			Finvc: float64(1.0385395013738175),
+			Flogc: -Float64FromFloat64(0.03781540056183985),
+		},
+		71: {
+			Finvc: float64(1.034343418940345),
+			Flogc: -Float64FromFloat64(0.03376684757915882),
+		},
+		72: {
+			Finvc: float64(1.0301811073173315),
+			Flogc: -Float64FromFloat64(0.029734619131772888),
+		},
+		73: {
+			Finvc: float64(1.026052043621297),
+			Flogc: -Float64FromFloat64(0.025718470239212365),
+		},
+		74: {
+			Finvc: float64(1.0219561082336197),
+			Flogc: -Float64FromFloat64(0.021718543925430822),
+		},
+		75: {
+			Finvc: float64(1.0178926505784922),
+			Flogc: -Float64FromFloat64(0.01773446126981071),
+		},
+		76: {
+			Finvc: float64(1.0138614436244586),
+			Flogc: -Float64FromFloat64(0.013766252464051831),
+		},
+		77: {
+			Finvc: float64(1.0098620186501341),
+			Flogc: -Float64FromFloat64(0.009813706322574944),
+		},
+		78: {
+			Finvc: float64(1.0058938559734134),
+			Flogc: -Float64FromFloat64(0.005876555150052809),
+		},
+		79: {
+			Finvc: float64(1.00195696235014),
+			Flogc: -Float64FromFloat64(0.0019550499938532084),
+		},
+		80: {
+			Finvc: float64(0.9961089923088509),
+			Flogc: float64(0.0038985973556009412),
+		},
+		81: {
+			Finvc: float64(0.9884170338185201),
+			Flogc: float64(0.011650571286395461),
+		},
+		82: {
+			Finvc: float64(0.9808429191005297),
+			Flogc: float64(0.019342955478919066),
+		},
+		83: {
+			Finvc: float64(0.9733840169987446),
+			Flogc: float64(0.0269766014846482),
+		},
+		84: {
+			Finvc: float64(0.9660377568876556),
+			Flogc: float64(0.034552359728422744),
+		},
+		85: {
+			Finvc: float64(0.9588014945307369),
+			Flogc: float64(0.04207121767183253),
+		},
+		86: {
+			Finvc: float64(0.9516728569073111),
+			Flogc: float64(0.049533940950141186),
+		},
+		87: {
+			Finvc: float64(0.9446494635965822),
+			Flogc: float64(0.056941358295944156),
+		},
+		88: {
+			Finvc: float64(0.9377288993026223),
+			Flogc: float64(0.06429439168346107),
+		},
+		89: {
+			Finvc: float64(0.9309091073790681),
+			Flogc: float64(0.0715936354946507),
+		},
+		90: {
+			Finvc: float64(0.924187681612722),
+			Flogc: float64(0.07884010933776153),
+		},
+		91: {
+			Finvc: float64(0.9175626765599192),
+			Flogc: float64(0.08603438905970506),
+		},
+		92: {
+			Finvc: float64(0.9110320403624034),
+			Flogc: float64(0.09317721180013905),
+		},
+		93: {
+			Finvc: float64(0.9045935839762024),
+			Flogc: float64(0.10026951462748457),
+		},
+		94: {
+			Finvc: float64(0.8982456375922825),
+			Flogc: float64(0.10731170956330516),
+		},
+		95: {
+			Finvc: float64(0.8919860966782501),
+			Flogc: float64(0.11430473320717738),
+		},
+		96: {
+			Finvc: float64(0.8858131121185129),
+			Flogc: float64(0.12124928503033061),
+		},
+		97: {
+			Finvc: float64(0.879725075760676),
+			Flogc: float64(0.12814583422959913),
+		},
+		98: {
+			Finvc: float64(0.8737201372634685),
+			Flogc: float64(0.1349951636851756),
+		},
+		99: {
+			Finvc: float64(0.8677966405782273),
+			Flogc: float64(0.1417978768189414),
+		},
+		100: {
+			Finvc: float64(0.8619528050060739),
+			Flogc: float64(0.14855476039031146),
+		},
+		101: {
+			Finvc: float64(0.8561872354420692),
+			Flogc: float64(0.1552661937658968),
+		},
+		102: {
+			Finvc: float64(0.8504983927816893),
+			Flogc: float64(0.16193275688146969),
+		},
+		103: {
+			Finvc: float64(0.8448844572790304),
+			Flogc: float64(0.16855539792220497),
+		},
+		104: {
+			Finvc: float64(0.8393442741575965),
+			Flogc: float64(0.1751343179947753),
+		},
+		105: {
+			Finvc: float64(0.8338762249349438),
+			Flogc: float64(0.1816702989864325),
+		},
+		106: {
+			Finvc: float64(0.8284789320557778),
+			Flogc: float64(0.18816387146023317),
+		},
+		107: {
+			Finvc: float64(0.8231510800065832),
+			Flogc: float64(0.1946155228479256),
+		},
+		108: {
+			Finvc: float64(0.8178913903778707),
+			Flogc: float64(0.20102572579389744),
+		},
+		109: {
+			Finvc: float64(0.8126984007245374),
+			Flogc: float64(0.2073952090795501),
+		},
+		110: {
+			Finvc: float64(0.8075710029460227),
+			Flogc: float64(0.21372429840596396),
+		},
+		111: {
+			Finvc: float64(0.8025078881160415),
+			Flogc: float64(0.2200135945981856),
+		},
+		112: {
+			Finvc: float64(0.7975077379364331),
+			Flogc: float64(0.22626374162859975),
+		},
+		113: {
+			Finvc: float64(0.792569604966373),
+			Flogc: float64(0.23247494747693054),
+		},
+		114: {
+			Finvc: float64(0.7876923641254114),
+			Flogc: float64(0.23864766620658884),
+		},
+		115: {
+			Finvc: float64(0.7828746724940998),
+			Flogc: float64(0.24478265647405806),
+		},
+		116: {
+			Finvc: float64(0.7781155388790811),
+			Flogc: float64(0.25088025827324145),
+		},
+		117: {
+			Finvc: float64(0.7734139557869777),
+			Flogc: float64(0.2569408552510595),
+		},
+		118: {
+			Finvc: float64(0.7687687179914933),
+			Flogc: float64(0.26296511155101143),
+		},
+		119: {
+			Finvc: float64(0.7641790698041854),
+			Flogc: float64(0.2689531327189343),
+		},
+		120: {
+			Finvc: float64(0.7596438763692399),
+			Flogc: float64(0.27490553924610595),
+		},
+		121: {
+			Finvc: float64(0.7551621951078668),
+			Flogc: float64(0.2808227248478943),
+		},
+		122: {
+			Finvc: float64(0.7507331780216866),
+			Flogc: float64(0.286704979267256),
+		},
+		123: {
+			Finvc: float64(0.7463557196361751),
+			Flogc: float64(0.29255295645509705),
+		},
+		124: {
+			Finvc: float64(0.7420289364869653),
+			Flogc: float64(0.2983670386142876),
+		},
+		125: {
+			Finvc: float64(0.7377521537065876),
+			Flogc: float64(0.30414734587282055),
+		},
+		126: {
+			Finvc: float64(0.7335242966002608),
+			Flogc: float64(0.30989455774829366),
+		},
+		127: {
+			Finvc: float64(0.729344777457841),
+			Flogc: float64(0.31560871301871884),
+		},
+	},
+	Ftab2: [128]struct {
+		Fchi float64
+		Fclo float64
+	}{
+		0: {
+			Fchi: float64(0.6894531274426304),
+			Fclo: float64(2.60290652810535e-17),
+		},
+		1: {
+			Fchi: float64(0.6933593811533166),
+			Fclo: float64(5.1607448519931415e-17),
+		},
+		2: {
+			Fchi: float64(0.6972656502972674),
+			Fclo: float64(5.290672414887869e-17),
+		},
+		3: {
+			Fchi: float64(0.7011718886092148),
+			Fclo: float64(7.801030634806013e-18),
+		},
+		4: {
+			Fchi: float64(0.7050781228976939),
+			Fclo: -Float64FromFloat64(2.471355337688684e-17),
+		},
+		5: {
+			Fchi: float64(0.7089843887644558),
+			Fclo: -Float64FromFloat64(4.6413389636862956e-17),
+		},
+		6: {
+			Fchi: float64(0.7128906815542553),
+			Fclo: float64(3.3387408065940366e-17),
+		},
+		7: {
+			Fchi: float64(0.7167968359278303),
+			Fclo: -Float64FromFloat64(2.6454587338050098e-17),
+		},
+		8: {
+			Fchi: float64(0.7207031520563163),
+			Fclo: float64(2.4284096334522285e-17),
+		},
+		9: {
+			Fchi: float64(0.7246093683054673),
+			Fclo: float64(4.85782435031982e-17),
+		},
+		10: {
+			Fchi: float64(0.7285155644718035),
+			Fclo: -Float64FromFloat64(1.3014776598894487e-17),
+		},
+		11: {
+			Fchi: float64(0.7324219036935506),
+			Fclo: -Float64FromFloat64(1.0402317671225898e-17),
+		},
+		12: {
+			Fchi: float64(0.73632811474659),
+			Fclo: float64(3.078291427467431e-17),
+		},
+		13: {
+			Fchi: float64(0.7402343715130797),
+			Fclo: -Float64FromFloat64(1.4304998976623033e-17),
+		},
+		14: {
+			Fchi: float64(0.7441405900738403),
+			Fclo: -Float64FromFloat64(2.8625955785571303e-17),
+		},
+		15: {
+			Fchi: float64(0.7480468324364),
+			Fclo: float64(5.1609093535635645e-17),
+		},
+		16: {
+			Fchi: float64(0.7519531335902885),
+			Fclo: float64(4.423423949536319e-17),
+		},
+		17: {
+			Fchi: float64(0.7558594189116706),
+			Fclo: -Float64FromFloat64(4.683016762099508e-17),
+		},
+		18: {
+			Fchi: float64(0.7597656365502305),
+			Fclo: float64(4.466742007514772e-17),
+		},
+		19: {
+			Fchi: float64(0.7636719350887737),
+			Fclo: -Float64FromFloat64(4.8134498775190266e-17),
+		},
+		20: {
+			Fchi: float64(0.767578087670501),
+			Fclo: -Float64FromFloat64(4.3371015350542286e-17),
+		},
+		21: {
+			Fchi: float64(0.7714844396979536),
+			Fclo: -Float64FromFloat64(2.515644472251707e-17),
+		},
+		22: {
+			Fchi: float64(0.7753905747966752),
+			Fclo: -Float64FromFloat64(4.163636184961329e-17),
+		},
+		23: {
+			Fchi: float64(0.7792968686084766),
+			Fclo: float64(3.3837161384165165e-17),
+		},
+		24: {
+			Fchi: float64(0.783203182701066),
+			Fclo: float64(4.379206565056758e-17),
+		},
+		25: {
+			Fchi: float64(0.7871094109030913),
+			Fclo: float64(2.7322930976146396e-17),
+		},
+		26: {
+			Fchi: float64(0.7910155783031153),
+			Fclo: -Float64FromFloat64(5.463661225364046e-17),
+		},
+		27: {
+			Fchi: float64(0.7949218121071572),
+			Fclo: -Float64FromFloat64(1.4320502634189868e-17),
+		},
+		28: {
+			Fchi: float64(0.7988281031542229),
+			Fclo: -Float64FromFloat64(4.0766731402809024e-17),
+		},
+		29: {
+			Fchi: float64(0.8027343109146796),
+			Fclo: -Float64FromFloat64(4.0338264352540086e-17),
+		},
+		30: {
+			Fchi: float64(0.8066405901480322),
+			Fclo: float64(1.7241428071650815e-18),
+		},
+		31: {
+			Fchi: float64(0.8105469363625933),
+			Fclo: -Float64FromFloat64(4.5534218930924523e-17),
+		},
+		32: {
+			Fchi: float64(0.8144531571720115),
+			Fclo: float64(1.821216920589142e-17),
+		},
+		33: {
+			Fchi: float64(0.8183593894061396),
+			Fclo: float64(4.9864288025894273e-17),
+		},
+		34: {
+			Fchi: float64(0.8222656559018297),
+			Fclo: float64(4.335990416726689e-17),
+		},
+		35: {
+			Fchi: float64(0.8261719308006343),
+			Fclo: -Float64FromFloat64(5.422001471661127e-17),
+		},
+		36: {
+			Fchi: float64(0.830078177803083),
+			Fclo: -Float64FromFloat64(5.333603728929035e-17),
+		},
+		37: {
+			Fchi: float64(0.8339844538076674),
+			Fclo: -Float64FromFloat64(1.1270648442682386e-17),
+		},
+		38: {
+			Fchi: float64(0.8378905498984414),
+			Fclo: -Float64FromFloat64(3.165126734800398e-17),
+		},
+		39: {
+			Fchi: float64(0.8417968420618669),
+			Fclo: float64(1.1286283062565865e-17),
+		},
+		40: {
+			Fchi: float64(0.8457030568173808),
+			Fclo: float64(5.643595964448442e-18),
+		},
+		41: {
+			Fchi: float64(0.8496093725173733),
+			Fclo: -Float64FromFloat64(2.1687834632368187e-17),
+		},
+		42: {
+			Fchi: float64(0.8535155534462677),
+			Fclo: -Float64FromFloat64(2.2548234217914977e-17),
+		},
+		43: {
+			Fchi: float64(0.8574219432077146),
+			Fclo: float64(4.683260556353139e-17),
+		},
+		44: {
+			Fchi: float64(0.8613281129443706),
+			Fclo: float64(2.5148296884122795e-17),
+		},
+		45: {
+			Fchi: float64(0.8652342893532053),
+			Fclo: -Float64FromFloat64(8.672187570949467e-18),
+		},
+		46: {
+			Fchi: float64(0.8691405397938828),
+			Fclo: -Float64FromFloat64(1.2576268285559751e-17),
+		},
+		47: {
+			Fchi: float64(0.8730468608194392),
+			Fclo: -Float64FromFloat64(2.9930851265148e-17),
+		},
+		48: {
+			Fchi: float64(0.8769530685783117),
+			Fclo: float64(4.814801507681644e-17),
+		},
+		49: {
+			Fchi: float64(0.8808593488818101),
+			Fclo: -Float64FromFloat64(9.10549533611022e-18),
+		},
+		50: {
+			Fchi: float64(0.8847655593409667),
+			Fclo: -Float64FromFloat64(3.512414651620766e-17),
+		},
+		51: {
+			Fchi: float64(0.888671840226208),
+			Fclo: float64(3.555261815374023e-17),
+		},
+		52: {
+			Fchi: float64(0.8925780870017613),
+			Fclo: float64(1.692380503540994e-17),
+		},
+		53: {
+			Fchi: float64(0.8964844367374554),
+			Fclo: -Float64FromFloat64(1.0837881791715702e-17),
+		},
+		54: {
+			Fchi: float64(0.9003905608862683),
+			Fclo: float64(5.2900545724138363e-17),
+		},
+		55: {
+			Fchi: float64(0.9042968358682077),
+			Fclo: float64(5.3330721088784517e-17),
+		},
+		56: {
+			Fchi: float64(0.9082031671057441),
+			Fclo: float64(1.8640040753232978e-17),
+		},
+		57: {
+			Fchi: float64(0.9121093993305497),
+			Fclo: float64(4.467972832054075e-17),
+		},
+		58: {
+			Fchi: float64(0.9160155849026457),
+			Fclo: -Float64FromFloat64(5.216213419585033e-18),
+		},
+		59: {
+			Fchi: float64(0.9199219622862499),
+			Fclo: -Float64FromFloat64(2.7324731032846873e-17),
+		},
+		60: {
+			Fchi: float64(0.9238281880717143),
+			Fclo: -Float64FromFloat64(1.7769263393434193e-17),
+		},
+		61: {
+			Fchi: float64(0.9277343012727929),
+			Fclo: float64(4.943363080817441e-17),
+		},
+		62: {
+			Fchi: float64(0.9316407021562788),
+			Fclo: float64(4.164434042024055e-17),
+		},
+		63: {
+			Fchi: float64(0.935546825207466),
+			Fclo: float64(1.3011820859795741e-17),
+		},
+		64: {
+			Fchi: float64(0.9394530312562943),
+			Fclo: -Float64FromFloat64(2.7332907838481398e-17),
+		},
+		65: {
+			Fchi: float64(0.9433593066844669),
+			Fclo: float64(2.342133170803292e-17),
+		},
+		66: {
+			Fchi: float64(0.9472655994038329),
+			Fclo: float64(1.6478717480487438e-17),
+		},
+		67: {
+			Fchi: float64(0.9511718313032721),
+			Fclo: -Float64FromFloat64(5.19608290131499e-18),
+		},
+		68: {
+			Fchi: float64(0.9550781578218178),
+			Fclo: -Float64FromFloat64(3.5565573220579e-17),
+		},
+		69: {
+			Fchi: float64(0.9589843147339043),
+			Fclo: float64(2.0816772146458738e-17),
+		},
+		70: {
+			Fchi: float64(0.9628906735633685),
+			Fclo: -Float64FromFloat64(3.471962826146841e-18),
+		},
+		71: {
+			Fchi: float64(0.9667968893972092),
+			Fclo: -Float64FromFloat64(3.68646834472642e-17),
+		},
+		72: {
+			Fchi: float64(0.9707031054025779),
+			Fclo: -Float64FromFloat64(3.4674108076868834e-18),
+		},
+		73: {
+			Fchi: float64(0.9746094325494931),
+			Fclo: float64(4.598152624774392e-17),
+		},
+		74: {
+			Fchi: float64(0.9785156054582722),
+			Fclo: float64(4.553145752392568e-17),
+		},
+		75: {
+			Fchi: float64(0.9824218687812282),
+			Fclo: -Float64FromFloat64(7.811259169418978e-18),
+		},
+		76: {
+			Fchi: float64(0.9863280690752917),
+			Fclo: float64(2.0375615178047467e-17),
+		},
+		77: {
+			Fchi: float64(0.9902342909546034),
+			Fclo: -Float64FromFloat64(1.344597043422914e-17),
+		},
+		78: {
+			Fchi: float64(0.9941406780264008),
+			Fclo: float64(1.51853723695054e-17),
+		},
+		79: {
+			Fchi: float64(0.9980468598715558),
+			Fclo: -Float64FromFloat64(1.301926039598001e-17),
+		},
+		80: {
+			Fchi: float64(1.0039062067717412),
+			Fclo: -Float64FromFloat64(4.596120641744973e-17),
+		},
+		81: {
+			Fchi: float64(1.0117187035281372),
+			Fclo: -Float64FromFloat64(8.152405002665349e-17),
+		},
+		82: {
+			Fchi: float64(1.0195312424919558),
+			Fclo: float64(8.239927014757811e-17),
+		},
+		83: {
+			Fchi: float64(1.0273437641634193),
+			Fclo: float64(3.122851005327045e-17),
+		},
+		84: {
+			Fchi: float64(1.0351562274561221),
+			Fclo: -Float64FromFloat64(1.3010212611128995e-17),
+		},
+		85: {
+			Fchi: float64(1.0429687539123276),
+			Fclo: -Float64FromFloat64(5.984116688633458e-17),
+		},
+		86: {
+			Fchi: float64(1.0507812561238108),
+			Fclo: float64(2.860923854822335e-17),
+		},
+		87: {
+			Fchi: float64(1.0585937308350133),
+			Fclo: -Float64FromFloat64(1.9962944508904598e-17),
+		},
+		88: {
+			Fchi: float64(1.0664062936992642),
+			Fclo: float64(5.291469130309099e-17),
+		},
+		89: {
+			Fchi: float64(1.0742187309945372),
+			Fclo: float64(1.0321575006732523e-16),
+		},
+		90: {
+			Fchi: float64(1.082031301537134),
+			Fclo: float64(9.021194373419119e-17),
+		},
+		91: {
+			Fchi: float64(1.0898438063644336),
+			Fclo: float64(5.202798992357953e-17),
+		},
+		92: {
+			Fchi: float64(1.0976562356711468),
+			Fclo: float64(5.898318482500785e-17),
+		},
+		93: {
+			Fchi: float64(1.1054688179463226),
+			Fclo: float64(8.846377690653252e-17),
+		},
+		94: {
+			Fchi: float64(1.113281220803328),
+			Fclo: -Float64FromFloat64(9.529455965212574e-18),
+		},
+		95: {
+			Fchi: float64(1.1210937073167315),
+			Fclo: float64(6.765080709377787e-17),
+		},
+		96: {
+			Fchi: float64(1.1289062967338532),
+			Fclo: float64(1.0929327370933015e-16),
+		},
+		97: {
+			Fchi: float64(1.1367187631150848),
+			Fclo: float64(6.938570551230516e-17),
+		},
+		98: {
+			Fchi: float64(1.1445312490244826),
+			Fclo: float64(1.908841015045148e-17),
+		},
+		99: {
+			Fchi: float64(1.1523437096203593),
+			Fclo: float64(2.7744504138979832e-17),
+		},
+		100: {
+			Fchi: float64(1.1601563266482477),
+			Fclo: -Float64FromFloat64(1.5621964097491672e-17),
+		},
+		101: {
+			Fchi: float64(1.1679688257483505),
+			Fclo: -Float64FromFloat64(6.4191661495975e-17),
+		},
+		102: {
+			Fchi: float64(1.1757811754697645),
+			Fclo: -Float64FromFloat64(4.336465165059268e-17),
+		},
+		103: {
+			Fchi: float64(1.183593793665613),
+			Fclo: -Float64FromFloat64(3.8159292551356396e-17),
+		},
+		104: {
+			Fchi: float64(1.1914062331617676),
+			Fclo: -Float64FromFloat64(2.94933042768015e-17),
+		},
+		105: {
+			Fchi: float64(1.1992187450577771),
+			Fclo: -Float64FromFloat64(6.244142916351348e-17),
+		},
+		106: {
+			Fchi: float64(1.2070312971249755),
+			Fclo: float64(7.458644622627413e-17),
+		},
+		107: {
+			Fchi: float64(1.2148438169965134),
+			Fclo: float64(2.7760519266147807e-17),
+		},
+		108: {
+			Fchi: float64(1.222656225220801),
+			Fclo: -Float64FromFloat64(7.025106921079665e-17),
+		},
+		109: {
+			Fchi: float64(1.2304687681290862),
+			Fclo: float64(3.7292622364618835e-17),
+		},
+		110: {
+			Fchi: float64(1.2382812116234925),
+			Fclo: float64(2.2558949940652082e-17),
+		},
+		111: {
+			Fchi: float64(1.2460936706149877),
+			Fclo: float64(8.499368944400665e-17),
+		},
+		112: {
+			Fchi: float64(1.2539063289686938),
+			Fclo: float64(1.039515474644361e-17),
+		},
+		113: {
+			Fchi: float64(1.2617188367227732),
+			Fclo: float64(3.297262223275499e-17),
+		},
+		114: {
+			Fchi: float64(1.2695311590462317),
+			Fclo: float64(4.509883253594155e-17),
+		},
+		115: {
+			Fchi: float64(1.277343660657941),
+			Fclo: -Float64FromFloat64(7.546987371769545e-17),
+		},
+		116: {
+			Fchi: float64(1.2851561882963496),
+			Fclo: float64(9.454295598818184e-17),
+		},
+		117: {
+			Fchi: float64(1.2929686521915196),
+			Fclo: -Float64FromFloat64(7.28545609119749e-17),
+		},
+		118: {
+			Fchi: float64(1.3007813359167737),
+			Fclo: -Float64FromFloat64(8.934357651462802e-17),
+		},
+		119: {
+			Fchi: float64(1.3085938093753886),
+			Fclo: float64(8.15257059458102e-17),
+		},
+		120: {
+			Fchi: float64(1.3164063202609564),
+			Fclo: float64(6.946341460765881e-18),
+		},
+		121: {
+			Fchi: float64(1.3242188320313901),
+			Fclo: -Float64FromFloat64(7.892731380721676e-17),
+		},
+		122: {
+			Fchi: float64(1.3320311786874468),
+			Fclo: -Float64FromFloat64(4.3384657500713545e-17),
+		},
+		123: {
+			Fchi: float64(1.3398436880573092),
+			Fclo: float64(9.627577954598792e-17),
+		},
+		124: {
+			Fchi: float64(1.3476563390295309),
+			Fclo: float64(4.2492400590204517e-17),
+		},
+		125: {
+			Fchi: float64(1.3554687641043626),
+			Fclo: -Float64FromFloat64(1.0843419551446047e-16),
+		},
+		126: {
+			Fchi: float64(1.3632813590971713),
+			Fclo: -Float64FromFloat64(8.50172782472025e-17),
+		},
+		127: {
+			Fchi: float64(1.3710936595522603),
+			Fclo: -Float64FromFloat64(7.110627206162922e-17),
+		},
+	},
+}
 
-var x___logf_data = Tlogf_data{Ftab: [16]struct {
-	Finvc float64
-	Flogc float64
-}{
-	0:  {Finvc: float64(1.398907162146528), Flogc: -Float64FromFloat64(0.33569133332882284)},
-	1:  {Finvc: float64(1.3403141896637998), Flogc: -Float64FromFloat64(0.2929040563774074)},
-	2:  {Finvc: float64(1.286432210124115), Flogc: -Float64FromFloat64(0.2518726580937369)},
-	3:  {Finvc: float64(1.2367150214269895), Flogc: -Float64FromFloat64(0.21245868807117255)},
-	4:  {Finvc: float64(1.1906977166711752), Flogc: -Float64FromFloat64(0.17453945183745634)},
-	5:  {Finvc: float64(1.1479821020556429), Flogc: -Float64FromFloat64(0.1380057072319758)},
-	6:  {Finvc: float64(1.1082251448272158), Flogc: -Float64FromFloat64(0.10275976698545139)},
-	7:  {Finvc: float64(1.0711297413057381), Flogc: -Float64FromFloat64(0.06871392447020525)},
-	8:  {Finvc: float64(1.036437278977283), Flogc: -Float64FromFloat64(0.0357891387398228)},
-	9:  {Finvc: float64(1), Flogc: float64(0)},
-	10: {Finvc: float64(0.9492859795739057), Flogc: float64(0.05204517742929496)},
-	11: {Finvc: float64(0.8951049428609004), Flogc: float64(0.11081431298787942)},
-	12: {Finvc: float64(0.8476821620351103), Flogc: float64(0.1652495223695143)},
-	13: {Finvc: float64(0.8050314851692001), Flogc: float64(0.21687389031699977)},
-	14: {Finvc: float64(0.7664671008843108), Flogc: float64(0.2659635028121397)},
-	15: {Finvc: float64(0.731428603316328), Flogc: float64(0.3127556664073557)}}, Fln2: float64(0.6931471805599453), Fpoly: [3]float64{
-	0: -Float64FromFloat64(0.25089342214237154),
-	1: float64(0.333456765744066),
-	2: -Float64FromFloat64(0.4999997485802103)}}
+var x___logf_data = Tlogf_data{
+	Ftab: [16]struct {
+		Finvc float64
+		Flogc float64
+	}{
+		0: {
+			Finvc: float64(1.398907162146528),
+			Flogc: -Float64FromFloat64(0.33569133332882284),
+		},
+		1: {
+			Finvc: float64(1.3403141896637998),
+			Flogc: -Float64FromFloat64(0.2929040563774074),
+		},
+		2: {
+			Finvc: float64(1.286432210124115),
+			Flogc: -Float64FromFloat64(0.2518726580937369),
+		},
+		3: {
+			Finvc: float64(1.2367150214269895),
+			Flogc: -Float64FromFloat64(0.21245868807117255),
+		},
+		4: {
+			Finvc: float64(1.1906977166711752),
+			Flogc: -Float64FromFloat64(0.17453945183745634),
+		},
+		5: {
+			Finvc: float64(1.1479821020556429),
+			Flogc: -Float64FromFloat64(0.1380057072319758),
+		},
+		6: {
+			Finvc: float64(1.1082251448272158),
+			Flogc: -Float64FromFloat64(0.10275976698545139),
+		},
+		7: {
+			Finvc: float64(1.0711297413057381),
+			Flogc: -Float64FromFloat64(0.06871392447020525),
+		},
+		8: {
+			Finvc: float64(1.036437278977283),
+			Flogc: -Float64FromFloat64(0.0357891387398228),
+		},
+		9: {
+			Finvc: float64(1),
+			Flogc: float64(0),
+		},
+		10: {
+			Finvc: float64(0.9492859795739057),
+			Flogc: float64(0.05204517742929496),
+		},
+		11: {
+			Finvc: float64(0.8951049428609004),
+			Flogc: float64(0.11081431298787942),
+		},
+		12: {
+			Finvc: float64(0.8476821620351103),
+			Flogc: float64(0.1652495223695143),
+		},
+		13: {
+			Finvc: float64(0.8050314851692001),
+			Flogc: float64(0.21687389031699977),
+		},
+		14: {
+			Finvc: float64(0.7664671008843108),
+			Flogc: float64(0.2659635028121397),
+		},
+		15: {
+			Finvc: float64(0.731428603316328),
+			Flogc: float64(0.3127556664073557),
+		},
+	},
+	Fln2: float64(0.6931471805599453),
+	Fpoly: [3]float64{
+		0: -Float64FromFloat64(0.25089342214237154),
+		1: float64(0.333456765744066),
+		2: -Float64FromFloat64(0.4999997485802103),
+	},
+}
 
 var x___malloc_context = Tmalloc_context{}
 
@@ -149570,179 +152640,880 @@ var x___malloc_size_classes = [48]uint16{
 	44: uint16(4680),
 	45: uint16(5460),
 	46: uint16(6552),
-	47: uint16(8191)}
+	47: uint16(8191),
+}
 
 var x___optpos int32
 
 var x___optreset int32
 
-var x___pow_log_data = Tpow_log_data{Fln2hi: float64(0.6931471805598903), Fln2lo: float64(5.497923018708371e-14), Fpoly: [7]float64{
-	0: -Float64FromFloat64(0.5),
-	1: Float64FromFloat64(0.3333333333333339) * float64(-Int32FromInt32(2)),
-	2: -Float64FromFloat64(0.25000000000000033) * float64(-Int32FromInt32(2)),
-	3: Float64FromFloat64(0.1999999998830994) * Float64FromInt32(4),
-	4: -Float64FromFloat64(0.16666666658719348) * Float64FromInt32(4),
-	5: Float64FromFloat64(0.14286370355743763) * float64(-Int32FromInt32(8)),
-	6: -Float64FromFloat64(0.12500519079594427) * float64(-Int32FromInt32(8))}, Ftab: [128]struct {
-	Finvc     float64
-	Fpad      float64
-	Flogc     float64
-	Flogctail float64
-}{
-	0:   {Finvc: float64(1.4140625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.3464667673462145), Flogctail: float64(5.929407345889625e-15)},
-	1:   {Finvc: float64(1.40625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.34092658697056777), Flogctail: -Float64FromFloat64(2.544157440035963e-14)},
-	2:   {Finvc: float64(1.3984375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.3353555419211034), Flogctail: -Float64FromFloat64(3.443525940775045e-14)},
-	3:   {Finvc: float64(1.390625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.3297532863724655), Flogctail: -Float64FromFloat64(2.500123826022799e-15)},
-	4:   {Finvc: float64(1.3828125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.32411946865420305), Flogctail: -Float64FromFloat64(8.929337133850617e-15)},
-	5:   {Finvc: float64(1.375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.31845373111855224), Flogctail: float64(1.7625431312172662e-14)},
-	6:   {Finvc: float64(1.3671875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.31275571000389846), Flogctail: float64(1.5688303180062087e-15)},
-	7:   {Finvc: float64(1.359375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.3070250352949415), Flogctail: float64(2.9655274673691784e-14)},
-	8:   {Finvc: float64(1.3515625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.3012613305781997), Flogctail: float64(3.7923164802093147e-14)},
-	9:   {Finvc: float64(1.34375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.2954642128938758), Flogctail: float64(3.993416384387844e-14)},
-	10:  {Finvc: float64(1.3359375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.28963329258306203), Flogctail: float64(1.9352855826489123e-14)},
-	11:  {Finvc: float64(1.3359375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.28963329258306203), Flogctail: float64(1.9352855826489123e-14)},
-	12:  {Finvc: float64(1.328125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.28376817313062475), Flogctail: -Float64FromFloat64(1.9852665484979036e-14)},
-	13:  {Finvc: float64(1.3203125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.27786845100342816), Flogctail: -Float64FromFloat64(2.814323765595281e-14)},
-	14:  {Finvc: float64(1.3125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.2719337154836694), Flogctail: float64(2.7643769993528702e-14)},
-	15:  {Finvc: float64(1.3046875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.2659635484970977), Flogctail: -Float64FromFloat64(4.025092402293806e-14)},
-	16:  {Finvc: float64(1.296875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.25995752443691345), Flogctail: -Float64FromFloat64(1.2621729398885316e-14)},
-	17:  {Finvc: float64(1.2890625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.25391520998095984), Flogctail: -Float64FromFloat64(3.600176732637335e-15)},
-	18:  {Finvc: float64(1.2890625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.25391520998095984), Flogctail: -Float64FromFloat64(3.600176732637335e-15)},
-	19:  {Finvc: float64(1.28125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.2478361639045943), Flogctail: float64(1.3029797173308663e-14)},
-	20:  {Finvc: float64(1.2734375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.2417199368871934), Flogctail: float64(4.8230289429940886e-14)},
-	21:  {Finvc: float64(1.265625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.23556607131274632), Flogctail: -Float64FromFloat64(2.0592242769647135e-14)},
-	22:  {Finvc: float64(1.2578125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.22937410106487732), Flogctail: float64(3.149265065191484e-14)},
-	23:  {Finvc: float64(1.25), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.22314355131425145), Flogctail: float64(4.169796584527195e-14)},
-	24:  {Finvc: float64(1.25), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.22314355131425145), Flogctail: float64(4.169796584527195e-14)},
-	25:  {Finvc: float64(1.2421875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.21687393830063684), Flogctail: float64(2.2477465222466186e-14)},
-	26:  {Finvc: float64(1.234375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.21056476910735), Flogctail: float64(3.6507188831790577e-16)},
-	27:  {Finvc: float64(1.2265625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.2042155414286526), Flogctail: -Float64FromFloat64(3.827767260205414e-14)},
-	28:  {Finvc: float64(1.2265625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.2042155414286526), Flogctail: -Float64FromFloat64(3.827767260205414e-14)},
-	29:  {Finvc: float64(1.21875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.19782574332987224), Flogctail: -Float64FromFloat64(4.7641388950792196e-14)},
-	30:  {Finvc: float64(1.2109375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.19139485299967873), Flogctail: float64(4.9278276214647115e-14)},
-	31:  {Finvc: float64(1.203125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.18492233849406148), Flogctail: float64(4.9485167661250996e-14)},
-	32:  {Finvc: float64(1.203125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.18492233849406148), Flogctail: float64(4.9485167661250996e-14)},
-	33:  {Finvc: float64(1.1953125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.1784076574728033), Flogctail: -Float64FromFloat64(1.5003333854266542e-14)},
-	34:  {Finvc: float64(1.1875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.17185025692663203), Flogctail: -Float64FromFloat64(2.7194441649495324e-14)},
-	35:  {Finvc: float64(1.1875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.17185025692663203), Flogctail: -Float64FromFloat64(2.7194441649495324e-14)},
-	36:  {Finvc: float64(1.1796875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.1652495728952772), Flogctail: -Float64FromFloat64(2.99659267292569e-14)},
-	37:  {Finvc: float64(1.171875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.15860503017665906), Flogctail: float64(2.0472357800461955e-14)},
-	38:  {Finvc: float64(1.171875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.15860503017665906), Flogctail: float64(2.0472357800461955e-14)},
-	39:  {Finvc: float64(1.1640625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.15191604202584585), Flogctail: float64(3.879296723063646e-15)},
-	40:  {Finvc: float64(1.15625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.1451820098444614), Flogctail: -Float64FromFloat64(3.6506824353335045e-14)},
-	41:  {Finvc: float64(1.1484375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.13840232285906495), Flogctail: -Float64FromFloat64(5.4183331379008994e-14)},
-	42:  {Finvc: float64(1.1484375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.13840232285906495), Flogctail: -Float64FromFloat64(5.4183331379008994e-14)},
-	43:  {Finvc: float64(1.140625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.131576357788731), Flogctail: float64(1.1729485484531301e-14)},
-	44:  {Finvc: float64(1.140625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.131576357788731), Flogctail: float64(1.1729485484531301e-14)},
-	45:  {Finvc: float64(1.1328125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.12470347850091912), Flogctail: -Float64FromFloat64(3.811763084710266e-14)},
-	46:  {Finvc: float64(1.125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.11778303565643), Flogctail: float64(4.654729747598445e-14)},
-	47:  {Finvc: float64(1.125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.11778303565643), Flogctail: float64(4.654729747598445e-14)},
-	48:  {Finvc: float64(1.1171875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.11081436634026431), Flogctail: -Float64FromFloat64(2.5799991283069902e-14)},
-	49:  {Finvc: float64(1.109375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.10379679368168127), Flogctail: float64(3.7700471749674615e-14)},
-	50:  {Finvc: float64(1.109375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.10379679368168127), Flogctail: float64(3.7700471749674615e-14)},
-	51:  {Finvc: float64(1.1015625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.09672962645856842), Flogctail: float64(1.7306161136093256e-14)},
-	52:  {Finvc: float64(1.1015625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.09672962645856842), Flogctail: float64(1.7306161136093256e-14)},
-	53:  {Finvc: float64(1.09375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.089612158689647), Flogctail: -Float64FromFloat64(4.012913552726574e-14)},
-	54:  {Finvc: float64(1.0859375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.08244366921110213), Flogctail: float64(2.7541708360737882e-14)},
-	55:  {Finvc: float64(1.0859375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.08244366921110213), Flogctail: float64(2.7541708360737882e-14)},
-	56:  {Finvc: float64(1.078125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.07522342123763792), Flogctail: float64(5.0396178134370583e-14)},
-	57:  {Finvc: float64(1.078125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.07522342123763792), Flogctail: float64(5.0396178134370583e-14)},
-	58:  {Finvc: float64(1.0703125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.06795066190852594), Flogctail: float64(1.8195060030168815e-14)},
-	59:  {Finvc: float64(1.0625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.06062462181648698), Flogctail: float64(5.213620639136504e-14)},
-	60:  {Finvc: float64(1.0625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.06062462181648698), Flogctail: float64(5.213620639136504e-14)},
-	61:  {Finvc: float64(1.0546875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.053244514518837605), Flogctail: float64(2.532168943117445e-14)},
-	62:  {Finvc: float64(1.0546875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.053244514518837605), Flogctail: float64(2.532168943117445e-14)},
-	63:  {Finvc: float64(1.046875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.045809536031242715), Flogctail: -Float64FromFloat64(5.148849572685811e-14)},
-	64:  {Finvc: float64(1.046875), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.045809536031242715), Flogctail: -Float64FromFloat64(5.148849572685811e-14)},
-	65:  {Finvc: float64(1.0390625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.038318864302141264), Flogctail: float64(4.6652946995830086e-15)},
-	66:  {Finvc: float64(1.0390625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.038318864302141264), Flogctail: float64(4.6652946995830086e-15)},
-	67:  {Finvc: float64(1.03125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.03077165866670839), Flogctail: -Float64FromFloat64(4.529814257790929e-14)},
-	68:  {Finvc: float64(1.03125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.03077165866670839), Flogctail: -Float64FromFloat64(4.529814257790929e-14)},
-	69:  {Finvc: float64(1.0234375), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.023167059281490765), Flogctail: -Float64FromFloat64(4.361324067851568e-14)},
-	70:  {Finvc: float64(1.015625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.015504186535963527), Flogctail: -Float64FromFloat64(1.7274567499706107e-15)},
-	71:  {Finvc: float64(1.015625), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.015504186535963527), Flogctail: -Float64FromFloat64(1.7274567499706107e-15)},
-	72:  {Finvc: float64(1.0078125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.0077821404420319595), Flogctail: -Float64FromFloat64(2.298941004620351e-14)},
-	73:  {Finvc: float64(1.0078125), Fpad: Float64FromInt32(0), Flogc: -Float64FromFloat64(0.0077821404420319595), Flogctail: -Float64FromFloat64(2.298941004620351e-14)},
-	74:  {Finvc: float64(1), Fpad: Float64FromInt32(0), Flogc: float64(0), Flogctail: float64(0)},
-	75:  {Finvc: float64(1), Fpad: Float64FromInt32(0), Flogc: float64(0), Flogctail: float64(0)},
-	76:  {Finvc: float64(0.9921875), Fpad: Float64FromInt32(0), Flogc: float64(0.007843177461040796), Flogctail: -Float64FromFloat64(1.4902732911301337e-14)},
-	77:  {Finvc: float64(0.984375), Fpad: Float64FromInt32(0), Flogc: float64(0.01574835696817445), Flogctail: -Float64FromFloat64(3.527980389655325e-14)},
-	78:  {Finvc: float64(0.9765625), Fpad: Float64FromInt32(0), Flogc: float64(0.023716526617363343), Flogctail: -Float64FromFloat64(4.730054772033249e-14)},
-	79:  {Finvc: float64(0.96875), Fpad: Float64FromInt32(0), Flogc: float64(0.03174869831457272), Flogctail: float64(7.580310369375161e-15)},
-	80:  {Finvc: float64(0.9609375), Fpad: Float64FromInt32(0), Flogc: float64(0.039845908547249564), Flogctail: -Float64FromFloat64(4.9893776716773285e-14)},
-	81:  {Finvc: float64(0.953125), Fpad: Float64FromInt32(0), Flogc: float64(0.048009219186383234), Flogctail: -Float64FromFloat64(2.262629393030674e-14)},
-	82:  {Finvc: float64(0.9453125), Fpad: Float64FromInt32(0), Flogc: float64(0.056239718322899535), Flogctail: -Float64FromFloat64(2.345674491018699e-14)},
-	83:  {Finvc: float64(0.94140625), Fpad: Float64FromInt32(0), Flogc: float64(0.06038051098892083), Flogctail: -Float64FromFloat64(1.3352588834854848e-14)},
-	84:  {Finvc: float64(0.93359375), Fpad: Float64FromInt32(0), Flogc: float64(0.06871389254808946), Flogctail: -Float64FromFloat64(3.765296820388875e-14)},
-	85:  {Finvc: float64(0.92578125), Fpad: Float64FromInt32(0), Flogc: float64(0.07711730334438016), Flogctail: float64(5.1128335719851986e-14)},
-	86:  {Finvc: float64(0.91796875), Fpad: Float64FromInt32(0), Flogc: float64(0.08559193033545398), Flogctail: -Float64FromFloat64(5.046674438470119e-14)},
-	87:  {Finvc: float64(0.9140625), Fpad: Float64FromInt32(0), Flogc: float64(0.08985632912185793), Flogctail: float64(3.1218748807418837e-15)},
-	88:  {Finvc: float64(0.90625), Fpad: Float64FromInt32(0), Flogc: float64(0.09844007281321865), Flogctail: float64(3.3871241029241416e-14)},
-	89:  {Finvc: float64(0.8984375), Fpad: Float64FromInt32(0), Flogc: float64(0.10709813555638448), Flogctail: -Float64FromFloat64(1.7376727386423858e-14)},
-	90:  {Finvc: float64(0.89453125), Fpad: Float64FromInt32(0), Flogc: float64(0.11145544092528326), Flogctail: float64(3.957125899799804e-14)},
-	91:  {Finvc: float64(0.88671875), Fpad: Float64FromInt32(0), Flogc: float64(0.12022742699821265), Flogctail: -Float64FromFloat64(5.2849453521890294e-14)},
-	92:  {Finvc: float64(0.8828125), Fpad: Float64FromInt32(0), Flogc: float64(0.12464244520731427), Flogctail: -Float64FromFloat64(3.767012502308738e-14)},
-	93:  {Finvc: float64(0.875), Fpad: Float64FromInt32(0), Flogc: float64(0.13353139262449076), Flogctail: float64(3.1859736349078334e-14)},
-	94:  {Finvc: float64(0.87109375), Fpad: Float64FromInt32(0), Flogc: float64(0.13800567301939282), Flogctail: float64(5.0900642926060466e-14)},
-	95:  {Finvc: float64(0.86328125), Fpad: Float64FromInt32(0), Flogc: float64(0.14701474296180095), Flogctail: float64(8.710783796122478e-15)},
-	96:  {Finvc: float64(0.859375), Fpad: Float64FromInt32(0), Flogc: float64(0.15154989812720032), Flogctail: float64(6.157896229122976e-16)},
-	97:  {Finvc: float64(0.8515625), Fpad: Float64FromInt32(0), Flogc: float64(0.16068238169043525), Flogctail: float64(3.821577743916796e-14)},
-	98:  {Finvc: float64(0.84765625), Fpad: Float64FromInt32(0), Flogc: float64(0.16528009093906348), Flogctail: float64(3.9440046718453496e-14)},
-	99:  {Finvc: float64(0.83984375), Fpad: Float64FromInt32(0), Flogc: float64(0.17453941635187675), Flogctail: float64(2.2924522154618074e-14)},
-	100: {Finvc: float64(0.8359375), Fpad: Float64FromInt32(0), Flogc: float64(0.17920142945774842), Flogctail: -Float64FromFloat64(3.742530094732263e-14)},
-	101: {Finvc: float64(0.83203125), Fpad: Float64FromInt32(0), Flogc: float64(0.18388527877016259), Flogctail: -Float64FromFloat64(2.5223102140407338e-14)},
-	102: {Finvc: float64(0.82421875), Fpad: Float64FromInt32(0), Flogc: float64(0.1933193110035063), Flogctail: -Float64FromFloat64(1.0320443688698849e-14)},
-	103: {Finvc: float64(0.8203125), Fpad: Float64FromInt32(0), Flogc: float64(0.19806991376208316), Flogctail: float64(1.0634128304268335e-14)},
-	104: {Finvc: float64(0.8125), Fpad: Float64FromInt32(0), Flogc: float64(0.20763936477828793), Flogctail: -Float64FromFloat64(4.3425422595242564e-14)},
-	105: {Finvc: float64(0.80859375), Fpad: Float64FromInt32(0), Flogc: float64(0.21245865121420593), Flogctail: -Float64FromFloat64(1.2527395755711364e-14)},
-	106: {Finvc: float64(0.8046875), Fpad: Float64FromInt32(0), Flogc: float64(0.21730127569003344), Flogctail: -Float64FromFloat64(5.204008743405884e-14)},
-	107: {Finvc: float64(0.80078125), Fpad: Float64FromInt32(0), Flogc: float64(0.22216746534115828), Flogctail: -Float64FromFloat64(3.979844515951702e-15)},
-	108: {Finvc: float64(0.79296875), Fpad: Float64FromInt32(0), Flogc: float64(0.2319714654378231), Flogctail: -Float64FromFloat64(4.7955860343296286e-14)},
-	109: {Finvc: float64(0.7890625), Fpad: Float64FromInt32(0), Flogc: float64(0.2369097470783572), Flogctail: float64(5.015686013791602e-16)},
-	110: {Finvc: float64(0.78515625), Fpad: Float64FromInt32(0), Flogc: float64(0.24187253642048745), Flogctail: -Float64FromFloat64(7.252318953240293e-16)},
-	111: {Finvc: float64(0.78125), Fpad: Float64FromInt32(0), Flogc: float64(0.2468600779315011), Flogctail: float64(2.4688324156011588e-14)},
-	112: {Finvc: float64(0.7734375), Fpad: Float64FromInt32(0), Flogc: float64(0.2569104137850218), Flogctail: float64(5.465121253624792e-15)},
-	113: {Finvc: float64(0.76953125), Fpad: Float64FromInt32(0), Flogc: float64(0.26197371574153294), Flogctail: float64(4.102651071698446e-14)},
-	114: {Finvc: float64(0.765625), Fpad: Float64FromInt32(0), Flogc: float64(0.2670627852490952), Flogctail: -Float64FromFloat64(4.996736502345936e-14)},
-	115: {Finvc: float64(0.76171875), Fpad: Float64FromInt32(0), Flogc: float64(0.27217788591576664), Flogctail: float64(4.903580708156347e-14)},
-	116: {Finvc: float64(0.7578125), Fpad: Float64FromInt32(0), Flogc: float64(0.27731928541618345), Flogctail: float64(5.089628039500759e-14)},
-	117: {Finvc: float64(0.75390625), Fpad: Float64FromInt32(0), Flogc: float64(0.28248725557466514), Flogctail: float64(1.1782016386565151e-14)},
-	118: {Finvc: float64(0.74609375), Fpad: Float64FromInt32(0), Flogc: float64(0.29290401643288533), Flogctail: float64(4.727452940514406e-14)},
-	119: {Finvc: float64(0.7421875), Fpad: Float64FromInt32(0), Flogc: float64(0.29815337231912054), Flogctail: -Float64FromFloat64(4.4204083338755686e-14)},
-	120: {Finvc: float64(0.73828125), Fpad: Float64FromInt32(0), Flogc: float64(0.3034304294199046), Flogctail: float64(1.548345993498083e-14)},
-	121: {Finvc: float64(0.734375), Fpad: Float64FromInt32(0), Flogc: float64(0.30873548164959175), Flogctail: float64(2.1522127491642888e-14)},
-	122: {Finvc: float64(0.73046875), Fpad: Float64FromInt32(0), Flogc: float64(0.3140688276249648), Flogctail: float64(1.1054030169005386e-14)},
-	123: {Finvc: float64(0.7265625), Fpad: Float64FromInt32(0), Flogc: float64(0.31943077076641657), Flogctail: -Float64FromFloat64(5.534326352070679e-14)},
-	124: {Finvc: float64(0.72265625), Fpad: Float64FromInt32(0), Flogc: float64(0.3248216194012912), Flogctail: -Float64FromFloat64(5.351646604259541e-14)},
-	125: {Finvc: float64(0.71875), Fpad: Float64FromInt32(0), Flogc: float64(0.33024168687052224), Flogctail: float64(5.4612144489920215e-14)},
-	126: {Finvc: float64(0.71484375), Fpad: Float64FromInt32(0), Flogc: float64(0.3356912916381134), Flogctail: float64(2.8136969901227338e-14)},
-	127: {Finvc: float64(0.7109375), Fpad: Float64FromInt32(0), Flogc: float64(0.3411707574027787), Flogctail: -Float64FromFloat64(1.156568624616423e-14)}}}
+var x___pow_log_data = Tpow_log_data{
+	Fln2hi: float64(0.6931471805598903),
+	Fln2lo: float64(5.497923018708371e-14),
+	Fpoly: [7]float64{
+		0: -Float64FromFloat64(0.5),
+		1: Float64FromFloat64(0.3333333333333339) * float64(-Int32FromInt32(2)),
+		2: -Float64FromFloat64(0.25000000000000033) * float64(-Int32FromInt32(2)),
+		3: Float64FromFloat64(0.1999999998830994) * Float64FromInt32(4),
+		4: -Float64FromFloat64(0.16666666658719348) * Float64FromInt32(4),
+		5: Float64FromFloat64(0.14286370355743763) * float64(-Int32FromInt32(8)),
+		6: -Float64FromFloat64(0.12500519079594427) * float64(-Int32FromInt32(8)),
+	},
+	Ftab: [128]struct {
+		Finvc     float64
+		Fpad      float64
+		Flogc     float64
+		Flogctail float64
+	}{
+		0: {
+			Finvc:     float64(1.4140625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.3464667673462145),
+			Flogctail: float64(5.929407345889625e-15),
+		},
+		1: {
+			Finvc:     float64(1.40625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.34092658697056777),
+			Flogctail: -Float64FromFloat64(2.544157440035963e-14),
+		},
+		2: {
+			Finvc:     float64(1.3984375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.3353555419211034),
+			Flogctail: -Float64FromFloat64(3.443525940775045e-14),
+		},
+		3: {
+			Finvc:     float64(1.390625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.3297532863724655),
+			Flogctail: -Float64FromFloat64(2.500123826022799e-15),
+		},
+		4: {
+			Finvc:     float64(1.3828125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.32411946865420305),
+			Flogctail: -Float64FromFloat64(8.929337133850617e-15),
+		},
+		5: {
+			Finvc:     float64(1.375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.31845373111855224),
+			Flogctail: float64(1.7625431312172662e-14),
+		},
+		6: {
+			Finvc:     float64(1.3671875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.31275571000389846),
+			Flogctail: float64(1.5688303180062087e-15),
+		},
+		7: {
+			Finvc:     float64(1.359375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.3070250352949415),
+			Flogctail: float64(2.9655274673691784e-14),
+		},
+		8: {
+			Finvc:     float64(1.3515625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.3012613305781997),
+			Flogctail: float64(3.7923164802093147e-14),
+		},
+		9: {
+			Finvc:     float64(1.34375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.2954642128938758),
+			Flogctail: float64(3.993416384387844e-14),
+		},
+		10: {
+			Finvc:     float64(1.3359375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.28963329258306203),
+			Flogctail: float64(1.9352855826489123e-14),
+		},
+		11: {
+			Finvc:     float64(1.3359375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.28963329258306203),
+			Flogctail: float64(1.9352855826489123e-14),
+		},
+		12: {
+			Finvc:     float64(1.328125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.28376817313062475),
+			Flogctail: -Float64FromFloat64(1.9852665484979036e-14),
+		},
+		13: {
+			Finvc:     float64(1.3203125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.27786845100342816),
+			Flogctail: -Float64FromFloat64(2.814323765595281e-14),
+		},
+		14: {
+			Finvc:     float64(1.3125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.2719337154836694),
+			Flogctail: float64(2.7643769993528702e-14),
+		},
+		15: {
+			Finvc:     float64(1.3046875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.2659635484970977),
+			Flogctail: -Float64FromFloat64(4.025092402293806e-14),
+		},
+		16: {
+			Finvc:     float64(1.296875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.25995752443691345),
+			Flogctail: -Float64FromFloat64(1.2621729398885316e-14),
+		},
+		17: {
+			Finvc:     float64(1.2890625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.25391520998095984),
+			Flogctail: -Float64FromFloat64(3.600176732637335e-15),
+		},
+		18: {
+			Finvc:     float64(1.2890625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.25391520998095984),
+			Flogctail: -Float64FromFloat64(3.600176732637335e-15),
+		},
+		19: {
+			Finvc:     float64(1.28125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.2478361639045943),
+			Flogctail: float64(1.3029797173308663e-14),
+		},
+		20: {
+			Finvc:     float64(1.2734375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.2417199368871934),
+			Flogctail: float64(4.8230289429940886e-14),
+		},
+		21: {
+			Finvc:     float64(1.265625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.23556607131274632),
+			Flogctail: -Float64FromFloat64(2.0592242769647135e-14),
+		},
+		22: {
+			Finvc:     float64(1.2578125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.22937410106487732),
+			Flogctail: float64(3.149265065191484e-14),
+		},
+		23: {
+			Finvc:     float64(1.25),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.22314355131425145),
+			Flogctail: float64(4.169796584527195e-14),
+		},
+		24: {
+			Finvc:     float64(1.25),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.22314355131425145),
+			Flogctail: float64(4.169796584527195e-14),
+		},
+		25: {
+			Finvc:     float64(1.2421875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.21687393830063684),
+			Flogctail: float64(2.2477465222466186e-14),
+		},
+		26: {
+			Finvc:     float64(1.234375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.21056476910735),
+			Flogctail: float64(3.6507188831790577e-16),
+		},
+		27: {
+			Finvc:     float64(1.2265625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.2042155414286526),
+			Flogctail: -Float64FromFloat64(3.827767260205414e-14),
+		},
+		28: {
+			Finvc:     float64(1.2265625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.2042155414286526),
+			Flogctail: -Float64FromFloat64(3.827767260205414e-14),
+		},
+		29: {
+			Finvc:     float64(1.21875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.19782574332987224),
+			Flogctail: -Float64FromFloat64(4.7641388950792196e-14),
+		},
+		30: {
+			Finvc:     float64(1.2109375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.19139485299967873),
+			Flogctail: float64(4.9278276214647115e-14),
+		},
+		31: {
+			Finvc:     float64(1.203125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.18492233849406148),
+			Flogctail: float64(4.9485167661250996e-14),
+		},
+		32: {
+			Finvc:     float64(1.203125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.18492233849406148),
+			Flogctail: float64(4.9485167661250996e-14),
+		},
+		33: {
+			Finvc:     float64(1.1953125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.1784076574728033),
+			Flogctail: -Float64FromFloat64(1.5003333854266542e-14),
+		},
+		34: {
+			Finvc:     float64(1.1875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.17185025692663203),
+			Flogctail: -Float64FromFloat64(2.7194441649495324e-14),
+		},
+		35: {
+			Finvc:     float64(1.1875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.17185025692663203),
+			Flogctail: -Float64FromFloat64(2.7194441649495324e-14),
+		},
+		36: {
+			Finvc:     float64(1.1796875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.1652495728952772),
+			Flogctail: -Float64FromFloat64(2.99659267292569e-14),
+		},
+		37: {
+			Finvc:     float64(1.171875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.15860503017665906),
+			Flogctail: float64(2.0472357800461955e-14),
+		},
+		38: {
+			Finvc:     float64(1.171875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.15860503017665906),
+			Flogctail: float64(2.0472357800461955e-14),
+		},
+		39: {
+			Finvc:     float64(1.1640625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.15191604202584585),
+			Flogctail: float64(3.879296723063646e-15),
+		},
+		40: {
+			Finvc:     float64(1.15625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.1451820098444614),
+			Flogctail: -Float64FromFloat64(3.6506824353335045e-14),
+		},
+		41: {
+			Finvc:     float64(1.1484375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.13840232285906495),
+			Flogctail: -Float64FromFloat64(5.4183331379008994e-14),
+		},
+		42: {
+			Finvc:     float64(1.1484375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.13840232285906495),
+			Flogctail: -Float64FromFloat64(5.4183331379008994e-14),
+		},
+		43: {
+			Finvc:     float64(1.140625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.131576357788731),
+			Flogctail: float64(1.1729485484531301e-14),
+		},
+		44: {
+			Finvc:     float64(1.140625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.131576357788731),
+			Flogctail: float64(1.1729485484531301e-14),
+		},
+		45: {
+			Finvc:     float64(1.1328125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.12470347850091912),
+			Flogctail: -Float64FromFloat64(3.811763084710266e-14),
+		},
+		46: {
+			Finvc:     float64(1.125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.11778303565643),
+			Flogctail: float64(4.654729747598445e-14),
+		},
+		47: {
+			Finvc:     float64(1.125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.11778303565643),
+			Flogctail: float64(4.654729747598445e-14),
+		},
+		48: {
+			Finvc:     float64(1.1171875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.11081436634026431),
+			Flogctail: -Float64FromFloat64(2.5799991283069902e-14),
+		},
+		49: {
+			Finvc:     float64(1.109375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.10379679368168127),
+			Flogctail: float64(3.7700471749674615e-14),
+		},
+		50: {
+			Finvc:     float64(1.109375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.10379679368168127),
+			Flogctail: float64(3.7700471749674615e-14),
+		},
+		51: {
+			Finvc:     float64(1.1015625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.09672962645856842),
+			Flogctail: float64(1.7306161136093256e-14),
+		},
+		52: {
+			Finvc:     float64(1.1015625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.09672962645856842),
+			Flogctail: float64(1.7306161136093256e-14),
+		},
+		53: {
+			Finvc:     float64(1.09375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.089612158689647),
+			Flogctail: -Float64FromFloat64(4.012913552726574e-14),
+		},
+		54: {
+			Finvc:     float64(1.0859375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.08244366921110213),
+			Flogctail: float64(2.7541708360737882e-14),
+		},
+		55: {
+			Finvc:     float64(1.0859375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.08244366921110213),
+			Flogctail: float64(2.7541708360737882e-14),
+		},
+		56: {
+			Finvc:     float64(1.078125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.07522342123763792),
+			Flogctail: float64(5.0396178134370583e-14),
+		},
+		57: {
+			Finvc:     float64(1.078125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.07522342123763792),
+			Flogctail: float64(5.0396178134370583e-14),
+		},
+		58: {
+			Finvc:     float64(1.0703125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.06795066190852594),
+			Flogctail: float64(1.8195060030168815e-14),
+		},
+		59: {
+			Finvc:     float64(1.0625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.06062462181648698),
+			Flogctail: float64(5.213620639136504e-14),
+		},
+		60: {
+			Finvc:     float64(1.0625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.06062462181648698),
+			Flogctail: float64(5.213620639136504e-14),
+		},
+		61: {
+			Finvc:     float64(1.0546875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.053244514518837605),
+			Flogctail: float64(2.532168943117445e-14),
+		},
+		62: {
+			Finvc:     float64(1.0546875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.053244514518837605),
+			Flogctail: float64(2.532168943117445e-14),
+		},
+		63: {
+			Finvc:     float64(1.046875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.045809536031242715),
+			Flogctail: -Float64FromFloat64(5.148849572685811e-14),
+		},
+		64: {
+			Finvc:     float64(1.046875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.045809536031242715),
+			Flogctail: -Float64FromFloat64(5.148849572685811e-14),
+		},
+		65: {
+			Finvc:     float64(1.0390625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.038318864302141264),
+			Flogctail: float64(4.6652946995830086e-15),
+		},
+		66: {
+			Finvc:     float64(1.0390625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.038318864302141264),
+			Flogctail: float64(4.6652946995830086e-15),
+		},
+		67: {
+			Finvc:     float64(1.03125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.03077165866670839),
+			Flogctail: -Float64FromFloat64(4.529814257790929e-14),
+		},
+		68: {
+			Finvc:     float64(1.03125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.03077165866670839),
+			Flogctail: -Float64FromFloat64(4.529814257790929e-14),
+		},
+		69: {
+			Finvc:     float64(1.0234375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.023167059281490765),
+			Flogctail: -Float64FromFloat64(4.361324067851568e-14),
+		},
+		70: {
+			Finvc:     float64(1.015625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.015504186535963527),
+			Flogctail: -Float64FromFloat64(1.7274567499706107e-15),
+		},
+		71: {
+			Finvc:     float64(1.015625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.015504186535963527),
+			Flogctail: -Float64FromFloat64(1.7274567499706107e-15),
+		},
+		72: {
+			Finvc:     float64(1.0078125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.0077821404420319595),
+			Flogctail: -Float64FromFloat64(2.298941004620351e-14),
+		},
+		73: {
+			Finvc:     float64(1.0078125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     -Float64FromFloat64(0.0077821404420319595),
+			Flogctail: -Float64FromFloat64(2.298941004620351e-14),
+		},
+		74: {
+			Finvc:     float64(1),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0),
+			Flogctail: float64(0),
+		},
+		75: {
+			Finvc:     float64(1),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0),
+			Flogctail: float64(0),
+		},
+		76: {
+			Finvc:     float64(0.9921875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.007843177461040796),
+			Flogctail: -Float64FromFloat64(1.4902732911301337e-14),
+		},
+		77: {
+			Finvc:     float64(0.984375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.01574835696817445),
+			Flogctail: -Float64FromFloat64(3.527980389655325e-14),
+		},
+		78: {
+			Finvc:     float64(0.9765625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.023716526617363343),
+			Flogctail: -Float64FromFloat64(4.730054772033249e-14),
+		},
+		79: {
+			Finvc:     float64(0.96875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.03174869831457272),
+			Flogctail: float64(7.580310369375161e-15),
+		},
+		80: {
+			Finvc:     float64(0.9609375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.039845908547249564),
+			Flogctail: -Float64FromFloat64(4.9893776716773285e-14),
+		},
+		81: {
+			Finvc:     float64(0.953125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.048009219186383234),
+			Flogctail: -Float64FromFloat64(2.262629393030674e-14),
+		},
+		82: {
+			Finvc:     float64(0.9453125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.056239718322899535),
+			Flogctail: -Float64FromFloat64(2.345674491018699e-14),
+		},
+		83: {
+			Finvc:     float64(0.94140625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.06038051098892083),
+			Flogctail: -Float64FromFloat64(1.3352588834854848e-14),
+		},
+		84: {
+			Finvc:     float64(0.93359375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.06871389254808946),
+			Flogctail: -Float64FromFloat64(3.765296820388875e-14),
+		},
+		85: {
+			Finvc:     float64(0.92578125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.07711730334438016),
+			Flogctail: float64(5.1128335719851986e-14),
+		},
+		86: {
+			Finvc:     float64(0.91796875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.08559193033545398),
+			Flogctail: -Float64FromFloat64(5.046674438470119e-14),
+		},
+		87: {
+			Finvc:     float64(0.9140625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.08985632912185793),
+			Flogctail: float64(3.1218748807418837e-15),
+		},
+		88: {
+			Finvc:     float64(0.90625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.09844007281321865),
+			Flogctail: float64(3.3871241029241416e-14),
+		},
+		89: {
+			Finvc:     float64(0.8984375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.10709813555638448),
+			Flogctail: -Float64FromFloat64(1.7376727386423858e-14),
+		},
+		90: {
+			Finvc:     float64(0.89453125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.11145544092528326),
+			Flogctail: float64(3.957125899799804e-14),
+		},
+		91: {
+			Finvc:     float64(0.88671875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.12022742699821265),
+			Flogctail: -Float64FromFloat64(5.2849453521890294e-14),
+		},
+		92: {
+			Finvc:     float64(0.8828125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.12464244520731427),
+			Flogctail: -Float64FromFloat64(3.767012502308738e-14),
+		},
+		93: {
+			Finvc:     float64(0.875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.13353139262449076),
+			Flogctail: float64(3.1859736349078334e-14),
+		},
+		94: {
+			Finvc:     float64(0.87109375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.13800567301939282),
+			Flogctail: float64(5.0900642926060466e-14),
+		},
+		95: {
+			Finvc:     float64(0.86328125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.14701474296180095),
+			Flogctail: float64(8.710783796122478e-15),
+		},
+		96: {
+			Finvc:     float64(0.859375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.15154989812720032),
+			Flogctail: float64(6.157896229122976e-16),
+		},
+		97: {
+			Finvc:     float64(0.8515625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.16068238169043525),
+			Flogctail: float64(3.821577743916796e-14),
+		},
+		98: {
+			Finvc:     float64(0.84765625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.16528009093906348),
+			Flogctail: float64(3.9440046718453496e-14),
+		},
+		99: {
+			Finvc:     float64(0.83984375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.17453941635187675),
+			Flogctail: float64(2.2924522154618074e-14),
+		},
+		100: {
+			Finvc:     float64(0.8359375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.17920142945774842),
+			Flogctail: -Float64FromFloat64(3.742530094732263e-14),
+		},
+		101: {
+			Finvc:     float64(0.83203125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.18388527877016259),
+			Flogctail: -Float64FromFloat64(2.5223102140407338e-14),
+		},
+		102: {
+			Finvc:     float64(0.82421875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.1933193110035063),
+			Flogctail: -Float64FromFloat64(1.0320443688698849e-14),
+		},
+		103: {
+			Finvc:     float64(0.8203125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.19806991376208316),
+			Flogctail: float64(1.0634128304268335e-14),
+		},
+		104: {
+			Finvc:     float64(0.8125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.20763936477828793),
+			Flogctail: -Float64FromFloat64(4.3425422595242564e-14),
+		},
+		105: {
+			Finvc:     float64(0.80859375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.21245865121420593),
+			Flogctail: -Float64FromFloat64(1.2527395755711364e-14),
+		},
+		106: {
+			Finvc:     float64(0.8046875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.21730127569003344),
+			Flogctail: -Float64FromFloat64(5.204008743405884e-14),
+		},
+		107: {
+			Finvc:     float64(0.80078125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.22216746534115828),
+			Flogctail: -Float64FromFloat64(3.979844515951702e-15),
+		},
+		108: {
+			Finvc:     float64(0.79296875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.2319714654378231),
+			Flogctail: -Float64FromFloat64(4.7955860343296286e-14),
+		},
+		109: {
+			Finvc:     float64(0.7890625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.2369097470783572),
+			Flogctail: float64(5.015686013791602e-16),
+		},
+		110: {
+			Finvc:     float64(0.78515625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.24187253642048745),
+			Flogctail: -Float64FromFloat64(7.252318953240293e-16),
+		},
+		111: {
+			Finvc:     float64(0.78125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.2468600779315011),
+			Flogctail: float64(2.4688324156011588e-14),
+		},
+		112: {
+			Finvc:     float64(0.7734375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.2569104137850218),
+			Flogctail: float64(5.465121253624792e-15),
+		},
+		113: {
+			Finvc:     float64(0.76953125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.26197371574153294),
+			Flogctail: float64(4.102651071698446e-14),
+		},
+		114: {
+			Finvc:     float64(0.765625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.2670627852490952),
+			Flogctail: -Float64FromFloat64(4.996736502345936e-14),
+		},
+		115: {
+			Finvc:     float64(0.76171875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.27217788591576664),
+			Flogctail: float64(4.903580708156347e-14),
+		},
+		116: {
+			Finvc:     float64(0.7578125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.27731928541618345),
+			Flogctail: float64(5.089628039500759e-14),
+		},
+		117: {
+			Finvc:     float64(0.75390625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.28248725557466514),
+			Flogctail: float64(1.1782016386565151e-14),
+		},
+		118: {
+			Finvc:     float64(0.74609375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.29290401643288533),
+			Flogctail: float64(4.727452940514406e-14),
+		},
+		119: {
+			Finvc:     float64(0.7421875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.29815337231912054),
+			Flogctail: -Float64FromFloat64(4.4204083338755686e-14),
+		},
+		120: {
+			Finvc:     float64(0.73828125),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.3034304294199046),
+			Flogctail: float64(1.548345993498083e-14),
+		},
+		121: {
+			Finvc:     float64(0.734375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.30873548164959175),
+			Flogctail: float64(2.1522127491642888e-14),
+		},
+		122: {
+			Finvc:     float64(0.73046875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.3140688276249648),
+			Flogctail: float64(1.1054030169005386e-14),
+		},
+		123: {
+			Finvc:     float64(0.7265625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.31943077076641657),
+			Flogctail: -Float64FromFloat64(5.534326352070679e-14),
+		},
+		124: {
+			Finvc:     float64(0.72265625),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.3248216194012912),
+			Flogctail: -Float64FromFloat64(5.351646604259541e-14),
+		},
+		125: {
+			Finvc:     float64(0.71875),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.33024168687052224),
+			Flogctail: float64(5.4612144489920215e-14),
+		},
+		126: {
+			Finvc:     float64(0.71484375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.3356912916381134),
+			Flogctail: float64(2.8136969901227338e-14),
+		},
+		127: {
+			Finvc:     float64(0.7109375),
+			Fpad:      Float64FromInt32(0),
+			Flogc:     float64(0.3411707574027787),
+			Flogctail: -Float64FromFloat64(1.156568624616423e-14),
+		},
+	},
+}
 
-var x___powf_log2_data = Tpowf_log2_data{Ftab: [16]struct {
-	Finvc float64
-	Flogc float64
-}{
-	0:  {Finvc: float64(1.398907162146528), Flogc: -Float64FromFloat64(0.48430022186289673) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	1:  {Finvc: float64(1.3403141896637998), Flogc: -Float64FromFloat64(0.42257122959194704) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	2:  {Finvc: float64(1.286432210124115), Flogc: -Float64FromFloat64(0.3633754347673556) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	3:  {Finvc: float64(1.2367150214269895), Flogc: -Float64FromFloat64(0.30651309567405577) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	4:  {Finvc: float64(1.1906977166711752), Flogc: -Float64FromFloat64(0.25180720160537634) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	5:  {Finvc: float64(1.1479821020556429), Flogc: -Float64FromFloat64(0.19910014943794563) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	6:  {Finvc: float64(1.1082251448272158), Flogc: -Float64FromFloat64(0.14825100623281615) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	7:  {Finvc: float64(1.0711297413057381), Flogc: -Float64FromFloat64(0.09913323807318392) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	8:  {Finvc: float64(1.036437278977283), Flogc: -Float64FromFloat64(0.051632812977629436) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	9:  {Finvc: float64(1), Flogc: float64(0) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	10: {Finvc: float64(0.9492859795739057), Flogc: float64(0.07508531937943004) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	11: {Finvc: float64(0.8951049428609004), Flogc: float64(0.15987125980713107) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	12: {Finvc: float64(0.8476821620351103), Flogc: float64(0.2384046664317681) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	13: {Finvc: float64(0.8050314851692001), Flogc: float64(0.31288288605863257) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	14: {Finvc: float64(0.7664671008843108), Flogc: float64(0.38370422656453185) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))},
-	15: {Finvc: float64(0.731428603316328), Flogc: float64(0.451211048935815) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))}}, Fpoly: [5]float64{
-	0: float64(0.288457581109214) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
-	1: -Float64FromFloat64(0.36092606229713164) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
-	2: float64(0.480898481472577) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
-	3: -Float64FromFloat64(0.7213474675006291) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
-	4: float64(1.4426950408774342) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))}}
+var x___powf_log2_data = Tpowf_log2_data{
+	Ftab: [16]struct {
+		Finvc float64
+		Flogc float64
+	}{
+		0: {
+			Finvc: float64(1.398907162146528),
+			Flogc: -Float64FromFloat64(0.48430022186289673) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		1: {
+			Finvc: float64(1.3403141896637998),
+			Flogc: -Float64FromFloat64(0.42257122959194704) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		2: {
+			Finvc: float64(1.286432210124115),
+			Flogc: -Float64FromFloat64(0.3633754347673556) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		3: {
+			Finvc: float64(1.2367150214269895),
+			Flogc: -Float64FromFloat64(0.30651309567405577) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		4: {
+			Finvc: float64(1.1906977166711752),
+			Flogc: -Float64FromFloat64(0.25180720160537634) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		5: {
+			Finvc: float64(1.1479821020556429),
+			Flogc: -Float64FromFloat64(0.19910014943794563) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		6: {
+			Finvc: float64(1.1082251448272158),
+			Flogc: -Float64FromFloat64(0.14825100623281615) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		7: {
+			Finvc: float64(1.0711297413057381),
+			Flogc: -Float64FromFloat64(0.09913323807318392) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		8: {
+			Finvc: float64(1.036437278977283),
+			Flogc: -Float64FromFloat64(0.051632812977629436) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		9: {
+			Finvc: float64(1),
+			Flogc: float64(0) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		10: {
+			Finvc: float64(0.9492859795739057),
+			Flogc: float64(0.07508531937943004) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		11: {
+			Finvc: float64(0.8951049428609004),
+			Flogc: float64(0.15987125980713107) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		12: {
+			Finvc: float64(0.8476821620351103),
+			Flogc: float64(0.2384046664317681) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		13: {
+			Finvc: float64(0.8050314851692001),
+			Flogc: float64(0.31288288605863257) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		14: {
+			Finvc: float64(0.7664671008843108),
+			Flogc: float64(0.38370422656453185) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+		15: {
+			Finvc: float64(0.731428603316328),
+			Flogc: float64(0.451211048935815) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		},
+	},
+	Fpoly: [5]float64{
+		0: float64(0.288457581109214) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		1: -Float64FromFloat64(0.36092606229713164) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		2: float64(0.480898481472577) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		3: -Float64FromFloat64(0.7213474675006291) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+		4: float64(1.4426950408774342) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)),
+	},
+}
 
 var x___progname uintptr
 
@@ -149882,7 +153653,8 @@ var x___rsqrt_tab = [128]uint16{
 	124: uint16(0xb78c),
 	125: uint16(0xb6d0),
 	126: uint16(0xb617),
-	127: uint16(0xb560)}
+	127: uint16(0xb560),
+}
 
 var x___seed48 = [7]uint16{
 	0: uint16(0),
@@ -149891,7 +153663,8 @@ var x___seed48 = [7]uint16{
 	3: uint16(0xe66d),
 	4: uint16(0xdeec),
 	5: uint16(0x5),
-	6: uint16(0xb)}
+	6: uint16(0xb),
+}
 
 var x___sem_open_lockptr = uintptr(unsafe.Pointer(&_lock9))
 
@@ -149899,17 +153672,46 @@ var x___signgam int32
 
 var x___stack_chk_guard uint64
 
-var x___stderr_FILE = TFILE{Fflags: uint32(Int32FromInt32(m_F_PERM) | Int32FromInt32(m_F_NORD)), Fclose1: uintptr(0), Fwrite: uintptr(0), Fseek: uintptr(0), Fbuf: uintptr(unsafe.Pointer(&_buf6)) + uintptr(m_UNGET), Fbuf_size: uint64(0), Ffd: int32(2), Flock: -int32(1), Flbf: -int32(1)}
+var x___stderr_FILE = TFILE{
+	Fflags:    uint32(Int32FromInt32(m_F_PERM) | Int32FromInt32(m_F_NORD)),
+	Fclose1:   uintptr(0),
+	Fwrite:    uintptr(0),
+	Fseek:     uintptr(0),
+	Fbuf:      uintptr(unsafe.Pointer(&_buf6)) + uintptr(m_UNGET),
+	Fbuf_size: uint64(0),
+	Ffd:       int32(2),
+	Flock:     -int32(1),
+	Flbf:      -int32(1),
+}
 
 var x___stderr_used = uintptr(unsafe.Pointer(&x___stderr_FILE))
 
-var x___stdin_FILE = TFILE{Fflags: uint32(Int32FromInt32(m_F_PERM) | Int32FromInt32(m_F_NOWR)), Fclose1: uintptr(0), Fread: uintptr(0), Fseek: uintptr(0), Fbuf: uintptr(unsafe.Pointer(&_buf7)) + uintptr(m_UNGET), Fbuf_size: Uint64FromInt64(1032) - Uint64FromInt32(m_UNGET), Ffd: int32(0), Flock: -int32(1)}
+var x___stdin_FILE = TFILE{
+	Fflags:    uint32(Int32FromInt32(m_F_PERM) | Int32FromInt32(m_F_NOWR)),
+	Fclose1:   uintptr(0),
+	Fread:     uintptr(0),
+	Fseek:     uintptr(0),
+	Fbuf:      uintptr(unsafe.Pointer(&_buf7)) + uintptr(m_UNGET),
+	Fbuf_size: Uint64FromInt64(1032) - Uint64FromInt32(m_UNGET),
+	Ffd:       int32(0),
+	Flock:     -int32(1),
+}
 
 var x___stdin_used = uintptr(unsafe.Pointer(&x___stdin_FILE))
 
 var x___stdio_ofl_lockptr = uintptr(unsafe.Pointer(&_ofl_lock))
 
-var x___stdout_FILE = TFILE{Fflags: uint32(Int32FromInt32(m_F_PERM) | Int32FromInt32(m_F_NORD)), Fclose1: uintptr(0), Fwrite: uintptr(0), Fseek: uintptr(0), Fbuf: uintptr(unsafe.Pointer(&_buf8)) + uintptr(m_UNGET), Fbuf_size: Uint64FromInt64(1032) - Uint64FromInt32(m_UNGET), Ffd: int32(1), Flock: -int32(1), Flbf: int32('\n')}
+var x___stdout_FILE = TFILE{
+	Fflags:    uint32(Int32FromInt32(m_F_PERM) | Int32FromInt32(m_F_NORD)),
+	Fclose1:   uintptr(0),
+	Fwrite:    uintptr(0),
+	Fseek:     uintptr(0),
+	Fbuf:      uintptr(unsafe.Pointer(&_buf8)) + uintptr(m_UNGET),
+	Fbuf_size: Uint64FromInt64(1032) - Uint64FromInt32(m_UNGET),
+	Ffd:       int32(1),
+	Flock:     -int32(1),
+	Flbf:      int32('\n'),
+}
 
 var x___stdout_used = uintptr(unsafe.Pointer(&x___stdout_FILE))
 
@@ -149930,22 +153732,53 @@ var x___utc = [4]int8{'U', 'T', 'C'}
 var x___vmlock_lockptr = uintptr(unsafe.Pointer(&_vmlock))
 
 var x__ns_flagdata = [16]T_ns_flagdata{
-	0:  {Fmask: int32(0x8000), Fshift: int32(15)},
-	1:  {Fmask: int32(0x7800), Fshift: int32(11)},
-	2:  {Fmask: int32(0x0400), Fshift: int32(10)},
-	3:  {Fmask: int32(0x0200), Fshift: int32(9)},
-	4:  {Fmask: int32(0x0100), Fshift: int32(8)},
-	5:  {Fmask: int32(0x0080), Fshift: int32(7)},
-	6:  {Fmask: int32(0x0040), Fshift: int32(6)},
-	7:  {Fmask: int32(0x0020), Fshift: int32(5)},
-	8:  {Fmask: int32(0x0010), Fshift: int32(4)},
-	9:  {Fmask: int32(0x000f), Fshift: int32(0)},
+	0: {
+		Fmask:  int32(0x8000),
+		Fshift: int32(15),
+	},
+	1: {
+		Fmask:  int32(0x7800),
+		Fshift: int32(11),
+	},
+	2: {
+		Fmask:  int32(0x0400),
+		Fshift: int32(10),
+	},
+	3: {
+		Fmask:  int32(0x0200),
+		Fshift: int32(9),
+	},
+	4: {
+		Fmask:  int32(0x0100),
+		Fshift: int32(8),
+	},
+	5: {
+		Fmask:  int32(0x0080),
+		Fshift: int32(7),
+	},
+	6: {
+		Fmask:  int32(0x0040),
+		Fshift: int32(6),
+	},
+	7: {
+		Fmask:  int32(0x0020),
+		Fshift: int32(5),
+	},
+	8: {
+		Fmask:  int32(0x0010),
+		Fshift: int32(4),
+	},
+	9: {
+		Fmask:  int32(0x000f),
+		Fshift: int32(0),
+	},
 	10: {},
 	11: {},
 	12: {},
 	13: {},
 	14: {},
-	15: {}}
+	15: {},
+}
 
 var x_getdate_err int32
 
@@ -149953,27 +153786,30 @@ var x_h_errno int32
 
 var x_in6addr_any = Tin6_addr{}
 
-var x_in6addr_loopback = Tin6_addr{F__in6_union: *(*struct {
-	F__s6_addr16 [0][8]uint16
-	F__s6_addr32 [0][4]uint32
-	F__s6_addr   [16]uint8
-})(unsafe.Pointer(&[16]uint8{
-	0:  uint8(0),
-	1:  uint8(0),
-	2:  uint8(0),
-	3:  uint8(0),
-	4:  uint8(0),
-	5:  uint8(0),
-	6:  uint8(0),
-	7:  uint8(0),
-	8:  uint8(0),
-	9:  uint8(0),
-	10: uint8(0),
-	11: uint8(0),
-	12: uint8(0),
-	13: uint8(0),
-	14: uint8(0),
-	15: uint8(1)}))}
+var x_in6addr_loopback = Tin6_addr{
+	F__in6_union: *(*struct {
+		F__s6_addr16 [0][8]uint16
+		F__s6_addr32 [0][4]uint32
+		F__s6_addr   [16]uint8
+	})(unsafe.Pointer(&[16]uint8{
+		0:  uint8(0),
+		1:  uint8(0),
+		2:  uint8(0),
+		3:  uint8(0),
+		4:  uint8(0),
+		5:  uint8(0),
+		6:  uint8(0),
+		7:  uint8(0),
+		8:  uint8(0),
+		9:  uint8(0),
+		10: uint8(0),
+		11: uint8(0),
+		12: uint8(0),
+		13: uint8(0),
+		14: uint8(0),
+		15: uint8(1),
+	})),
+}
 
 var Xoptarg uintptr
 

@@ -116,15 +116,6 @@ func TestXfmod(t *testing.T) {
 	}
 }
 
-// func TestSwap(t *testing.T) {
-// 	if g, e := ___bswap_16(nil, 0x1234), uint16(0x3412); g != e {
-// 		t.Errorf("%#04x %#04x", g, e)
-// 	}
-// 	if g, e := ___bswap_32(nil, 0x12345678), uint32(0x78563412); g != e {
-// 		t.Errorf("%#04x %#04x", g, e)
-// 	}
-// }
-
 var (
 	valist       [256]byte
 	formatString [256]byte

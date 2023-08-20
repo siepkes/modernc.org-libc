@@ -167,6 +167,7 @@ func main() {
 	})
 	util.MustCopyDir(true, filepath.Join("include", "musl", goarch), filepath.Join(tempDir, extractedArchivePath, "include"), nil)
 	util.MustCopyDir(true, filepath.Join("include", "musl", goarch, "bits"), filepath.Join(tempDir, extractedArchivePath, "obj", "include", "bits"), nil)
+	util.MustCopyDir(true, filepath.Join("include", "musl", goarch, "bits"), filepath.Join(tempDir, extractedArchivePath, "arch", "generic", "bits"), nil)
 	util.MustCopyDir(true, filepath.Join("include", "musl", goarch, "bits"), filepath.Join(tempDir, extractedArchivePath, "arch", muslArch, "bits"), nil)
 	fn := fmt.Sprintf("ccgo_%s_%s.go", goos, goarch)
 	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fn)
