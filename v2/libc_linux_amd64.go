@@ -4,6 +4,8 @@
 
 package libc // import "modernc.org/libc/v2"
 
+//TODO https://gcc.gnu.org/onlinedocs/gcc-6.2.0/gcc/Integer-Overflow-Builtins.html
+
 import (
 	"fmt"
 	"math"
@@ -118,7 +120,7 @@ func GoString(s uintptr) string {
 
 // Go libc private heap, outside of the C heap.
 func mustPrivateCalloc(sz int) uintptr {
-	if p, _ := privateCalloc(sz); p != 0 {
+	if p, _ := privateCalloc(sz); p != 0 || sz == 0 {
 		return p
 	}
 
@@ -127,7 +129,7 @@ func mustPrivateCalloc(sz int) uintptr {
 
 // Go libc private heap, outside of the C heap.
 func mustPrivateMalloc(sz int) uintptr {
-	if p, _ := privateMalloc(sz); p != 0 {
+	if p, _ := privateMalloc(sz); p != 0 || sz == 0 {
 		return p
 	}
 
@@ -419,38 +421,66 @@ func ___syscall0(tls *TLS, n int64) int64 {
 		runtime.Gosched()
 		return 0
 	default:
-		r1, _, _ := syscall.Syscall(uintptr(n), 0, 0, 0)
+		r1, _, err := syscall.Syscall(uintptr(n), 0, 0, 0)
+		if err != 0 {
+			return int64(-err)
+		}
+
 		return int64(r1)
 	}
 }
 
 func ___syscall1(tls *TLS, n, a1 int64) int64 {
-	r1, _, _ := syscall.Syscall(uintptr(n), uintptr(a1), 0, 0)
+	r1, _, err := syscall.Syscall(uintptr(n), uintptr(a1), 0, 0)
+	if err != 0 {
+		return int64(-err)
+	}
+
 	return int64(r1)
 }
 
 func ___syscall2(tls *TLS, n, a1, a2 int64) int64 {
-	r1, _, _ := syscall.Syscall(uintptr(n), uintptr(a1), uintptr(a2), 0)
+	r1, _, err := syscall.Syscall(uintptr(n), uintptr(a1), uintptr(a2), 0)
+	if err != 0 {
+		return int64(-err)
+	}
+
 	return int64(r1)
 }
 
 func ___syscall3(tls *TLS, n, a1, a2, a3 int64) int64 {
-	r1, _, _ := syscall.Syscall(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3))
+	r1, _, err := syscall.Syscall(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3))
+	if err != 0 {
+		return int64(-err)
+	}
+
 	return int64(r1)
 }
 
 func ___syscall4(tls *TLS, n, a1, a2, a3, a4 int64) int64 {
-	r1, _, _ := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), 0, 0)
+	r1, _, err := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), 0, 0)
+	if err != 0 {
+		return int64(-err)
+	}
+
 	return int64(r1)
 }
 
 func ___syscall5(tls *TLS, n, a1, a2, a3, a4, a5 int64) int64 {
-	r1, _, _ := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), uintptr(a5), 0)
+	r1, _, err := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), uintptr(a5), 0)
+	if err != 0 {
+		return int64(-err)
+	}
+
 	return int64(r1)
 }
 
 func ___syscall6(tls *TLS, n, a1, a2, a3, a4, a5, a6 int64) int64 {
-	r1, _, _ := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), uintptr(a5), uintptr(a6))
+	r1, _, err := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), uintptr(a5), uintptr(a6))
+	if err != 0 {
+		return int64(-err)
+	}
+
 	return int64(r1)
 }
 
@@ -1275,36 +1305,6 @@ func X__builtin_abs(tls *TLS, j int32) (r int32) {
 	return Xabs(tls, j)
 }
 
-func X__builtin_add_overflowUint32(t *TLS, a, b uint32, res uintptr) int32 {
-	s, c := bits.Add32(a, b, 0)
-	*(*uint32)(unsafe.Pointer(res)) = s
-	return Bool32(c != 0)
-}
-
-func X__builtin_add_overflowInt32(t *TLS, a, b int32, res uintptr) int32 {
-	r, ovf := mathutil.AddOverflowInt32(a, b)
-	*(*int32)(unsafe.Pointer(res)) = r
-	return Bool32(ovf)
-}
-
-func X__builtin_add_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
-	r, ovf := mathutil.AddOverflowInt64(a, b)
-	*(*int64)(unsafe.Pointer(res)) = r
-	return Bool32(ovf)
-}
-
-func X__builtin_add_overflowUint8(t *TLS, a, b uint8, res uintptr) int32 {
-	s := uint16(a) + uint16(b)
-	*(*uint8)(unsafe.Pointer(res)) = uint8(s)
-	return Bool32(s > math.MaxUint8)
-}
-
-func X__builtin_add_overflowUint64(t *TLS, a, b uint64, res uintptr) int32 {
-	s, c := bits.Add64(a, b, 0)
-	*(*uint64)(unsafe.Pointer(res)) = s
-	return Bool32(c != 0)
-}
-
 func X__builtin_bswap16(t *TLS, x uint16) uint16 {
 	return x<<8 | x>>8
 }
@@ -1411,36 +1411,6 @@ func X__builtin_infl(t *TLS) float64 {
 
 func X__builtin_isunordered(t *TLS, a, b float64) int32 {
 	return Bool32(math.IsNaN(a) || math.IsNaN(b))
-}
-
-func X__builtin_sub_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
-	r, ovf := mathutil.SubOverflowInt64(a, b)
-	*(*int64)(unsafe.Pointer(res)) = r
-	return Bool32(ovf)
-}
-
-func X__builtin_mul_overflowUint16(t *TLS, a, b uint16, res uintptr) int32 {
-	r := uint32(a) * uint32(b)
-	*(*uint16)(unsafe.Pointer(res)) = uint16(r)
-	return Bool32(r > math.MaxUint16)
-}
-
-func X__builtin_mul_overflowUint32(t *TLS, a, b uint32, res uintptr) int32 {
-	hi, lo := bits.Mul32(a, b)
-	*(*uint32)(unsafe.Pointer(res)) = lo
-	return Bool32(hi != 0)
-}
-
-func X__builtin_mul_overflowInt32(t *TLS, a, b int32, res uintptr) int32 {
-	r, ovf := mathutil.MulOverflowInt32(a, b)
-	*(*int32)(unsafe.Pointer(res)) = r
-	return Bool32(ovf)
-}
-
-func X__builtin_mul_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
-	r, ovf := mathutil.MulOverflowInt64(a, b)
-	*(*int64)(unsafe.Pointer(res)) = r
-	return Bool32(ovf)
 }
 
 func X__builtin_nan(t *TLS, s uintptr) float64 {
@@ -2042,6 +2012,24 @@ func Xmempcpy(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
 // Xremove() deletes a name from the filesystem.
 func Xremove(tls *TLS, name uintptr) (r int32) {
 	return x_remove(tls, name)
+}
+
+func X__builtin_add_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
+	r, ovf := mathutil.AddOverflowInt64(a, b)
+	*(*int64)(unsafe.Pointer(res)) = r
+	return Bool32(ovf)
+}
+
+func X__builtin_sub_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
+	r, ovf := mathutil.SubOverflowInt64(a, b)
+	*(*int64)(unsafe.Pointer(res)) = r
+	return Bool32(ovf)
+}
+
+func X__builtin_mul_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
+	r, ovf := mathutil.MulOverflowInt64(a, b)
+	*(*int64)(unsafe.Pointer(res)) = r
+	return Bool32(ovf)
 }
 
 func _fabs(tls *TLS, x float64) float64 {
