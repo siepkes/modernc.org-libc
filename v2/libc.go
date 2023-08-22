@@ -7,7 +7,7 @@
 //
 // # Bugs
 //
-// A subset of musl v0.7.0, alpha version from 2011, is exported.
+// A subset of musl v1.2.4 is exported.
 //
 // # libc API documentation copyright
 //
