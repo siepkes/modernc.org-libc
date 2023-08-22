@@ -910,6 +910,10 @@ func Xfprintf(tls *TLS, stream uintptr, fmt uintptr, va uintptr) (r int32) {
 	return x_fprintf(tls, stream, fmt, va)
 }
 
+func X__builtin_fprintf(tls *TLS, stream uintptr, fmt uintptr, va uintptr) (r int32) {
+	return Xfprintf(tls, stream, fmt, va)
+}
+
 // Xgetc is equivalent to Xfgetc.
 func Xgetc(tls *TLS, stream uintptr) (r int32) {
 	return Xfgetc(tls, stream)
