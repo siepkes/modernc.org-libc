@@ -404,3 +404,17 @@ func TestPow(t *testing.T) {
 		}
 	}
 }
+
+var testAtomicStore8 uint32
+
+func TestAtomicStore8(t *testing.T) {
+	testAtomicStore8 = 0x12345678
+	AtomicStorePUint8(uintptr(unsafe.Pointer(&testAtomicStore8)), 0x9a)
+	if g, e := *(*byte)(unsafe.Pointer(&testAtomicStore8)), byte(0x9a); g != e {
+		t.Errorf("%#0x %#0x", g, e)
+	}
+
+	if g, e := testAtomicStore8, uint32(0x1234569a); g != e {
+		t.Errorf("%#0x %#0x", g, e)
+	}
+}

@@ -3,6 +3,11 @@ module modernc.org/libc/v2
 go 1.21.0
 
 require (
+	modernc.org/mathutil v1.6.0
+	modernc.org/memory v1.7.1
+)
+
+require (
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
@@ -15,12 +20,9 @@ require (
 	modernc.org/cc/v3 v3.41.0 // indirect
 	modernc.org/cc/v4 v4.12.2 // indirect
 	modernc.org/ccgo/v3 v3.16.15 // indirect
-	modernc.org/ccgo/v4 v4.0.0-20230822184826-6821e19c9634 // indirect
-	modernc.org/ccorpus2 v1.4.1 // indirect
+	modernc.org/ccgo/v4 v4.0.0-20230825181201-2e4921a3ff3c // indirect
 	modernc.org/gc/v2 v2.3.0 // indirect
 	modernc.org/libc v1.24.1 // indirect
-	modernc.org/mathutil v1.6.0 // indirect
-	modernc.org/memory v1.7.0 // indirect
 	modernc.org/opt v0.1.3 // indirect
 	modernc.org/strutil v1.2.0 // indirect
 	modernc.org/token v1.1.0 // indirect

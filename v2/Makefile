@@ -41,17 +41,19 @@ generate:
 	go build -v ./...  | tee -a log-generate
 	go test -v -count=1 ./... 2>&1 | tee -a log-generate
 	git status
+	grep TODO log-generate || true
 
 dev:
 	echo -n > /tmp/ccgo.log
 	echo -n > log-generate
 	echo -n > log-generate-errors
 	GO_GENERATE_DEV=1 go run -tags=ccgo.dmesg,ccgo.assert generator*.go 2>&1 | tee log-generate
-	grep FAIL /tmp/ccgo.log
 	./unconvert.sh
 	go build -v ./...  | tee -a log-generate
 	go test -v -count=1 ./... 2>&1 | tee -a log-generate
 	git status
+	grep FAIL /tmp/ccgo.log
+	grep TODO log-generate || true
 
 test:
 	go test -v -timeout 24h 2>&1 | tee log-test

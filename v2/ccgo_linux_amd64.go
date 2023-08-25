@@ -1772,7 +1772,7 @@ func x_cabsf(tls *TLS, z complex64) (r float32) {
 }
 
 func x_cabsl(tls *TLS, z complex128) (r float64) {
-	return x_cabs(tls, z)
+	return x_cabs(tls, Complex128FromComplex128(z))
 }
 
 func x_cacos(tls *TLS, z complex128) (r complex128) {
@@ -1842,11 +1842,11 @@ func x_cacoshf(tls *TLS, z complex64) (r complex64) {
 }
 
 func x_cacoshl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_cacosh(tls, z))
+	return Complex128FromComplex128(x_cacosh(tls, Complex128FromComplex128(z)))
 }
 
 func x_cacosl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_cacos(tls, z))
+	return Complex128FromComplex128(x_cacos(tls, Complex128FromComplex128(z)))
 }
 
 func x_carg(tls *TLS, z complex128) (r float64) {
@@ -1858,7 +1858,7 @@ func x_cargf(tls *TLS, z complex64) (r float32) {
 }
 
 func x_cargl(tls *TLS, z complex128) (r float64) {
-	return x_carg(tls, z)
+	return x_carg(tls, Complex128FromComplex128(z))
 }
 
 func x_casin(tls *TLS, z complex128) (r1 complex128) {
@@ -1936,11 +1936,11 @@ func x_casinhf(tls *TLS, z complex64) (r complex64) {
 }
 
 func x_casinhl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_casinh(tls, z))
+	return Complex128FromComplex128(x_casinh(tls, Complex128FromComplex128(z)))
 }
 
 func x_casinl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_casin(tls, z))
+	return Complex128FromComplex128(x_casin(tls, Complex128FromComplex128(z)))
 }
 
 var _DP1 = float64(3.141592651605606)
@@ -2057,11 +2057,11 @@ func x_catanhf(tls *TLS, z complex64) (r complex64) {
 }
 
 func x_catanhl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_catanh(tls, z))
+	return Complex128FromComplex128(x_catanh(tls, Complex128FromComplex128(z)))
 }
 
 func x_catanl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_catan(tls, z))
+	return Complex128FromComplex128(x_catan(tls, Complex128FromComplex128(z)))
 }
 
 func x_ccos(tls *TLS, z complex128) (r complex128) {
@@ -2353,11 +2353,11 @@ func x_ccoshf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func x_ccoshl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_ccosh(tls, z))
+	return Complex128FromComplex128(x_ccosh(tls, Complex128FromComplex128(z)))
 }
 
 func x_ccosl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_ccos(tls, z))
+	return Complex128FromComplex128(x_ccos(tls, Complex128FromComplex128(z)))
 }
 
 var _exp_ovfl = uint32(0x40862e42) /* high bits of MAX_EXP * ln2 ~= 710 */
@@ -2519,7 +2519,7 @@ func x_cexpf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func x_cexpl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_cexp(tls, z))
+	return Complex128FromComplex128(x_cexp(tls, Complex128FromComplex128(z)))
 }
 
 func x_cimag(tls *TLS, z complex128) (r float64) {
@@ -2559,7 +2559,7 @@ func x_clogf(tls *TLS, z complex64) (r1 complex64) {
 }
 
 func x_clogl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_clog(tls, z))
+	return Complex128FromComplex128(x_clog(tls, Complex128FromComplex128(z)))
 }
 
 func x_conj(tls *TLS, z complex128) (r complex128) {
@@ -2598,7 +2598,7 @@ func x_cpowf(tls *TLS, z complex64, c complex64) (r complex64) {
 }
 
 func x_cpowl(tls *TLS, z complex128, c complex128) (r complex128) {
-	return Complex128FromComplex128(x_cpow(tls, z, c))
+	return Complex128FromComplex128(x_cpow(tls, Complex128FromComplex128(z), Complex128FromComplex128(c)))
 }
 
 const m_FP_INFINITE = 1
@@ -2628,7 +2628,7 @@ func x_cprojf(tls *TLS, z complex64) (r complex64) {
 }
 
 func x_cprojl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_cproj(tls, z))
+	return Complex128FromComplex128(x_cproj(tls, Complex128FromComplex128(z)))
 }
 
 func x_creal(tls *TLS, z complex128) (r float64) {
@@ -2943,11 +2943,11 @@ func x_csinhf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func x_csinhl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_csinh(tls, z))
+	return Complex128FromComplex128(x_csinh(tls, Complex128FromComplex128(z)))
 }
 
 func x_csinl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_csin(tls, z))
+	return Complex128FromComplex128(x_csin(tls, Complex128FromComplex128(z)))
 }
 
 func x_csqrt(tls *TLS, z complex128) (r complex128) {
@@ -3117,7 +3117,7 @@ func x_csqrtf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func x_csqrtl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_csqrt(tls, z))
+	return Complex128FromComplex128(x_csqrt(tls, Complex128FromComplex128(z)))
 }
 
 func x_ctan(tls *TLS, z complex128) (r complex128) {
@@ -3317,11 +3317,11 @@ func x_ctanhf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func x_ctanhl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_ctanh(tls, z))
+	return Complex128FromComplex128(x_ctanh(tls, Complex128FromComplex128(z)))
 }
 
 func x_ctanl(tls *TLS, z complex128) (r complex128) {
-	return Complex128FromComplex128(x_ctan(tls, z))
+	return Complex128FromComplex128(x_ctan(tls, Complex128FromComplex128(z)))
 }
 
 const m__CS_POSIX_V6_ILP32_OFF32_CFLAGS = 1116

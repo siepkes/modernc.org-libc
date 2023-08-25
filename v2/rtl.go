@@ -5,6 +5,7 @@
 package libc // import "modernc.org/libc/v2"
 
 import (
+	"math"
 	"reflect"
 	"sync/atomic"
 	"unsafe"
@@ -172,6 +173,95 @@ func VaUintptr(app *uintptr) uintptr {
 	ap += 8
 	*(*uintptr)(unsafe.Pointer(app)) = ap
 	return v
+}
+
+func AtomicStorePInt8(addr uintptr, val int8) int8 {
+	a_store_8(addr, int32(val))
+	return val
+}
+
+func AtomicStorePUint8(addr uintptr, val byte) byte {
+	a_store_8(addr, int32(val))
+	return val
+}
+
+func AtomicStorePInt32(addr uintptr, val int32) int32 {
+	atomic.StoreInt32((*int32)(unsafe.Pointer(addr)), val)
+	return val
+}
+
+func AtomicStorePInt64(addr uintptr, val int64) int64 {
+	atomic.StoreInt64((*int64)(unsafe.Pointer(addr)), val)
+	return val
+}
+
+func AtomicStorePUint32(addr uintptr, val uint32) uint32 {
+	atomic.StoreUint32((*uint32)(unsafe.Pointer(addr)), val)
+	return val
+}
+
+func AtomicStorePUint64(addr uintptr, val uint64) uint64 {
+	atomic.StoreUint64((*uint64)(unsafe.Pointer(addr)), val)
+	return val
+}
+
+func AtomicStorePUintptr(addr uintptr, val uintptr) uintptr {
+	atomic.StoreUintptr((*uintptr)(unsafe.Pointer(addr)), val)
+	return val
+}
+
+func AtomicStorePFloat32(addr uintptr, val float32) float32 {
+	atomic.StoreUint32((*uint32)(unsafe.Pointer(addr)), math.Float32bits(val))
+	return val
+}
+
+func AtomicStorePFloat64(addr uintptr, val float64) float64 {
+	atomic.StoreUint64((*uint64)(unsafe.Pointer(addr)), math.Float64bits(val))
+	return val
+}
+
+func AtomicLoadPInt8(addr uintptr) (val int8) {
+	return int8(a_load_8(addr))
+}
+
+func AtomicLoadPInt16(addr uintptr) (val int16) {
+	return int16(a_load_16(addr))
+}
+
+func AtomicLoadPInt32(addr uintptr) (val int32) {
+	return atomic.LoadInt32((*int32)(unsafe.Pointer(addr)))
+}
+
+func AtomicLoadPInt64(addr uintptr) (val int64) {
+	return atomic.LoadInt64((*int64)(unsafe.Pointer(addr)))
+}
+
+func AtomicLoadPUint8(addr uintptr) byte {
+	return byte(a_load_8(addr))
+}
+
+func AtomicLoadPUint16(addr uintptr) uint16 {
+	return uint16(a_load_16(addr))
+}
+
+func AtomicLoadPUint32(addr uintptr) (val uint32) {
+	return atomic.LoadUint32((*uint32)(unsafe.Pointer(addr)))
+}
+
+func AtomicLoadPUint64(addr uintptr) (val uint64) {
+	return atomic.LoadUint64((*uint64)(unsafe.Pointer(addr)))
+}
+
+func AtomicLoadPUintptr(addr uintptr) (val uintptr) {
+	return atomic.LoadUintptr((*uintptr)(unsafe.Pointer(addr)))
+}
+
+func AtomicLoadPFloat32(addr uintptr) (val float32) {
+	return math.Float32frombits(atomic.LoadUint32((*uint32)(unsafe.Pointer(addr))))
+}
+
+func AtomicLoadPFloat64(addr uintptr) (val float64) {
+	return math.Float64frombits(atomic.LoadUint64((*uint64)(unsafe.Pointer(addr))))
 }
 
 func AtomicStoreNUint16(ptr uintptr, val uint16, memorder int32) {
@@ -934,6 +1024,22 @@ func PreIncAtomicUint32(p *uint32, d uint32) uint32     { return atomic.AddUint3
 func PreIncAtomicUint64(p *uint64, d uint64) uint64     { return atomic.AddUint64(p, d) }
 func PreIncAtomicUintptr(p *uintptr, d uintptr) uintptr { return atomic.AddUintptr(p, d) }
 
+func PreIncAtomicInt32P(p uintptr, d int32) int32 {
+	return atomic.AddInt32((*int32)(unsafe.Pointer(p)), d)
+}
+func PreIncAtomicInt64P(p uintptr, d int64) int64 {
+	return atomic.AddInt64((*int64)(unsafe.Pointer(p)), d)
+}
+func PreIncAtomicUint32P(p uintptr, d uint32) uint32 {
+	return atomic.AddUint32((*uint32)(unsafe.Pointer(p)), d)
+}
+func PreIncAtomicUint64P(p uintptr, d uint64) uint64 {
+	return atomic.AddUint64((*uint64)(unsafe.Pointer(p)), d)
+}
+func PreInrAtomicUintptrP(p uintptr, d uintptr) uintptr {
+	return atomic.AddUintptr((*uintptr)(unsafe.Pointer(p)), d)
+}
+
 func PreDecInt8(p *int8, d int8) int8                         { *p -= d; return *p }
 func PreDecInt16(p *int16, d int16) int16                     { *p -= d; return *p }
 func PreDecInt32(p *int32, d int32) int32                     { *p -= d; return *p }
@@ -973,6 +1079,22 @@ func PostIncAtomicInt64(p *int64, d int64) int64         { return atomic.AddInt6
 func PostIncAtomicUint32(p *uint32, d uint32) uint32     { return atomic.AddUint32(p, d) - d }
 func PostIncAtomicUint64(p *uint64, d uint64) uint64     { return atomic.AddUint64(p, d) - d }
 func PostIncAtomicUintptr(p *uintptr, d uintptr) uintptr { return atomic.AddUintptr(p, d) - d }
+
+func PostIncAtomicInt32P(p uintptr, d int32) int32 {
+	return atomic.AddInt32((*int32)(unsafe.Pointer(p)), d) - d
+}
+func PostIncAtomicInt64P(p uintptr, d int64) int64 {
+	return atomic.AddInt64((*int64)(unsafe.Pointer(p)), d) - d
+}
+func PostIncAtomicUint32P(p uintptr, d uint32) uint32 {
+	return atomic.AddUint32((*uint32)(unsafe.Pointer(p)), d) - d
+}
+func PostIncAtomicUint64P(p uintptr, d uint64) uint64 {
+	return atomic.AddUint64((*uint64)(unsafe.Pointer(p)), d) - d
+}
+func PostIncAtomicUintptrP(p uintptr, d uintptr) uintptr {
+	return atomic.AddUintptr((*uintptr)(unsafe.Pointer(p)), d) - d
+}
 
 func PostDecInt8(p *int8, d int8) int8                         { r := *p; *p -= d; return r }
 func PostDecInt16(p *int16, d int16) int16                     { r := *p; *p -= d; return r }
