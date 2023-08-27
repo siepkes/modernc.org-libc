@@ -9,6 +9,8 @@ package main
 
 // https://posixtest.sourceforge.net/
 
+// ~/tmp/musl/musl-1.2.4/
+
 import (
 	"fmt"
 	"io/fs"
@@ -144,24 +146,13 @@ func main() {
 			"-ignore-unsupported-atomic-sizes", //TODO- it is possible
 			"-isystem", "",
 		)
-		// Arguments when archiving/linking static and dynamic musl libc
-		//	$ diff -u static dynamic
-		//	--- static	2023-07-23 13:40:26.325791570 +0200
-		//	+++ dynamic	2023-07-23 13:42:18.021633710 +0200
-		//	@@ -1339,3 +1339,5 @@
-		//	 obj/src/unistd/usleep.lo
-		//	 obj/src/unistd/write.lo
-		//	 obj/src/unistd/writev.lo
-		//	+obj/ldso/dlstart.lo
-		//	+obj/ldso/dynlink.lo
-		//	$
 		args = append(args,
 			"--predef=float __builtin_inff(void);",
 			"--predef=long __builtin_expect(long, long);",
 			"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS",
 			"-hide", "a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32",
 			"-hide", "fabs,fabsf,fabsl,fork",
-			"-ignore-file=obj/ldso/dlstart.lo.go,obj/ldso/dynlink.lo.go",
+			"-hide", "__init_tls,__libc_start_init,__libc_exit_fini,__dl_invalid_handle",
 		)
 		return ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.so"), os.Stdout, os.Stderr, nil).Main()
 	})

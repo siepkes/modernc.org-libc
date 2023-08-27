@@ -28,6 +28,9 @@ var (
 	allocator   memory.Allocator
 	allocatorMu sync.Mutex
 
+	argc int32   // Value established in initLibc
+	argv uintptr // Value established in initLibc
+
 	tid atomic.Int32 // TLS Go ID
 )
 
@@ -35,41 +38,25 @@ var (
 func Start(main func(*TLS, int32, uintptr) int32) {
 	runtime.LockOSThread()
 	tls := NewTLS()
-	argv := Xcalloc(tls, 1, uint64((len(os.Args)+1)*int(unsafe.Sizeof(uintptr(0)))))
-	if argv == 0 {
-		panic("OOM")
-	}
-
-	p := argv
-	for _, v := range os.Args {
-		s := Xcalloc(tls, 1, uint64(len(v)+1))
-		if s == 0 {
-			panic("OOM")
-		}
-
-		copy(unsafe.Slice((*byte)(unsafe.Pointer(s)), len(v)), v)
-		*(*uintptr)(unsafe.Pointer(p)) = s
-		p += unsafe.Sizeof(uintptr(0))
-	}
-	Xexit(tls, main(tls, int32(len(os.Args)), argv))
+	Xexit(tls, main(tls, argc, argv))
 }
 
 func initLibc(tls *TLS) {
-	var argv []uintptr
+	var args []uintptr
 	for _, v := range os.Args {
 		p := mustPrivateCalloc(len(v) + 1)
 		copy(unsafe.Slice((*byte)(unsafe.Pointer(p)), len(v)), v)
-		argv = append(argv, p)
+		args = append(args, p)
 	}
-	argv = append(argv, 0)
+	args = append(args, 0)
 	for _, v := range os.Environ() {
 		p := mustPrivateCalloc(len(v) + 1)
 		copy(unsafe.Slice((*byte)(unsafe.Pointer(p)), len(v)), v)
-		argv = append(argv, p)
+		args = append(args, p)
 	}
-	argv = append(argv, 0)
-	argvP := mustPrivateCalloc(len(argv) * int(unsafe.Sizeof(uintptr(0))))
-	copy(unsafe.Slice((*uintptr)(unsafe.Pointer(argvP)), len(argv)), argv)
+	args = append(args, 0)
+	argv = mustPrivateCalloc(len(args) * int(unsafe.Sizeof(uintptr(0))))
+	copy(unsafe.Slice((*uintptr)(unsafe.Pointer(argv)), len(args)), args)
 
 	// mov $main,%rdi  /* 1st arg: application entry ip */
 	// pop %rsi        /* 2nd arg: argc */
@@ -78,7 +65,8 @@ func initLibc(tls *TLS) {
 	// xor %r8,%r8     /* 5th arg: always 0 */
 	// mov %rdx,%r9    /* 6th arg: ptr to register with atexit() */
 
-	x___libc_start_main(tls, 0, int32(len(os.Args)), argvP, 0, 0, 0)
+	argc = int32(len(os.Args))
+	x___libc_start_main(tls, 0, argc, argv, 0, 0, 0)
 }
 
 // CString returns a pointer to a zero-terminated version of s. The caller is
@@ -186,7 +174,8 @@ type tlsStack struct {
 	sz int
 }
 
-// TLS emulates thread local storage.
+// TLS emulates thread local storage. TLS is not safe for concurrent use by
+// multiple goroutines.
 type TLS struct {
 	allocas        []uintptr
 	freeFS         uintptr
@@ -301,6 +290,14 @@ var ___cp_end [1]int8
 
 func ___clone(tls *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va uintptr) (r int32) {
 	return -m_ENOSYS
+}
+
+func ___tlsdesc_dynamic(tls *TLS) int64 {
+	panic(todo(""))
+}
+
+func ___tlsdesc_static(tls *TLS) int64 {
+	panic(todo(""))
 }
 
 func _sqrt(tls *TLS, x float64) float64 {
@@ -1761,6 +1758,12 @@ func Xmempcpy(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
 // Xremove() deletes a name from the filesystem.
 func Xremove(tls *TLS, name uintptr) (r int32) {
 	return x_remove(tls, name)
+}
+
+// Xstrspn calculates the length (in bytes) of the initial segment of s which
+// consists entirely of bytes in accept.
+func Xstrspn(tls *TLS, s uintptr, accept uintptr) (r uint64) {
+	return x_strspn(tls, s, accept)
 }
 
 func X__builtin_add_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {

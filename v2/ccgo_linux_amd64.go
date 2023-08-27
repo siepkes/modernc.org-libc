@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'gcc --package-name=libc --prefix-enumerator=_ --prefix-external=x_ --prefix-field=F --prefix-macro=m_ --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-enum=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --prefix-undefined=_ -exec-cc gcc -extended-errors -ignore-asm-errors -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -isystem  --predef=float __builtin_inff(void); --predef=long __builtin_expect(long, long); -hide __syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS -hide a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32 -hide fabs,fabsf,fabsl,fork -ignore-file=obj/ldso/dlstart.lo.go,obj/ldso/dynlink.lo.go -std=c99 -nostdinc -ffreestanding -D_XOPEN_SOURCE=700 -I./arch/x86_64 -I./arch/generic -Iobj/src/internal -I./src/include -I./src/internal -Iobj/include -I./include -mlong-double-64 -nostdlib -shared -o lib/libc.so.go obj/src/aio/aio.lo.go obj/src/aio/aio_suspend.lo.go obj/src/aio/lio_listio.lo.go obj/src/complex/__cexp.lo.go obj/src/complex/__cexpf.lo.go obj/src/complex/cabs.lo.go obj/src/complex/cabsf.lo.go obj/src/complex/cabsl.lo.go obj/src/complex/cacos.lo.go obj/src/complex/cacosf.lo.go obj/src/complex/cacosh.lo.go obj/src/complex/cacoshf.lo.go obj/src/complex/cacoshl.lo.go obj/src/complex/cacosl.lo.go obj/src/complex/carg.lo.go obj/src/complex/cargf.lo.go obj/src/complex/cargl.lo.go obj/src/complex/casin.lo.go obj/src/complex/casinf.lo.go obj/src/complex/casinh.lo.go obj/src/complex/casinhf.lo.go obj/src/complex/casinhl.lo.go obj/src/complex/casinl.lo.go obj/src/complex/catan.lo.go obj/src/complex/catanf.lo.go obj/src/complex/catanh.lo.go obj/src/complex/catanhf.lo.go obj/src/complex/catanhl.lo.go obj/src/complex/catanl.lo.go obj/src/complex/ccos.lo.go obj/src/complex/ccosf.lo.go obj/src/complex/ccosh.lo.go obj/src/complex/ccoshf.lo.go obj/src/complex/ccoshl.lo.go obj/src/complex/ccosl.lo.go obj/src/complex/cexp.lo.go obj/src/complex/cexpf.lo.go obj/src/complex/cexpl.lo.go obj/src/complex/cimag.lo.go obj/src/complex/cimagf.lo.go obj/src/complex/cimagl.lo.go obj/src/complex/clog.lo.go obj/src/complex/clogf.lo.go obj/src/complex/clogl.lo.go obj/src/complex/conj.lo.go obj/src/complex/conjf.lo.go obj/src/complex/conjl.lo.go obj/src/complex/cpow.lo.go obj/src/complex/cpowf.lo.go obj/src/complex/cpowl.lo.go obj/src/complex/cproj.lo.go obj/src/complex/cprojf.lo.go obj/src/complex/cprojl.lo.go obj/src/complex/creal.lo.go obj/src/complex/crealf.lo.go obj/src/complex/creall.lo.go obj/src/complex/csin.lo.go obj/src/complex/csinf.lo.go obj/src/complex/csinh.lo.go obj/src/complex/csinhf.lo.go obj/src/complex/csinhl.lo.go obj/src/complex/csinl.lo.go obj/src/complex/csqrt.lo.go obj/src/complex/csqrtf.lo.go obj/src/complex/csqrtl.lo.go obj/src/complex/ctan.lo.go obj/src/complex/ctanf.lo.go obj/src/complex/ctanh.lo.go obj/src/complex/ctanhf.lo.go obj/src/complex/ctanhl.lo.go obj/src/complex/ctanl.lo.go obj/src/conf/confstr.lo.go obj/src/conf/fpathconf.lo.go obj/src/conf/legacy.lo.go obj/src/conf/pathconf.lo.go obj/src/conf/sysconf.lo.go obj/src/crypt/crypt.lo.go obj/src/crypt/crypt_blowfish.lo.go obj/src/crypt/crypt_des.lo.go obj/src/crypt/crypt_md5.lo.go obj/src/crypt/crypt_r.lo.go obj/src/crypt/crypt_sha256.lo.go obj/src/crypt/crypt_sha512.lo.go obj/src/crypt/encrypt.lo.go obj/src/ctype/__ctype_b_loc.lo.go obj/src/ctype/__ctype_get_mb_cur_max.lo.go obj/src/ctype/__ctype_tolower_loc.lo.go obj/src/ctype/__ctype_toupper_loc.lo.go obj/src/ctype/isalnum.lo.go obj/src/ctype/isalpha.lo.go obj/src/ctype/isascii.lo.go obj/src/ctype/isblank.lo.go obj/src/ctype/iscntrl.lo.go obj/src/ctype/isdigit.lo.go obj/src/ctype/isgraph.lo.go obj/src/ctype/islower.lo.go obj/src/ctype/isprint.lo.go obj/src/ctype/ispunct.lo.go obj/src/ctype/isspace.lo.go obj/src/ctype/isupper.lo.go obj/src/ctype/iswalnum.lo.go obj/src/ctype/iswalpha.lo.go obj/src/ctype/iswblank.lo.go obj/src/ctype/iswcntrl.lo.go obj/src/ctype/iswctype.lo.go obj/src/ctype/iswdigit.lo.go obj/src/ctype/iswgraph.lo.go obj/src/ctype/iswlower.lo.go obj/src/ctype/iswprint.lo.go obj/src/ctype/iswpunct.lo.go obj/src/ctype/iswspace.lo.go obj/src/ctype/iswupper.lo.go obj/src/ctype/iswxdigit.lo.go obj/src/ctype/isxdigit.lo.go obj/src/ctype/toascii.lo.go obj/src/ctype/tolower.lo.go obj/src/ctype/toupper.lo.go obj/src/ctype/towctrans.lo.go obj/src/ctype/wcswidth.lo.go obj/src/ctype/wctrans.lo.go obj/src/ctype/wcwidth.lo.go obj/src/dirent/alphasort.lo.go obj/src/dirent/closedir.lo.go obj/src/dirent/dirfd.lo.go obj/src/dirent/fdopendir.lo.go obj/src/dirent/opendir.lo.go obj/src/dirent/readdir.lo.go obj/src/dirent/readdir_r.lo.go obj/src/dirent/rewinddir.lo.go obj/src/dirent/scandir.lo.go obj/src/dirent/seekdir.lo.go obj/src/dirent/telldir.lo.go obj/src/dirent/versionsort.lo.go obj/src/env/__environ.lo.go obj/src/env/__init_tls.lo.go obj/src/env/__libc_start_main.lo.go obj/src/env/__reset_tls.lo.go obj/src/env/__stack_chk_fail.lo.go obj/src/env/clearenv.lo.go obj/src/env/getenv.lo.go obj/src/env/putenv.lo.go obj/src/env/secure_getenv.lo.go obj/src/env/setenv.lo.go obj/src/env/unsetenv.lo.go obj/src/errno/__errno_location.lo.go obj/src/errno/strerror.lo.go obj/src/exit/_Exit.lo.go obj/src/exit/abort.lo.go obj/src/exit/abort_lock.lo.go obj/src/exit/assert.lo.go obj/src/exit/at_quick_exit.lo.go obj/src/exit/atexit.lo.go obj/src/exit/exit.lo.go obj/src/exit/quick_exit.lo.go obj/src/fcntl/creat.lo.go obj/src/fcntl/fcntl.lo.go obj/src/fcntl/open.lo.go obj/src/fcntl/openat.lo.go obj/src/fcntl/posix_fadvise.lo.go obj/src/fcntl/posix_fallocate.lo.go obj/src/fenv/__flt_rounds.lo.go obj/src/fenv/fegetexceptflag.lo.go obj/src/fenv/feholdexcept.lo.go obj/src/fenv/fesetexceptflag.lo.go obj/src/fenv/fesetround.lo.go obj/src/fenv/feupdateenv.lo.go obj/src/internal/defsysinfo.lo.go obj/src/internal/floatscan.lo.go obj/src/internal/intscan.lo.go obj/src/internal/libc.lo.go obj/src/internal/procfdname.lo.go obj/src/internal/shgetc.lo.go obj/src/internal/syscall_ret.lo.go obj/src/internal/vdso.lo.go obj/src/internal/version.lo.go obj/src/ipc/ftok.lo.go obj/src/ipc/msgctl.lo.go obj/src/ipc/msgget.lo.go obj/src/ipc/msgrcv.lo.go obj/src/ipc/msgsnd.lo.go obj/src/ipc/semctl.lo.go obj/src/ipc/semget.lo.go obj/src/ipc/semop.lo.go obj/src/ipc/semtimedop.lo.go obj/src/ipc/shmat.lo.go obj/src/ipc/shmctl.lo.go obj/src/ipc/shmdt.lo.go obj/src/ipc/shmget.lo.go obj/src/ldso/__dlsym.lo.go obj/src/ldso/dl_iterate_phdr.lo.go obj/src/ldso/dladdr.lo.go obj/src/ldso/dlclose.lo.go obj/src/ldso/dlerror.lo.go obj/src/ldso/dlinfo.lo.go obj/src/ldso/dlopen.lo.go obj/src/legacy/cuserid.lo.go obj/src/legacy/daemon.lo.go obj/src/legacy/err.lo.go obj/src/legacy/euidaccess.lo.go obj/src/legacy/ftw.lo.go obj/src/legacy/futimes.lo.go obj/src/legacy/getdtablesize.lo.go obj/src/legacy/getloadavg.lo.go obj/src/legacy/getpagesize.lo.go obj/src/legacy/getpass.lo.go obj/src/legacy/getusershell.lo.go obj/src/legacy/isastream.lo.go obj/src/legacy/lutimes.lo.go obj/src/legacy/ulimit.lo.go obj/src/legacy/utmpx.lo.go obj/src/legacy/valloc.lo.go obj/src/linux/adjtime.lo.go obj/src/linux/adjtimex.lo.go obj/src/linux/arch_prctl.lo.go obj/src/linux/brk.lo.go obj/src/linux/cache.lo.go obj/src/linux/cap.lo.go obj/src/linux/chroot.lo.go obj/src/linux/clock_adjtime.lo.go obj/src/linux/clone.lo.go obj/src/linux/copy_file_range.lo.go obj/src/linux/epoll.lo.go obj/src/linux/eventfd.lo.go obj/src/linux/fallocate.lo.go obj/src/linux/fanotify.lo.go obj/src/linux/flock.lo.go obj/src/linux/getdents.lo.go obj/src/linux/getrandom.lo.go obj/src/linux/gettid.lo.go obj/src/linux/inotify.lo.go obj/src/linux/ioperm.lo.go obj/src/linux/iopl.lo.go obj/src/linux/klogctl.lo.go obj/src/linux/membarrier.lo.go obj/src/linux/memfd_create.lo.go obj/src/linux/mlock2.lo.go obj/src/linux/module.lo.go obj/src/linux/mount.lo.go obj/src/linux/name_to_handle_at.lo.go obj/src/linux/open_by_handle_at.lo.go obj/src/linux/personality.lo.go obj/src/linux/pivot_root.lo.go obj/src/linux/ppoll.lo.go obj/src/linux/prctl.lo.go obj/src/linux/prlimit.lo.go obj/src/linux/process_vm.lo.go obj/src/linux/ptrace.lo.go obj/src/linux/quotactl.lo.go obj/src/linux/readahead.lo.go obj/src/linux/reboot.lo.go obj/src/linux/remap_file_pages.lo.go obj/src/linux/sbrk.lo.go obj/src/linux/sendfile.lo.go obj/src/linux/setfsgid.lo.go obj/src/linux/setfsuid.lo.go obj/src/linux/setgroups.lo.go obj/src/linux/sethostname.lo.go obj/src/linux/setns.lo.go obj/src/linux/settimeofday.lo.go obj/src/linux/signalfd.lo.go obj/src/linux/splice.lo.go obj/src/linux/stime.lo.go obj/src/linux/swap.lo.go obj/src/linux/sync_file_range.lo.go obj/src/linux/syncfs.lo.go obj/src/linux/sysinfo.lo.go obj/src/linux/tee.lo.go obj/src/linux/timerfd.lo.go obj/src/linux/unshare.lo.go obj/src/linux/utimes.lo.go obj/src/linux/vhangup.lo.go obj/src/linux/vmsplice.lo.go obj/src/linux/wait3.lo.go obj/src/linux/wait4.lo.go obj/src/linux/xattr.lo.go obj/src/locale/__lctrans.lo.go obj/src/locale/__mo_lookup.lo.go obj/src/locale/bind_textdomain_codeset.lo.go obj/src/locale/c_locale.lo.go obj/src/locale/catclose.lo.go obj/src/locale/catgets.lo.go obj/src/locale/catopen.lo.go obj/src/locale/dcngettext.lo.go obj/src/locale/duplocale.lo.go obj/src/locale/freelocale.lo.go obj/src/locale/iconv.lo.go obj/src/locale/iconv_close.lo.go obj/src/locale/langinfo.lo.go obj/src/locale/locale_map.lo.go obj/src/locale/localeconv.lo.go obj/src/locale/newlocale.lo.go obj/src/locale/pleval.lo.go obj/src/locale/setlocale.lo.go obj/src/locale/strcoll.lo.go obj/src/locale/strfmon.lo.go obj/src/locale/strtod_l.lo.go obj/src/locale/strxfrm.lo.go obj/src/locale/textdomain.lo.go obj/src/locale/uselocale.lo.go obj/src/locale/wcscoll.lo.go obj/src/locale/wcsxfrm.lo.go obj/src/malloc/calloc.lo.go obj/src/malloc/free.lo.go obj/src/malloc/libc_calloc.lo.go obj/src/malloc/lite_malloc.lo.go obj/src/malloc/mallocng/aligned_alloc.lo.go obj/src/malloc/mallocng/donate.lo.go obj/src/malloc/mallocng/free.lo.go obj/src/malloc/mallocng/malloc.lo.go obj/src/malloc/mallocng/malloc_usable_size.lo.go obj/src/malloc/mallocng/realloc.lo.go obj/src/malloc/memalign.lo.go obj/src/malloc/posix_memalign.lo.go obj/src/malloc/realloc.lo.go obj/src/malloc/reallocarray.lo.go obj/src/malloc/replaced.lo.go obj/src/math/__cos.lo.go obj/src/math/__cosdf.lo.go obj/src/math/__cosl.lo.go obj/src/math/__expo2.lo.go obj/src/math/__expo2f.lo.go obj/src/math/__fpclassify.lo.go obj/src/math/__fpclassifyf.lo.go obj/src/math/__fpclassifyl.lo.go obj/src/math/__math_divzero.lo.go obj/src/math/__math_divzerof.lo.go obj/src/math/__math_invalid.lo.go obj/src/math/__math_invalidf.lo.go obj/src/math/__math_invalidl.lo.go obj/src/math/__math_oflow.lo.go obj/src/math/__math_oflowf.lo.go obj/src/math/__math_uflow.lo.go obj/src/math/__math_uflowf.lo.go obj/src/math/__math_xflow.lo.go obj/src/math/__math_xflowf.lo.go obj/src/math/__polevll.lo.go obj/src/math/__rem_pio2.lo.go obj/src/math/__rem_pio2_large.lo.go obj/src/math/__rem_pio2f.lo.go obj/src/math/__rem_pio2l.lo.go obj/src/math/__signbit.lo.go obj/src/math/__signbitf.lo.go obj/src/math/__signbitl.lo.go obj/src/math/__sin.lo.go obj/src/math/__sindf.lo.go obj/src/math/__sinl.lo.go obj/src/math/__tan.lo.go obj/src/math/__tandf.lo.go obj/src/math/__tanl.lo.go obj/src/math/acos.lo.go obj/src/math/acosf.lo.go obj/src/math/acosh.lo.go obj/src/math/acoshf.lo.go obj/src/math/acoshl.lo.go obj/src/math/asin.lo.go obj/src/math/asinf.lo.go obj/src/math/asinh.lo.go obj/src/math/asinhf.lo.go obj/src/math/asinhl.lo.go obj/src/math/atan.lo.go obj/src/math/atan2.lo.go obj/src/math/atan2f.lo.go obj/src/math/atanf.lo.go obj/src/math/atanh.lo.go obj/src/math/atanhf.lo.go obj/src/math/atanhl.lo.go obj/src/math/cbrt.lo.go obj/src/math/cbrtf.lo.go obj/src/math/cbrtl.lo.go obj/src/math/ceil.lo.go obj/src/math/ceilf.lo.go obj/src/math/copysign.lo.go obj/src/math/copysignf.lo.go obj/src/math/copysignl.lo.go obj/src/math/cos.lo.go obj/src/math/cosf.lo.go obj/src/math/cosh.lo.go obj/src/math/coshf.lo.go obj/src/math/coshl.lo.go obj/src/math/cosl.lo.go obj/src/math/erf.lo.go obj/src/math/erff.lo.go obj/src/math/erfl.lo.go obj/src/math/exp.lo.go obj/src/math/exp10.lo.go obj/src/math/exp10f.lo.go obj/src/math/exp10l.lo.go obj/src/math/exp2.lo.go obj/src/math/exp2f.lo.go obj/src/math/exp2f_data.lo.go obj/src/math/exp_data.lo.go obj/src/math/expf.lo.go obj/src/math/expm1.lo.go obj/src/math/expm1f.lo.go obj/src/math/fdim.lo.go obj/src/math/fdimf.lo.go obj/src/math/fdiml.lo.go obj/src/math/finite.lo.go obj/src/math/finitef.lo.go obj/src/math/floor.lo.go obj/src/math/floorf.lo.go obj/src/math/fmal.lo.go obj/src/math/fmax.lo.go obj/src/math/fmaxf.lo.go obj/src/math/fmaxl.lo.go obj/src/math/fmin.lo.go obj/src/math/fminf.lo.go obj/src/math/fminl.lo.go obj/src/math/fmod.lo.go obj/src/math/fmodf.lo.go obj/src/math/frexp.lo.go obj/src/math/frexpf.lo.go obj/src/math/frexpl.lo.go obj/src/math/hypot.lo.go obj/src/math/hypotf.lo.go obj/src/math/hypotl.lo.go obj/src/math/ilogb.lo.go obj/src/math/ilogbf.lo.go obj/src/math/ilogbl.lo.go obj/src/math/j0.lo.go obj/src/math/j0f.lo.go obj/src/math/j1.lo.go obj/src/math/j1f.lo.go obj/src/math/jn.lo.go obj/src/math/jnf.lo.go obj/src/math/ldexp.lo.go obj/src/math/ldexpf.lo.go obj/src/math/ldexpl.lo.go obj/src/math/lgamma.lo.go obj/src/math/lgamma_r.lo.go obj/src/math/lgammaf.lo.go obj/src/math/lgammaf_r.lo.go obj/src/math/lgammal.lo.go obj/src/math/llround.lo.go obj/src/math/llroundf.lo.go obj/src/math/llroundl.lo.go obj/src/math/log.lo.go obj/src/math/log10.lo.go obj/src/math/log10f.lo.go obj/src/math/log1p.lo.go obj/src/math/log1pf.lo.go obj/src/math/log2.lo.go obj/src/math/log2_data.lo.go obj/src/math/log2f.lo.go obj/src/math/log2f_data.lo.go obj/src/math/log_data.lo.go obj/src/math/logb.lo.go obj/src/math/logbf.lo.go obj/src/math/logbl.lo.go obj/src/math/logf.lo.go obj/src/math/logf_data.lo.go obj/src/math/lround.lo.go obj/src/math/lroundf.lo.go obj/src/math/lroundl.lo.go obj/src/math/modf.lo.go obj/src/math/modff.lo.go obj/src/math/modfl.lo.go obj/src/math/nan.lo.go obj/src/math/nanf.lo.go obj/src/math/nanl.lo.go obj/src/math/nearbyint.lo.go obj/src/math/nearbyintf.lo.go obj/src/math/nearbyintl.lo.go obj/src/math/nextafter.lo.go obj/src/math/nextafterf.lo.go obj/src/math/nextafterl.lo.go obj/src/math/nexttoward.lo.go obj/src/math/nexttowardf.lo.go obj/src/math/nexttowardl.lo.go obj/src/math/pow.lo.go obj/src/math/pow_data.lo.go obj/src/math/powf.lo.go obj/src/math/powf_data.lo.go obj/src/math/powl.lo.go obj/src/math/remainder.lo.go obj/src/math/remainderf.lo.go obj/src/math/remquo.lo.go obj/src/math/remquof.lo.go obj/src/math/rint.lo.go obj/src/math/rintf.lo.go obj/src/math/round.lo.go obj/src/math/roundf.lo.go obj/src/math/roundl.lo.go obj/src/math/scalb.lo.go obj/src/math/scalbf.lo.go obj/src/math/scalbln.lo.go obj/src/math/scalblnf.lo.go obj/src/math/scalblnl.lo.go obj/src/math/scalbn.lo.go obj/src/math/scalbnf.lo.go obj/src/math/scalbnl.lo.go obj/src/math/signgam.lo.go obj/src/math/significand.lo.go obj/src/math/significandf.lo.go obj/src/math/sin.lo.go obj/src/math/sincos.lo.go obj/src/math/sincosf.lo.go obj/src/math/sincosl.lo.go obj/src/math/sinf.lo.go obj/src/math/sinh.lo.go obj/src/math/sinhf.lo.go obj/src/math/sinhl.lo.go obj/src/math/sinl.lo.go obj/src/math/sqrt_data.lo.go obj/src/math/tan.lo.go obj/src/math/tanf.lo.go obj/src/math/tanh.lo.go obj/src/math/tanhf.lo.go obj/src/math/tanhl.lo.go obj/src/math/tanl.lo.go obj/src/math/tgamma.lo.go obj/src/math/tgammaf.lo.go obj/src/math/tgammal.lo.go obj/src/math/trunc.lo.go obj/src/math/truncf.lo.go obj/src/math/x86_64/fabs.lo.go obj/src/math/x86_64/fabsf.lo.go obj/src/math/x86_64/fabsl.lo.go obj/src/math/x86_64/fma.lo.go obj/src/math/x86_64/fmaf.lo.go obj/src/math/x86_64/fmodl.lo.go obj/src/math/x86_64/llrint.lo.go obj/src/math/x86_64/llrintf.lo.go obj/src/math/x86_64/llrintl.lo.go obj/src/math/x86_64/lrint.lo.go obj/src/math/x86_64/lrintf.lo.go obj/src/math/x86_64/lrintl.lo.go obj/src/math/x86_64/remainderl.lo.go obj/src/math/x86_64/remquol.lo.go obj/src/math/x86_64/rintl.lo.go obj/src/math/x86_64/sqrt.lo.go obj/src/math/x86_64/sqrtf.lo.go obj/src/math/x86_64/sqrtl.lo.go obj/src/misc/a64l.lo.go obj/src/misc/basename.lo.go obj/src/misc/dirname.lo.go obj/src/misc/ffs.lo.go obj/src/misc/ffsl.lo.go obj/src/misc/ffsll.lo.go obj/src/misc/fmtmsg.lo.go obj/src/misc/forkpty.lo.go obj/src/misc/get_current_dir_name.lo.go obj/src/misc/getauxval.lo.go obj/src/misc/getdomainname.lo.go obj/src/misc/getentropy.lo.go obj/src/misc/gethostid.lo.go obj/src/misc/getopt.lo.go obj/src/misc/getopt_long.lo.go obj/src/misc/getpriority.lo.go obj/src/misc/getresgid.lo.go obj/src/misc/getresuid.lo.go obj/src/misc/getrlimit.lo.go obj/src/misc/getrusage.lo.go obj/src/misc/getsubopt.lo.go obj/src/misc/initgroups.lo.go obj/src/misc/ioctl.lo.go obj/src/misc/issetugid.lo.go obj/src/misc/lockf.lo.go obj/src/misc/login_tty.lo.go obj/src/misc/mntent.lo.go obj/src/misc/nftw.lo.go obj/src/misc/openpty.lo.go obj/src/misc/ptsname.lo.go obj/src/misc/pty.lo.go obj/src/misc/realpath.lo.go obj/src/misc/setdomainname.lo.go obj/src/misc/setpriority.lo.go obj/src/misc/setrlimit.lo.go obj/src/misc/syscall.lo.go obj/src/misc/syslog.lo.go obj/src/misc/uname.lo.go obj/src/misc/wordexp.lo.go obj/src/mman/madvise.lo.go obj/src/mman/mincore.lo.go obj/src/mman/mlock.lo.go obj/src/mman/mlockall.lo.go obj/src/mman/mmap.lo.go obj/src/mman/mprotect.lo.go obj/src/mman/mremap.lo.go obj/src/mman/msync.lo.go obj/src/mman/munlock.lo.go obj/src/mman/munlockall.lo.go obj/src/mman/munmap.lo.go obj/src/mman/posix_madvise.lo.go obj/src/mman/shm_open.lo.go obj/src/mq/mq_close.lo.go obj/src/mq/mq_getattr.lo.go obj/src/mq/mq_notify.lo.go obj/src/mq/mq_open.lo.go obj/src/mq/mq_receive.lo.go obj/src/mq/mq_send.lo.go obj/src/mq/mq_setattr.lo.go obj/src/mq/mq_timedreceive.lo.go obj/src/mq/mq_timedsend.lo.go obj/src/mq/mq_unlink.lo.go obj/src/multibyte/btowc.lo.go obj/src/multibyte/c16rtomb.lo.go obj/src/multibyte/c32rtomb.lo.go obj/src/multibyte/internal.lo.go obj/src/multibyte/mblen.lo.go obj/src/multibyte/mbrlen.lo.go obj/src/multibyte/mbrtoc16.lo.go obj/src/multibyte/mbrtoc32.lo.go obj/src/multibyte/mbrtowc.lo.go obj/src/multibyte/mbsinit.lo.go obj/src/multibyte/mbsnrtowcs.lo.go obj/src/multibyte/mbsrtowcs.lo.go obj/src/multibyte/mbstowcs.lo.go obj/src/multibyte/mbtowc.lo.go obj/src/multibyte/wcrtomb.lo.go obj/src/multibyte/wcsnrtombs.lo.go obj/src/multibyte/wcsrtombs.lo.go obj/src/multibyte/wcstombs.lo.go obj/src/multibyte/wctob.lo.go obj/src/multibyte/wctomb.lo.go obj/src/network/accept.lo.go obj/src/network/accept4.lo.go obj/src/network/bind.lo.go obj/src/network/connect.lo.go obj/src/network/dn_comp.lo.go obj/src/network/dn_expand.lo.go obj/src/network/dn_skipname.lo.go obj/src/network/dns_parse.lo.go obj/src/network/ent.lo.go obj/src/network/ether.lo.go obj/src/network/freeaddrinfo.lo.go obj/src/network/gai_strerror.lo.go obj/src/network/getaddrinfo.lo.go obj/src/network/gethostbyaddr.lo.go obj/src/network/gethostbyaddr_r.lo.go obj/src/network/gethostbyname.lo.go obj/src/network/gethostbyname2.lo.go obj/src/network/gethostbyname2_r.lo.go obj/src/network/gethostbyname_r.lo.go obj/src/network/getifaddrs.lo.go obj/src/network/getnameinfo.lo.go obj/src/network/getpeername.lo.go obj/src/network/getservbyname.lo.go obj/src/network/getservbyname_r.lo.go obj/src/network/getservbyport.lo.go obj/src/network/getservbyport_r.lo.go obj/src/network/getsockname.lo.go obj/src/network/getsockopt.lo.go obj/src/network/h_errno.lo.go obj/src/network/herror.lo.go obj/src/network/hstrerror.lo.go obj/src/network/htonl.lo.go obj/src/network/htons.lo.go obj/src/network/if_freenameindex.lo.go obj/src/network/if_indextoname.lo.go obj/src/network/if_nameindex.lo.go obj/src/network/if_nametoindex.lo.go obj/src/network/in6addr_any.lo.go obj/src/network/in6addr_loopback.lo.go obj/src/network/inet_addr.lo.go obj/src/network/inet_aton.lo.go obj/src/network/inet_legacy.lo.go obj/src/network/inet_ntoa.lo.go obj/src/network/inet_ntop.lo.go obj/src/network/inet_pton.lo.go obj/src/network/listen.lo.go obj/src/network/lookup_ipliteral.lo.go obj/src/network/lookup_name.lo.go obj/src/network/lookup_serv.lo.go obj/src/network/netlink.lo.go obj/src/network/netname.lo.go obj/src/network/ns_parse.lo.go obj/src/network/ntohl.lo.go obj/src/network/ntohs.lo.go obj/src/network/proto.lo.go obj/src/network/recv.lo.go obj/src/network/recvfrom.lo.go obj/src/network/recvmmsg.lo.go obj/src/network/recvmsg.lo.go obj/src/network/res_init.lo.go obj/src/network/res_mkquery.lo.go obj/src/network/res_msend.lo.go obj/src/network/res_query.lo.go obj/src/network/res_querydomain.lo.go obj/src/network/res_send.lo.go obj/src/network/res_state.lo.go obj/src/network/resolvconf.lo.go obj/src/network/send.lo.go obj/src/network/sendmmsg.lo.go obj/src/network/sendmsg.lo.go obj/src/network/sendto.lo.go obj/src/network/serv.lo.go obj/src/network/setsockopt.lo.go obj/src/network/shutdown.lo.go obj/src/network/sockatmark.lo.go obj/src/network/socket.lo.go obj/src/network/socketpair.lo.go obj/src/passwd/fgetgrent.lo.go obj/src/passwd/fgetpwent.lo.go obj/src/passwd/fgetspent.lo.go obj/src/passwd/getgr_a.lo.go obj/src/passwd/getgr_r.lo.go obj/src/passwd/getgrent.lo.go obj/src/passwd/getgrent_a.lo.go obj/src/passwd/getgrouplist.lo.go obj/src/passwd/getpw_a.lo.go obj/src/passwd/getpw_r.lo.go obj/src/passwd/getpwent.lo.go obj/src/passwd/getpwent_a.lo.go obj/src/passwd/getspent.lo.go obj/src/passwd/getspnam.lo.go obj/src/passwd/getspnam_r.lo.go obj/src/passwd/lckpwdf.lo.go obj/src/passwd/nscd_query.lo.go obj/src/passwd/putgrent.lo.go obj/src/passwd/putpwent.lo.go obj/src/passwd/putspent.lo.go obj/src/prng/__rand48_step.lo.go obj/src/prng/__seed48.lo.go obj/src/prng/drand48.lo.go obj/src/prng/lcong48.lo.go obj/src/prng/lrand48.lo.go obj/src/prng/mrand48.lo.go obj/src/prng/rand.lo.go obj/src/prng/rand_r.lo.go obj/src/prng/random.lo.go obj/src/prng/seed48.lo.go obj/src/prng/srand48.lo.go obj/src/process/_Fork.lo.go obj/src/process/execl.lo.go obj/src/process/execle.lo.go obj/src/process/execlp.lo.go obj/src/process/execv.lo.go obj/src/process/execve.lo.go obj/src/process/execvp.lo.go obj/src/process/fexecve.lo.go obj/src/process/fork.lo.go obj/src/process/posix_spawn.lo.go obj/src/process/posix_spawn_file_actions_addchdir.lo.go obj/src/process/posix_spawn_file_actions_addclose.lo.go obj/src/process/posix_spawn_file_actions_adddup2.lo.go obj/src/process/posix_spawn_file_actions_addfchdir.lo.go obj/src/process/posix_spawn_file_actions_addopen.lo.go obj/src/process/posix_spawn_file_actions_destroy.lo.go obj/src/process/posix_spawn_file_actions_init.lo.go obj/src/process/posix_spawnattr_destroy.lo.go obj/src/process/posix_spawnattr_getflags.lo.go obj/src/process/posix_spawnattr_getpgroup.lo.go obj/src/process/posix_spawnattr_getsigdefault.lo.go obj/src/process/posix_spawnattr_getsigmask.lo.go obj/src/process/posix_spawnattr_init.lo.go obj/src/process/posix_spawnattr_sched.lo.go obj/src/process/posix_spawnattr_setflags.lo.go obj/src/process/posix_spawnattr_setpgroup.lo.go obj/src/process/posix_spawnattr_setsigdefault.lo.go obj/src/process/posix_spawnattr_setsigmask.lo.go obj/src/process/posix_spawnp.lo.go obj/src/process/system.lo.go obj/src/process/wait.lo.go obj/src/process/waitid.lo.go obj/src/process/waitpid.lo.go obj/src/regex/fnmatch.lo.go obj/src/regex/glob.lo.go obj/src/regex/regcomp.lo.go obj/src/regex/regerror.lo.go obj/src/regex/regexec.lo.go obj/src/regex/tre-mem.lo.go obj/src/sched/affinity.lo.go obj/src/sched/sched_cpucount.lo.go obj/src/sched/sched_get_priority_max.lo.go obj/src/sched/sched_getcpu.lo.go obj/src/sched/sched_getparam.lo.go obj/src/sched/sched_getscheduler.lo.go obj/src/sched/sched_rr_get_interval.lo.go obj/src/sched/sched_setparam.lo.go obj/src/sched/sched_setscheduler.lo.go obj/src/sched/sched_yield.lo.go obj/src/search/hsearch.lo.go obj/src/search/insque.lo.go obj/src/search/lsearch.lo.go obj/src/search/tdelete.lo.go obj/src/search/tdestroy.lo.go obj/src/search/tfind.lo.go obj/src/search/tsearch.lo.go obj/src/search/twalk.lo.go obj/src/select/poll.lo.go obj/src/select/pselect.lo.go obj/src/select/select.lo.go obj/src/signal/block.lo.go obj/src/signal/getitimer.lo.go obj/src/signal/kill.lo.go obj/src/signal/killpg.lo.go obj/src/signal/psiginfo.lo.go obj/src/signal/psignal.lo.go obj/src/signal/raise.lo.go obj/src/signal/setitimer.lo.go obj/src/signal/sigaction.lo.go obj/src/signal/sigaddset.lo.go obj/src/signal/sigaltstack.lo.go obj/src/signal/sigandset.lo.go obj/src/signal/sigdelset.lo.go obj/src/signal/sigemptyset.lo.go obj/src/signal/sigfillset.lo.go obj/src/signal/sighold.lo.go obj/src/signal/sigignore.lo.go obj/src/signal/siginterrupt.lo.go obj/src/signal/sigisemptyset.lo.go obj/src/signal/sigismember.lo.go obj/src/signal/siglongjmp.lo.go obj/src/signal/signal.lo.go obj/src/signal/sigorset.lo.go obj/src/signal/sigpause.lo.go obj/src/signal/sigpending.lo.go obj/src/signal/sigprocmask.lo.go obj/src/signal/sigqueue.lo.go obj/src/signal/sigrelse.lo.go obj/src/signal/sigrtmax.lo.go obj/src/signal/sigrtmin.lo.go obj/src/signal/sigset.lo.go obj/src/signal/sigsetjmp_tail.lo.go obj/src/signal/sigsuspend.lo.go obj/src/signal/sigtimedwait.lo.go obj/src/signal/sigwait.lo.go obj/src/signal/sigwaitinfo.lo.go obj/src/stat/__xstat.lo.go obj/src/stat/chmod.lo.go obj/src/stat/fchmod.lo.go obj/src/stat/fchmodat.lo.go obj/src/stat/fstat.lo.go obj/src/stat/fstatat.lo.go obj/src/stat/futimens.lo.go obj/src/stat/futimesat.lo.go obj/src/stat/lchmod.lo.go obj/src/stat/lstat.lo.go obj/src/stat/mkdir.lo.go obj/src/stat/mkdirat.lo.go obj/src/stat/mkfifo.lo.go obj/src/stat/mkfifoat.lo.go obj/src/stat/mknod.lo.go obj/src/stat/mknodat.lo.go obj/src/stat/stat.lo.go obj/src/stat/statvfs.lo.go obj/src/stat/umask.lo.go obj/src/stat/utimensat.lo.go obj/src/stdio/__fclose_ca.lo.go obj/src/stdio/__fdopen.lo.go obj/src/stdio/__fmodeflags.lo.go obj/src/stdio/__fopen_rb_ca.lo.go obj/src/stdio/__lockfile.lo.go obj/src/stdio/__overflow.lo.go obj/src/stdio/__stdio_close.lo.go obj/src/stdio/__stdio_exit.lo.go obj/src/stdio/__stdio_read.lo.go obj/src/stdio/__stdio_seek.lo.go obj/src/stdio/__stdio_write.lo.go obj/src/stdio/__stdout_write.lo.go obj/src/stdio/__toread.lo.go obj/src/stdio/__towrite.lo.go obj/src/stdio/__uflow.lo.go obj/src/stdio/asprintf.lo.go obj/src/stdio/clearerr.lo.go obj/src/stdio/dprintf.lo.go obj/src/stdio/ext.lo.go obj/src/stdio/ext2.lo.go obj/src/stdio/fclose.lo.go obj/src/stdio/feof.lo.go obj/src/stdio/ferror.lo.go obj/src/stdio/fflush.lo.go obj/src/stdio/fgetc.lo.go obj/src/stdio/fgetln.lo.go obj/src/stdio/fgetpos.lo.go obj/src/stdio/fgets.lo.go obj/src/stdio/fgetwc.lo.go obj/src/stdio/fgetws.lo.go obj/src/stdio/fileno.lo.go obj/src/stdio/flockfile.lo.go obj/src/stdio/fmemopen.lo.go obj/src/stdio/fopen.lo.go obj/src/stdio/fopencookie.lo.go obj/src/stdio/fprintf.lo.go obj/src/stdio/fputc.lo.go obj/src/stdio/fputs.lo.go obj/src/stdio/fputwc.lo.go obj/src/stdio/fputws.lo.go obj/src/stdio/fread.lo.go obj/src/stdio/freopen.lo.go obj/src/stdio/fscanf.lo.go obj/src/stdio/fseek.lo.go obj/src/stdio/fsetpos.lo.go obj/src/stdio/ftell.lo.go obj/src/stdio/ftrylockfile.lo.go obj/src/stdio/funlockfile.lo.go obj/src/stdio/fwide.lo.go obj/src/stdio/fwprintf.lo.go obj/src/stdio/fwrite.lo.go obj/src/stdio/fwscanf.lo.go obj/src/stdio/getc.lo.go obj/src/stdio/getc_unlocked.lo.go obj/src/stdio/getchar.lo.go obj/src/stdio/getchar_unlocked.lo.go obj/src/stdio/getdelim.lo.go obj/src/stdio/getline.lo.go obj/src/stdio/gets.lo.go obj/src/stdio/getw.lo.go obj/src/stdio/getwc.lo.go obj/src/stdio/getwchar.lo.go obj/src/stdio/ofl.lo.go obj/src/stdio/ofl_add.lo.go obj/src/stdio/open_memstream.lo.go obj/src/stdio/open_wmemstream.lo.go obj/src/stdio/pclose.lo.go obj/src/stdio/perror.lo.go obj/src/stdio/popen.lo.go obj/src/stdio/printf.lo.go obj/src/stdio/putc.lo.go obj/src/stdio/putc_unlocked.lo.go obj/src/stdio/putchar.lo.go obj/src/stdio/putchar_unlocked.lo.go obj/src/stdio/puts.lo.go obj/src/stdio/putw.lo.go obj/src/stdio/putwc.lo.go obj/src/stdio/putwchar.lo.go obj/src/stdio/remove.lo.go obj/src/stdio/rename.lo.go obj/src/stdio/rewind.lo.go obj/src/stdio/scanf.lo.go obj/src/stdio/setbuf.lo.go obj/src/stdio/setbuffer.lo.go obj/src/stdio/setlinebuf.lo.go obj/src/stdio/setvbuf.lo.go obj/src/stdio/snprintf.lo.go obj/src/stdio/sprintf.lo.go obj/src/stdio/sscanf.lo.go obj/src/stdio/stderr.lo.go obj/src/stdio/stdin.lo.go obj/src/stdio/stdout.lo.go obj/src/stdio/swprintf.lo.go obj/src/stdio/swscanf.lo.go obj/src/stdio/tempnam.lo.go obj/src/stdio/tmpfile.lo.go obj/src/stdio/tmpnam.lo.go obj/src/stdio/ungetc.lo.go obj/src/stdio/ungetwc.lo.go obj/src/stdio/vasprintf.lo.go obj/src/stdio/vdprintf.lo.go obj/src/stdio/vfprintf.lo.go obj/src/stdio/vfscanf.lo.go obj/src/stdio/vfwprintf.lo.go obj/src/stdio/vfwscanf.lo.go obj/src/stdio/vprintf.lo.go obj/src/stdio/vscanf.lo.go obj/src/stdio/vsnprintf.lo.go obj/src/stdio/vsprintf.lo.go obj/src/stdio/vsscanf.lo.go obj/src/stdio/vswprintf.lo.go obj/src/stdio/vswscanf.lo.go obj/src/stdio/vwprintf.lo.go obj/src/stdio/vwscanf.lo.go obj/src/stdio/wprintf.lo.go obj/src/stdio/wscanf.lo.go obj/src/stdlib/abs.lo.go obj/src/stdlib/atof.lo.go obj/src/stdlib/atoi.lo.go obj/src/stdlib/atol.lo.go obj/src/stdlib/atoll.lo.go obj/src/stdlib/bsearch.lo.go obj/src/stdlib/div.lo.go obj/src/stdlib/ecvt.lo.go obj/src/stdlib/fcvt.lo.go obj/src/stdlib/gcvt.lo.go obj/src/stdlib/imaxabs.lo.go obj/src/stdlib/imaxdiv.lo.go obj/src/stdlib/labs.lo.go obj/src/stdlib/ldiv.lo.go obj/src/stdlib/llabs.lo.go obj/src/stdlib/lldiv.lo.go obj/src/stdlib/qsort.lo.go obj/src/stdlib/qsort_nr.lo.go obj/src/stdlib/strtod.lo.go obj/src/stdlib/strtol.lo.go obj/src/stdlib/wcstod.lo.go obj/src/stdlib/wcstol.lo.go obj/src/string/bcmp.lo.go obj/src/string/bcopy.lo.go obj/src/string/bzero.lo.go obj/src/string/explicit_bzero.lo.go obj/src/string/index.lo.go obj/src/string/memccpy.lo.go obj/src/string/memchr.lo.go obj/src/string/memcmp.lo.go obj/src/string/memmem.lo.go obj/src/string/mempcpy.lo.go obj/src/string/memrchr.lo.go obj/src/string/rindex.lo.go obj/src/string/stpcpy.lo.go obj/src/string/stpncpy.lo.go obj/src/string/strcasecmp.lo.go obj/src/string/strcasestr.lo.go obj/src/string/strcat.lo.go obj/src/string/strchr.lo.go obj/src/string/strchrnul.lo.go obj/src/string/strcmp.lo.go obj/src/string/strcpy.lo.go obj/src/string/strcspn.lo.go obj/src/string/strdup.lo.go obj/src/string/strerror_r.lo.go obj/src/string/strlcat.lo.go obj/src/string/strlcpy.lo.go obj/src/string/strlen.lo.go obj/src/string/strncasecmp.lo.go obj/src/string/strncat.lo.go obj/src/string/strncmp.lo.go obj/src/string/strncpy.lo.go obj/src/string/strndup.lo.go obj/src/string/strnlen.lo.go obj/src/string/strpbrk.lo.go obj/src/string/strrchr.lo.go obj/src/string/strsep.lo.go obj/src/string/strsignal.lo.go obj/src/string/strspn.lo.go obj/src/string/strstr.lo.go obj/src/string/strtok.lo.go obj/src/string/strtok_r.lo.go obj/src/string/strverscmp.lo.go obj/src/string/swab.lo.go obj/src/string/wcpcpy.lo.go obj/src/string/wcpncpy.lo.go obj/src/string/wcscasecmp.lo.go obj/src/string/wcscasecmp_l.lo.go obj/src/string/wcscat.lo.go obj/src/string/wcschr.lo.go obj/src/string/wcscmp.lo.go obj/src/string/wcscpy.lo.go obj/src/string/wcscspn.lo.go obj/src/string/wcsdup.lo.go obj/src/string/wcslen.lo.go obj/src/string/wcsncasecmp.lo.go obj/src/string/wcsncasecmp_l.lo.go obj/src/string/wcsncat.lo.go obj/src/string/wcsncmp.lo.go obj/src/string/wcsncpy.lo.go obj/src/string/wcsnlen.lo.go obj/src/string/wcspbrk.lo.go obj/src/string/wcsrchr.lo.go obj/src/string/wcsspn.lo.go obj/src/string/wcsstr.lo.go obj/src/string/wcstok.lo.go obj/src/string/wcswcs.lo.go obj/src/string/wmemchr.lo.go obj/src/string/wmemcmp.lo.go obj/src/string/wmemcpy.lo.go obj/src/string/wmemmove.lo.go obj/src/string/wmemset.lo.go obj/src/temp/__randname.lo.go obj/src/temp/mkdtemp.lo.go obj/src/temp/mkostemp.lo.go obj/src/temp/mkostemps.lo.go obj/src/temp/mkstemp.lo.go obj/src/temp/mkstemps.lo.go obj/src/temp/mktemp.lo.go obj/src/termios/cfgetospeed.lo.go obj/src/termios/cfmakeraw.lo.go obj/src/termios/cfsetospeed.lo.go obj/src/termios/tcdrain.lo.go obj/src/termios/tcflow.lo.go obj/src/termios/tcflush.lo.go obj/src/termios/tcgetattr.lo.go obj/src/termios/tcgetsid.lo.go obj/src/termios/tcgetwinsize.lo.go obj/src/termios/tcsendbreak.lo.go obj/src/termios/tcsetattr.lo.go obj/src/termios/tcsetwinsize.lo.go obj/src/thread/__lock.lo.go obj/src/thread/__syscall_cp.lo.go obj/src/thread/__timedwait.lo.go obj/src/thread/__tls_get_addr.lo.go obj/src/thread/__wait.lo.go obj/src/thread/call_once.lo.go obj/src/thread/cnd_broadcast.lo.go obj/src/thread/cnd_destroy.lo.go obj/src/thread/cnd_init.lo.go obj/src/thread/cnd_signal.lo.go obj/src/thread/cnd_timedwait.lo.go obj/src/thread/cnd_wait.lo.go obj/src/thread/default_attr.lo.go obj/src/thread/lock_ptc.lo.go obj/src/thread/mtx_destroy.lo.go obj/src/thread/mtx_init.lo.go obj/src/thread/mtx_lock.lo.go obj/src/thread/mtx_timedlock.lo.go obj/src/thread/mtx_trylock.lo.go obj/src/thread/mtx_unlock.lo.go obj/src/thread/pthread_atfork.lo.go obj/src/thread/pthread_attr_destroy.lo.go obj/src/thread/pthread_attr_get.lo.go obj/src/thread/pthread_attr_init.lo.go obj/src/thread/pthread_attr_setdetachstate.lo.go obj/src/thread/pthread_attr_setguardsize.lo.go obj/src/thread/pthread_attr_setinheritsched.lo.go obj/src/thread/pthread_attr_setschedparam.lo.go obj/src/thread/pthread_attr_setschedpolicy.lo.go obj/src/thread/pthread_attr_setscope.lo.go obj/src/thread/pthread_attr_setstack.lo.go obj/src/thread/pthread_attr_setstacksize.lo.go obj/src/thread/pthread_barrier_destroy.lo.go obj/src/thread/pthread_barrier_init.lo.go obj/src/thread/pthread_barrier_wait.lo.go obj/src/thread/pthread_barrierattr_destroy.lo.go obj/src/thread/pthread_barrierattr_init.lo.go obj/src/thread/pthread_barrierattr_setpshared.lo.go obj/src/thread/pthread_cancel.lo.go obj/src/thread/pthread_cleanup_push.lo.go obj/src/thread/pthread_cond_broadcast.lo.go obj/src/thread/pthread_cond_destroy.lo.go obj/src/thread/pthread_cond_init.lo.go obj/src/thread/pthread_cond_signal.lo.go obj/src/thread/pthread_cond_timedwait.lo.go obj/src/thread/pthread_cond_wait.lo.go obj/src/thread/pthread_condattr_destroy.lo.go obj/src/thread/pthread_condattr_init.lo.go obj/src/thread/pthread_condattr_setclock.lo.go obj/src/thread/pthread_condattr_setpshared.lo.go obj/src/thread/pthread_create.lo.go obj/src/thread/pthread_detach.lo.go obj/src/thread/pthread_equal.lo.go obj/src/thread/pthread_getattr_np.lo.go obj/src/thread/pthread_getconcurrency.lo.go obj/src/thread/pthread_getcpuclockid.lo.go obj/src/thread/pthread_getname_np.lo.go obj/src/thread/pthread_getschedparam.lo.go obj/src/thread/pthread_getspecific.lo.go obj/src/thread/pthread_join.lo.go obj/src/thread/pthread_key_create.lo.go obj/src/thread/pthread_kill.lo.go obj/src/thread/pthread_mutex_consistent.lo.go obj/src/thread/pthread_mutex_destroy.lo.go obj/src/thread/pthread_mutex_getprioceiling.lo.go obj/src/thread/pthread_mutex_init.lo.go obj/src/thread/pthread_mutex_lock.lo.go obj/src/thread/pthread_mutex_setprioceiling.lo.go obj/src/thread/pthread_mutex_timedlock.lo.go obj/src/thread/pthread_mutex_trylock.lo.go obj/src/thread/pthread_mutex_unlock.lo.go obj/src/thread/pthread_mutexattr_destroy.lo.go obj/src/thread/pthread_mutexattr_init.lo.go obj/src/thread/pthread_mutexattr_setprotocol.lo.go obj/src/thread/pthread_mutexattr_setpshared.lo.go obj/src/thread/pthread_mutexattr_setrobust.lo.go obj/src/thread/pthread_mutexattr_settype.lo.go obj/src/thread/pthread_once.lo.go obj/src/thread/pthread_rwlock_destroy.lo.go obj/src/thread/pthread_rwlock_init.lo.go obj/src/thread/pthread_rwlock_rdlock.lo.go obj/src/thread/pthread_rwlock_timedrdlock.lo.go obj/src/thread/pthread_rwlock_timedwrlock.lo.go obj/src/thread/pthread_rwlock_tryrdlock.lo.go obj/src/thread/pthread_rwlock_trywrlock.lo.go obj/src/thread/pthread_rwlock_unlock.lo.go obj/src/thread/pthread_rwlock_wrlock.lo.go obj/src/thread/pthread_rwlockattr_destroy.lo.go obj/src/thread/pthread_rwlockattr_init.lo.go obj/src/thread/pthread_rwlockattr_setpshared.lo.go obj/src/thread/pthread_self.lo.go obj/src/thread/pthread_setattr_default_np.lo.go obj/src/thread/pthread_setcancelstate.lo.go obj/src/thread/pthread_setcanceltype.lo.go obj/src/thread/pthread_setconcurrency.lo.go obj/src/thread/pthread_setname_np.lo.go obj/src/thread/pthread_setschedparam.lo.go obj/src/thread/pthread_setschedprio.lo.go obj/src/thread/pthread_setspecific.lo.go obj/src/thread/pthread_sigmask.lo.go obj/src/thread/pthread_spin_destroy.lo.go obj/src/thread/pthread_spin_init.lo.go obj/src/thread/pthread_spin_lock.lo.go obj/src/thread/pthread_spin_trylock.lo.go obj/src/thread/pthread_spin_unlock.lo.go obj/src/thread/pthread_testcancel.lo.go obj/src/thread/sem_destroy.lo.go obj/src/thread/sem_getvalue.lo.go obj/src/thread/sem_init.lo.go obj/src/thread/sem_open.lo.go obj/src/thread/sem_post.lo.go obj/src/thread/sem_timedwait.lo.go obj/src/thread/sem_trywait.lo.go obj/src/thread/sem_unlink.lo.go obj/src/thread/sem_wait.lo.go obj/src/thread/synccall.lo.go obj/src/thread/thrd_create.lo.go obj/src/thread/thrd_exit.lo.go obj/src/thread/thrd_join.lo.go obj/src/thread/thrd_sleep.lo.go obj/src/thread/thrd_yield.lo.go obj/src/thread/tls.lo.go obj/src/thread/tss_create.lo.go obj/src/thread/tss_delete.lo.go obj/src/thread/tss_set.lo.go obj/src/thread/vmlock.lo.go obj/src/time/__map_file.lo.go obj/src/time/__month_to_secs.lo.go obj/src/time/__secs_to_tm.lo.go obj/src/time/__tm_to_secs.lo.go obj/src/time/__tz.lo.go obj/src/time/__year_to_secs.lo.go obj/src/time/asctime.lo.go obj/src/time/asctime_r.lo.go obj/src/time/clock.lo.go obj/src/time/clock_getcpuclockid.lo.go obj/src/time/clock_getres.lo.go obj/src/time/clock_gettime.lo.go obj/src/time/clock_nanosleep.lo.go obj/src/time/clock_settime.lo.go obj/src/time/ctime.lo.go obj/src/time/ctime_r.lo.go obj/src/time/difftime.lo.go obj/src/time/ftime.lo.go obj/src/time/getdate.lo.go obj/src/time/gettimeofday.lo.go obj/src/time/gmtime.lo.go obj/src/time/gmtime_r.lo.go obj/src/time/localtime.lo.go obj/src/time/localtime_r.lo.go obj/src/time/mktime.lo.go obj/src/time/nanosleep.lo.go obj/src/time/strftime.lo.go obj/src/time/strptime.lo.go obj/src/time/time.lo.go obj/src/time/timegm.lo.go obj/src/time/timer_create.lo.go obj/src/time/timer_delete.lo.go obj/src/time/timer_getoverrun.lo.go obj/src/time/timer_gettime.lo.go obj/src/time/timer_settime.lo.go obj/src/time/times.lo.go obj/src/time/timespec_get.lo.go obj/src/time/utime.lo.go obj/src/time/wcsftime.lo.go obj/src/unistd/_exit.lo.go obj/src/unistd/access.lo.go obj/src/unistd/acct.lo.go obj/src/unistd/alarm.lo.go obj/src/unistd/chdir.lo.go obj/src/unistd/chown.lo.go obj/src/unistd/close.lo.go obj/src/unistd/ctermid.lo.go obj/src/unistd/dup.lo.go obj/src/unistd/dup2.lo.go obj/src/unistd/dup3.lo.go obj/src/unistd/faccessat.lo.go obj/src/unistd/fchdir.lo.go obj/src/unistd/fchown.lo.go obj/src/unistd/fchownat.lo.go obj/src/unistd/fdatasync.lo.go obj/src/unistd/fsync.lo.go obj/src/unistd/ftruncate.lo.go obj/src/unistd/getcwd.lo.go obj/src/unistd/getegid.lo.go obj/src/unistd/geteuid.lo.go obj/src/unistd/getgid.lo.go obj/src/unistd/getgroups.lo.go obj/src/unistd/gethostname.lo.go obj/src/unistd/getlogin.lo.go obj/src/unistd/getlogin_r.lo.go obj/src/unistd/getpgid.lo.go obj/src/unistd/getpgrp.lo.go obj/src/unistd/getpid.lo.go obj/src/unistd/getppid.lo.go obj/src/unistd/getsid.lo.go obj/src/unistd/getuid.lo.go obj/src/unistd/isatty.lo.go obj/src/unistd/lchown.lo.go obj/src/unistd/link.lo.go obj/src/unistd/linkat.lo.go obj/src/unistd/lseek.lo.go obj/src/unistd/nice.lo.go obj/src/unistd/pause.lo.go obj/src/unistd/pipe.lo.go obj/src/unistd/pipe2.lo.go obj/src/unistd/posix_close.lo.go obj/src/unistd/pread.lo.go obj/src/unistd/preadv.lo.go obj/src/unistd/pwrite.lo.go obj/src/unistd/pwritev.lo.go obj/src/unistd/read.lo.go obj/src/unistd/readlink.lo.go obj/src/unistd/readlinkat.lo.go obj/src/unistd/readv.lo.go obj/src/unistd/renameat.lo.go obj/src/unistd/rmdir.lo.go obj/src/unistd/setegid.lo.go obj/src/unistd/seteuid.lo.go obj/src/unistd/setgid.lo.go obj/src/unistd/setpgid.lo.go obj/src/unistd/setpgrp.lo.go obj/src/unistd/setregid.lo.go obj/src/unistd/setresgid.lo.go obj/src/unistd/setresuid.lo.go obj/src/unistd/setreuid.lo.go obj/src/unistd/setsid.lo.go obj/src/unistd/setuid.lo.go obj/src/unistd/setxid.lo.go obj/src/unistd/sleep.lo.go obj/src/unistd/symlink.lo.go obj/src/unistd/symlinkat.lo.go obj/src/unistd/sync.lo.go obj/src/unistd/tcgetpgrp.lo.go obj/src/unistd/tcsetpgrp.lo.go obj/src/unistd/truncate.lo.go obj/src/unistd/ttyname.lo.go obj/src/unistd/ttyname_r.lo.go obj/src/unistd/ualarm.lo.go obj/src/unistd/unlink.lo.go obj/src/unistd/unlinkat.lo.go obj/src/unistd/usleep.lo.go obj/src/unistd/write.lo.go obj/src/unistd/writev.lo.go obj/ldso/dlstart.lo.go obj/ldso/dynlink.lo.go', DO NOT EDIT.
+// Code generated for linux/amd64 by 'gcc --package-name=libc --prefix-enumerator=_ --prefix-external=x_ --prefix-field=F --prefix-macro=m_ --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-enum=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --prefix-undefined=_ -exec-cc gcc -extended-errors -ignore-asm-errors -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -isystem  --predef=float __builtin_inff(void); --predef=long __builtin_expect(long, long); -hide __syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS -hide a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32 -hide fabs,fabsf,fabsl,fork -hide __init_tls,__libc_start_init,__libc_exit_fini,__dl_invalid_handle -std=c99 -nostdinc -ffreestanding -D_XOPEN_SOURCE=700 -I./arch/x86_64 -I./arch/generic -Iobj/src/internal -I./src/include -I./src/internal -Iobj/include -I./include -mlong-double-64 -nostdlib -shared -o lib/libc.so.go obj/src/aio/aio.lo.go obj/src/aio/aio_suspend.lo.go obj/src/aio/lio_listio.lo.go obj/src/complex/__cexp.lo.go obj/src/complex/__cexpf.lo.go obj/src/complex/cabs.lo.go obj/src/complex/cabsf.lo.go obj/src/complex/cabsl.lo.go obj/src/complex/cacos.lo.go obj/src/complex/cacosf.lo.go obj/src/complex/cacosh.lo.go obj/src/complex/cacoshf.lo.go obj/src/complex/cacoshl.lo.go obj/src/complex/cacosl.lo.go obj/src/complex/carg.lo.go obj/src/complex/cargf.lo.go obj/src/complex/cargl.lo.go obj/src/complex/casin.lo.go obj/src/complex/casinf.lo.go obj/src/complex/casinh.lo.go obj/src/complex/casinhf.lo.go obj/src/complex/casinhl.lo.go obj/src/complex/casinl.lo.go obj/src/complex/catan.lo.go obj/src/complex/catanf.lo.go obj/src/complex/catanh.lo.go obj/src/complex/catanhf.lo.go obj/src/complex/catanhl.lo.go obj/src/complex/catanl.lo.go obj/src/complex/ccos.lo.go obj/src/complex/ccosf.lo.go obj/src/complex/ccosh.lo.go obj/src/complex/ccoshf.lo.go obj/src/complex/ccoshl.lo.go obj/src/complex/ccosl.lo.go obj/src/complex/cexp.lo.go obj/src/complex/cexpf.lo.go obj/src/complex/cexpl.lo.go obj/src/complex/cimag.lo.go obj/src/complex/cimagf.lo.go obj/src/complex/cimagl.lo.go obj/src/complex/clog.lo.go obj/src/complex/clogf.lo.go obj/src/complex/clogl.lo.go obj/src/complex/conj.lo.go obj/src/complex/conjf.lo.go obj/src/complex/conjl.lo.go obj/src/complex/cpow.lo.go obj/src/complex/cpowf.lo.go obj/src/complex/cpowl.lo.go obj/src/complex/cproj.lo.go obj/src/complex/cprojf.lo.go obj/src/complex/cprojl.lo.go obj/src/complex/creal.lo.go obj/src/complex/crealf.lo.go obj/src/complex/creall.lo.go obj/src/complex/csin.lo.go obj/src/complex/csinf.lo.go obj/src/complex/csinh.lo.go obj/src/complex/csinhf.lo.go obj/src/complex/csinhl.lo.go obj/src/complex/csinl.lo.go obj/src/complex/csqrt.lo.go obj/src/complex/csqrtf.lo.go obj/src/complex/csqrtl.lo.go obj/src/complex/ctan.lo.go obj/src/complex/ctanf.lo.go obj/src/complex/ctanh.lo.go obj/src/complex/ctanhf.lo.go obj/src/complex/ctanhl.lo.go obj/src/complex/ctanl.lo.go obj/src/conf/confstr.lo.go obj/src/conf/fpathconf.lo.go obj/src/conf/legacy.lo.go obj/src/conf/pathconf.lo.go obj/src/conf/sysconf.lo.go obj/src/crypt/crypt.lo.go obj/src/crypt/crypt_blowfish.lo.go obj/src/crypt/crypt_des.lo.go obj/src/crypt/crypt_md5.lo.go obj/src/crypt/crypt_r.lo.go obj/src/crypt/crypt_sha256.lo.go obj/src/crypt/crypt_sha512.lo.go obj/src/crypt/encrypt.lo.go obj/src/ctype/__ctype_b_loc.lo.go obj/src/ctype/__ctype_get_mb_cur_max.lo.go obj/src/ctype/__ctype_tolower_loc.lo.go obj/src/ctype/__ctype_toupper_loc.lo.go obj/src/ctype/isalnum.lo.go obj/src/ctype/isalpha.lo.go obj/src/ctype/isascii.lo.go obj/src/ctype/isblank.lo.go obj/src/ctype/iscntrl.lo.go obj/src/ctype/isdigit.lo.go obj/src/ctype/isgraph.lo.go obj/src/ctype/islower.lo.go obj/src/ctype/isprint.lo.go obj/src/ctype/ispunct.lo.go obj/src/ctype/isspace.lo.go obj/src/ctype/isupper.lo.go obj/src/ctype/iswalnum.lo.go obj/src/ctype/iswalpha.lo.go obj/src/ctype/iswblank.lo.go obj/src/ctype/iswcntrl.lo.go obj/src/ctype/iswctype.lo.go obj/src/ctype/iswdigit.lo.go obj/src/ctype/iswgraph.lo.go obj/src/ctype/iswlower.lo.go obj/src/ctype/iswprint.lo.go obj/src/ctype/iswpunct.lo.go obj/src/ctype/iswspace.lo.go obj/src/ctype/iswupper.lo.go obj/src/ctype/iswxdigit.lo.go obj/src/ctype/isxdigit.lo.go obj/src/ctype/toascii.lo.go obj/src/ctype/tolower.lo.go obj/src/ctype/toupper.lo.go obj/src/ctype/towctrans.lo.go obj/src/ctype/wcswidth.lo.go obj/src/ctype/wctrans.lo.go obj/src/ctype/wcwidth.lo.go obj/src/dirent/alphasort.lo.go obj/src/dirent/closedir.lo.go obj/src/dirent/dirfd.lo.go obj/src/dirent/fdopendir.lo.go obj/src/dirent/opendir.lo.go obj/src/dirent/readdir.lo.go obj/src/dirent/readdir_r.lo.go obj/src/dirent/rewinddir.lo.go obj/src/dirent/scandir.lo.go obj/src/dirent/seekdir.lo.go obj/src/dirent/telldir.lo.go obj/src/dirent/versionsort.lo.go obj/src/env/__environ.lo.go obj/src/env/__init_tls.lo.go obj/src/env/__libc_start_main.lo.go obj/src/env/__reset_tls.lo.go obj/src/env/__stack_chk_fail.lo.go obj/src/env/clearenv.lo.go obj/src/env/getenv.lo.go obj/src/env/putenv.lo.go obj/src/env/secure_getenv.lo.go obj/src/env/setenv.lo.go obj/src/env/unsetenv.lo.go obj/src/errno/__errno_location.lo.go obj/src/errno/strerror.lo.go obj/src/exit/_Exit.lo.go obj/src/exit/abort.lo.go obj/src/exit/abort_lock.lo.go obj/src/exit/assert.lo.go obj/src/exit/at_quick_exit.lo.go obj/src/exit/atexit.lo.go obj/src/exit/exit.lo.go obj/src/exit/quick_exit.lo.go obj/src/fcntl/creat.lo.go obj/src/fcntl/fcntl.lo.go obj/src/fcntl/open.lo.go obj/src/fcntl/openat.lo.go obj/src/fcntl/posix_fadvise.lo.go obj/src/fcntl/posix_fallocate.lo.go obj/src/fenv/__flt_rounds.lo.go obj/src/fenv/fegetexceptflag.lo.go obj/src/fenv/feholdexcept.lo.go obj/src/fenv/fesetexceptflag.lo.go obj/src/fenv/fesetround.lo.go obj/src/fenv/feupdateenv.lo.go obj/src/internal/defsysinfo.lo.go obj/src/internal/floatscan.lo.go obj/src/internal/intscan.lo.go obj/src/internal/libc.lo.go obj/src/internal/procfdname.lo.go obj/src/internal/shgetc.lo.go obj/src/internal/syscall_ret.lo.go obj/src/internal/vdso.lo.go obj/src/internal/version.lo.go obj/src/ipc/ftok.lo.go obj/src/ipc/msgctl.lo.go obj/src/ipc/msgget.lo.go obj/src/ipc/msgrcv.lo.go obj/src/ipc/msgsnd.lo.go obj/src/ipc/semctl.lo.go obj/src/ipc/semget.lo.go obj/src/ipc/semop.lo.go obj/src/ipc/semtimedop.lo.go obj/src/ipc/shmat.lo.go obj/src/ipc/shmctl.lo.go obj/src/ipc/shmdt.lo.go obj/src/ipc/shmget.lo.go obj/src/ldso/__dlsym.lo.go obj/src/ldso/dl_iterate_phdr.lo.go obj/src/ldso/dladdr.lo.go obj/src/ldso/dlclose.lo.go obj/src/ldso/dlerror.lo.go obj/src/ldso/dlinfo.lo.go obj/src/ldso/dlopen.lo.go obj/src/legacy/cuserid.lo.go obj/src/legacy/daemon.lo.go obj/src/legacy/err.lo.go obj/src/legacy/euidaccess.lo.go obj/src/legacy/ftw.lo.go obj/src/legacy/futimes.lo.go obj/src/legacy/getdtablesize.lo.go obj/src/legacy/getloadavg.lo.go obj/src/legacy/getpagesize.lo.go obj/src/legacy/getpass.lo.go obj/src/legacy/getusershell.lo.go obj/src/legacy/isastream.lo.go obj/src/legacy/lutimes.lo.go obj/src/legacy/ulimit.lo.go obj/src/legacy/utmpx.lo.go obj/src/legacy/valloc.lo.go obj/src/linux/adjtime.lo.go obj/src/linux/adjtimex.lo.go obj/src/linux/arch_prctl.lo.go obj/src/linux/brk.lo.go obj/src/linux/cache.lo.go obj/src/linux/cap.lo.go obj/src/linux/chroot.lo.go obj/src/linux/clock_adjtime.lo.go obj/src/linux/clone.lo.go obj/src/linux/copy_file_range.lo.go obj/src/linux/epoll.lo.go obj/src/linux/eventfd.lo.go obj/src/linux/fallocate.lo.go obj/src/linux/fanotify.lo.go obj/src/linux/flock.lo.go obj/src/linux/getdents.lo.go obj/src/linux/getrandom.lo.go obj/src/linux/gettid.lo.go obj/src/linux/inotify.lo.go obj/src/linux/ioperm.lo.go obj/src/linux/iopl.lo.go obj/src/linux/klogctl.lo.go obj/src/linux/membarrier.lo.go obj/src/linux/memfd_create.lo.go obj/src/linux/mlock2.lo.go obj/src/linux/module.lo.go obj/src/linux/mount.lo.go obj/src/linux/name_to_handle_at.lo.go obj/src/linux/open_by_handle_at.lo.go obj/src/linux/personality.lo.go obj/src/linux/pivot_root.lo.go obj/src/linux/ppoll.lo.go obj/src/linux/prctl.lo.go obj/src/linux/prlimit.lo.go obj/src/linux/process_vm.lo.go obj/src/linux/ptrace.lo.go obj/src/linux/quotactl.lo.go obj/src/linux/readahead.lo.go obj/src/linux/reboot.lo.go obj/src/linux/remap_file_pages.lo.go obj/src/linux/sbrk.lo.go obj/src/linux/sendfile.lo.go obj/src/linux/setfsgid.lo.go obj/src/linux/setfsuid.lo.go obj/src/linux/setgroups.lo.go obj/src/linux/sethostname.lo.go obj/src/linux/setns.lo.go obj/src/linux/settimeofday.lo.go obj/src/linux/signalfd.lo.go obj/src/linux/splice.lo.go obj/src/linux/stime.lo.go obj/src/linux/swap.lo.go obj/src/linux/sync_file_range.lo.go obj/src/linux/syncfs.lo.go obj/src/linux/sysinfo.lo.go obj/src/linux/tee.lo.go obj/src/linux/timerfd.lo.go obj/src/linux/unshare.lo.go obj/src/linux/utimes.lo.go obj/src/linux/vhangup.lo.go obj/src/linux/vmsplice.lo.go obj/src/linux/wait3.lo.go obj/src/linux/wait4.lo.go obj/src/linux/xattr.lo.go obj/src/locale/__lctrans.lo.go obj/src/locale/__mo_lookup.lo.go obj/src/locale/bind_textdomain_codeset.lo.go obj/src/locale/c_locale.lo.go obj/src/locale/catclose.lo.go obj/src/locale/catgets.lo.go obj/src/locale/catopen.lo.go obj/src/locale/dcngettext.lo.go obj/src/locale/duplocale.lo.go obj/src/locale/freelocale.lo.go obj/src/locale/iconv.lo.go obj/src/locale/iconv_close.lo.go obj/src/locale/langinfo.lo.go obj/src/locale/locale_map.lo.go obj/src/locale/localeconv.lo.go obj/src/locale/newlocale.lo.go obj/src/locale/pleval.lo.go obj/src/locale/setlocale.lo.go obj/src/locale/strcoll.lo.go obj/src/locale/strfmon.lo.go obj/src/locale/strtod_l.lo.go obj/src/locale/strxfrm.lo.go obj/src/locale/textdomain.lo.go obj/src/locale/uselocale.lo.go obj/src/locale/wcscoll.lo.go obj/src/locale/wcsxfrm.lo.go obj/src/malloc/calloc.lo.go obj/src/malloc/free.lo.go obj/src/malloc/libc_calloc.lo.go obj/src/malloc/lite_malloc.lo.go obj/src/malloc/mallocng/aligned_alloc.lo.go obj/src/malloc/mallocng/donate.lo.go obj/src/malloc/mallocng/free.lo.go obj/src/malloc/mallocng/malloc.lo.go obj/src/malloc/mallocng/malloc_usable_size.lo.go obj/src/malloc/mallocng/realloc.lo.go obj/src/malloc/memalign.lo.go obj/src/malloc/posix_memalign.lo.go obj/src/malloc/realloc.lo.go obj/src/malloc/reallocarray.lo.go obj/src/malloc/replaced.lo.go obj/src/math/__cos.lo.go obj/src/math/__cosdf.lo.go obj/src/math/__cosl.lo.go obj/src/math/__expo2.lo.go obj/src/math/__expo2f.lo.go obj/src/math/__fpclassify.lo.go obj/src/math/__fpclassifyf.lo.go obj/src/math/__fpclassifyl.lo.go obj/src/math/__math_divzero.lo.go obj/src/math/__math_divzerof.lo.go obj/src/math/__math_invalid.lo.go obj/src/math/__math_invalidf.lo.go obj/src/math/__math_invalidl.lo.go obj/src/math/__math_oflow.lo.go obj/src/math/__math_oflowf.lo.go obj/src/math/__math_uflow.lo.go obj/src/math/__math_uflowf.lo.go obj/src/math/__math_xflow.lo.go obj/src/math/__math_xflowf.lo.go obj/src/math/__polevll.lo.go obj/src/math/__rem_pio2.lo.go obj/src/math/__rem_pio2_large.lo.go obj/src/math/__rem_pio2f.lo.go obj/src/math/__rem_pio2l.lo.go obj/src/math/__signbit.lo.go obj/src/math/__signbitf.lo.go obj/src/math/__signbitl.lo.go obj/src/math/__sin.lo.go obj/src/math/__sindf.lo.go obj/src/math/__sinl.lo.go obj/src/math/__tan.lo.go obj/src/math/__tandf.lo.go obj/src/math/__tanl.lo.go obj/src/math/acos.lo.go obj/src/math/acosf.lo.go obj/src/math/acosh.lo.go obj/src/math/acoshf.lo.go obj/src/math/acoshl.lo.go obj/src/math/asin.lo.go obj/src/math/asinf.lo.go obj/src/math/asinh.lo.go obj/src/math/asinhf.lo.go obj/src/math/asinhl.lo.go obj/src/math/atan.lo.go obj/src/math/atan2.lo.go obj/src/math/atan2f.lo.go obj/src/math/atanf.lo.go obj/src/math/atanh.lo.go obj/src/math/atanhf.lo.go obj/src/math/atanhl.lo.go obj/src/math/cbrt.lo.go obj/src/math/cbrtf.lo.go obj/src/math/cbrtl.lo.go obj/src/math/ceil.lo.go obj/src/math/ceilf.lo.go obj/src/math/copysign.lo.go obj/src/math/copysignf.lo.go obj/src/math/copysignl.lo.go obj/src/math/cos.lo.go obj/src/math/cosf.lo.go obj/src/math/cosh.lo.go obj/src/math/coshf.lo.go obj/src/math/coshl.lo.go obj/src/math/cosl.lo.go obj/src/math/erf.lo.go obj/src/math/erff.lo.go obj/src/math/erfl.lo.go obj/src/math/exp.lo.go obj/src/math/exp10.lo.go obj/src/math/exp10f.lo.go obj/src/math/exp10l.lo.go obj/src/math/exp2.lo.go obj/src/math/exp2f.lo.go obj/src/math/exp2f_data.lo.go obj/src/math/exp_data.lo.go obj/src/math/expf.lo.go obj/src/math/expm1.lo.go obj/src/math/expm1f.lo.go obj/src/math/fdim.lo.go obj/src/math/fdimf.lo.go obj/src/math/fdiml.lo.go obj/src/math/finite.lo.go obj/src/math/finitef.lo.go obj/src/math/floor.lo.go obj/src/math/floorf.lo.go obj/src/math/fmal.lo.go obj/src/math/fmax.lo.go obj/src/math/fmaxf.lo.go obj/src/math/fmaxl.lo.go obj/src/math/fmin.lo.go obj/src/math/fminf.lo.go obj/src/math/fminl.lo.go obj/src/math/fmod.lo.go obj/src/math/fmodf.lo.go obj/src/math/frexp.lo.go obj/src/math/frexpf.lo.go obj/src/math/frexpl.lo.go obj/src/math/hypot.lo.go obj/src/math/hypotf.lo.go obj/src/math/hypotl.lo.go obj/src/math/ilogb.lo.go obj/src/math/ilogbf.lo.go obj/src/math/ilogbl.lo.go obj/src/math/j0.lo.go obj/src/math/j0f.lo.go obj/src/math/j1.lo.go obj/src/math/j1f.lo.go obj/src/math/jn.lo.go obj/src/math/jnf.lo.go obj/src/math/ldexp.lo.go obj/src/math/ldexpf.lo.go obj/src/math/ldexpl.lo.go obj/src/math/lgamma.lo.go obj/src/math/lgamma_r.lo.go obj/src/math/lgammaf.lo.go obj/src/math/lgammaf_r.lo.go obj/src/math/lgammal.lo.go obj/src/math/llround.lo.go obj/src/math/llroundf.lo.go obj/src/math/llroundl.lo.go obj/src/math/log.lo.go obj/src/math/log10.lo.go obj/src/math/log10f.lo.go obj/src/math/log1p.lo.go obj/src/math/log1pf.lo.go obj/src/math/log2.lo.go obj/src/math/log2_data.lo.go obj/src/math/log2f.lo.go obj/src/math/log2f_data.lo.go obj/src/math/log_data.lo.go obj/src/math/logb.lo.go obj/src/math/logbf.lo.go obj/src/math/logbl.lo.go obj/src/math/logf.lo.go obj/src/math/logf_data.lo.go obj/src/math/lround.lo.go obj/src/math/lroundf.lo.go obj/src/math/lroundl.lo.go obj/src/math/modf.lo.go obj/src/math/modff.lo.go obj/src/math/modfl.lo.go obj/src/math/nan.lo.go obj/src/math/nanf.lo.go obj/src/math/nanl.lo.go obj/src/math/nearbyint.lo.go obj/src/math/nearbyintf.lo.go obj/src/math/nearbyintl.lo.go obj/src/math/nextafter.lo.go obj/src/math/nextafterf.lo.go obj/src/math/nextafterl.lo.go obj/src/math/nexttoward.lo.go obj/src/math/nexttowardf.lo.go obj/src/math/nexttowardl.lo.go obj/src/math/pow.lo.go obj/src/math/pow_data.lo.go obj/src/math/powf.lo.go obj/src/math/powf_data.lo.go obj/src/math/powl.lo.go obj/src/math/remainder.lo.go obj/src/math/remainderf.lo.go obj/src/math/remquo.lo.go obj/src/math/remquof.lo.go obj/src/math/rint.lo.go obj/src/math/rintf.lo.go obj/src/math/round.lo.go obj/src/math/roundf.lo.go obj/src/math/roundl.lo.go obj/src/math/scalb.lo.go obj/src/math/scalbf.lo.go obj/src/math/scalbln.lo.go obj/src/math/scalblnf.lo.go obj/src/math/scalblnl.lo.go obj/src/math/scalbn.lo.go obj/src/math/scalbnf.lo.go obj/src/math/scalbnl.lo.go obj/src/math/signgam.lo.go obj/src/math/significand.lo.go obj/src/math/significandf.lo.go obj/src/math/sin.lo.go obj/src/math/sincos.lo.go obj/src/math/sincosf.lo.go obj/src/math/sincosl.lo.go obj/src/math/sinf.lo.go obj/src/math/sinh.lo.go obj/src/math/sinhf.lo.go obj/src/math/sinhl.lo.go obj/src/math/sinl.lo.go obj/src/math/sqrt_data.lo.go obj/src/math/tan.lo.go obj/src/math/tanf.lo.go obj/src/math/tanh.lo.go obj/src/math/tanhf.lo.go obj/src/math/tanhl.lo.go obj/src/math/tanl.lo.go obj/src/math/tgamma.lo.go obj/src/math/tgammaf.lo.go obj/src/math/tgammal.lo.go obj/src/math/trunc.lo.go obj/src/math/truncf.lo.go obj/src/math/x86_64/fabs.lo.go obj/src/math/x86_64/fabsf.lo.go obj/src/math/x86_64/fabsl.lo.go obj/src/math/x86_64/fma.lo.go obj/src/math/x86_64/fmaf.lo.go obj/src/math/x86_64/fmodl.lo.go obj/src/math/x86_64/llrint.lo.go obj/src/math/x86_64/llrintf.lo.go obj/src/math/x86_64/llrintl.lo.go obj/src/math/x86_64/lrint.lo.go obj/src/math/x86_64/lrintf.lo.go obj/src/math/x86_64/lrintl.lo.go obj/src/math/x86_64/remainderl.lo.go obj/src/math/x86_64/remquol.lo.go obj/src/math/x86_64/rintl.lo.go obj/src/math/x86_64/sqrt.lo.go obj/src/math/x86_64/sqrtf.lo.go obj/src/math/x86_64/sqrtl.lo.go obj/src/misc/a64l.lo.go obj/src/misc/basename.lo.go obj/src/misc/dirname.lo.go obj/src/misc/ffs.lo.go obj/src/misc/ffsl.lo.go obj/src/misc/ffsll.lo.go obj/src/misc/fmtmsg.lo.go obj/src/misc/forkpty.lo.go obj/src/misc/get_current_dir_name.lo.go obj/src/misc/getauxval.lo.go obj/src/misc/getdomainname.lo.go obj/src/misc/getentropy.lo.go obj/src/misc/gethostid.lo.go obj/src/misc/getopt.lo.go obj/src/misc/getopt_long.lo.go obj/src/misc/getpriority.lo.go obj/src/misc/getresgid.lo.go obj/src/misc/getresuid.lo.go obj/src/misc/getrlimit.lo.go obj/src/misc/getrusage.lo.go obj/src/misc/getsubopt.lo.go obj/src/misc/initgroups.lo.go obj/src/misc/ioctl.lo.go obj/src/misc/issetugid.lo.go obj/src/misc/lockf.lo.go obj/src/misc/login_tty.lo.go obj/src/misc/mntent.lo.go obj/src/misc/nftw.lo.go obj/src/misc/openpty.lo.go obj/src/misc/ptsname.lo.go obj/src/misc/pty.lo.go obj/src/misc/realpath.lo.go obj/src/misc/setdomainname.lo.go obj/src/misc/setpriority.lo.go obj/src/misc/setrlimit.lo.go obj/src/misc/syscall.lo.go obj/src/misc/syslog.lo.go obj/src/misc/uname.lo.go obj/src/misc/wordexp.lo.go obj/src/mman/madvise.lo.go obj/src/mman/mincore.lo.go obj/src/mman/mlock.lo.go obj/src/mman/mlockall.lo.go obj/src/mman/mmap.lo.go obj/src/mman/mprotect.lo.go obj/src/mman/mremap.lo.go obj/src/mman/msync.lo.go obj/src/mman/munlock.lo.go obj/src/mman/munlockall.lo.go obj/src/mman/munmap.lo.go obj/src/mman/posix_madvise.lo.go obj/src/mman/shm_open.lo.go obj/src/mq/mq_close.lo.go obj/src/mq/mq_getattr.lo.go obj/src/mq/mq_notify.lo.go obj/src/mq/mq_open.lo.go obj/src/mq/mq_receive.lo.go obj/src/mq/mq_send.lo.go obj/src/mq/mq_setattr.lo.go obj/src/mq/mq_timedreceive.lo.go obj/src/mq/mq_timedsend.lo.go obj/src/mq/mq_unlink.lo.go obj/src/multibyte/btowc.lo.go obj/src/multibyte/c16rtomb.lo.go obj/src/multibyte/c32rtomb.lo.go obj/src/multibyte/internal.lo.go obj/src/multibyte/mblen.lo.go obj/src/multibyte/mbrlen.lo.go obj/src/multibyte/mbrtoc16.lo.go obj/src/multibyte/mbrtoc32.lo.go obj/src/multibyte/mbrtowc.lo.go obj/src/multibyte/mbsinit.lo.go obj/src/multibyte/mbsnrtowcs.lo.go obj/src/multibyte/mbsrtowcs.lo.go obj/src/multibyte/mbstowcs.lo.go obj/src/multibyte/mbtowc.lo.go obj/src/multibyte/wcrtomb.lo.go obj/src/multibyte/wcsnrtombs.lo.go obj/src/multibyte/wcsrtombs.lo.go obj/src/multibyte/wcstombs.lo.go obj/src/multibyte/wctob.lo.go obj/src/multibyte/wctomb.lo.go obj/src/network/accept.lo.go obj/src/network/accept4.lo.go obj/src/network/bind.lo.go obj/src/network/connect.lo.go obj/src/network/dn_comp.lo.go obj/src/network/dn_expand.lo.go obj/src/network/dn_skipname.lo.go obj/src/network/dns_parse.lo.go obj/src/network/ent.lo.go obj/src/network/ether.lo.go obj/src/network/freeaddrinfo.lo.go obj/src/network/gai_strerror.lo.go obj/src/network/getaddrinfo.lo.go obj/src/network/gethostbyaddr.lo.go obj/src/network/gethostbyaddr_r.lo.go obj/src/network/gethostbyname.lo.go obj/src/network/gethostbyname2.lo.go obj/src/network/gethostbyname2_r.lo.go obj/src/network/gethostbyname_r.lo.go obj/src/network/getifaddrs.lo.go obj/src/network/getnameinfo.lo.go obj/src/network/getpeername.lo.go obj/src/network/getservbyname.lo.go obj/src/network/getservbyname_r.lo.go obj/src/network/getservbyport.lo.go obj/src/network/getservbyport_r.lo.go obj/src/network/getsockname.lo.go obj/src/network/getsockopt.lo.go obj/src/network/h_errno.lo.go obj/src/network/herror.lo.go obj/src/network/hstrerror.lo.go obj/src/network/htonl.lo.go obj/src/network/htons.lo.go obj/src/network/if_freenameindex.lo.go obj/src/network/if_indextoname.lo.go obj/src/network/if_nameindex.lo.go obj/src/network/if_nametoindex.lo.go obj/src/network/in6addr_any.lo.go obj/src/network/in6addr_loopback.lo.go obj/src/network/inet_addr.lo.go obj/src/network/inet_aton.lo.go obj/src/network/inet_legacy.lo.go obj/src/network/inet_ntoa.lo.go obj/src/network/inet_ntop.lo.go obj/src/network/inet_pton.lo.go obj/src/network/listen.lo.go obj/src/network/lookup_ipliteral.lo.go obj/src/network/lookup_name.lo.go obj/src/network/lookup_serv.lo.go obj/src/network/netlink.lo.go obj/src/network/netname.lo.go obj/src/network/ns_parse.lo.go obj/src/network/ntohl.lo.go obj/src/network/ntohs.lo.go obj/src/network/proto.lo.go obj/src/network/recv.lo.go obj/src/network/recvfrom.lo.go obj/src/network/recvmmsg.lo.go obj/src/network/recvmsg.lo.go obj/src/network/res_init.lo.go obj/src/network/res_mkquery.lo.go obj/src/network/res_msend.lo.go obj/src/network/res_query.lo.go obj/src/network/res_querydomain.lo.go obj/src/network/res_send.lo.go obj/src/network/res_state.lo.go obj/src/network/resolvconf.lo.go obj/src/network/send.lo.go obj/src/network/sendmmsg.lo.go obj/src/network/sendmsg.lo.go obj/src/network/sendto.lo.go obj/src/network/serv.lo.go obj/src/network/setsockopt.lo.go obj/src/network/shutdown.lo.go obj/src/network/sockatmark.lo.go obj/src/network/socket.lo.go obj/src/network/socketpair.lo.go obj/src/passwd/fgetgrent.lo.go obj/src/passwd/fgetpwent.lo.go obj/src/passwd/fgetspent.lo.go obj/src/passwd/getgr_a.lo.go obj/src/passwd/getgr_r.lo.go obj/src/passwd/getgrent.lo.go obj/src/passwd/getgrent_a.lo.go obj/src/passwd/getgrouplist.lo.go obj/src/passwd/getpw_a.lo.go obj/src/passwd/getpw_r.lo.go obj/src/passwd/getpwent.lo.go obj/src/passwd/getpwent_a.lo.go obj/src/passwd/getspent.lo.go obj/src/passwd/getspnam.lo.go obj/src/passwd/getspnam_r.lo.go obj/src/passwd/lckpwdf.lo.go obj/src/passwd/nscd_query.lo.go obj/src/passwd/putgrent.lo.go obj/src/passwd/putpwent.lo.go obj/src/passwd/putspent.lo.go obj/src/prng/__rand48_step.lo.go obj/src/prng/__seed48.lo.go obj/src/prng/drand48.lo.go obj/src/prng/lcong48.lo.go obj/src/prng/lrand48.lo.go obj/src/prng/mrand48.lo.go obj/src/prng/rand.lo.go obj/src/prng/rand_r.lo.go obj/src/prng/random.lo.go obj/src/prng/seed48.lo.go obj/src/prng/srand48.lo.go obj/src/process/_Fork.lo.go obj/src/process/execl.lo.go obj/src/process/execle.lo.go obj/src/process/execlp.lo.go obj/src/process/execv.lo.go obj/src/process/execve.lo.go obj/src/process/execvp.lo.go obj/src/process/fexecve.lo.go obj/src/process/fork.lo.go obj/src/process/posix_spawn.lo.go obj/src/process/posix_spawn_file_actions_addchdir.lo.go obj/src/process/posix_spawn_file_actions_addclose.lo.go obj/src/process/posix_spawn_file_actions_adddup2.lo.go obj/src/process/posix_spawn_file_actions_addfchdir.lo.go obj/src/process/posix_spawn_file_actions_addopen.lo.go obj/src/process/posix_spawn_file_actions_destroy.lo.go obj/src/process/posix_spawn_file_actions_init.lo.go obj/src/process/posix_spawnattr_destroy.lo.go obj/src/process/posix_spawnattr_getflags.lo.go obj/src/process/posix_spawnattr_getpgroup.lo.go obj/src/process/posix_spawnattr_getsigdefault.lo.go obj/src/process/posix_spawnattr_getsigmask.lo.go obj/src/process/posix_spawnattr_init.lo.go obj/src/process/posix_spawnattr_sched.lo.go obj/src/process/posix_spawnattr_setflags.lo.go obj/src/process/posix_spawnattr_setpgroup.lo.go obj/src/process/posix_spawnattr_setsigdefault.lo.go obj/src/process/posix_spawnattr_setsigmask.lo.go obj/src/process/posix_spawnp.lo.go obj/src/process/system.lo.go obj/src/process/wait.lo.go obj/src/process/waitid.lo.go obj/src/process/waitpid.lo.go obj/src/regex/fnmatch.lo.go obj/src/regex/glob.lo.go obj/src/regex/regcomp.lo.go obj/src/regex/regerror.lo.go obj/src/regex/regexec.lo.go obj/src/regex/tre-mem.lo.go obj/src/sched/affinity.lo.go obj/src/sched/sched_cpucount.lo.go obj/src/sched/sched_get_priority_max.lo.go obj/src/sched/sched_getcpu.lo.go obj/src/sched/sched_getparam.lo.go obj/src/sched/sched_getscheduler.lo.go obj/src/sched/sched_rr_get_interval.lo.go obj/src/sched/sched_setparam.lo.go obj/src/sched/sched_setscheduler.lo.go obj/src/sched/sched_yield.lo.go obj/src/search/hsearch.lo.go obj/src/search/insque.lo.go obj/src/search/lsearch.lo.go obj/src/search/tdelete.lo.go obj/src/search/tdestroy.lo.go obj/src/search/tfind.lo.go obj/src/search/tsearch.lo.go obj/src/search/twalk.lo.go obj/src/select/poll.lo.go obj/src/select/pselect.lo.go obj/src/select/select.lo.go obj/src/signal/block.lo.go obj/src/signal/getitimer.lo.go obj/src/signal/kill.lo.go obj/src/signal/killpg.lo.go obj/src/signal/psiginfo.lo.go obj/src/signal/psignal.lo.go obj/src/signal/raise.lo.go obj/src/signal/setitimer.lo.go obj/src/signal/sigaction.lo.go obj/src/signal/sigaddset.lo.go obj/src/signal/sigaltstack.lo.go obj/src/signal/sigandset.lo.go obj/src/signal/sigdelset.lo.go obj/src/signal/sigemptyset.lo.go obj/src/signal/sigfillset.lo.go obj/src/signal/sighold.lo.go obj/src/signal/sigignore.lo.go obj/src/signal/siginterrupt.lo.go obj/src/signal/sigisemptyset.lo.go obj/src/signal/sigismember.lo.go obj/src/signal/siglongjmp.lo.go obj/src/signal/signal.lo.go obj/src/signal/sigorset.lo.go obj/src/signal/sigpause.lo.go obj/src/signal/sigpending.lo.go obj/src/signal/sigprocmask.lo.go obj/src/signal/sigqueue.lo.go obj/src/signal/sigrelse.lo.go obj/src/signal/sigrtmax.lo.go obj/src/signal/sigrtmin.lo.go obj/src/signal/sigset.lo.go obj/src/signal/sigsetjmp_tail.lo.go obj/src/signal/sigsuspend.lo.go obj/src/signal/sigtimedwait.lo.go obj/src/signal/sigwait.lo.go obj/src/signal/sigwaitinfo.lo.go obj/src/stat/__xstat.lo.go obj/src/stat/chmod.lo.go obj/src/stat/fchmod.lo.go obj/src/stat/fchmodat.lo.go obj/src/stat/fstat.lo.go obj/src/stat/fstatat.lo.go obj/src/stat/futimens.lo.go obj/src/stat/futimesat.lo.go obj/src/stat/lchmod.lo.go obj/src/stat/lstat.lo.go obj/src/stat/mkdir.lo.go obj/src/stat/mkdirat.lo.go obj/src/stat/mkfifo.lo.go obj/src/stat/mkfifoat.lo.go obj/src/stat/mknod.lo.go obj/src/stat/mknodat.lo.go obj/src/stat/stat.lo.go obj/src/stat/statvfs.lo.go obj/src/stat/umask.lo.go obj/src/stat/utimensat.lo.go obj/src/stdio/__fclose_ca.lo.go obj/src/stdio/__fdopen.lo.go obj/src/stdio/__fmodeflags.lo.go obj/src/stdio/__fopen_rb_ca.lo.go obj/src/stdio/__lockfile.lo.go obj/src/stdio/__overflow.lo.go obj/src/stdio/__stdio_close.lo.go obj/src/stdio/__stdio_exit.lo.go obj/src/stdio/__stdio_read.lo.go obj/src/stdio/__stdio_seek.lo.go obj/src/stdio/__stdio_write.lo.go obj/src/stdio/__stdout_write.lo.go obj/src/stdio/__toread.lo.go obj/src/stdio/__towrite.lo.go obj/src/stdio/__uflow.lo.go obj/src/stdio/asprintf.lo.go obj/src/stdio/clearerr.lo.go obj/src/stdio/dprintf.lo.go obj/src/stdio/ext.lo.go obj/src/stdio/ext2.lo.go obj/src/stdio/fclose.lo.go obj/src/stdio/feof.lo.go obj/src/stdio/ferror.lo.go obj/src/stdio/fflush.lo.go obj/src/stdio/fgetc.lo.go obj/src/stdio/fgetln.lo.go obj/src/stdio/fgetpos.lo.go obj/src/stdio/fgets.lo.go obj/src/stdio/fgetwc.lo.go obj/src/stdio/fgetws.lo.go obj/src/stdio/fileno.lo.go obj/src/stdio/flockfile.lo.go obj/src/stdio/fmemopen.lo.go obj/src/stdio/fopen.lo.go obj/src/stdio/fopencookie.lo.go obj/src/stdio/fprintf.lo.go obj/src/stdio/fputc.lo.go obj/src/stdio/fputs.lo.go obj/src/stdio/fputwc.lo.go obj/src/stdio/fputws.lo.go obj/src/stdio/fread.lo.go obj/src/stdio/freopen.lo.go obj/src/stdio/fscanf.lo.go obj/src/stdio/fseek.lo.go obj/src/stdio/fsetpos.lo.go obj/src/stdio/ftell.lo.go obj/src/stdio/ftrylockfile.lo.go obj/src/stdio/funlockfile.lo.go obj/src/stdio/fwide.lo.go obj/src/stdio/fwprintf.lo.go obj/src/stdio/fwrite.lo.go obj/src/stdio/fwscanf.lo.go obj/src/stdio/getc.lo.go obj/src/stdio/getc_unlocked.lo.go obj/src/stdio/getchar.lo.go obj/src/stdio/getchar_unlocked.lo.go obj/src/stdio/getdelim.lo.go obj/src/stdio/getline.lo.go obj/src/stdio/gets.lo.go obj/src/stdio/getw.lo.go obj/src/stdio/getwc.lo.go obj/src/stdio/getwchar.lo.go obj/src/stdio/ofl.lo.go obj/src/stdio/ofl_add.lo.go obj/src/stdio/open_memstream.lo.go obj/src/stdio/open_wmemstream.lo.go obj/src/stdio/pclose.lo.go obj/src/stdio/perror.lo.go obj/src/stdio/popen.lo.go obj/src/stdio/printf.lo.go obj/src/stdio/putc.lo.go obj/src/stdio/putc_unlocked.lo.go obj/src/stdio/putchar.lo.go obj/src/stdio/putchar_unlocked.lo.go obj/src/stdio/puts.lo.go obj/src/stdio/putw.lo.go obj/src/stdio/putwc.lo.go obj/src/stdio/putwchar.lo.go obj/src/stdio/remove.lo.go obj/src/stdio/rename.lo.go obj/src/stdio/rewind.lo.go obj/src/stdio/scanf.lo.go obj/src/stdio/setbuf.lo.go obj/src/stdio/setbuffer.lo.go obj/src/stdio/setlinebuf.lo.go obj/src/stdio/setvbuf.lo.go obj/src/stdio/snprintf.lo.go obj/src/stdio/sprintf.lo.go obj/src/stdio/sscanf.lo.go obj/src/stdio/stderr.lo.go obj/src/stdio/stdin.lo.go obj/src/stdio/stdout.lo.go obj/src/stdio/swprintf.lo.go obj/src/stdio/swscanf.lo.go obj/src/stdio/tempnam.lo.go obj/src/stdio/tmpfile.lo.go obj/src/stdio/tmpnam.lo.go obj/src/stdio/ungetc.lo.go obj/src/stdio/ungetwc.lo.go obj/src/stdio/vasprintf.lo.go obj/src/stdio/vdprintf.lo.go obj/src/stdio/vfprintf.lo.go obj/src/stdio/vfscanf.lo.go obj/src/stdio/vfwprintf.lo.go obj/src/stdio/vfwscanf.lo.go obj/src/stdio/vprintf.lo.go obj/src/stdio/vscanf.lo.go obj/src/stdio/vsnprintf.lo.go obj/src/stdio/vsprintf.lo.go obj/src/stdio/vsscanf.lo.go obj/src/stdio/vswprintf.lo.go obj/src/stdio/vswscanf.lo.go obj/src/stdio/vwprintf.lo.go obj/src/stdio/vwscanf.lo.go obj/src/stdio/wprintf.lo.go obj/src/stdio/wscanf.lo.go obj/src/stdlib/abs.lo.go obj/src/stdlib/atof.lo.go obj/src/stdlib/atoi.lo.go obj/src/stdlib/atol.lo.go obj/src/stdlib/atoll.lo.go obj/src/stdlib/bsearch.lo.go obj/src/stdlib/div.lo.go obj/src/stdlib/ecvt.lo.go obj/src/stdlib/fcvt.lo.go obj/src/stdlib/gcvt.lo.go obj/src/stdlib/imaxabs.lo.go obj/src/stdlib/imaxdiv.lo.go obj/src/stdlib/labs.lo.go obj/src/stdlib/ldiv.lo.go obj/src/stdlib/llabs.lo.go obj/src/stdlib/lldiv.lo.go obj/src/stdlib/qsort.lo.go obj/src/stdlib/qsort_nr.lo.go obj/src/stdlib/strtod.lo.go obj/src/stdlib/strtol.lo.go obj/src/stdlib/wcstod.lo.go obj/src/stdlib/wcstol.lo.go obj/src/string/bcmp.lo.go obj/src/string/bcopy.lo.go obj/src/string/bzero.lo.go obj/src/string/explicit_bzero.lo.go obj/src/string/index.lo.go obj/src/string/memccpy.lo.go obj/src/string/memchr.lo.go obj/src/string/memcmp.lo.go obj/src/string/memmem.lo.go obj/src/string/mempcpy.lo.go obj/src/string/memrchr.lo.go obj/src/string/rindex.lo.go obj/src/string/stpcpy.lo.go obj/src/string/stpncpy.lo.go obj/src/string/strcasecmp.lo.go obj/src/string/strcasestr.lo.go obj/src/string/strcat.lo.go obj/src/string/strchr.lo.go obj/src/string/strchrnul.lo.go obj/src/string/strcmp.lo.go obj/src/string/strcpy.lo.go obj/src/string/strcspn.lo.go obj/src/string/strdup.lo.go obj/src/string/strerror_r.lo.go obj/src/string/strlcat.lo.go obj/src/string/strlcpy.lo.go obj/src/string/strlen.lo.go obj/src/string/strncasecmp.lo.go obj/src/string/strncat.lo.go obj/src/string/strncmp.lo.go obj/src/string/strncpy.lo.go obj/src/string/strndup.lo.go obj/src/string/strnlen.lo.go obj/src/string/strpbrk.lo.go obj/src/string/strrchr.lo.go obj/src/string/strsep.lo.go obj/src/string/strsignal.lo.go obj/src/string/strspn.lo.go obj/src/string/strstr.lo.go obj/src/string/strtok.lo.go obj/src/string/strtok_r.lo.go obj/src/string/strverscmp.lo.go obj/src/string/swab.lo.go obj/src/string/wcpcpy.lo.go obj/src/string/wcpncpy.lo.go obj/src/string/wcscasecmp.lo.go obj/src/string/wcscasecmp_l.lo.go obj/src/string/wcscat.lo.go obj/src/string/wcschr.lo.go obj/src/string/wcscmp.lo.go obj/src/string/wcscpy.lo.go obj/src/string/wcscspn.lo.go obj/src/string/wcsdup.lo.go obj/src/string/wcslen.lo.go obj/src/string/wcsncasecmp.lo.go obj/src/string/wcsncasecmp_l.lo.go obj/src/string/wcsncat.lo.go obj/src/string/wcsncmp.lo.go obj/src/string/wcsncpy.lo.go obj/src/string/wcsnlen.lo.go obj/src/string/wcspbrk.lo.go obj/src/string/wcsrchr.lo.go obj/src/string/wcsspn.lo.go obj/src/string/wcsstr.lo.go obj/src/string/wcstok.lo.go obj/src/string/wcswcs.lo.go obj/src/string/wmemchr.lo.go obj/src/string/wmemcmp.lo.go obj/src/string/wmemcpy.lo.go obj/src/string/wmemmove.lo.go obj/src/string/wmemset.lo.go obj/src/temp/__randname.lo.go obj/src/temp/mkdtemp.lo.go obj/src/temp/mkostemp.lo.go obj/src/temp/mkostemps.lo.go obj/src/temp/mkstemp.lo.go obj/src/temp/mkstemps.lo.go obj/src/temp/mktemp.lo.go obj/src/termios/cfgetospeed.lo.go obj/src/termios/cfmakeraw.lo.go obj/src/termios/cfsetospeed.lo.go obj/src/termios/tcdrain.lo.go obj/src/termios/tcflow.lo.go obj/src/termios/tcflush.lo.go obj/src/termios/tcgetattr.lo.go obj/src/termios/tcgetsid.lo.go obj/src/termios/tcgetwinsize.lo.go obj/src/termios/tcsendbreak.lo.go obj/src/termios/tcsetattr.lo.go obj/src/termios/tcsetwinsize.lo.go obj/src/thread/__lock.lo.go obj/src/thread/__syscall_cp.lo.go obj/src/thread/__timedwait.lo.go obj/src/thread/__tls_get_addr.lo.go obj/src/thread/__wait.lo.go obj/src/thread/call_once.lo.go obj/src/thread/cnd_broadcast.lo.go obj/src/thread/cnd_destroy.lo.go obj/src/thread/cnd_init.lo.go obj/src/thread/cnd_signal.lo.go obj/src/thread/cnd_timedwait.lo.go obj/src/thread/cnd_wait.lo.go obj/src/thread/default_attr.lo.go obj/src/thread/lock_ptc.lo.go obj/src/thread/mtx_destroy.lo.go obj/src/thread/mtx_init.lo.go obj/src/thread/mtx_lock.lo.go obj/src/thread/mtx_timedlock.lo.go obj/src/thread/mtx_trylock.lo.go obj/src/thread/mtx_unlock.lo.go obj/src/thread/pthread_atfork.lo.go obj/src/thread/pthread_attr_destroy.lo.go obj/src/thread/pthread_attr_get.lo.go obj/src/thread/pthread_attr_init.lo.go obj/src/thread/pthread_attr_setdetachstate.lo.go obj/src/thread/pthread_attr_setguardsize.lo.go obj/src/thread/pthread_attr_setinheritsched.lo.go obj/src/thread/pthread_attr_setschedparam.lo.go obj/src/thread/pthread_attr_setschedpolicy.lo.go obj/src/thread/pthread_attr_setscope.lo.go obj/src/thread/pthread_attr_setstack.lo.go obj/src/thread/pthread_attr_setstacksize.lo.go obj/src/thread/pthread_barrier_destroy.lo.go obj/src/thread/pthread_barrier_init.lo.go obj/src/thread/pthread_barrier_wait.lo.go obj/src/thread/pthread_barrierattr_destroy.lo.go obj/src/thread/pthread_barrierattr_init.lo.go obj/src/thread/pthread_barrierattr_setpshared.lo.go obj/src/thread/pthread_cancel.lo.go obj/src/thread/pthread_cleanup_push.lo.go obj/src/thread/pthread_cond_broadcast.lo.go obj/src/thread/pthread_cond_destroy.lo.go obj/src/thread/pthread_cond_init.lo.go obj/src/thread/pthread_cond_signal.lo.go obj/src/thread/pthread_cond_timedwait.lo.go obj/src/thread/pthread_cond_wait.lo.go obj/src/thread/pthread_condattr_destroy.lo.go obj/src/thread/pthread_condattr_init.lo.go obj/src/thread/pthread_condattr_setclock.lo.go obj/src/thread/pthread_condattr_setpshared.lo.go obj/src/thread/pthread_create.lo.go obj/src/thread/pthread_detach.lo.go obj/src/thread/pthread_equal.lo.go obj/src/thread/pthread_getattr_np.lo.go obj/src/thread/pthread_getconcurrency.lo.go obj/src/thread/pthread_getcpuclockid.lo.go obj/src/thread/pthread_getname_np.lo.go obj/src/thread/pthread_getschedparam.lo.go obj/src/thread/pthread_getspecific.lo.go obj/src/thread/pthread_join.lo.go obj/src/thread/pthread_key_create.lo.go obj/src/thread/pthread_kill.lo.go obj/src/thread/pthread_mutex_consistent.lo.go obj/src/thread/pthread_mutex_destroy.lo.go obj/src/thread/pthread_mutex_getprioceiling.lo.go obj/src/thread/pthread_mutex_init.lo.go obj/src/thread/pthread_mutex_lock.lo.go obj/src/thread/pthread_mutex_setprioceiling.lo.go obj/src/thread/pthread_mutex_timedlock.lo.go obj/src/thread/pthread_mutex_trylock.lo.go obj/src/thread/pthread_mutex_unlock.lo.go obj/src/thread/pthread_mutexattr_destroy.lo.go obj/src/thread/pthread_mutexattr_init.lo.go obj/src/thread/pthread_mutexattr_setprotocol.lo.go obj/src/thread/pthread_mutexattr_setpshared.lo.go obj/src/thread/pthread_mutexattr_setrobust.lo.go obj/src/thread/pthread_mutexattr_settype.lo.go obj/src/thread/pthread_once.lo.go obj/src/thread/pthread_rwlock_destroy.lo.go obj/src/thread/pthread_rwlock_init.lo.go obj/src/thread/pthread_rwlock_rdlock.lo.go obj/src/thread/pthread_rwlock_timedrdlock.lo.go obj/src/thread/pthread_rwlock_timedwrlock.lo.go obj/src/thread/pthread_rwlock_tryrdlock.lo.go obj/src/thread/pthread_rwlock_trywrlock.lo.go obj/src/thread/pthread_rwlock_unlock.lo.go obj/src/thread/pthread_rwlock_wrlock.lo.go obj/src/thread/pthread_rwlockattr_destroy.lo.go obj/src/thread/pthread_rwlockattr_init.lo.go obj/src/thread/pthread_rwlockattr_setpshared.lo.go obj/src/thread/pthread_self.lo.go obj/src/thread/pthread_setattr_default_np.lo.go obj/src/thread/pthread_setcancelstate.lo.go obj/src/thread/pthread_setcanceltype.lo.go obj/src/thread/pthread_setconcurrency.lo.go obj/src/thread/pthread_setname_np.lo.go obj/src/thread/pthread_setschedparam.lo.go obj/src/thread/pthread_setschedprio.lo.go obj/src/thread/pthread_setspecific.lo.go obj/src/thread/pthread_sigmask.lo.go obj/src/thread/pthread_spin_destroy.lo.go obj/src/thread/pthread_spin_init.lo.go obj/src/thread/pthread_spin_lock.lo.go obj/src/thread/pthread_spin_trylock.lo.go obj/src/thread/pthread_spin_unlock.lo.go obj/src/thread/pthread_testcancel.lo.go obj/src/thread/sem_destroy.lo.go obj/src/thread/sem_getvalue.lo.go obj/src/thread/sem_init.lo.go obj/src/thread/sem_open.lo.go obj/src/thread/sem_post.lo.go obj/src/thread/sem_timedwait.lo.go obj/src/thread/sem_trywait.lo.go obj/src/thread/sem_unlink.lo.go obj/src/thread/sem_wait.lo.go obj/src/thread/synccall.lo.go obj/src/thread/thrd_create.lo.go obj/src/thread/thrd_exit.lo.go obj/src/thread/thrd_join.lo.go obj/src/thread/thrd_sleep.lo.go obj/src/thread/thrd_yield.lo.go obj/src/thread/tls.lo.go obj/src/thread/tss_create.lo.go obj/src/thread/tss_delete.lo.go obj/src/thread/tss_set.lo.go obj/src/thread/vmlock.lo.go obj/src/time/__map_file.lo.go obj/src/time/__month_to_secs.lo.go obj/src/time/__secs_to_tm.lo.go obj/src/time/__tm_to_secs.lo.go obj/src/time/__tz.lo.go obj/src/time/__year_to_secs.lo.go obj/src/time/asctime.lo.go obj/src/time/asctime_r.lo.go obj/src/time/clock.lo.go obj/src/time/clock_getcpuclockid.lo.go obj/src/time/clock_getres.lo.go obj/src/time/clock_gettime.lo.go obj/src/time/clock_nanosleep.lo.go obj/src/time/clock_settime.lo.go obj/src/time/ctime.lo.go obj/src/time/ctime_r.lo.go obj/src/time/difftime.lo.go obj/src/time/ftime.lo.go obj/src/time/getdate.lo.go obj/src/time/gettimeofday.lo.go obj/src/time/gmtime.lo.go obj/src/time/gmtime_r.lo.go obj/src/time/localtime.lo.go obj/src/time/localtime_r.lo.go obj/src/time/mktime.lo.go obj/src/time/nanosleep.lo.go obj/src/time/strftime.lo.go obj/src/time/strptime.lo.go obj/src/time/time.lo.go obj/src/time/timegm.lo.go obj/src/time/timer_create.lo.go obj/src/time/timer_delete.lo.go obj/src/time/timer_getoverrun.lo.go obj/src/time/timer_gettime.lo.go obj/src/time/timer_settime.lo.go obj/src/time/times.lo.go obj/src/time/timespec_get.lo.go obj/src/time/utime.lo.go obj/src/time/wcsftime.lo.go obj/src/unistd/_exit.lo.go obj/src/unistd/access.lo.go obj/src/unistd/acct.lo.go obj/src/unistd/alarm.lo.go obj/src/unistd/chdir.lo.go obj/src/unistd/chown.lo.go obj/src/unistd/close.lo.go obj/src/unistd/ctermid.lo.go obj/src/unistd/dup.lo.go obj/src/unistd/dup2.lo.go obj/src/unistd/dup3.lo.go obj/src/unistd/faccessat.lo.go obj/src/unistd/fchdir.lo.go obj/src/unistd/fchown.lo.go obj/src/unistd/fchownat.lo.go obj/src/unistd/fdatasync.lo.go obj/src/unistd/fsync.lo.go obj/src/unistd/ftruncate.lo.go obj/src/unistd/getcwd.lo.go obj/src/unistd/getegid.lo.go obj/src/unistd/geteuid.lo.go obj/src/unistd/getgid.lo.go obj/src/unistd/getgroups.lo.go obj/src/unistd/gethostname.lo.go obj/src/unistd/getlogin.lo.go obj/src/unistd/getlogin_r.lo.go obj/src/unistd/getpgid.lo.go obj/src/unistd/getpgrp.lo.go obj/src/unistd/getpid.lo.go obj/src/unistd/getppid.lo.go obj/src/unistd/getsid.lo.go obj/src/unistd/getuid.lo.go obj/src/unistd/isatty.lo.go obj/src/unistd/lchown.lo.go obj/src/unistd/link.lo.go obj/src/unistd/linkat.lo.go obj/src/unistd/lseek.lo.go obj/src/unistd/nice.lo.go obj/src/unistd/pause.lo.go obj/src/unistd/pipe.lo.go obj/src/unistd/pipe2.lo.go obj/src/unistd/posix_close.lo.go obj/src/unistd/pread.lo.go obj/src/unistd/preadv.lo.go obj/src/unistd/pwrite.lo.go obj/src/unistd/pwritev.lo.go obj/src/unistd/read.lo.go obj/src/unistd/readlink.lo.go obj/src/unistd/readlinkat.lo.go obj/src/unistd/readv.lo.go obj/src/unistd/renameat.lo.go obj/src/unistd/rmdir.lo.go obj/src/unistd/setegid.lo.go obj/src/unistd/seteuid.lo.go obj/src/unistd/setgid.lo.go obj/src/unistd/setpgid.lo.go obj/src/unistd/setpgrp.lo.go obj/src/unistd/setregid.lo.go obj/src/unistd/setresgid.lo.go obj/src/unistd/setresuid.lo.go obj/src/unistd/setreuid.lo.go obj/src/unistd/setsid.lo.go obj/src/unistd/setuid.lo.go obj/src/unistd/setxid.lo.go obj/src/unistd/sleep.lo.go obj/src/unistd/symlink.lo.go obj/src/unistd/symlinkat.lo.go obj/src/unistd/sync.lo.go obj/src/unistd/tcgetpgrp.lo.go obj/src/unistd/tcsetpgrp.lo.go obj/src/unistd/truncate.lo.go obj/src/unistd/ttyname.lo.go obj/src/unistd/ttyname_r.lo.go obj/src/unistd/ualarm.lo.go obj/src/unistd/unlink.lo.go obj/src/unistd/unlinkat.lo.go obj/src/unistd/usleep.lo.go obj/src/unistd/write.lo.go obj/src/unistd/writev.lo.go obj/ldso/dlstart.lo.go obj/ldso/dynlink.lo.go', DO NOT EDIT.
 
 //go:build linux && amd64
 // +build linux,amd64
@@ -150901,6 +150901,3079 @@ func x_writev(tls *TLS, fd int32, iov uintptr, count int32) (r int64) {
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(20), int64(fd), int64(iov), int64(count), 0, 0, 0)))
 }
 
+const m_AT_BASE = 7
+const m_AUX_CNT1 = 32
+const m_DT_MIPS_LOCAL_GOTNO = 1879048202
+const m_DT_PLTGOT = 3
+const m_DT_REL = 17
+const m_DT_RELA = 7
+const m_DT_RELASZ = 8
+const m_DT_RELR = 36
+const m_DT_RELRSZ = 35
+const m_DT_RELSZ = 18
+const m_DYN_CNT = 37
+const m_NEED_MIPS_GOT_RELOCS = 0
+const m_R_X86_64_RELATIVE = 8
+
+func x__dlstart_c(tls *TLS, sp uintptr, dynv uintptr) {
+	var argc int32
+	var argv, auxv, dls2, got, ph, rel, rel_addr, rel_addr1, relr_addr, v8 uintptr
+	var aux [32]uint64
+	var base, bitmap, i, i1, local_cnt, phentsize, phnum, rel_size, v3 uint64
+	var dyn [37]uint64
+	argc = int32(*(*uint64)(unsafe.Pointer(sp)))
+	argv = sp + UintptrFromInt32(1)*8
+	for i = uint64(argc + int32(1)); *(*uintptr)(unsafe.Pointer(argv + uintptr(i)*8)) != 0; i++ {
+	}
+	auxv = argv + uintptr(i)*8 + UintptrFromInt32(1)*8
+	for i = uint64(0); i < uint64(m_AUX_CNT1); i++ {
+		aux[i] = uint64(0)
+	}
+	for i = uint64(0); *(*uint64)(unsafe.Pointer(auxv + uintptr(i)*8)) != 0; {
+		if *(*uint64)(unsafe.Pointer(auxv + uintptr(i)*8)) < uint64(m_AUX_CNT1) {
+			aux[*(*uint64)(unsafe.Pointer(auxv + uintptr(i)*8))] = *(*uint64)(unsafe.Pointer(auxv + uintptr(i+uint64(1))*8))
+		}
+		goto _1
+	_1:
+		i += uint64(2)
+	}
+	for i = uint64(0); i < uint64(m_DYN_CNT); i++ {
+		dyn[i] = uint64(0)
+	}
+	for i = uint64(0); *(*uint64)(unsafe.Pointer(dynv + uintptr(i)*8)) != 0; {
+		if *(*uint64)(unsafe.Pointer(dynv + uintptr(i)*8)) < uint64(m_DYN_CNT) {
+			dyn[*(*uint64)(unsafe.Pointer(dynv + uintptr(i)*8))] = *(*uint64)(unsafe.Pointer(dynv + uintptr(i+uint64(1))*8))
+		}
+		goto _2
+	_2:
+		i += uint64(2)
+	}
+	/* If the dynamic linker is invoked as a command, its load
+	 * address is not available in the aux vector. Instead, compute
+	 * the load address as the difference between &_DYNAMIC and the
+	 * virtual address in the PT_DYNAMIC program header. */
+	base = aux[int32(m_AT_BASE)]
+	if !(base != 0) {
+		phnum = aux[int32(m_AT_PHNUM)]
+		phentsize = aux[int32(m_AT_PHENT)]
+		ph = uintptr(aux[int32(m_AT_PHDR)])
+		for i = phnum; ; ph = ph + uintptr(phentsize) {
+			v3 = i
+			i--
+			if !(v3 != 0) {
+				break
+			}
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_type == uint32(m_PT_DYNAMIC) {
+				base = uint64(dynv) - (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr
+				break
+			}
+		}
+	}
+	/* MIPS uses an ugly packed form for GOT relocations. Since we
+	 * can't make function calls yet and the code is tiny anyway,
+	 * it's simply inlined here. */
+	if m_NEED_MIPS_GOT_RELOCS != 0 {
+		local_cnt = uint64(0)
+		got = uintptr(base + dyn[int32(m_DT_PLTGOT)])
+		for i = uint64(0); *(*uint64)(unsafe.Pointer(dynv + uintptr(i)*8)) != 0; {
+			if *(*uint64)(unsafe.Pointer(dynv + uintptr(i)*8)) == uint64(m_DT_MIPS_LOCAL_GOTNO) {
+				local_cnt = *(*uint64)(unsafe.Pointer(dynv + uintptr(i+uint64(1))*8))
+			}
+			goto _4
+		_4:
+			i += uint64(2)
+		}
+		for i = uint64(0); i < local_cnt; i++ {
+			*(*uint64)(unsafe.Pointer(got + uintptr(i)*8)) += base
+		}
+	}
+	rel = uintptr(base + dyn[int32(m_DT_REL)])
+	rel_size = dyn[int32(m_DT_RELSZ)]
+	for rel_size != 0 {
+		if !(*(*uint64)(unsafe.Pointer(rel + 1*8))&uint64(0x7fffffff) == uint64(m_R_X86_64_RELATIVE) || *(*uint64)(unsafe.Pointer(rel + 1*8))&uint64(0x7fffffff) == Uint64FromInt32(_REL_SYM_OR_REL) && !(*(*uint64)(unsafe.Pointer(rel + 1*8))>>Int32FromInt32(32) != 0)) {
+			goto _5
+		}
+		rel_addr = uintptr(base + *(*uint64)(unsafe.Pointer(rel)))
+		*(*uint64)(unsafe.Pointer(rel_addr)) += base
+		goto _5
+	_5:
+		rel += uintptr(2) * 8
+		rel_size -= Uint64FromInt32(2) * Uint64FromInt64(8)
+	}
+	rel = uintptr(base + dyn[int32(m_DT_RELA)])
+	rel_size = dyn[int32(m_DT_RELASZ)]
+	for rel_size != 0 {
+		if !(*(*uint64)(unsafe.Pointer(rel + 1*8))&uint64(0x7fffffff) == uint64(m_R_X86_64_RELATIVE) || *(*uint64)(unsafe.Pointer(rel + 1*8))&uint64(0x7fffffff) == Uint64FromInt32(_REL_SYM_OR_REL) && !(*(*uint64)(unsafe.Pointer(rel + 1*8))>>Int32FromInt32(32) != 0)) {
+			goto _6
+		}
+		rel_addr1 = uintptr(base + *(*uint64)(unsafe.Pointer(rel)))
+		*(*uint64)(unsafe.Pointer(rel_addr1)) = base + *(*uint64)(unsafe.Pointer(rel + 2*8))
+		goto _6
+	_6:
+		rel += uintptr(3) * 8
+		rel_size -= Uint64FromInt32(3) * Uint64FromInt64(8)
+	}
+	rel = uintptr(base + dyn[int32(m_DT_RELR)])
+	rel_size = dyn[int32(m_DT_RELRSZ)]
+	relr_addr = uintptr(0)
+	for rel_size != 0 {
+		if *(*uint64)(unsafe.Pointer(rel))&uint64(1) == uint64(0) {
+			relr_addr = uintptr(base + *(*uint64)(unsafe.Pointer(rel)))
+			v8 = relr_addr
+			relr_addr += 8
+			*(*uint64)(unsafe.Pointer(v8)) += base
+		} else {
+			i1 = uint64(0)
+			bitmap = *(*uint64)(unsafe.Pointer(rel))
+			for ; ; i1++ {
+				bitmap >>= uint64(1)
+				if !(bitmap != 0) {
+					break
+				}
+				if bitmap&uint64(1) != 0 {
+					*(*uint64)(unsafe.Pointer(relr_addr + uintptr(i1)*8)) += base
+				}
+			}
+			relr_addr += uintptr(Uint64FromInt32(8)*Uint64FromInt64(8)-Uint64FromInt32(1)) * 8
+		}
+		goto _7
+	_7:
+		rel += 8
+		rel_size -= uint64(8)
+	}
+	// __asm__ ( 	  	 ".hidden __dls2\n	lea __dls2(%%rip),%0\n" 	: "=r"(*&dls2) : : "memory" );
+	x___assert_fail(tls, ts+672, ts+2857, 161, ts+2867)
+	(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{dls2})))(tls, uintptr(base), sp)
+}
+
+const m_ADDEND_LIMIT = 4096
+const m_AT_ENTRY = 9
+const m_DF_1_NOW = 1
+const m_DF_BIND_NOW = 8
+const m_DL_FDPIC = 0
+const m_DL_NOMMU_SUPPORT = 0
+const m_DT_BIND_NOW = 24
+const m_DT_DEBUG = 21
+const m_DT_DEBUG_INDIRECT = 0
+const m_DT_DEBUG_INDIRECT_REL = 0
+const m_DT_FINI = 13
+const m_DT_FINI_ARRAY = 26
+const m_DT_FINI_ARRAYSZ = 28
+const m_DT_FLAGS = 30
+const m_DT_FLAGS_1 = 1879048187
+const m_DT_GNU_HASH = 1879047925
+const m_DT_INIT = 12
+const m_DT_INIT_ARRAY = 25
+const m_DT_INIT_ARRAYSZ = 27
+const m_DT_MIPS_GOTSYM = 1879048211
+const m_DT_MIPS_SYMTABNO = 1879048209
+const m_DT_NEEDED = 1
+const m_DT_PLTREL = 20
+const m_DT_PLTRELSZ = 2
+const m_DT_RPATH = 15
+const m_DT_RUNPATH = 29
+const m_DT_TEXTREL = 22
+const m_ENOEXEC = 8
+const m_ET_DYN = 3
+const m_ET_EXEC = 2
+const m_FDPIC_CONSTDISP_FLAG = 0
+const m_PROT_EXEC = 4
+const m_PT_GNU_RELRO = 1685382482
+const m_PT_INTERP = 3
+const m_RTLD_GLOBAL = 256
+const m_RTLD_LAZY = 1
+const m_RTLD_NOLOAD = 4
+const m_R_X86_64_64 = 1
+const m_R_X86_64_COPY = 5
+const m_R_X86_64_DTPMOD64 = 16
+const m_R_X86_64_DTPOFF64 = 17
+const m_R_X86_64_GLOB_DAT = 6
+const m_R_X86_64_JUMP_SLOT = 7
+const m_R_X86_64_PC32 = 2
+const m_R_X86_64_TLSDESC = 36
+const m_R_X86_64_TPOFF64 = 18
+const m_SHN_UNDEF = 0
+const m_STB_LOCAL = 0
+const m_STT_SECTION = 3
+const m_STT_TLS = 6
+
+var _ldso_page_size uint64
+
+var _error = uintptr(0)
+
+func init() {
+	p := unsafe.Pointer(&_error)
+	*(*uintptr)(unsafe.Add(p, 0)) = __ccgo_fp(_error_noop)
+}
+
+type Tdebug = struct {
+	Fver   int32
+	Fhead  uintptr
+	Fbp    uintptr
+	Fstate int32
+	Fbase  uintptr
+}
+
+type Ttd_index = struct {
+	Fargs [2]uint64
+	Fnext uintptr
+}
+
+type Tdso = struct {
+	Fbase           uintptr
+	Fname           uintptr
+	Fdynv           uintptr
+	Fnext           uintptr
+	Fprev           uintptr
+	Fphdr           uintptr
+	Fphnum          int32
+	Fphentsize      uint64
+	Fsyms           uintptr
+	Fhashtab        uintptr
+	Fghashtab       uintptr
+	Fversym         uintptr
+	Fstrings        uintptr
+	Fsyms_next      uintptr
+	Flazy_next      uintptr
+	Flazy           uintptr
+	Flazy_cnt       uint64
+	Fmap1           uintptr
+	Fmap_len        uint64
+	Fdev            uint64
+	Fino            uint64
+	Frelocated      int8
+	Fconstructed    int8
+	Fkernel_mapped  int8
+	Fmark           int8
+	Fbfs_built      int8
+	Fruntime_loaded int8
+	Fdeps           uintptr
+	Fneeded_by      uintptr
+	Fndeps_direct   uint64
+	Fnext_dep       uint64
+	Fctor_visitor   uintptr
+	Frpath_orig     uintptr
+	Frpath          uintptr
+	Ftls            Ttls_module
+	Ftls_id         uint64
+	Frelro_start    uint64
+	Frelro_end      uint64
+	Fnew_dtv        uintptr
+	Fnew_tls        uintptr
+	Ftd_index       uintptr
+	Ffini_next      uintptr
+	Fshortname      uintptr
+	Floadmap        uintptr
+	Ffuncdescs      uintptr
+	Fgot            uintptr
+}
+
+type Tsymdef = struct {
+	Fsym uintptr
+	Fdso uintptr
+}
+
+type Tstage3_func = uintptr
+
+var _builtin_tls1 [1]Tbuiltin_tls
+
+var _saved_addends uintptr
+var _apply_addends_to uintptr
+
+var _ldso Tdso
+var _head1 uintptr
+var _tail uintptr
+var _fini_head uintptr
+var _syms_tail uintptr
+var _lazy_head uintptr
+var _env_path uintptr
+var _sys_path uintptr
+var _gencnt uint64
+var _runtime int32
+var _ldd_mode int32
+var _ldso_fail int32
+var _noload int32
+var _shutting_down int32
+var _rtld_fail uintptr
+var _lock11 Tpthread_rwlock_t
+var _debug Tdebug
+var _tls_tail uintptr
+var _tls_cnt uint64
+var _tls_offset uint64
+var _tls_align = uint64(UintptrFromInt32(0) + 8)
+var _static_tls_cnt uint64
+var _init_fini_lock Tpthread_mutex_t
+var _ctor_cond Tpthread_cond_t
+var _builtin_deps [2]uintptr
+var _no_deps [1]uintptr
+var _builtin_ctor_queue [4]uintptr
+var _main_ctor_queue uintptr
+var _app_loadmap uintptr
+var _app_dummy_loadmap Tfdpic_dummy_loadmap
+
+func _dl_strcmp(tls *TLS, l uintptr, r uintptr) (r1 int32) {
+	for int32(*(*int8)(unsafe.Pointer(l))) == int32(*(*int8)(unsafe.Pointer(r))) && *(*int8)(unsafe.Pointer(l)) != 0 {
+		goto _1
+	_1:
+		l++
+		r++
+	}
+	return int32(*(*uint8)(unsafe.Pointer(l))) - int32(*(*uint8)(unsafe.Pointer(r)))
+}
+
+func _decode_vec(tls *TLS, v uintptr, a uintptr, cnt uint64) {
+	var i uint64
+	for i = uint64(0); i < cnt; i++ {
+		*(*uint64)(unsafe.Pointer(a + uintptr(i)*8)) = uint64(0)
+	}
+	for *(*uint64)(unsafe.Pointer(v)) != 0 {
+		if *(*uint64)(unsafe.Pointer(v))-uint64(1) < cnt-uint64(1) {
+			if *(*uint64)(unsafe.Pointer(v)) < Uint64FromInt32(8)*Uint64FromInt64(8) {
+				*(*uint64)(unsafe.Pointer(a)) |= uint64(1) << *(*uint64)(unsafe.Pointer(v))
+			}
+			*(*uint64)(unsafe.Pointer(a + uintptr(*(*uint64)(unsafe.Pointer(v)))*8)) = *(*uint64)(unsafe.Pointer(v + 1*8))
+		}
+		goto _1
+	_1:
+		v += uintptr(2) * 8
+	}
+}
+
+func _search_vec(tls *TLS, v uintptr, r uintptr, key uint64) (r1 int32) {
+	for *(*uint64)(unsafe.Pointer(v)) != key {
+		if !(*(*uint64)(unsafe.Pointer(v)) != 0) {
+			return 0
+		}
+		goto _1
+	_1:
+		v += uintptr(2) * 8
+	}
+	*(*uint64)(unsafe.Pointer(r)) = *(*uint64)(unsafe.Pointer(v + 1*8))
+	return int32(1)
+}
+
+func _sysv_hash(tls *TLS, s0 uintptr) (r uint32) {
+	var h uint32
+	var s, v1 uintptr
+	s = s0
+	h = uint32(0)
+	for *(*uint8)(unsafe.Pointer(s)) != 0 {
+		v1 = s
+		s++
+		h = uint32(16)*h + uint32(*(*uint8)(unsafe.Pointer(v1)))
+		h ^= h >> int32(24) & uint32(0xf0)
+	}
+	return h & uint32(0xfffffff)
+}
+
+func _gnu_hash(tls *TLS, s0 uintptr) (r uint32) {
+	var h uint32
+	var s uintptr
+	s = s0
+	h = uint32(5381)
+	for ; *(*uint8)(unsafe.Pointer(s)) != 0; s++ {
+		h += h*uint32(32) + uint32(*(*uint8)(unsafe.Pointer(s)))
+	}
+	return h
+}
+
+func _sysv_lookup(tls *TLS, s uintptr, h uint32, dso uintptr) (r uintptr) {
+	var hashtab, strings, syms uintptr
+	var i uint64
+	syms = (*Tdso)(unsafe.Pointer(dso)).Fsyms
+	hashtab = (*Tdso)(unsafe.Pointer(dso)).Fhashtab
+	strings = (*Tdso)(unsafe.Pointer(dso)).Fstrings
+	for i = uint64(*(*uint32)(unsafe.Pointer(hashtab + uintptr(uint32(2)+h%*(*uint32)(unsafe.Pointer(hashtab)))*4))); i != 0; i = uint64(*(*uint32)(unsafe.Pointer(hashtab + uintptr(uint64(uint32(2)+*(*uint32)(unsafe.Pointer(hashtab)))+i)*4))) {
+		if (!((*Tdso)(unsafe.Pointer(dso)).Fversym != 0) || int32(*(*int16)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Fversym + uintptr(i)*2))) >= 0) && !(_dl_strcmp(tls, s, strings+uintptr((*(*TSym)(unsafe.Pointer(syms + uintptr(i)*24))).Fst_name)) != 0) {
+			return syms + uintptr(i)*24
+		}
+	}
+	return uintptr(0)
+}
+
+func _gnu_lookup(tls *TLS, h1 uint32, hashtab uintptr, dso uintptr, s uintptr) (r uintptr) {
+	var buckets, hashval, v1 uintptr
+	var h2, i, nbuckets uint32
+	nbuckets = *(*uint32)(unsafe.Pointer(hashtab))
+	buckets = hashtab + uintptr(4)*4 + uintptr(uint64(*(*uint32)(unsafe.Pointer(hashtab + 2*4)))*(Uint64FromInt64(8)/Uint64FromInt32(4)))*4
+	i = *(*uint32)(unsafe.Pointer(buckets + uintptr(h1%nbuckets)*4))
+	if !(i != 0) {
+		return uintptr(0)
+	}
+	hashval = buckets + uintptr(nbuckets)*4 + uintptr(i-*(*uint32)(unsafe.Pointer(hashtab + 1*4)))*4
+	h1 |= uint32(1)
+	for ; ; i++ {
+		v1 = hashval
+		hashval += 4
+		h2 = *(*uint32)(unsafe.Pointer(v1))
+		if h1 == h2|uint32(1) && (!((*Tdso)(unsafe.Pointer(dso)).Fversym != 0) || int32(*(*int16)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Fversym + uintptr(i)*2))) >= 0) && !(_dl_strcmp(tls, s, (*Tdso)(unsafe.Pointer(dso)).Fstrings+uintptr((*(*TSym)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Fsyms + uintptr(i)*24))).Fst_name)) != 0) {
+			return (*Tdso)(unsafe.Pointer(dso)).Fsyms + uintptr(i)*24
+		}
+		if h2&uint32(1) != 0 {
+			break
+		}
+	}
+	return uintptr(0)
+}
+
+func _gnu_lookup_filtered(tls *TLS, h1 uint32, hashtab uintptr, dso uintptr, s uintptr, fofs uint32, fmask uint64) (r uintptr) {
+	var bloomwords uintptr
+	var f uint64
+	bloomwords = hashtab + UintptrFromInt32(4)*4
+	f = *(*uint64)(unsafe.Pointer(bloomwords + uintptr(fofs&(*(*uint32)(unsafe.Pointer(hashtab + 2*4))-uint32(1)))*8))
+	if !(f&fmask != 0) {
+		return uintptr(0)
+	}
+	f >>= uint64(h1>>*(*uint32)(unsafe.Pointer(hashtab + 3*4))) % (Uint64FromInt32(8) * Uint64FromInt64(8))
+	if !(f&Uint64FromInt32(1) != 0) {
+		return uintptr(0)
+	}
+	return _gnu_lookup(tls, h1, hashtab, dso, s)
+}
+
+func _find_sym2(tls *TLS, dso uintptr, s uintptr, need_def int32, use_deps int32) (r Tsymdef) {
+	var def Tsymdef
+	var deps, ght, sym, v1, v2, v3, v5 uintptr
+	var gh, gho, h uint32
+	var ghm uint64
+	h = uint32(0)
+	gh = _gnu_hash(tls, s)
+	gho = uint32(uint64(gh) / (Uint64FromInt32(8) * Uint64FromInt64(8)))
+	ghm = uint64(1) << (uint64(gh) % (Uint64FromInt32(8) * Uint64FromInt64(8)))
+	def = Tsymdef{}
+	if use_deps != 0 {
+		v1 = (*Tdso)(unsafe.Pointer(dso)).Fdeps
+	} else {
+		v1 = uintptr(0)
+	}
+	deps = v1
+	for dso != 0 {
+		v5 = (*Tdso)(unsafe.Pointer(dso)).Fghashtab
+		ght = v5
+		if v5 != 0 {
+			sym = _gnu_lookup_filtered(tls, gh, ght, dso, s, gho, ghm)
+		} else {
+			if !(h != 0) {
+				h = _sysv_hash(tls, s)
+			}
+			sym = _sysv_lookup(tls, s, h, dso)
+		}
+		if !(sym != 0) {
+			goto _4
+		}
+		if !((*TSym)(unsafe.Pointer(sym)).Fst_shndx != 0) {
+			if need_def != 0 || int32((*TSym)(unsafe.Pointer(sym)).Fst_info)&int32(0xf) == int32(m_STT_TLS) || 0 != 0 {
+				goto _4
+			}
+		}
+		if !((*TSym)(unsafe.Pointer(sym)).Fst_value != 0) {
+			if int32((*TSym)(unsafe.Pointer(sym)).Fst_info)&int32(0xf) != int32(m_STT_TLS) {
+				goto _4
+			}
+		}
+		if !(Int32FromInt32(1)<<(int32((*TSym)(unsafe.Pointer(sym)).Fst_info)&Int32FromInt32(0xf))&(Int32FromInt32(1)<<Int32FromInt32(m_STT_NOTYPE)|Int32FromInt32(1)<<Int32FromInt32(m_STT_OBJECT)|Int32FromInt32(1)<<Int32FromInt32(m_STT_FUNC)|Int32FromInt32(1)<<Int32FromInt32(m_STT_COMMON)|Int32FromInt32(1)<<Int32FromInt32(m_STT_TLS)) != 0) {
+			goto _4
+		}
+		if !(Int32FromInt32(1)<<(int32((*TSym)(unsafe.Pointer(sym)).Fst_info)>>Int32FromInt32(4))&(Int32FromInt32(1)<<Int32FromInt32(m_STB_GLOBAL)|Int32FromInt32(1)<<Int32FromInt32(m_STB_WEAK)|Int32FromInt32(1)<<Int32FromInt32(m_STB_GNU_UNIQUE)) != 0) {
+			goto _4
+		}
+		def.Fsym = sym
+		def.Fdso = dso
+		break
+		goto _4
+	_4:
+		if use_deps != 0 {
+			v3 = deps
+			deps += 8
+			v2 = *(*uintptr)(unsafe.Pointer(v3))
+		} else {
+			v2 = (*Tdso)(unsafe.Pointer(dso)).Fsyms_next
+		}
+		dso = v2
+	}
+	return def
+}
+
+func _find_sym(tls *TLS, dso uintptr, s uintptr, need_def int32) (r Tsymdef) {
+	return _find_sym2(tls, dso, s, need_def, 0)
+}
+
+func _get_lfs64(tls *TLS, name uintptr) (r Tsymdef) {
+	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
+	defer tls.Free(16)
+	var l uint64
+	var p uintptr
+	var _ /* buf at bp+0 */ [16]int8
+	for l = uint64(0); *(*int8)(unsafe.Pointer(name + uintptr(l))) != 0; l++ {
+		if l >= uint64(16) {
+			goto nomatch
+		}
+		(*(*[16]int8)(unsafe.Pointer(bp)))[l] = *(*int8)(unsafe.Pointer(name + uintptr(l)))
+	}
+	if !(_dl_strcmp(tls, name, ts+2878) != 0) {
+		return _find_sym(tls, uintptr(unsafe.Pointer(&_ldso)), ts+2890, int32(1))
+	}
+	if l < uint64(2) || int32(*(*int8)(unsafe.Pointer(name + uintptr(l-uint64(2))))) != int32('6') || int32(*(*int8)(unsafe.Pointer(name + uintptr(l-uint64(1))))) != int32('4') {
+		goto nomatch
+	}
+	l -= uint64(2)
+	(*(*[16]int8)(unsafe.Pointer(bp)))[l] = 0
+	for p = uintptr(unsafe.Pointer(&_lfs64_list)); *(*int8)(unsafe.Pointer(p)) != 0; p++ {
+		if !(_dl_strcmp(tls, bp, p) != 0) {
+			return _find_sym(tls, uintptr(unsafe.Pointer(&_ldso)), bp, int32(1))
+		}
+		for *(*int8)(unsafe.Pointer(p)) != 0 {
+			p++
+		}
+	}
+nomatch:
+	return Tsymdef{}
+	return r
+}
+
+var _lfs64_list = [496]int8{'a', 'i', 'o', '_', 'c', 'a', 'n', 'c', 'e', 'l', 0, 'a', 'i', 'o', '_', 'e', 'r', 'r', 'o', 'r', 0, 'a', 'i', 'o', '_', 'f', 's', 'y', 'n', 'c', 0, 'a', 'i', 'o', '_', 'r', 'e', 'a', 'd', 0, 'a', 'i', 'o', '_', 'r', 'e', 't', 'u', 'r', 'n', 0, 'a', 'i', 'o', '_', 's', 'u', 's', 'p', 'e', 'n', 'd', 0, 'a', 'i', 'o', '_', 'w', 'r', 'i', 't', 'e', 0, 'a', 'l', 'p', 'h', 'a', 's', 'o', 'r', 't', 0, 'c', 'r', 'e', 'a', 't', 0, 'f', 'a', 'l', 'l', 'o', 'c', 'a', 't', 'e', 0, 'f', 'g', 'e', 't', 'p', 'o', 's', 0, 'f', 'o', 'p', 'e', 'n', 0, 'f', 'r', 'e', 'o', 'p', 'e', 'n', 0, 'f', 's', 'e', 'e', 'k', 'o', 0, 'f', 's', 'e', 't', 'p', 'o', 's', 0, 'f', 's', 't', 'a', 't', 0, 'f', 's', 't', 'a', 't', 'a', 't', 0, 'f', 's', 't', 'a', 't', 'f', 's', 0, 'f', 's', 't', 'a', 't', 'v', 'f', 's', 0, 'f', 't', 'e', 'l', 'l', 'o', 0, 'f', 't', 'r', 'u', 'n', 'c', 'a', 't', 'e', 0, 'f', 't', 'w', 0, 'g', 'e', 't', 'd', 'e', 'n', 't', 's', 0, 'g', 'e', 't', 'r', 'l', 'i', 'm', 'i', 't', 0, 'g', 'l', 'o', 'b', 0, 'g', 'l', 'o', 'b', 'f', 'r', 'e', 'e', 0, 'l', 'i', 'o', '_', 'l', 'i', 's', 't', 'i', 'o', 0, 'l', 'o', 'c', 'k', 'f', 0, 'l', 's', 'e', 'e', 'k', 0, 'l', 's', 't', 'a', 't', 0, 'm', 'k', 'o', 's', 't', 'e', 'm', 'p', 0, 'm', 'k', 'o', 's', 't', 'e', 'm', 'p', 's', 0, 'm', 'k', 's', 't', 'e', 'm', 'p', 0, 'm', 'k', 's', 't', 'e', 'm', 'p', 's', 0, 'm', 'm', 'a', 'p', 0, 'n', 'f', 't', 'w', 0, 'o', 'p', 'e', 'n', 0, 'o', 'p', 'e', 'n', 'a', 't', 0, 'p', 'o', 's', 'i', 'x', '_', 'f', 'a', 'd', 'v', 'i', 's', 'e', 0, 'p', 'o', 's', 'i', 'x', '_', 'f', 'a', 'l', 'l', 'o', 'c', 'a', 't', 'e', 0, 'p', 'r', 'e', 'a', 'd', 0, 'p', 'r', 'e', 'a', 'd', 'v', 0, 'p', 'r', 'l', 'i', 'm', 'i', 't', 0, 'p', 'w', 'r', 'i', 't', 'e', 0, 'p', 'w', 'r', 'i', 't', 'e', 'v', 0, 'r', 'e', 'a', 'd', 'd', 'i', 'r', 0, 's', 'c', 'a', 'n', 'd', 'i', 'r', 0, 's', 'e', 'n', 'd', 'f', 'i', 'l', 'e', 0, 's', 'e', 't', 'r', 'l', 'i', 'm', 'i', 't', 0, 's', 't', 'a', 't', 0, 's', 't', 'a', 't', 'f', 's', 0, 's', 't', 'a', 't', 'v', 'f', 's', 0, 't', 'm', 'p', 'f', 'i', 'l', 'e', 0, 't', 'r', 'u', 'n', 'c', 'a', 't', 'e', 0, 'v', 'e', 'r', 's', 'i', 'o', 'n', 's', 'o', 'r', 't', 0, '_', '_', 'f', 'x', 's', 't', 'a', 't', 0, '_', '_', 'f', 'x', 's', 't', 'a', 't', 'a', 't', 0, '_', '_', 'l', 'x', 's', 't', 'a', 't', 0, '_', '_', 'x', 's', 't', 'a', 't'}
+
+func _do_relocs(tls *TLS, dso uintptr, rel uintptr, rel_size uint64, stride uint64) {
+	bp := tls.Alloc(40) /* tlsAllocs 8 maxVaListSize 24 */
+	defer tls.Free(40)
+	var addend, sym_val, tls_val, v5, v6, v7, v8 uint64
+	var base, ctx, name, new1, reloc_addr, strings, sym, syms, v3, v9 uintptr
+	var def, v4 Tsymdef
+	var reuse_addends, save_slot, skip_relative, sym_index, type1, v2 int32
+	base = (*Tdso)(unsafe.Pointer(dso)).Fbase
+	syms = (*Tdso)(unsafe.Pointer(dso)).Fsyms
+	strings = (*Tdso)(unsafe.Pointer(dso)).Fstrings
+	skip_relative = 0
+	reuse_addends = 0
+	save_slot = 0
+	if dso == uintptr(unsafe.Pointer(&_ldso)) {
+		/* Only ldso's REL table needs addend saving/reuse. */
+		if rel == _apply_addends_to {
+			reuse_addends = int32(1)
+		}
+		skip_relative = int32(1)
+	}
+	for rel_size != 0 {
+		if skip_relative != 0 && (*(*uint64)(unsafe.Pointer(rel + 1*8))&uint64(0x7fffffff) == uint64(m_R_X86_64_RELATIVE) || *(*uint64)(unsafe.Pointer(rel + 1*8))&uint64(0x7fffffff) == Uint64FromInt32(_REL_SYM_OR_REL) && !(*(*uint64)(unsafe.Pointer(rel + 1*8))>>Int32FromInt32(32) != 0)) {
+			goto _1
+		}
+		type1 = int32(*(*uint64)(unsafe.Pointer(rel + 1*8)) & Uint64FromInt32(0x7fffffff))
+		if type1 == int32(_REL_NONE) {
+			goto _1
+		}
+		reloc_addr = (*Tdso)(unsafe.Pointer(dso)).Fbase + uintptr(*(*uint64)(unsafe.Pointer(rel)))
+		if stride > uint64(2) {
+			addend = *(*uint64)(unsafe.Pointer(rel + 2*8))
+		} else {
+			if type1 == int32(m_R_X86_64_GLOB_DAT) || type1 == int32(m_R_X86_64_JUMP_SLOT) || type1 == int32(m_R_X86_64_COPY) {
+				addend = uint64(0)
+			} else {
+				if reuse_addends != 0 {
+					/* Save original addend in stage 2 where the dso
+					 * chain consists of just ldso; otherwise read back
+					 * saved addend since the inline one was clobbered. */
+					if _head1 == uintptr(unsafe.Pointer(&_ldso)) {
+						*(*uint64)(unsafe.Pointer(_saved_addends + uintptr(save_slot)*8)) = *(*uint64)(unsafe.Pointer(reloc_addr))
+					}
+					v2 = save_slot
+					save_slot++
+					addend = *(*uint64)(unsafe.Pointer(_saved_addends + uintptr(v2)*8))
+				} else {
+					addend = *(*uint64)(unsafe.Pointer(reloc_addr))
+				}
+			}
+		}
+		sym_index = int32(*(*uint64)(unsafe.Pointer(rel + 1*8)) >> Int32FromInt32(32))
+		if sym_index != 0 {
+			sym = syms + uintptr(sym_index)*24
+			name = strings + uintptr((*TSym)(unsafe.Pointer(sym)).Fst_name)
+			if type1 == int32(m_R_X86_64_COPY) {
+				v3 = (*Tdso)(unsafe.Pointer(_head1)).Fsyms_next
+			} else {
+				v3 = _head1
+			}
+			ctx = v3
+			if int32((*TSym)(unsafe.Pointer(sym)).Fst_info)>>int32(4) == m_STB_LOCAL {
+				v4 = Tsymdef{
+					Fsym: sym,
+					Fdso: dso,
+				}
+			} else {
+				v4 = _find_sym(tls, ctx, name, BoolInt32(type1 == int32(m_R_X86_64_JUMP_SLOT)))
+			}
+			def = v4
+			if !(def.Fsym != 0) {
+				def = _get_lfs64(tls, name)
+			}
+			if !(def.Fsym != 0) && (int32((*TSym)(unsafe.Pointer(sym)).Fst_shndx) != m_SHN_UNDEF || int32((*TSym)(unsafe.Pointer(sym)).Fst_info)>>int32(4) != int32(m_STB_WEAK)) {
+				if (*Tdso)(unsafe.Pointer(dso)).Flazy != 0 && (type1 == int32(m_R_X86_64_JUMP_SLOT) || type1 == int32(m_R_X86_64_GLOB_DAT)) {
+					*(*uint64)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Flazy + uintptr(uint64(3)*(*Tdso)(unsafe.Pointer(dso)).Flazy_cnt+uint64(0))*8)) = *(*uint64)(unsafe.Pointer(rel))
+					*(*uint64)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Flazy + uintptr(uint64(3)*(*Tdso)(unsafe.Pointer(dso)).Flazy_cnt+uint64(1))*8)) = *(*uint64)(unsafe.Pointer(rel + 1*8))
+					*(*uint64)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Flazy + uintptr(uint64(3)*(*Tdso)(unsafe.Pointer(dso)).Flazy_cnt+uint64(2))*8)) = addend
+					(*Tdso)(unsafe.Pointer(dso)).Flazy_cnt++
+					goto _1
+				}
+				(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+2900, VaList(bp+16, (*Tdso)(unsafe.Pointer(dso)).Fname, name))
+				if _runtime != 0 {
+					_longjmp(tls, _rtld_fail, int32(1))
+				}
+				goto _1
+			}
+		} else {
+			sym = uintptr(0)
+			def.Fsym = uintptr(0)
+			def.Fdso = dso
+		}
+		if def.Fsym != 0 {
+			v5 = uint64((*Tdso)(unsafe.Pointer(def.Fdso)).Fbase + uintptr((*TSym)(unsafe.Pointer(def.Fsym)).Fst_value))
+		} else {
+			v5 = uint64(0)
+		}
+		sym_val = v5
+		if def.Fsym != 0 {
+			v6 = (*TSym)(unsafe.Pointer(def.Fsym)).Fst_value
+		} else {
+			v6 = uint64(0)
+		}
+		tls_val = v6
+		if (type1 == int32(m_R_X86_64_TPOFF64) || type1 == int32(_REL_TPOFF_NEG)) && (*Tdso)(unsafe.Pointer(def.Fdso)).Ftls_id > _static_tls_cnt {
+			(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+2942, VaList(bp+16, (*Tdso)(unsafe.Pointer(dso)).Fname, name, (*Tdso)(unsafe.Pointer(def.Fdso)).Fname))
+			_longjmp(tls, _rtld_fail, int32(1))
+		}
+		switch type1 {
+		case int32(_REL_OFFSET):
+			addend -= uint64(reloc_addr)
+			fallthrough
+		case int32(m_R_X86_64_64):
+			fallthrough
+		case int32(m_R_X86_64_GLOB_DAT):
+			fallthrough
+		case int32(m_R_X86_64_JUMP_SLOT):
+			*(*uint64)(unsafe.Pointer(reloc_addr)) = sym_val + addend
+		case int32(_REL_USYMBOLIC):
+			*(*uint64)(unsafe.Pointer(bp)) = sym_val + addend
+			_memcpy(tls, reloc_addr, bp, uint64(8))
+		case int32(m_R_X86_64_RELATIVE):
+			*(*uint64)(unsafe.Pointer(reloc_addr)) = uint64(base) + addend
+		case int32(_REL_SYM_OR_REL):
+			if sym != 0 {
+				*(*uint64)(unsafe.Pointer(reloc_addr)) = sym_val + addend
+			} else {
+				*(*uint64)(unsafe.Pointer(reloc_addr)) = uint64(base) + addend
+			}
+		case int32(m_R_X86_64_COPY):
+			_memcpy(tls, reloc_addr, uintptr(sym_val), (*TSym)(unsafe.Pointer(sym)).Fst_size)
+		case int32(m_R_X86_64_PC32):
+			*(*uint32)(unsafe.Pointer(reloc_addr)) = uint32(sym_val + addend - uint64(reloc_addr))
+		case int32(_REL_FUNCDESC):
+			if def.Fsym != 0 {
+				v7 = uint64((*Tdso)(unsafe.Pointer(def.Fdso)).Ffuncdescs + uintptr((int64(def.Fsym)-int64((*Tdso)(unsafe.Pointer(def.Fdso)).Fsyms))/24)*16)
+			} else {
+				v7 = uint64(0)
+			}
+			*(*uint64)(unsafe.Pointer(reloc_addr)) = v7
+		case int32(_REL_FUNCDESC_VAL):
+			if int32((*TSym)(unsafe.Pointer(sym)).Fst_info)&int32(0xf) == int32(m_STT_SECTION) {
+				*(*uint64)(unsafe.Pointer(reloc_addr)) += sym_val
+			} else {
+				*(*uint64)(unsafe.Pointer(reloc_addr)) = sym_val
+			}
+			if def.Fsym != 0 {
+				v8 = uint64((*Tdso)(unsafe.Pointer(def.Fdso)).Fgot)
+			} else {
+				v8 = uint64(0)
+			}
+			*(*uint64)(unsafe.Pointer(reloc_addr + 1*8)) = v8
+		case int32(m_R_X86_64_DTPMOD64):
+			*(*uint64)(unsafe.Pointer(reloc_addr)) = (*Tdso)(unsafe.Pointer(def.Fdso)).Ftls_id
+		case int32(m_R_X86_64_DTPOFF64):
+			*(*uint64)(unsafe.Pointer(reloc_addr)) = tls_val + addend - uint64(m_DTP_OFFSET)
+		case int32(m_R_X86_64_TPOFF64):
+			*(*uint64)(unsafe.Pointer(reloc_addr)) = tls_val - (*Tdso)(unsafe.Pointer(def.Fdso)).Ftls.Foffset + addend
+		case int32(_REL_TPOFF_NEG):
+			*(*uint64)(unsafe.Pointer(reloc_addr)) = (*Tdso)(unsafe.Pointer(def.Fdso)).Ftls.Foffset - tls_val + addend
+		case int32(m_R_X86_64_TLSDESC):
+			if stride < uint64(3) {
+				addend = *(*uint64)(unsafe.Pointer(reloc_addr + 1*8))
+			}
+			if (*Tdso)(unsafe.Pointer(def.Fdso)).Ftls_id > _static_tls_cnt {
+				new1 = x___libc_malloc(tls, uint64(24))
+				if !(new1 != 0) {
+					if sym != 0 {
+						v9 = name
+					} else {
+						v9 = ts + 3021
+					}
+					(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3029, VaList(bp+16, (*Tdso)(unsafe.Pointer(dso)).Fname, v9))
+					_longjmp(tls, _rtld_fail, int32(1))
+				}
+				(*Ttd_index)(unsafe.Pointer(new1)).Fnext = (*Tdso)(unsafe.Pointer(dso)).Ftd_index
+				(*Tdso)(unsafe.Pointer(dso)).Ftd_index = new1
+				*(*uint64)(unsafe.Pointer(new1)) = (*Tdso)(unsafe.Pointer(def.Fdso)).Ftls_id
+				*(*uint64)(unsafe.Pointer(new1 + 1*8)) = tls_val + addend - uint64(m_DTP_OFFSET)
+				*(*uint64)(unsafe.Pointer(reloc_addr)) = uint64(__ccgo_fp(___tlsdesc_dynamic))
+				*(*uint64)(unsafe.Pointer(reloc_addr + 1*8)) = uint64(new1)
+			} else {
+				*(*uint64)(unsafe.Pointer(reloc_addr)) = uint64(__ccgo_fp(___tlsdesc_static))
+				*(*uint64)(unsafe.Pointer(reloc_addr + 1*8)) = tls_val - (*Tdso)(unsafe.Pointer(def.Fdso)).Ftls.Foffset + addend
+			}
+		default:
+			(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3081, VaList(bp+16, (*Tdso)(unsafe.Pointer(dso)).Fname, type1))
+			if _runtime != 0 {
+				_longjmp(tls, _rtld_fail, int32(1))
+			}
+			goto _1
+		}
+		goto _1
+	_1:
+		rel += uintptr(stride) * 8
+		rel_size -= stride * uint64(8)
+	}
+}
+
+func _do_relr_relocs(tls *TLS, dso uintptr, relr uintptr, relr_size uint64) {
+	var base, reloc_addr, v2 uintptr
+	var bitmap uint64
+	var i int32
+	if dso == uintptr(unsafe.Pointer(&_ldso)) {
+		return
+	} /* self-relocation was done in _dlstart */
+	base = (*Tdso)(unsafe.Pointer(dso)).Fbase
+	for relr_size != 0 {
+		if *(*uint64)(unsafe.Pointer(relr))&uint64(1) == uint64(0) {
+			reloc_addr = (*Tdso)(unsafe.Pointer(dso)).Fbase + uintptr(*(*uint64)(unsafe.Pointer(relr)))
+			v2 = reloc_addr
+			reloc_addr += 8
+			*(*uint64)(unsafe.Pointer(v2)) += uint64(base)
+		} else {
+			i = 0
+			bitmap = *(*uint64)(unsafe.Pointer(relr))
+			for ; ; i++ {
+				bitmap >>= uint64(1)
+				if !(bitmap != 0) {
+					break
+				}
+				if bitmap&uint64(1) != 0 {
+					*(*uint64)(unsafe.Pointer(reloc_addr + uintptr(i)*8)) += uint64(base)
+				}
+			}
+			reloc_addr += uintptr(Uint64FromInt32(8)*Uint64FromInt64(8)-Uint64FromInt32(1)) * 8
+		}
+		goto _1
+	_1:
+		relr += 8
+		relr_size -= uint64(8)
+	}
+}
+
+func _redo_lazy_relocs(tls *TLS) {
+	var next, p uintptr
+	var size uint64
+	p = _lazy_head
+	_lazy_head = uintptr(0)
+	for ; p != 0; p = next {
+		next = (*Tdso)(unsafe.Pointer(p)).Flazy_next
+		size = (*Tdso)(unsafe.Pointer(p)).Flazy_cnt * uint64(3) * uint64(8)
+		(*Tdso)(unsafe.Pointer(p)).Flazy_cnt = uint64(0)
+		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Flazy, size, uint64(3))
+		if (*Tdso)(unsafe.Pointer(p)).Flazy_cnt != 0 {
+			(*Tdso)(unsafe.Pointer(p)).Flazy_next = _lazy_head
+			_lazy_head = p
+		} else {
+			x___libc_free(tls, (*Tdso)(unsafe.Pointer(p)).Flazy)
+			(*Tdso)(unsafe.Pointer(p)).Flazy = uintptr(0)
+			(*Tdso)(unsafe.Pointer(p)).Flazy_next = uintptr(0)
+		}
+	}
+}
+
+func _reclaim(tls *TLS, dso uintptr, start uint64, end uint64) {
+	var base uintptr
+	if start >= (*Tdso)(unsafe.Pointer(dso)).Frelro_start && start < (*Tdso)(unsafe.Pointer(dso)).Frelro_end {
+		start = (*Tdso)(unsafe.Pointer(dso)).Frelro_end
+	}
+	if end >= (*Tdso)(unsafe.Pointer(dso)).Frelro_start && end < (*Tdso)(unsafe.Pointer(dso)).Frelro_end {
+		end = (*Tdso)(unsafe.Pointer(dso)).Frelro_start
+	}
+	if start >= end {
+		return
+	}
+	base = (*Tdso)(unsafe.Pointer(dso)).Fbase + uintptr(start)
+	x___malloc_donate(tls, base, base+uintptr(end-start))
+}
+
+func _reclaim_gaps(tls *TLS, dso uintptr) {
+	var ph uintptr
+	var phcnt, v1 uint64
+	ph = (*Tdso)(unsafe.Pointer(dso)).Fphdr
+	phcnt = uint64((*Tdso)(unsafe.Pointer(dso)).Fphnum)
+	for ; ; ph = ph + uintptr((*Tdso)(unsafe.Pointer(dso)).Fphentsize) {
+		v1 = phcnt
+		phcnt--
+		if !(v1 != 0) {
+			break
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_type != uint32(m_PT_LOAD) {
+			continue
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(2)|Int32FromInt32(1)<<Int32FromInt32(1)) != uint32(Int32FromInt32(1)<<Int32FromInt32(2)|Int32FromInt32(1)<<Int32FromInt32(1)) {
+			continue
+		}
+		_reclaim(tls, dso, (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr&uint64(-Int32FromInt32(m_PAGESIZE)), (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr)
+		_reclaim(tls, dso, (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr+(*TPhdr)(unsafe.Pointer(ph)).Fp_memsz, ((*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr+(*TPhdr)(unsafe.Pointer(ph)).Fp_memsz+uint64(m_PAGESIZE)-uint64(1))&uint64(-Int32FromInt32(m_PAGESIZE)))
+	}
+}
+
+func _read_loop(tls *TLS, fd int32, p uintptr, n uint64) (r int64) {
+	var i uint64
+	var l int64
+	i = uint64(0)
+	for i < n {
+		l = x_read(tls, fd, p+uintptr(i), n-i)
+		if l < 0 {
+			if *(*int32)(unsafe.Pointer(x___errno_location(tls))) == int32(m_EINTR) {
+				continue
+			} else {
+				return int64(-int32(1))
+			}
+		}
+		if l == 0 {
+			return int64(i)
+		}
+		i += uint64(l)
+	}
+	return int64(n)
+}
+
+func _mmap_fixed(tls *TLS, p uintptr, n uint64, prot int32, flags int32, fd int32, off int64) (r1 uintptr) {
+	var q uintptr
+	var r int64
+	if !(n != 0) {
+		return p
+	}
+	if !(_no_map_fixed != 0) {
+		q = x___mmap(tls, p, n, prot, flags|int32(m_MAP_FIXED), fd, off)
+		if !(Int32FromInt32(m_DL_NOMMU_SUPPORT) != 0) || q != uintptr(-Int32FromInt32(1)) || *(*int32)(unsafe.Pointer(x___errno_location(tls))) != int32(m_EINVAL) {
+			return q
+		}
+		_no_map_fixed = int32(1)
+	}
+	/* Fallbacks for MAP_FIXED failure on NOMMU kernels. */
+	if flags&int32(m_MAP_ANON) != 0 {
+		_memset(tls, p, 0, n)
+		return p
+	}
+	if x___lseek(tls, fd, off, m_SEEK_SET) < 0 {
+		return uintptr(-Int32FromInt32(1))
+	}
+	for q = p; n != 0; {
+		r = x_read(tls, fd, q, n)
+		if r < 0 && *(*int32)(unsafe.Pointer(x___errno_location(tls))) != int32(m_EINTR) {
+			return uintptr(-Int32FromInt32(1))
+		}
+		if !(r != 0) {
+			_memset(tls, q, 0, n)
+			break
+		}
+		goto _1
+	_1:
+		q += uintptr(r)
+		off += r
+		n -= uint64(r)
+	}
+	return p
+}
+
+var _no_map_fixed int32
+
+func _unmap_library(tls *TLS, dso uintptr) {
+	var i uint64
+	if (*Tdso)(unsafe.Pointer(dso)).Floadmap != 0 {
+		for i = uint64(0); i < uint64((*Tfdpic_loadmap)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Floadmap)).Fnsegs); i++ {
+			if !((*(*Tfdpic_loadseg)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Floadmap + 8 + uintptr(i)*24))).Fp_memsz != 0) {
+				continue
+			}
+			x___munmap(tls, uintptr((*(*Tfdpic_loadseg)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Floadmap + 8 + uintptr(i)*24))).Faddr), (*(*Tfdpic_loadseg)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Floadmap + 8 + uintptr(i)*24))).Fp_memsz)
+		}
+		x___libc_free(tls, (*Tdso)(unsafe.Pointer(dso)).Floadmap)
+	} else if (*Tdso)(unsafe.Pointer(dso)).Fmap1 != 0 && (*Tdso)(unsafe.Pointer(dso)).Fmap_len != 0 {
+		x___munmap(tls, (*Tdso)(unsafe.Pointer(dso)).Fmap1, (*Tdso)(unsafe.Pointer(dso)).Fmap_len)
+	}
+}
+
+func _map_library(tls *TLS, fd int32, dso uintptr) (r uintptr) {
+	bp := tls.Alloc(960) /* tlsAllocs 960 maxVaListSize 0 */
+	defer tls.Free(960)
+	var addr_max, addr_min, brk, brk1, dyn, i, map_len, nsegs, pgbrk, pgbrk1, pgend, phsize, this_max, this_min, tls_image, v5 uint64
+	var allocated_buf, base, eh, map1, ph, ph0, v1, v2, v3 uintptr
+	var l, off_start int64
+	var prot uint32
+	var v10, v11, v13, v14, v15, v6, v7, v8, v9 int32
+	var _ /* buf at bp+0 */ [15]TEhdr
+	allocated_buf = uintptr(0)
+	addr_min = Uint64FromUint64(0xffffffffffffffff)
+	addr_max = uint64(0)
+	nsegs = uint64(0)
+	map1 = uintptr(-Int32FromInt32(1))
+	dyn = uint64(0)
+	tls_image = uint64(0)
+	l = x_read(tls, fd, bp, uint64(960))
+	eh = bp
+	if l < 0 {
+		return uintptr(0)
+	}
+	if uint64(l) < uint64(64) || int32((*TEhdr)(unsafe.Pointer(eh)).Fe_type) != int32(m_ET_DYN) && int32((*TEhdr)(unsafe.Pointer(eh)).Fe_type) != int32(m_ET_EXEC) {
+		goto noexec
+	}
+	phsize = uint64(int32((*TEhdr)(unsafe.Pointer(eh)).Fe_phentsize) * int32((*TEhdr)(unsafe.Pointer(eh)).Fe_phnum))
+	if phsize > Uint64FromInt64(960)-Uint64FromInt64(64) {
+		allocated_buf = x___libc_malloc(tls, phsize)
+		if !(allocated_buf != 0) {
+			return uintptr(0)
+		}
+		l = x_pread(tls, fd, allocated_buf, phsize, int64((*TEhdr)(unsafe.Pointer(eh)).Fe_phoff))
+		if l < 0 {
+			goto error
+		}
+		if uint64(l) != phsize {
+			goto noexec
+		}
+		v1 = allocated_buf
+		ph0 = v1
+		ph = v1
+	} else {
+		if (*TEhdr)(unsafe.Pointer(eh)).Fe_phoff+phsize > uint64(l) {
+			l = x_pread(tls, fd, bp+uintptr(1)*64, phsize, int64((*TEhdr)(unsafe.Pointer(eh)).Fe_phoff))
+			if l < 0 {
+				goto error
+			}
+			if uint64(l) != phsize {
+				goto noexec
+			}
+			v2 = bp + UintptrFromInt32(1)*64
+			ph0 = v2
+			ph = v2
+		} else {
+			v3 = bp + uintptr((*TEhdr)(unsafe.Pointer(eh)).Fe_phoff)
+			ph0 = v3
+			ph = v3
+		}
+	}
+	for i = uint64((*TEhdr)(unsafe.Pointer(eh)).Fe_phnum); i != 0; {
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_type == uint32(m_PT_DYNAMIC) {
+			dyn = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr
+		} else {
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_type == uint32(m_PT_TLS) {
+				tls_image = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr
+				(*Tdso)(unsafe.Pointer(dso)).Ftls.Falign = (*TPhdr)(unsafe.Pointer(ph)).Fp_align
+				(*Tdso)(unsafe.Pointer(dso)).Ftls.Flen1 = (*TPhdr)(unsafe.Pointer(ph)).Fp_filesz
+				(*Tdso)(unsafe.Pointer(dso)).Ftls.Fsize = (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz
+			} else {
+				if (*TPhdr)(unsafe.Pointer(ph)).Fp_type == uint32(m_PT_GNU_RELRO) {
+					(*Tdso)(unsafe.Pointer(dso)).Frelro_start = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr & uint64(-Int32FromInt32(m_PAGESIZE))
+					(*Tdso)(unsafe.Pointer(dso)).Frelro_end = ((*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr + (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz) & uint64(-Int32FromInt32(m_PAGESIZE))
+				} else if (*TPhdr)(unsafe.Pointer(ph)).Fp_type == uint32(m_PT_GNU_STACK) {
+					if !(_runtime != 0) && (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz > uint64(x___default_stacksize) {
+						if (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz < uint64(Int32FromInt32(8)<<Int32FromInt32(20)) {
+							v5 = (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz
+						} else {
+							v5 = uint64(Int32FromInt32(8) << Int32FromInt32(20))
+						}
+						x___default_stacksize = uint32(v5)
+					}
+				}
+			}
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_type != uint32(m_PT_LOAD) {
+			goto _4
+		}
+		nsegs++
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr < addr_min {
+			addr_min = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr
+			off_start = int64((*TPhdr)(unsafe.Pointer(ph)).Fp_offset)
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(2)) != 0 {
+				v6 = int32(m_PROT_READ)
+			} else {
+				v6 = 0
+			}
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(1)) != 0 {
+				v7 = int32(m_PROT_WRITE)
+			} else {
+				v7 = 0
+			}
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(0)) != 0 {
+				v8 = int32(m_PROT_EXEC)
+			} else {
+				v8 = 0
+			}
+			prot = uint32(v6 | v7 | v8)
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr+(*TPhdr)(unsafe.Pointer(ph)).Fp_memsz > addr_max {
+			addr_max = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr + (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz
+		}
+		goto _4
+	_4:
+		i--
+		ph = ph + uintptr((*TEhdr)(unsafe.Pointer(eh)).Fe_phentsize)
+	}
+	if !(dyn != 0) {
+		goto noexec
+	}
+	if m_DL_FDPIC != 0 && !((*TEhdr)(unsafe.Pointer(eh)).Fe_flags&Uint32FromInt32(m_FDPIC_CONSTDISP_FLAG) != 0) {
+		(*Tdso)(unsafe.Pointer(dso)).Floadmap = x___libc_calloc(tls, uint64(1), uint64(8)+nsegs*uint64(24))
+		if !((*Tdso)(unsafe.Pointer(dso)).Floadmap != 0) {
+			goto error
+		}
+		(*Tfdpic_loadmap)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Floadmap)).Fnsegs = uint16(nsegs)
+		ph = ph0
+		i = Uint64FromInt32(0)
+		for ; i < nsegs; ph = ph + uintptr((*TEhdr)(unsafe.Pointer(eh)).Fe_phentsize) {
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_type != uint32(m_PT_LOAD) {
+				continue
+			}
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(2)) != 0 {
+				v9 = int32(m_PROT_READ)
+			} else {
+				v9 = 0
+			}
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(1)) != 0 {
+				v10 = int32(m_PROT_WRITE)
+			} else {
+				v10 = 0
+			}
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(0)) != 0 {
+				v11 = int32(m_PROT_EXEC)
+			} else {
+				v11 = 0
+			}
+			prot = uint32(v9 | v10 | v11)
+			map1 = x___mmap(tls, uintptr(0), (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz+(*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr&uint64(Int32FromInt32(m_PAGESIZE)-Int32FromInt32(1)), int32(prot), int32(m_MAP_PRIVATE), fd, int64((*TPhdr)(unsafe.Pointer(ph)).Fp_offset&uint64(-Int32FromInt32(m_PAGESIZE))))
+			if map1 == uintptr(-Int32FromInt32(1)) {
+				_unmap_library(tls, dso)
+				goto error
+			}
+			(*(*Tfdpic_loadseg)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Floadmap + 8 + uintptr(i)*24))).Faddr = uint64(map1) + (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr&uint64(Int32FromInt32(m_PAGESIZE)-Int32FromInt32(1))
+			(*(*Tfdpic_loadseg)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Floadmap + 8 + uintptr(i)*24))).Fp_vaddr = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr
+			(*(*Tfdpic_loadseg)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Floadmap + 8 + uintptr(i)*24))).Fp_memsz = (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz
+			i++
+			if prot&uint32(m_PROT_WRITE) != 0 {
+				brk = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr&uint64(Int32FromInt32(m_PAGESIZE)-Int32FromInt32(1)) + (*TPhdr)(unsafe.Pointer(ph)).Fp_filesz
+				pgbrk = (brk + uint64(m_PAGESIZE) - uint64(1)) & uint64(-Int32FromInt32(m_PAGESIZE))
+				pgend = (brk + (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz - (*TPhdr)(unsafe.Pointer(ph)).Fp_filesz + uint64(m_PAGESIZE) - uint64(1)) & uint64(-Int32FromInt32(m_PAGESIZE))
+				if pgend > pgbrk && _mmap_fixed(tls, map1+uintptr(pgbrk), pgend-pgbrk, int32(prot), Int32FromInt32(m_MAP_PRIVATE)|Int32FromInt32(m_MAP_FIXED)|Int32FromInt32(m_MAP_ANON), -int32(1), off_start) == uintptr(-Int32FromInt32(1)) {
+					goto error
+				}
+				_memset(tls, map1+uintptr(brk), 0, pgbrk-brk)
+			}
+		}
+		map1 = uintptr((*(*Tfdpic_loadseg)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Floadmap + 8))).Faddr)
+		map_len = uint64(0)
+		goto done_mapping
+	}
+	addr_max += uint64(Int32FromInt32(m_PAGESIZE) - Int32FromInt32(1))
+	addr_max &= uint64(-Int32FromInt32(m_PAGESIZE))
+	addr_min &= uint64(-Int32FromInt32(m_PAGESIZE))
+	off_start &= int64(-int32(m_PAGESIZE))
+	map_len = addr_max - addr_min + uint64(off_start)
+	/* The first time, we map too much, possibly even more than
+	 * the length of the file. This is okay because we will not
+	 * use the invalid part; we just need to reserve the right
+	 * amount of virtual address space to map over later. */
+	map1 = x___mmap(tls, uintptr(addr_min), map_len, int32(prot), int32(m_MAP_PRIVATE), fd, off_start)
+	if map1 == uintptr(-Int32FromInt32(1)) {
+		goto error
+	}
+	(*Tdso)(unsafe.Pointer(dso)).Fmap1 = map1
+	(*Tdso)(unsafe.Pointer(dso)).Fmap_len = map_len
+	/* If the loaded file is not relocatable and the requested address is
+	 * not available, then the load operation must fail. */
+	if int32((*TEhdr)(unsafe.Pointer(eh)).Fe_type) != int32(m_ET_DYN) && addr_min != 0 && map1 != uintptr(addr_min) {
+		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_EBUSY)
+		goto error
+	}
+	base = map1 - uintptr(addr_min)
+	(*Tdso)(unsafe.Pointer(dso)).Fphdr = uintptr(0)
+	(*Tdso)(unsafe.Pointer(dso)).Fphnum = 0
+	ph = ph0
+	i = uint64((*TEhdr)(unsafe.Pointer(eh)).Fe_phnum)
+	for i != 0 {
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_type != uint32(m_PT_LOAD) {
+			goto _12
+		}
+		/* Check if the programs headers are in this load segment, and
+		 * if so, record the address for use by dl_iterate_phdr. */
+		if !((*Tdso)(unsafe.Pointer(dso)).Fphdr != 0) && (*TEhdr)(unsafe.Pointer(eh)).Fe_phoff >= (*TPhdr)(unsafe.Pointer(ph)).Fp_offset && (*TEhdr)(unsafe.Pointer(eh)).Fe_phoff+phsize <= (*TPhdr)(unsafe.Pointer(ph)).Fp_offset+(*TPhdr)(unsafe.Pointer(ph)).Fp_filesz {
+			(*Tdso)(unsafe.Pointer(dso)).Fphdr = base + uintptr((*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr) + uintptr((*TEhdr)(unsafe.Pointer(eh)).Fe_phoff-(*TPhdr)(unsafe.Pointer(ph)).Fp_offset)
+			(*Tdso)(unsafe.Pointer(dso)).Fphnum = int32((*TEhdr)(unsafe.Pointer(eh)).Fe_phnum)
+			(*Tdso)(unsafe.Pointer(dso)).Fphentsize = uint64((*TEhdr)(unsafe.Pointer(eh)).Fe_phentsize)
+		}
+		this_min = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr & uint64(-Int32FromInt32(m_PAGESIZE))
+		this_max = ((*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr + (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz + uint64(m_PAGESIZE) - uint64(1)) & uint64(-Int32FromInt32(m_PAGESIZE))
+		off_start = int64((*TPhdr)(unsafe.Pointer(ph)).Fp_offset & uint64(-Int32FromInt32(m_PAGESIZE)))
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(2)) != 0 {
+			v13 = int32(m_PROT_READ)
+		} else {
+			v13 = 0
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(1)) != 0 {
+			v14 = int32(m_PROT_WRITE)
+		} else {
+			v14 = 0
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(0)) != 0 {
+			v15 = int32(m_PROT_EXEC)
+		} else {
+			v15 = 0
+		}
+		prot = uint32(v13 | v14 | v15)
+		/* Reuse the existing mapping for the lowest-address LOAD */
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr&uint64(-Int32FromInt32(m_PAGESIZE)) != addr_min || m_DL_NOMMU_SUPPORT != 0 {
+			if _mmap_fixed(tls, base+uintptr(this_min), this_max-this_min, int32(prot), Int32FromInt32(m_MAP_PRIVATE)|Int32FromInt32(m_MAP_FIXED), fd, off_start) == uintptr(-Int32FromInt32(1)) {
+				goto error
+			}
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz > (*TPhdr)(unsafe.Pointer(ph)).Fp_filesz && (*TPhdr)(unsafe.Pointer(ph)).Fp_flags&uint32(Int32FromInt32(1)<<Int32FromInt32(1)) != 0 {
+			brk1 = uint64(base) + (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr + (*TPhdr)(unsafe.Pointer(ph)).Fp_filesz
+			pgbrk1 = (brk1 + uint64(m_PAGESIZE) - uint64(1)) & uint64(-Int32FromInt32(m_PAGESIZE))
+			_memset(tls, uintptr(brk1), 0, (pgbrk1-brk1)&uint64(Int32FromInt32(m_PAGESIZE)-Int32FromInt32(1)))
+			if pgbrk1-uint64(base) < this_max && _mmap_fixed(tls, uintptr(pgbrk1), uint64(base)+this_max-pgbrk1, int32(prot), Int32FromInt32(m_MAP_PRIVATE)|Int32FromInt32(m_MAP_FIXED)|Int32FromInt32(m_MAP_ANON), -int32(1), 0) == uintptr(-Int32FromInt32(1)) {
+				goto error
+			}
+		}
+		goto _12
+	_12:
+		i--
+		ph = ph + uintptr((*TEhdr)(unsafe.Pointer(eh)).Fe_phentsize)
+	}
+	for i = uint64(0); *(*uint64)(unsafe.Pointer(base + uintptr(dyn) + uintptr(i)*8)) != 0; {
+		if *(*uint64)(unsafe.Pointer(base + uintptr(dyn) + uintptr(i)*8)) == uint64(m_DT_TEXTREL) {
+			if x___mprotect(tls, map1, map_len, Int32FromInt32(m_PROT_READ)|Int32FromInt32(m_PROT_WRITE)|Int32FromInt32(m_PROT_EXEC)) != 0 && *(*int32)(unsafe.Pointer(x___errno_location(tls))) != int32(m_ENOSYS) {
+				goto error
+			}
+			break
+		}
+		goto _16
+	_16:
+		i += uint64(2)
+	}
+done_mapping:
+	(*Tdso)(unsafe.Pointer(dso)).Fbase = base
+	(*Tdso)(unsafe.Pointer(dso)).Fdynv = (*Tdso)(unsafe.Pointer(dso)).Fbase + uintptr(dyn)
+	if (*Tdso)(unsafe.Pointer(dso)).Ftls.Fsize != 0 {
+		(*Tdso)(unsafe.Pointer(dso)).Ftls.Fimage = (*Tdso)(unsafe.Pointer(dso)).Fbase + uintptr(tls_image)
+	}
+	x___libc_free(tls, allocated_buf)
+	return map1
+noexec:
+	*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_ENOEXEC)
+error:
+	if map1 != uintptr(-Int32FromInt32(1)) {
+		_unmap_library(tls, dso)
+	}
+	x___libc_free(tls, allocated_buf)
+	return uintptr(0)
+}
+
+func _path_open(tls *TLS, name uintptr, s uintptr, buf uintptr, buf_size uint64) (r int32) {
+	bp := tls.Alloc(32) /* tlsAllocs 0 maxVaListSize 24 */
+	defer tls.Free(32)
+	var fd, v1 int32
+	var l uint64
+	for {
+		s += uintptr(x_strspn(tls, s, ts+3133))
+		l = x_strcspn(tls, s, ts+3133)
+		if l-uint64(1) >= uint64(m_INT_MAX) {
+			return -int32(1)
+		}
+		if uint64(x_snprintf(tls, buf, buf_size, ts+3136, VaList(bp+8, int32(l), s, name))) < buf_size {
+			v1 = x_open(tls, buf, Int32FromInt32(m_O_RDONLY)|Int32FromInt32(m_O_CLOEXEC), 0)
+			fd = v1
+			if v1 >= 0 {
+				return fd
+			}
+			switch *(*int32)(unsafe.Pointer(x___errno_location(tls))) {
+			case int32(m_ENOENT):
+				fallthrough
+			case int32(m_ENOTDIR):
+				fallthrough
+			case int32(m_EACCES):
+				fallthrough
+			case int32(m_ENAMETOOLONG):
+			default:
+				/* Any negative value but -1 will inhibit
+				 * futher path search. */
+				return -int32(2)
+			}
+		}
+		s += uintptr(l)
+	}
+	return r
+}
+
+func _fixup_rpath(tls *TLS, p uintptr, buf uintptr, buf_size uint64) (r int32) {
+	var d, origin, s, t, v1, v2 uintptr
+	var l, n uint64
+	if (*Tdso)(unsafe.Pointer(p)).Frpath != 0 || !((*Tdso)(unsafe.Pointer(p)).Frpath_orig != 0) {
+		return 0
+	}
+	if !(x_strchr(tls, (*Tdso)(unsafe.Pointer(p)).Frpath_orig, int32('$')) != 0) {
+		(*Tdso)(unsafe.Pointer(p)).Frpath = (*Tdso)(unsafe.Pointer(p)).Frpath_orig
+		return 0
+	}
+	n = uint64(0)
+	s = (*Tdso)(unsafe.Pointer(p)).Frpath_orig
+	for {
+		v1 = x_strchr(tls, s, int32('$'))
+		t = v1
+		if !(v1 != 0) {
+			break
+		}
+		if x_strncmp(tls, t, ts+3144, uint64(7)) != 0 && x_strncmp(tls, t, ts+3152, uint64(9)) != 0 {
+			return 0
+		}
+		s = t + uintptr(1)
+		n++
+	}
+	if n > uint64(Int64FromInt64(0x7fffffffffffffff)/Int64FromInt32(m_PATH_MAX)) {
+		return 0
+	}
+	if (*Tdso)(unsafe.Pointer(p)).Fkernel_mapped != 0 {
+		/* $ORIGIN searches cannot be performed for the main program
+		 * when it is suid/sgid/AT_SECURE. This is because the
+		 * pathname is under the control of the caller of execve.
+		 * For libraries, however, $ORIGIN can be processed safely
+		 * since the library's pathname came from a trusted source
+		 * (either system paths or a call to dlopen). */
+		if x___libc.Fsecure != 0 {
+			return 0
+		}
+		l = uint64(x_readlink(tls, ts+310, buf, buf_size))
+		if l == uint64(-Int32FromInt32(1)) {
+			switch *(*int32)(unsafe.Pointer(x___errno_location(tls))) {
+			case int32(m_ENOENT):
+				fallthrough
+			case int32(m_ENOTDIR):
+				fallthrough
+			case int32(m_EACCES):
+				return 0
+			default:
+				return -int32(1)
+			}
+		}
+		if l >= buf_size {
+			return 0
+		}
+		*(*int8)(unsafe.Pointer(buf + uintptr(l))) = 0
+		origin = buf
+	} else {
+		origin = (*Tdso)(unsafe.Pointer(p)).Fname
+	}
+	t = x_strrchr(tls, origin, int32('/'))
+	if t != 0 {
+		l = uint64(int64(t) - int64(origin))
+	} else {
+		/* Normally p->name will always be an absolute or relative
+		 * pathname containing at least one '/' character, but in the
+		 * case where ldso was invoked as a command to execute a
+		 * program in the working directory, app.name may not. Fix. */
+		origin = ts + 664
+		l = uint64(1)
+	}
+	/* Disallow non-absolute origins for suid/sgid/AT_SECURE. */
+	if x___libc.Fsecure != 0 && int32(*(*int8)(unsafe.Pointer(origin))) != int32('/') {
+		return 0
+	}
+	(*Tdso)(unsafe.Pointer(p)).Frpath = x___libc_malloc(tls, x_strlen(tls, (*Tdso)(unsafe.Pointer(p)).Frpath_orig)+n*l+uint64(1))
+	if !((*Tdso)(unsafe.Pointer(p)).Frpath != 0) {
+		return -int32(1)
+	}
+	d = (*Tdso)(unsafe.Pointer(p)).Frpath
+	s = (*Tdso)(unsafe.Pointer(p)).Frpath_orig
+	for {
+		v2 = x_strchr(tls, s, int32('$'))
+		t = v2
+		if !(v2 != 0) {
+			break
+		}
+		_memcpy(tls, d, s, uint64(int64(t)-int64(s)))
+		d += uintptr(int64(t) - int64(s))
+		_memcpy(tls, d, origin, l)
+		d += uintptr(l)
+		/* It was determined previously that the '$' is followed
+		 * either by "ORIGIN" or "{ORIGIN}". */
+		s = t + uintptr(7) + uintptr(int32(2)*BoolInt32(int32(*(*int8)(unsafe.Pointer(t + 1))) == int32('{')))
+	}
+	x_strcpy(tls, d, s)
+	return 0
+}
+
+func _decode_dyn(tls *TLS, p uintptr) {
+	bp := tls.Alloc(296) /* tlsAllocs 296 maxVaListSize 0 */
+	defer tls.Free(296)
+	var _ /* dyn at bp+0 */ [37]uint64
+	_decode_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DYN_CNT))
+	(*Tdso)(unsafe.Pointer(p)).Fsyms = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(6)])
+	(*Tdso)(unsafe.Pointer(p)).Fstrings = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(5)])
+	if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_HASH)) != 0 {
+		(*Tdso)(unsafe.Pointer(p)).Fhashtab = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(4)])
+	}
+	if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_RPATH)) != 0 {
+		(*Tdso)(unsafe.Pointer(p)).Frpath_orig = (*Tdso)(unsafe.Pointer(p)).Fstrings + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RPATH)])
+	}
+	if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_RUNPATH)) != 0 {
+		(*Tdso)(unsafe.Pointer(p)).Frpath_orig = (*Tdso)(unsafe.Pointer(p)).Fstrings + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RUNPATH)])
+	}
+	if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_PLTGOT)) != 0 {
+		(*Tdso)(unsafe.Pointer(p)).Fgot = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(3)])
+	}
+	if _search_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DT_GNU_HASH)) != 0 {
+		(*Tdso)(unsafe.Pointer(p)).Fghashtab = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr(*(*uint64)(unsafe.Pointer(bp)))
+	}
+	if _search_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DT_VERSYM)) != 0 {
+		(*Tdso)(unsafe.Pointer(p)).Fversym = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr(*(*uint64)(unsafe.Pointer(bp)))
+	}
+}
+
+func _count_syms(tls *TLS, p uintptr) (r uint64) {
+	var buckets, hashval, v2 uintptr
+	var i, nsym, v1 uint64
+	if (*Tdso)(unsafe.Pointer(p)).Fhashtab != 0 {
+		return uint64(*(*uint32)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fhashtab + 1*4)))
+	}
+	buckets = (*Tdso)(unsafe.Pointer(p)).Fghashtab + uintptr(4)*4 + uintptr(uint64(*(*uint32)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fghashtab + 2*4)))*Uint64FromInt64(8)/Uint64FromInt32(4))*4
+	v1 = Uint64FromInt32(0)
+	nsym = v1
+	i = v1
+	for ; i < uint64(*(*uint32)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fghashtab))); i++ {
+		if uint64(*(*uint32)(unsafe.Pointer(buckets + uintptr(i)*4))) > nsym {
+			nsym = uint64(*(*uint32)(unsafe.Pointer(buckets + uintptr(i)*4)))
+		}
+	}
+	if nsym != 0 {
+		hashval = buckets + uintptr(*(*uint32)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fghashtab)))*4 + uintptr(nsym-uint64(*(*uint32)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fghashtab + 1*4))))*4
+		for first := true; ; first = false {
+			if !first {
+				v2 = hashval
+				hashval += 4
+				if !!(*(*uint32)(unsafe.Pointer(v2))&Uint32FromInt32(1) != 0) {
+					break
+				}
+			}
+			nsym++
+		}
+	}
+	return nsym
+}
+
+func _dl_mmap(tls *TLS, n uint64) (r uintptr) {
+	var flags, prot int32
+	var p, v1 uintptr
+	prot = Int32FromInt32(m_PROT_READ) | Int32FromInt32(m_PROT_WRITE)
+	flags = Int32FromInt32(m_MAP_ANON) | Int32FromInt32(m_MAP_PRIVATE)
+	p = uintptr(___syscall6(tls, int64(9), int64(Int32FromInt32(0)), int64(n), int64(prot), int64(flags), int64(-Int32FromInt32(1)), int64(Int32FromInt32(0))))
+	if uint64(p) > -Uint64FromUint64(4096) {
+		v1 = uintptr(0)
+	} else {
+		v1 = p
+	}
+	return v1
+}
+
+func _makefuncdescs(tls *TLS, p uintptr) {
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
+	defer tls.Free(16)
+	var i, nsym, size uint64
+	nsym = _count_syms(tls, p)
+	size = nsym * uint64(16)
+	if !(_self_done != 0) {
+		(*Tdso)(unsafe.Pointer(p)).Ffuncdescs = _dl_mmap(tls, size)
+		_self_done = int32(1)
+	} else {
+		(*Tdso)(unsafe.Pointer(p)).Ffuncdescs = x___libc_malloc(tls, size)
+	}
+	if !((*Tdso)(unsafe.Pointer(p)).Ffuncdescs != 0) {
+		if !(_runtime != 0) {
+			_a_crash(tls)
+		}
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3162, VaList(bp+8, (*Tdso)(unsafe.Pointer(p)).Fname))
+		_longjmp(tls, _rtld_fail, int32(1))
+	}
+	for i = uint64(0); i < nsym; i++ {
+		if int32((*(*TSym)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fsyms + uintptr(i)*24))).Fst_info)&int32(0xf) == int32(m_STT_FUNC) && (*(*TSym)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fsyms + uintptr(i)*24))).Fst_shndx != 0 {
+			(*(*Tfuncdesc)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Ffuncdescs + uintptr(i)*16))).Faddr = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*TSym)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fsyms + uintptr(i)*24))).Fst_value)
+			(*(*Tfuncdesc)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Ffuncdescs + uintptr(i)*16))).Fgot = (*Tdso)(unsafe.Pointer(p)).Fgot
+		} else {
+			(*(*Tfuncdesc)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Ffuncdescs + uintptr(i)*16))).Faddr = uintptr(0)
+			(*(*Tfuncdesc)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Ffuncdescs + uintptr(i)*16))).Fgot = uintptr(0)
+		}
+	}
+}
+
+var _self_done int32
+
+func _load_library(tls *TLS, name uintptr, needed_by uintptr) (r uintptr) {
+	bp := tls.Alloc(1056) /* tlsAllocs 1024 maxVaListSize 24 */
+	defer tls.Free(1056)
+	var alloc_size, n, per_th, prefix_len, v3, v6 uint64
+	var etc_ldso_path, map1, next, p, pathname, prefix, rp, s, t, z, v1, v2, v4, v5 uintptr
+	var fd, is_self, n_th int32
+	var mask uint32
+	var _ /* buf at bp+0 */ [512]int8
+	var _ /* st at bp+880 */ Tstat
+	var _ /* temp_dso at bp+512 */ Tdso
+	defer func() { x_realloc(tls, etc_ldso_path, 0) }()
+	*(*Tdso)(unsafe.Pointer(bp + 512)) = struct {
+		Fbase           uintptr
+		Fname           uintptr
+		Fdynv           uintptr
+		Fnext           uintptr
+		Fprev           uintptr
+		Fphdr           uintptr
+		Fphnum          int32
+		Fphentsize      uint64
+		Fsyms           uintptr
+		Fhashtab        uintptr
+		Fghashtab       uintptr
+		Fversym         uintptr
+		Fstrings        uintptr
+		Fsyms_next      uintptr
+		Flazy_next      uintptr
+		Flazy           uintptr
+		Flazy_cnt       uint64
+		Fmap1           uintptr
+		Fmap_len        uint64
+		Fdev            uint64
+		Fino            uint64
+		Frelocated      int8
+		Fconstructed    int8
+		Fkernel_mapped  int8
+		Fmark           int8
+		Fbfs_built      int8
+		Fruntime_loaded int8
+		Fdeps           uintptr
+		Fneeded_by      uintptr
+		Fndeps_direct   uint64
+		Fnext_dep       uint64
+		Fctor_visitor   uintptr
+		Frpath_orig     uintptr
+		Frpath          uintptr
+		Ftls            Ttls_module
+		Ftls_id         uint64
+		Frelro_start    uint64
+		Frelro_end      uint64
+		Fnew_dtv        uintptr
+		Fnew_tls        uintptr
+		Ftd_index       uintptr
+		Ffini_next      uintptr
+		Fshortname      uintptr
+		Floadmap        uintptr
+		Ffuncdescs      uintptr
+		Fgot            uintptr
+	}{}
+	n_th = 0
+	is_self = 0
+	if !(*(*int8)(unsafe.Pointer(name)) != 0) {
+		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_EINVAL)
+		return uintptr(0)
+	}
+	/* Catch and block attempts to reload the implementation itself */
+	if int32(*(*int8)(unsafe.Pointer(name))) == int32('l') && int32(*(*int8)(unsafe.Pointer(name + 1))) == int32('i') && int32(*(*int8)(unsafe.Pointer(name + 2))) == int32('b') {
+		for rp = uintptr(unsafe.Pointer(&_reserved)); *(*int8)(unsafe.Pointer(rp)) != 0; rp = next {
+			next = x_strchr(tls, rp, int32('.')) + uintptr(1)
+			if x_strncmp(tls, name+uintptr(3), rp, uint64(int64(next)-int64(rp))) == 0 {
+				break
+			}
+		}
+		if *(*int8)(unsafe.Pointer(rp)) != 0 {
+			if _ldd_mode != 0 {
+				mask = uint32(1) << (int64(rp) - int64(uintptr(unsafe.Pointer(&_reserved))))
+				if !(_reported&mask != 0) {
+					_reported |= mask
+					x_dprintf(tls, int32(1), ts+3207, VaList(bp+1032, name, _ldso.Fname, _ldso.Fbase))
+				}
+			}
+			is_self = int32(1)
+		}
+	}
+	if !(_dl_strcmp(tls, name, _ldso.Fname) != 0) {
+		is_self = int32(1)
+	}
+	if is_self != 0 {
+		if !(_ldso.Fprev != 0) {
+			(*Tdso)(unsafe.Pointer(_tail)).Fnext = uintptr(unsafe.Pointer(&_ldso))
+			_ldso.Fprev = _tail
+			_tail = uintptr(unsafe.Pointer(&_ldso))
+		}
+		return uintptr(unsafe.Pointer(&_ldso))
+	}
+	if x_strchr(tls, name, int32('/')) != 0 {
+		pathname = name
+		fd = x_open(tls, name, Int32FromInt32(m_O_RDONLY)|Int32FromInt32(m_O_CLOEXEC), 0)
+	} else {
+		/* Search for the name to see if it's already loaded */
+		for p = (*Tdso)(unsafe.Pointer(_head1)).Fnext; p != 0; p = (*Tdso)(unsafe.Pointer(p)).Fnext {
+			if (*Tdso)(unsafe.Pointer(p)).Fshortname != 0 && !(_dl_strcmp(tls, (*Tdso)(unsafe.Pointer(p)).Fshortname, name) != 0) {
+				return p
+			}
+		}
+		if x_strlen(tls, name) > uint64(m_NAME_MAX) {
+			return uintptr(0)
+		}
+		fd = -int32(1)
+		if _env_path != 0 {
+			fd = _path_open(tls, name, _env_path, bp, uint64(512))
+		}
+		for p = needed_by; fd == -int32(1) && p != 0; p = (*Tdso)(unsafe.Pointer(p)).Fneeded_by {
+			if _fixup_rpath(tls, p, bp, uint64(512)) < 0 {
+				fd = -int32(2)
+			} /* Inhibit further search. */
+			if (*Tdso)(unsafe.Pointer(p)).Frpath != 0 {
+				fd = _path_open(tls, name, (*Tdso)(unsafe.Pointer(p)).Frpath, bp, uint64(512))
+			}
+		}
+		if fd == -int32(1) {
+			if !(_sys_path != 0) {
+				prefix = uintptr(0)
+				if int32(*(*int8)(unsafe.Pointer(_ldso.Fname))) == int32('/') {
+					v2 = _ldso.Fname
+					z = v2
+					v1 = v2
+					t = v1
+					s = v1
+					for ; *(*int8)(unsafe.Pointer(s)) != 0; s++ {
+						if int32(*(*int8)(unsafe.Pointer(s))) == int32('/') {
+							z = t
+							t = s
+						}
+					}
+					prefix_len = uint64(int64(z) - int64(_ldso.Fname))
+					if prefix_len < uint64(m_PATH_MAX) {
+						prefix = _ldso.Fname
+					}
+				}
+				if !(prefix != 0) {
+					prefix = ts
+					prefix_len = uint64(0)
+				}
+				v3 = prefix_len + uint64(1) + uint64(25)
+				etc_ldso_path = x_realloc(tls, etc_ldso_path, v3)
+				x_snprintf(tls, etc_ldso_path, v3, ts+3223, VaList(bp+1032, int32(prefix_len), prefix))
+				fd = x_open(tls, etc_ldso_path, Int32FromInt32(m_O_RDONLY)|Int32FromInt32(m_O_CLOEXEC), 0)
+				if fd >= 0 {
+					n = uint64(0)
+					if !(x___fstat(tls, fd, bp+880) != 0) {
+						n = uint64((*(*Tstat)(unsafe.Pointer(bp + 880))).Fst_size)
+					}
+					v4 = x___libc_malloc(tls, n+uint64(1))
+					_sys_path = v4
+					if v4 != 0 {
+						*(*int8)(unsafe.Pointer(_sys_path + uintptr(n))) = 0
+					}
+					if !(_sys_path != 0) || _read_loop(tls, fd, _sys_path, n) < 0 {
+						x___libc_free(tls, _sys_path)
+						_sys_path = ts
+					}
+					x_close(tls, fd)
+				} else if *(*int32)(unsafe.Pointer(x___errno_location(tls))) != int32(m_ENOENT) {
+					_sys_path = ts
+				}
+			}
+			if !(_sys_path != 0) {
+				_sys_path = ts + 3252
+			}
+			fd = _path_open(tls, name, _sys_path, bp, uint64(512))
+		}
+		pathname = bp
+	}
+	if fd < 0 {
+		return uintptr(0)
+	}
+	if x___fstat(tls, fd, bp+880) < 0 {
+		x_close(tls, fd)
+		return uintptr(0)
+	}
+	for p = (*Tdso)(unsafe.Pointer(_head1)).Fnext; p != 0; p = (*Tdso)(unsafe.Pointer(p)).Fnext {
+		if (*Tdso)(unsafe.Pointer(p)).Fdev == (*(*Tstat)(unsafe.Pointer(bp + 880))).Fst_dev && (*Tdso)(unsafe.Pointer(p)).Fino == (*(*Tstat)(unsafe.Pointer(bp + 880))).Fst_ino {
+			/* If this library was previously loaded with a
+			 * pathname but a search found the same inode,
+			 * setup its shortname so it can be found by name. */
+			if !((*Tdso)(unsafe.Pointer(p)).Fshortname != 0) && pathname != name {
+				(*Tdso)(unsafe.Pointer(p)).Fshortname = x_strrchr(tls, (*Tdso)(unsafe.Pointer(p)).Fname, int32('/')) + uintptr(1)
+			}
+			x_close(tls, fd)
+			return p
+		}
+	}
+	if _noload != 0 {
+		v5 = uintptr(0)
+	} else {
+		v5 = _map_library(tls, fd, bp+512)
+	}
+	map1 = v5
+	x_close(tls, fd)
+	if !(map1 != 0) {
+		return uintptr(0)
+	}
+	/* Avoid the danger of getting two versions of libc mapped into the
+	 * same process when an absolute pathname was used. The symbols
+	 * checked are chosen to catch both musl and glibc, and to avoid
+	 * false positives from interposition-hack libraries. */
+	_decode_dyn(tls, bp+512)
+	if _find_sym(tls, bp+512, ts+3281, int32(1)).Fsym != 0 && _find_sym(tls, bp+512, ts+3299, int32(1)).Fsym != 0 {
+		_unmap_library(tls, bp+512)
+		return _load_library(tls, ts+3305, needed_by)
+	}
+	/* Past this point, if we haven't reached runtime yet, ldso has
+	 * committed either to use the mapped library or to abort execution.
+	 * Unmapping is not possible, so we can safely reclaim gaps. */
+	if !(_runtime != 0) {
+		_reclaim_gaps(tls, bp+512)
+	}
+	/* Allocate storage for the new DSO. When there is TLS, this
+	 * storage must include a reservation for all pre-existing
+	 * threads to obtain copies of both the new TLS, and an
+	 * extended DTV capable of storing an additional slot for
+	 * the newly-loaded DSO. */
+	alloc_size = uint64(368) + x_strlen(tls, pathname) + uint64(1)
+	if _runtime != 0 && (*(*Tdso)(unsafe.Pointer(bp + 512))).Ftls.Fimage != 0 {
+		per_th = (*(*Tdso)(unsafe.Pointer(bp + 512))).Ftls.Fsize + (*(*Tdso)(unsafe.Pointer(bp + 512))).Ftls.Falign + uint64(8)*(_tls_cnt+uint64(3))
+		n_th = x___libc.Fthreads_minus_1 + int32(1)
+		if uint64(n_th) > uint64(0x7fffffffffffffff)/per_th {
+			alloc_size = Uint64FromUint64(0xffffffffffffffff)
+		} else {
+			alloc_size += uint64(n_th) * per_th
+		}
+	}
+	p = x___libc_calloc(tls, uint64(1), alloc_size)
+	if !(p != 0) {
+		_unmap_library(tls, bp+512)
+		return uintptr(0)
+	}
+	_memcpy(tls, p, bp+512, uint64(368))
+	(*Tdso)(unsafe.Pointer(p)).Fdev = (*(*Tstat)(unsafe.Pointer(bp + 880))).Fst_dev
+	(*Tdso)(unsafe.Pointer(p)).Fino = (*(*Tstat)(unsafe.Pointer(bp + 880))).Fst_ino
+	(*Tdso)(unsafe.Pointer(p)).Fneeded_by = needed_by
+	(*Tdso)(unsafe.Pointer(p)).Fname = p + 368
+	(*Tdso)(unsafe.Pointer(p)).Fruntime_loaded = int8(_runtime)
+	x_strcpy(tls, (*Tdso)(unsafe.Pointer(p)).Fname, pathname)
+	/* Add a shortname only if name arg was not an explicit pathname. */
+	if pathname != name {
+		(*Tdso)(unsafe.Pointer(p)).Fshortname = x_strrchr(tls, (*Tdso)(unsafe.Pointer(p)).Fname, int32('/')) + uintptr(1)
+	}
+	if (*Tdso)(unsafe.Pointer(p)).Ftls.Fimage != 0 {
+		_tls_cnt++
+		v6 = _tls_cnt
+		(*Tdso)(unsafe.Pointer(p)).Ftls_id = v6
+		_tls_align = -(-_tls_align & -(*Tdso)(unsafe.Pointer(p)).Ftls.Falign)
+		_tls_offset += (*Tdso)(unsafe.Pointer(p)).Ftls.Fsize + (*Tdso)(unsafe.Pointer(p)).Ftls.Falign - uint64(1)
+		_tls_offset -= (_tls_offset + uint64((*Tdso)(unsafe.Pointer(p)).Ftls.Fimage)) & ((*Tdso)(unsafe.Pointer(p)).Ftls.Falign - uint64(1))
+		(*Tdso)(unsafe.Pointer(p)).Ftls.Foffset = _tls_offset
+		(*Tdso)(unsafe.Pointer(p)).Fnew_dtv = uintptr(-Uint64FromInt64(8) & uint64((*Tdso)(unsafe.Pointer(p)).Fname+uintptr(x_strlen(tls, (*Tdso)(unsafe.Pointer(p)).Fname))+UintptrFromInt64(8)))
+		(*Tdso)(unsafe.Pointer(p)).Fnew_tls = (*Tdso)(unsafe.Pointer(p)).Fnew_dtv + uintptr(uint64(n_th)*(_tls_cnt+Uint64FromInt32(1)))*8
+		if _tls_tail != 0 {
+			(*Ttls_module)(unsafe.Pointer(_tls_tail)).Fnext = p + 232
+		} else {
+			x___libc.Ftls_head = p + 232
+		}
+		_tls_tail = p + 232
+	}
+	(*Tdso)(unsafe.Pointer(_tail)).Fnext = p
+	(*Tdso)(unsafe.Pointer(p)).Fprev = _tail
+	_tail = p
+	if m_DL_FDPIC != 0 {
+		_makefuncdescs(tls, p)
+	}
+	if _ldd_mode != 0 {
+		x_dprintf(tls, int32(1), ts+3207, VaList(bp+1032, name, pathname, (*Tdso)(unsafe.Pointer(p)).Fbase))
+	}
+	return p
+}
+
+var _reserved = [29]int8{'c', '.', 'p', 't', 'h', 'r', 'e', 'a', 'd', '.', 'r', 't', '.', 'm', '.', 'd', 'l', '.', 'u', 't', 'i', 'l', '.', 'x', 'n', 'e', 't', '.'}
+
+/* Track which names have been resolved
+ * and only report each one once. */
+var _reported uint32
+
+func _load_direct_deps(tls *TLS, p uintptr) {
+	bp := tls.Alloc(24) /* tlsAllocs 0 maxVaListSize 16 */
+	defer tls.Free(24)
+	var cnt, i, v3, v5 uint64
+	var dep, q, q1, v2 uintptr
+	cnt = uint64(0)
+	if (*Tdso)(unsafe.Pointer(p)).Fdeps != 0 {
+		return
+	}
+	/* For head, all preloads are direct pseudo-dependencies.
+	 * Count and include them now to avoid realloc later. */
+	if p == _head1 {
+		q = (*Tdso)(unsafe.Pointer(p)).Fnext
+		for ; q != 0; q = (*Tdso)(unsafe.Pointer(q)).Fnext {
+			cnt++
+		}
+	}
+	for i = uint64(0); *(*uint64)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdynv + uintptr(i)*8)) != 0; {
+		if *(*uint64)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdynv + uintptr(i)*8)) == uint64(m_DT_NEEDED) {
+			cnt++
+		}
+		goto _1
+	_1:
+		i += uint64(2)
+	}
+	/* Use builtin buffer for apps with no external deps, to
+	 * preserve property of no runtime failure paths. */
+	if p == _head1 && cnt < uint64(2) {
+		v2 = uintptr(unsafe.Pointer(&_builtin_deps))
+	} else {
+		v2 = x___libc_calloc(tls, cnt+uint64(1), uint64(8))
+	}
+	(*Tdso)(unsafe.Pointer(p)).Fdeps = v2
+	if !((*Tdso)(unsafe.Pointer(p)).Fdeps != 0) {
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3313, VaList(bp+8, (*Tdso)(unsafe.Pointer(p)).Fname))
+		if _runtime != 0 {
+			_longjmp(tls, _rtld_fail, int32(1))
+		}
+	}
+	cnt = uint64(0)
+	if p == _head1 {
+		q1 = (*Tdso)(unsafe.Pointer(p)).Fnext
+		for ; q1 != 0; q1 = (*Tdso)(unsafe.Pointer(q1)).Fnext {
+			v3 = cnt
+			cnt++
+			*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(v3)*8)) = q1
+		}
+	}
+	for i = uint64(0); *(*uint64)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdynv + uintptr(i)*8)) != 0; {
+		if *(*uint64)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdynv + uintptr(i)*8)) != uint64(m_DT_NEEDED) {
+			goto _4
+		}
+		dep = _load_library(tls, (*Tdso)(unsafe.Pointer(p)).Fstrings+uintptr(*(*uint64)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdynv + uintptr(i+uint64(1))*8))), p)
+		if !(dep != 0) {
+			(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3347, VaList(bp+8, (*Tdso)(unsafe.Pointer(p)).Fstrings+uintptr(*(*uint64)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdynv + uintptr(i+uint64(1))*8))), (*Tdso)(unsafe.Pointer(p)).Fname))
+			if _runtime != 0 {
+				_longjmp(tls, _rtld_fail, int32(1))
+			}
+			goto _4
+		}
+		v5 = cnt
+		cnt++
+		*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(v5)*8)) = dep
+		goto _4
+	_4:
+		i += uint64(2)
+	}
+	*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(cnt)*8)) = uintptr(0)
+	(*Tdso)(unsafe.Pointer(p)).Fndeps_direct = cnt
+}
+
+func _load_deps(tls *TLS, p uintptr) {
+	if (*Tdso)(unsafe.Pointer(p)).Fdeps != 0 {
+		return
+	}
+	for ; p != 0; p = (*Tdso)(unsafe.Pointer(p)).Fnext {
+		_load_direct_deps(tls, p)
+	}
+}
+
+func _extend_bfs_deps(tls *TLS, p uintptr) {
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
+	defer tls.Free(16)
+	var cnt, i, j, ndeps_all, v1, v3 uint64
+	var dep, tmp, v2 uintptr
+	var no_realloc int32
+	/* Can't use realloc if the original p->deps was allocated at
+	 * program entry and malloc has been replaced, or if it's
+	 * the builtin non-allocated trivial main program deps array. */
+	no_realloc = BoolInt32(x___malloc_replaced != 0 && !((*Tdso)(unsafe.Pointer(p)).Fruntime_loaded != 0) || (*Tdso)(unsafe.Pointer(p)).Fdeps == uintptr(unsafe.Pointer(&_builtin_deps)))
+	if (*Tdso)(unsafe.Pointer(p)).Fbfs_built != 0 {
+		return
+	}
+	ndeps_all = (*Tdso)(unsafe.Pointer(p)).Fndeps_direct
+	/* Mark existing (direct) deps so they won't be duplicated. */
+	for i = uint64(0); *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(i)*8)) != 0; i++ {
+		(*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(i)*8)))).Fmark = int8(1)
+	}
+	/* For each dependency already in the list, copy its list of direct
+	 * dependencies to the list, excluding any items already in the
+	 * list. Note that the list this loop iterates over will grow during
+	 * the loop, but since duplicates are excluded, growth is bounded. */
+	for i = uint64(0); *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(i)*8)) != 0; i++ {
+		dep = *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(i)*8))
+		v1 = Uint64FromInt32(0)
+		cnt = v1
+		j = v1
+		for ; j < (*Tdso)(unsafe.Pointer(dep)).Fndeps_direct; j++ {
+			if !((*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dep)).Fdeps + uintptr(j)*8)))).Fmark != 0) {
+				cnt++
+			}
+		}
+		if no_realloc != 0 {
+			v2 = x___libc_malloc(tls, uint64(8)*(ndeps_all+cnt+uint64(1)))
+		} else {
+			v2 = x___libc_realloc(tls, (*Tdso)(unsafe.Pointer(p)).Fdeps, uint64(8)*(ndeps_all+cnt+uint64(1)))
+		}
+		tmp = v2
+		if !(tmp != 0) {
+			(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3398, VaList(bp+8, (*Tdso)(unsafe.Pointer(p)).Fname))
+			if _runtime != 0 {
+				_longjmp(tls, _rtld_fail, int32(1))
+			}
+			continue
+		}
+		if no_realloc != 0 {
+			_memcpy(tls, tmp, (*Tdso)(unsafe.Pointer(p)).Fdeps, uint64(8)*(ndeps_all+uint64(1)))
+			no_realloc = 0
+		}
+		(*Tdso)(unsafe.Pointer(p)).Fdeps = tmp
+		for j = uint64(0); j < (*Tdso)(unsafe.Pointer(dep)).Fndeps_direct; j++ {
+			if (*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dep)).Fdeps + uintptr(j)*8)))).Fmark != 0 {
+				continue
+			}
+			(*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dep)).Fdeps + uintptr(j)*8)))).Fmark = int8(1)
+			v3 = ndeps_all
+			ndeps_all++
+			*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(v3)*8)) = *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dep)).Fdeps + uintptr(j)*8))
+		}
+		*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(ndeps_all)*8)) = uintptr(0)
+	}
+	(*Tdso)(unsafe.Pointer(p)).Fbfs_built = int8(1)
+	for p = _head1; p != 0; p = (*Tdso)(unsafe.Pointer(p)).Fnext {
+		(*Tdso)(unsafe.Pointer(p)).Fmark = 0
+	}
+}
+
+func _load_preload(tls *TLS, s uintptr) {
+	var tmp, v1, v2, v5, v6 int32
+	var z uintptr
+	var v4, v8 bool
+	for z = s; *(*int8)(unsafe.Pointer(z)) != 0; s = z {
+		for ; ; s++ {
+			if v4 = *(*int8)(unsafe.Pointer(s)) != 0; v4 {
+				v1 = int32(*(*int8)(unsafe.Pointer(s)))
+				v2 = BoolInt32(v1 == int32(' ') || uint32(v1)-uint32('\t') < uint32(5))
+				goto _3
+			_3:
+			}
+			if !(v4 && (v2 != 0 || int32(*(*int8)(unsafe.Pointer(s))) == int32(':'))) {
+				break
+			}
+		}
+		for z = s; ; z++ {
+			if v8 = *(*int8)(unsafe.Pointer(z)) != 0; v8 {
+				v5 = int32(*(*int8)(unsafe.Pointer(z)))
+				v6 = BoolInt32(v5 == int32(' ') || uint32(v5)-uint32('\t') < uint32(5))
+				goto _7
+			_7:
+			}
+			if !(v8 && !(v6 != 0) && int32(*(*int8)(unsafe.Pointer(z))) != int32(':')) {
+				break
+			}
+		}
+		tmp = int32(*(*int8)(unsafe.Pointer(z)))
+		*(*int8)(unsafe.Pointer(z)) = 0
+		_load_library(tls, s, uintptr(0))
+		*(*int8)(unsafe.Pointer(z)) = int8(tmp)
+	}
+}
+
+func _add_syms(tls *TLS, p uintptr) {
+	if !((*Tdso)(unsafe.Pointer(p)).Fsyms_next != 0) && _syms_tail != p {
+		(*Tdso)(unsafe.Pointer(_syms_tail)).Fsyms_next = p
+		_syms_tail = p
+	}
+}
+
+func _revert_syms(tls *TLS, old_tail uintptr) {
+	var next, p uintptr
+	/* Chop off the tail of the list of dsos that participate in
+	 * the global symbol table, reverting them to RTLD_LOCAL. */
+	for p = old_tail; p != 0; p = next {
+		next = (*Tdso)(unsafe.Pointer(p)).Fsyms_next
+		(*Tdso)(unsafe.Pointer(p)).Fsyms_next = uintptr(0)
+	}
+	_syms_tail = old_tail
+}
+
+func _do_mips_relocs(tls *TLS, p uintptr, got uintptr) {
+	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
+	defer tls.Free(32)
+	var base, sym, v2 uintptr
+	var v1 uint64
+	var _ /* i at bp+0 */ uint64
+	var _ /* j at bp+8 */ uint64
+	var _ /* rel at bp+16 */ [2]uint64
+	base = (*Tdso)(unsafe.Pointer(p)).Fbase
+	*(*uint64)(unsafe.Pointer(bp)) = uint64(0)
+	_search_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DT_MIPS_LOCAL_GOTNO))
+	if p == uintptr(unsafe.Pointer(&_ldso)) {
+		got += uintptr(*(*uint64)(unsafe.Pointer(bp))) * 8
+	} else {
+		for {
+			v1 = *(*uint64)(unsafe.Pointer(bp))
+			*(*uint64)(unsafe.Pointer(bp))--
+			if !(v1 != 0) {
+				break
+			}
+			v2 = got
+			got += 8
+			*(*uint64)(unsafe.Pointer(v2)) += uint64(base)
+		}
+	}
+	*(*uint64)(unsafe.Pointer(bp + 8)) = uint64(0)
+	_search_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp+8, uint64(m_DT_MIPS_GOTSYM))
+	*(*uint64)(unsafe.Pointer(bp)) = uint64(0)
+	_search_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DT_MIPS_SYMTABNO))
+	sym = (*Tdso)(unsafe.Pointer(p)).Fsyms + uintptr(*(*uint64)(unsafe.Pointer(bp + 8)))*24
+	(*(*[2]uint64)(unsafe.Pointer(bp + 16)))[0] = uint64(int64(got) - int64(base))
+	*(*uint64)(unsafe.Pointer(bp)) -= *(*uint64)(unsafe.Pointer(bp + 8))
+	for *(*uint64)(unsafe.Pointer(bp)) != 0 {
+		(*(*[2]uint64)(unsafe.Pointer(bp + 16)))[int32(1)] = uint64((int64(sym)-int64((*Tdso)(unsafe.Pointer(p)).Fsyms))/24)<<Int32FromInt32(32) + uint64(Int32FromInt32(127))
+		_do_relocs(tls, p, bp+16, uint64(16), uint64(2))
+		goto _3
+	_3:
+		*(*uint64)(unsafe.Pointer(bp))--
+		sym += 24
+		*(*uint64)(unsafe.Pointer(bp + 16)) += uint64(8)
+	}
+}
+
+func _reloc_all(tls *TLS, p uintptr) {
+	bp := tls.Alloc(312) /* tlsAllocs 296 maxVaListSize 8 */
+	defer tls.Free(312)
+	var ret int64
+	var _ /* dyn at bp+0 */ [37]uint64
+	for ; p != 0; p = (*Tdso)(unsafe.Pointer(p)).Fnext {
+		if (*Tdso)(unsafe.Pointer(p)).Frelocated != 0 {
+			continue
+		}
+		_decode_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DYN_CNT))
+		if m_NEED_MIPS_GOT_RELOCS != 0 {
+			_do_mips_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(3)]))
+		}
+		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(23)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_PLTRELSZ)], uint64(int32(2)+BoolInt32((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_PLTREL)] == uint64(m_DT_RELA))))
+		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(17)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELSZ)], uint64(2))
+		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(7)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELASZ)], uint64(3))
+		if !(Int32FromInt32(m_DL_FDPIC) != 0) {
+			_do_relr_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(36)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELRSZ)])
+		}
+		if _head1 != uintptr(unsafe.Pointer(&_ldso)) && (*Tdso)(unsafe.Pointer(p)).Frelro_start != (*Tdso)(unsafe.Pointer(p)).Frelro_end {
+			ret = ___syscall3(tls, int64(10), int64((*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*Tdso)(unsafe.Pointer(p)).Frelro_start)), int64((*Tdso)(unsafe.Pointer(p)).Frelro_end-(*Tdso)(unsafe.Pointer(p)).Frelro_start), int64(Int32FromInt32(1)))
+			if ret != 0 && ret != int64(-int32(m_ENOSYS)) {
+				(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3434, VaList(bp+304, (*Tdso)(unsafe.Pointer(p)).Fname))
+				if _runtime != 0 {
+					_longjmp(tls, _rtld_fail, int32(1))
+				}
+			}
+		}
+		(*Tdso)(unsafe.Pointer(p)).Frelocated = int8(1)
+	}
+}
+
+func _kernel_mapped_dso(tls *TLS, p uintptr) {
+	var cnt, max_addr, min_addr, v1, v2 uint64
+	var ph uintptr
+	min_addr = uint64(-Int32FromInt32(1))
+	max_addr = uint64(0)
+	ph = (*Tdso)(unsafe.Pointer(p)).Fphdr
+	for cnt = uint64((*Tdso)(unsafe.Pointer(p)).Fphnum); ; ph = ph + uintptr((*Tdso)(unsafe.Pointer(p)).Fphentsize) {
+		v1 = cnt
+		cnt--
+		if !(v1 != 0) {
+			break
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_type == uint32(m_PT_DYNAMIC) {
+			(*Tdso)(unsafe.Pointer(p)).Fdynv = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr)
+		} else {
+			if (*TPhdr)(unsafe.Pointer(ph)).Fp_type == uint32(m_PT_GNU_RELRO) {
+				(*Tdso)(unsafe.Pointer(p)).Frelro_start = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr & uint64(-Int32FromInt32(m_PAGESIZE))
+				(*Tdso)(unsafe.Pointer(p)).Frelro_end = ((*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr + (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz) & uint64(-Int32FromInt32(m_PAGESIZE))
+			} else if (*TPhdr)(unsafe.Pointer(ph)).Fp_type == uint32(m_PT_GNU_STACK) {
+				if !(_runtime != 0) && (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz > uint64(x___default_stacksize) {
+					if (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz < uint64(Int32FromInt32(8)<<Int32FromInt32(20)) {
+						v2 = (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz
+					} else {
+						v2 = uint64(Int32FromInt32(8) << Int32FromInt32(20))
+					}
+					x___default_stacksize = uint32(v2)
+				}
+			}
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_type != uint32(m_PT_LOAD) {
+			continue
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr < min_addr {
+			min_addr = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr
+		}
+		if (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr+(*TPhdr)(unsafe.Pointer(ph)).Fp_memsz > max_addr {
+			max_addr = (*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr + (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz
+		}
+	}
+	min_addr &= uint64(-Int32FromInt32(m_PAGESIZE))
+	max_addr = (max_addr + uint64(m_PAGESIZE) - uint64(1)) & uint64(-Int32FromInt32(m_PAGESIZE))
+	(*Tdso)(unsafe.Pointer(p)).Fmap1 = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr(min_addr)
+	(*Tdso)(unsafe.Pointer(p)).Fmap_len = max_addr - min_addr
+	(*Tdso)(unsafe.Pointer(p)).Fkernel_mapped = int8(1)
+}
+
+func x___ldso_atfork(tls *TLS, who int32) {
+	if who < 0 {
+		x___pthread_rwlock_wrlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+		x___pthread_mutex_lock(tls, uintptr(unsafe.Pointer(&_init_fini_lock)))
+	} else {
+		x___pthread_mutex_unlock(tls, uintptr(unsafe.Pointer(&_init_fini_lock)))
+		x___pthread_rwlock_unlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+	}
+}
+
+func _queue_ctors(tls *TLS, dso uintptr) (r uintptr) {
+	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
+	defer tls.Free(16)
+	var cnt, i, qpos, spos, v2, v3, v4, v5 uint64
+	var p, queue, stack uintptr
+	if _ldd_mode != 0 {
+		return uintptr(0)
+	}
+	/* Bound on queue size is the total number of indirect deps.
+	 * If a bfs deps list was built, we can use it. Otherwise,
+	 * bound by the total number of DSOs, which is always safe and
+	 * is reasonable we use it (for main app at startup). */
+	if (*Tdso)(unsafe.Pointer(dso)).Fbfs_built != 0 {
+		for cnt = uint64(0); *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Fdeps + uintptr(cnt)*8)) != 0; cnt++ {
+			(*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(dso)).Fdeps + uintptr(cnt)*8)))).Fmark = 0
+		}
+		cnt++
+	} else {
+		cnt = uint64(0)
+		p = _head1
+		for p != 0 {
+			(*Tdso)(unsafe.Pointer(p)).Fmark = 0
+			goto _1
+		_1:
+			cnt++
+			p = (*Tdso)(unsafe.Pointer(p)).Fnext
+		}
+	}
+	cnt++ /* termination slot */
+	if dso == _head1 && cnt <= Uint64FromInt64(32)/Uint64FromInt64(8) {
+		queue = uintptr(unsafe.Pointer(&_builtin_ctor_queue))
+	} else {
+		queue = x___libc_calloc(tls, cnt, uint64(8))
+	}
+	if !(queue != 0) {
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3483, 0)
+		if _runtime != 0 {
+			_longjmp(tls, _rtld_fail, int32(1))
+		}
+		return uintptr(0)
+	}
+	/* Opposite ends of the allocated buffer serve as an output queue
+	 * and a working stack. Setup initial stack with just the argument
+	 * dso and initial queue empty... */
+	stack = queue
+	qpos = uint64(0)
+	spos = cnt
+	spos--
+	v2 = spos
+	*(*uintptr)(unsafe.Pointer(stack + uintptr(v2)*8)) = dso
+	(*Tdso)(unsafe.Pointer(dso)).Fnext_dep = uint64(0)
+	(*Tdso)(unsafe.Pointer(dso)).Fmark = int8(1)
+	/* Then perform pseudo-DFS sort, but ignoring circular deps. */
+	for spos < cnt {
+		v3 = spos
+		spos++
+		p = *(*uintptr)(unsafe.Pointer(stack + uintptr(v3)*8))
+		for (*Tdso)(unsafe.Pointer(p)).Fnext_dep < (*Tdso)(unsafe.Pointer(p)).Fndeps_direct {
+			if (*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr((*Tdso)(unsafe.Pointer(p)).Fnext_dep)*8)))).Fmark != 0 {
+				(*Tdso)(unsafe.Pointer(p)).Fnext_dep++
+			} else {
+				spos--
+				v4 = spos
+				*(*uintptr)(unsafe.Pointer(stack + uintptr(v4)*8)) = p
+				p = *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr((*Tdso)(unsafe.Pointer(p)).Fnext_dep)*8))
+				(*Tdso)(unsafe.Pointer(p)).Fnext_dep = uint64(0)
+				(*Tdso)(unsafe.Pointer(p)).Fmark = int8(1)
+			}
+		}
+		v5 = qpos
+		qpos++
+		*(*uintptr)(unsafe.Pointer(queue + uintptr(v5)*8)) = p
+	}
+	*(*uintptr)(unsafe.Pointer(queue + uintptr(qpos)*8)) = uintptr(0)
+	for i = uint64(0); i < qpos; i++ {
+		(*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(queue + uintptr(i)*8)))).Fmark = 0
+	}
+	for i = uint64(0); i < qpos; i++ {
+		if (*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(queue + uintptr(i)*8)))).Fctor_visitor != 0 && (*T__pthread)(unsafe.Pointer((*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(queue + uintptr(i)*8)))).Fctor_visitor)).Ftid < 0 {
+			(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3523, VaList(bp+8, (*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(queue + uintptr(i)*8)))).Fname))
+			x___libc_free(tls, queue)
+			if _runtime != 0 {
+				_longjmp(tls, _rtld_fail, int32(1))
+			}
+		}
+	}
+	return queue
+}
+
+func _do_init_fini(tls *TLS, queue uintptr) {
+	bp := tls.Alloc(296) /* tlsAllocs 296 maxVaListSize 0 */
+	defer tls.Free(296)
+	var fn, p, self, v1, v3 uintptr
+	var i, n, v2 uint64
+	var _ /* dyn at bp+0 */ [37]uint64
+	self = ___get_tp(tls)
+	x___pthread_mutex_lock(tls, uintptr(unsafe.Pointer(&_init_fini_lock)))
+	for i = uint64(0); ; i++ {
+		v1 = *(*uintptr)(unsafe.Pointer(queue + uintptr(i)*8))
+		p = v1
+		if !(v1 != 0) {
+			break
+		}
+		for (*Tdso)(unsafe.Pointer(p)).Fctor_visitor != 0 && (*Tdso)(unsafe.Pointer(p)).Fctor_visitor != self || _shutting_down != 0 {
+			x_pthread_cond_wait(tls, uintptr(unsafe.Pointer(&_ctor_cond)), uintptr(unsafe.Pointer(&_init_fini_lock)))
+		}
+		if (*Tdso)(unsafe.Pointer(p)).Fctor_visitor != 0 || (*Tdso)(unsafe.Pointer(p)).Fconstructed != 0 {
+			continue
+		}
+		(*Tdso)(unsafe.Pointer(p)).Fctor_visitor = self
+		_decode_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DYN_CNT))
+		if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_FINI)|Int32FromInt32(1)<<Int32FromInt32(m_DT_FINI_ARRAY)) != 0 {
+			(*Tdso)(unsafe.Pointer(p)).Ffini_next = _fini_head
+			_fini_head = p
+		}
+		x___pthread_mutex_unlock(tls, uintptr(unsafe.Pointer(&_init_fini_lock)))
+		if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_INIT)) != 0 && (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_INIT)] != 0 {
+			(*(*func(*TLS))(unsafe.Pointer(&struct{ uintptr }{(*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(12)])})))(tls)
+		}
+		if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_INIT_ARRAY)) != 0 {
+			n = (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_INIT_ARRAYSZ)] / uint64(8)
+			fn = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(25)])
+			for {
+				v2 = n
+				n--
+				if !(v2 != 0) {
+					break
+				}
+				v3 = fn
+				fn += 8
+				(*(*func(*TLS))(unsafe.Pointer(&struct{ uintptr }{uintptr(*(*uint64)(unsafe.Pointer(v3)))})))(tls)
+			}
+		}
+		x___pthread_mutex_lock(tls, uintptr(unsafe.Pointer(&_init_fini_lock)))
+		(*Tdso)(unsafe.Pointer(p)).Fctor_visitor = uintptr(0)
+		(*Tdso)(unsafe.Pointer(p)).Fconstructed = int8(1)
+		x_pthread_cond_broadcast(tls, uintptr(unsafe.Pointer(&_ctor_cond)))
+	}
+	x___pthread_mutex_unlock(tls, uintptr(unsafe.Pointer(&_init_fini_lock)))
+}
+
+func _dl_debug_state(tls *TLS) {
+}
+
+func _update_tls_size(tls *TLS) {
+	x___libc.Ftls_cnt = _tls_cnt
+	x___libc.Ftls_align = _tls_align
+	x___libc.Ftls_size = ((Uint64FromInt32(1)+_tls_cnt)*Uint64FromInt64(8) + _tls_offset + Uint64FromInt64(200) + _tls_align*Uint64FromInt32(2) + _tls_align - Uint64FromInt32(1)) & -_tls_align
+}
+
+func _install_new_tls(tls *TLS) {
+	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
+	defer tls.Free(128)
+	var dtv_provider, mem, new1, newdtv, p, self, td uintptr
+	var i, j, old_cnt, v1 uint64
+	var _ /* set at bp+0 */ Tsigset_t
+	defer func() { x_realloc(tls, newdtv, 0) }()
+	self = ___get_tp(tls)
+	dtv_provider = _tls_tail - uintptr(uint64(UintptrFromInt32(0)+232))
+	v1 = (_tls_cnt + uint64(1)) * 8
+	newdtv = (*Tdso)(unsafe.Pointer(dtv_provider)).Fnew_dtv
+	old_cnt = *(*uint64)(unsafe.Pointer((*T__pthread)(unsafe.Pointer(self)).Fdtv))
+	x___block_app_sigs(tls, bp)
+	x___tl_lock(tls)
+	/* Copy existing dtv contents from all existing threads. */
+	i = uint64(0)
+	td = self
+	for !(i != 0) || td != self {
+		_memcpy(tls, newdtv+uintptr(i)*uintptr(v1), (*T__pthread)(unsafe.Pointer(td)).Fdtv, (old_cnt+uint64(1))*uint64(8))
+		*(*uint64)(unsafe.Pointer(newdtv + uintptr(i)*uintptr(v1))) = _tls_cnt
+		goto _2
+	_2:
+		i++
+		td = (*T__pthread)(unsafe.Pointer(td)).Fnext
+	}
+	/* Install new dtls into the enlarged, uninstalled dtv copies. */
+	for p = _head1; ; p = (*Tdso)(unsafe.Pointer(p)).Fnext {
+		if (*Tdso)(unsafe.Pointer(p)).Ftls_id <= old_cnt {
+			continue
+		}
+		mem = (*Tdso)(unsafe.Pointer(p)).Fnew_tls
+		for j = uint64(0); j < i; j++ {
+			new1 = mem
+			new1 += uintptr((uint64((*Tdso)(unsafe.Pointer(p)).Ftls.Fimage) - uint64(mem)) & ((*Tdso)(unsafe.Pointer(p)).Ftls.Falign - uint64(1)))
+			_memcpy(tls, new1, (*Tdso)(unsafe.Pointer(p)).Ftls.Fimage, (*Tdso)(unsafe.Pointer(p)).Ftls.Flen1)
+			*(*uint64)(unsafe.Pointer(newdtv + uintptr(j)*uintptr(v1) + uintptr((*Tdso)(unsafe.Pointer(p)).Ftls_id)*8)) = uint64(new1) + uint64(m_DTP_OFFSET)
+			mem += uintptr((*Tdso)(unsafe.Pointer(p)).Ftls.Fsize + (*Tdso)(unsafe.Pointer(p)).Ftls.Falign)
+		}
+		if (*Tdso)(unsafe.Pointer(p)).Ftls_id == _tls_cnt {
+			break
+		}
+	}
+	/* Broadcast barrier to ensure contents of new dtv is visible
+	 * if the new dtv pointer is. The __membarrier function has a
+	 * fallback emulation using signals for kernels that lack the
+	 * feature at the syscall level. */
+	x___membarrier(tls, int32(m_MEMBARRIER_CMD_PRIVATE_EXPEDITED), 0)
+	/* Install new dtv for each thread. */
+	j = uint64(0)
+	td = self
+	for !(j != 0) || td != self {
+		(*T__pthread)(unsafe.Pointer(td)).Fdtv = newdtv + uintptr(j)*uintptr(v1)
+		goto _3
+	_3:
+		j++
+		td = (*T__pthread)(unsafe.Pointer(td)).Fnext
+	}
+	x___tl_unlock(tls)
+	x___restore_sigs(tls, bp)
+}
+
+func x___dls2(tls *TLS, base uintptr, sp uintptr) {
+	bp := tls.Alloc(552) /* tlsAllocs 552 maxVaListSize 0 */
+	defer tls.Free(552)
+	var addends, auxv, ehdr, p1, p2, rel, v1, v2, v3 uintptr
+	var dls2b_def Tsymdef
+	var rel_size, symbolic_rel_cnt, v5 uint64
+	var _ /* aux at bp+0 */ [32]uint64
+	var _ /* dyn at bp+256 */ [37]uint64
+	defer func() { x_realloc(tls, addends, 0) }()
+	for auxv = sp + uintptr(1)*8 + uintptr(*(*uint64)(unsafe.Pointer(sp)))*8 + uintptr(1)*8; *(*uint64)(unsafe.Pointer(auxv)) != 0; auxv += 8 {
+	}
+	auxv += 8
+	if m_DL_FDPIC != 0 {
+		p1 = uintptr(*(*uint64)(unsafe.Pointer(sp + uintptr(-Int32FromInt32(2))*8)))
+		p2 = uintptr(*(*uint64)(unsafe.Pointer(sp + uintptr(-Int32FromInt32(1))*8)))
+		if !(p1 != 0) {
+			_decode_vec(tls, auxv, bp, uint64(m_AUX_CNT1))
+			if (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_BASE)] != 0 {
+				_ldso.Fbase = uintptr((*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_BASE)])
+			} else {
+				_ldso.Fbase = uintptr((*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_PHDR)] & uint64(-Int32FromInt32(4096)))
+			}
+		}
+		if p2 != 0 {
+			v1 = p1
+		} else {
+			v1 = uintptr(0)
+		}
+		_app_loadmap = v1
+		if p2 != 0 {
+			v2 = p2
+		} else {
+			v2 = p1
+		}
+		_ldso.Floadmap = v2
+		_ldso.Fbase = (*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_ldso)))).Fbase + uintptr(Int32FromInt32(0))
+	} else {
+		_ldso.Fbase = base
+	}
+	ehdr = _ldso.Fbase
+	v3 = ts + 3305
+	_ldso.Fshortname = v3
+	_ldso.Fname = v3
+	_ldso.Fphnum = int32((*TEhdr)(unsafe.Pointer(ehdr)).Fe_phnum)
+	_ldso.Fphdr = (*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_ldso)))).Fbase + uintptr((*TEhdr)(unsafe.Pointer(ehdr)).Fe_phoff)
+	_ldso.Fphentsize = uint64((*TEhdr)(unsafe.Pointer(ehdr)).Fe_phentsize)
+	_search_vec(tls, auxv, uintptr(unsafe.Pointer(&_ldso_page_size)), uint64(m_AT_PAGESZ))
+	_kernel_mapped_dso(tls, uintptr(unsafe.Pointer(&_ldso)))
+	_decode_dyn(tls, uintptr(unsafe.Pointer(&_ldso)))
+	if m_DL_FDPIC != 0 {
+		_makefuncdescs(tls, uintptr(unsafe.Pointer(&_ldso)))
+	}
+	/* Prepare storage for to save clobbered REL addends so they
+	 * can be reused in stage 3. There should be very few. If
+	 * something goes wrong and there are a huge number, abort
+	 * instead of risking stack overflow. */
+	_decode_vec(tls, _ldso.Fdynv, bp+256, uint64(m_DYN_CNT))
+	rel = (*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_ldso)))).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp + 256)))[int32(17)])
+	rel_size = (*(*[37]uint64)(unsafe.Pointer(bp + 256)))[int32(m_DT_RELSZ)]
+	symbolic_rel_cnt = uint64(0)
+	_apply_addends_to = rel
+	for rel_size != 0 {
+		if !(*(*uint64)(unsafe.Pointer(rel + 1*8))&uint64(0x7fffffff) == uint64(m_R_X86_64_RELATIVE) || *(*uint64)(unsafe.Pointer(rel + 1*8))&uint64(0x7fffffff) == Uint64FromInt32(_REL_SYM_OR_REL) && !(*(*uint64)(unsafe.Pointer(rel + 1*8))>>Int32FromInt32(32) != 0)) {
+			symbolic_rel_cnt++
+		}
+		goto _4
+	_4:
+		rel += uintptr(2) * 8
+		rel_size -= Uint64FromInt32(2) * Uint64FromInt64(8)
+	}
+	if symbolic_rel_cnt >= uint64(m_ADDEND_LIMIT) {
+		_a_crash(tls)
+	}
+	v5 = (symbolic_rel_cnt + uint64(1)) * 8
+	addends = x_realloc(tls, addends, v5)
+	_saved_addends = addends
+	_head1 = uintptr(unsafe.Pointer(&_ldso))
+	_reloc_all(tls, uintptr(unsafe.Pointer(&_ldso)))
+	_ldso.Frelocated = 0
+	/* Call dynamic linker stage-2b, __dls2b, looking it up
+	 * symbolically as a barrier against moving the address
+	 * load across the above relocation processing. */
+	dls2b_def = _find_sym(tls, uintptr(unsafe.Pointer(&_ldso)), ts+3578, 0)
+	if m_DL_FDPIC != 0 {
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_ldso.Ffuncdescs + uintptr((int64(dls2b_def.Fsym)-int64(_ldso.Fsyms))/24)*16})))(tls, sp, auxv)
+	} else {
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_ldso)))).Fbase + uintptr((*TSym)(unsafe.Pointer(dls2b_def.Fsym)).Fst_value)})))(tls, sp, auxv)
+	}
+}
+
+func x___dls2b(tls *TLS, sp uintptr, auxv uintptr) {
+	var dls3_def Tsymdef
+	/* Setup early thread pointer in builtin_tls for ldso/libc itself to
+	 * use during dynamic linking. If possible it will also serve as the
+	 * thread pointer at runtime. */
+	_search_vec(tls, auxv, uintptr(unsafe.Pointer(&x___hwcap)), uint64(m_AT_HWCAP))
+	x___libc.Fauxv = auxv
+	x___libc.Ftls_size = uint64(336)
+	x___libc.Ftls_align = _tls_align
+	if x___init_tp(tls, x___copy_tls(tls, uintptr(unsafe.Pointer(&_builtin_tls1)))) < 0 {
+		_a_crash(tls)
+	}
+	dls3_def = _find_sym(tls, uintptr(unsafe.Pointer(&_ldso)), ts+3586, 0)
+	if m_DL_FDPIC != 0 {
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_ldso.Ffuncdescs + uintptr((int64(dls3_def.Fsym)-int64(_ldso.Fsyms))/24)*16})))(tls, sp, auxv)
+	} else {
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_ldso)))).Fbase + uintptr((*TSym)(unsafe.Pointer(dls3_def.Fsym)).Fst_value)})))(tls, sp, auxv)
+	}
+}
+
+func x___dls3(tls *TLS, sp uintptr, auxv uintptr) {
+	bp := tls.Alloc(296) /* tlsAllocs 264 maxVaListSize 24 */
+	defer tls.Free(296)
+	var argc, fd int32
+	var argv, argv_orig, ehdr, ehdr1, env_preload, envp, initial_tls, ldname, opt, p, phdr, phdr1, ptr, ptr1, replace_argv0, self, v1, v11, v12, v13, v3, v4, v5, v6, v7, v8 uintptr
+	var i, interp_off, l, tls_image, tmp_tls_size, v10, v9 uint64
+	var _ /* aux at bp+0 */ [32]uint64
+	var _ /* vdso_base at bp+256 */ uint64
+	env_preload = uintptr(0)
+	replace_argv0 = uintptr(0)
+	argc = int32(*(*uint64)(unsafe.Pointer(sp)))
+	argv = sp + UintptrFromInt32(1)*8
+	argv_orig = argv
+	envp = argv + uintptr(argc)*8 + uintptr(1)*8
+	/* Find aux vector just past environ[] and use it to initialize
+	 * global data that may be needed before we can make syscalls. */
+	x___environ = envp
+	_decode_vec(tls, auxv, bp, uint64(m_AUX_CNT1))
+	_search_vec(tls, auxv, uintptr(unsafe.Pointer(&x___sysinfo)), uint64(m_AT_SYSINFO))
+	(*T__pthread)(unsafe.Pointer(___get_tp(tls))).Fsysinfo = x___sysinfo
+	x___libc.Fpage_size = (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_PAGESZ)]
+	x___libc.Fsecure = BoolInt8((*(*[32]uint64)(unsafe.Pointer(bp)))[0]&uint64(0x7800) != uint64(0x7800) || (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_UID)] != (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_EUID)] || (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_GID)] != (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_EGID)] || (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_SECURE)] != 0)
+	/* Only trust user/env if kernel says we're not suid/sgid */
+	if !(x___libc.Fsecure != 0) {
+		_env_path = x_getenv(tls, ts+3593)
+		env_preload = x_getenv(tls, ts+3609)
+	}
+	/* Activate error handler function */
+	_error = __ccgo_fp(_error_impl)
+	/* If the main program was already loaded by the kernel,
+	 * AT_PHDR will point to some location other than the dynamic
+	 * linker's program headers. */
+	if (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_PHDR)] != uint64(_ldso.Fphdr) {
+		interp_off = uint64(0)
+		tls_image = uint64(0)
+		/* Find load address of the main program, via AT_PHDR vs PT_PHDR. */
+		v1 = uintptr((*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_PHDR)])
+		_app.Fphdr = v1
+		phdr = v1
+		_app.Fphnum = int32((*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_PHNUM)])
+		_app.Fphentsize = (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_PHENT)]
+		for i = (*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_PHNUM)]; i != 0; {
+			if (*TPhdr)(unsafe.Pointer(phdr)).Fp_type == uint32(m_PT_PHDR) {
+				_app.Fbase = uintptr((*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_PHDR)] - (*TPhdr)(unsafe.Pointer(phdr)).Fp_vaddr)
+			} else {
+				if (*TPhdr)(unsafe.Pointer(phdr)).Fp_type == uint32(m_PT_INTERP) {
+					interp_off = (*TPhdr)(unsafe.Pointer(phdr)).Fp_vaddr
+				} else if (*TPhdr)(unsafe.Pointer(phdr)).Fp_type == uint32(m_PT_TLS) {
+					tls_image = (*TPhdr)(unsafe.Pointer(phdr)).Fp_vaddr
+					_app.Ftls.Flen1 = (*TPhdr)(unsafe.Pointer(phdr)).Fp_filesz
+					_app.Ftls.Fsize = (*TPhdr)(unsafe.Pointer(phdr)).Fp_memsz
+					_app.Ftls.Falign = (*TPhdr)(unsafe.Pointer(phdr)).Fp_align
+				}
+			}
+			goto _2
+		_2:
+			i--
+			phdr = phdr + uintptr((*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_PHENT)])
+		}
+		if m_DL_FDPIC != 0 {
+			_app.Floadmap = _app_loadmap
+		}
+		if _app.Ftls.Fsize != 0 {
+			_app.Ftls.Fimage = (*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_app)))).Fbase + uintptr(tls_image)
+		}
+		if interp_off != 0 {
+			_ldso.Fname = (*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_app)))).Fbase + uintptr(interp_off)
+		}
+		if (*(*[32]uint64)(unsafe.Pointer(bp)))[0]&(Uint64FromUint64(1)<<Int32FromInt32(m_AT_EXECFN)) != 0 && x_strncmp(tls, uintptr((*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_EXECFN)]), ts+3620, uint64(6)) != 0 {
+			_app.Fname = uintptr((*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_EXECFN)])
+		} else {
+			_app.Fname = *(*uintptr)(unsafe.Pointer(argv))
+		}
+		_kernel_mapped_dso(tls, uintptr(unsafe.Pointer(&_app)))
+	} else {
+		ldname = *(*uintptr)(unsafe.Pointer(argv))
+		l = x_strlen(tls, ldname)
+		if l >= uint64(3) && !(_dl_strcmp(tls, ldname+uintptr(l)-uintptr(3), ts+3627) != 0) {
+			_ldd_mode = int32(1)
+		}
+		argv += 8
+		for *(*uintptr)(unsafe.Pointer(argv)) != 0 && int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(argv))))) == int32('-') && int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(argv)) + 1))) == int32('-') {
+			opt = *(*uintptr)(unsafe.Pointer(argv)) + uintptr(2)
+			v3 = argv
+			argv += 8
+			*(*uintptr)(unsafe.Pointer(v3)) = uintptr(-Int32FromInt32(1))
+			if !(*(*int8)(unsafe.Pointer(opt)) != 0) {
+				break
+			} else {
+				if !(x_memcmp(tls, opt, ts+3631, uint64(5)) != 0) {
+					_ldd_mode = int32(1)
+				} else {
+					if !(x_memcmp(tls, opt, ts+3636, uint64(12)) != 0) {
+						if int32(*(*int8)(unsafe.Pointer(opt + 12))) == int32('=') {
+							_env_path = opt + uintptr(13)
+						} else {
+							if *(*int8)(unsafe.Pointer(opt + 12)) != 0 {
+								*(*uintptr)(unsafe.Pointer(argv)) = uintptr(0)
+							} else if *(*uintptr)(unsafe.Pointer(argv)) != 0 {
+								v4 = argv
+								argv += 8
+								_env_path = *(*uintptr)(unsafe.Pointer(v4))
+							}
+						}
+					} else {
+						if !(x_memcmp(tls, opt, ts+3649, uint64(7)) != 0) {
+							if int32(*(*int8)(unsafe.Pointer(opt + 7))) == int32('=') {
+								env_preload = opt + uintptr(8)
+							} else {
+								if *(*int8)(unsafe.Pointer(opt + 7)) != 0 {
+									*(*uintptr)(unsafe.Pointer(argv)) = uintptr(0)
+								} else if *(*uintptr)(unsafe.Pointer(argv)) != 0 {
+									v5 = argv
+									argv += 8
+									env_preload = *(*uintptr)(unsafe.Pointer(v5))
+								}
+							}
+						} else {
+							if !(x_memcmp(tls, opt, ts+3657, uint64(5)) != 0) {
+								if int32(*(*int8)(unsafe.Pointer(opt + 5))) == int32('=') {
+									replace_argv0 = opt + uintptr(6)
+								} else {
+									if *(*int8)(unsafe.Pointer(opt + 5)) != 0 {
+										*(*uintptr)(unsafe.Pointer(argv)) = uintptr(0)
+									} else if *(*uintptr)(unsafe.Pointer(argv)) != 0 {
+										v6 = argv
+										argv += 8
+										replace_argv0 = *(*uintptr)(unsafe.Pointer(v6))
+									}
+								}
+							} else {
+								*(*uintptr)(unsafe.Pointer(argv)) = uintptr(0)
+							}
+						}
+					}
+				}
+			}
+		}
+		*(*uintptr)(unsafe.Pointer(argv + uintptr(-Int32FromInt32(1))*8)) = uintptr(int64(argc) - (int64(argv)-int64(argv_orig))/8)
+		if !(*(*uintptr)(unsafe.Pointer(argv)) != 0) {
+			if _ldd_mode != 0 {
+				v7 = ts
+			} else {
+				v7 = ts + 3663
+			}
+			x_dprintf(tls, int32(2), ts+3671, VaList(bp+272, uintptr(unsafe.Pointer(&x___libc_version)), ldname, v7))
+			x__exit(tls, int32(1))
+		}
+		fd = x_open(tls, *(*uintptr)(unsafe.Pointer(argv)), m_O_RDONLY, 0)
+		if fd < 0 {
+			x_dprintf(tls, int32(2), ts+3761, VaList(bp+272, ldname, *(*uintptr)(unsafe.Pointer(argv)), x_strerror(tls, *(*int32)(unsafe.Pointer(x___errno_location(tls))))))
+			x__exit(tls, int32(1))
+		}
+		ehdr = _map_library(tls, fd, uintptr(unsafe.Pointer(&_app)))
+		if !(ehdr != 0) {
+			x_dprintf(tls, int32(2), ts+3785, VaList(bp+272, ldname, *(*uintptr)(unsafe.Pointer(argv))))
+			x__exit(tls, int32(1))
+		}
+		x_close(tls, fd)
+		_ldso.Fname = ldname
+		_app.Fname = *(*uintptr)(unsafe.Pointer(argv))
+		(*(*[32]uint64)(unsafe.Pointer(bp)))[int32(m_AT_ENTRY)] = uint64((*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_app)))).Fbase + uintptr((*TEhdr)(unsafe.Pointer(ehdr)).Fe_entry))
+		/* Find the name that would have been used for the dynamic
+		 * linker had ldd not taken its place. */
+		if _ldd_mode != 0 {
+			for i = uint64(0); i < uint64(_app.Fphnum); i++ {
+				if (*(*TPhdr)(unsafe.Pointer(_app.Fphdr + uintptr(i)*56))).Fp_type == uint32(m_PT_INTERP) {
+					_ldso.Fname = (*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_app)))).Fbase + uintptr((*(*TPhdr)(unsafe.Pointer(_app.Fphdr + uintptr(i)*56))).Fp_vaddr)
+				}
+			}
+			x_dprintf(tls, int32(1), ts+3822, VaList(bp+272, _ldso.Fname, _ldso.Fbase))
+		}
+	}
+	if _app.Ftls.Fsize != 0 {
+		v8 = uintptr(unsafe.Pointer(&_app.Ftls))
+		_tls_tail = v8
+		x___libc.Ftls_head = v8
+		v9 = Uint64FromInt32(1)
+		_tls_cnt = v9
+		_app.Ftls_id = v9
+		v10 = _app.Ftls.Fsize + -(uint64(_app.Ftls.Fimage)+_app.Ftls.Fsize)&(_app.Ftls.Falign-Uint64FromInt32(1))
+		_app.Ftls.Foffset = v10
+		_tls_offset = v10
+		_tls_align = -(-_tls_align & -_app.Ftls.Falign)
+	}
+	_decode_dyn(tls, uintptr(unsafe.Pointer(&_app)))
+	if m_DL_FDPIC != 0 {
+		_makefuncdescs(tls, uintptr(unsafe.Pointer(&_app)))
+		if !(_app.Floadmap != 0) {
+			_app.Floadmap = uintptr(unsafe.Pointer(&_app_dummy_loadmap))
+			(*Tfdpic_loadmap)(unsafe.Pointer(_app.Floadmap)).Fnsegs = uint16(1)
+			(*(*Tfdpic_loadseg)(unsafe.Pointer(_app.Floadmap + 8))).Faddr = uint64(_app.Fmap1)
+			(*(*Tfdpic_loadseg)(unsafe.Pointer(_app.Floadmap + 8))).Fp_vaddr = uint64(_app.Fmap1) - uint64(_app.Fbase)
+			(*(*Tfdpic_loadseg)(unsafe.Pointer(_app.Floadmap + 8))).Fp_memsz = _app.Fmap_len
+		}
+		*(*uintptr)(unsafe.Pointer(argv + uintptr(-Int32FromInt32(3))*8)) = _app.Floadmap
+	}
+	/* Initial dso chain consists only of the app. */
+	v12 = uintptr(unsafe.Pointer(&_app))
+	_syms_tail = v12
+	v11 = v12
+	_tail = v11
+	_head1 = v11
+	/* Donate unused parts of app and library mapping to malloc */
+	_reclaim_gaps(tls, uintptr(unsafe.Pointer(&_app)))
+	_reclaim_gaps(tls, uintptr(unsafe.Pointer(&_ldso)))
+	/* Load preload/needed libraries, add symbols to global namespace. */
+	_ldso.Fdeps = uintptr(unsafe.Pointer(&_no_deps))
+	if env_preload != 0 {
+		_load_preload(tls, env_preload)
+	}
+	_load_deps(tls, uintptr(unsafe.Pointer(&_app)))
+	p = _head1
+	for ; p != 0; p = (*Tdso)(unsafe.Pointer(p)).Fnext {
+		_add_syms(tls, p)
+	}
+	/* Attach to vdso, if provided by the kernel, last so that it does
+	 * not become part of the global namespace.  */
+	if _search_vec(tls, auxv, bp+256, uint64(m_AT_SYSINFO_EHDR)) != 0 && *(*uint64)(unsafe.Pointer(bp + 256)) != 0 {
+		ehdr1 = uintptr(*(*uint64)(unsafe.Pointer(bp + 256)))
+		v13 = uintptr(*(*uint64)(unsafe.Pointer(bp + 256)) + (*TEhdr)(unsafe.Pointer(ehdr1)).Fe_phoff)
+		_vdso.Fphdr = v13
+		phdr1 = v13
+		_vdso.Fphnum = int32((*TEhdr)(unsafe.Pointer(ehdr1)).Fe_phnum)
+		_vdso.Fphentsize = uint64((*TEhdr)(unsafe.Pointer(ehdr1)).Fe_phentsize)
+		for i = uint64((*TEhdr)(unsafe.Pointer(ehdr1)).Fe_phnum); i != 0; {
+			if (*TPhdr)(unsafe.Pointer(phdr1)).Fp_type == uint32(m_PT_DYNAMIC) {
+				_vdso.Fdynv = uintptr(*(*uint64)(unsafe.Pointer(bp + 256)) + (*TPhdr)(unsafe.Pointer(phdr1)).Fp_offset)
+			}
+			if (*TPhdr)(unsafe.Pointer(phdr1)).Fp_type == uint32(m_PT_LOAD) {
+				_vdso.Fbase = uintptr(*(*uint64)(unsafe.Pointer(bp + 256)) - (*TPhdr)(unsafe.Pointer(phdr1)).Fp_vaddr + (*TPhdr)(unsafe.Pointer(phdr1)).Fp_offset)
+			}
+			goto _14
+		_14:
+			i--
+			phdr1 = phdr1 + uintptr((*TEhdr)(unsafe.Pointer(ehdr1)).Fe_phentsize)
+		}
+		_vdso.Fname = ts
+		_vdso.Fshortname = ts + 3832
+		_vdso.Frelocated = int8(1)
+		_vdso.Fdeps = uintptr(unsafe.Pointer(&_no_deps))
+		_decode_dyn(tls, uintptr(unsafe.Pointer(&_vdso)))
+		_vdso.Fprev = _tail
+		(*Tdso)(unsafe.Pointer(_tail)).Fnext = uintptr(unsafe.Pointer(&_vdso))
+		_tail = uintptr(unsafe.Pointer(&_vdso))
+	}
+	for i = uint64(0); *(*uint64)(unsafe.Pointer(_app.Fdynv + uintptr(i)*8)) != 0; {
+		if !(Int32FromInt32(m_DT_DEBUG_INDIRECT) != 0) && *(*uint64)(unsafe.Pointer(_app.Fdynv + uintptr(i)*8)) == uint64(m_DT_DEBUG) {
+			*(*uint64)(unsafe.Pointer(_app.Fdynv + uintptr(i+uint64(1))*8)) = uint64(uintptr(unsafe.Pointer(&_debug)))
+		}
+		if m_DT_DEBUG_INDIRECT != 0 && *(*uint64)(unsafe.Pointer(_app.Fdynv + uintptr(i)*8)) == uint64(m_DT_DEBUG_INDIRECT) {
+			ptr = uintptr(*(*uint64)(unsafe.Pointer(_app.Fdynv + uintptr(i+uint64(1))*8)))
+			*(*uint64)(unsafe.Pointer(ptr)) = uint64(uintptr(unsafe.Pointer(&_debug)))
+		}
+		if *(*uint64)(unsafe.Pointer(_app.Fdynv + uintptr(i)*8)) == uint64(m_DT_DEBUG_INDIRECT_REL) {
+			ptr1 = uintptr(uint64(_app.Fdynv+uintptr(i)*8) + *(*uint64)(unsafe.Pointer(_app.Fdynv + uintptr(i+uint64(1))*8)))
+			*(*uint64)(unsafe.Pointer(ptr1)) = uint64(uintptr(unsafe.Pointer(&_debug)))
+		}
+		goto _15
+	_15:
+		i += uint64(2)
+	}
+	/* This must be done before final relocations, since it calls
+	 * malloc, which may be provided by the application. Calling any
+	 * application code prior to the jump to its entry point is not
+	 * valid in our model and does not work with FDPIC, where there
+	 * are additional relocation-like fixups that only the entry point
+	 * code can see to perform. */
+	_main_ctor_queue = _queue_ctors(tls, uintptr(unsafe.Pointer(&_app)))
+	/* Initial TLS must also be allocated before final relocations
+	 * might result in calloc being a call to application code. */
+	_update_tls_size(tls)
+	initial_tls = uintptr(unsafe.Pointer(&_builtin_tls1))
+	if x___libc.Ftls_size > uint64(336) || _tls_align > uint64(UintptrFromInt32(0)+8) {
+		initial_tls = x___libc_calloc(tls, x___libc.Ftls_size, uint64(1))
+		if !(initial_tls != 0) {
+			x_dprintf(tls, int32(2), ts+3848, VaList(bp+272, *(*uintptr)(unsafe.Pointer(argv)), x___libc.Ftls_size))
+			x__exit(tls, int32(127))
+		}
+	}
+	_static_tls_cnt = _tls_cnt
+	/* The main program must be relocated LAST since it may contain
+	 * copy relocations which depend on libraries' relocations. */
+	_reloc_all(tls, _app.Fnext)
+	_reloc_all(tls, uintptr(unsafe.Pointer(&_app)))
+	/* Actual copying to new TLS needs to happen after relocations,
+	 * since the TLS images might have contained relocated addresses. */
+	if initial_tls != uintptr(unsafe.Pointer(&_builtin_tls1)) {
+		if x___init_tp(tls, x___copy_tls(tls, initial_tls)) < 0 {
+			_a_crash(tls)
+		}
+	} else {
+		tmp_tls_size = x___libc.Ftls_size
+		self = ___get_tp(tls)
+		/* Temporarily set the tls size to the full size of
+		 * builtin_tls so that __copy_tls will use the same layout
+		 * as it did for before. Then check, just to be safe. */
+		x___libc.Ftls_size = uint64(336)
+		if x___copy_tls(tls, uintptr(unsafe.Pointer(&_builtin_tls1))) != self {
+			_a_crash(tls)
+		}
+		x___libc.Ftls_size = tmp_tls_size
+	}
+	if _ldso_fail != 0 {
+		x__exit(tls, int32(127))
+	}
+	if _ldd_mode != 0 {
+		x__exit(tls, 0)
+	}
+	/* Determine if malloc was interposed by a replacement implementation
+	 * so that calloc and the memalign family can harden against the
+	 * possibility of incomplete replacement. */
+	if _find_sym(tls, _head1, ts+3902, int32(1)).Fdso != uintptr(unsafe.Pointer(&_ldso)) {
+		x___malloc_replaced = int32(1)
+	}
+	if _find_sym(tls, _head1, ts+3909, int32(1)).Fdso != uintptr(unsafe.Pointer(&_ldso)) {
+		x___aligned_alloc_replaced = int32(1)
+	}
+	/* Switch to runtime mode: any further failures in the dynamic
+	 * linker are a reportable failure rather than a fatal startup
+	 * error. */
+	_runtime = int32(1)
+	_debug.Fver = int32(1)
+	_debug.Fbp = __ccgo_fp(_dl_debug_state)
+	_debug.Fhead = _head1
+	_debug.Fbase = _ldso.Fbase
+	_debug.Fstate = int32(_RT_CONSISTENT)
+	_dl_debug_state(tls)
+	if replace_argv0 != 0 {
+		*(*uintptr)(unsafe.Pointer(argv)) = replace_argv0
+	}
+	*(*int32)(unsafe.Pointer(x___errno_location(tls))) = 0
+	// __asm__ __volatile__( 	"mov %1,%%rsp ; jmp *%0" : : "r"((void *)aux[	9]), "r"( argv-1) : "memory" );
+	x___assert_fail(tls, ts+672, ts+3923, 2073, ts+3586)
+	for {
+	}
+}
+
+var _app Tdso
+
+var _vdso Tdso
+
+func _prepare_lazy(tls *TLS, p uintptr) {
+	bp := tls.Alloc(336) /* tlsAllocs 320 maxVaListSize 8 */
+	defer tls.Free(336)
+	var n uint64
+	var _ /* dyn at bp+0 */ [37]uint64
+	var _ /* flags1 at bp+296 */ uint64
+	var _ /* i at bp+312 */ uint64
+	var _ /* j at bp+304 */ uint64
+	*(*uint64)(unsafe.Pointer(bp + 296)) = uint64(0)
+	_decode_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DYN_CNT))
+	_search_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp+296, uint64(m_DT_FLAGS_1))
+	if (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_BIND_NOW)] != 0 || (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_FLAGS)]&uint64(m_DF_BIND_NOW) != 0 || *(*uint64)(unsafe.Pointer(bp + 296))&uint64(m_DF_1_NOW) != 0 {
+		return
+	}
+	n = (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELSZ)]/uint64(2) + (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELASZ)]/uint64(3) + (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_PLTRELSZ)]/uint64(2) + uint64(1)
+	if m_NEED_MIPS_GOT_RELOCS != 0 {
+		*(*uint64)(unsafe.Pointer(bp + 304)) = uint64(0)
+		_search_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp+304, uint64(m_DT_MIPS_GOTSYM))
+		*(*uint64)(unsafe.Pointer(bp + 312)) = uint64(0)
+		_search_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp+312, uint64(m_DT_MIPS_SYMTABNO))
+		n += *(*uint64)(unsafe.Pointer(bp + 312)) - *(*uint64)(unsafe.Pointer(bp + 304))
+	}
+	(*Tdso)(unsafe.Pointer(p)).Flazy = x___libc_calloc(tls, n, Uint64FromInt32(3)*Uint64FromInt64(8))
+	if !((*Tdso)(unsafe.Pointer(p)).Flazy != 0) {
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3933, VaList(bp+328, (*Tdso)(unsafe.Pointer(p)).Fname))
+		_longjmp(tls, _rtld_fail, int32(1))
+	}
+	(*Tdso)(unsafe.Pointer(p)).Flazy_next = _lazy_head
+	_lazy_head = p
+}
+
+func x_dlopen(tls *TLS, file uintptr, mode int32) (r uintptr) {
+	bp := tls.Alloc(224) /* tlsAllocs 208 maxVaListSize 8 */
+	defer tls.Free(224)
+	var constructed int32
+	var ctor_queue, next, orig_lazy_head, orig_syms_tail, orig_tail, orig_tls_tail, p, tmp, v1 uintptr
+	var i, orig_tls_align, orig_tls_cnt, orig_tls_offset uint64
+	var _ /* cs at bp+0 */ int32
+	var _ /* jb at bp+8 */ Tjmp_buf
+	ctor_queue = uintptr(0)
+	if !(file != 0) {
+		return _head1
+	}
+	x___pthread_setcancelstate(tls, int32(m_PTHREAD_CANCEL_DISABLE), bp)
+	x___pthread_rwlock_wrlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+	x___inhibit_ptc(tls)
+	_debug.Fstate = int32(_RT_ADD)
+	_dl_debug_state(tls)
+	p = uintptr(0)
+	if _shutting_down != 0 {
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3976, 0)
+		goto end
+	}
+	orig_tls_tail = _tls_tail
+	orig_tls_cnt = _tls_cnt
+	orig_tls_offset = _tls_offset
+	orig_tls_align = _tls_align
+	orig_lazy_head = _lazy_head
+	orig_syms_tail = _syms_tail
+	orig_tail = _tail
+	_noload = mode & int32(m_RTLD_NOLOAD)
+	_rtld_fail = bp + 8
+	if _setjmp(tls, _rtld_fail) != 0 {
+		/* Clean up anything new that was (partially) loaded */
+		_revert_syms(tls, orig_syms_tail)
+		for p = (*Tdso)(unsafe.Pointer(orig_tail)).Fnext; p != 0; p = next {
+			next = (*Tdso)(unsafe.Pointer(p)).Fnext
+			for (*Tdso)(unsafe.Pointer(p)).Ftd_index != 0 {
+				tmp = (*Ttd_index)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Ftd_index)).Fnext
+				x___libc_free(tls, (*Tdso)(unsafe.Pointer(p)).Ftd_index)
+				(*Tdso)(unsafe.Pointer(p)).Ftd_index = tmp
+			}
+			x___libc_free(tls, (*Tdso)(unsafe.Pointer(p)).Ffuncdescs)
+			if (*Tdso)(unsafe.Pointer(p)).Frpath != (*Tdso)(unsafe.Pointer(p)).Frpath_orig {
+				x___libc_free(tls, (*Tdso)(unsafe.Pointer(p)).Frpath)
+			}
+			x___libc_free(tls, (*Tdso)(unsafe.Pointer(p)).Fdeps)
+			_unmap_library(tls, p)
+			x___libc_free(tls, p)
+		}
+		x___libc_free(tls, ctor_queue)
+		ctor_queue = uintptr(0)
+		if !(orig_tls_tail != 0) {
+			x___libc.Ftls_head = uintptr(0)
+		}
+		_tls_tail = orig_tls_tail
+		if _tls_tail != 0 {
+			(*Ttls_module)(unsafe.Pointer(_tls_tail)).Fnext = uintptr(0)
+		}
+		_tls_cnt = orig_tls_cnt
+		_tls_offset = orig_tls_offset
+		_tls_align = orig_tls_align
+		_lazy_head = orig_lazy_head
+		_tail = orig_tail
+		(*Tdso)(unsafe.Pointer(_tail)).Fnext = uintptr(0)
+		p = uintptr(0)
+		goto end
+	} else {
+		p = _load_library(tls, file, _head1)
+	}
+	if !(p != 0) {
+		if _noload != 0 {
+			v1 = ts + 4016
+		} else {
+			v1 = ts + 4049
+		}
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, v1, VaList(bp+216, file))
+		goto end
+	}
+	/* First load handling */
+	_load_deps(tls, p)
+	_extend_bfs_deps(tls, p)
+	x___pthread_mutex_lock(tls, uintptr(unsafe.Pointer(&_init_fini_lock)))
+	constructed = int32((*Tdso)(unsafe.Pointer(p)).Fconstructed)
+	x___pthread_mutex_unlock(tls, uintptr(unsafe.Pointer(&_init_fini_lock)))
+	if !(constructed != 0) {
+		ctor_queue = _queue_ctors(tls, p)
+	}
+	if !((*Tdso)(unsafe.Pointer(p)).Frelocated != 0) && mode&int32(m_RTLD_LAZY) != 0 {
+		_prepare_lazy(tls, p)
+		for i = uint64(0); *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(i)*8)) != 0; i++ {
+			if !((*Tdso)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(i)*8)))).Frelocated != 0) {
+				_prepare_lazy(tls, *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(i)*8)))
+			}
+		}
+	}
+	if !((*Tdso)(unsafe.Pointer(p)).Frelocated != 0) || mode&int32(m_RTLD_GLOBAL) != 0 {
+		/* Make new symbols global, at least temporarily, so we can do
+		 * relocations. If not RTLD_GLOBAL, this is reverted below. */
+		_add_syms(tls, p)
+		for i = uint64(0); *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(i)*8)) != 0; i++ {
+			_add_syms(tls, *(*uintptr)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Fdeps + uintptr(i)*8)))
+		}
+	}
+	if !((*Tdso)(unsafe.Pointer(p)).Frelocated != 0) {
+		_reloc_all(tls, p)
+	}
+	/* If RTLD_GLOBAL was not specified, undo any new additions
+	 * to the global symbol table. This is a nop if the library was
+	 * previously loaded and already global. */
+	if !(mode&Int32FromInt32(m_RTLD_GLOBAL) != 0) {
+		_revert_syms(tls, orig_syms_tail)
+	}
+	/* Processing of deferred lazy relocations must not happen until
+	 * the new libraries are committed; otherwise we could end up with
+	 * relocations resolved to symbol definitions that get removed. */
+	_redo_lazy_relocs(tls)
+	_update_tls_size(tls)
+	if _tls_cnt != orig_tls_cnt {
+		_install_new_tls(tls)
+	}
+	orig_tail = _tail
+end:
+	_debug.Fstate = int32(_RT_CONSISTENT)
+	_dl_debug_state(tls)
+	x___release_ptc(tls)
+	if p != 0 {
+		_gencnt++
+	}
+	x___pthread_rwlock_unlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+	if ctor_queue != 0 {
+		_do_init_fini(tls, ctor_queue)
+		x___libc_free(tls, ctor_queue)
+	}
+	x___pthread_setcancelstate(tls, *(*int32)(unsafe.Pointer(bp)), uintptr(0))
+	return p
+}
+
+func _addr2dso(tls *TLS, a uint64) (r uintptr) {
+	var base, entsz, i, phcnt, v1 uint64
+	var p, ph uintptr
+	if m_DL_FDPIC != 0 {
+		for p = _head1; p != 0; p = (*Tdso)(unsafe.Pointer(p)).Fnext {
+			i = _count_syms(tls, p)
+			if a-uint64((*Tdso)(unsafe.Pointer(p)).Ffuncdescs) < i*uint64(16) {
+				return p
+			}
+		}
+	}
+	for p = _head1; p != 0; p = (*Tdso)(unsafe.Pointer(p)).Fnext {
+		if m_DL_FDPIC != 0 && (*Tdso)(unsafe.Pointer(p)).Floadmap != 0 {
+			for i = uint64(0); i < uint64((*Tfdpic_loadmap)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Floadmap)).Fnsegs); i++ {
+				if a-(*(*Tfdpic_loadseg)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Floadmap + 8 + uintptr(i)*24))).Fp_vaddr < (*(*Tfdpic_loadseg)(unsafe.Pointer((*Tdso)(unsafe.Pointer(p)).Floadmap + 8 + uintptr(i)*24))).Fp_memsz {
+					return p
+				}
+			}
+		} else {
+			ph = (*Tdso)(unsafe.Pointer(p)).Fphdr
+			phcnt = uint64((*Tdso)(unsafe.Pointer(p)).Fphnum)
+			entsz = (*Tdso)(unsafe.Pointer(p)).Fphentsize
+			base = uint64((*Tdso)(unsafe.Pointer(p)).Fbase)
+			for ; ; ph = ph + uintptr(entsz) {
+				v1 = phcnt
+				phcnt--
+				if !(v1 != 0) {
+					break
+				}
+				if (*TPhdr)(unsafe.Pointer(ph)).Fp_type != uint32(m_PT_LOAD) {
+					continue
+				}
+				if a-base-(*TPhdr)(unsafe.Pointer(ph)).Fp_vaddr < (*TPhdr)(unsafe.Pointer(ph)).Fp_memsz {
+					return p
+				}
+			}
+			if a-uint64((*Tdso)(unsafe.Pointer(p)).Fmap1) < (*Tdso)(unsafe.Pointer(p)).Fmap_len {
+				return uintptr(0)
+			}
+		}
+	}
+	return uintptr(0)
+}
+
+func _do_dlsym(tls *TLS, p uintptr, s uintptr, ra uintptr) (r uintptr) {
+	bp := tls.Alloc(32) /* tlsAllocs 16 maxVaListSize 8 */
+	defer tls.Free(32)
+	var def Tsymdef
+	var use_deps int32
+	use_deps = 0
+	if p == _head1 || p == UintptrFromInt32(0) {
+		p = _head1
+	} else {
+		if p == uintptr(-Int32FromInt32(1)) {
+			p = _addr2dso(tls, uint64(ra))
+			if !(p != 0) {
+				p = _head1
+			}
+			p = (*Tdso)(unsafe.Pointer(p)).Fnext
+		} else {
+			if _stub_invalid_handle(tls, p) != 0 {
+				return uintptr(0)
+			} else {
+				use_deps = int32(1)
+			}
+		}
+	}
+	def = _find_sym2(tls, p, s, 0, use_deps)
+	if !(def.Fsym != 0) {
+		(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+289, VaList(bp+24, s))
+		return uintptr(0)
+	}
+	if int32((*TSym)(unsafe.Pointer(def.Fsym)).Fst_info)&int32(0xf) == int32(m_STT_TLS) {
+		*(*[2]uint64)(unsafe.Pointer(bp)) = [2]uint64{
+			0: (*Tdso)(unsafe.Pointer(def.Fdso)).Ftls_id,
+			1: (*TSym)(unsafe.Pointer(def.Fsym)).Fst_value - uint64(m_DTP_OFFSET),
+		}
+		return x___tls_get_addr(tls, bp)
+	}
+	if m_DL_FDPIC != 0 && int32((*TSym)(unsafe.Pointer(def.Fsym)).Fst_info)&int32(0xf) == int32(m_STT_FUNC) {
+		return (*Tdso)(unsafe.Pointer(def.Fdso)).Ffuncdescs + uintptr((int64(def.Fsym)-int64((*Tdso)(unsafe.Pointer(def.Fdso)).Fsyms))/24)*16
+	}
+	return (*Tdso)(unsafe.Pointer(def.Fdso)).Fbase + uintptr((*TSym)(unsafe.Pointer(def.Fsym)).Fst_value)
+}
+
+func x_dladdr(tls *TLS, addr_arg uintptr, info uintptr) (r int32) {
+	var addr, best, besterr, idx, symaddr uint64
+	var bestsym, p, strings, sym uintptr
+	var nsym uint32
+	addr = uint64(addr_arg)
+	best = uint64(0)
+	besterr = uint64(-Int32FromInt32(1))
+	x___pthread_rwlock_rdlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+	p = _addr2dso(tls, addr)
+	x___pthread_rwlock_unlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+	if !(p != 0) {
+		return 0
+	}
+	sym = (*Tdso)(unsafe.Pointer(p)).Fsyms
+	strings = (*Tdso)(unsafe.Pointer(p)).Fstrings
+	nsym = uint32(_count_syms(tls, p))
+	if m_DL_FDPIC != 0 {
+		idx = (addr - uint64((*Tdso)(unsafe.Pointer(p)).Ffuncdescs)) / uint64(16)
+		if idx < uint64(nsym) && int32((*(*TSym)(unsafe.Pointer(sym + uintptr(idx)*24))).Fst_info)&int32(0xf) == int32(m_STT_FUNC) {
+			best = uint64((*Tdso)(unsafe.Pointer(p)).Ffuncdescs + uintptr(idx)*16)
+			bestsym = sym + uintptr(idx)*24
+			besterr = uint64(0)
+		}
+	}
+	if !(best != 0) {
+		for nsym != 0 {
+			if (*TSym)(unsafe.Pointer(sym)).Fst_value != 0 && int32(1)<<(int32((*TSym)(unsafe.Pointer(sym)).Fst_info)&int32(0xf))&(Int32FromInt32(1)<<Int32FromInt32(m_STT_NOTYPE)|Int32FromInt32(1)<<Int32FromInt32(m_STT_OBJECT)|Int32FromInt32(1)<<Int32FromInt32(m_STT_FUNC)|Int32FromInt32(1)<<Int32FromInt32(m_STT_COMMON)|Int32FromInt32(1)<<Int32FromInt32(m_STT_TLS)) != 0 && int32(1)<<(int32((*TSym)(unsafe.Pointer(sym)).Fst_info)>>int32(4))&(Int32FromInt32(1)<<Int32FromInt32(m_STB_GLOBAL)|Int32FromInt32(1)<<Int32FromInt32(m_STB_WEAK)|Int32FromInt32(1)<<Int32FromInt32(m_STB_GNU_UNIQUE)) != 0 {
+				symaddr = uint64((*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*TSym)(unsafe.Pointer(sym)).Fst_value))
+				if symaddr > addr || symaddr <= best {
+					goto _1
+				}
+				best = symaddr
+				bestsym = sym
+				besterr = addr - symaddr
+				if addr == symaddr {
+					break
+				}
+			}
+			goto _1
+		_1:
+			nsym--
+			sym += 24
+		}
+	}
+	if best != 0 && besterr > (*TSym)(unsafe.Pointer(bestsym)).Fst_size-uint64(1) {
+		best = uint64(0)
+		bestsym = uintptr(0)
+	}
+	(*TDl_info)(unsafe.Pointer(info)).Fdli_fname = (*Tdso)(unsafe.Pointer(p)).Fname
+	(*TDl_info)(unsafe.Pointer(info)).Fdli_fbase = (*Tdso)(unsafe.Pointer(p)).Fmap1
+	if !(best != 0) {
+		(*TDl_info)(unsafe.Pointer(info)).Fdli_sname = uintptr(0)
+		(*TDl_info)(unsafe.Pointer(info)).Fdli_saddr = uintptr(0)
+		return int32(1)
+	}
+	if m_DL_FDPIC != 0 && int32((*TSym)(unsafe.Pointer(bestsym)).Fst_info)&int32(0xf) == int32(m_STT_FUNC) {
+		best = uint64((*Tdso)(unsafe.Pointer(p)).Ffuncdescs + uintptr((int64(bestsym)-int64((*Tdso)(unsafe.Pointer(p)).Fsyms))/24)*16)
+	}
+	(*TDl_info)(unsafe.Pointer(info)).Fdli_sname = strings + uintptr((*TSym)(unsafe.Pointer(bestsym)).Fst_name)
+	(*TDl_info)(unsafe.Pointer(info)).Fdli_saddr = uintptr(best)
+	return int32(1)
+}
+
+func x___dlsym(tls *TLS, p uintptr, s uintptr, ra uintptr) (r uintptr) {
+	var res uintptr
+	x___pthread_rwlock_rdlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+	res = _do_dlsym(tls, p, s, ra)
+	x___pthread_rwlock_unlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+	return res
+}
+
+func x___dlsym_redir_time64(tls *TLS, p uintptr, s uintptr, ra uintptr) (r uintptr) {
+	return x___dlsym(tls, p, s, ra)
+}
+
+func x_dl_iterate_phdr(tls *TLS, callback uintptr, data uintptr) (r int32) {
+	bp := tls.Alloc(80) /* tlsAllocs 80 maxVaListSize 0 */
+	defer tls.Free(80)
+	var current, v1 uintptr
+	var ret int32
+	var _ /* info at bp+16 */ Tdl_phdr_info
+	ret = 0
+	for current = _head1; current != 0; {
+		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_addr = uint64((*Tdso)(unsafe.Pointer(current)).Fbase)
+		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_name = (*Tdso)(unsafe.Pointer(current)).Fname
+		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_phdr = (*Tdso)(unsafe.Pointer(current)).Fphdr
+		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_phnum = uint16((*Tdso)(unsafe.Pointer(current)).Fphnum)
+		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_adds = _gencnt
+		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_subs = uint64(0)
+		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_tls_modid = (*Tdso)(unsafe.Pointer(current)).Ftls_id
+		if !((*Tdso)(unsafe.Pointer(current)).Ftls_id != 0) {
+			v1 = uintptr(0)
+		} else {
+			*(*[2]uint64)(unsafe.Pointer(bp)) = [2]uint64{
+				0: (*Tdso)(unsafe.Pointer(current)).Ftls_id,
+				1: uint64(0),
+			}
+			v1 = x___tls_get_addr(tls, bp)
+		}
+		(*(*Tdl_phdr_info)(unsafe.Pointer(bp + 16))).Fdlpi_tls_data = v1
+		ret = (*(*func(*TLS, uintptr, uint64, uintptr) int32)(unsafe.Pointer(&struct{ uintptr }{callback})))(tls, bp+16, uint64(64), data)
+		if ret != 0 {
+			break
+		}
+		x___pthread_rwlock_rdlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+		current = (*Tdso)(unsafe.Pointer(current)).Fnext
+		x___pthread_rwlock_unlock(tls, uintptr(unsafe.Pointer(&_lock11)))
+	}
+	return ret
+}
+
+func _error_impl(tls *TLS, fmt uintptr, va uintptr) {
+	var ap uintptr
+	ap = va
+	if !(_runtime != 0) {
+		x_vdprintf(tls, int32(2), fmt, ap)
+		x_dprintf(tls, int32(2), ts+482, 0)
+		_ldso_fail = int32(1)
+		_ = ap
+		return
+	}
+	x___dl_vseterr(tls, fmt, ap)
+	_ = ap
+}
+
+func _error_noop(tls *TLS, fmt uintptr, va uintptr) {
+}
+
+type Tfuncdesc = struct {
+	Faddr uintptr
+	Fgot  uintptr
+}
+
 func __ccgo_fp(f interface{}) uintptr {
 	type iface [2]uintptr
 	return (*iface)(unsafe.Pointer(&f))[1]
@@ -151271,6 +154344,8 @@ var x___exp_data = Texp_data{
 	},
 }
 
+var x___fini_array_start uintptr
+
 var x___fsmu8 = [51]uint32{
 	0:  (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23) | Uint32FromInt32(0x2),
 	1:  (Uint32FromUint32(0x40)-Uint32FromInt32(0xc0))<<Int32FromInt32(23) | Uint32FromInt32(0x3),
@@ -151328,6 +154403,8 @@ var x___fsmu8 = [51]uint32{
 var x___gettext_lockptr = uintptr(unsafe.Pointer(&_lock2))
 
 var x___hwcap uint64
+
+var x___init_array_start uintptr
 
 var x___libc T__libc
 
@@ -154244,6 +157321,8 @@ var x___utc = [4]int8{'U', 'T', 'C'}
 
 var x___vmlock_lockptr = uintptr(unsafe.Pointer(&_vmlock))
 
+var x__dl_debug_addr = uintptr(unsafe.Pointer(&_debug))
+
 var x__ns_flagdata = [16]T_ns_flagdata{
 	0: {
 		Fmask:  int32(0x8000),
@@ -154340,4 +157419,4 @@ var Xstdout = uintptr(unsafe.Pointer(&x___stdout_FILE))
 
 var ts = (*reflect.StringHeader)(unsafe.Pointer(&ts1)).Data
 
-var ts1 = "\x00/bin:/usr/bin\x00%s\x008b \xd0\xc1\xd2\xcf\xcc\xd8\x00$2a$00$abcdefghijklmnopqrstuu\x00\xff4\xff\xff\xffE\x00*\x00\x80\xff\x80\x01 \x7f\x81\x80\x80\r\n\xff\x7f \x81 test\x00_0.../9Zz\x00_0.../9ZzX7iSJNd21sU\x00\x80x\x00\x80x22/wK52ZKGA\x00x\x00$1$\x00$5$\x00rounds=\x00rounds=%u$\x00$5$%s%.*s$\x00$6$\x00$6$%s%.*s$\x00toupper\x00tolower\x00/dev/null\x00Assertion failed: %s (%s: %s: %d)\n\x00infinity\x00nan\x00\x00\x01\x02\x04\a\x03\x06\x05\x00/proc/self/fd/\x00Symbol not found: %s\x00/proc/self/exe\x00Dynamic linker failed to allocate memory for error message\x00Invalid library handle %p\x00Unsupported request %d\x00Dynamic loading not supported\x00/\x00%s: \x00: \x00/dev/tty\x00\n\x00/etc/shells\x00rbe\x00rb\x00UTF-8\x00NLSPATH\x00LANG\x00_.@\x00.@\x00%\x00messages\x00%s/%.*s%.*s/%s/%s.mo\x00\x00n!=1;\x00Plural-Forms:\x00nplurals=\x00plural=\x00Ê̄Ê̌ê̄ê̌\x00utf8\x00ASCII\x00C\x00LC_ALL\x00C.UTF-8\x00POSIX\x00MUSL_LOCPATH\x00.\x00%*.*f\x00assembler statements not supported\x00fmodl.c\x00fmodl\x00llrint.c\x00llrint\x00llrintf.c\x00llrintf\x00llrintl.c\x00llrintl\x00lrint.c\x00lrint\x00lrintf.c\x00lrintf\x00lrintl.c\x00lrintl\x00remainderl.c\x00remainderl\x00remquol.c\x00remquol\x00rintl.c\x00rintl\x00sqrt.c\x00sqrt\x00sqrtf.c\x00sqrtf\x00sqrtl.c\x00sqrtl\x00MSGVERB\x00label\x00severity\x00text\x00action\x00tag\x00HALT: \x00ERROR: \x00WARNING: \x00INFO: \x00/dev/console\x00\nTO FIX: \x00 \x00%s%s%s%s%s%s%s%s\n\x00PWD\x00: unrecognized option: \x00: option requires an argument: \x00: option does not take an argument: \x00: option is ambiguous: \x00%*[^\n]%*[\n]\x00 %n%*s%n %n%*s%n %n%*s%n %n%*s%n %d %d\x00%s\t%s\t%s\t%s\t%d\t%d\n\x00/dev/ptmx\x00/dev/pts/%d\x00%b %e %T\x00<%d>%s %n%s%s%.0d%s: \x00[\x00]\x00%.*s\x002>/dev/null\x00/bin/sh\x00sh\x00-c\x00eval \"printf %s\\\\\\\\0 x $1 $2\"\x00r\x00/dev/shm/\x00%.2X\x00:%.2X\x00%d.%d.%d.%d.in-addr.arpa\x00ip6.arpa\x00/etc/hosts\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xff\xff\x00/etc/services\x00/udp\x00/tcp\x00tcp\x00udp\x00%s%s%s\n\x00%d.%d.%d.%d\x00%x:%x:%x:%x:%x:%x:%x:%x\x00%x:%x:%x:%x:%x:%x:%d.%d.%d.%d\x00:0\x00/etc/resolv.conf\x00options\x00ndots:\x00attempts:\x00timeout:\x00nameserver\x00domain\x00search\x00127.0.0.1\x00/etc/group\x00/etc/passwd\x00/etc/tcb/%s/shadow\x00/etc/shadow\x00re\x00%s:%s:%u:\x00,\x00%s%s\x00%s:%s:%u:%u:%s:%s:%s\n\x00%s:%s:%.*ld:%.*ld:%.*ld:%.*ld:%.*ld:%.*ld:%.*lu\n\x00PATH\x00/usr/local/bin:/bin:/usr/bin\x00HOME\x00new_size > s->size\x00src/regex/regcomp.c\x00\t\x00\r\x00\f\x00\a\x00\x1b\x00[[:alnum:]_]\x00[^[:alnum:]_]\x00[[:space:]]\x00[^[:space:]]\x00[[:digit:]]\x00[^[:digit:]]\x00tnfa->submatch_data[id].parents == NULL\x00!IS_TAG(lit)\x000\x00tree->num_tags == num_tags\x00lit->code_max >= 1 || lit->code_max <= ASSERT_LAST\x00cat->left->nullable\x00cat->right->nullable\x00(trans->assertions & ASSERT_CHAR_CLASS) == 0\x00p2->backref < 0\x00iter->max == -1 || iter->max == 1\x00iter->min == 0 || iter->min == 1\x00reach_pos[trans_i->state_id].pos == pos\x00src/regex/regexec.c\x00stack->prev\x00pmatch[i].rm_so == -1\x00pmatch[i].rm_so <= pmatch[i].rm_eo\x00LINUX_2.6\x00__vdso_getcpu\x00rwa\x00/tmp\x00temp\x00w+\x00-0X+0X 0X-0x+0x 0x\x00inf\x00INF\x00NAN\x00-+   0X0x\x00(null)\x00%*s\x00%%%s%s%s%s%s*.*%c%c\x00#\x00+\x00-\x00\x00\x00\x00\x00%.*s%.0d%s%c%%lln\x00%*\x00%.*e\x00%.*f\x00000000000000000\x00%.*g\x00@\x00\x00\x00\x00\x00\x00\x00explicit_bzero.c\x00explicit_bzero\x00XXXXXX\x00/proc/self/task/%d/comm\x00TODO pthread_setattr_default_np.c:31:11: (init.go:488:initializerUnionMany:)/dev/shm/tmp-%d\x00TZ\x00/etc/localtime\x00UTC\x00GMT\x00TZif\x00%.3s %.3s%3d %.2d:%.2d:%.2d %d\n\x00__vdso_clock_gettime\x00DATEMSK\x00%m/%d/%y\x00%Y-%m-%d\x00%H:%M\x00%H:%M:%S\x00+%lld\x00%+.4ld\x00%lld\x00%*lld\x00%0*lld\x00LOGNAME\x00"
+var ts1 = "\x00/bin:/usr/bin\x00%s\x008b \xd0\xc1\xd2\xcf\xcc\xd8\x00$2a$00$abcdefghijklmnopqrstuu\x00\xff4\xff\xff\xffE\x00*\x00\x80\xff\x80\x01 \x7f\x81\x80\x80\r\n\xff\x7f \x81 test\x00_0.../9Zz\x00_0.../9ZzX7iSJNd21sU\x00\x80x\x00\x80x22/wK52ZKGA\x00x\x00$1$\x00$5$\x00rounds=\x00rounds=%u$\x00$5$%s%.*s$\x00$6$\x00$6$%s%.*s$\x00toupper\x00tolower\x00/dev/null\x00Assertion failed: %s (%s: %s: %d)\n\x00infinity\x00nan\x00\x00\x01\x02\x04\a\x03\x06\x05\x00/proc/self/fd/\x00Symbol not found: %s\x00/proc/self/exe\x00Dynamic linker failed to allocate memory for error message\x00Invalid library handle %p\x00Unsupported request %d\x00Dynamic loading not supported\x00/\x00%s: \x00: \x00/dev/tty\x00\n\x00/etc/shells\x00rbe\x00rb\x00UTF-8\x00NLSPATH\x00LANG\x00_.@\x00.@\x00%\x00messages\x00%s/%.*s%.*s/%s/%s.mo\x00\x00n!=1;\x00Plural-Forms:\x00nplurals=\x00plural=\x00Ê̄Ê̌ê̄ê̌\x00utf8\x00ASCII\x00C\x00LC_ALL\x00C.UTF-8\x00POSIX\x00MUSL_LOCPATH\x00.\x00%*.*f\x00assembler statements not supported\x00fmodl.c\x00fmodl\x00llrint.c\x00llrint\x00llrintf.c\x00llrintf\x00llrintl.c\x00llrintl\x00lrint.c\x00lrint\x00lrintf.c\x00lrintf\x00lrintl.c\x00lrintl\x00remainderl.c\x00remainderl\x00remquol.c\x00remquol\x00rintl.c\x00rintl\x00sqrt.c\x00sqrt\x00sqrtf.c\x00sqrtf\x00sqrtl.c\x00sqrtl\x00MSGVERB\x00label\x00severity\x00text\x00action\x00tag\x00HALT: \x00ERROR: \x00WARNING: \x00INFO: \x00/dev/console\x00\nTO FIX: \x00 \x00%s%s%s%s%s%s%s%s\n\x00PWD\x00: unrecognized option: \x00: option requires an argument: \x00: option does not take an argument: \x00: option is ambiguous: \x00%*[^\n]%*[\n]\x00 %n%*s%n %n%*s%n %n%*s%n %n%*s%n %d %d\x00%s\t%s\t%s\t%s\t%d\t%d\n\x00/dev/ptmx\x00/dev/pts/%d\x00%b %e %T\x00<%d>%s %n%s%s%.0d%s: \x00[\x00]\x00%.*s\x002>/dev/null\x00/bin/sh\x00sh\x00-c\x00eval \"printf %s\\\\\\\\0 x $1 $2\"\x00r\x00/dev/shm/\x00%.2X\x00:%.2X\x00%d.%d.%d.%d.in-addr.arpa\x00ip6.arpa\x00/etc/hosts\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xff\xff\x00/etc/services\x00/udp\x00/tcp\x00tcp\x00udp\x00%s%s%s\n\x00%d.%d.%d.%d\x00%x:%x:%x:%x:%x:%x:%x:%x\x00%x:%x:%x:%x:%x:%x:%d.%d.%d.%d\x00:0\x00/etc/resolv.conf\x00options\x00ndots:\x00attempts:\x00timeout:\x00nameserver\x00domain\x00search\x00127.0.0.1\x00/etc/group\x00/etc/passwd\x00/etc/tcb/%s/shadow\x00/etc/shadow\x00re\x00%s:%s:%u:\x00,\x00%s%s\x00%s:%s:%u:%u:%s:%s:%s\n\x00%s:%s:%.*ld:%.*ld:%.*ld:%.*ld:%.*ld:%.*ld:%.*lu\n\x00PATH\x00/usr/local/bin:/bin:/usr/bin\x00HOME\x00new_size > s->size\x00src/regex/regcomp.c\x00\t\x00\r\x00\f\x00\a\x00\x1b\x00[[:alnum:]_]\x00[^[:alnum:]_]\x00[[:space:]]\x00[^[:space:]]\x00[[:digit:]]\x00[^[:digit:]]\x00tnfa->submatch_data[id].parents == NULL\x00!IS_TAG(lit)\x000\x00tree->num_tags == num_tags\x00lit->code_max >= 1 || lit->code_max <= ASSERT_LAST\x00cat->left->nullable\x00cat->right->nullable\x00(trans->assertions & ASSERT_CHAR_CLASS) == 0\x00p2->backref < 0\x00iter->max == -1 || iter->max == 1\x00iter->min == 0 || iter->min == 1\x00reach_pos[trans_i->state_id].pos == pos\x00src/regex/regexec.c\x00stack->prev\x00pmatch[i].rm_so == -1\x00pmatch[i].rm_so <= pmatch[i].rm_eo\x00LINUX_2.6\x00__vdso_getcpu\x00rwa\x00/tmp\x00temp\x00w+\x00-0X+0X 0X-0x+0x 0x\x00inf\x00INF\x00NAN\x00-+   0X0x\x00(null)\x00%*s\x00%%%s%s%s%s%s*.*%c%c\x00#\x00+\x00-\x00\x00\x00\x00\x00%.*s%.0d%s%c%%lln\x00%*\x00%.*e\x00%.*f\x00000000000000000\x00%.*g\x00@\x00\x00\x00\x00\x00\x00\x00explicit_bzero.c\x00explicit_bzero\x00XXXXXX\x00/proc/self/task/%d/comm\x00TODO pthread_setattr_default_np.c:31:11: (init.go:488:initializerUnionMany:)/dev/shm/tmp-%d\x00TZ\x00/etc/localtime\x00UTC\x00GMT\x00TZif\x00%.3s %.3s%3d %.2d:%.2d:%.2d %d\n\x00__vdso_clock_gettime\x00DATEMSK\x00%m/%d/%y\x00%Y-%m-%d\x00%H:%M\x00%H:%M:%S\x00+%lld\x00%+.4ld\x00%lld\x00%*lld\x00%0*lld\x00LOGNAME\x00dlstart.c\x00_dlstart_c\x00readdir64_r\x00readdir_r\x00Error relocating %s: %s: symbol not found\x00Error relocating %s: %s: initial-exec TLS resolves to dynamic definition in %s\x00(local)\x00Error relocating %s: cannot allocate TLSDESC for %s\x00Error relocating %s: unsupported relocation type %d\x00:\n\x00%.*s/%s\x00$ORIGIN\x00${ORIGIN}\x00Error allocating function descriptors for %s\x00\t%s => %s (%p)\n\x00%.*s/etc/ld-musl-x86_64.path\x00/lib:/usr/local/lib:/usr/lib\x00__libc_start_main\x00stdin\x00libc.so\x00Error loading dependencies for %s\x00Error loading shared library %s: %m (needed by %s)\x00Error recording dependencies for %s\x00Error relocating %s: RELRO protection failed: %m\x00Error allocating constructor queue: %m\n\x00State of %s is inconsistent due to multithreaded fork\n\x00__dls2b\x00__dls3\x00LD_LIBRARY_PATH\x00LD_PRELOAD\x00/proc/\x00ldd\x00list\x00library-path\x00preload\x00argv0\x00 [args]\x00musl libc (x86_64)\nVersion %s\nDynamic Program Loader\nUsage: %s [options] [--] pathname%s\n\x00%s: cannot load %s: %s\n\x00%s: %s: Not a valid dynamic program\n\x00\t%s (%p)\n\x00linux-gate.so.1\x00%s: Error getting %zu bytes thread-local storage: %m\n\x00malloc\x00aligned_alloc\x00dynlink.c\x00Error preparing lazy relocation for %s: %m\x00Cannot dlopen while program is exiting.\x00Library %s is not already loaded\x00Error loading shared library %s: %m\x00"
