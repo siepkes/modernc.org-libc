@@ -28,6 +28,15 @@ TEXT ·a_or(SB),NOSPLIT,$0-12
 	ORL	AX, 0(BX)
 	RET
 
+
+// static inline int a_fetch_add(volatile int *p, int v)
+TEXT ·a_fetch_add(SB),NOSPLIT,$0-12
+	MOVQ	p+0(FP), BX
+	MOVL	v+8(FP), AX
+	LOCK
+	XADDL	AX, 0(BX)
+	RET
+
 // static inline void a_or_64(volatile uint64_t *p, uint64_t v)
 TEXT ·a_or_64(SB),NOSPLIT,$0-16
 	MOVQ	p+0(FP), BX

@@ -200,6 +200,9 @@ func NewTLS() (r *TLS) {
 		Ftid: r.ID,
 	}
 	initLibcOnce.Do(func() { initLibc(r) })
+	if r.ID > 1 {
+		x___libc.Fneed_locks = -1
+	}
 	return r
 }
 
@@ -359,8 +362,10 @@ func _a_spin(tls *TLS) {
 	a_spin()
 }
 
+func a_fetch_add(p uintptr, v int32) int32
+
 func _a_fetch_add(tls *TLS, p uintptr, v int32) int32 {
-	panic(todo(""))
+	return a_fetch_add(p, v)
 }
 
 // func a_and_64(p uintptr, x uint64)
@@ -1764,6 +1769,19 @@ func Xremove(tls *TLS, name uintptr) (r int32) {
 // consists entirely of bytes in accept.
 func Xstrspn(tls *TLS, s uintptr, accept uintptr) (r uint64) {
 	return x_strspn(tls, s, accept)
+}
+
+// Xlseek repositions the file offset of the open file description associated
+// with the file descriptor fd to the argument offset according to the
+// directive whence.
+func Xlseek(tls *TLS, fd int32, offset int64, whence int32) (r int64) {
+	return x___lseek(tls, fd, offset, whence)
+}
+
+// Xferror tests the error indicator for the stream pointed to by stream,
+// returning nonzero if it is set.
+func Xferror(tls *TLS, stream uintptr) (r int32) {
+	return x_ferror(tls, stream)
 }
 
 func X__builtin_add_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {

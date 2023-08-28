@@ -24,7 +24,7 @@ edit:
 	@if [ -f "Session.vim" ]; then gvim -S & else gvim -p Makefile *.go & fi
 
 editor:
-	gofmt -l -s -w *.go 2>&1 | tee log-editor
+	gofmt -l -s -w . 2>&1 | tee log-editor
 	go test -c -o /dev/null 2>&1 | tee -a log-editor
 	go install -v  ./... 2>&1 | tee -a log-editor
 	go build -o /dev/null generator*.go
@@ -52,7 +52,7 @@ dev:
 	go build -v ./...  | tee -a log-generate
 	go test -v -count=1 ./... 2>&1 | tee -a log-generate
 	git status
-	grep FAIL /tmp/ccgo.log
+	grep FAIL /tmp/ccgo.log || true
 	grep TODO log-generate || true
 
 test:
@@ -63,6 +63,7 @@ tidy:
 	./unconvert.sh
 
 work:
+	rm -f go.work*
 	go work init
 	go work use .
 	go work use ../../ccgo/v4
