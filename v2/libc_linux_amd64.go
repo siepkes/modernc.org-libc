@@ -528,6 +528,39 @@ func Xfmod(tls *TLS, x float64, y float64) (r float64) {
 	return x_fmod(tls, x, y)
 }
 
+// Xhypot return sqrt(x*x+y*y).
+func Xhypot(tls *TLS, x float64, y float64) (r float64) {
+	return x_hypot(tls, x, y)
+}
+
+// Xhypotf return sqrt(x*x+y*y).
+func Xhypotf(tls *TLS, x float32, y float32) (r float32) {
+	return x_hypotf(tls, x, y)
+}
+
+// Xhypotl return sqrt(x*x+y*y).
+func Xhypotl(tls *TLS, x float64, y float64) (r float64) {
+	return x_hypotl(tls, x, y)
+}
+
+// Xmodf breaks the argument x into an integral part and a fractional part,
+// each of which has the same sign as x.
+func Xmodf(tls *TLS, x float64, iptr uintptr) (r float64) {
+	return x_modf(tls, x, iptr)
+}
+
+// Xmodff breaks the argument x into an integral part and a fractional part,
+// each of which has the same sign as x.
+func Xmodff(tls *TLS, x float32, iptr uintptr) (r float32) {
+	return x_modff(tls, x, iptr)
+}
+
+// Xmodfl breaks the argument x into an integral part and a fractional part,
+// each of which has the same sign as x.
+func Xmodfl(tls *TLS, x float64, iptr uintptr) (r float64) {
+	return x_modfl(tls, x, iptr)
+}
+
 // Xvsnprintf() produces output according to a format. Xvsnprintf writes to the
 // character string str.
 func Xvsnprintf(tls *TLS, str uintptr, n uint64, format uintptr, ap uintptr) (r int32) {
@@ -548,6 +581,13 @@ func Xsprintf(tls *TLS, str uintptr, fmt uintptr, va uintptr) (r int32) {
 // X__builtin_sprintf is equivalent to Xsprintf.
 func X__builtin_sprintf(tls *TLS, str uintptr, fmt uintptr, va uintptr) (r int32) {
 	return Xsprintf(tls, str, fmt, va)
+}
+
+// Xstrtoul converts the initial part of the string in nptr to an unsigned long
+// value according to the given base, which must be between 2 and 36 inclusive,
+// or be the special value 0.
+func Xstrtoul(tls *TLS, npts uintptr, endptr uintptr, base int32) (r uint64) {
+	return x_strtoul(tls, npts, endptr, base)
 }
 
 // Xstrtod converts the initial portion of the string pointed to by nptr to
@@ -1482,6 +1522,13 @@ func Xisprint(tls *TLS, c int32) (r int32) {
 
 func X__builtin_isprint(tls *TLS, c int32) (r int32) {
 	return Xisprint(tls, c)
+}
+
+// Xisxdigit checks for hexadecimal digits, that is, one of
+//
+//	0 1 2 3 4 5 6 7 8 9 a b c d e f A B C D E F.
+func Xisxdigit(tls *TLS, c int32) (r int32) {
+	return x_isxdigit(tls, c)
 }
 
 // Xisalnum checks for an alphanumeric character; it is equivalent to
