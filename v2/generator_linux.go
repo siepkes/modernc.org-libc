@@ -162,6 +162,7 @@ func main() {
 	util.MustCopyDir(true, filepath.Join("include", goos, goarch, "bits"), filepath.Join(tempDir, extractedArchivePath, "arch", muslArch, "bits"), nil)
 	fn := fmt.Sprintf("ccgo_%s_%s.go", goos, goarch)
 	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fn)
+	util.MustShell(true, "sed", "-i", "s/\\<x___environ\\>/Xenviron/g", fn)
 	for _, v := range []string{
 		"optarg",
 		"opterr",

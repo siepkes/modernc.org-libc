@@ -1831,6 +1831,29 @@ func Xferror(tls *TLS, stream uintptr) (r int32) {
 	return x_ferror(tls, stream)
 }
 
+// Xmktime converts a broken-down time structure, expressed as local time, to
+// calendar time representation.
+func Xmktime(tls *TLS, tm uintptr) (r int64) {
+	return x_mktime(tls, tm)
+}
+
+// Xlocaltime_r converts the calendar time timep to broken-down time
+// representation, expressed relative to the user's specified timezone.
+func Xlocaltime_r(tls *TLS, timep uintptr, tm uintptr) (r uintptr) {
+	return x___localtime_r(tls, timep, tm)
+}
+
+// Xtzset initializes  the  tzname variable from the TZ environment variable.
+func Xtzset(tls *TLS) {
+	___tzset(tls)
+}
+
+// Xstrpbrk locates the first occurrence in the string s of any of the bytes
+// in the string accept.
+func Xstrpbrk(tls *TLS, s uintptr, accept uintptr) (r uintptr) {
+	return x_strpbrk(tls, s, accept)
+}
+
 func X__builtin_add_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
 	r, ovf := mathutil.AddOverflowInt64(a, b)
 	*(*int64)(unsafe.Pointer(res)) = r

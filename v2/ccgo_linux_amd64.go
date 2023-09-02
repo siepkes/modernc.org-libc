@@ -23,14 +23,18 @@ const m_EBADF = 9
 const m_ECANCELED = 125
 const m_EINPROGRESS = 115
 const m_EINVAL = 22
+const m_EI_NIDENT = 16
 const m_ENOENT = 2
 const m_ENOSYS = 38
 const m_FUTEX_PRIVATE = 128
+const m_FUTEX_WAIT = 0
+const m_FUTEX_WAKE = 1
 const m_F_GETFD = 1
 const m_F_GETFL = 3
 const m_INT_MAX = 2147483647
 const m_LIO_READ = 0
 const m_LIO_WRITE = 1
+const m_MINSIGSTKSZ = 2048
 const m_O_APPEND = 1024
 const m_O_DSYNC = 4096
 const m_O_SYNC = 1052672
@@ -40,6 +44,8 @@ const m_SIGEV_SIGNAL = 0
 const m_SIGEV_THREAD = 2
 const m_SIG_BLOCK = 0
 const m_SIG_SETMASK = 2
+const m_SYS_futex = 202
+const m_SYS_rt_sigqueueinfo = 129
 
 type T__builtin_va_list = uintptr
 
@@ -955,8 +961,8 @@ func ___aio_get_queue(tls *TLS, fd int32, need int32) (r uintptr) {
 		x___pthread_rwlock_wrlock(tls, uintptr(unsafe.Pointer(&_maplock)))
 		if !(_io_thread_stack_size != 0) {
 			val = x___getauxval(tls, uint64(m_AT_MINSIGSTKSZ))
-			if uint64(Int32FromInt32(2048)+Int32FromInt32(2048)) > val+uint64(512) {
-				v3 = uint64(Int32FromInt32(2048) + Int32FromInt32(2048))
+			if uint64(Int32FromInt32(m_MINSIGSTKSZ)+Int32FromInt32(2048)) > val+uint64(512) {
+				v3 = uint64(Int32FromInt32(m_MINSIGSTKSZ) + Int32FromInt32(2048))
 			} else {
 				v3 = val + uint64(512)
 			}
@@ -1073,7 +1079,7 @@ func _cleanup(tls *TLS, ctx uintptr) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	}
 	if _a_swap(tls, cb+112, (*Taio_thread)(unsafe.Pointer(at)).Ferr) != int32(m_EINPROGRESS) {
 		v4 = cb + 112
@@ -1085,7 +1091,7 @@ func _cleanup(tls *TLS, ctx uintptr) {
 		if v5 < Int32FromInt32(0) {
 			v5 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)), int64(v5)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v5)) != 0
 	}
 	if _a_swap(tls, uintptr(unsafe.Pointer(&x___aio_fut)), 0) != 0 {
 		v7 = uintptr(unsafe.Pointer(&x___aio_fut))
@@ -1097,7 +1103,7 @@ func _cleanup(tls *TLS, ctx uintptr) {
 		if v8 < Int32FromInt32(0) {
 			v8 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v7), int64(Int32FromInt32(1)|v9), int64(v8)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v7), int64(Int32FromInt32(1)), int64(v8)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v7), int64(Int32FromInt32(m_FUTEX_WAKE)|v9), int64(v8)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v7), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v8)) != 0
 	}
 	x___pthread_mutex_lock(tls, q+24)
 	if (*Taio_thread)(unsafe.Pointer(at)).Fnext != 0 {
@@ -1118,7 +1124,7 @@ func _cleanup(tls *TLS, ctx uintptr) {
 		*(*int32)(unsafe.Pointer(bp + 72)) = -Int32FromInt32(4)
 		*(*int32)(unsafe.Pointer(bp + 80)) = x_getpid(tls)
 		*(*uint32)(unsafe.Pointer(bp + 84)) = x_getuid(tls)
-		___syscall3(tls, int64(129), int64(*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsiginfo_t)(unsafe.Pointer(bp + 64))).F__si_fields))))), int64((*(*Tsiginfo_t)(unsafe.Pointer(bp + 64))).Fsi_signo), int64(bp+64))
+		___syscall3(tls, int64(m_SYS_rt_sigqueueinfo), int64(*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsiginfo_t)(unsafe.Pointer(bp + 64))).F__si_fields))))), int64((*(*Tsiginfo_t)(unsafe.Pointer(bp + 64))).Fsi_signo), int64(bp+64))
 	}
 	if (*(*Tsigevent)(unsafe.Pointer(bp))).Fsigev_notify == int32(m_SIGEV_THREAD) {
 		_a_store(tls, ___get_tp(tls)+60, 0)
@@ -1545,7 +1551,7 @@ func _notify_signal(tls *TLS, sev uintptr) {
 	*(*int32)(unsafe.Pointer(bp + 8)) = -Int32FromInt32(4)
 	*(*int32)(unsafe.Pointer(bp + 16)) = x_getpid(tls)
 	*(*uint32)(unsafe.Pointer(bp + 20)) = x_getuid(tls)
-	___syscall3(tls, int64(129), int64(*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsiginfo_t)(unsafe.Pointer(bp))).F__si_fields))))), int64((*(*Tsiginfo_t)(unsafe.Pointer(bp))).Fsi_signo), int64(bp))
+	___syscall3(tls, int64(m_SYS_rt_sigqueueinfo), int64(*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsiginfo_t)(unsafe.Pointer(bp))).F__si_fields))))), int64((*(*Tsiginfo_t)(unsafe.Pointer(bp))).Fsi_signo), int64(bp))
 }
 
 func _wait_thread(tls *TLS, p uintptr) (r uintptr) {
@@ -3456,7 +3462,6 @@ const m_DELAYTIMER_MAX = 2147483647
 const m_FD_SETSIZE = 1024
 const m_HOST_NAME_MAX = 255
 const m_IOV_MAX = 1024
-const m_MINSIGSTKSZ = 2048
 const m_MQ_PRIO_MAX = 32768
 const m_NZERO = 20
 const m_PTHREAD_DESTRUCTOR_ITERATIONS = 4
@@ -3469,6 +3474,7 @@ const m_SEM_NSEMS_MAX = 256
 const m_SEM_VALUE_MAX = 2147483647
 const m_SIGSTKSZ = 8192
 const m_SYMLOOP_MAX = 40
+const m_SYS_sched_getaffinity = 204
 const m_TTY_NAME_MAX = 32
 const m_TZNAME_MAX = 6
 const m__NSIG = 65
@@ -3712,7 +3718,7 @@ func x_sysconf(tls *TLS, name int32) (r int64) {
 		*(*[128]uint8)(unsafe.Pointer(bp + 16)) = [128]uint8{
 			0: uint8(1),
 		}
-		___syscall3(tls, int64(204), int64(Int32FromInt32(0)), int64(Uint64FromInt64(128)), int64(bp+16))
+		___syscall3(tls, int64(m_SYS_sched_getaffinity), int64(Int32FromInt32(0)), int64(Uint64FromInt64(128)), int64(bp+16))
 		v2 = Int32FromInt32(0)
 		cnt = v2
 		i = v2
@@ -28219,6 +28225,7 @@ func x_fdopendir(tls *TLS, fd int32) (r uintptr) {
 const m_O_CLOEXEC = 524288
 const m_O_DIRECTORY = 65536
 const m_O_RDONLY = 0
+const m_SYS_close = 3
 
 type Tiovec = struct {
 	Fiov_base uintptr
@@ -28246,12 +28253,14 @@ func x_opendir(tls *TLS, name uintptr) (r uintptr) {
 	v2 = x_calloc(tls, uint64(1), uint64(2072))
 	dir = v2
 	if !(v2 != 0) {
-		___syscall1(tls, int64(3), int64(fd))
+		___syscall1(tls, int64(m_SYS_close), int64(fd))
 		return uintptr(0)
 	}
 	(*TDIR)(unsafe.Pointer(dir)).Ffd = fd
 	return dir
 }
+
+const m_SYS_getdents64 = 217
 
 type Tptrdiff_t = int64
 
@@ -28261,7 +28270,7 @@ func x_readdir(tls *TLS, dir uintptr) (r uintptr) {
 	var de uintptr
 	var len1 int32
 	if (*TDIR)(unsafe.Pointer(dir)).Fbuf_pos >= (*TDIR)(unsafe.Pointer(dir)).Fbuf_end {
-		len1 = int32(___syscall3(tls, int64(217), int64((*TDIR)(unsafe.Pointer(dir)).Ffd), int64(dir+24), int64(Uint64FromInt64(2048))))
+		len1 = int32(___syscall3(tls, int64(m_SYS_getdents64), int64((*TDIR)(unsafe.Pointer(dir)).Ffd), int64(dir+24), int64(Uint64FromInt64(2048))))
 		if len1 <= 0 {
 			if len1 < 0 && len1 != -int32(m_ENOENT) {
 				*(*int32)(unsafe.Pointer(x___errno_location(tls))) = -len1
@@ -28313,6 +28322,8 @@ func x_rewinddir(tls *TLS, dir uintptr) {
 	(*TDIR)(unsafe.Pointer(dir)).Ftell = 0
 	x___unlock(tls, dir+20)
 }
+
+const m_UINT64_MAX = 18446744073709551615
 
 func x_scandir(tls *TLS, path uintptr, res uintptr, sel uintptr, cmp uintptr) (r int32) {
 	var cnt, len1, v2, v3 uint64
@@ -28400,10 +28411,16 @@ const m_AT_PHDR = 3
 const m_AT_PHENT = 4
 const m_AT_PHNUM = 5
 const m_DTP_OFFSET = 0
+const m_MAP_ANON = 32
+const m_MAP_PRIVATE = 2
+const m_PROT_READ = 1
+const m_PROT_WRITE = 2
 const m_PT_DYNAMIC = 2
 const m_PT_GNU_STACK = 1685382481
 const m_PT_PHDR = 6
 const m_PT_TLS = 7
+const m_SYS_mmap = 9
+const m_SYS_set_tid_address = 218
 
 func x___init_tp(tls *TLS, p uintptr) (r1 int32) {
 	var r int32
@@ -28418,7 +28435,7 @@ func x___init_tp(tls *TLS, p uintptr) (r1 int32) {
 		x___libc.Fcan_do_threads = int8(1)
 	}
 	AtomicStorePInt32(td+56, int32(_DT_JOINABLE))
-	(*T__pthread)(unsafe.Pointer(td)).Ftid = int32(___syscall1(tls, int64(218), int64(uintptr(unsafe.Pointer(&x___thread_list_lock)))))
+	(*T__pthread)(unsafe.Pointer(td)).Ftid = int32(___syscall1(tls, int64(m_SYS_set_tid_address), int64(uintptr(unsafe.Pointer(&x___thread_list_lock)))))
 	(*T__pthread)(unsafe.Pointer(td)).Flocale = uintptr(unsafe.Pointer(&x___libc.Fglobal_locale))
 	(*T__pthread)(unsafe.Pointer(td)).Frobust_list.Fhead = uintptr(unsafe.Pointer(&(*T__pthread)(unsafe.Pointer(td)).Frobust_list.Fhead))
 	(*T__pthread)(unsafe.Pointer(td)).Fsysinfo = x___sysinfo
@@ -28518,7 +28535,7 @@ func _static_init_tls(tls *TLS, aux uintptr) {
 	x___libc.Ftls_align = _main_tls.Falign
 	x___libc.Ftls_size = (Uint64FromInt32(2)*Uint64FromInt64(8) + Uint64FromInt64(200) + _main_tls.Fsize + _main_tls.Falign + uint64(UintptrFromInt32(0)+8) - uint64(1)) & -uint64(UintptrFromInt32(0)+8)
 	if x___libc.Ftls_size > uint64(336) {
-		mem = uintptr(___syscall6(tls, int64(9), int64(Int32FromInt32(0)), int64(x___libc.Ftls_size), int64(Int32FromInt32(1)|Int32FromInt32(2)), int64(Int32FromInt32(0x20)|Int32FromInt32(0x02)), int64(-Int32FromInt32(1)), int64(Int32FromInt32(0))))
+		mem = uintptr(___syscall6(tls, int64(m_SYS_mmap), int64(Int32FromInt32(0)), int64(x___libc.Ftls_size), int64(Int32FromInt32(m_PROT_READ)|Int32FromInt32(m_PROT_WRITE)), int64(Int32FromInt32(m_MAP_ANON)|Int32FromInt32(m_MAP_PRIVATE)), int64(-Int32FromInt32(1)), int64(Int32FromInt32(0))))
 		/* -4095...-1 cast to void * will crash on dereference anyway,
 		 * so don't bloat the init code checking for error codes and
 		 * explicitly calling a_crash(). */
@@ -28543,8 +28560,10 @@ const m_AT_SYSINFO = 32
 const m_AT_UID = 11
 const m_AUX_CNT = 38
 const m_O_LARGEFILE = 32768
+const m_O_RDWR = 2
 const m_POLLNVAL = 32
 const m_SYS_open = 2
+const m_SYS_poll = 7
 
 type Tnfds_t = uint64
 
@@ -28569,7 +28588,7 @@ func x___init_libc(tls *TLS, envp uintptr, pn uintptr) {
 	var _ /* aux at bp+0 */ [38]uint64
 	var _ /* pfd at bp+304 */ [3]Tpollfd
 	*(*[38]uint64)(unsafe.Pointer(bp)) = [38]uint64{}
-	x___environ = envp
+	Xenviron = envp
 	for i = uint64(0); *(*uintptr)(unsafe.Pointer(envp + uintptr(i)*8)) != 0; i++ {
 	}
 	v1 = envp + uintptr(i)*8 + UintptrFromInt32(1)*8
@@ -28616,13 +28635,13 @@ func x___init_libc(tls *TLS, envp uintptr, pn uintptr) {
 			Ffd: int32(2),
 		},
 	}
-	r = int32(___syscall3(tls, int64(7), int64(bp+304), int64(Int32FromInt32(3)), int64(Int32FromInt32(0))))
+	r = int32(___syscall3(tls, int64(m_SYS_poll), int64(bp+304), int64(Int32FromInt32(3)), int64(Int32FromInt32(0))))
 	if r < 0 {
 		_a_crash(tls)
 	}
 	for i = uint64(0); i < uint64(3); i++ {
 		if int32((*(*[3]Tpollfd)(unsafe.Pointer(bp + 304)))[i].Frevents)&int32(m_POLLNVAL) != 0 {
-			if ___syscall2(tls, int64(m_SYS_open), int64(ts+207), int64(Int32FromInt32(02)|Int32FromInt32(m_O_LARGEFILE))) < 0 {
+			if ___syscall2(tls, int64(m_SYS_open), int64(ts+207), int64(Int32FromInt32(m_O_RDWR)|Int32FromInt32(m_O_LARGEFILE))) < 0 {
 				_a_crash(tls)
 			}
 		}
@@ -28706,8 +28725,8 @@ func _dummy2(tls *TLS, old uintptr, new1 uintptr) {
 
 func x_clearenv(tls *TLS) (r int32) {
 	var e, v1 uintptr
-	e = x___environ
-	x___environ = uintptr(0)
+	e = Xenviron
+	Xenviron = uintptr(0)
 	if e != 0 {
 		for *(*uintptr)(unsafe.Pointer(e)) != 0 {
 			v1 = e
@@ -28722,8 +28741,8 @@ func x_getenv(tls *TLS, name uintptr) (r uintptr) {
 	var e uintptr
 	var l uint64
 	l = uint64(int64(x___strchrnul(tls, name, int32('='))) - int64(name))
-	if l != 0 && !(*(*int8)(unsafe.Pointer(name + uintptr(l))) != 0) && x___environ != 0 {
-		e = x___environ
+	if l != 0 && !(*(*int8)(unsafe.Pointer(name + uintptr(l))) != 0) && Xenviron != 0 {
+		e = Xenviron
 		for ; *(*uintptr)(unsafe.Pointer(e)) != 0; e += 8 {
 			if !(x_strncmp(tls, name, *(*uintptr)(unsafe.Pointer(e)), l) != 0) && int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(e)) + uintptr(l)))) == int32('=') {
 				return *(*uintptr)(unsafe.Pointer(e)) + uintptr(l) + uintptr(1)
@@ -28740,8 +28759,8 @@ func x___putenv(tls *TLS, s uintptr, l uint64, r uintptr) (r1 int32) {
 	var e, newenv, tmp, v2 uintptr
 	var i uint64
 	i = uint64(0)
-	if x___environ != 0 {
-		e = x___environ
+	if Xenviron != 0 {
+		e = Xenviron
 		for *(*uintptr)(unsafe.Pointer(e)) != 0 {
 			if !(x_strncmp(tls, s, *(*uintptr)(unsafe.Pointer(e)), l+uint64(1)) != 0) {
 				tmp = *(*uintptr)(unsafe.Pointer(e))
@@ -28755,7 +28774,7 @@ func x___putenv(tls *TLS, s uintptr, l uint64, r uintptr) (r1 int32) {
 			i++
 		}
 	}
-	if x___environ == _oldenv {
+	if Xenviron == _oldenv {
 		newenv = x_realloc(tls, _oldenv, uint64(8)*(i+uint64(2)))
 		if !(newenv != 0) {
 			goto oom
@@ -28766,7 +28785,7 @@ func x___putenv(tls *TLS, s uintptr, l uint64, r uintptr) (r1 int32) {
 			goto oom
 		}
 		if i != 0 {
-			_memcpy(tls, newenv, x___environ, uint64(8)*i)
+			_memcpy(tls, newenv, Xenviron, uint64(8)*i)
 		}
 		x_free(tls, _oldenv)
 	}
@@ -28774,7 +28793,7 @@ func x___putenv(tls *TLS, s uintptr, l uint64, r uintptr) (r1 int32) {
 	*(*uintptr)(unsafe.Pointer(newenv + uintptr(i+uint64(1))*8)) = uintptr(0)
 	v2 = newenv
 	_oldenv = v2
-	x___environ = v2
+	Xenviron = v2
 	if r != 0 {
 		x___env_rm_add(tls, uintptr(0), r)
 	}
@@ -28883,8 +28902,8 @@ func x_unsetenv(tls *TLS, name uintptr) (r int32) {
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_EINVAL)
 		return -int32(1)
 	}
-	if x___environ != 0 {
-		e = x___environ
+	if Xenviron != 0 {
+		e = Xenviron
 		eo = e
 		for ; *(*uintptr)(unsafe.Pointer(e)) != 0; e += 8 {
 			if !(x_strncmp(tls, name, *(*uintptr)(unsafe.Pointer(e)), l) != 0) && int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(e)) + uintptr(l)))) == int32('=') {
@@ -28909,6 +28928,89 @@ func x_unsetenv(tls *TLS, name uintptr) (r int32) {
 func x___errno_location(tls *TLS) (r uintptr) {
 	return ___get_tp(tls) + 52
 }
+
+const m_E2BIG = 7
+const m_EACCES = 13
+const m_EADDRINUSE = 98
+const m_EADDRNOTAVAIL = 99
+const m_EAFNOSUPPORT = 97
+const m_EALREADY = 114
+const m_EBADFD = 77
+const m_EBADMSG = 74
+const m_EBUSY = 16
+const m_ECHILD = 10
+const m_ECONNABORTED = 103
+const m_ECONNREFUSED = 111
+const m_ECONNRESET = 104
+const m_EDEADLK = 35
+const m_EDESTADDRREQ = 89
+const m_EDOM = 33
+const m_EDQUOT = 122
+const m_EEXIST = 17
+const m_EFAULT = 14
+const m_EFBIG = 27
+const m_EHOSTDOWN = 112
+const m_EHOSTUNREACH = 113
+const m_EIDRM = 43
+const m_EILSEQ = 84
+const m_EISCONN = 106
+const m_EISDIR = 21
+const m_EKEYEXPIRED = 127
+const m_EKEYREJECTED = 129
+const m_EKEYREVOKED = 128
+const m_ELOOP = 40
+const m_EMEDIUMTYPE = 124
+const m_EMFILE = 24
+const m_EMLINK = 31
+const m_EMSGSIZE = 90
+const m_EMULTIHOP = 72
+const m_ENAMETOOLONG = 36
+const m_ENETDOWN = 100
+const m_ENETRESET = 102
+const m_ENETUNREACH = 101
+const m_ENFILE = 23
+const m_ENOBUFS = 105
+const m_ENODATA = 61
+const m_ENODEV = 19
+const m_ENOEXEC = 8
+const m_ENOKEY = 126
+const m_ENOLCK = 37
+const m_ENOLINK = 67
+const m_ENOMEDIUM = 123
+const m_ENOMEM = 12
+const m_ENOMSG = 42
+const m_ENOPROTOOPT = 92
+const m_ENOSPC = 28
+const m_ENOSR = 63
+const m_ENOSTR = 60
+const m_ENOTBLK = 15
+const m_ENOTCONN = 107
+const m_ENOTEMPTY = 39
+const m_ENOTRECOVERABLE = 131
+const m_ENOTSOCK = 88
+const m_ENOTTY = 25
+const m_ENXIO = 6
+const m_EOPNOTSUPP = 95
+const m_EOVERFLOW = 75
+const m_EOWNERDEAD = 130
+const m_EPERM = 1
+const m_EPFNOSUPPORT = 96
+const m_EPIPE = 32
+const m_EPROTO = 71
+const m_EPROTONOSUPPORT = 93
+const m_EPROTOTYPE = 91
+const m_ERANGE = 34
+const m_EREMOTEIO = 121
+const m_EROFS = 30
+const m_ESHUTDOWN = 108
+const m_ESOCKTNOSUPPORT = 94
+const m_ESPIPE = 29
+const m_ESRCH = 3
+const m_ESTALE = 116
+const m_ETIME = 62
+const m_ETXTBSY = 26
+const m_EXDEV = 18
+const m_LC_MESSAGES = 5
 
 /* mips has one error code outside of the 8-bit range due to a
  * historical typo, so we just remap it. */
@@ -29214,15 +29316,22 @@ func x_strerror(tls *TLS, e int32) (r uintptr) {
 	return x___strerror_l(tls, e, (*T__pthread)(unsafe.Pointer(___get_tp(tls))).Flocale)
 }
 
+const m_SYS_exit = 60
+const m_SYS_exit_group = 231
+
 func x__Exit(tls *TLS, ec int32) {
-	___syscall1(tls, int64(231), int64(ec))
+	___syscall1(tls, int64(m_SYS_exit_group), int64(ec))
 	for {
-		___syscall1(tls, int64(60), int64(ec))
+		___syscall1(tls, int64(m_SYS_exit), int64(ec))
 	}
 }
 
 const m_SIGABRT = 6
 const m_SIGKILL = 9
+const m_SIG_UNBLOCK = 1
+const m_SYS_rt_sigaction = 13
+const m_SYS_rt_sigprocmask = 14
+const m_SYS_tkill = 200
 
 type Tk_sigaction = struct {
 	Fhandler  uintptr
@@ -29243,12 +29352,12 @@ func x_abort(tls *TLS) {
 	x___block_all_sigs(tls, uintptr(0))
 	x___lock(tls, uintptr(unsafe.Pointer(&x___abort_lock)))
 	*(*Tk_sigaction)(unsafe.Pointer(bp)) = Tk_sigaction{}
-	___syscall4(tls, int64(13), int64(Int32FromInt32(6)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
-	___syscall2(tls, int64(200), int64((*T__pthread)(unsafe.Pointer(___get_tp(tls))).Ftid), int64(Int32FromInt32(6)))
+	___syscall4(tls, int64(m_SYS_rt_sigaction), int64(Int32FromInt32(m_SIGABRT)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
+	___syscall2(tls, int64(m_SYS_tkill), int64((*T__pthread)(unsafe.Pointer(___get_tp(tls))).Ftid), int64(Int32FromInt32(m_SIGABRT)))
 	*(*[1]int64)(unsafe.Pointer(bp + 32)) = [1]int64{
-		0: int64(Uint64FromUint64(1) << (Int32FromInt32(6) - Int32FromInt32(1))),
+		0: int64(Uint64FromUint64(1) << (Int32FromInt32(m_SIGABRT) - Int32FromInt32(1))),
 	}
-	___syscall4(tls, int64(14), int64(Int32FromInt32(1)), int64(bp+32), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
+	___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_UNBLOCK)), int64(bp+32), int64(Int32FromInt32(0)), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 	/* Beyond this point should be unreachable. */
 	_a_crash(tls)
 	x_raise(tls, int32(m_SIGKILL))
@@ -29410,6 +29519,7 @@ func x_creat(tls *TLS, filename uintptr, mode uint32) (r int32) {
 	return x_open(tls, filename, Int32FromInt32(m_O_CREAT)|Int32FromInt32(m_O_WRONLY)|Int32FromInt32(m_O_TRUNC), VaList(bp+8, mode))
 }
 
+const m_F_DUPFD = 0
 const m_F_DUPFD_CLOEXEC = 1030
 const m_F_GETLK = 5
 const m_F_GETOWN = 9
@@ -29419,6 +29529,7 @@ const m_F_SETFL = 4
 const m_F_SETLK = 6
 const m_F_SETLKW = 7
 const m_F_SETOWN_EX = 15
+const m_SYS_fcntl = 72
 
 func x_fcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r int32) {
 	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
@@ -29434,12 +29545,12 @@ func x_fcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r int32) {
 		arg |= uint64(m_O_LARGEFILE)
 	}
 	if cmd == int32(m_F_SETLKW) {
-		return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(72), int64(fd), int64(cmd), int64(uintptr(arg)), 0, 0, 0))))
+		return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_fcntl), int64(fd), int64(cmd), int64(uintptr(arg)), 0, 0, 0))))
 	}
 	if cmd == int32(m_F_GETOWN) {
-		ret = int32(___syscall3(tls, int64(72), int64(fd), int64(Int32FromInt32(16)), int64(bp)))
+		ret = int32(___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_GETOWN_EX)), int64(bp)))
 		if ret == -int32(m_EINVAL) {
-			return int32(___syscall3(tls, int64(72), int64(fd), int64(cmd), int64(uintptr(arg))))
+			return int32(___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(cmd), int64(uintptr(arg))))
 		}
 		if ret != 0 {
 			return int32(x___syscall_ret(tls, uint64(ret)))
@@ -29452,23 +29563,23 @@ func x_fcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r int32) {
 		return v1
 	}
 	if cmd == int32(m_F_DUPFD_CLOEXEC) {
-		ret1 = int32(___syscall3(tls, int64(72), int64(fd), int64(Int32FromInt32(1030)), int64(arg)))
+		ret1 = int32(___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_DUPFD_CLOEXEC)), int64(arg)))
 		if ret1 != -int32(m_EINVAL) {
 			if ret1 >= 0 {
-				___syscall3(tls, int64(72), int64(ret1), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+				___syscall3(tls, int64(m_SYS_fcntl), int64(ret1), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 			}
 			return int32(x___syscall_ret(tls, uint64(ret1)))
 		}
-		ret1 = int32(___syscall3(tls, int64(72), int64(fd), int64(Int32FromInt32(1030)), int64(Int32FromInt32(0))))
+		ret1 = int32(___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_DUPFD_CLOEXEC)), int64(Int32FromInt32(0))))
 		if ret1 != -int32(m_EINVAL) {
 			if ret1 >= 0 {
-				___syscall1(tls, int64(3), int64(ret1))
+				___syscall1(tls, int64(m_SYS_close), int64(ret1))
 			}
 			return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EINVAL))))
 		}
-		ret1 = int32(___syscall3(tls, int64(72), int64(fd), int64(Int32FromInt32(0)), int64(arg)))
+		ret1 = int32(___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_DUPFD)), int64(arg)))
 		if ret1 >= 0 {
-			___syscall3(tls, int64(72), int64(ret1), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(ret1), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 		}
 		return int32(x___syscall_ret(tls, uint64(ret1)))
 	}
@@ -29480,9 +29591,9 @@ func x_fcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r int32) {
 	case int32(m_F_GETOWN_EX):
 		fallthrough
 	case int32(m_F_SETOWN_EX):
-		return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(72), int64(fd), int64(cmd), int64(uintptr(arg))))))
+		return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(cmd), int64(uintptr(arg))))))
 	default:
-		return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(72), int64(fd), int64(cmd), int64(arg)))))
+		return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(cmd), int64(arg)))))
 	}
 	return r
 }
@@ -29501,10 +29612,12 @@ func x_open(tls *TLS, filename uintptr, flags int32, va uintptr) (r int32) {
 	}
 	fd = int32(x___syscall_cp(tls, int64(m_SYS_open), int64(filename), int64(flags|Int32FromInt32(m_O_LARGEFILE)), int64(mode), 0, 0, 0))
 	if fd >= 0 && flags&int32(m_O_CLOEXEC) != 0 {
-		___syscall3(tls, int64(72), int64(fd), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 	}
 	return int32(x___syscall_ret(tls, uint64(fd)))
 }
+
+const m_SYS_openat = 257
 
 func x_openat(tls *TLS, fd int32, filename uintptr, flags int32, va uintptr) (r int32) {
 	var ap uintptr
@@ -29515,15 +29628,19 @@ func x_openat(tls *TLS, fd int32, filename uintptr, flags int32, va uintptr) (r 
 		mode = VaUint32(&ap)
 		_ = ap
 	}
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(257), int64(fd), int64(filename), int64(flags|Int32FromInt32(0100000)), int64(mode), 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_openat), int64(fd), int64(filename), int64(flags|Int32FromInt32(m_O_LARGEFILE)), int64(mode), 0, 0))))
 }
+
+const m_SYS_fadvise64 = 221
 
 func x_posix_fadvise(tls *TLS, fd int32, base int64, len1 int64, advice int32) (r int32) {
-	return int32(-___syscall4(tls, int64(221), int64(fd), base, len1, int64(advice)))
+	return int32(-___syscall4(tls, int64(m_SYS_fadvise64), int64(fd), base, len1, int64(advice)))
 }
 
+const m_SYS_fallocate = 285
+
 func x_posix_fallocate(tls *TLS, fd int32, base int64, len1 int64) (r int32) {
-	return int32(-___syscall4(tls, int64(285), int64(fd), int64(Int32FromInt32(0)), base, len1))
+	return int32(-___syscall4(tls, int64(m_SYS_fallocate), int64(fd), int64(Int32FromInt32(0)), base, len1))
 }
 
 const m_FE_DOWNWARD = 1024
@@ -29601,7 +29718,6 @@ func x_feupdateenv(tls *TLS, envp uintptr) (r int32) {
 }
 
 const m_DBL_MANT_DIG = 53
-const m_ERANGE = 34
 const m_FLT_MANT_DIG = 24
 const m_KMAX = 128
 const m_LDBL_MANT_DIG = 53
@@ -31246,6 +31362,10 @@ func x_ftok(tls *TLS, path uintptr, id int32) (r int32) {
 	return int32((*(*Tstat)(unsafe.Pointer(bp))).Fst_ino&Uint64FromInt32(0xffff) | (*(*Tstat)(unsafe.Pointer(bp))).Fst_dev&Uint64FromInt32(0xff)<<Int32FromInt32(16) | uint64(uint32(id)&Uint32FromUint32(0xff)<<Int32FromInt32(24)))
 }
 
+const m_IPC_64 = 0
+const m_IPC_STAT = 2
+const m_SYS_msgctl = 71
+
 type Tmsgqnum_t = uint64
 
 type Tmsglen_t = uint64
@@ -31277,29 +31397,35 @@ type Tmsginfo = struct {
 
 func x_msgctl(tls *TLS, q int32, cmd int32, buf uintptr) (r1 int32) {
 	var r int32
-	r = int32(___syscall3(tls, int64(71), int64(q), int64(cmd & ^(Int32FromInt32(2)&Int32FromInt32(0x100)) | Int32FromInt32(0)), int64(buf)))
+	r = int32(___syscall3(tls, int64(m_SYS_msgctl), int64(q), int64(cmd & ^(Int32FromInt32(m_IPC_STAT)&Int32FromInt32(0x100)) | Int32FromInt32(m_IPC_64)), int64(buf)))
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
+const m_SYS_msgget = 68
+
 func x_msgget(tls *TLS, k int32, flag int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(68), int64(k), int64(flag)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_msgget), int64(k), int64(flag)))))
 }
+
+const m_SYS_msgrcv = 70
 
 func x_msgrcv(tls *TLS, q int32, m uintptr, len1 uint64, type1 int64, flag int32) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(70), int64(q), int64(m), int64(len1), type1, int64(flag), 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_msgrcv), int64(q), int64(m), int64(len1), type1, int64(flag), 0)))
 }
 
+const m_SYS_msgsnd = 69
+
 func x_msgsnd(tls *TLS, q int32, m uintptr, len1 uint64, flag int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(69), int64(q), int64(m), int64(len1), int64(flag), 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_msgsnd), int64(q), int64(m), int64(len1), int64(flag), 0, 0))))
 }
 
 const m_GETALL = 13
 const m_IPC_INFO = 3
 const m_IPC_SET = 1
-const m_IPC_STAT = 2
 const m_SEM_INFO = 19
 const m_SETALL = 17
 const m_SETVAL = 16
+const m_SYS_semctl = 66
 
 type Tsemid_ds = struct {
 	Fsem_perm        Tipc_perm
@@ -31369,10 +31495,11 @@ func x_semctl(tls *TLS, id int32, num int32, cmd int32, va uintptr) (r1 int32) {
 		*(*Tsemun)(unsafe.Pointer(bp)) = *(*Tsemun)(unsafe.Pointer(VaOther(&ap, 8)))
 		_ = ap
 	}
-	r = int32(___syscall4(tls, int64(66), int64(id), int64(num), int64(cmd & ^(Int32FromInt32(2)&Int32FromInt32(0x100)) | Int32FromInt32(0)), int64(*(*uintptr)(unsafe.Pointer(bp)))))
+	r = int32(___syscall4(tls, int64(m_SYS_semctl), int64(id), int64(num), int64(cmd & ^(Int32FromInt32(m_IPC_STAT)&Int32FromInt32(0x100)) | Int32FromInt32(m_IPC_64)), int64(*(*uintptr)(unsafe.Pointer(bp)))))
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
+const m_SYS_semget = 64
 const m_USHRT_MAX = 65535
 
 func x_semget(tls *TLS, key int32, n int32, fl int32) (r int32) {
@@ -31383,12 +31510,16 @@ func x_semget(tls *TLS, key int32, n int32, fl int32) (r int32) {
 	if n > int32(m_USHRT_MAX) {
 		return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EINVAL))))
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(64), int64(key), int64(n), int64(fl)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_semget), int64(key), int64(n), int64(fl)))))
 }
 
+const m_SYS_semop = 65
+
 func x_semop(tls *TLS, id int32, buf uintptr, n uint64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(65), int64(id), int64(buf), int64(n)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_semop), int64(id), int64(buf), int64(n)))))
 }
+
+const m_SYS_semtimedop = 220
 
 type Tipc_perm1 = struct {
 	Fkey    int32
@@ -31415,8 +31546,10 @@ type Tsemid_ds1 = struct {
 }
 
 func x_semtimedop(tls *TLS, id int32, buf uintptr, n uint64, ts uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(220), int64(id), int64(buf), int64(n), int64(ts)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_semtimedop), int64(id), int64(buf), int64(n), int64(ts)))))
 }
+
+const m_SYS_shmat = 30
 
 type Tshmid_ds = struct {
 	Fshm_perm   Tipc_perm
@@ -31452,24 +31585,31 @@ type Tshm_info = struct {
 type Tshmatt_t = uint64
 
 func x_shmat(tls *TLS, id int32, addr uintptr, flag int32) (r uintptr) {
-	return uintptr(x___syscall_ret(tls, uint64(___syscall3(tls, int64(30), int64(id), int64(addr), int64(flag)))))
+	return uintptr(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_shmat), int64(id), int64(addr), int64(flag)))))
 }
+
+const m_SYS_shmctl = 31
 
 func x_shmctl(tls *TLS, id int32, cmd int32, buf uintptr) (r1 int32) {
 	var r int32
-	r = int32(___syscall3(tls, int64(31), int64(id), int64(cmd & ^(Int32FromInt32(2)&Int32FromInt32(0x100)) | Int32FromInt32(0)), int64(buf)))
+	r = int32(___syscall3(tls, int64(m_SYS_shmctl), int64(id), int64(cmd & ^(Int32FromInt32(m_IPC_STAT)&Int32FromInt32(0x100)) | Int32FromInt32(m_IPC_64)), int64(buf)))
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
+const m_SYS_shmdt = 67
+
 func x_shmdt(tls *TLS, addr uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(67), int64(addr)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_shmdt), int64(addr)))))
 }
 
+const m_INT64_MAX = 9223372036854775807
+const m_SYS_shmget = 29
+
 func x_shmget(tls *TLS, key int32, size uint64, flag int32) (r int32) {
-	if size > uint64(Int64FromInt64(0x7fffffffffffffff)) {
+	if size > uint64(Int64FromInt64(m_INT64_MAX)) {
 		size = Uint64FromUint64(0xffffffffffffffff)
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(29), int64(key), int64(size), int64(flag)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_shmget), int64(key), int64(size), int64(flag)))))
 }
 
 const _REL_NONE = 0
@@ -31728,8 +31868,6 @@ func x_cuserid(tls *TLS, buf uintptr) (r uintptr) {
 }
 
 var _usridbuf [20]int8
-
-const m_O_RDWR = 2
 
 func x_daemon(tls *TLS, nochdir int32, noclose int32) (r int32) {
 	var failed, fd, v1 int32
@@ -32136,8 +32274,6 @@ func x_ulimit(tls *TLS, cmd int32, va uintptr) (r int64) {
 	return int64((*(*Trlimit)(unsafe.Pointer(bp))).Frlim_cur / uint64(512))
 }
 
-const m_EOPNOTSUPP = 95
-
 type Tutmpx = struct {
 	Fut_type   int16
 	F__ut_pad1 int16
@@ -32259,27 +32395,35 @@ func x_adjtimex(tls *TLS, tx uintptr) (r int32) {
 	return x_clock_adjtime(tls, m_CLOCK_REALTIME, tx)
 }
 
-func x_arch_prctl(tls *TLS, code int32, addr uint64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(158), int64(code), int64(addr)))))
-}
+const m_SYS_arch_prctl = 158
 
-const m_ENOMEM = 12
+func x_arch_prctl(tls *TLS, code int32, addr uint64) (r int32) {
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_arch_prctl), int64(code), int64(addr)))))
+}
 
 func x_brk(tls *TLS, end uintptr) (r int32) {
 	return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOMEM))))
 }
 
+const m_SYS_capget = 125
+const m_SYS_capset = 126
+
 func x_capset(tls *TLS, a uintptr, b uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(126), int64(a), int64(b)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_capset), int64(a), int64(b)))))
 }
 
 func x_capget(tls *TLS, a uintptr, b uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(125), int64(a), int64(b)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_capget), int64(a), int64(b)))))
 }
 
+const m_SYS_chroot = 161
+
 func x_chroot(tls *TLS, path uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(161), int64(path)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_chroot), int64(path)))))
 }
+
+const m_SYS_adjtimex = 159
+const m_SYS_clock_adjtime = 305
 
 type Tktimex64 = struct {
 	Fmodes     uint32
@@ -32365,9 +32509,9 @@ func x_clock_adjtime(tls *TLS, clock_id int32, utx uintptr) (r1 int32) {
 			Ftai:       (*Ttimex)(unsafe.Pointer(utx)).Ftai,
 		}
 		if clock_id == m_CLOCK_REALTIME {
-			r = int32(___syscall1(tls, int64(159), int64(bp)))
+			r = int32(___syscall1(tls, int64(m_SYS_adjtimex), int64(bp)))
 		} else {
-			r = int32(___syscall2(tls, int64(305), int64(clock_id), int64(bp)))
+			r = int32(___syscall2(tls, int64(m_SYS_clock_adjtime), int64(clock_id), int64(bp)))
 		}
 		if r >= 0 {
 			(*Ttimex)(unsafe.Pointer(utx)).Fmodes = (*(*Tktimex)(unsafe.Pointer(bp))).Fmodes
@@ -32395,9 +32539,9 @@ func x_clock_adjtime(tls *TLS, clock_id int32, utx uintptr) (r1 int32) {
 		return int32(x___syscall_ret(tls, uint64(r)))
 	}
 	if clock_id == m_CLOCK_REALTIME {
-		return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(159), int64(utx)))))
+		return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_adjtimex), int64(utx)))))
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(305), int64(clock_id), int64(utx)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_clock_adjtime), int64(clock_id), int64(utx)))))
 }
 
 type Tcpu_set_t = struct {
@@ -32534,9 +32678,17 @@ func x_clone(tls1 *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, 
 	return int32(x___syscall_ret(tls1, uint64(___clone(tls1, func1, stack, flags, arg, VaList(bp+8, ptid, tls, ctid)))))
 }
 
+const m_SYS_copy_file_range = 326
+
 func x_copy_file_range(tls *TLS, fd_in int32, off_in uintptr, fd_out int32, off_out uintptr, len1 uint64, flags uint32) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(326), int64(fd_in), int64(off_in), int64(fd_out), int64(off_out), int64(len1), int64(flags))))
+	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(m_SYS_copy_file_range), int64(fd_in), int64(off_in), int64(fd_out), int64(off_out), int64(len1), int64(flags))))
 }
+
+const m_SYS_epoll_create = 213
+const m_SYS_epoll_create1 = 291
+const m_SYS_epoll_ctl = 233
+const m_SYS_epoll_pwait = 281
+const m_SYS_epoll_wait = 232
 
 type Tfsblkcnt_t = uint64
 
@@ -32578,22 +32730,22 @@ func x_epoll_create(tls *TLS, size int32) (r int32) {
 
 func x_epoll_create1(tls *TLS, flags int32) (r1 int32) {
 	var r int32
-	r = int32(___syscall1(tls, int64(291), int64(flags)))
+	r = int32(___syscall1(tls, int64(m_SYS_epoll_create1), int64(flags)))
 	if r == -int32(m_ENOSYS) && !(flags != 0) {
-		r = int32(___syscall1(tls, int64(213), int64(Int32FromInt32(1))))
+		r = int32(___syscall1(tls, int64(m_SYS_epoll_create), int64(Int32FromInt32(1))))
 	}
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
 func x_epoll_ctl(tls *TLS, fd int32, op int32, fd2 int32, ev uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(233), int64(fd), int64(op), int64(fd2), int64(ev)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_epoll_ctl), int64(fd), int64(op), int64(fd2), int64(ev)))))
 }
 
 func x_epoll_pwait(tls *TLS, fd int32, ev uintptr, cnt int32, to int32, sigs uintptr) (r1 int32) {
 	var r int32
-	r = int32(x___syscall_cp(tls, int64(281), int64(fd), int64(ev), int64(cnt), int64(to), int64(sigs), int64(Int32FromInt32(65)/Int32FromInt32(8))))
+	r = int32(x___syscall_cp(tls, int64(m_SYS_epoll_pwait), int64(fd), int64(ev), int64(cnt), int64(to), int64(sigs), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8))))
 	if r == -int32(m_ENOSYS) && !(sigs != 0) {
-		r = int32(x___syscall_cp(tls, int64(232), int64(fd), int64(ev), int64(cnt), int64(to), 0, 0))
+		r = int32(x___syscall_cp(tls, int64(m_SYS_epoll_wait), int64(fd), int64(ev), int64(cnt), int64(to), 0, 0))
 	}
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
@@ -32602,13 +32754,16 @@ func x_epoll_wait(tls *TLS, fd int32, ev uintptr, cnt int32, to int32) (r int32)
 	return x_epoll_pwait(tls, fd, ev, cnt, to, uintptr(0))
 }
 
+const m_SYS_eventfd = 284
+const m_SYS_eventfd2 = 290
+
 type Teventfd_t = uint64
 
 func x_eventfd(tls *TLS, count uint32, flags int32) (r1 int32) {
 	var r int32
-	r = int32(___syscall2(tls, int64(290), int64(count), int64(flags)))
+	r = int32(___syscall2(tls, int64(m_SYS_eventfd2), int64(count), int64(flags)))
 	if r == -int32(m_ENOSYS) && !(flags != 0) {
-		r = int32(___syscall1(tls, int64(284), int64(count)))
+		r = int32(___syscall1(tls, int64(m_SYS_eventfd), int64(count)))
 	}
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
@@ -32637,8 +32792,11 @@ func x_eventfd_write(tls *TLS, fd int32, _value uint64) (r int32) {
 }
 
 func x_fallocate(tls *TLS, fd int32, mode int32, base int64, len1 int64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(285), int64(fd), int64(mode), base, len1))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_fallocate), int64(fd), int64(mode), base, len1))))
 }
+
+const m_SYS_fanotify_init = 300
+const m_SYS_fanotify_mark = 301
 
 type Tstatvfs = struct {
 	Ff_bsize    uint64
@@ -32703,26 +32861,30 @@ type Tfanotify_response = struct {
 }
 
 func x_fanotify_init(tls *TLS, flags uint32, event_f_flags uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(300), int64(flags), int64(event_f_flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_fanotify_init), int64(flags), int64(event_f_flags)))))
 }
 
 func x_fanotify_mark(tls *TLS, fanotify_fd int32, flags uint32, mask uint64, dfd int32, pathname uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(301), int64(fanotify_fd), int64(flags), int64(mask), int64(dfd), int64(pathname)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_fanotify_mark), int64(fanotify_fd), int64(flags), int64(mask), int64(dfd), int64(pathname)))))
 }
 
+const m_SYS_flock = 73
+
 func x_flock(tls *TLS, fd int32, op int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(73), int64(fd), int64(op)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_flock), int64(fd), int64(op)))))
 }
 
 func x_getdents(tls *TLS, fd int32, buf uintptr, len1 uint64) (r int32) {
 	if len1 > uint64(m_INT_MAX) {
 		len1 = uint64(m_INT_MAX)
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(217), int64(fd), int64(buf), int64(len1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_getdents64), int64(fd), int64(buf), int64(len1)))))
 }
 
+const m_SYS_getrandom = 318
+
 func x_getrandom(tls *TLS, buf uintptr, buflen uint64, flags uint32) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(318), int64(buf), int64(buflen), int64(flags), 0, 0, 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_getrandom), int64(buf), int64(buflen), int64(flags), 0, 0, 0)))
 }
 
 type Tucontext_t3 = struct {
@@ -32738,6 +32900,11 @@ func x_gettid(tls *TLS) (r int32) {
 	return (*T__pthread)(unsafe.Pointer(___get_tp(tls))).Ftid
 }
 
+const m_SYS_inotify_add_watch = 254
+const m_SYS_inotify_init = 253
+const m_SYS_inotify_init1 = 294
+const m_SYS_inotify_rm_watch = 255
+
 type Tinotify_event = struct {
 	Fwd     int32
 	Fmask   uint32
@@ -32751,37 +32918,45 @@ func x_inotify_init(tls *TLS) (r int32) {
 
 func x_inotify_init1(tls *TLS, flags int32) (r1 int32) {
 	var r int32
-	r = int32(___syscall1(tls, int64(294), int64(flags)))
+	r = int32(___syscall1(tls, int64(m_SYS_inotify_init1), int64(flags)))
 	if r == -int32(m_ENOSYS) && !(flags != 0) {
-		r = int32(___syscall0(tls, int64(253)))
+		r = int32(___syscall0(tls, int64(m_SYS_inotify_init)))
 	}
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
 func x_inotify_add_watch(tls *TLS, fd int32, pathname uintptr, mask uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(254), int64(fd), int64(pathname), int64(mask)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_inotify_add_watch), int64(fd), int64(pathname), int64(mask)))))
 }
 
 func x_inotify_rm_watch(tls *TLS, fd int32, wd int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(255), int64(fd), int64(wd)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_inotify_rm_watch), int64(fd), int64(wd)))))
 }
+
+const m_SYS_ioperm = 173
 
 func x_ioperm(tls *TLS, from uint64, num uint64, turn_on int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(173), int64(from), int64(num), int64(turn_on)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_ioperm), int64(from), int64(num), int64(turn_on)))))
 }
+
+const m_SYS_iopl = 172
 
 func x_iopl(tls *TLS, level int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(172), int64(level)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_iopl), int64(level)))))
 }
 
+const m_SYS_syslog = 103
+
 func x_klogctl(tls *TLS, type1 int32, buf uintptr, len1 int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(103), int64(type1), int64(buf), int64(len1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_syslog), int64(type1), int64(buf), int64(len1)))))
 }
 
 const m_MEMBARRIER_CMD_PRIVATE_EXPEDITED = 8
+const m_MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED = 16
 const m_SA_ONSTACK = 134217728
 const m_SA_RESTART = 268435456
 const m_SIGSYNCCALL = 34
+const m_SYS_membarrier = 324
 
 func _dummy_0(tls *TLS) {
 }
@@ -32799,7 +32974,7 @@ func x___membarrier(tls *TLS, cmd int32, flags int32) (r1 int32) {
 	var self, td uintptr
 	var _ /* sa at bp+128 */ Tsigaction
 	var _ /* set at bp+0 */ Tsigset_t
-	r = int32(___syscall2(tls, int64(324), int64(cmd), int64(flags)))
+	r = int32(___syscall2(tls, int64(m_SYS_membarrier), int64(cmd), int64(flags)))
 	/* Emulate the private expedited command, which is needed by the
 	 * dynamic linker for installation of dynamic TLS, for older
 	 * kernels that lack the syscall. Unlike the syscall, this only
@@ -32817,7 +32992,7 @@ func x___membarrier(tls *TLS, cmd int32, flags int32) (r1 int32) {
 		_memset(tls, uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp + 128))).Fsa_mask)), -int32(1), uint64(128))
 		if !(x___libc_sigaction(tls, int32(m_SIGSYNCCALL), bp+128, uintptr(0)) != 0) {
 			for td = (*T__pthread)(unsafe.Pointer(self)).Fnext; td != self; {
-				___syscall2(tls, int64(200), int64((*T__pthread)(unsafe.Pointer(td)).Ftid), int64(Int32FromInt32(34)))
+				___syscall2(tls, int64(m_SYS_tkill), int64((*T__pthread)(unsafe.Pointer(td)).Ftid), int64(Int32FromInt32(m_SIGSYNCCALL)))
 				goto _1
 			_1:
 				td = (*T__pthread)(unsafe.Pointer(td)).Fnext
@@ -32849,55 +33024,75 @@ func x___membarrier_init(tls *TLS) {
 	 * to the application to do so if desired. Unfortunately this means
 	 * library code initialized after the process becomes multi-threaded
 	 * cannot use these features without accepting registration latency. */
-	___syscall2(tls, int64(324), int64(Int32FromInt32(16)), int64(Int32FromInt32(0)))
+	___syscall2(tls, int64(m_SYS_membarrier), int64(Int32FromInt32(m_MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED)), int64(Int32FromInt32(0)))
 }
 
+const m_SYS_memfd_create = 319
+
 func x_memfd_create(tls *TLS, name uintptr, flags uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(319), int64(name), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_memfd_create), int64(name), int64(flags)))))
 }
+
+const m_SYS_mlock2 = 325
 
 func x_mlock2(tls *TLS, addr uintptr, len1 uint64, flags uint32) (r int32) {
 	if flags == uint32(0) {
 		return x_mlock(tls, addr, len1)
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(325), int64(addr), int64(len1), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mlock2), int64(addr), int64(len1), int64(flags)))))
 }
 
+const m_SYS_delete_module = 176
+const m_SYS_init_module = 175
+
 func x_init_module(tls *TLS, a uintptr, b uint64, c uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(175), int64(a), int64(b), int64(c)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_init_module), int64(a), int64(b), int64(c)))))
 }
 
 func x_delete_module(tls *TLS, a uintptr, b uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(176), int64(a), int64(b)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_delete_module), int64(a), int64(b)))))
 }
 
+const m_SYS_mount = 165
+const m_SYS_umount2 = 166
+
 func x_mount(tls *TLS, special uintptr, dir uintptr, fstype uintptr, flags uint64, data uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(165), int64(special), int64(dir), int64(fstype), int64(flags), int64(data)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_mount), int64(special), int64(dir), int64(fstype), int64(flags), int64(data)))))
 }
 
 func x_umount(tls *TLS, special uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(166), int64(special), int64(Int32FromInt32(0))))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_umount2), int64(special), int64(Int32FromInt32(0))))))
 }
 
 func x_umount2(tls *TLS, special uintptr, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(166), int64(special), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_umount2), int64(special), int64(flags)))))
 }
+
+const m_SYS_name_to_handle_at = 303
 
 func x_name_to_handle_at(tls *TLS, dirfd int32, pathname uintptr, handle uintptr, mount_id uintptr, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(303), int64(dirfd), int64(pathname), int64(handle), int64(mount_id), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_name_to_handle_at), int64(dirfd), int64(pathname), int64(handle), int64(mount_id), int64(flags)))))
 }
+
+const m_SYS_open_by_handle_at = 304
 
 func x_open_by_handle_at(tls *TLS, mount_fd int32, handle uintptr, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(304), int64(mount_fd), int64(handle), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_open_by_handle_at), int64(mount_fd), int64(handle), int64(flags)))))
 }
+
+const m_SYS_personality = 135
 
 func x_personality(tls *TLS, persona uint64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(135), int64(persona)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_personality), int64(persona)))))
 }
 
+const m_SYS_pivot_root = 155
+
 func x_pivot_root(tls *TLS, new1 uintptr, old uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(155), int64(new1), int64(old)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_pivot_root), int64(new1), int64(old)))))
 }
+
+const m_SYS_ppoll = 271
 
 func x_ppoll(tls *TLS, fds uintptr, n uint64, to uintptr, mask uintptr) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
@@ -32925,8 +33120,10 @@ func x_ppoll(tls *TLS, fds uintptr, n uint64, to uintptr, mask uintptr) (r int32
 	} else {
 		v3 = uintptr(0)
 	}
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(271), int64(fds), int64(n), int64(v3), int64(mask), int64(Int32FromInt32(65)/Int32FromInt32(8)), 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_ppoll), int64(fds), int64(n), int64(v3), int64(mask), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)), 0))))
 }
+
+const m_SYS_prctl = 157
 
 type Tprctl_mm_map = struct {
 	Fstart_code  uint64
@@ -32954,8 +33151,10 @@ func x_prctl(tls *TLS, op int32, va uintptr) (r int32) {
 		x[i] = VaUint64(&ap)
 	}
 	_ = ap
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(157), int64(op), int64(x[0]), int64(x[int32(1)]), int64(x[int32(2)]), int64(x[int32(3)])))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_prctl), int64(op), int64(x[0]), int64(x[int32(1)]), int64(x[int32(2)]), int64(x[int32(3)])))))
 }
+
+const m_SYS_prlimit64 = 302
 
 func x_prlimit(tls *TLS, pid int32, resource int32, new_limit uintptr, old_limit uintptr) (r1 int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
@@ -32972,7 +33171,7 @@ func x_prlimit(tls *TLS, pid int32, resource int32, new_limit uintptr, old_limit
 		}
 		new_limit = bp
 	}
-	r = int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(302), int64(pid), int64(resource), int64(new_limit), int64(old_limit)))))
+	r = int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_prlimit64), int64(pid), int64(resource), int64(new_limit), int64(old_limit)))))
 	if !(r != 0) && old_limit != 0 && ^Uint64FromUint64(0) != ^Uint64FromUint64(0) {
 		if (*Trlimit)(unsafe.Pointer(old_limit)).Frlim_cur >= ^Uint64FromUint64(0) {
 			(*Trlimit)(unsafe.Pointer(old_limit)).Frlim_cur = ^Uint64FromUint64(0)
@@ -32984,13 +33183,18 @@ func x_prlimit(tls *TLS, pid int32, resource int32, new_limit uintptr, old_limit
 	return r
 }
 
+const m_SYS_process_vm_readv = 310
+const m_SYS_process_vm_writev = 311
+
 func x_process_vm_writev(tls *TLS, pid int32, lvec uintptr, liovcnt uint64, rvec uintptr, riovcnt uint64, flags uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(311), int64(pid), int64(lvec), int64(liovcnt), int64(rvec), int64(riovcnt), int64(flags))))
+	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(m_SYS_process_vm_writev), int64(pid), int64(lvec), int64(liovcnt), int64(rvec), int64(riovcnt), int64(flags))))
 }
 
 func x_process_vm_readv(tls *TLS, pid int32, lvec uintptr, liovcnt uint64, rvec uintptr, riovcnt uint64, flags uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(310), int64(pid), int64(lvec), int64(liovcnt), int64(rvec), int64(riovcnt), int64(flags))))
+	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(m_SYS_process_vm_readv), int64(pid), int64(lvec), int64(liovcnt), int64(rvec), int64(riovcnt), int64(flags))))
 }
+
+const m_SYS_ptrace = 101
 
 type T__ptrace_peeksiginfo_args = struct {
 	Foff   uint64
@@ -33054,12 +33258,14 @@ func x_ptrace(tls *TLS, req int32, va uintptr) (r int64) {
 	if uint32(req)-uint32(1) < uint32(3) {
 		data = bp
 	}
-	ret = x___syscall_ret(tls, uint64(___syscall5(tls, int64(101), int64(req), int64(pid), int64(addr), int64(data), int64(addr2))))
+	ret = x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_ptrace), int64(req), int64(pid), int64(addr), int64(data), int64(addr2))))
 	if ret < 0 || uint32(req)-uint32(1) >= uint32(3) {
 		return ret
 	}
 	return *(*int64)(unsafe.Pointer(bp))
 }
+
+const m_SYS_quotactl = 179
 
 type Tdqblk = struct {
 	Fdqb_bhardlimit uint64
@@ -33082,39 +33288,57 @@ type Tdqinfo = struct {
 }
 
 func x_quotactl(tls *TLS, cmd int32, special uintptr, id int32, addr uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(179), int64(cmd), int64(special), int64(id), int64(addr)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_quotactl), int64(cmd), int64(special), int64(id), int64(addr)))))
 }
+
+const m_SYS_readahead = 187
 
 func x_readahead(tls *TLS, fd int32, pos int64, len1 uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(187), int64(fd), pos, int64(len1))))
+	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_readahead), int64(fd), pos, int64(len1))))
 }
+
+const m_SYS_reboot = 169
 
 func x_reboot(tls *TLS, type1 int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(169), int64(Uint32FromUint32(0xfee1dead)), int64(Int32FromInt32(672274793)), int64(type1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_reboot), int64(Uint32FromUint32(0xfee1dead)), int64(Int32FromInt32(672274793)), int64(type1)))))
 }
 
+const m_SYS_remap_file_pages = 216
+
 func x_remap_file_pages(tls *TLS, addr uintptr, size uint64, prot int32, pgoff uint64, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(216), int64(addr), int64(size), int64(prot), int64(pgoff), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_remap_file_pages), int64(addr), int64(size), int64(prot), int64(pgoff), int64(flags)))))
 }
+
+const m_SYS_brk = 12
 
 func x_sbrk(tls *TLS, inc int64) (r uintptr) {
 	if inc != 0 {
 		return uintptr(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOMEM))))
 	}
-	return uintptr(___syscall1(tls, int64(12), int64(Int32FromInt32(0))))
+	return uintptr(___syscall1(tls, int64(m_SYS_brk), int64(Int32FromInt32(0))))
 }
+
+const m_SYS_sendfile = 40
 
 func x_sendfile(tls *TLS, out_fd int32, in_fd int32, ofs uintptr, count uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(40), int64(out_fd), int64(in_fd), int64(ofs), int64(count))))
+	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_sendfile), int64(out_fd), int64(in_fd), int64(ofs), int64(count))))
 }
+
+const m_SYS_setfsgid = 123
 
 func x_setfsgid(tls *TLS, gid uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(123), int64(gid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_setfsgid), int64(gid)))))
 }
 
+const m_SYS_setfsuid = 122
+
 func x_setfsuid(tls *TLS, uid uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(122), int64(uid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_setfsuid), int64(uid)))))
 }
+
+const m_SYS_getpid = 39
+const m_SYS_kill = 62
+const m_SYS_setgroups = 116
 
 type Tctx = struct {
 	Fcount       uint64
@@ -33130,14 +33354,14 @@ func _do_setgroups(tls *TLS, p uintptr) {
 	if (*Tctx)(unsafe.Pointer(c)).Fret < 0 {
 		return
 	}
-	ret = int32(___syscall2(tls, int64(116), int64((*Tctx)(unsafe.Pointer(c)).Fcount), int64((*Tctx)(unsafe.Pointer(c)).Flist)))
+	ret = int32(___syscall2(tls, int64(m_SYS_setgroups), int64((*Tctx)(unsafe.Pointer(c)).Fcount), int64((*Tctx)(unsafe.Pointer(c)).Flist)))
 	if ret != 0 && !((*Tctx)(unsafe.Pointer(c)).Fret != 0) {
 		/* If one thread fails to set groups after another has already
 		 * succeeded, forcibly killing the process is the only safe
 		 * thing to do. State is inconsistent and dangerous. Use
 		 * SIGKILL because it is uncatchable. */
 		x___block_all_sigs(tls, uintptr(0))
-		___syscall2(tls, int64(62), ___syscall0(tls, int64(39)), int64(Int32FromInt32(9)))
+		___syscall2(tls, int64(m_SYS_kill), ___syscall0(tls, int64(m_SYS_getpid)), int64(Int32FromInt32(m_SIGKILL)))
 	}
 	(*Tctx)(unsafe.Pointer(c)).Fret = ret
 }
@@ -33157,12 +33381,16 @@ func x_setgroups(tls *TLS, count uint64, list uintptr) (r int32) {
 	return int32(x___syscall_ret(tls, uint64((*(*Tctx)(unsafe.Pointer(bp))).Fret)))
 }
 
+const m_SYS_sethostname = 170
+
 func x_sethostname(tls *TLS, name uintptr, len1 uint64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(170), int64(name), int64(len1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_sethostname), int64(name), int64(len1)))))
 }
 
+const m_SYS_setns = 308
+
 func x_setns(tls *TLS, fd int32, nstype int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(308), int64(fd), int64(nstype)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_setns), int64(fd), int64(nstype)))))
 }
 
 func x_settimeofday(tls *TLS, tv uintptr, tz uintptr) (r int32) {
@@ -33182,6 +33410,8 @@ func x_settimeofday(tls *TLS, tv uintptr, tz uintptr) (r int32) {
 }
 
 const m_O_NONBLOCK = 2048
+const m_SYS_signalfd = 282
+const m_SYS_signalfd4 = 289
 
 type Tsignalfd_siginfo = struct {
 	Fssi_signo     uint32
@@ -33210,24 +33440,26 @@ type Tsignalfd_siginfo = struct {
 
 func x_signalfd(tls *TLS, fd int32, sigs uintptr, flags int32) (r int32) {
 	var ret int32
-	ret = int32(___syscall4(tls, int64(289), int64(fd), int64(sigs), int64(Int32FromInt32(65)/Int32FromInt32(8)), int64(flags)))
+	ret = int32(___syscall4(tls, int64(m_SYS_signalfd4), int64(fd), int64(sigs), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)), int64(flags)))
 	if ret != -int32(m_ENOSYS) {
 		return int32(x___syscall_ret(tls, uint64(ret)))
 	}
-	ret = int32(___syscall3(tls, int64(282), int64(fd), int64(sigs), int64(Int32FromInt32(65)/Int32FromInt32(8))))
+	ret = int32(___syscall3(tls, int64(m_SYS_signalfd), int64(fd), int64(sigs), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8))))
 	if ret >= 0 {
 		if flags&int32(m_O_CLOEXEC) != 0 {
-			___syscall3(tls, int64(72), int64(ret), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(ret), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 		}
 		if flags&int32(m_O_NONBLOCK) != 0 {
-			___syscall3(tls, int64(72), int64(ret), int64(Int32FromInt32(4)), int64(Int32FromInt32(04000)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(ret), int64(Int32FromInt32(m_F_SETFL)), int64(Int32FromInt32(m_O_NONBLOCK)))
 		}
 	}
 	return int32(x___syscall_ret(tls, uint64(ret)))
 }
 
+const m_SYS_splice = 275
+
 func x_splice(tls *TLS, fd_in int32, off_in uintptr, fd_out int32, off_out uintptr, len1 uint64, flags uint32) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(275), int64(fd_in), int64(off_in), int64(fd_out), int64(off_out), int64(len1), int64(flags))))
+	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(m_SYS_splice), int64(fd_in), int64(off_in), int64(fd_out), int64(off_out), int64(len1), int64(flags))))
 }
 
 func x_stime(tls *TLS, t uintptr) (r int32) {
@@ -33241,56 +33473,77 @@ func x_stime(tls *TLS, t uintptr) (r int32) {
 	return x_settimeofday(tls, bp, UintptrFromInt32(0))
 }
 
+const m_SYS_swapoff = 168
+const m_SYS_swapon = 167
+
 func x_swapon(tls *TLS, path uintptr, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(167), int64(path), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_swapon), int64(path), int64(flags)))))
 }
 
 func x_swapoff(tls *TLS, path uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(168), int64(path)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_swapoff), int64(path)))))
 }
+
+const m_SYS_sync_file_range = 277
 
 func x_sync_file_range(tls *TLS, fd int32, pos int64, len1 int64, flags uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(277), int64(fd), pos, len1, int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_sync_file_range), int64(fd), pos, len1, int64(flags)))))
 }
+
+const m_SYS_syncfs = 306
 
 func x_syncfs(tls *TLS, fd int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(306), int64(fd)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_syncfs), int64(fd)))))
 }
+
+const m_SYS_sysinfo = 99
 
 func x___lsysinfo(tls *TLS, info uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(99), int64(info)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_sysinfo), int64(info)))))
 }
+
+const m_SYS_tee = 276
 
 func x_tee(tls *TLS, src int32, dest int32, len1 uint64, flags uint32) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(276), int64(src), int64(dest), int64(len1), int64(flags))))
+	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_tee), int64(src), int64(dest), int64(len1), int64(flags))))
 }
 
+const m_SYS_timerfd_create = 283
+const m_SYS_timerfd_gettime = 287
+const m_SYS_timerfd_settime = 286
+
 func x_timerfd_create(tls *TLS, clockid int32, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(283), int64(clockid), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_timerfd_create), int64(clockid), int64(flags)))))
 }
 
 func x_timerfd_settime(tls *TLS, fd int32, flags int32, new1 uintptr, old uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(286), int64(fd), int64(flags), int64(new1), int64(old)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_timerfd_settime), int64(fd), int64(flags), int64(new1), int64(old)))))
 }
 
 func x_timerfd_gettime(tls *TLS, fd int32, cur uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(287), int64(fd), int64(cur)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_timerfd_gettime), int64(fd), int64(cur)))))
 }
 
+const m_SYS_unshare = 272
+
 func x_unshare(tls *TLS, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(272), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_unshare), int64(flags)))))
 }
 
 func x_utimes(tls *TLS, path uintptr, times uintptr) (r int32) {
 	return x___futimesat(tls, -int32(100), path, times)
 }
 
+const m_SYS_vhangup = 153
+
 func x_vhangup(tls *TLS) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(153)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(m_SYS_vhangup)))))
 }
 
+const m_SYS_vmsplice = 278
+
 func x_vmsplice(tls *TLS, fd int32, iov uintptr, cnt uint64, flags uint32) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(278), int64(fd), int64(iov), int64(cnt), int64(flags))))
+	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_vmsplice), int64(fd), int64(iov), int64(cnt), int64(flags))))
 }
 
 type Tidtype_t = int32
@@ -33304,6 +33557,8 @@ func x_wait3(tls *TLS, status uintptr, options int32, usage uintptr) (r int32) {
 	return x_wait4(tls, -int32(1), status, options, usage)
 }
 
+const m_SYS_wait4 = 61
+
 func x_wait4(tls *TLS, pid int32, status uintptr, options int32, ru uintptr) (r1 int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
@@ -33316,7 +33571,7 @@ func x_wait4(tls *TLS, pid int32, status uintptr, options int32, ru uintptr) (r1
 		v1 = uintptr(0)
 	}
 	dest = v1
-	r = int32(___syscall4(tls, int64(61), int64(pid), int64(status), int64(options), int64(dest)))
+	r = int32(___syscall4(tls, int64(m_SYS_wait4), int64(pid), int64(status), int64(options), int64(dest)))
 	if r > 0 && ru != 0 && uint64(8) > uint64(8) {
 		_memcpy(tls, bp, dest, Uint64FromInt32(4)*Uint64FromInt64(8))
 		(*Trusage)(unsafe.Pointer(ru)).Fru_utime = Ttimeval{
@@ -33331,55 +33586,66 @@ func x_wait4(tls *TLS, pid int32, status uintptr, options int32, ru uintptr) (r1
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
+const m_SYS_fgetxattr = 193
+const m_SYS_flistxattr = 196
+const m_SYS_fremovexattr = 199
+const m_SYS_fsetxattr = 190
+const m_SYS_getxattr = 191
+const m_SYS_lgetxattr = 192
+const m_SYS_listxattr = 194
+const m_SYS_llistxattr = 195
+const m_SYS_lremovexattr = 198
+const m_SYS_lsetxattr = 189
+const m_SYS_removexattr = 197
+const m_SYS_setxattr = 188
+
 func x_getxattr(tls *TLS, path uintptr, name uintptr, value uintptr, size uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(191), int64(path), int64(name), int64(value), int64(size))))
+	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_getxattr), int64(path), int64(name), int64(value), int64(size))))
 }
 
 func x_lgetxattr(tls *TLS, path uintptr, name uintptr, value uintptr, size uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(192), int64(path), int64(name), int64(value), int64(size))))
+	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_lgetxattr), int64(path), int64(name), int64(value), int64(size))))
 }
 
 func x_fgetxattr(tls *TLS, filedes int32, name uintptr, value uintptr, size uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(193), int64(filedes), int64(name), int64(value), int64(size))))
+	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_fgetxattr), int64(filedes), int64(name), int64(value), int64(size))))
 }
 
 func x_listxattr(tls *TLS, path uintptr, list uintptr, size uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(194), int64(path), int64(list), int64(size))))
+	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_listxattr), int64(path), int64(list), int64(size))))
 }
 
 func x_llistxattr(tls *TLS, path uintptr, list uintptr, size uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(195), int64(path), int64(list), int64(size))))
+	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_llistxattr), int64(path), int64(list), int64(size))))
 }
 
 func x_flistxattr(tls *TLS, filedes int32, list uintptr, size uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(196), int64(filedes), int64(list), int64(size))))
+	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_flistxattr), int64(filedes), int64(list), int64(size))))
 }
 
 func x_setxattr(tls *TLS, path uintptr, name uintptr, value uintptr, size uint64, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(188), int64(path), int64(name), int64(value), int64(size), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_setxattr), int64(path), int64(name), int64(value), int64(size), int64(flags)))))
 }
 
 func x_lsetxattr(tls *TLS, path uintptr, name uintptr, value uintptr, size uint64, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(189), int64(path), int64(name), int64(value), int64(size), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_lsetxattr), int64(path), int64(name), int64(value), int64(size), int64(flags)))))
 }
 
 func x_fsetxattr(tls *TLS, filedes int32, name uintptr, value uintptr, size uint64, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(190), int64(filedes), int64(name), int64(value), int64(size), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_fsetxattr), int64(filedes), int64(name), int64(value), int64(size), int64(flags)))))
 }
 
 func x_removexattr(tls *TLS, path uintptr, name uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(197), int64(path), int64(name)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_removexattr), int64(path), int64(name)))))
 }
 
 func x_lremovexattr(tls *TLS, path uintptr, name uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(198), int64(path), int64(name)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_lremovexattr), int64(path), int64(name)))))
 }
 
 func x_fremovexattr(tls *TLS, fd int32, name uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(199), int64(fd), int64(name)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_fremovexattr), int64(fd), int64(name)))))
 }
-
-const m_LC_MESSAGES = 5
 
 func _dummy7(tls *TLS, msg uintptr, lm uintptr) (r uintptr) {
 	return msg
@@ -33478,8 +33744,6 @@ _3:
 	x___munmap(tls, map1, uint64(v2+uint32(20)))
 	return 0
 }
-
-const m_ENOMSG = 42
 
 func _cmp(tls *TLS, a uintptr, b uintptr) (r int32) {
 	var x, y, v1, v2, v4, v5 uint32
@@ -33619,7 +33883,7 @@ func x_catopen(tls *TLS, name uintptr, oflag int32) (r uintptr) {
 		return uintptr(-Int32FromInt32(1))
 	}
 	if oflag != 0 {
-		v3 = x___nl_langinfo(tls, Int32FromInt32(5)<<Int32FromInt32(16)|Int32FromInt32(0xffff))
+		v3 = x___nl_langinfo(tls, Int32FromInt32(m_LC_MESSAGES)<<Int32FromInt32(16)|Int32FromInt32(0xffff))
 	} else {
 		v3 = x_getenv(tls, ts+517)
 	}
@@ -34045,8 +34309,6 @@ func x_freelocale(tls *TLS, l uintptr) {
 }
 
 const m_BIG5 = 224
-const m_E2BIG = 7
-const m_EILSEQ = 84
 const m_EUC_JP = 208
 const m_EUC_KR = 232
 const m_GB18030 = 216
@@ -101493,7 +101755,7 @@ func x_iconv(tls *TLS, cd uintptr, in uintptr, inb uintptr, out uintptr, outb ui
 			if c != uint32('(') && c != uint32('$') {
 				goto ilseq
 			}
-			switch uint32(int32(128)*BoolInt32(c == uint32('$'))) + d {
+			switch uint32(Int32FromInt32(128)*BoolInt32(c == Uint32FromUint8('$'))) + d {
 			case uint32('B'):
 				(*Tstateful_cd)(unsafe.Pointer(scd)).Fstate = uint32(0)
 				goto _1
@@ -103092,10 +103354,6 @@ func x___libc_calloc(tls *TLS, m uint64, n uint64) (r uintptr) {
 }
 
 const m_ALIGN = 16
-const m_MAP_ANON = 32
-const m_MAP_PRIVATE = 2
-const m_PROT_READ = 1
-const m_PROT_WRITE = 2
 
 func _traverses_stack_p(tls *TLS, old uint64, new1 uint64) (r int32) {
 	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
@@ -103148,13 +103406,13 @@ func ___simple_malloc(tls *TLS, n uint64) (r uintptr) {
 	if n > _end-_cur {
 		req = (n - (_end - _cur) + uint64(m_PAGESIZE) - uint64(1)) & uint64(-Int32FromInt32(m_PAGESIZE))
 		if !(_cur != 0) {
-			_brk = uint64(___syscall1(tls, int64(12), int64(Int32FromInt32(0))))
+			_brk = uint64(___syscall1(tls, int64(m_SYS_brk), int64(Int32FromInt32(0))))
 			_brk += -_brk & uint64(Int32FromInt32(m_PAGESIZE)-Int32FromInt32(1))
 			v1 = _brk
 			_end = v1
 			_cur = v1
 		}
-		if _brk == _end && req < uint64(0xffffffffffffffff)-_brk && !(_traverses_stack_p(tls, _brk, _brk+req) != 0) && uint64(___syscall1(tls, int64(12), int64(_brk+req))) == _brk+req {
+		if _brk == _end && req < uint64(0xffffffffffffffff)-_brk && !(_traverses_stack_p(tls, _brk, _brk+req) != 0) && uint64(___syscall1(tls, int64(m_SYS_brk), int64(_brk+req))) == _brk+req {
 			_end += req
 			_brk = _end
 		} else {
@@ -103329,7 +103587,7 @@ _3:
 		}
 	}
 	if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(16)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
+		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
 			_a_crash(tls)
 		}
 	}
@@ -103545,7 +103803,7 @@ func _free_group(tls *TLS, g uintptr) (r Tmapinfo) {
 			}
 		}
 		if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-			if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(16)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
+			if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
 				_a_crash(tls)
 			}
 		}
@@ -103777,7 +104035,7 @@ _3:
 		}
 	}
 	if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(16)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
+		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
 			_a_crash(tls)
 		}
 	}
@@ -103879,7 +104137,6 @@ const m_MAP_FIXED = 16
 const m_MMAP_THRESHOLD = 131052
 const m_PROT_NONE = 0
 const m_RDLOCK_IS_EXCLUSIVE = 1
-const m_SYS_brk = 12
 
 func x___malloc_atfork(tls *TLS, who int32) {
 	var v1 int32
@@ -104736,7 +104993,7 @@ _3:
 		}
 	}
 	if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(16)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
+		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
 			_a_crash(tls)
 		}
 	}
@@ -104814,7 +105071,7 @@ _3:
 		}
 	}
 	if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(16)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
+		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
 			_a_crash(tls)
 		}
 	}
@@ -104939,7 +105196,7 @@ _5:
 		}
 	}
 	if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(16)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
+		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
 			_a_crash(tls)
 		}
 	}
@@ -106459,8 +106716,6 @@ func x_asinf(tls *TLS, x float32) (r float32) {
 	return x
 }
 
-const m_fp_force_evall = 0
-
 // C documentation
 //
 //	/* asinh(x) = sign(x)*log(|x|+sqrt(x*x+1)) ~= x - x^3/6 + o(x^5) */
@@ -107481,7 +107736,7 @@ func x_cos(tls *TLS, x float64) (r float64) {
 	}
 	/* argument reduction */
 	n = uint32(x___rem_pio2(tls, x, bp+24))
-	switch n & uint32(3) {
+	switch n & Uint32FromInt32(3) {
 	case uint32(0):
 		return x___cos(tls, (*(*[2]float64)(unsafe.Pointer(bp + 24)))[0], (*(*[2]float64)(unsafe.Pointer(bp + 24)))[int32(1)])
 	case uint32(1):
@@ -107567,7 +107822,7 @@ func x_cosf(tls *TLS, x float32) (r float32) {
 	}
 	/* general argument reduction needed */
 	n = uint32(x___rem_pio2f(tls, x, bp+24))
-	switch n & uint32(3) {
+	switch n & Uint32FromInt32(3) {
 	case uint32(0):
 		return x___cosdf(tls, *(*float64)(unsafe.Pointer(bp + 24)))
 	case uint32(1):
@@ -109582,8 +109837,6 @@ func x_hypotl(tls *TLS, x float64, y float64) (r float64) {
 	return x_hypot(tls, x, y)
 }
 
-const m_FP_ILOGB0 = 1
-
 func x_ilogb(tls *TLS, x float64) (r int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
@@ -111072,7 +111325,7 @@ func x_jn(tls *TLS, n int32, x float64) (r float64) {
 				 *             2    -s+c            -c-s
 				 *             3     s+c             c-s
 				 */
-				switch nm1 & int32(3) {
+				switch nm1 & Int32FromInt32(3) {
 				case 0:
 					temp = -x_cos(tls, x) + x_sin(tls, x)
 				case int32(1):
@@ -111261,7 +111514,7 @@ func x_yn(tls *TLS, n int32, x float64) (r float64) {
 		 *             2    -s+c            -c-s
 		 *             3     s+c             c-s
 		 */
-		switch nm1 & int32(3) {
+		switch nm1 & Int32FromInt32(3) {
 		case 0:
 			temp = -x_sin(tls, x) - x_cos(tls, x)
 		case int32(1):
@@ -113779,7 +114032,7 @@ func x_powf(tls *TLS, x float32, y1 float32) (r float32) {
 	logx = _log2_inline(tls, ix)
 	ylogx = float64(y1) * logx /* cannot overflow, y is single prec.  */
 	v5 = ylogx
-	v6 = float64(126) * float64(Int32FromInt32(1)<<Int32FromInt32(0))
+	v6 = float64(126) * float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS))
 	if ___builtin_expect(tls, BoolInt64(*(*uint64)(unsafe.Pointer(&v5))>>int32(47)&uint64(0xffff) >= *(*uint64)(unsafe.Pointer(&v6))>>int32(47)), 0) != 0 {
 		/* |y*log(x)| >= 126.  */
 		if ylogx > float64(127.99999995700433)*float64(Int32FromInt32(1)<<Int32FromInt32(m_POWF_SCALE_BITS)) {
@@ -114485,7 +114738,7 @@ func x_sin(tls *TLS, x float64) (r float64) {
 	}
 	/* argument reduction needed */
 	n = uint32(x___rem_pio2(tls, x, bp+24))
-	switch n & uint32(3) {
+	switch n & Uint32FromInt32(3) {
 	case uint32(0):
 		return x___sin(tls, (*(*[2]float64)(unsafe.Pointer(bp + 24)))[0], (*(*[2]float64)(unsafe.Pointer(bp + 24)))[int32(1)], int32(1))
 	case uint32(1):
@@ -114557,7 +114810,7 @@ func x_sincos(tls *TLS, x float64, sin uintptr, cos uintptr) {
 	n = uint32(x___rem_pio2(tls, x, bp+24))
 	s = x___sin(tls, (*(*[2]float64)(unsafe.Pointer(bp + 24)))[0], (*(*[2]float64)(unsafe.Pointer(bp + 24)))[int32(1)], int32(1))
 	c = x___cos(tls, (*(*[2]float64)(unsafe.Pointer(bp + 24)))[0], (*(*[2]float64)(unsafe.Pointer(bp + 24)))[int32(1)])
-	switch n & uint32(3) {
+	switch n & Uint32FromInt32(3) {
 	case uint32(0):
 		*(*float64)(unsafe.Pointer(sin)) = s
 		*(*float64)(unsafe.Pointer(cos)) = c
@@ -114697,7 +114950,7 @@ func x_sincosf(tls *TLS, x float32, sin uintptr, cos uintptr) {
 	n = uint32(x___rem_pio2f(tls, x, bp+24))
 	s = x___sindf(tls, *(*float64)(unsafe.Pointer(bp + 24)))
 	c = x___cosdf(tls, *(*float64)(unsafe.Pointer(bp + 24)))
-	switch n & uint32(3) {
+	switch n & Uint32FromInt32(3) {
 	case uint32(0):
 		*(*float32)(unsafe.Pointer(sin)) = s
 		*(*float32)(unsafe.Pointer(cos)) = c
@@ -114814,7 +115067,7 @@ func x_sinf(tls *TLS, x float32) (r float32) {
 	}
 	/* general argument reduction needed */
 	n = x___rem_pio2f(tls, x, bp+24)
-	switch n & int32(3) {
+	switch n & Int32FromInt32(3) {
 	case 0:
 		return x___sindf(tls, *(*float64)(unsafe.Pointer(bp + 24)))
 	case int32(1):
@@ -116658,22 +116911,30 @@ func x_getopt_long_only(tls *TLS, argc int32, argv uintptr, optstring uintptr, l
 	return ___getopt_long(tls, argc, argv, optstring, longopts, idx, int32(1))
 }
 
+const m_SYS_getpriority = 140
+
 func x_getpriority(tls *TLS, which int32, who uint32) (r int32) {
 	var ret int32
-	ret = int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(140), int64(which), int64(who)))))
+	ret = int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_getpriority), int64(which), int64(who)))))
 	if ret < 0 {
 		return ret
 	}
 	return int32(20) - ret
 }
 
+const m_SYS_getresgid = 120
+
 func x_getresgid(tls *TLS, rgid uintptr, egid uintptr, sgid uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(120), int64(rgid), int64(egid), int64(sgid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_getresgid), int64(rgid), int64(egid), int64(sgid)))))
 }
 
+const m_SYS_getresuid = 118
+
 func x_getresuid(tls *TLS, ruid uintptr, euid uintptr, suid uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(118), int64(ruid), int64(euid), int64(suid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_getresuid), int64(ruid), int64(euid), int64(suid)))))
 }
+
+const m_SYS_getrlimit = 97
 
 func x_getrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
@@ -116681,7 +116942,7 @@ func x_getrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 	var ret int32
 	var v1, v2 uint64
 	var _ /* k_rlim at bp+0 */ [2]uint64
-	ret = int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(302), int64(Int32FromInt32(0)), int64(resource), int64(Int32FromInt32(0)), int64(rlim)))))
+	ret = int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_prlimit64), int64(Int32FromInt32(0)), int64(resource), int64(Int32FromInt32(0)), int64(rlim)))))
 	if !(ret != 0) {
 		if (*Trlimit)(unsafe.Pointer(rlim)).Frlim_cur >= ^Uint64FromUint64(0) {
 			(*Trlimit)(unsafe.Pointer(rlim)).Frlim_cur = ^Uint64FromUint64(0)
@@ -116693,7 +116954,7 @@ func x_getrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 	if !(ret != 0) || *(*int32)(unsafe.Pointer(x___errno_location(tls))) != int32(m_ENOSYS) {
 		return ret
 	}
-	if x___syscall_ret(tls, uint64(___syscall2(tls, int64(97), int64(resource), int64(bp)))) < 0 {
+	if x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_getrlimit), int64(resource), int64(bp)))) < 0 {
 		return -int32(1)
 	}
 	if (*(*[2]uint64)(unsafe.Pointer(bp)))[0] == -Uint64FromUint64(1) {
@@ -116717,6 +116978,8 @@ func x_getrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 	return 0
 }
 
+const m_SYS_getrusage = 98
+
 func x_getrusage(tls *TLS, who int32, ru uintptr) (r1 int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
@@ -116724,7 +116987,7 @@ func x_getrusage(tls *TLS, who int32, ru uintptr) (r1 int32) {
 	var r int32
 	var _ /* kru at bp+0 */ [4]int64
 	dest = ru + 32 - uintptr(Uint64FromInt32(4)*Uint64FromInt64(8))
-	r = int32(___syscall2(tls, int64(98), int64(who), int64(dest)))
+	r = int32(___syscall2(tls, int64(m_SYS_getrusage), int64(who), int64(dest)))
 	if !(r != 0) && uint64(8) > uint64(8) {
 		_memcpy(tls, bp, dest, Uint64FromInt32(4)*Uint64FromInt64(8))
 		(*Trusage)(unsafe.Pointer(ru)).Fru_utime = Ttimeval{
@@ -116790,16 +117053,16 @@ func x_initgroups(tls *TLS, user uintptr, gid uint32) (r int32) {
 	return x_setgroups(tls, uint64(*(*int32)(unsafe.Pointer(bp + 128))), bp)
 }
 
-const m_ENOTTY = 25
 const m_R = 2
 const m_SIOCGSTAMP = 35078
 const m_SIOCGSTAMPNS = 35079
 const m_SIOCGSTAMPNS_OLD = 35079
 const m_SIOCGSTAMP_OLD = 35078
+const m_SYS_ioctl = 16
 const m_W = 1
 const m_WR = 3
 const m__IOC_READ = 2
-const m__IOC_WRITE = 2
+const m__IOC_WRITE = 1
 const m___BIG_ENDIAN = 4321
 
 type Tioctl_compat_map = struct {
@@ -117146,7 +117409,7 @@ func x_ioctl(tls *TLS, fd int32, req int32, va uintptr) (r1 int32) {
 	ap = va
 	arg = VaUintptr(&ap)
 	_ = ap
-	r = int32(___syscall3(tls, int64(16), int64(fd), int64(req), int64(arg)))
+	r = int32(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(req), int64(arg)))
 	if int32(m_SIOCGSTAMP) != int32(m_SIOCGSTAMP_OLD) && req != 0 && r == -int32(m_ENOTTY) {
 		i = 0
 		for ; uint64(i) < Uint64FromInt64(400)/Uint64FromInt64(20); i++ {
@@ -117154,7 +117417,7 @@ func x_ioctl(tls *TLS, fd int32, req int32, va uintptr) (r1 int32) {
 				continue
 			}
 			_convert_ioctl_struct(tls, uintptr(unsafe.Pointer(&_compat_map))+uintptr(i)*20, bp, arg, int32(m_W))
-			r = int32(___syscall3(tls, int64(16), int64(fd), int64(_compat_map[i].Fold_req), int64(bp)))
+			r = int32(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(_compat_map[i].Fold_req), int64(bp)))
 			if r < 0 {
 				break
 			}
@@ -117169,7 +117432,6 @@ func x_issetugid(tls *TLS) (r int32) {
 	return int32(x___libc.Fsecure)
 }
 
-const m_EACCES = 13
 const m_F_LOCK = 1
 const m_F_RDLCK = 0
 const m_F_TEST = 3
@@ -117325,7 +117587,6 @@ func x_hasmntopt(tls *TLS, mnt uintptr, opt uintptr) (r uintptr) {
 	return x_strstr(tls, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_opts, opt)
 }
 
-const m_ENAMETOOLONG = 36
 const m_FTW_D = 2
 const m_FTW_DEPTH = 8
 const m_FTW_DNR = 3
@@ -117574,8 +117835,6 @@ func x_ptsname(tls *TLS, fd int32) (r uintptr) {
 
 var _buf2 [22]int8
 
-const m_ENOSPC = 28
-
 func x_posix_openpt(tls *TLS, flags int32) (r1 int32) {
 	var r int32
 	r = x_open(tls, ts+1220, flags, 0)
@@ -117605,7 +117864,7 @@ func x___ptsname_r(tls *TLS, fd int32, buf uintptr, len1 uint64) (r int32) {
 	if !(buf != 0) {
 		len1 = uint64(0)
 	}
-	v1 = int32(___syscall3(tls, int64(16), int64(fd), int64(Uint32FromUint32(0x80045430)), int64(bp)))
+	v1 = int32(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(Uint32FromUint32(m_TIOCGPTN)), int64(bp)))
 	err = v1
 	if v1 != 0 {
 		return -err
@@ -117615,8 +117874,6 @@ func x___ptsname_r(tls *TLS, fd int32, buf uintptr, len1 uint64) (r int32) {
 	}
 	return 0
 }
-
-const m_ELOOP = 40
 
 func _slash_len(tls *TLS, s uintptr) (r uint64) {
 	var s0 uintptr
@@ -117828,13 +118085,19 @@ toolong:
 	return uintptr(0)
 }
 
+const m_SYS_setdomainname = 171
+
 func x_setdomainname(tls *TLS, name uintptr, len1 uint64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(171), int64(name), int64(len1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_setdomainname), int64(name), int64(len1)))))
 }
 
+const m_SYS_setpriority = 141
+
 func x_setpriority(tls *TLS, which int32, who uint32, prio int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(141), int64(which), int64(who), int64(prio)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_setpriority), int64(which), int64(who), int64(prio)))))
 }
+
+const m_SYS_setrlimit = 160
 
 type Tctx1 = struct {
 	Flim [2]uint64
@@ -117848,7 +118111,7 @@ func _do_setrlimit(tls *TLS, p uintptr) {
 	if (*Tctx1)(unsafe.Pointer(c)).Ferr > 0 {
 		return
 	}
-	(*Tctx1)(unsafe.Pointer(c)).Ferr = int32(-___syscall2(tls, int64(160), int64((*Tctx1)(unsafe.Pointer(c)).Fres), int64(c)))
+	(*Tctx1)(unsafe.Pointer(c)).Ferr = int32(-___syscall2(tls, int64(m_SYS_setrlimit), int64((*Tctx1)(unsafe.Pointer(c)).Fres), int64(c)))
 }
 
 func x_setrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
@@ -117868,7 +118131,7 @@ func x_setrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 		}
 		rlim = bp
 	}
-	ret = int32(___syscall4(tls, int64(302), int64(Int32FromInt32(0)), int64(resource), int64(rlim), int64(Int32FromInt32(0))))
+	ret = int32(___syscall4(tls, int64(m_SYS_prlimit64), int64(Int32FromInt32(0)), int64(resource), int64(rlim), int64(Int32FromInt32(0))))
 	if ret != -int32(m_ENOSYS) {
 		return int32(x___syscall_ret(tls, uint64(ret)))
 	}
@@ -117914,10 +118177,6 @@ func x_syscall(tls *TLS, n int64, va uintptr) (r int64) {
 	return x___syscall_ret(tls, uint64(___syscall6(tls, n, a, b, c, d, e, f)))
 }
 
-const m_ECONNREFUSED = 111
-const m_ECONNRESET = 104
-const m_ENOTCONN = 107
-const m_EPIPE = 32
 const m_LOG_CONS = 2
 const m_LOG_FACMASK = 1016
 const m_LOG_NDELAY = 8
@@ -118115,6 +118374,8 @@ func x_syslog(tls *TLS, priority int32, message uintptr, va uintptr) {
 	_ = ap
 }
 
+const m_SYS_uname = 63
+
 type Tutsname1 = struct {
 	Fsysname      [65]int8
 	Fnodename     [65]int8
@@ -118125,7 +118386,7 @@ type Tutsname1 = struct {
 }
 
 func x_uname(tls *TLS, uts uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(63), int64(uts)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_uname), int64(uts)))))
 }
 
 const m_WRDE_APPEND = 2
@@ -118392,25 +118653,31 @@ func x_wordfree(tls *TLS, we uintptr) {
 	(*Twordexp_t)(unsafe.Pointer(we)).Fwe_wordc = uint64(0)
 }
 
+const m_SYS_madvise = 28
+
 func x___madvise(tls *TLS, addr uintptr, len1 uint64, advice int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(28), int64(addr), int64(len1), int64(advice)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_madvise), int64(addr), int64(len1), int64(advice)))))
 }
+
+const m_SYS_mincore = 27
 
 func x_mincore(tls *TLS, addr uintptr, len1 uint64, vec uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(27), int64(addr), int64(len1), int64(vec)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mincore), int64(addr), int64(len1), int64(vec)))))
 }
+
+const m_SYS_mlock = 149
 
 func x_mlock(tls *TLS, addr uintptr, len1 uint64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(149), int64(addr), int64(len1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_mlock), int64(addr), int64(len1)))))
 }
+
+const m_SYS_mlockall = 151
 
 func x_mlockall(tls *TLS, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(151), int64(flags)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_mlockall), int64(flags)))))
 }
 
-const m_EPERM = 1
 const m_SYSCALL_MMAP2_UNIT = 4096
-const m_UNIT1 = 1
 
 func _dummy8(tls *TLS) {
 }
@@ -118421,14 +118688,14 @@ func x___mmap(tls *TLS, start uintptr, len1 uint64, prot int32, flags int32, fd 
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_EINVAL)
 		return uintptr(-Int32FromInt32(1))
 	}
-	if len1 >= uint64(Int64FromInt64(0x7fffffffffffffff)) {
+	if len1 >= uint64(Int64FromInt64(m_INT64_MAX)) {
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_ENOMEM)
 		return uintptr(-Int32FromInt32(1))
 	}
 	if flags&int32(m_MAP_FIXED) != 0 {
 		x___vm_wait(tls)
 	}
-	ret = ___syscall6(tls, int64(9), int64(start), int64(len1), int64(prot), int64(flags), int64(fd), off)
+	ret = ___syscall6(tls, int64(m_SYS_mmap), int64(start), int64(len1), int64(prot), int64(flags), int64(fd), off)
 	/* Fixup incorrect EPERM from kernel. */
 	if ret == int64(-int32(m_EPERM)) && !(start != 0) && flags&int32(m_MAP_ANON) != 0 && !(flags&Int32FromInt32(m_MAP_FIXED) != 0) {
 		ret = int64(-int32(m_ENOMEM))
@@ -118436,14 +118703,17 @@ func x___mmap(tls *TLS, start uintptr, len1 uint64, prot int32, flags int32, fd 
 	return uintptr(x___syscall_ret(tls, uint64(ret)))
 }
 
+const m_SYS_mprotect = 10
+
 func x___mprotect(tls *TLS, addr uintptr, len1 uint64, prot int32) (r int32) {
 	var end, start uint64
 	start = uint64(addr) & uint64(-Int32FromInt32(m_PAGESIZE))
 	end = uint64(addr+uintptr(len1)+UintptrFromInt32(m_PAGESIZE)-UintptrFromInt32(1)) & uint64(-Int32FromInt32(m_PAGESIZE))
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(10), int64(start), int64(end-start), int64(prot)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mprotect), int64(start), int64(end-start), int64(prot)))))
 }
 
 const m_MREMAP_FIXED = 2
+const m_SYS_mremap = 25
 
 func _dummy9(tls *TLS) {
 }
@@ -118451,7 +118721,7 @@ func _dummy9(tls *TLS) {
 func x___mremap(tls *TLS, old_addr uintptr, old_len uint64, new_len uint64, flags int32, va uintptr) (r uintptr) {
 	var ap, new_addr uintptr
 	new_addr = uintptr(0)
-	if new_len >= uint64(Int64FromInt64(0x7fffffffffffffff)) {
+	if new_len >= uint64(Int64FromInt64(m_INT64_MAX)) {
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_ENOMEM)
 		return uintptr(-Int32FromInt32(1))
 	}
@@ -118461,27 +118731,35 @@ func x___mremap(tls *TLS, old_addr uintptr, old_len uint64, new_len uint64, flag
 		new_addr = VaUintptr(&ap)
 		_ = ap
 	}
-	return uintptr(x___syscall_ret(tls, uint64(___syscall5(tls, int64(25), int64(old_addr), int64(old_len), int64(new_len), int64(flags), int64(new_addr)))))
+	return uintptr(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_mremap), int64(old_addr), int64(old_len), int64(new_len), int64(flags), int64(new_addr)))))
 }
+
+const m_SYS_msync = 26
 
 func x_msync(tls *TLS, start uintptr, len1 uint64, flags int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(26), int64(start), int64(len1), int64(flags), 0, 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_msync), int64(start), int64(len1), int64(flags), 0, 0, 0))))
 }
+
+const m_SYS_munlock = 150
 
 func x_munlock(tls *TLS, addr uintptr, len1 uint64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(150), int64(addr), int64(len1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_munlock), int64(addr), int64(len1)))))
 }
 
+const m_SYS_munlockall = 152
+
 func x_munlockall(tls *TLS) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(152)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(m_SYS_munlockall)))))
 }
+
+const m_SYS_munmap = 11
 
 func _dummy10(tls *TLS) {
 }
 
 func x___munmap(tls *TLS, start uintptr, len1 uint64) (r int32) {
 	x___vm_wait(tls)
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(11), int64(start), int64(len1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_munmap), int64(start), int64(len1)))))
 }
 
 const m_MADV_DONTNEED = 4
@@ -118490,7 +118768,7 @@ func x_posix_madvise(tls *TLS, addr uintptr, len1 uint64, advice int32) (r int32
 	if advice == int32(m_MADV_DONTNEED) {
 		return 0
 	}
-	return int32(-___syscall3(tls, int64(28), int64(addr), int64(len1), int64(advice)))
+	return int32(-___syscall3(tls, int64(m_SYS_madvise), int64(addr), int64(len1), int64(advice)))
 }
 
 const m_O_NOFOLLOW = 131072
@@ -118557,7 +118835,7 @@ type Tmq_attr = struct {
 }
 
 func x_mq_close(tls *TLS, mqd int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(3), int64(mqd)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_close), int64(mqd)))))
 }
 
 func x_mq_getattr(tls *TLS, mqd int32, attr uintptr) (r int32) {
@@ -118569,6 +118847,7 @@ const m_MSG_WAITALL = 256
 const m_PF_NETLINK = 16
 const m_PTHREAD_CREATE_JOINABLE = 0
 const m_SOCK_RAW = 3
+const m_SYS_mq_notify = 244
 
 type Targs = struct {
 	Fsem  Tsem_t
@@ -118597,7 +118876,7 @@ func _start(tls *TLS, p uintptr) (r uintptr) {
 	(*(*Tsigevent)(unsafe.Pointer(bp + 32))).Fsigev_notify = int32(m_SIGEV_THREAD)
 	(*(*Tsigevent)(unsafe.Pointer(bp + 32))).Fsigev_signo = s
 	*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsigevent)(unsafe.Pointer(bp + 32))).Fsigev_value)))) = uintptr(unsafe.Pointer(&_zeros))
-	v1 = int32(-___syscall2(tls, int64(244), int64((*Targs)(unsafe.Pointer(args)).Fmqd), int64(bp+32)))
+	v1 = int32(-___syscall2(tls, int64(m_SYS_mq_notify), int64((*Targs)(unsafe.Pointer(args)).Fmqd), int64(bp+32)))
 	err = v1
 	(*Targs)(unsafe.Pointer(args)).Ferr = v1
 	x_sem_post(tls, args)
@@ -118629,7 +118908,7 @@ func x_mq_notify(tls *TLS, mqd int32, sev uintptr) (r int32) {
 		Fsev: sev,
 	}
 	if !(sev != 0) || (*Tsigevent)(unsafe.Pointer(sev)).Fsigev_notify != int32(m_SIGEV_THREAD) {
-		return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(244), int64(mqd), int64(sev)))))
+		return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_mq_notify), int64(mqd), int64(sev)))))
 	}
 	s = x_socket(tls, int32(m_PF_NETLINK), Int32FromInt32(m_SOCK_RAW)|Int32FromInt32(m_SOCK_CLOEXEC), 0)
 	if s < 0 {
@@ -118653,7 +118932,7 @@ func x_mq_notify(tls *TLS, mqd int32, sev uintptr) (r int32) {
 	x_sigfillset(tls, bp+128)
 	x_pthread_sigmask(tls, m_SIG_BLOCK, bp+128, bp+256)
 	if x___pthread_create(tls, bp+112, bp+56, __ccgo_fp(_start), bp) != 0 {
-		___syscall1(tls, int64(3), int64(s))
+		___syscall1(tls, int64(m_SYS_close), int64(s))
 		x_pthread_sigmask(tls, int32(m_SIG_SETMASK), bp+256, uintptr(0))
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_EAGAIN)
 		return -int32(1)
@@ -118663,7 +118942,7 @@ func x_mq_notify(tls *TLS, mqd int32, sev uintptr) (r int32) {
 	x_sem_wait(tls, uintptr(unsafe.Pointer(&(*(*Targs)(unsafe.Pointer(bp))).Fsem)))
 	x_sem_destroy(tls, uintptr(unsafe.Pointer(&(*(*Targs)(unsafe.Pointer(bp))).Fsem)))
 	if (*(*Targs)(unsafe.Pointer(bp))).Ferr != 0 {
-		___syscall1(tls, int64(3), int64(s))
+		___syscall1(tls, int64(m_SYS_close), int64(s))
 		x___pthread_join(tls, *(*uintptr)(unsafe.Pointer(bp + 112)), uintptr(0))
 		x___pthread_setcancelstate(tls, *(*int32)(unsafe.Pointer(bp + 120)), uintptr(0))
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = (*(*Targs)(unsafe.Pointer(bp))).Ferr
@@ -118672,6 +118951,8 @@ func x_mq_notify(tls *TLS, mqd int32, sev uintptr) (r int32) {
 	x___pthread_setcancelstate(tls, *(*int32)(unsafe.Pointer(bp + 120)), uintptr(0))
 	return 0
 }
+
+const m_SYS_mq_open = 240
 
 func x_mq_open(tls *TLS, name uintptr, flags int32, va uintptr) (r int32) {
 	var ap, attr uintptr
@@ -118687,7 +118968,7 @@ func x_mq_open(tls *TLS, name uintptr, flags int32, va uintptr) (r int32) {
 		attr = VaUintptr(&ap)
 		_ = ap
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(240), int64(name), int64(flags), int64(mode), int64(attr)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_mq_open), int64(name), int64(flags), int64(mode), int64(attr)))))
 }
 
 func x_mq_receive(tls *TLS, mqd int32, msg uintptr, len1 uint64, prio uintptr) (r int64) {
@@ -118698,24 +118979,32 @@ func x_mq_send(tls *TLS, mqd int32, msg uintptr, len1 uint64, prio uint32) (r in
 	return x_mq_timedsend(tls, mqd, msg, len1, prio, uintptr(0))
 }
 
+const m_SYS_mq_getsetattr = 245
+
 func x_mq_setattr(tls *TLS, mqd int32, new1 uintptr, old uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(245), int64(mqd), int64(new1), int64(old)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mq_getsetattr), int64(mqd), int64(new1), int64(old)))))
 }
+
+const m_SYS_mq_timedreceive = 243
 
 func x_mq_timedreceive(tls *TLS, mqd int32, msg uintptr, len1 uint64, prio uintptr, at uintptr) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(243), int64(mqd), int64(msg), int64(len1), int64(prio), int64(at), 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_mq_timedreceive), int64(mqd), int64(msg), int64(len1), int64(prio), int64(at), 0)))
 }
 
+const m_SYS_mq_timedsend = 242
+
 func x_mq_timedsend(tls *TLS, mqd int32, msg uintptr, len1 uint64, prio uint32, at uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(242), int64(mqd), int64(msg), int64(len1), int64(prio), int64(at), 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_mq_timedsend), int64(mqd), int64(msg), int64(len1), int64(prio), int64(at), 0))))
 }
+
+const m_SYS_mq_unlink = 241
 
 func x_mq_unlink(tls *TLS, name uintptr) (r int32) {
 	var ret int32
 	if int32(*(*int8)(unsafe.Pointer(name))) == int32('/') {
 		name++
 	}
-	ret = int32(___syscall1(tls, int64(241), int64(name)))
+	ret = int32(___syscall1(tls, int64(m_SYS_mq_unlink), int64(name)))
 	if ret < 0 {
 		if ret == -int32(m_EPERM) {
 			ret = -int32(m_EACCES)
@@ -119600,10 +119889,10 @@ _9:
 		return ret
 	}
 	if flg&int32(m_SOCK_CLOEXEC) != 0 {
-		___syscall3(tls, int64(72), int64(ret), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(ret), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 	}
 	if flg&int32(m_SOCK_NONBLOCK) != 0 {
-		___syscall3(tls, int64(72), int64(ret), int64(Int32FromInt32(4)), int64(Int32FromInt32(04000)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(ret), int64(Int32FromInt32(m_F_SETFL)), int64(Int32FromInt32(m_O_NONBLOCK)))
 	}
 	return ret
 }
@@ -120622,11 +120911,6 @@ const m_AI_NUMERICHOST = 4
 const m_AI_NUMERICSERV = 1024
 const m_AI_PASSIVE = 1
 const m_AI_V4MAPPED = 8
-const m_EADDRNOTAVAIL = 99
-const m_EAFNOSUPPORT = 97
-const m_EHOSTUNREACH = 113
-const m_ENETDOWN = 100
-const m_ENETUNREACH = 101
 const m_IPPROTO_UDP = 17
 const m_PF_INET = 2
 const m_PF_INET6 = 10
@@ -120912,7 +121196,6 @@ func x_gethostbyaddr(tls *TLS, a uintptr, l uint32, af int32) (r uintptr) {
 
 var _h uintptr
 
-const m_EBADMSG = 74
 const m_TRY_AGAIN = 2
 
 func x_gethostbyaddr_r(tls *TLS, a uintptr, l uint32, af int32, h uintptr, buf uintptr, buflen uint64, res uintptr, err uintptr) (r int32) {
@@ -121973,7 +122256,6 @@ _9:
 	return int32(x___syscall_ret(tls, uint64(v8)))
 }
 
-const m_ENOPROTOOPT = 92
 const m_SOL_SOCKET = 1
 const m_SO_RCVTIMEO = 20
 const m_SO_RCVTIMEO_OLD = 20
@@ -122206,8 +122488,6 @@ func x_if_freenameindex(tls *TLS, idx uintptr) {
 	x_free(tls, idx)
 }
 
-const m_ENODEV = 19
-const m_ENXIO = 6
 const m_SIOCGIFNAME = 35088
 
 func x_if_indextoname(tls *TLS, index uint32, name uintptr) (r1 uintptr) {
@@ -122222,7 +122502,7 @@ func x_if_indextoname(tls *TLS, index uint32, name uintptr) (r1 uintptr) {
 	}
 	*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tifreq)(unsafe.Pointer(bp))).Fifr_ifru)))) = int32(index)
 	r = x_ioctl(tls, fd, int32(m_SIOCGIFNAME), VaList(bp+48, bp))
-	___syscall1(tls, int64(3), int64(fd))
+	___syscall1(tls, int64(m_SYS_close), int64(fd))
 	if r < 0 {
 		if *(*int32)(unsafe.Pointer(x___errno_location(tls))) == int32(m_ENODEV) {
 			*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_ENXIO)
@@ -122231,8 +122511,6 @@ func x_if_indextoname(tls *TLS, index uint32, name uintptr) (r1 uintptr) {
 	}
 	return x_strncpy(tls, name, uintptr(unsafe.Pointer(&(*(*Tifreq)(unsafe.Pointer(bp))).Fifr_ifrn.Fifrn_name)), uint64(m_IF_NAMESIZE))
 }
-
-const m_ENOBUFS = 105
 
 type Tifnamemap = struct {
 	Fhash_next   uint32
@@ -122377,7 +122655,7 @@ func x_if_nametoindex(tls *TLS, name uintptr) (r1 uint32) {
 	}
 	x_strncpy(tls, uintptr(unsafe.Pointer(&(*(*Tifreq)(unsafe.Pointer(bp))).Fifr_ifrn.Fifrn_name)), name, uint64(16))
 	r = x_ioctl(tls, fd, int32(m_SIOCGIFINDEX), VaList(bp+48, bp))
-	___syscall1(tls, int64(3), int64(fd))
+	___syscall1(tls, int64(m_SYS_close), int64(fd))
 	if r < 0 {
 		v2 = 0
 	} else {
@@ -123754,7 +124032,7 @@ func x___rtnetlink_enumerate(tls *TLS, link_af int32, addr_af int32, cb uintptr,
 	if !(r != 0) {
 		r = ___netlink_enumerate(tls, fd, uint32(2), int32(m_RTM_GETADDR), addr_af, cb, ctx)
 	}
-	___syscall1(tls, int64(3), int64(fd))
+	___syscall1(tls, int64(m_SYS_close), int64(fd))
 	return r
 }
 
@@ -123766,7 +124044,6 @@ func x_getnetbyname(tls *TLS, name uintptr) (r uintptr) {
 	return uintptr(0)
 }
 
-const m_EMSGSIZE = 90
 const m_NS_INT16SZ = 2
 const m_NS_INT32SZ = 4
 
@@ -124095,6 +124372,8 @@ _9:
 	return x___syscall_ret(tls, uint64(v8))
 }
 
+const m_SYS_recvmmsg = 299
+
 func x_recvmmsg(tls *TLS, fd int32, msgvec uintptr, vlen uint32, flags uint32, timeout uintptr) (r int32) {
 	var i uint32
 	var mh uintptr
@@ -124109,7 +124388,7 @@ func x_recvmmsg(tls *TLS, fd int32, msgvec uintptr, vlen uint32, flags uint32, t
 		i--
 		mh += 64
 	}
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(299), int64(fd), int64(msgvec), int64(vlen), int64(flags), int64(timeout), 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_recvmmsg), int64(fd), int64(msgvec), int64(vlen), int64(flags), int64(timeout), 0))))
 }
 
 const m_MSG_CTRUNC = 8
@@ -124333,7 +124612,7 @@ func _cleanup1(tls *TLS, p uintptr) {
 	i = 0
 	for ; (*(*Tpollfd)(unsafe.Pointer(pfd + uintptr(i)*8))).Ffd >= -int32(1); i++ {
 		if (*(*Tpollfd)(unsafe.Pointer(pfd + uintptr(i)*8))).Ffd >= 0 {
-			___syscall1(tls, int64(3), int64((*(*Tpollfd)(unsafe.Pointer(pfd + uintptr(i)*8))).Ffd))
+			___syscall1(tls, int64(m_SYS_close), int64((*(*Tpollfd)(unsafe.Pointer(pfd + uintptr(i)*8))).Ffd))
 		}
 	}
 }
@@ -124632,7 +124911,7 @@ func x___res_msend_rc(tls *TLS, nqueries int32, queries uintptr, qlens uintptr, 
 			/* Only accept positive or negative responses;
 			 * retry immediately on server failure, and ignore
 			 * all other codes such as refusal. */
-			switch int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(answers + uintptr(next)*8)) + 3))) & int32(15) {
+			switch int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(answers + uintptr(next)*8)) + 3))) & Int32FromInt32(15) {
 			case 0:
 				fallthrough
 			case int32(3):
@@ -124745,7 +125024,7 @@ func x___res_msend_rc(tls *TLS, nqueries int32, queries uintptr, qlens uintptr, 
 				 * Immediately close TCP socket so as not to consume
 				 * resources we no longer need. */
 				*(*int32)(unsafe.Pointer(alens + uintptr(i)*4)) = alen
-				___syscall1(tls, int64(3), int64((*(*Tpollfd)(unsafe.Add(unsafe.Pointer(pfd), i*8))).Ffd))
+				___syscall1(tls, int64(m_SYS_close), int64((*(*Tpollfd)(unsafe.Add(unsafe.Pointer(pfd), i*8))).Ffd))
 				(*(*Tpollfd)(unsafe.Add(unsafe.Pointer(pfd), i*8))).Ffd = -int32(1)
 			}
 		}
@@ -125327,7 +125606,6 @@ func x_sockatmark(tls *TLS, s int32) (r int32) {
 	return *(*int32)(unsafe.Pointer(bp))
 }
 
-const m_EPROTONOSUPPORT = 93
 const m_SYS_socket = 41
 const m___SC_socket = 1
 
@@ -125359,7 +125637,7 @@ _9:
 		v10 = int32(m_SYS_socket)
 		_ = int32(m___SC_socket)
 		v11 = int64(domain)
-		v12 = int64(type1 & ^(Int32FromInt32(02000000) | Int32FromInt32(04000)))
+		v12 = int64(type1 & ^(Int32FromInt32(m_SOCK_CLOEXEC) | Int32FromInt32(m_SOCK_NONBLOCK)))
 		v13 = int64(protocol)
 		v14 = int64(Int32FromInt32(0))
 		v15 = int64(Int32FromInt32(0))
@@ -125381,10 +125659,10 @@ _9:
 			return int32(x___syscall_ret(tls, uint64(s)))
 		}
 		if type1&int32(m_SOCK_CLOEXEC) != 0 {
-			___syscall3(tls, int64(72), int64(s), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(s), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 		}
 		if type1&int32(m_SOCK_NONBLOCK) != 0 {
-			___syscall3(tls, int64(72), int64(s), int64(Int32FromInt32(4)), int64(Int32FromInt32(04000)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(s), int64(Int32FromInt32(m_F_SETFL)), int64(Int32FromInt32(m_O_NONBLOCK)))
 		}
 	}
 	return int32(x___syscall_ret(tls, uint64(s)))
@@ -125421,7 +125699,7 @@ _9:
 		v10 = int32(m_SYS_socketpair)
 		_ = int32(m___SC_socketpair)
 		v11 = int64(domain)
-		v12 = int64(type1 & ^(Int32FromInt32(02000000) | Int32FromInt32(04000)))
+		v12 = int64(type1 & ^(Int32FromInt32(m_SOCK_CLOEXEC) | Int32FromInt32(m_SOCK_NONBLOCK)))
 		v13 = int64(protocol)
 		v14 = int64(fd)
 		v15 = int64(Int32FromInt32(0))
@@ -125443,12 +125721,12 @@ _9:
 			return r1
 		}
 		if type1&int32(m_SOCK_CLOEXEC) != 0 {
-			___syscall3(tls, int64(72), int64(*(*int32)(unsafe.Pointer(fd))), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
-			___syscall3(tls, int64(72), int64(*(*int32)(unsafe.Pointer(fd + 1*4))), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(*(*int32)(unsafe.Pointer(fd))), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(*(*int32)(unsafe.Pointer(fd + 1*4))), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 		}
 		if type1&int32(m_SOCK_NONBLOCK) != 0 {
-			___syscall3(tls, int64(72), int64(*(*int32)(unsafe.Pointer(fd))), int64(Int32FromInt32(4)), int64(Int32FromInt32(04000)))
-			___syscall3(tls, int64(72), int64(*(*int32)(unsafe.Pointer(fd + 1*4))), int64(Int32FromInt32(4)), int64(Int32FromInt32(04000)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(*(*int32)(unsafe.Pointer(fd))), int64(Int32FromInt32(m_F_SETFL)), int64(Int32FromInt32(m_O_NONBLOCK)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(*(*int32)(unsafe.Pointer(fd + 1*4))), int64(Int32FromInt32(m_F_SETFL)), int64(Int32FromInt32(m_O_NONBLOCK)))
 		}
 	}
 	return r1
@@ -125526,6 +125804,7 @@ const m_GRMEMCNT = 5
 const m_GRNAMELEN = 2
 const m_GRPASSWDLEN = 3
 const m_GR_LEN = 6
+const m_UINT32_MAX = 4294967295
 
 func _itoa1(tls *TLS, p uintptr, x uint32) (r uintptr) {
 	var v1, v2 uintptr
@@ -127137,6 +127416,9 @@ func x_srand48(tls *TLS, seed int64) {
 	x_seed48(tls, bp)
 }
 
+const m_SYS_fork = 57
+const m_SYS_gettid = 186
+
 func _dummy11(tls *TLS, x int32) {
 }
 
@@ -127148,10 +127430,10 @@ func x__Fork(tls *TLS) (r int32) {
 	var _ /* set at bp+0 */ Tsigset_t
 	x___block_all_sigs(tls, bp)
 	x___lock(tls, uintptr(unsafe.Pointer(&x___abort_lock)))
-	ret = int32(___syscall0(tls, int64(57)))
+	ret = int32(___syscall0(tls, int64(m_SYS_fork)))
 	if !(ret != 0) {
 		self = ___get_tp(tls)
-		(*T__pthread)(unsafe.Pointer(self)).Ftid = int32(___syscall0(tls, int64(186)))
+		(*T__pthread)(unsafe.Pointer(self)).Ftid = int32(___syscall0(tls, int64(m_SYS_gettid)))
 		(*T__pthread)(unsafe.Pointer(self)).Frobust_list.Foff = 0
 		(*T__pthread)(unsafe.Pointer(self)).Frobust_list.Fpending = uintptr(0)
 		v1 = self
@@ -127238,12 +127520,14 @@ func x_execlp(tls *TLS, file uintptr, argv0 uintptr, va uintptr) (r int32) {
 }
 
 func x_execv(tls *TLS, path uintptr, argv uintptr) (r int32) {
-	return x_execve(tls, path, argv, x___environ)
+	return x_execve(tls, path, argv, Xenviron)
 }
+
+const m_SYS_execve = 59
 
 func x_execve(tls *TLS, path uintptr, argv uintptr, envp uintptr) (r int32) {
 	/* do we need to use environ if envp is null? */
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(59), int64(path), int64(argv), int64(envp)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_execve), int64(path), int64(argv), int64(envp)))))
 }
 
 /* Support signed or unsigned plain-char */
@@ -127320,15 +127604,18 @@ func x___execvpe(tls *TLS, file uintptr, argv uintptr, envp uintptr) (r int32) {
 }
 
 func x_execvp(tls *TLS, file uintptr, argv uintptr) (r int32) {
-	return x___execvpe(tls, file, argv, x___environ)
+	return x___execvpe(tls, file, argv, Xenviron)
 }
+
+const m_AT_EMPTY_PATH = 4096
+const m_SYS_execveat = 322
 
 func x_fexecve(tls *TLS, fd int32, argv uintptr, envp uintptr) (r1 int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var r int32
 	var _ /* buf at bp+0 */ [27]int8
-	r = int32(___syscall5(tls, int64(322), int64(fd), int64(ts), int64(argv), int64(envp), int64(Int32FromInt32(0x1000))))
+	r = int32(___syscall5(tls, int64(m_SYS_execveat), int64(fd), int64(ts), int64(argv), int64(envp), int64(Int32FromInt32(m_AT_EMPTY_PATH))))
 	if r != -int32(m_ENOSYS) {
 		return int32(x___syscall_ret(tls, uint64(r)))
 	}
@@ -127374,6 +127661,17 @@ const m_POSIX_SPAWN_SETSID = 128
 const m_POSIX_SPAWN_SETSIGDEF = 4
 const m_POSIX_SPAWN_SETSIGMASK = 8
 const m_SIGCHLD = 17
+const m_SYS_chdir = 80
+const m_SYS_dup = 32
+const m_SYS_dup2 = 33
+const m_SYS_fchdir = 81
+const m_SYS_getgid = 104
+const m_SYS_getuid = 102
+const m_SYS_setgid = 106
+const m_SYS_setpgid = 109
+const m_SYS_setsid = 112
+const m_SYS_setuid = 105
+const m_SYS_write = 1
 
 type Tsched_param1 = struct {
 	Fsched_priority int32
@@ -127424,7 +127722,7 @@ type Targs1 = struct {
 }
 
 func ___sys_dup2(tls *TLS, old int32, new1 int32) (r int32) {
-	return int32(___syscall2(tls, int64(33), int64(old), int64(new1)))
+	return int32(___syscall2(tls, int64(m_SYS_dup2), int64(old), int64(new1)))
 }
 
 func _child(tls *TLS, args_vp uintptr) (r int32) {
@@ -127471,14 +127769,14 @@ func _child(tls *TLS, args_vp uintptr) (r int32) {
 		x___libc_sigaction(tls, i, bp+8, uintptr(0))
 	}
 	if (*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__flags&int32(m_POSIX_SPAWN_SETSID) != 0 {
-		v1 = int32(___syscall0(tls, int64(112)))
+		v1 = int32(___syscall0(tls, int64(m_SYS_setsid)))
 		*(*int32)(unsafe.Pointer(bp)) = v1
 		if v1 < 0 {
 			goto fail
 		}
 	}
 	if (*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__flags&int32(m_POSIX_SPAWN_SETPGROUP) != 0 {
-		v2 = int32(___syscall2(tls, int64(109), int64(Int32FromInt32(0)), int64((*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__pgrp)))
+		v2 = int32(___syscall2(tls, int64(m_SYS_setpgid), int64(Int32FromInt32(0)), int64((*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__pgrp)))
 		*(*int32)(unsafe.Pointer(bp)) = v2
 		if v2 != 0 {
 			goto fail
@@ -127488,10 +127786,10 @@ func _child(tls *TLS, args_vp uintptr) (r int32) {
 	 * to do a multi-threaded synchronized id-change, which would
 	 * trash the parent's state. */
 	if (*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__flags&int32(m_POSIX_SPAWN_RESETIDS) != 0 {
-		v3 = int32(___syscall1(tls, int64(106), ___syscall0(tls, int64(104))))
+		v3 = int32(___syscall1(tls, int64(m_SYS_setgid), ___syscall0(tls, int64(m_SYS_getgid))))
 		*(*int32)(unsafe.Pointer(bp)) = v3
 		if v5 = v3 != 0; !v5 {
-			v4 = int32(___syscall1(tls, int64(105), ___syscall0(tls, int64(102))))
+			v4 = int32(___syscall1(tls, int64(m_SYS_setuid), ___syscall0(tls, int64(m_SYS_getuid))))
 			*(*int32)(unsafe.Pointer(bp)) = v4
 		}
 		if v5 || v4 != 0 {
@@ -127510,16 +127808,16 @@ func _child(tls *TLS, args_vp uintptr) (r int32) {
 			 * parent. To avoid that, we dup the pipe onto
 			 * an unoccupied fd. */
 			if (*Tfdop)(unsafe.Pointer(op)).Ffd == p {
-				*(*int32)(unsafe.Pointer(bp)) = int32(___syscall1(tls, int64(32), int64(p)))
+				*(*int32)(unsafe.Pointer(bp)) = int32(___syscall1(tls, int64(m_SYS_dup), int64(p)))
 				if *(*int32)(unsafe.Pointer(bp)) < 0 {
 					goto fail
 				}
-				___syscall1(tls, int64(3), int64(p))
+				___syscall1(tls, int64(m_SYS_close), int64(p))
 				p = *(*int32)(unsafe.Pointer(bp))
 			}
 			switch (*Tfdop)(unsafe.Pointer(op)).Fcmd {
 			case int32(m_FDOP_CLOSE):
-				___syscall1(tls, int64(3), int64((*Tfdop)(unsafe.Pointer(op)).Ffd))
+				___syscall1(tls, int64(m_SYS_close), int64((*Tfdop)(unsafe.Pointer(op)).Ffd))
 			case int32(m_FDOP_DUP2):
 				fd = (*Tfdop)(unsafe.Pointer(op)).Fsrcfd
 				if fd == p {
@@ -127533,8 +127831,8 @@ func _child(tls *TLS, args_vp uintptr) (r int32) {
 						goto fail
 					}
 				} else {
-					*(*int32)(unsafe.Pointer(bp)) = int32(___syscall2(tls, int64(72), int64(fd), int64(Int32FromInt32(1))))
-					*(*int32)(unsafe.Pointer(bp)) = int32(___syscall3(tls, int64(72), int64(fd), int64(Int32FromInt32(2)), int64(*(*int32)(unsafe.Pointer(bp)) & ^Int32FromInt32(1))))
+					*(*int32)(unsafe.Pointer(bp)) = int32(___syscall2(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_GETFD))))
+					*(*int32)(unsafe.Pointer(bp)) = int32(___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_SETFD)), int64(*(*int32)(unsafe.Pointer(bp)) & ^Int32FromInt32(m_FD_CLOEXEC))))
 					if *(*int32)(unsafe.Pointer(bp)) < 0 {
 						goto fail
 					}
@@ -127552,15 +127850,15 @@ func _child(tls *TLS, args_vp uintptr) (r int32) {
 					if v10 < 0 {
 						goto fail
 					}
-					___syscall1(tls, int64(3), int64(fd))
+					___syscall1(tls, int64(m_SYS_close), int64(fd))
 				}
 			case int32(m_FDOP_CHDIR):
-				*(*int32)(unsafe.Pointer(bp)) = int32(___syscall1(tls, int64(80), int64(op+36)))
+				*(*int32)(unsafe.Pointer(bp)) = int32(___syscall1(tls, int64(m_SYS_chdir), int64(op+36)))
 				if *(*int32)(unsafe.Pointer(bp)) < 0 {
 					goto fail
 				}
 			case int32(m_FDOP_FCHDIR):
-				*(*int32)(unsafe.Pointer(bp)) = int32(___syscall1(tls, int64(81), int64((*Tfdop)(unsafe.Pointer(op)).Ffd)))
+				*(*int32)(unsafe.Pointer(bp)) = int32(___syscall1(tls, int64(m_SYS_fchdir), int64((*Tfdop)(unsafe.Pointer(op)).Ffd)))
 				if *(*int32)(unsafe.Pointer(bp)) < 0 {
 					goto fail
 				}
@@ -127575,7 +127873,7 @@ func _child(tls *TLS, args_vp uintptr) (r int32) {
 	 * to a different fd. We don't use F_DUPFD_CLOEXEC above because
 	 * it would fail on older kernels and atomicity is not needed --
 	 * in this process there are no threads or signal handlers. */
-	___syscall3(tls, int64(72), int64(p), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+	___syscall3(tls, int64(m_SYS_fcntl), int64(p), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 	if (*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__flags&int32(m_POSIX_SPAWN_SETSIGMASK) != 0 {
 		v11 = attr + 136
 	} else {
@@ -127594,7 +127892,7 @@ fail:
 	/* Since sizeof errno < PIPE_BUF, the write is atomic. */
 	*(*int32)(unsafe.Pointer(bp)) = -*(*int32)(unsafe.Pointer(bp))
 	if *(*int32)(unsafe.Pointer(bp)) != 0 {
-		for ___syscall3(tls, int64(1), int64(p), int64(bp), int64(Uint64FromInt64(4))) < 0 {
+		for ___syscall3(tls, int64(m_SYS_write), int64(p), int64(bp), int64(Uint64FromInt64(4))) < 0 {
 		}
 	}
 	x__exit(tls, int32(127))
@@ -127911,7 +128209,7 @@ func x_system(tls *TLS, cmd uintptr) (r int32) {
 		2: cmd,
 		3: uintptr(0),
 	}
-	ret = x_posix_spawn(tls, bp+32, ts+1294, uintptr(0), bp+760, bp, x___environ)
+	ret = x_posix_spawn(tls, bp+32, ts+1294, uintptr(0), bp+760, bp, Xenviron)
 	x_posix_spawnattr_destroy(tls, bp+760)
 	if !(ret != 0) {
 		for x_waitpid(tls, *(*int32)(unsafe.Pointer(bp + 32)), bp+752, 0) < 0 && *(*int32)(unsafe.Pointer(x___errno_location(tls))) == int32(m_EINTR) {
@@ -127930,12 +128228,14 @@ func x_wait(tls *TLS, status uintptr) (r int32) {
 	return x_waitpid(tls, -Int32FromInt32(1), status, 0)
 }
 
+const m_SYS_waitid = 247
+
 func x_waitid(tls *TLS, type1 int32, id uint32, info uintptr, options int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(247), int64(type1), int64(id), int64(info), int64(options), int64(Int32FromInt32(0)), 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_waitid), int64(type1), int64(id), int64(info), int64(options), int64(Int32FromInt32(0)), 0))))
 }
 
 func x_waitpid(tls *TLS, pid int32, status uintptr, options int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(61), int64(pid), int64(status), int64(options), int64(Int32FromInt32(0)), 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_wait4), int64(pid), int64(status), int64(options), int64(Int32FromInt32(0)), 0, 0))))
 }
 
 const m_END = 0
@@ -128828,6 +129128,7 @@ const m_ASSERT_AT_WB_NEG = 128
 const m_ASSERT_BACKREF = 256
 const m_ASSERT_CHAR_CLASS = 4
 const m_ASSERT_CHAR_CLASS_NEG = 8
+const m_ASSERT_LAST = 256
 const m_CHARCLASS_NAME_MAX = 14
 const m_COPY_MAXIMIZE_FIRST_TAG = 2
 const m_COPY_REMOVE_TAGS = 1
@@ -128843,14 +129144,13 @@ const m_REG_EESCAPE = 5
 const m_REG_EPAREN = 8
 const m_REG_ERANGE = 11
 const m_REG_ESPACE = 12
+const m_REG_ESUBREG = 6
 const m_REG_EXTENDED = 1
 const m_REG_ICASE = 2
 const m_REG_NEWLINE = 4
 const m_REG_NOSUB = 8
 const m_REG_OK = 0
 const m_TRE_CHAR_MAX = 1114111
-const m_tre_mem_alloc_impl = 0
-const m_tre_mem_new_impl = 0
 
 type Tregoff_t = int64
 
@@ -131216,7 +131516,7 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 					}
 				}
 			case int64(-int32(2)):
-				if v1 = (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_max >= int64(1) || (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_max <= int64(256); !v1 {
+				if v1 = (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_max >= int64(1) || (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_max <= int64(m_ASSERT_LAST); !v1 {
 					x___assert_fail(tls, ts+2006, ts+1817, int32(2180), uintptr(unsafe.Pointer(&___func__4)))
 				}
 				_ = v1 || Int32FromInt32(0) != 0
@@ -131591,7 +131891,7 @@ func _tre_make_trans(tls *TLS, p1 uintptr, p2 uintptr, transitions uintptr, coun
 				}
 				(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fassertions = (*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fassertions | (*Ttre_pos_and_tags_t)(unsafe.Pointer(p2)).Fassertions | v1 | v2
 				if (*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fbackref >= 0 {
-					if v3 = (*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fassertions&int32(4) == 0; !v3 {
+					if v3 = (*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fassertions&int32(m_ASSERT_CHAR_CLASS) == 0; !v3 {
 						x___assert_fail(tls, ts+2098, ts+1817, int32(2530), uintptr(unsafe.Pointer(&___func__6)))
 					}
 					_ = v3 || Int32FromInt32(0) != 0
@@ -131794,7 +132094,7 @@ func x_regcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 	tree = (*(*Ttre_parse_ctx_t)(unsafe.Pointer(bp))).Fn
 	/* Referring to nonexistent subexpressions is illegal. */
 	if (*(*Ttre_parse_ctx_t)(unsafe.Pointer(bp))).Fmax_backref > int32((*Tregex_t)(unsafe.Pointer(preg)).Fre_nsub) {
-		errcode = int32(6)
+		errcode = int32(m_REG_ESUBREG)
 		if int32(1) != 0 {
 			goto error_exit
 		}
@@ -131802,7 +132102,7 @@ func x_regcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 	/* Allocate the TNFA struct. */
 	tnfa = x_calloc(tls, uint64(1), uint64(104))
 	if tnfa == UintptrFromInt32(0) {
-		errcode = int32(12)
+		errcode = int32(m_REG_ESPACE)
 		if int32(1) != 0 {
 			goto error_exit
 		}
@@ -131824,7 +132124,7 @@ func x_regcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 		if (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags > 0 {
 			tag_directions = _default_malloc(tls, uint64(4)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags+Int32FromInt32(1)))
 			if tag_directions == UintptrFromInt32(0) {
-				errcode = int32(12)
+				errcode = int32(m_REG_ESPACE)
 				if int32(1) != 0 {
 					goto error_exit
 				}
@@ -131834,14 +132134,14 @@ func x_regcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 		}
 		(*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fminimal_tags = x_calloc(tls, uint64(uint32((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags)*uint32(2)+uint32(1)), uint64(4))
 		if (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fminimal_tags == UintptrFromInt32(0) {
-			errcode = int32(12)
+			errcode = int32(m_REG_ESPACE)
 			if int32(1) != 0 {
 				goto error_exit
 			}
 		}
 		submatch_data = x_calloc(tls, uint64(uint32((*(*Ttre_parse_ctx_t)(unsafe.Pointer(bp))).Fsubmatch_id)), uint64(16))
 		if submatch_data == UintptrFromInt32(0) {
-			errcode = int32(12)
+			errcode = int32(m_REG_ESPACE)
 			if int32(1) != 0 {
 				goto error_exit
 			}
@@ -131873,14 +132173,14 @@ func x_regcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 	*(*int32)(unsafe.Pointer(v2))++
 	tmp_ast_r = _tre_ast_new_literal(tls, mem, 0, 0, v1)
 	if tmp_ast_r == UintptrFromInt32(0) {
-		errcode = int32(12)
+		errcode = int32(m_REG_ESPACE)
 		if int32(1) != 0 {
 			goto error_exit
 		}
 	}
 	tree = _tre_ast_new_catenation(tls, mem, tmp_ast_l, tmp_ast_r)
 	if tree == UintptrFromInt32(0) {
-		errcode = int32(12)
+		errcode = int32(m_REG_ESPACE)
 		if int32(1) != 0 {
 			goto error_exit
 		}
@@ -131894,14 +132194,14 @@ func x_regcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 	}
 	counts = _default_malloc(tls, uint64(4)*uint64((*(*Ttre_parse_ctx_t)(unsafe.Pointer(bp))).Fposition))
 	if counts == UintptrFromInt32(0) {
-		errcode = int32(12)
+		errcode = int32(m_REG_ESPACE)
 		if int32(1) != 0 {
 			goto error_exit
 		}
 	}
 	offs = _default_malloc(tls, uint64(4)*uint64((*(*Ttre_parse_ctx_t)(unsafe.Pointer(bp))).Fposition))
 	if offs == UintptrFromInt32(0) {
-		errcode = int32(12)
+		errcode = int32(m_REG_ESPACE)
 		if int32(1) != 0 {
 			goto error_exit
 		}
@@ -131918,7 +132218,7 @@ func x_regcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 	}
 	transitions = x_calloc(tls, uint64(uint32(add)+uint32(1)), uint64(56))
 	if transitions == UintptrFromInt32(0) {
-		errcode = int32(12)
+		errcode = int32(m_REG_ESPACE)
 		if int32(1) != 0 {
 			goto error_exit
 		}
@@ -131941,7 +132241,7 @@ func x_regcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 	}
 	initial = x_calloc(tls, uint64(uint32(i)+uint32(1)), uint64(56))
 	if initial == UintptrFromInt32(0) {
-		errcode = int32(12)
+		errcode = int32(m_REG_ESPACE)
 		if int32(1) != 0 {
 			goto error_exit
 		}
@@ -131959,7 +132259,7 @@ func x_regcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 			}
 			(*(*Ttre_tnfa_transition_t)(unsafe.Pointer(initial + uintptr(i)*56))).Ftags = _default_malloc(tls, uint64(4)*uint64(j+Int32FromInt32(1)))
 			if !((*(*Ttre_tnfa_transition_t)(unsafe.Pointer(initial + uintptr(i)*56))).Ftags != 0) {
-				errcode = int32(12)
+				errcode = int32(m_REG_ESPACE)
 				if int32(1) != 0 {
 					goto error_exit
 				}
@@ -132073,7 +132373,6 @@ func x_regerror(tls *TLS, e int32, preg uintptr, buf uintptr, size uint64) (r ui
 const m_REG_NOMATCH = 1
 const m_REG_NOTBOL = 1
 const m_REG_NOTEOL = 2
-const m_tre_bt_mem_destroy = 0
 
 /***********************************************************************
  from tre-match-utils.h
@@ -133081,17 +133380,19 @@ func x___tre_mem_alloc_impl(tls *TLS, mem uintptr, provided int32, provided_bloc
 	return ptr
 }
 
+const m_SYS_sched_setaffinity = 203
+
 func x_sched_setaffinity(tls *TLS, tid int32, size uint64, set uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(203), int64(tid), int64(size), int64(set)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_sched_setaffinity), int64(tid), int64(size), int64(set)))))
 }
 
 func x_pthread_setaffinity_np(tls *TLS, td uintptr, size uint64, set uintptr) (r int32) {
-	return int32(-___syscall3(tls, int64(203), int64((*T__pthread)(unsafe.Pointer(td)).Ftid), int64(size), int64(set)))
+	return int32(-___syscall3(tls, int64(m_SYS_sched_setaffinity), int64((*T__pthread)(unsafe.Pointer(td)).Ftid), int64(size), int64(set)))
 }
 
 func _do_getaffinity(tls *TLS, tid int32, size uint64, set uintptr) (r int32) {
 	var ret int64
-	ret = ___syscall3(tls, int64(204), int64(tid), int64(size), int64(set))
+	ret = ___syscall3(tls, int64(m_SYS_sched_getaffinity), int64(tid), int64(size), int64(set))
 	if ret < 0 {
 		return int32(ret)
 	}
@@ -133124,14 +133425,18 @@ func x___sched_cpucount(tls *TLS, size uint64, set uintptr) (r int32) {
 	return int32(cnt)
 }
 
+const m_SYS_sched_get_priority_max = 146
+const m_SYS_sched_get_priority_min = 147
+
 func x_sched_get_priority_max(tls *TLS, policy int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(146), int64(policy)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_sched_get_priority_max), int64(policy)))))
 }
 
 func x_sched_get_priority_min(tls *TLS, policy int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(147), int64(policy)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_sched_get_priority_min), int64(policy)))))
 }
 
+const m_SYS_getcpu = 309
 const m_VDSO_GETCPU_SYM = "__vdso_getcpu"
 const m_VDSO_GETCPU_VER = "LINUX_2.6"
 
@@ -133174,7 +133479,7 @@ func x_sched_getcpu(tls *TLS) (r1 int32) {
 			return int32(x___syscall_ret(tls, uint64(r)))
 		}
 	}
-	r = int32(___syscall3(tls, int64(309), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(0))))
+	r = int32(___syscall3(tls, int64(m_SYS_getcpu), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(0))))
 	if !(r != 0) {
 		return int32(*(*uint32)(unsafe.Pointer(bp)))
 	}
@@ -133189,10 +133494,12 @@ func x_sched_getscheduler(tls *TLS, pid int32) (r int32) {
 	return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOSYS))))
 }
 
+const m_SYS_sched_rr_get_interval = 148
+
 func x_sched_rr_get_interval(tls *TLS, pid int32, ts uintptr) (r int32) {
 	/* If reaching this point, it's a 64-bit arch or time64-only
 	 * 32-bit arch and we can get result directly into timespec. */
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(148), int64(pid), int64(ts)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_sched_rr_get_interval), int64(pid), int64(ts)))))
 }
 
 func x_sched_setparam(tls *TLS, pid int32, param uintptr) (r int32) {
@@ -133203,8 +133510,10 @@ func x_sched_setscheduler(tls *TLS, pid int32, sched int32, param uintptr) (r in
 	return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOSYS))))
 }
 
+const m_SYS_sched_yield = 24
+
 func x_sched_yield(tls *TLS) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(24)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(m_SYS_sched_yield)))))
 }
 
 const m_MINSIZE = 8
@@ -133713,8 +134022,10 @@ func x_twalk(tls *TLS, root uintptr, action uintptr) {
 }
 
 func x_poll(tls *TLS, fds uintptr, n uint64, timeout int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(7), int64(fds), int64(n), int64(timeout), 0, 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_poll), int64(fds), int64(n), int64(timeout), 0, 0, 0))))
 }
+
+const m_SYS_pselect6 = 270
 
 func x_pselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, ts uintptr, mask uintptr) (r int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
@@ -133747,8 +134058,10 @@ func x_pselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, ts u
 	} else {
 		v3 = uintptr(0)
 	}
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(270), int64(n), int64(rfds), int64(wfds), int64(efds), int64(v3), int64(bp+16)))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_pselect6), int64(n), int64(rfds), int64(wfds), int64(efds), int64(v3), int64(bp+16)))))
 }
+
+const m_SYS_select = 23
 
 func x_select(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, tv uintptr) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
@@ -133790,7 +134103,7 @@ func x_select(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, tv ui
 	} else {
 		v3 = uintptr(0)
 	}
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(23), int64(n), int64(rfds), int64(wfds), int64(efds), int64(v3), 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_select), int64(n), int64(rfds), int64(wfds), int64(efds), int64(v3), 0))))
 }
 
 var _all_mask = [1]uint64{
@@ -133802,16 +134115,18 @@ var _app_mask = [1]uint64{
 }
 
 func x___block_all_sigs(tls *TLS, set uintptr) {
-	___syscall4(tls, int64(14), int64(Int32FromInt32(0)), int64(uintptr(unsafe.Pointer(&_all_mask))), int64(set), int64(Int32FromInt32(65)/Int32FromInt32(8)))
+	___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_BLOCK)), int64(uintptr(unsafe.Pointer(&_all_mask))), int64(set), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 }
 
 func x___block_app_sigs(tls *TLS, set uintptr) {
-	___syscall4(tls, int64(14), int64(Int32FromInt32(0)), int64(uintptr(unsafe.Pointer(&_app_mask))), int64(set), int64(Int32FromInt32(65)/Int32FromInt32(8)))
+	___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_BLOCK)), int64(uintptr(unsafe.Pointer(&_app_mask))), int64(set), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 }
 
 func x___restore_sigs(tls *TLS, set uintptr) {
-	___syscall4(tls, int64(14), int64(Int32FromInt32(2)), int64(set), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
+	___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_SETMASK)), int64(set), int64(Int32FromInt32(0)), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 }
+
+const m_SYS_getitimer = 36
 
 func x_getitimer(tls *TLS, which int32, old uintptr) (r1 int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
@@ -133819,7 +134134,7 @@ func x_getitimer(tls *TLS, which int32, old uintptr) (r1 int32) {
 	var r int32
 	var _ /* old32 at bp+0 */ [4]int64
 	if uint64(8) > uint64(8) {
-		r = int32(___syscall2(tls, int64(36), int64(which), int64(bp)))
+		r = int32(___syscall2(tls, int64(m_SYS_getitimer), int64(which), int64(bp)))
 		if !(r != 0) {
 			(*Titimerval)(unsafe.Pointer(old)).Fit_interval.Ftv_sec = (*(*[4]int64)(unsafe.Pointer(bp)))[0]
 			(*Titimerval)(unsafe.Pointer(old)).Fit_interval.Ftv_usec = (*(*[4]int64)(unsafe.Pointer(bp)))[int32(1)]
@@ -133828,11 +134143,11 @@ func x_getitimer(tls *TLS, which int32, old uintptr) (r1 int32) {
 		}
 		return int32(x___syscall_ret(tls, uint64(r)))
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(36), int64(which), int64(old)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_getitimer), int64(which), int64(old)))))
 }
 
 func x_kill(tls *TLS, pid int32, sig int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(62), int64(pid), int64(sig)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_kill), int64(pid), int64(sig)))))
 }
 
 func x_killpg(tls *TLS, pgid int32, sig int32) (r int32) {
@@ -133893,10 +134208,12 @@ func x_raise(tls *TLS, sig int32) (r int32) {
 	var ret int32
 	var _ /* set at bp+0 */ Tsigset_t
 	x___block_app_sigs(tls, bp)
-	ret = int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(200), int64((*T__pthread)(unsafe.Pointer(___get_tp(tls))).Ftid), int64(sig)))))
+	ret = int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_tkill), int64((*T__pthread)(unsafe.Pointer(___get_tp(tls))).Ftid), int64(sig)))))
 	x___restore_sigs(tls, bp)
 	return ret
 }
+
+const m_SYS_setitimer = 38
 
 func x_setitimer(tls *TLS, which int32, new1 uintptr, old uintptr) (r1 int32) {
 	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
@@ -133918,7 +134235,7 @@ func x_setitimer(tls *TLS, which int32, new1 uintptr, old uintptr) (r1 int32) {
 			2: vs,
 			3: vus,
 		}
-		r = int32(___syscall3(tls, int64(38), int64(which), int64(bp), int64(bp+32)))
+		r = int32(___syscall3(tls, int64(m_SYS_setitimer), int64(which), int64(bp), int64(bp+32)))
 		if !(r != 0) && old != 0 {
 			(*Titimerval)(unsafe.Pointer(old)).Fit_interval.Ftv_sec = (*(*[4]int64)(unsafe.Pointer(bp + 32)))[0]
 			(*Titimerval)(unsafe.Pointer(old)).Fit_interval.Ftv_usec = (*(*[4]int64)(unsafe.Pointer(bp + 32)))[int32(1)]
@@ -133927,7 +134244,7 @@ func x_setitimer(tls *TLS, which int32, new1 uintptr, old uintptr) (r1 int32) {
 		}
 		return int32(x___syscall_ret(tls, uint64(r)))
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(38), int64(which), int64(new1), int64(old)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_setitimer), int64(which), int64(new1), int64(old)))))
 }
 
 const m_SA_RESTORER = 67108864
@@ -133969,7 +134286,7 @@ func x___libc_sigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r1 int32)
 				*(*[1]uint64)(unsafe.Pointer(bp)) = [1]uint64{
 					0: Uint64FromUint64(3) << (Int32FromInt32(32) * BoolInt32(Uint64FromInt64(8) > Uint64FromInt32(4))),
 				}
-				___syscall4(tls, int64(14), int64(Int32FromInt32(1)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
+				___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_UNBLOCK)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 				_unmask_done = int32(1)
 			}
 			if !((*Tsigaction)(unsafe.Pointer(sa)).Fsa_flags&Int32FromInt32(m_SA_RESTART) != 0) {
@@ -133997,7 +134314,7 @@ func x___libc_sigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r1 int32)
 	} else {
 		v5 = uintptr(0)
 	}
-	r = int32(___syscall4(tls, int64(13), int64(sig), int64(v4), int64(v5), int64(Int32FromInt32(65)/Int32FromInt32(8))))
+	r = int32(___syscall4(tls, int64(m_SYS_rt_sigaction), int64(sig), int64(v4), int64(v5), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8))))
 	if old != 0 && !(r != 0) {
 		*(*uintptr)(unsafe.Pointer(old)) = (*(*Tk_sigaction)(unsafe.Pointer(bp + 40))).Fhandler
 		(*Tsigaction)(unsafe.Pointer(old)).Fsa_flags = int32((*(*Tk_sigaction)(unsafe.Pointer(bp + 40))).Fflags)
@@ -134043,6 +134360,7 @@ func x_sigaddset(tls *TLS, set uintptr, sig int32) (r int32) {
 
 const m_SS_DISABLE = 2
 const m_SS_ONSTACK = 1
+const m_SYS_sigaltstack = 131
 
 func x_sigaltstack(tls *TLS, ss uintptr, old uintptr) (r int32) {
 	if ss != 0 {
@@ -134055,7 +134373,7 @@ func x_sigaltstack(tls *TLS, ss uintptr, old uintptr) (r int32) {
 			return -int32(1)
 		}
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(131), int64(ss), int64(old)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_sigaltstack), int64(ss), int64(old)))))
 }
 
 func x_sigandset(tls *TLS, dest uintptr, left uintptr, right uintptr) (r1 int32) {
@@ -134208,8 +134526,10 @@ func x_sigpause(tls *TLS, sig int32) (r int32) {
 	return x_sigsuspend(tls, bp)
 }
 
+const m_SYS_rt_sigpending = 127
+
 func x_sigpending(tls *TLS, set uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(127), int64(set), int64(Int32FromInt32(65)/Int32FromInt32(8))))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_rt_sigpending), int64(set), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8))))))
 }
 
 func x_sigprocmask(tls *TLS, how int32, set uintptr, old uintptr) (r1 int32) {
@@ -134235,12 +134555,10 @@ func x_sigqueue(tls *TLS, pid int32, sig int32, value Tsigval) (r1 int32) {
 	*(*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsiginfo_t)(unsafe.Pointer(bp))).F__si_fields)) + 4)) = x_getuid(tls)
 	x___block_app_sigs(tls, bp+128)
 	*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsiginfo_t)(unsafe.Pointer(bp))).F__si_fields)))) = x_getpid(tls)
-	r = int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(129), int64(pid), int64(sig), int64(bp)))))
+	r = int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_rt_sigqueueinfo), int64(pid), int64(sig), int64(bp)))))
 	x___restore_sigs(tls, bp+128)
 	return r
 }
-
-const m_SIG_UNBLOCK = 1
 
 func x_sigrelse(tls *TLS, sig int32) (r int32) {
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
@@ -134312,16 +134630,20 @@ func x___sigsetjmp_tail(tls *TLS, jb uintptr, ret int32) (r int32) {
 	} else {
 		v2 = p
 	}
-	___syscall4(tls, int64(14), int64(Int32FromInt32(2)), int64(v1), int64(v2), int64(Int32FromInt32(65)/Int32FromInt32(8)))
+	___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_SETMASK)), int64(v1), int64(v2), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 	return ret
 }
 
+const m_SYS_rt_sigsuspend = 130
+
 func x_sigsuspend(tls *TLS, mask uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(130), int64(mask), int64(Int32FromInt32(65)/Int32FromInt32(8)), 0, 0, 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_rt_sigsuspend), int64(mask), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)), 0, 0, 0, 0))))
 }
 
+const m_SYS_rt_sigtimedwait = 128
+
 func _do_sigtimedwait(tls *TLS, mask uintptr, si uintptr, ts uintptr) (r int32) {
-	return int32(x___syscall_cp(tls, int64(128), int64(mask), int64(si), int64(ts), int64(Int32FromInt32(65)/Int32FromInt32(8)), 0, 0))
+	return int32(x___syscall_cp(tls, int64(m_SYS_rt_sigtimedwait), int64(mask), int64(si), int64(ts), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)), 0, 0))
 }
 
 func x_sigtimedwait(tls *TLS, mask uintptr, si uintptr, timeout uintptr) (r int32) {
@@ -134371,22 +134693,28 @@ func x___xmknodat(tls *TLS, ver int32, fd int32, path uintptr, mode uint32, dev 
 	return x_mknodat(tls, fd, path, mode, *(*uint64)(unsafe.Pointer(dev)))
 }
 
+const m_SYS_chmod = 90
+
 func x_chmod(tls *TLS, path uintptr, mode uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(90), int64(path), int64(mode)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_chmod), int64(path), int64(mode)))))
 }
+
+const m_SYS_fchmod = 91
 
 func x_fchmod(tls *TLS, fd int32, mode uint32) (r int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ret int32
 	var _ /* buf at bp+0 */ [27]int8
-	ret = int32(___syscall2(tls, int64(91), int64(fd), int64(mode)))
-	if ret != -int32(m_EBADF) || ___syscall2(tls, int64(72), int64(fd), int64(Int32FromInt32(1))) < 0 {
+	ret = int32(___syscall2(tls, int64(m_SYS_fchmod), int64(fd), int64(mode)))
+	if ret != -int32(m_EBADF) || ___syscall2(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_GETFD))) < 0 {
 		return int32(x___syscall_ret(tls, uint64(ret)))
 	}
 	x___procfdname(tls, bp, uint32(fd))
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(90), int64(bp), int64(mode)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_chmod), int64(bp), int64(mode)))))
 }
+
+const m_SYS_fchmodat = 268
 
 func x_fchmodat(tls *TLS, fd int32, path uintptr, mode uint32, flag int32) (r int32) {
 	bp := tls.Alloc(176) /* tlsAllocs 176 maxVaListSize 0 */
@@ -134395,7 +134723,7 @@ func x_fchmodat(tls *TLS, fd int32, path uintptr, mode uint32, flag int32) (r in
 	var _ /* proc at bp+144 */ [27]int8
 	var _ /* st at bp+0 */ Tstat
 	if !(flag != 0) {
-		return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(268), int64(fd), int64(path), int64(mode), int64(flag)))))
+		return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_fchmodat), int64(fd), int64(path), int64(mode), int64(flag)))))
 	}
 	if flag != int32(m_AT_SYMLINK_NOFOLLOW) {
 		return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EINVAL))))
@@ -134406,7 +134734,7 @@ func x_fchmodat(tls *TLS, fd int32, path uintptr, mode uint32, flag int32) (r in
 	if (*(*Tstat)(unsafe.Pointer(bp))).Fst_mode&uint32(m_S_IFMT) == uint32(m_S_IFLNK) {
 		return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EOPNOTSUPP))))
 	}
-	v1 = int32(___syscall3(tls, int64(257), int64(fd), int64(path), int64(Int32FromInt32(00)|Int32FromInt32(010000000)|Int32FromInt32(0400000)|Int32FromInt32(0400)|Int32FromInt32(02000000))))
+	v1 = int32(___syscall3(tls, int64(m_SYS_openat), int64(fd), int64(path), int64(Int32FromInt32(m_O_RDONLY)|Int32FromInt32(m_O_PATH)|Int32FromInt32(m_O_NOFOLLOW)|Int32FromInt32(m_O_NOCTTY)|Int32FromInt32(m_O_CLOEXEC))))
 	fd2 = v1
 	if v1 < 0 {
 		if fd2 == -int32(m_ELOOP) {
@@ -134420,14 +134748,12 @@ func x_fchmodat(tls *TLS, fd int32, path uintptr, mode uint32, flag int32) (r in
 		if (*(*Tstat)(unsafe.Pointer(bp))).Fst_mode&uint32(m_S_IFMT) == uint32(m_S_IFLNK) {
 			ret = int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EOPNOTSUPP))))
 		} else {
-			ret = int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(268), int64(-Int32FromInt32(100)), int64(bp+144), int64(mode)))))
+			ret = int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_fchmodat), int64(-Int32FromInt32(100)), int64(bp+144), int64(mode)))))
 		}
 	}
-	___syscall1(tls, int64(3), int64(fd2))
+	___syscall1(tls, int64(m_SYS_close), int64(fd2))
 	return ret
 }
-
-const m_AT_EMPTY_PATH = 4096
 
 func x___fstat(tls *TLS, fd int32, st uintptr) (r int32) {
 	if fd < 0 {
@@ -134435,6 +134761,12 @@ func x___fstat(tls *TLS, fd int32, st uintptr) (r int32) {
 	}
 	return x___fstatat(tls, fd, ts, st, int32(m_AT_EMPTY_PATH))
 }
+
+const m_SYS_fstat = 5
+const m_SYS_lstat = 6
+const m_SYS_newfstatat = 262
+const m_SYS_stat = 4
+const m_SYS_statx = 332
 
 type Tstatx = struct {
 	Fstx_mask            uint32
@@ -134481,7 +134813,7 @@ func _fstatat_statx(tls *TLS, fd int32, path uintptr, st uintptr, flag int32) (r
 	defer tls.Free(256)
 	var ret int32
 	var _ /* stx at bp+0 */ Tstatx
-	ret = int32(___syscall5(tls, int64(332), int64(fd), int64(path), int64(flag), int64(Int32FromInt32(0x7ff)), int64(bp)))
+	ret = int32(___syscall5(tls, int64(m_SYS_statx), int64(fd), int64(path), int64(flag), int64(Int32FromInt32(0x7ff)), int64(bp)))
 	if ret != 0 {
 		return ret
 	}
@@ -134540,22 +134872,22 @@ func _fstatat_kstat(tls *TLS, fd int32, path uintptr, st uintptr, flag int32) (r
 	var _ /* buf at bp+144 */ [27]int8
 	var _ /* kst at bp+0 */ Tkstat
 	if flag == int32(m_AT_EMPTY_PATH) && fd >= 0 && !(*(*int8)(unsafe.Pointer(path)) != 0) {
-		ret = int32(___syscall2(tls, int64(5), int64(fd), int64(bp)))
-		if ret == -int32(m_EBADF) && ___syscall2(tls, int64(72), int64(fd), int64(Int32FromInt32(1))) >= 0 {
-			ret = int32(___syscall4(tls, int64(262), int64(fd), int64(path), int64(bp), int64(flag)))
+		ret = int32(___syscall2(tls, int64(m_SYS_fstat), int64(fd), int64(bp)))
+		if ret == -int32(m_EBADF) && ___syscall2(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_GETFD))) >= 0 {
+			ret = int32(___syscall4(tls, int64(m_SYS_newfstatat), int64(fd), int64(path), int64(bp), int64(flag)))
 			if ret == -int32(m_EINVAL) {
 				x___procfdname(tls, bp+144, uint32(fd))
-				ret = int32(___syscall2(tls, int64(4), int64(bp+144), int64(bp)))
+				ret = int32(___syscall2(tls, int64(m_SYS_stat), int64(bp+144), int64(bp)))
 			}
 		}
 	} else {
 		if (fd == -int32(100) || int32(*(*int8)(unsafe.Pointer(path))) == int32('/')) && flag == int32(m_AT_SYMLINK_NOFOLLOW) {
-			ret = int32(___syscall2(tls, int64(6), int64(path), int64(bp)))
+			ret = int32(___syscall2(tls, int64(m_SYS_lstat), int64(path), int64(bp)))
 		} else {
 			if (fd == -int32(100) || int32(*(*int8)(unsafe.Pointer(path))) == int32('/')) && !(flag != 0) {
-				ret = int32(___syscall2(tls, int64(4), int64(path), int64(bp)))
+				ret = int32(___syscall2(tls, int64(m_SYS_stat), int64(path), int64(bp)))
 			} else {
-				ret = int32(___syscall4(tls, int64(262), int64(fd), int64(path), int64(bp), int64(flag)))
+				ret = int32(___syscall4(tls, int64(m_SYS_newfstatat), int64(fd), int64(path), int64(bp), int64(flag)))
 			}
 		}
 	}
@@ -134636,12 +134968,16 @@ func x_lstat(tls *TLS, path uintptr, buf uintptr) (r int32) {
 	return x___fstatat(tls, -int32(100), path, buf, int32(m_AT_SYMLINK_NOFOLLOW))
 }
 
+const m_SYS_mkdir = 83
+
 func x_mkdir(tls *TLS, path uintptr, mode uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(83), int64(path), int64(mode)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_mkdir), int64(path), int64(mode)))))
 }
 
+const m_SYS_mkdirat = 258
+
 func x_mkdirat(tls *TLS, fd int32, path uintptr, mode uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(258), int64(fd), int64(path), int64(mode)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mkdirat), int64(fd), int64(path), int64(mode)))))
 }
 
 const m_S_IFIFO = 4096
@@ -134654,26 +134990,33 @@ func x_mkfifoat(tls *TLS, fd int32, path uintptr, mode uint32) (r int32) {
 	return x_mknodat(tls, fd, path, mode|uint32(m_S_IFIFO), uint64(0))
 }
 
+const m_SYS_mknod = 133
+
 func x_mknod(tls *TLS, path uintptr, mode uint32, dev uint64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(133), int64(path), int64(mode), int64(dev)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mknod), int64(path), int64(mode), int64(dev)))))
 }
 
+const m_SYS_mknodat = 259
+
 func x_mknodat(tls *TLS, fd int32, path uintptr, mode uint32, dev uint64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(259), int64(fd), int64(path), int64(mode), int64(dev)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_mknodat), int64(fd), int64(path), int64(mode), int64(dev)))))
 }
 
 func x_stat(tls *TLS, path uintptr, buf uintptr) (r int32) {
 	return x___fstatat(tls, -int32(100), path, buf, 0)
 }
 
+const m_SYS_fstatfs = 138
+const m_SYS_statfs = 137
+
 func ___statfs(tls *TLS, path uintptr, buf uintptr) (r int32) {
 	*(*Tstatfs)(unsafe.Pointer(buf)) = Tstatfs{}
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(137), int64(path), int64(buf)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_statfs), int64(path), int64(buf)))))
 }
 
 func ___fstatfs(tls *TLS, fd int32, buf uintptr) (r int32) {
 	*(*Tstatfs)(unsafe.Pointer(buf)) = Tstatfs{}
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(138), int64(fd), int64(buf)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_fstatfs), int64(fd), int64(buf)))))
 }
 
 func _fixup(tls *TLS, out uintptr, in uintptr) {
@@ -134719,10 +135062,15 @@ func x_fstatvfs(tls *TLS, fd int32, buf uintptr) (r int32) {
 	return 0
 }
 
+const m_SYS_umask = 95
+
 func x_umask(tls *TLS, mode uint32) (r uint32) {
-	return uint32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(95), int64(mode)))))
+	return uint32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_umask), int64(mode)))))
 }
 
+const m_SYS_futimesat = 261
+const m_SYS_utimensat = 280
+const m_SYS_utimes = 235
 const m_UTIME_NOW = 1073741823
 const m_UTIME_OMIT = 1073741822
 
@@ -134735,7 +135083,7 @@ func x_utimensat(tls *TLS, fd int32, path uintptr, times uintptr, flags int32) (
 	if times != 0 && (*(*Ttimespec)(unsafe.Pointer(times))).Ftv_nsec == int64(m_UTIME_NOW) && (*(*Ttimespec)(unsafe.Pointer(times + 1*16))).Ftv_nsec == int64(m_UTIME_NOW) {
 		times = uintptr(0)
 	}
-	r = int32(___syscall4(tls, int64(280), int64(fd), int64(path), int64(times), int64(flags)))
+	r = int32(___syscall4(tls, int64(m_SYS_utimensat), int64(fd), int64(path), int64(times), int64(flags)))
 	if r != -int32(m_ENOSYS) || flags != 0 {
 		return int32(x___syscall_ret(tls, uint64(r)))
 	}
@@ -134753,11 +135101,11 @@ func x_utimensat(tls *TLS, fd int32, path uintptr, times uintptr, flags int32) (
 			(*(*[4]int64)(unsafe.Pointer(bp)))[int32(2)*i+int32(1)] = (*(*Ttimespec)(unsafe.Pointer(times + uintptr(i)*16))).Ftv_nsec / int64(1000)
 		}
 	}
-	r = int32(___syscall3(tls, int64(261), int64(fd), int64(path), int64(tv)))
+	r = int32(___syscall3(tls, int64(m_SYS_futimesat), int64(fd), int64(path), int64(tv)))
 	if r != -int32(m_ENOSYS) || fd != -int32(100) {
 		return int32(x___syscall_ret(tls, uint64(r)))
 	}
-	r = int32(___syscall2(tls, int64(235), int64(path), int64(tv)))
+	r = int32(___syscall2(tls, int64(m_SYS_utimes), int64(path), int64(tv)))
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
@@ -134769,6 +135117,7 @@ const m_BUFSIZ = 1024
 const m_F_APP = 128
 const m_F_NORD = 4
 const m_F_NOWR = 8
+const m_TIOCGWINSZ = 21523
 const m_UNGET = 8
 
 func x___fdopen(tls *TLS, fd int32, mode uintptr) (r uintptr) {
@@ -134801,13 +135150,13 @@ func x___fdopen(tls *TLS, fd int32, mode uintptr) (r uintptr) {
 	}
 	/* Apply close-on-exec flag */
 	if x_strchr(tls, mode, int32('e')) != 0 {
-		___syscall3(tls, int64(72), int64(fd), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 	}
 	/* Set append mode on fd if opened for append */
 	if int32(*(*int8)(unsafe.Pointer(mode))) == int32('a') {
-		flags = int32(___syscall2(tls, int64(72), int64(fd), int64(Int32FromInt32(3))))
+		flags = int32(___syscall2(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_GETFL))))
 		if !(flags&Int32FromInt32(m_O_APPEND) != 0) {
-			___syscall3(tls, int64(72), int64(fd), int64(Int32FromInt32(4)), int64(flags|Int32FromInt32(02000)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_SETFL)), int64(flags|Int32FromInt32(m_O_APPEND)))
 		}
 		*(*uint32)(unsafe.Pointer(f)) |= uint32(m_F_APP)
 	}
@@ -134816,7 +135165,7 @@ func x___fdopen(tls *TLS, fd int32, mode uintptr) (r uintptr) {
 	(*TFILE)(unsafe.Pointer(f)).Fbuf_size = uint64(m_BUFSIZ)
 	/* Activate line buffered mode for terminals */
 	(*TFILE)(unsafe.Pointer(f)).Flbf = -int32(1)
-	if !((*TFILE)(unsafe.Pointer(f)).Fflags&Uint32FromInt32(m_F_NOWR) != 0) && !(___syscall3(tls, int64(16), int64(fd), int64(Int32FromInt32(0x5413)), int64(bp)) != 0) {
+	if !((*TFILE)(unsafe.Pointer(f)).Fflags&Uint32FromInt32(m_F_NOWR) != 0) && !(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(Int32FromInt32(m_TIOCGWINSZ)), int64(bp)) != 0) {
 		(*TFILE)(unsafe.Pointer(f)).Flbf = int32('\n')
 	}
 	/* Initialize op ptrs. No problem if some are unneeded. */
@@ -134863,15 +135212,14 @@ func x___fmodeflags(tls *TLS, mode uintptr) (r int32) {
 }
 
 const m_F_PERM = 1
-const m_O_LARGEFILE1 = 524288
 
 func x___fopen_rb_ca(tls *TLS, filename uintptr, f uintptr, buf uintptr, len1 uint64) (r uintptr) {
 	_memset(tls, f, 0, uint64(232))
-	(*TFILE)(unsafe.Pointer(f)).Ffd = int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_open), int64(filename), int64(Int32FromInt32(00)|Int32FromInt32(02000000)|Int32FromInt32(m_O_LARGEFILE1))))))
+	(*TFILE)(unsafe.Pointer(f)).Ffd = int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_open), int64(filename), int64(Int32FromInt32(m_O_RDONLY)|Int32FromInt32(m_O_CLOEXEC)|Int32FromInt32(m_O_LARGEFILE))))))
 	if (*TFILE)(unsafe.Pointer(f)).Ffd < 0 {
 		return uintptr(0)
 	}
-	___syscall3(tls, int64(72), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+	___syscall3(tls, int64(m_SYS_fcntl), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 	(*TFILE)(unsafe.Pointer(f)).Fflags = uint32(Int32FromInt32(m_F_NOWR) | Int32FromInt32(m_F_PERM))
 	(*TFILE)(unsafe.Pointer(f)).Fbuf = buf + uintptr(m_UNGET)
 	(*TFILE)(unsafe.Pointer(f)).Fbuf_size = len1 - uint64(m_UNGET)
@@ -134909,7 +135257,7 @@ func x___lockfile(tls *TLS, f uintptr) (r int32) {
 			if v4 != 0 {
 				v4 = int32(m_FUTEX_PRIVATE)
 			}
-			_ = ___syscall4(tls, int64(202), int64(v2), int64(Int32FromInt32(0)|v4), int64(v3), int64(Int32FromInt32(0))) != int64(-int32(m_ENOSYS)) || ___syscall4(tls, int64(202), int64(v2), int64(Int32FromInt32(0)), int64(v3), int64(Int32FromInt32(0))) != 0
+			_ = ___syscall4(tls, int64(m_SYS_futex), int64(v2), int64(Int32FromInt32(m_FUTEX_WAIT)|v4), int64(v3), int64(Int32FromInt32(0))) != int64(-int32(m_ENOSYS)) || ___syscall4(tls, int64(m_SYS_futex), int64(v2), int64(Int32FromInt32(m_FUTEX_WAIT)), int64(v3), int64(Int32FromInt32(0))) != 0
 		}
 	}
 	return int32(1)
@@ -134928,7 +135276,7 @@ func x___unlockfile(tls *TLS, f uintptr) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	}
 }
 
@@ -134961,7 +135309,7 @@ func _dummy13(tls *TLS, fd int32) (r int32) {
 }
 
 func x___stdio_close(tls *TLS, f uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(3), int64(x___aio_close(tls, (*TFILE)(unsafe.Pointer(f)).Ffd))))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_close), int64(x___aio_close(tls, (*TFILE)(unsafe.Pointer(f)).Ffd))))))
 }
 
 var _dummy_file = uintptr(0)
@@ -134995,6 +135343,8 @@ func x___stdio_exit(tls *TLS) {
 }
 
 const m_F_ERR = 32
+const m_SYS_read = 0
+const m_SYS_readv = 19
 
 func x___stdio_read(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
@@ -135014,9 +135364,9 @@ func x___stdio_read(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 		},
 	}
 	if (*(*[2]Tiovec)(unsafe.Pointer(bp)))[0].Fiov_len != 0 {
-		v1 = x___syscall_ret(tls, uint64(___syscall3(tls, int64(19), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(bp), int64(Int32FromInt32(2)))))
+		v1 = x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_readv), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(bp), int64(Int32FromInt32(2)))))
 	} else {
-		v1 = x___syscall_ret(tls, uint64(___syscall3(tls, 0, int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64((*(*[2]Tiovec)(unsafe.Pointer(bp)))[int32(1)].Fiov_base), int64((*(*[2]Tiovec)(unsafe.Pointer(bp)))[int32(1)].Fiov_len))))
+		v1 = x___syscall_ret(tls, uint64(___syscall3(tls, m_SYS_read, int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64((*(*[2]Tiovec)(unsafe.Pointer(bp)))[int32(1)].Fiov_base), int64((*(*[2]Tiovec)(unsafe.Pointer(bp)))[int32(1)].Fiov_len))))
 	}
 	cnt = v1
 	if cnt <= 0 {
@@ -135047,6 +135397,8 @@ func x___stdio_seek(tls *TLS, f uintptr, off int64, whence int32) (r int64) {
 	return x___lseek(tls, (*TFILE)(unsafe.Pointer(f)).Ffd, off, whence)
 }
 
+const m_SYS_writev = 20
+
 func x___stdio_write(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
@@ -135069,7 +135421,7 @@ func x___stdio_write(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 	rem = (*(*Tiovec)(unsafe.Pointer(iov))).Fiov_len + (*(*Tiovec)(unsafe.Pointer(iov + 1*16))).Fiov_len
 	iovcnt = int32(2)
 	for {
-		cnt = x___syscall_ret(tls, uint64(___syscall3(tls, int64(20), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(iov), int64(iovcnt))))
+		cnt = x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_writev), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(iov), int64(iovcnt))))
 		if uint64(cnt) == rem {
 			(*TFILE)(unsafe.Pointer(f)).Fwend = (*TFILE)(unsafe.Pointer(f)).Fbuf + uintptr((*TFILE)(unsafe.Pointer(f)).Fbuf_size)
 			v1 = (*TFILE)(unsafe.Pointer(f)).Fbuf
@@ -135110,7 +135462,7 @@ func x___stdout_write(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) 
 	defer tls.Free(8)
 	var _ /* wsz at bp+0 */ Twinsize
 	(*TFILE)(unsafe.Pointer(f)).Fwrite = __ccgo_fp(x___stdio_write)
-	if !((*TFILE)(unsafe.Pointer(f)).Fflags&Uint32FromInt32(m_F_SVB) != 0) && ___syscall3(tls, int64(16), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(Int32FromInt32(0x5413)), int64(bp)) != 0 {
+	if !((*TFILE)(unsafe.Pointer(f)).Fflags&Uint32FromInt32(m_F_SVB) != 0) && ___syscall3(tls, int64(m_SYS_ioctl), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(Int32FromInt32(m_TIOCGWINSZ)), int64(bp)) != 0 {
 		(*TFILE)(unsafe.Pointer(f)).Flbf = -int32(1)
 	}
 	return x___stdio_write(tls, f, buf, len1)
@@ -135461,7 +135813,7 @@ func _locking_getc(tls *TLS, f uintptr) (r int32) {
 		if v5 < Int32FromInt32(0) {
 			v5 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)), int64(v5)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v5)) != 0
 	}
 	return c
 }
@@ -135893,7 +136245,7 @@ func x_fmemopen(tls *TLS, buf uintptr, size uint64, mode uintptr) (r uintptr) {
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_EINVAL)
 		return uintptr(0)
 	}
-	if !(buf != 0) && size > uint64(Int64FromInt64(0x7fffffffffffffff)) {
+	if !(buf != 0) && size > uint64(Int64FromInt64(m_INT64_MAX)) {
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_ENOMEM)
 		return uintptr(0)
 	}
@@ -135948,8 +136300,6 @@ func x_fmemopen(tls *TLS, buf uintptr, size uint64, mode uintptr) (r uintptr) {
 	return x___ofl_add(tls, f)
 }
 
-const m_O_LARGEFILE2 = 32768
-
 func x_fopen(tls *TLS, filename uintptr, mode uintptr) (r uintptr) {
 	var f uintptr
 	var fd, flags int32
@@ -135960,18 +136310,18 @@ func x_fopen(tls *TLS, filename uintptr, mode uintptr) (r uintptr) {
 	}
 	/* Compute the flags to pass to open() */
 	flags = x___fmodeflags(tls, mode)
-	fd = int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_open), int64(filename), int64(flags|Int32FromInt32(m_O_LARGEFILE2)), int64(Int32FromInt32(0666))))))
+	fd = int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_open), int64(filename), int64(flags|Int32FromInt32(m_O_LARGEFILE)), int64(Int32FromInt32(0666))))))
 	if fd < 0 {
 		return uintptr(0)
 	}
 	if flags&int32(m_O_CLOEXEC) != 0 {
-		___syscall3(tls, int64(72), int64(fd), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 	}
 	f = x___fdopen(tls, fd, mode)
 	if f != 0 {
 		return f
 	}
-	___syscall1(tls, int64(3), int64(fd))
+	___syscall1(tls, int64(m_SYS_close), int64(fd))
 	return uintptr(0)
 }
 
@@ -136174,7 +136524,7 @@ func _locking_putc(tls *TLS, c int32, f uintptr) (r int32) {
 		if v6 < Int32FromInt32(0) {
 			v6 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v5), int64(Int32FromInt32(1)|v7), int64(v6)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v5), int64(Int32FromInt32(1)), int64(v6)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v5), int64(Int32FromInt32(m_FUTEX_WAKE)|v7), int64(v6)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v5), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v6)) != 0
 	}
 	return c
 }
@@ -136385,10 +136735,10 @@ func x_freopen(tls *TLS, filename uintptr, mode uintptr, f uintptr) (r uintptr) 
 	x_fflush(tls, f)
 	if !(filename != 0) {
 		if fl&int32(m_O_CLOEXEC) != 0 {
-			___syscall3(tls, int64(72), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+			___syscall3(tls, int64(m_SYS_fcntl), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 		}
 		fl &= ^(Int32FromInt32(m_O_CREAT) | Int32FromInt32(m_O_EXCL) | Int32FromInt32(m_O_CLOEXEC))
-		if x___syscall_ret(tls, uint64(___syscall3(tls, int64(72), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(Int32FromInt32(4)), int64(fl)))) < 0 {
+		if x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_fcntl), int64((*TFILE)(unsafe.Pointer(f)).Ffd), int64(Int32FromInt32(m_F_SETFL)), int64(fl)))) < 0 {
 			goto fail
 		}
 	} else {
@@ -136488,8 +136838,6 @@ func x_fseek(tls *TLS, f uintptr, off int64, whence int32) (r int32) {
 func x_fsetpos(tls *TLS, f uintptr, pos uintptr) (r int32) {
 	return x___fseeko(tls, f, *(*int64)(unsafe.Pointer(pos)), m_SEEK_SET)
 }
-
-const m_EOVERFLOW = 75
 
 func x___ftello_unlocked(tls *TLS, f uintptr) (r int64) {
 	var pos int64
@@ -136740,7 +137088,7 @@ func _locking_getc1(tls *TLS, f uintptr) (r int32) {
 		if v5 < Int32FromInt32(0) {
 			v5 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)), int64(v5)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v5)) != 0
 	}
 	return c
 }
@@ -136807,7 +137155,7 @@ func _locking_getc2(tls *TLS, f uintptr) (r int32) {
 		if v5 < Int32FromInt32(0) {
 			v5 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)), int64(v5)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v5)) != 0
 	}
 	return c
 }
@@ -137321,7 +137669,7 @@ func x_pclose(tls *TLS, f uintptr) (r1 int32) {
 	pid = (*TFILE)(unsafe.Pointer(f)).Fpipe_pid
 	x_fclose(tls, f)
 	for {
-		v1 = int32(___syscall4(tls, int64(61), int64(pid), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(0))))
+		v1 = int32(___syscall4(tls, int64(m_SYS_wait4), int64(pid), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(0))))
 		r = v1
 		if !(v1 == -int32(m_EINTR)) {
 			break
@@ -137385,8 +137733,8 @@ func x_popen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
 	}
 	f = x___fdopen(tls, (*(*[2]int32)(unsafe.Pointer(bp + 32)))[op], mode)
 	if !(f != 0) {
-		___syscall1(tls, int64(3), int64((*(*[2]int32)(unsafe.Pointer(bp + 32)))[0]))
-		___syscall1(tls, int64(3), int64((*(*[2]int32)(unsafe.Pointer(bp + 32)))[int32(1)]))
+		___syscall1(tls, int64(m_SYS_close), int64((*(*[2]int32)(unsafe.Pointer(bp + 32)))[0]))
+		___syscall1(tls, int64(m_SYS_close), int64((*(*[2]int32)(unsafe.Pointer(bp + 32)))[int32(1)]))
 		return UintptrFromInt32(0)
 	}
 	e = int32(m_ENOMEM)
@@ -137407,7 +137755,7 @@ func x_popen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
 				2: cmd,
 				3: uintptr(0),
 			}
-			v2 = x_posix_spawn(tls, bp+40, ts+1294, bp+48, uintptr(0), bp, x___environ)
+			v2 = x_posix_spawn(tls, bp+40, ts+1294, bp+48, uintptr(0), bp, Xenviron)
 			e = v2
 			if !(v2 != 0) {
 				x_posix_spawn_file_actions_destroy(tls, bp+48)
@@ -137415,7 +137763,7 @@ func x_popen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
 				if !(x_strchr(tls, mode, int32('e')) != 0) {
 					x_fcntl(tls, (*(*[2]int32)(unsafe.Pointer(bp + 32)))[op], int32(m_F_SETFD), VaList(bp+136, 0))
 				}
-				___syscall1(tls, int64(3), int64((*(*[2]int32)(unsafe.Pointer(bp + 32)))[int32(1)-op]))
+				___syscall1(tls, int64(m_SYS_close), int64((*(*[2]int32)(unsafe.Pointer(bp + 32)))[int32(1)-op]))
 				x___ofl_unlock(tls)
 				return f
 			}
@@ -137425,7 +137773,7 @@ func x_popen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
 		x_posix_spawn_file_actions_destroy(tls, bp+48)
 	}
 	x_fclose(tls, f)
-	___syscall1(tls, int64(3), int64((*(*[2]int32)(unsafe.Pointer(bp + 32)))[int32(1)-op]))
+	___syscall1(tls, int64(m_SYS_close), int64((*(*[2]int32)(unsafe.Pointer(bp + 32)))[int32(1)-op]))
 	*(*int32)(unsafe.Pointer(x___errno_location(tls))) = e
 	return uintptr(0)
 }
@@ -137467,7 +137815,7 @@ func _locking_putc1(tls *TLS, c int32, f uintptr) (r int32) {
 		if v6 < Int32FromInt32(0) {
 			v6 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v5), int64(Int32FromInt32(1)|v7), int64(v6)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v5), int64(Int32FromInt32(1)), int64(v6)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v5), int64(Int32FromInt32(m_FUTEX_WAKE)|v7), int64(v6)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v5), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v6)) != 0
 	}
 	return c
 }
@@ -137544,7 +137892,7 @@ func _locking_putc2(tls *TLS, c int32, f uintptr) (r int32) {
 		if v6 < Int32FromInt32(0) {
 			v6 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v5), int64(Int32FromInt32(1)|v7), int64(v6)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v5), int64(Int32FromInt32(1)), int64(v6)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v5), int64(Int32FromInt32(m_FUTEX_WAKE)|v7), int64(v6)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v5), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v6)) != 0
 	}
 	return c
 }
@@ -137638,19 +137986,22 @@ func x_putwchar(tls *TLS, c int32) (r uint32) {
 	return x_fputwc(tls, c, uintptr(unsafe.Pointer(&x___stdout_FILE)))
 }
 
-const m_EISDIR = 21
+const m_SYS_rmdir = 84
+const m_SYS_unlink = 87
 
 func x_remove(tls *TLS, path uintptr) (r1 int32) {
 	var r int32
-	r = int32(___syscall1(tls, int64(87), int64(path)))
+	r = int32(___syscall1(tls, int64(m_SYS_unlink), int64(path)))
 	if r == -int32(m_EISDIR) {
-		r = int32(___syscall1(tls, int64(84), int64(path)))
+		r = int32(___syscall1(tls, int64(m_SYS_rmdir), int64(path)))
 	}
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
+const m_SYS_rename = 82
+
 func x_rename(tls *TLS, old uintptr, new1 uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(82), int64(old), int64(new1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_rename), int64(old), int64(new1)))))
 }
 
 func x_rewind(tls *TLS, f uintptr) {
@@ -137801,6 +138152,7 @@ func x_swscanf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
 
 const m_MAXTRIES = 100
 const m_P_tmpdir = "/tmp"
+const m_SYS_readlink = 89
 
 func x_tempnam(tls *TLS, dir uintptr, pfx uintptr) (r1 uintptr) {
 	bp := tls.Alloc(4104) /* tlsAllocs 4104 maxVaListSize 0 */
@@ -137829,15 +138181,13 @@ func x_tempnam(tls *TLS, dir uintptr, pfx uintptr) (r1 uintptr) {
 	for try = 0; try < int32(m_MAXTRIES); try++ {
 		x___randname(tls, bp+1+uintptr(l)-uintptr(6))
 		*(*[1]int8)(unsafe.Pointer(bp)) = [1]int8{}
-		r = int32(___syscall3(tls, int64(89), int64(bp+1), int64(bp), int64(Int32FromInt32(1))))
+		r = int32(___syscall3(tls, int64(m_SYS_readlink), int64(bp+1), int64(bp), int64(Int32FromInt32(1))))
 		if r == -int32(m_ENOENT) {
 			return x_strdup(tls, bp+1)
 		}
 	}
 	return uintptr(0)
 }
-
-const m_O_LARGEFILE3 = 64
 
 func x_tmpfile(tls *TLS) (r uintptr) {
 	bp := tls.Alloc(24) /* tlsAllocs 24 maxVaListSize 0 */
@@ -137848,12 +138198,12 @@ func x_tmpfile(tls *TLS) (r uintptr) {
 	*(*[20]int8)(unsafe.Pointer(bp)) = [20]int8{'/', 't', 'm', 'p', '/', 't', 'm', 'p', 'f', 'i', 'l', 'e', '_', 'X', 'X', 'X', 'X', 'X', 'X'}
 	for try = 0; try < int32(m_MAXTRIES); try++ {
 		x___randname(tls, bp+uintptr(13))
-		fd = int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_open), int64(bp), int64(Int32FromInt32(02)|Int32FromInt32(0100)|Int32FromInt32(0200)|Int32FromInt32(m_O_LARGEFILE3)), int64(Int32FromInt32(0600))))))
+		fd = int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_open), int64(bp), int64(Int32FromInt32(m_O_RDWR)|Int32FromInt32(m_O_CREAT)|Int32FromInt32(m_O_EXCL)|Int32FromInt32(m_O_LARGEFILE)), int64(Int32FromInt32(0600))))))
 		if fd >= 0 {
-			___syscall1(tls, int64(87), int64(bp))
+			___syscall1(tls, int64(m_SYS_unlink), int64(bp))
 			f = x___fdopen(tls, fd, ts+2393)
 			if !(f != 0) {
-				___syscall1(tls, int64(3), int64(fd))
+				___syscall1(tls, int64(m_SYS_close), int64(fd))
 			}
 			return f
 		}
@@ -137873,7 +138223,7 @@ func x_tmpnam(tls *TLS, buf uintptr) (r1 uintptr) {
 	for try = 0; try < int32(m_MAXTRIES); try++ {
 		x___randname(tls, bp+1+uintptr(12))
 		*(*[1]int8)(unsafe.Pointer(bp)) = [1]int8{}
-		r = int32(___syscall3(tls, int64(89), int64(bp+1), int64(bp), int64(Int32FromInt32(1))))
+		r = int32(___syscall3(tls, int64(m_SYS_readlink), int64(bp+1), int64(bp), int64(Int32FromInt32(1))))
 		if r == -int32(m_ENOENT) {
 			if buf != 0 {
 				v1 = buf
@@ -138003,9 +138353,7 @@ func x_vdprintf(tls *TLS, fd int32, fmt uintptr, ap uintptr) (r int32) {
 	return x_vfprintf(tls, bp, fmt, ap)
 }
 
-const m_INTMAX_MAX = 9223372036854775807
 const m_LDBL_MAX_EXP = 1024
-const m_LONG_MAX = 1
 const m_NL_ARGMAX = 9
 
 const _BARE = 0
@@ -139074,7 +139422,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 	_12:
 	_11:
 		pl = int32(1)
-		if *(*uint64)(unsafe.Pointer(bp + 8)) > uint64(Int64FromInt64(0x7fffffffffffffff)) {
+		if *(*uint64)(unsafe.Pointer(bp + 8)) > uint64(Int64FromInt64(m_INT64_MAX)) {
 			*(*uint64)(unsafe.Pointer(bp + 8)) = -*(*uint64)(unsafe.Pointer(bp + 8))
 		} else {
 			if fl&(Uint32FromUint32(1)<<(Int32FromUint8('+')-Int32FromUint8(' '))) != 0 {
@@ -140417,7 +140765,7 @@ func _wprintf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr,
 			goto overflow
 		}
 		x_snprintf(tls, bp+24, uint64(16), ts+2448, VaList(bp+56, ts+2468+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('#')-Int32FromUint8(' '))) != 0)), ts+2470+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('+')-Int32FromUint8(' '))) != 0)), ts+2472+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('-')-Int32FromUint8(' '))) != 0)), ts+1009+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8(' ')-Int32FromUint8(' '))) != 0)), ts+1977+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('0')-Int32FromUint8(' '))) != 0)), int32(_sizeprefix[t|int32(32)-int32('a')]), t))
-		switch t | int32(32) {
+		switch t | Int32FromInt32(32) {
 		case int32('a'):
 			fallthrough
 		case int32('e'):
@@ -143883,8 +144231,6 @@ func x___randname(tls *TLS, template uintptr) (r1 uintptr) {
 	return template
 }
 
-const m_EEXIST = 17
-
 func x_mkdtemp(tls *TLS, template uintptr) (r uintptr) {
 	var l uint64
 	var retries, v1 int32
@@ -144042,8 +144388,10 @@ func x_cfsetispeed(tls *TLS, tio uintptr, speed uint32) (r int32) {
 	return v1
 }
 
+const m_TCSBRK = 21513
+
 func x_tcdrain(tls *TLS, fd int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(16), int64(fd), int64(Int32FromInt32(0x5409)), int64(Int32FromInt32(1)), 0, 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_ioctl), int64(fd), int64(Int32FromInt32(m_TCSBRK)), int64(Int32FromInt32(1)), 0, 0, 0))))
 }
 
 const m_TCXONC = 21514
@@ -144086,10 +144434,8 @@ func x_tcgetsid(tls *TLS, fd int32) (r int32) {
 }
 
 func x_tcgetwinsize(tls *TLS, fd int32, wsz uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(16), int64(fd), int64(Int32FromInt32(0x5413)), int64(wsz)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(Int32FromInt32(m_TIOCGWINSZ)), int64(wsz)))))
 }
-
-const m_TCSBRK = 21513
 
 func x_tcsendbreak(tls *TLS, fd int32, dur int32) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
@@ -144111,7 +144457,7 @@ func x_tcsetattr(tls *TLS, fd int32, act int32, tio uintptr) (r int32) {
 }
 
 func x_tcsetwinsize(tls *TLS, fd int32, wsz uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(16), int64(fd), int64(Int32FromInt32(0x5414)), int64(wsz)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(Int32FromInt32(m_TIOCSWINSZ)), int64(wsz)))))
 }
 
 func x___lock(tls *TLS, l uintptr) {
@@ -144158,7 +144504,7 @@ func x___lock(tls *TLS, l uintptr) {
 			if v3 != 0 {
 				v3 = int32(m_FUTEX_PRIVATE)
 			}
-			_ = ___syscall4(tls, int64(202), int64(v1), int64(Int32FromInt32(0)|v3), int64(v2), int64(Int32FromInt32(0))) != int64(-int32(m_ENOSYS)) || ___syscall4(tls, int64(202), int64(v1), int64(Int32FromInt32(0)), int64(v2), int64(Int32FromInt32(0))) != 0
+			_ = ___syscall4(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAIT)|v3), int64(v2), int64(Int32FromInt32(0))) != int64(-int32(m_ENOSYS)) || ___syscall4(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAIT)), int64(v2), int64(Int32FromInt32(0))) != 0
 			current -= -Int32FromInt32(1) - Int32FromInt32(0x7fffffff) + Int32FromInt32(1)
 		}
 		/* assertion: current > 0, the count includes us already. */
@@ -144185,7 +144531,7 @@ func x___unlock(tls *TLS, l uintptr) {
 			if v2 < Int32FromInt32(0) {
 				v2 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 		}
 	}
 }
@@ -144198,15 +144544,13 @@ func x___syscall_cp(tls *TLS, nr int64, u int64, v int64, w int64, x int64, y in
 	return x___syscall_cp_c(tls, nr, u, v, w, x, y, z)
 }
 
-const m_FUTEX_WAIT = 0
-
 func ___futex4_cp(tls *TLS, addr uintptr, op int32, val int32, to uintptr) (r1 int32) {
 	var r int32
-	r = int32(x___syscall_cp(tls, int64(202), int64(addr), int64(op), int64(val), int64(to), 0, 0))
+	r = int32(x___syscall_cp(tls, int64(m_SYS_futex), int64(addr), int64(op), int64(val), int64(to), 0, 0))
 	if r != -int32(m_ENOSYS) {
 		return r
 	}
-	return int32(x___syscall_cp(tls, int64(202), int64(addr), int64(op & ^Int32FromInt32(128)), int64(val), int64(to), 0, 0))
+	return int32(x___syscall_cp(tls, int64(m_SYS_futex), int64(addr), int64(op & ^Int32FromInt32(m_FUTEX_PRIVATE)), int64(val), int64(to), 0, 0))
 }
 
 var _dummy16 = int32(0)
@@ -144294,7 +144638,7 @@ func x___wait(tls *TLS, addr uintptr, waiters uintptr, val int32, priv int32) {
 		_a_inc(tls, waiters)
 	}
 	for AtomicLoadPInt32(addr) == val {
-		_ = ___syscall4(tls, int64(202), int64(addr), int64(Int32FromInt32(0)|priv), int64(val), int64(Int32FromInt32(0))) != int64(-int32(m_ENOSYS)) || ___syscall4(tls, int64(202), int64(addr), int64(Int32FromInt32(0)), int64(val), int64(Int32FromInt32(0))) != 0
+		_ = ___syscall4(tls, int64(m_SYS_futex), int64(addr), int64(Int32FromInt32(m_FUTEX_WAIT)|priv), int64(val), int64(Int32FromInt32(0))) != int64(-int32(m_ENOSYS)) || ___syscall4(tls, int64(m_SYS_futex), int64(addr), int64(Int32FromInt32(m_FUTEX_WAIT)), int64(val), int64(Int32FromInt32(0))) != 0
 	}
 	if waiters != 0 {
 		_a_dec(tls, waiters)
@@ -144425,8 +144769,6 @@ func x_mtx_init(tls *TLS, m uintptr, type1 int32) (r int32) {
 	}
 	return int32(_thrd_success)
 }
-
-const m_EBUSY = 16
 
 func x_mtx_lock(tls *TLS, m uintptr) (r int32) {
 	if *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*Tmtx_t)(unsafe.Pointer(m)).F__u.F__i)))) == m_PTHREAD_MUTEX_NORMAL && !(_a_cas(tls, uintptr(unsafe.Pointer(&(*Tmtx_t)(unsafe.Pointer(m)).F__u))+1*4, 0, int32(m_EBUSY)) != 0) {
@@ -144786,7 +145128,7 @@ func _pshared_barrier_wait(tls *TLS, b uintptr) (r int32) {
 			if v5 < Int32FromInt32(0) {
 				v5 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)), int64(v5)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v5)) != 0
 		}
 	} else {
 		_a_store(tls, uintptr(unsafe.Pointer(&(*Tpthread_barrier_t)(unsafe.Pointer(b)).F__u)), 0)
@@ -144800,7 +145142,7 @@ func _pshared_barrier_wait(tls *TLS, b uintptr) (r int32) {
 			if v8 < Int32FromInt32(0) {
 				v8 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v7), int64(Int32FromInt32(1)|v9), int64(v8)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v7), int64(Int32FromInt32(1)), int64(v8)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v7), int64(Int32FromInt32(m_FUTEX_WAKE)|v9), int64(v8)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v7), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v8)) != 0
 		}
 		for {
 			v10 = *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*Tpthread_barrier_t)(unsafe.Pointer(b)).F__u)) + 3*4))
@@ -144825,7 +145167,7 @@ func _pshared_barrier_wait(tls *TLS, b uintptr) (r int32) {
 			if v12 < Int32FromInt32(0) {
 				v12 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v11), int64(Int32FromInt32(1)|v13), int64(v12)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v11), int64(Int32FromInt32(1)), int64(v12)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v11), int64(Int32FromInt32(m_FUTEX_WAKE)|v13), int64(v12)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v11), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v12)) != 0
 		}
 	} else {
 		for {
@@ -144863,7 +145205,7 @@ func _pshared_barrier_wait(tls *TLS, b uintptr) (r int32) {
 		if v17 < Int32FromInt32(0) {
 			v17 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v16), int64(Int32FromInt32(1)|v18), int64(v17)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v16), int64(Int32FromInt32(1)), int64(v17)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v16), int64(Int32FromInt32(m_FUTEX_WAKE)|v18), int64(v17)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v16), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v17)) != 0
 	}
 	x___vm_unlock(tls)
 	return ret
@@ -144914,7 +145256,7 @@ func x_pthread_barrier_wait(tls *TLS, b uintptr) (r int32) {
 			if v3 < Int32FromInt32(0) {
 				v3 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v2), int64(Int32FromInt32(1)|v4), int64(v3)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v2), int64(Int32FromInt32(1)), int64(v3)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v2), int64(Int32FromInt32(m_FUTEX_WAKE)|v4), int64(v3)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v2), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v3)) != 0
 		}
 		for {
 			v5 = spins
@@ -144926,7 +145268,7 @@ func x_pthread_barrier_wait(tls *TLS, b uintptr) (r int32) {
 		}
 		_a_inc(tls, inst+12)
 		for AtomicLoadPInt32(inst+12) == int32(1) {
-			_ = ___syscall4(tls, int64(202), int64(inst+12), int64(Int32FromInt32(0)|Int32FromInt32(128)), int64(Int32FromInt32(1)), int64(Int32FromInt32(0))) != int64(-int32(m_ENOSYS)) || ___syscall4(tls, int64(202), int64(inst+12), int64(Int32FromInt32(0)), int64(Int32FromInt32(1)), int64(Int32FromInt32(0))) != 0
+			_ = ___syscall4(tls, int64(m_SYS_futex), int64(inst+12), int64(Int32FromInt32(m_FUTEX_WAIT)|Int32FromInt32(m_FUTEX_PRIVATE)), int64(Int32FromInt32(1)), int64(Int32FromInt32(0))) != int64(-int32(m_ENOSYS)) || ___syscall4(tls, int64(m_SYS_futex), int64(inst+12), int64(Int32FromInt32(m_FUTEX_WAIT)), int64(Int32FromInt32(1)), int64(Int32FromInt32(0))) != 0
 		}
 		return -int32(1)
 	}
@@ -144944,7 +145286,7 @@ func x_pthread_barrier_wait(tls *TLS, b uintptr) (r int32) {
 			if v7 < Int32FromInt32(0) {
 				v7 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v6), int64(Int32FromInt32(1)|v8), int64(v7)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v6), int64(Int32FromInt32(1)), int64(v7)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v6), int64(Int32FromInt32(m_FUTEX_WAKE)|v8), int64(v7)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v6), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v7)) != 0
 		}
 		_a_store(tls, inst+4, int32(1))
 		if AtomicLoadPInt32(inst+8) != 0 {
@@ -144957,7 +145299,7 @@ func x_pthread_barrier_wait(tls *TLS, b uintptr) (r int32) {
 			if v10 < Int32FromInt32(0) {
 				v10 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v9), int64(Int32FromInt32(1)|v11), int64(v10)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v9), int64(Int32FromInt32(1)), int64(v10)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v9), int64(Int32FromInt32(m_FUTEX_WAKE)|v11), int64(v10)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v9), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v10)) != 0
 		}
 	} else {
 		_a_store(tls, uintptr(unsafe.Pointer(&(*Tpthread_barrier_t)(unsafe.Pointer(b)).F__u)), 0)
@@ -144971,7 +145313,7 @@ func x_pthread_barrier_wait(tls *TLS, b uintptr) (r int32) {
 			if v13 < Int32FromInt32(0) {
 				v13 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v12), int64(Int32FromInt32(1)|v14), int64(v13)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v12), int64(Int32FromInt32(1)), int64(v13)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v12), int64(Int32FromInt32(m_FUTEX_WAKE)|v14), int64(v13)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v12), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v13)) != 0
 		}
 		x___wait(tls, inst+4, inst+8, 0, int32(1))
 	}
@@ -144986,7 +145328,7 @@ func x_pthread_barrier_wait(tls *TLS, b uintptr) (r int32) {
 		if v16 < Int32FromInt32(0) {
 			v16 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v15), int64(Int32FromInt32(1)|v17), int64(v16)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v15), int64(Int32FromInt32(1)), int64(v16)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v15), int64(Int32FromInt32(m_FUTEX_WAKE)|v17), int64(v16)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v15), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v16)) != 0
 	}
 	return 0
 }
@@ -145070,7 +145412,7 @@ func _cancel_handler(tls *TLS, sig int32, si uintptr, ctx uintptr) {
 		*(*int64)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*Tucontext_t5)(unsafe.Pointer(uc)).Fuc_mcontext.Fgregs)) + uintptr(_REG_RIP)*8)) = int64(uint64(uintptr(unsafe.Pointer(&___cp_cancel))))
 		return
 	}
-	___syscall2(tls, int64(200), int64((*T__pthread)(unsafe.Pointer(self)).Ftid), int64(Int32FromInt32(33)))
+	___syscall2(tls, int64(m_SYS_tkill), int64((*T__pthread)(unsafe.Pointer(self)).Ftid), int64(Int32FromInt32(m_SIGCANCEL)))
 }
 
 func x___testcancel(tls *TLS) {
@@ -145144,7 +145486,7 @@ func x_pthread_cond_broadcast(tls *TLS, c uintptr) (r int32) {
 	if v2 < Int32FromInt32(0) {
 		v2 = int32(m_INT_MAX)
 	}
-	_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+	_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	return 0
 }
 
@@ -145163,7 +145505,7 @@ func x_pthread_cond_destroy(tls *TLS, c uintptr) (r int32) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 		for {
 			v4 = *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*Tpthread_cond_t)(unsafe.Pointer(c)).F__u)) + 3*4))
 			cnt = v4
@@ -145206,10 +145548,11 @@ func x_pthread_cond_signal(tls *TLS, c uintptr) (r int32) {
 	if v2 < Int32FromInt32(0) {
 		v2 = int32(m_INT_MAX)
 	}
-	_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+	_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	return 0
 }
 
+const m_FUTEX_REQUEUE = 3
 const m_PTHREAD_CANCEL_MASKED = 2
 
 /*
@@ -145264,7 +145607,7 @@ func _unlock(tls *TLS, l uintptr) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	}
 }
 
@@ -145282,9 +145625,9 @@ func _unlock_requeue(tls *TLS, l uintptr, r uintptr, w int32) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	} else {
-		_ = ___syscall5(tls, int64(202), int64(l), int64(Int32FromInt32(3)|Int32FromInt32(128)), int64(Int32FromInt32(0)), int64(Int32FromInt32(1)), int64(r)) != int64(-int32(m_ENOSYS)) || ___syscall5(tls, int64(202), int64(l), int64(Int32FromInt32(3)), int64(Int32FromInt32(0)), int64(Int32FromInt32(1)), int64(r)) != 0
+		_ = ___syscall5(tls, int64(m_SYS_futex), int64(l), int64(Int32FromInt32(m_FUTEX_REQUEUE)|Int32FromInt32(m_FUTEX_PRIVATE)), int64(Int32FromInt32(0)), int64(Int32FromInt32(1)), int64(r)) != int64(-int32(m_ENOSYS)) || ___syscall5(tls, int64(m_SYS_futex), int64(l), int64(Int32FromInt32(m_FUTEX_REQUEUE)), int64(Int32FromInt32(0)), int64(Int32FromInt32(1)), int64(r)) != 0
 	}
 }
 
@@ -145356,7 +145699,7 @@ func x___pthread_cond_timedwait(tls *TLS, c uintptr, m uintptr, ts uintptr) (r i
 			if v2 < Int32FromInt32(0) {
 				v2 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 		}
 		oldstate = int32(_WAITING)
 		goto relock
@@ -145390,7 +145733,7 @@ func x___pthread_cond_timedwait(tls *TLS, c uintptr, m uintptr, ts uintptr) (r i
 				if v5 < Int32FromInt32(0) {
 					v5 = int32(m_INT_MAX)
 				}
-				_ = ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v4), int64(Int32FromInt32(1)), int64(v5)) != 0
+				_ = ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)|v6), int64(v5)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v4), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v5)) != 0
 			}
 		}
 	} else {
@@ -145528,6 +145871,8 @@ const m_CLONE_SETTLS = 524288
 const m_CLONE_SIGHAND = 2048
 const m_CLONE_SYSVSEM = 262144
 const m_CLONE_THREAD = 65536
+const m_SYS_sched_setscheduler = 144
+const m_SYS_set_robust_list = 273
 
 func _dummy_02(tls *TLS) {
 }
@@ -145571,7 +145916,7 @@ func x___tl_unlock(tls *TLS) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	}
 }
 
@@ -145594,7 +145939,7 @@ func x___tl_sync(tls *TLS, td uintptr) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	}
 }
 
@@ -145678,7 +146023,7 @@ func x___pthread_exit(tls *TLS, result uintptr) {
 			if v2 < Int32FromInt32(0) {
 				v2 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 		}
 	}
 	x___vm_unlock(tls)
@@ -145708,7 +146053,7 @@ func x___pthread_exit(tls *TLS, result uintptr) {
 		/* Robust list will no longer be valid, and was already
 		 * processed above, so unregister it with the kernel. */
 		if (*T__pthread)(unsafe.Pointer(self)).Frobust_list.Foff != 0 {
-			___syscall2(tls, int64(273), int64(Int32FromInt32(0)), int64(Uint64FromInt32(3)*Uint64FromInt64(8)))
+			___syscall2(tls, int64(m_SYS_set_robust_list), int64(Int32FromInt32(0)), int64(Uint64FromInt32(3)*Uint64FromInt64(8)))
 		}
 		/* The following call unmaps the thread's stack mapping
 		 * and then exits without touching the stack. */
@@ -145725,9 +146070,9 @@ func x___pthread_exit(tls *TLS, result uintptr) {
 	if v8 < Int32FromInt32(0) {
 		v8 = int32(m_INT_MAX)
 	}
-	_ = ___syscall3(tls, int64(202), int64(v7), int64(Int32FromInt32(1)|v9), int64(v8)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v7), int64(Int32FromInt32(1)), int64(v8)) != 0
+	_ = ___syscall3(tls, int64(m_SYS_futex), int64(v7), int64(Int32FromInt32(m_FUTEX_WAKE)|v9), int64(v8)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v7), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v8)) != 0
 	for {
-		___syscall1(tls, int64(60), int64(Int32FromInt32(0)))
+		___syscall1(tls, int64(m_SYS_exit), int64(Int32FromInt32(0)))
 	}
 }
 
@@ -145759,13 +146104,13 @@ func _start1(tls *TLS, p uintptr) (r int32) {
 			x___wait(tls, args+16, uintptr(0), int32(2), int32(1))
 		}
 		if AtomicLoadPInt32(args+16) != 0 {
-			___syscall1(tls, int64(218), int64(args+16))
+			___syscall1(tls, int64(m_SYS_set_tid_address), int64(args+16))
 			for {
-				___syscall1(tls, int64(60), int64(Int32FromInt32(0)))
+				___syscall1(tls, int64(m_SYS_exit), int64(Int32FromInt32(0)))
 			}
 		}
 	}
-	___syscall4(tls, int64(14), int64(Int32FromInt32(2)), int64(args+24), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
+	___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_SETMASK)), int64(args+24), int64(Int32FromInt32(0)), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 	x___pthread_exit(tls, (*(*func(*TLS, uintptr) uintptr)(unsafe.Pointer(&struct{ uintptr }{(*Tstart_args)(unsafe.Pointer(args)).Fstart_func})))(tls, (*Tstart_args)(unsafe.Pointer(args)).Fstart_arg))
 	return 0
 }
@@ -145826,7 +146171,7 @@ func x___pthread_create(tls *TLS, res uintptr, attrp uintptr, entry uintptr, arg
 		*(*[1]uint64)(unsafe.Pointer(bp)) = [1]uint64{
 			0: Uint64FromUint64(3) << (Int32FromInt32(32) * BoolInt32(Uint64FromInt64(8) > Uint64FromInt32(4))),
 		}
-		___syscall4(tls, int64(14), int64(Int32FromInt32(1)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
+		___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_UNBLOCK)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 		(*T__pthread)(unsafe.Pointer(self)).Ftsd = uintptr(unsafe.Pointer(&x___pthread_tsd_main))
 		x___membarrier_init(tls)
 		x___libc.Fthreaded = int8(1)
@@ -145941,7 +146286,7 @@ func x___pthread_create(tls *TLS, res uintptr, attrp uintptr, entry uintptr, arg
 	if ret < 0 {
 		ret = -int32(m_EAGAIN)
 	} else if *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tpthread_attr_t)(unsafe.Pointer(bp + 8))).F__u.F__i)) + uintptr(Uint64FromInt32(3)*(Uint64FromInt64(8)/Uint64FromInt64(4))+Uint64FromInt32(1))*4)) != 0 {
-		ret = int32(___syscall3(tls, int64(144), int64((*T__pthread)(unsafe.Pointer(new1)).Ftid), int64(*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tpthread_attr_t)(unsafe.Pointer(bp + 8))).F__u.F__i)) + uintptr(Uint64FromInt32(3)*(Uint64FromInt64(8)/Uint64FromInt64(4))+Uint64FromInt32(2))*4))), int64(uintptr(unsafe.Pointer(&(*(*Tpthread_attr_t)(unsafe.Pointer(bp + 8))).F__u.F__i))+uintptr(Uint64FromInt32(3)*(Uint64FromInt64(8)/Uint64FromInt64(4))+Uint64FromInt32(3))*4)))
+		ret = int32(___syscall3(tls, int64(m_SYS_sched_setscheduler), int64((*T__pthread)(unsafe.Pointer(new1)).Ftid), int64(*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tpthread_attr_t)(unsafe.Pointer(bp + 8))).F__u.F__i)) + uintptr(Uint64FromInt32(3)*(Uint64FromInt64(8)/Uint64FromInt64(4))+Uint64FromInt32(2))*4))), int64(uintptr(unsafe.Pointer(&(*(*Tpthread_attr_t)(unsafe.Pointer(bp + 8))).F__u.F__i))+uintptr(Uint64FromInt32(3)*(Uint64FromInt64(8)/Uint64FromInt64(4))+Uint64FromInt32(3))*4)))
 		if ret != 0 {
 			v6 = int32(3)
 		} else {
@@ -145957,7 +146302,7 @@ func x___pthread_create(tls *TLS, res uintptr, attrp uintptr, entry uintptr, arg
 			if v8 < Int32FromInt32(0) {
 				v8 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v7), int64(Int32FromInt32(1)|v9), int64(v8)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v7), int64(Int32FromInt32(1)), int64(v8)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v7), int64(Int32FromInt32(m_FUTEX_WAKE)|v9), int64(v8)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v7), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v8)) != 0
 		}
 		if ret != 0 {
 			x___wait(tls, args+16, uintptr(0), int32(3), 0)
@@ -146083,7 +146428,8 @@ func x_pthread_getname_np(tls *TLS, thread uintptr, name uintptr, len1 uint64) (
 	return status
 }
 
-const m_ESRCH = 3
+const m_SYS_sched_getparam = 143
+const m_SYS_sched_getscheduler = 145
 
 func x_pthread_getschedparam(tls *TLS, t uintptr, policy uintptr, param uintptr) (r1 int32) {
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
@@ -146095,9 +146441,9 @@ func x_pthread_getschedparam(tls *TLS, t uintptr, policy uintptr, param uintptr)
 	if !((*T__pthread)(unsafe.Pointer(t)).Ftid != 0) {
 		r = int32(m_ESRCH)
 	} else {
-		r = int32(-___syscall2(tls, int64(143), int64((*T__pthread)(unsafe.Pointer(t)).Ftid), int64(param)))
+		r = int32(-___syscall2(tls, int64(m_SYS_sched_getparam), int64((*T__pthread)(unsafe.Pointer(t)).Ftid), int64(param)))
 		if !(r != 0) {
-			*(*int32)(unsafe.Pointer(policy)) = int32(___syscall1(tls, int64(145), int64((*T__pthread)(unsafe.Pointer(t)).Ftid)))
+			*(*int32)(unsafe.Pointer(policy)) = int32(___syscall1(tls, int64(m_SYS_sched_getscheduler), int64((*T__pthread)(unsafe.Pointer(t)).Ftid)))
 		}
 	}
 	x___unlock(tls, t+176)
@@ -146285,7 +146631,7 @@ func x_pthread_kill(tls *TLS, t uintptr, sig int32) (r1 int32) {
 	x___block_all_sigs(tls, bp)
 	x___lock(tls, t+176)
 	if (*T__pthread)(unsafe.Pointer(t)).Ftid != 0 {
-		v1 = -___syscall2(tls, int64(200), int64((*T__pthread)(unsafe.Pointer(t)).Ftid), int64(sig))
+		v1 = -___syscall2(tls, int64(m_SYS_tkill), int64((*T__pthread)(unsafe.Pointer(t)).Ftid), int64(sig))
 	} else {
 		if uint32(sig)+0 >= uint32(m__NSIG) {
 			v2 = int32(m_EINVAL)
@@ -146347,12 +146693,12 @@ func x_pthread_mutex_setprioceiling(tls *TLS, m uintptr, ceiling int32, old uint
 	return int32(m_EINVAL)
 }
 
-const m_EDEADLK = 35
 const m_FUTEX_LOCK_PI = 6
+const m_FUTEX_UNLOCK_PI = 7
 const m_PTHREAD_MUTEX_ERRORCHECK = 2
 
 func ___futex4(tls *TLS, addr uintptr, op int32, val int32, to uintptr) (r int32) {
-	return int32(___syscall4(tls, int64(202), int64(addr), int64(op), int64(val), int64(to)))
+	return int32(___syscall4(tls, int64(m_SYS_futex), int64(addr), int64(op), int64(val), int64(to)))
 }
 
 func _pthread_mutex_timedlock_pi(tls *TLS, m uintptr, at uintptr) (r int32) {
@@ -146377,7 +146723,7 @@ func _pthread_mutex_timedlock_pi(tls *TLS, m uintptr, at uintptr) (r int32) {
 		/* Catch spurious success for non-robust mutexes. */
 		if !(type1&Int32FromInt32(4) != 0) && (*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u)) + 1*4))&int32(0x40000000) != 0 || *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u)) + 2*4)) != 0) {
 			_a_store(tls, uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+2*4, -int32(1))
-			___syscall2(tls, int64(202), int64(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+1*4), int64(Int32FromInt32(7)|priv))
+			___syscall2(tls, int64(m_SYS_futex), int64(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+1*4), int64(Int32FromInt32(m_FUTEX_UNLOCK_PI)|priv))
 			(*T__pthread)(unsafe.Pointer(self)).Frobust_list.Fpending = uintptr(0)
 			break
 		}
@@ -146447,9 +146793,6 @@ func x___pthread_mutex_timedlock(tls *TLS, m uintptr, at uintptr) (r1 int32) {
 	return r
 }
 
-const m_ENOTRECOVERABLE = 131
-const m_EOWNERDEAD = 130
-
 func x___pthread_mutex_trylock_owner(tls *TLS, m uintptr) (r int32) {
 	var next, self uintptr
 	var old, own, priv, tid, type1, v1 int32
@@ -146481,7 +146824,7 @@ func x___pthread_mutex_trylock_owner(tls *TLS, m uintptr) (r int32) {
 	if type1&int32(128) != 0 {
 		if !((*T__pthread)(unsafe.Pointer(self)).Frobust_list.Foff != 0) {
 			(*T__pthread)(unsafe.Pointer(self)).Frobust_list.Foff = int64(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+1*4) - int64(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+4*8)
-			___syscall2(tls, int64(273), int64(self+136), int64(Uint64FromInt32(3)*Uint64FromInt64(8)))
+			___syscall2(tls, int64(m_SYS_set_robust_list), int64(self+136), int64(Uint64FromInt32(3)*Uint64FromInt64(8)))
 		}
 		if *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u)) + 2*4)) != 0 {
 			tid = int32(uint32(tid) | Uint32FromUint32(0x80000000))
@@ -146499,7 +146842,7 @@ func x___pthread_mutex_trylock_owner(tls *TLS, m uintptr) (r int32) {
 success:
 	if type1&int32(8) != 0 && *(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u)) + 2*4)) != 0 {
 		priv = type1&int32(128) ^ int32(128)
-		___syscall2(tls, int64(202), int64(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+1*4), int64(Int32FromInt32(7)|priv))
+		___syscall2(tls, int64(m_SYS_futex), int64(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+1*4), int64(Int32FromInt32(m_FUTEX_UNLOCK_PI)|priv))
 		(*T__pthread)(unsafe.Pointer(self)).Frobust_list.Fpending = uintptr(0)
 		if type1&int32(4) != 0 {
 			v1 = int32(m_ENOTRECOVERABLE)
@@ -146567,7 +146910,7 @@ func x___pthread_mutex_unlock(tls *TLS, m uintptr) (r int32) {
 			if new1 != 0 {
 				_a_store(tls, uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+2*4, -int32(1))
 			}
-			___syscall2(tls, int64(202), int64(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+1*4), int64(Int32FromInt32(7)|priv))
+			___syscall2(tls, int64(m_SYS_futex), int64(uintptr(unsafe.Pointer(&(*Tpthread_mutex_t)(unsafe.Pointer(m)).F__u))+1*4), int64(Int32FromInt32(m_FUTEX_UNLOCK_PI)|priv))
 		}
 		cont = 0
 		waiters = 0
@@ -146588,7 +146931,7 @@ func x___pthread_mutex_unlock(tls *TLS, m uintptr) (r int32) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	}
 	return 0
 }
@@ -146621,7 +146964,7 @@ func x_pthread_mutexattr_setprotocol(tls *TLS, a uintptr, protocol int32) (r1 in
 		r = AtomicLoadPInt32(uintptr(unsafe.Pointer(&_check_pi_result)))
 		if r < 0 {
 			*(*int32)(unsafe.Pointer(bp)) = 0
-			r = int32(-___syscall4(tls, int64(202), int64(bp), int64(Int32FromInt32(6)), int64(Int32FromInt32(0)), int64(Int32FromInt32(0))))
+			r = int32(-___syscall4(tls, int64(m_SYS_futex), int64(bp), int64(Int32FromInt32(m_FUTEX_LOCK_PI)), int64(Int32FromInt32(0)), int64(Int32FromInt32(0))))
 			_a_store(tls, uintptr(unsafe.Pointer(&_check_pi_result)), r)
 		}
 		if r != 0 {
@@ -146646,6 +146989,8 @@ func x_pthread_mutexattr_setpshared(tls *TLS, a uintptr, pshared int32) (r int32
 	return 0
 }
 
+const m_SYS_get_robust_list = 274
+
 var _check_robust_result = -int32(1)
 
 func x_pthread_mutexattr_setrobust(tls *TLS, a uintptr, robust int32) (r1 int32) {
@@ -146660,7 +147005,7 @@ func x_pthread_mutexattr_setrobust(tls *TLS, a uintptr, robust int32) (r1 int32)
 	if robust != 0 {
 		r = AtomicLoadPInt32(uintptr(unsafe.Pointer(&_check_robust_result)))
 		if r < 0 {
-			r = int32(-___syscall3(tls, int64(274), int64(Int32FromInt32(0)), int64(bp), int64(bp+8)))
+			r = int32(-___syscall3(tls, int64(m_SYS_get_robust_list), int64(Int32FromInt32(0)), int64(bp), int64(bp+8)))
 			_a_store(tls, uintptr(unsafe.Pointer(&_check_robust_result)), r)
 		}
 		if r != 0 {
@@ -146696,7 +147041,7 @@ func _undo(tls *TLS, control uintptr) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	}
 }
 
@@ -146743,7 +147088,7 @@ func x___pthread_once_full(tls *TLS, control uintptr, init1 uintptr) (r int32) {
 			if v9 < Int32FromInt32(0) {
 				v9 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(202), int64(v8), int64(Int32FromInt32(1)|v10), int64(v9)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v8), int64(Int32FromInt32(1)), int64(v9)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v8), int64(Int32FromInt32(m_FUTEX_WAKE)|v10), int64(v9)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v8), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v9)) != 0
 		}
 		return 0
 	_2:
@@ -146908,7 +147253,7 @@ func x___pthread_rwlock_unlock(tls *TLS, rw uintptr) (r int32) {
 		if v3 < Int32FromInt32(0) {
 			v3 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v2), int64(Int32FromInt32(1)|v4), int64(v3)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v2), int64(Int32FromInt32(1)), int64(v3)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v2), int64(Int32FromInt32(m_FUTEX_WAKE)|v4), int64(v3)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v2), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v3)) != 0
 	}
 	return 0
 }
@@ -147095,13 +147440,15 @@ func x_pthread_setschedparam(tls *TLS, t uintptr, policy int32, param uintptr) (
 	if !((*T__pthread)(unsafe.Pointer(t)).Ftid != 0) {
 		v1 = int64(m_ESRCH)
 	} else {
-		v1 = -___syscall3(tls, int64(144), int64((*T__pthread)(unsafe.Pointer(t)).Ftid), int64(policy), int64(param))
+		v1 = -___syscall3(tls, int64(m_SYS_sched_setscheduler), int64((*T__pthread)(unsafe.Pointer(t)).Ftid), int64(policy), int64(param))
 	}
 	r = int32(v1)
 	x___unlock(tls, t+176)
 	x___restore_sigs(tls, bp)
 	return r
 }
+
+const m_SYS_sched_setparam = 142
 
 func x_pthread_setschedprio(tls *TLS, t uintptr, _prio int32) (r1 int32) {
 	bp := tls.Alloc(136) /* tlsAllocs 136 maxVaListSize 0 */
@@ -147115,7 +147462,7 @@ func x_pthread_setschedprio(tls *TLS, t uintptr, _prio int32) (r1 int32) {
 	if !((*T__pthread)(unsafe.Pointer(t)).Ftid != 0) {
 		v1 = int64(m_ESRCH)
 	} else {
-		v1 = -___syscall2(tls, int64(142), int64((*T__pthread)(unsafe.Pointer(t)).Ftid), int64(bp))
+		v1 = -___syscall2(tls, int64(m_SYS_sched_setparam), int64((*T__pthread)(unsafe.Pointer(t)).Ftid), int64(bp))
 	}
 	r = int32(v1)
 	x___unlock(tls, t+176)
@@ -147140,7 +147487,7 @@ func x_pthread_sigmask(tls *TLS, how int32, set uintptr, old uintptr) (r int32) 
 	if set != 0 && uint32(how)-uint32(m_SIG_BLOCK) > uint32(2) {
 		return int32(m_EINVAL)
 	}
-	ret = int32(-___syscall4(tls, int64(14), int64(how), int64(set), int64(old), int64(Int32FromInt32(65)/Int32FromInt32(8))))
+	ret = int32(-___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(how), int64(set), int64(old), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8))))
 	if !(ret != 0) && old != 0 {
 		if uint64(8) == uint64(8) {
 			p1 = old
@@ -147215,7 +147562,6 @@ func x_sem_init(tls *TLS, sem uintptr, pshared int32, value uint32) (r int32) {
 	return 0
 }
 
-const m_EMFILE = 24
 const m_F_OK = 0
 const m_MAP_SHARED = 1
 
@@ -147503,7 +147849,7 @@ func x_sem_post(tls *TLS, sem uintptr) (r int32) {
 		if v3 < Int32FromInt32(0) {
 			v3 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v2), int64(Int32FromInt32(1)|v4), int64(v3)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v2), int64(Int32FromInt32(1)), int64(v3)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v2), int64(Int32FromInt32(m_FUTEX_WAKE)|v4), int64(v3)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v2), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v3)) != 0
 	}
 	return 0
 }
@@ -147626,7 +147972,7 @@ func x___synccall(tls *TLS, func1 uintptr, ctx uintptr) {
 	x___pthread_setcancelstate(tls, int32(m_PTHREAD_CANCEL_DISABLE), bp+128)
 	x_sem_init(tls, uintptr(unsafe.Pointer(&_target_sem)), 0, uint32(0))
 	x_sem_init(tls, uintptr(unsafe.Pointer(&_caller_sem)), 0, uint32(0))
-	if !(x___libc.Fthreads_minus_1 != 0) || ___syscall0(tls, int64(186)) != int64((*T__pthread)(unsafe.Pointer(self)).Ftid) {
+	if !(x___libc.Fthreads_minus_1 != 0) || ___syscall0(tls, int64(m_SYS_gettid)) != int64((*T__pthread)(unsafe.Pointer(self)).Ftid) {
 		goto single_threaded
 	}
 	_callback = func1
@@ -147639,7 +147985,7 @@ func x___synccall(tls *TLS, func1 uintptr, ctx uintptr) {
 	for td = (*T__pthread)(unsafe.Pointer(self)).Fnext; td != self; {
 		_target_tid = (*T__pthread)(unsafe.Pointer(td)).Ftid
 		for {
-			v2 = int32(-___syscall2(tls, int64(200), int64((*T__pthread)(unsafe.Pointer(td)).Ftid), int64(Int32FromInt32(34))))
+			v2 = int32(-___syscall2(tls, int64(m_SYS_tkill), int64((*T__pthread)(unsafe.Pointer(td)).Ftid), int64(Int32FromInt32(m_SIGSYNCCALL))))
 			r = v2
 			if !(v2 == int32(m_EAGAIN)) {
 				break
@@ -147730,7 +148076,7 @@ func x_thrd_sleep(tls *TLS, req uintptr, rem uintptr) (r int32) {
 }
 
 func x_thrd_yield(tls *TLS) {
-	___syscall0(tls, int64(24))
+	___syscall0(tls, int64(m_SYS_sched_yield))
 }
 
 func x_tss_create(tls *TLS, tss uintptr, dtor uintptr) (r int32) {
@@ -147792,11 +148138,9 @@ func x___vm_unlock(tls *TLS) {
 		if v2 < Int32FromInt32(0) {
 			v2 = int32(m_INT_MAX)
 		}
-		_ = ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(202), int64(v1), int64(Int32FromInt32(1)), int64(v2)) != 0
+		_ = ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)|v3), int64(v2)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v1), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v2)) != 0
 	}
 }
-
-const m_O_LARGEFILE4 = 524288
 
 func x___map_file(tls *TLS, pathname uintptr, size uintptr) (r uintptr) {
 	bp := tls.Alloc(144) /* tlsAllocs 144 maxVaListSize 0 */
@@ -147805,7 +148149,7 @@ func x___map_file(tls *TLS, pathname uintptr, size uintptr) (r uintptr) {
 	var map1, v1 uintptr
 	var _ /* st at bp+0 */ Tstat
 	map1 = uintptr(-Int32FromInt32(1))
-	fd = int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_open), int64(pathname), int64(Int32FromInt32(00)|Int32FromInt32(02000000)|Int32FromInt32(04000)|Int32FromInt32(m_O_LARGEFILE4))))))
+	fd = int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_open), int64(pathname), int64(Int32FromInt32(m_O_RDONLY)|Int32FromInt32(m_O_CLOEXEC)|Int32FromInt32(m_O_NONBLOCK)|Int32FromInt32(m_O_LARGEFILE))))))
 	if fd < 0 {
 		return uintptr(0)
 	}
@@ -147813,7 +148157,7 @@ func x___map_file(tls *TLS, pathname uintptr, size uintptr) (r uintptr) {
 		map1 = x___mmap(tls, uintptr(0), uint64((*(*Tstat)(unsafe.Pointer(bp))).Fst_size), int32(m_PROT_READ), int32(m_MAP_SHARED), fd, 0)
 		*(*uint64)(unsafe.Pointer(size)) = uint64((*(*Tstat)(unsafe.Pointer(bp))).Fst_size)
 	}
-	___syscall1(tls, int64(3), int64(fd))
+	___syscall1(tls, int64(m_SYS_close), int64(fd))
 	if map1 == uintptr(-Int32FromInt32(1)) {
 		v1 = uintptr(0)
 	} else {
@@ -148583,13 +148927,15 @@ func x_clock(tls *TLS) (r int64) {
 	return (*(*Ttimespec)(unsafe.Pointer(bp))).Ftv_sec*int64(1000000) + (*(*Ttimespec)(unsafe.Pointer(bp))).Ftv_nsec/int64(1000)
 }
 
+const m_SYS_clock_getres = 229
+
 func x_clock_getcpuclockid(tls *TLS, pid int32, clk uintptr) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var id, ret int32
 	var _ /* ts at bp+0 */ Ttimespec
 	id = int32(uint32(-pid-Int32FromInt32(1))*uint32(8) + uint32(2))
-	ret = int32(___syscall2(tls, int64(229), int64(id), int64(bp)))
+	ret = int32(___syscall2(tls, int64(m_SYS_clock_getres), int64(id), int64(bp)))
 	if ret == -int32(m_EINVAL) {
 		ret = -int32(m_ESRCH)
 	}
@@ -148603,9 +148949,11 @@ func x_clock_getcpuclockid(tls *TLS, pid int32, clk uintptr) (r int32) {
 func x_clock_getres(tls *TLS, clk int32, ts uintptr) (r int32) {
 	/* If reaching this point, it's a 64-bit arch or time64-only
 	 * 32-bit arch and we can get result directly into timespec. */
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(229), int64(clk), int64(ts)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_clock_getres), int64(clk), int64(ts)))))
 }
 
+const m_SYS_clock_gettime = 228
+const m_SYS_gettimeofday = 96
 const m_VDSO_CGT_SYM = "__vdso_clock_gettime"
 const m_VDSO_CGT_VER = "LINUX_2.6"
 
@@ -148648,10 +148996,10 @@ func x___clock_gettime(tls *TLS, clk int32, ts uintptr) (r1 int32) {
 		 * also handles the case where cgt_init fails to find
 		 * a vdso function to use. */
 	}
-	r = int32(___syscall2(tls, int64(228), int64(clk), int64(ts)))
+	r = int32(___syscall2(tls, int64(m_SYS_clock_gettime), int64(clk), int64(ts)))
 	if r == -int32(m_ENOSYS) {
 		if clk == m_CLOCK_REALTIME {
-			___syscall2(tls, int64(96), int64(ts), int64(Int32FromInt32(0)))
+			___syscall2(tls, int64(m_SYS_gettimeofday), int64(ts), int64(Int32FromInt32(0)))
 			(*Ttimespec)(unsafe.Pointer(ts)).Ftv_nsec = int64(int32((*Ttimespec)(unsafe.Pointer(ts)).Ftv_nsec) * int32(1000))
 			return 0
 		}
@@ -148661,19 +149009,23 @@ func x___clock_gettime(tls *TLS, clk int32, ts uintptr) (r1 int32) {
 }
 
 const m_CLOCK_THREAD_CPUTIME_ID = 3
+const m_SYS_clock_nanosleep = 230
+const m_SYS_nanosleep = 35
 
 func x___clock_nanosleep(tls *TLS, clk int32, flags int32, req uintptr, rem uintptr) (r int32) {
 	if clk == int32(m_CLOCK_THREAD_CPUTIME_ID) {
 		return int32(m_EINVAL)
 	}
 	if clk == m_CLOCK_REALTIME && !(flags != 0) {
-		return int32(-x___syscall_cp(tls, int64(35), int64(req), int64(rem), 0, 0, 0, 0))
+		return int32(-x___syscall_cp(tls, int64(m_SYS_nanosleep), int64(req), int64(rem), 0, 0, 0, 0))
 	}
-	return int32(-x___syscall_cp(tls, int64(230), int64(clk), int64(flags), int64(req), int64(rem), 0, 0))
+	return int32(-x___syscall_cp(tls, int64(m_SYS_clock_nanosleep), int64(clk), int64(flags), int64(req), int64(rem), 0, 0))
 }
 
+const m_SYS_clock_settime = 227
+
 func x_clock_settime(tls *TLS, clk int32, ts uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(227), int64(clk), int64(ts)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_clock_settime), int64(clk), int64(ts)))))
 }
 
 func x_ctime(tls *TLS, t uintptr) (r uintptr) {
@@ -149621,6 +149973,8 @@ func x_timegm(tls *TLS, tm uintptr) (r int64) {
 
 const m_SIGEV_THREAD_ID = 4
 const m_SIGTIMER = 32
+const m_SYS_timer_create = 222
+const m_SYS_timer_delete = 226
 
 type Tksigevent = struct {
 	Fsigev_value  Tsigval
@@ -149687,7 +150041,7 @@ func _start2(tls *TLS, arg uintptr) (r uintptr) {
 			break
 		}
 	}
-	___syscall1(tls, int64(226), int64(AtomicLoadPInt32(self+164)&Int32FromInt32(0x7fffffff)))
+	___syscall1(tls, int64(m_SYS_timer_delete), int64(AtomicLoadPInt32(self+164)&Int32FromInt32(m_INT_MAX)))
 	return uintptr(0)
 }
 
@@ -149726,7 +150080,7 @@ func x_timer_create(tls *TLS, clk int32, evp uintptr, res uintptr) (r1 int32) {
 			}
 			ksevp = bp + 112
 		}
-		if x___syscall_ret(tls, uint64(___syscall3(tls, int64(222), int64(clk), int64(ksevp), int64(bp+136)))) < 0 {
+		if x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_timer_create), int64(clk), int64(ksevp), int64(bp+136)))) < 0 {
 			return -int32(1)
 		}
 		*(*uintptr)(unsafe.Pointer(res)) = uintptr(int64(*(*int32)(unsafe.Pointer(bp + 136))))
@@ -149755,7 +150109,7 @@ func x_timer_create(tls *TLS, clk int32, evp uintptr, res uintptr) (r1 int32) {
 		*(*[1]uint64)(unsafe.Pointer(bp)) = [1]uint64{
 			0: uint64(0x80000000),
 		}
-		___syscall4(tls, int64(14), int64(Int32FromInt32(0)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(65)/Int32FromInt32(8)))
+		___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_BLOCK)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
 		r = x___pthread_create(tls, bp+8, bp+16, __ccgo_fp(_start2), bp+72)
 		x___restore_sigs(tls, bp+144)
 		if r != 0 {
@@ -149766,7 +150120,7 @@ func x_timer_create(tls *TLS, clk int32, evp uintptr, res uintptr) (r1 int32) {
 		(*(*Tksigevent)(unsafe.Pointer(bp + 112))).Fsigev_signo = int32(m_SIGTIMER)
 		(*(*Tksigevent)(unsafe.Pointer(bp + 112))).Fsigev_notify = int32(m_SIGEV_THREAD_ID)
 		(*(*Tksigevent)(unsafe.Pointer(bp + 112))).Fsigev_tid = (*T__pthread)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))).Ftid
-		if x___syscall_ret(tls, uint64(___syscall3(tls, int64(222), int64(clk), int64(bp+112), int64(bp+136)))) < 0 {
+		if x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_timer_create), int64(clk), int64(bp+112), int64(bp+136)))) < 0 {
 			*(*int32)(unsafe.Pointer(bp + 136)) = -int32(1)
 			AtomicStorePInt32(*(*uintptr)(unsafe.Pointer(bp + 8))+60, int32(1))
 		}
@@ -149790,11 +150144,13 @@ func x_timer_delete(tls *TLS, t uintptr) (r int32) {
 	if int64(t) < 0 {
 		td = uintptr(uint64(t) << Int32FromInt32(1))
 		_a_store(tls, td+164, AtomicLoadPInt32(td+164)|(-Int32FromInt32(1)-Int32FromInt32(0x7fffffff)))
-		___syscall2(tls, int64(200), int64((*T__pthread)(unsafe.Pointer(td)).Ftid), int64(Int32FromInt32(32)))
+		___syscall2(tls, int64(m_SYS_tkill), int64((*T__pthread)(unsafe.Pointer(td)).Ftid), int64(Int32FromInt32(m_SIGTIMER)))
 		return 0
 	}
-	return int32(___syscall1(tls, int64(226), int64(t)))
+	return int32(___syscall1(tls, int64(m_SYS_timer_delete), int64(t)))
 }
+
+const m_SYS_timer_getoverrun = 225
 
 func x_timer_getoverrun(tls *TLS, t uintptr) (r int32) {
 	var td uintptr
@@ -149802,8 +150158,10 @@ func x_timer_getoverrun(tls *TLS, t uintptr) (r int32) {
 		td = uintptr(uint64(t) << Int32FromInt32(1))
 		t = uintptr(uint64(AtomicLoadPInt32(td+164) & Int32FromInt32(m_INT_MAX)))
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(225), int64(t)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_timer_getoverrun), int64(t)))))
 }
+
+const m_SYS_timer_gettime = 224
 
 func x_timer_gettime(tls *TLS, t uintptr, val uintptr) (r int32) {
 	var td uintptr
@@ -149811,8 +150169,10 @@ func x_timer_gettime(tls *TLS, t uintptr, val uintptr) (r int32) {
 		td = uintptr(uint64(t) << Int32FromInt32(1))
 		t = uintptr(uint64(AtomicLoadPInt32(td+164) & Int32FromInt32(m_INT_MAX)))
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(224), int64(t), int64(val)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_timer_gettime), int64(t), int64(val)))))
 }
+
+const m_SYS_timer_settime = 223
 
 func x_timer_settime(tls *TLS, t uintptr, flags int32, val uintptr, old uintptr) (r int32) {
 	var td uintptr
@@ -149820,8 +150180,10 @@ func x_timer_settime(tls *TLS, t uintptr, flags int32, val uintptr, old uintptr)
 		td = uintptr(uint64(t) << Int32FromInt32(1))
 		t = uintptr(uint64(AtomicLoadPInt32(td+164) & Int32FromInt32(m_INT_MAX)))
 	}
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(223), int64(t), int64(flags), int64(val), int64(old)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_timer_settime), int64(t), int64(flags), int64(val), int64(old)))))
 }
+
+const m_SYS_times = 100
 
 type Ttms = struct {
 	Ftms_utime  int64
@@ -149831,7 +150193,7 @@ type Ttms = struct {
 }
 
 func x_times(tls *TLS, tms uintptr) (r int64) {
-	return ___syscall1(tls, int64(100), int64(tms))
+	return ___syscall1(tls, int64(m_SYS_times), int64(tms))
 }
 
 const m_TIME_UTC = 1
@@ -149983,12 +150345,16 @@ func x__exit(tls *TLS, status int32) {
 	x__Exit(tls, status)
 }
 
+const m_SYS_access = 21
+
 func x_access(tls *TLS, filename uintptr, amode int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(21), int64(filename), int64(amode)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_access), int64(filename), int64(amode)))))
 }
 
+const m_SYS_acct = 163
+
 func x_acct(tls *TLS, filename uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(163), int64(filename)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_acct), int64(filename)))))
 }
 
 const m_ITIMER_REAL = 0
@@ -150009,11 +150375,13 @@ func x_alarm(tls *TLS, seconds uint32) (r uint32) {
 }
 
 func x_chdir(tls *TLS, path uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(80), int64(path)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_chdir), int64(path)))))
 }
 
+const m_SYS_chown = 92
+
 func x_chown(tls *TLS, path uintptr, uid uint32, gid uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(92), int64(path), int64(uid), int64(gid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_chown), int64(path), int64(uid), int64(gid)))))
 }
 
 func _dummy22(tls *TLS, fd int32) (r int32) {
@@ -150023,7 +150391,7 @@ func _dummy22(tls *TLS, fd int32) (r int32) {
 func x_close(tls *TLS, fd int32) (r1 int32) {
 	var r int32
 	fd = x___aio_close(tls, fd)
-	r = int32(x___syscall_cp(tls, int64(3), int64(fd), 0, 0, 0, 0, 0))
+	r = int32(x___syscall_cp(tls, int64(m_SYS_close), int64(fd), 0, 0, 0, 0, 0))
 	if r == -int32(m_EINTR) {
 		r = 0
 	}
@@ -150041,13 +150409,13 @@ func x_ctermid(tls *TLS, s uintptr) (r uintptr) {
 }
 
 func x_dup(tls *TLS, fd int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(32), int64(fd)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_dup), int64(fd)))))
 }
 
 func x_dup2(tls *TLS, old int32, new1 int32) (r1 int32) {
 	var r, v1 int32
 	for {
-		v1 = int32(___syscall2(tls, int64(33), int64(old), int64(new1)))
+		v1 = int32(___syscall2(tls, int64(m_SYS_dup2), int64(old), int64(new1)))
 		r = v1
 		if !(v1 == -int32(m_EBUSY)) {
 			break
@@ -150056,6 +150424,8 @@ func x_dup2(tls *TLS, old int32, new1 int32) (r1 int32) {
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
+const m_SYS_dup3 = 292
+
 func x___dup3(tls *TLS, old int32, new1 int32, flags int32) (r1 int32) {
 	var r, v1, v2 int32
 	if old == new1 {
@@ -150063,7 +150433,7 @@ func x___dup3(tls *TLS, old int32, new1 int32, flags int32) (r1 int32) {
 	}
 	if flags != 0 {
 		for {
-			v1 = int32(___syscall3(tls, int64(292), int64(old), int64(new1), int64(flags)))
+			v1 = int32(___syscall3(tls, int64(m_SYS_dup3), int64(old), int64(new1), int64(flags)))
 			r = v1
 			if !(v1 == -int32(m_EBUSY)) {
 				break
@@ -150077,17 +150447,25 @@ func x___dup3(tls *TLS, old int32, new1 int32, flags int32) (r1 int32) {
 		}
 	}
 	for {
-		v2 = int32(___syscall2(tls, int64(33), int64(old), int64(new1)))
+		v2 = int32(___syscall2(tls, int64(m_SYS_dup2), int64(old), int64(new1)))
 		r = v2
 		if !(v2 == -int32(m_EBUSY)) {
 			break
 		}
 	}
 	if r >= 0 && flags&int32(m_O_CLOEXEC) != 0 {
-		___syscall3(tls, int64(72), int64(new1), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(new1), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 	}
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
+
+const m_SYS_faccessat = 269
+const m_SYS_faccessat2 = 439
+const m_SYS_getegid = 108
+const m_SYS_geteuid = 107
+const m_SYS_setregid = 114
+const m_SYS_setreuid = 113
+const m___WCLONE = 2147483648
 
 type Tctx2 = struct {
 	Ffd       int32
@@ -150102,11 +150480,11 @@ func _checker(tls *TLS, p uintptr) (r int32) {
 	var c uintptr
 	var _ /* ret at bp+0 */ int32
 	c = p
-	if ___syscall2(tls, int64(114), ___syscall0(tls, int64(108)), int64(-Int32FromInt32(1))) != 0 || ___syscall2(tls, int64(113), ___syscall0(tls, int64(107)), int64(-Int32FromInt32(1))) != 0 {
-		___syscall1(tls, int64(60), int64(Int32FromInt32(1)))
+	if ___syscall2(tls, int64(m_SYS_setregid), ___syscall0(tls, int64(m_SYS_getegid)), int64(-Int32FromInt32(1))) != 0 || ___syscall2(tls, int64(m_SYS_setreuid), ___syscall0(tls, int64(m_SYS_geteuid)), int64(-Int32FromInt32(1))) != 0 {
+		___syscall1(tls, int64(m_SYS_exit), int64(Int32FromInt32(1)))
 	}
-	*(*int32)(unsafe.Pointer(bp)) = int32(___syscall4(tls, int64(269), int64((*Tctx2)(unsafe.Pointer(c)).Ffd), int64((*Tctx2)(unsafe.Pointer(c)).Ffilename), int64((*Tctx2)(unsafe.Pointer(c)).Famode), int64(Int32FromInt32(0))))
-	___syscall3(tls, int64(1), int64((*Tctx2)(unsafe.Pointer(c)).Fp), int64(bp), int64(Uint64FromInt64(4)))
+	*(*int32)(unsafe.Pointer(bp)) = int32(___syscall4(tls, int64(m_SYS_faccessat), int64((*Tctx2)(unsafe.Pointer(c)).Ffd), int64((*Tctx2)(unsafe.Pointer(c)).Ffilename), int64((*Tctx2)(unsafe.Pointer(c)).Famode), int64(Int32FromInt32(0))))
+	___syscall3(tls, int64(m_SYS_write), int64((*Tctx2)(unsafe.Pointer(c)).Fp), int64(bp), int64(Uint64FromInt64(4)))
 	return 0
 }
 
@@ -150121,7 +150499,7 @@ func x_faccessat(tls *TLS, fd int32, filename uintptr, amode int32, flag int32) 
 	var _ /* stack at bp+0 */ [1024]int8
 	var _ /* status at bp+1152 */ int32
 	if flag != 0 {
-		ret = int32(___syscall4(tls, int64(439), int64(fd), int64(filename), int64(amode), int64(flag)))
+		ret = int32(___syscall4(tls, int64(m_SYS_faccessat2), int64(fd), int64(filename), int64(amode), int64(flag)))
 		if ret != -int32(m_ENOSYS) {
 			return int32(x___syscall_ret(tls, uint64(ret)))
 		}
@@ -150130,7 +150508,7 @@ func x_faccessat(tls *TLS, fd int32, filename uintptr, amode int32, flag int32) 
 		return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EINVAL))))
 	}
 	if !(flag != 0) || x_getuid(tls) == x_geteuid(tls) && x_getgid(tls) == x_getegid(tls) {
-		return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(269), int64(fd), int64(filename), int64(amode)))))
+		return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_faccessat), int64(fd), int64(filename), int64(amode)))))
 	}
 	if x_pipe2(tls, bp+1160, int32(m_O_CLOEXEC)) != 0 {
 		return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EBUSY))))
@@ -150143,12 +150521,12 @@ func x_faccessat(tls *TLS, fd int32, filename uintptr, amode int32, flag int32) 
 	}
 	x___block_all_sigs(tls, bp+1024)
 	pid = ___clone(tls, __ccgo_fp(_checker), bp+uintptr(1024), 0, bp+1168, 0)
-	___syscall1(tls, int64(3), int64((*(*[2]int32)(unsafe.Pointer(bp + 1160)))[int32(1)]))
-	if pid < 0 || uint64(___syscall3(tls, 0, int64((*(*[2]int32)(unsafe.Pointer(bp + 1160)))[0]), int64(bp+1156), int64(Uint64FromInt64(4)))) != uint64(4) {
+	___syscall1(tls, int64(m_SYS_close), int64((*(*[2]int32)(unsafe.Pointer(bp + 1160)))[int32(1)]))
+	if pid < 0 || uint64(___syscall3(tls, m_SYS_read, int64((*(*[2]int32)(unsafe.Pointer(bp + 1160)))[0]), int64(bp+1156), int64(Uint64FromInt64(4)))) != uint64(4) {
 		*(*int32)(unsafe.Pointer(bp + 1156)) = -int32(m_EBUSY)
 	}
-	___syscall1(tls, int64(3), int64((*(*[2]int32)(unsafe.Pointer(bp + 1160)))[0]))
-	___syscall4(tls, int64(61), int64(pid), int64(bp+1152), int64(Uint32FromUint32(0x80000000)), int64(Int32FromInt32(0)))
+	___syscall1(tls, int64(m_SYS_close), int64((*(*[2]int32)(unsafe.Pointer(bp + 1160)))[0]))
+	___syscall4(tls, int64(m_SYS_wait4), int64(pid), int64(bp+1152), int64(Uint32FromUint32(m___WCLONE)), int64(Int32FromInt32(0)))
 	x___restore_sigs(tls, bp+1024)
 	return int32(x___syscall_ret(tls, uint64(*(*int32)(unsafe.Pointer(bp + 1156)))))
 }
@@ -150158,42 +150536,54 @@ func x_fchdir(tls *TLS, fd int32) (r int32) {
 	defer tls.Free(32)
 	var ret int32
 	var _ /* buf at bp+0 */ [27]int8
-	ret = int32(___syscall1(tls, int64(81), int64(fd)))
-	if ret != -int32(m_EBADF) || ___syscall2(tls, int64(72), int64(fd), int64(Int32FromInt32(1))) < 0 {
+	ret = int32(___syscall1(tls, int64(m_SYS_fchdir), int64(fd)))
+	if ret != -int32(m_EBADF) || ___syscall2(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_GETFD))) < 0 {
 		return int32(x___syscall_ret(tls, uint64(ret)))
 	}
 	x___procfdname(tls, bp, uint32(fd))
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(80), int64(bp)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_chdir), int64(bp)))))
 }
+
+const m_SYS_fchown = 93
 
 func x_fchown(tls *TLS, fd int32, uid uint32, gid uint32) (r int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ret int32
 	var _ /* buf at bp+0 */ [27]int8
-	ret = int32(___syscall3(tls, int64(93), int64(fd), int64(uid), int64(gid)))
-	if ret != -int32(m_EBADF) || ___syscall2(tls, int64(72), int64(fd), int64(Int32FromInt32(1))) < 0 {
+	ret = int32(___syscall3(tls, int64(m_SYS_fchown), int64(fd), int64(uid), int64(gid)))
+	if ret != -int32(m_EBADF) || ___syscall2(tls, int64(m_SYS_fcntl), int64(fd), int64(Int32FromInt32(m_F_GETFD))) < 0 {
 		return int32(x___syscall_ret(tls, uint64(ret)))
 	}
 	x___procfdname(tls, bp, uint32(fd))
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(92), int64(bp), int64(uid), int64(gid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_chown), int64(bp), int64(uid), int64(gid)))))
 }
+
+const m_SYS_fchownat = 260
 
 func x_fchownat(tls *TLS, fd int32, path uintptr, uid uint32, gid uint32, flag int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(260), int64(fd), int64(path), int64(uid), int64(gid), int64(flag)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_fchownat), int64(fd), int64(path), int64(uid), int64(gid), int64(flag)))))
 }
+
+const m_SYS_fdatasync = 75
 
 func x_fdatasync(tls *TLS, fd int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(75), int64(fd), 0, 0, 0, 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_fdatasync), int64(fd), 0, 0, 0, 0, 0))))
 }
+
+const m_SYS_fsync = 74
 
 func x_fsync(tls *TLS, fd int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(74), int64(fd), 0, 0, 0, 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_fsync), int64(fd), 0, 0, 0, 0, 0))))
 }
 
+const m_SYS_ftruncate = 77
+
 func x_ftruncate(tls *TLS, fd int32, length int64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(77), int64(fd), length))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_ftruncate), int64(fd), length))))
 }
+
+const m_SYS_getcwd = 79
 
 func x_getcwd(tls *TLS, buf uintptr, size uint64) (r uintptr) {
 	var ret int64
@@ -150215,7 +150605,7 @@ func x_getcwd(tls *TLS, buf uintptr, size uint64) (r uintptr) {
 		*(*int32)(unsafe.Pointer(x___errno_location(tls))) = int32(m_EINVAL)
 		return uintptr(0)
 	}
-	ret = x___syscall_ret(tls, uint64(___syscall2(tls, int64(79), int64(buf), int64(size))))
+	ret = x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_getcwd), int64(buf), int64(size))))
 	if ret < 0 {
 		return uintptr(0)
 	}
@@ -150232,19 +150622,21 @@ func x_getcwd(tls *TLS, buf uintptr, size uint64) (r uintptr) {
 }
 
 func x_getegid(tls *TLS) (r uint32) {
-	return uint32(___syscall0(tls, int64(108)))
+	return uint32(___syscall0(tls, int64(m_SYS_getegid)))
 }
 
 func x_geteuid(tls *TLS) (r uint32) {
-	return uint32(___syscall0(tls, int64(107)))
+	return uint32(___syscall0(tls, int64(m_SYS_geteuid)))
 }
 
 func x_getgid(tls *TLS) (r uint32) {
-	return uint32(___syscall0(tls, int64(104)))
+	return uint32(___syscall0(tls, int64(m_SYS_getgid)))
 }
 
+const m_SYS_getgroups = 115
+
 func x_getgroups(tls *TLS, count int32, list uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(115), int64(count), int64(list)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_getgroups), int64(count), int64(list)))))
 }
 
 func x_gethostname(tls *TLS, name uintptr, len1 uint64) (r int32) {
@@ -150292,28 +150684,34 @@ func x_getlogin_r(tls *TLS, name uintptr, size uint64) (r int32) {
 	return 0
 }
 
+const m_SYS_getpgid = 121
+
 func x_getpgid(tls *TLS, pid int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(121), int64(pid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_getpgid), int64(pid)))))
 }
 
 func x_getpgrp(tls *TLS) (r int32) {
-	return int32(___syscall1(tls, int64(121), int64(Int32FromInt32(0))))
+	return int32(___syscall1(tls, int64(m_SYS_getpgid), int64(Int32FromInt32(0))))
 }
 
 func x_getpid(tls *TLS) (r int32) {
-	return int32(___syscall0(tls, int64(39)))
+	return int32(___syscall0(tls, int64(m_SYS_getpid)))
 }
+
+const m_SYS_getppid = 110
 
 func x_getppid(tls *TLS) (r int32) {
-	return int32(___syscall0(tls, int64(110)))
+	return int32(___syscall0(tls, int64(m_SYS_getppid)))
 }
 
+const m_SYS_getsid = 124
+
 func x_getsid(tls *TLS, pid int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(124), int64(pid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_getsid), int64(pid)))))
 }
 
 func x_getuid(tls *TLS) (r uint32) {
-	return uint32(___syscall0(tls, int64(102)))
+	return uint32(___syscall0(tls, int64(m_SYS_getuid)))
 }
 
 func x_isatty(tls *TLS, fd int32) (r1 int32) {
@@ -150321,7 +150719,7 @@ func x_isatty(tls *TLS, fd int32) (r1 int32) {
 	defer tls.Free(8)
 	var r uint64
 	var _ /* wsz at bp+0 */ Twinsize
-	r = uint64(x___syscall_ret(tls, uint64(___syscall3(tls, int64(16), int64(fd), int64(Int32FromInt32(0x5413)), int64(bp)))))
+	r = uint64(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(Int32FromInt32(m_TIOCGWINSZ)), int64(bp)))))
 	if r == uint64(0) {
 		return int32(1)
 	}
@@ -150331,20 +150729,28 @@ func x_isatty(tls *TLS, fd int32) (r1 int32) {
 	return 0
 }
 
+const m_SYS_lchown = 94
+
 func x_lchown(tls *TLS, path uintptr, uid uint32, gid uint32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(94), int64(path), int64(uid), int64(gid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_lchown), int64(path), int64(uid), int64(gid)))))
 }
+
+const m_SYS_link = 86
 
 func x_link(tls *TLS, existing uintptr, new1 uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(86), int64(existing), int64(new1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_link), int64(existing), int64(new1)))))
 }
+
+const m_SYS_linkat = 265
 
 func x_linkat(tls *TLS, fd1 int32, existing uintptr, fd2 int32, new1 uintptr, flag int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(265), int64(fd1), int64(existing), int64(fd2), int64(new1), int64(flag)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_linkat), int64(fd1), int64(existing), int64(fd2), int64(new1), int64(flag)))))
 }
 
+const m_SYS_lseek = 8
+
 func x___lseek(tls *TLS, fd int32, offset int64, whence int32) (r int64) {
-	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(8), int64(fd), offset, int64(whence))))
+	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_lseek), int64(fd), offset, int64(whence))))
 }
 
 const m_PRIO_PROCESS = 0
@@ -150374,20 +150780,26 @@ func x_nice(tls *TLS, inc int32) (r int32) {
 	return r
 }
 
+const m_SYS_pause = 34
+
 func x_pause(tls *TLS) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(34), 0, 0, 0, 0, 0, 0))))
+	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_pause), 0, 0, 0, 0, 0, 0))))
 }
 
+const m_SYS_pipe = 22
+
 func x_pipe(tls *TLS, fd uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(22), int64(fd)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_pipe), int64(fd)))))
 }
+
+const m_SYS_pipe2 = 293
 
 func x_pipe2(tls *TLS, fd uintptr, flag int32) (r int32) {
 	var ret int32
 	if !(flag != 0) {
 		return x_pipe(tls, fd)
 	}
-	ret = int32(___syscall2(tls, int64(293), int64(fd), int64(flag)))
+	ret = int32(___syscall2(tls, int64(m_SYS_pipe2), int64(fd), int64(flag)))
 	if ret != -int32(m_ENOSYS) {
 		return int32(x___syscall_ret(tls, uint64(ret)))
 	}
@@ -150399,12 +150811,12 @@ func x_pipe2(tls *TLS, fd uintptr, flag int32) (r int32) {
 		return ret
 	}
 	if flag&int32(m_O_CLOEXEC) != 0 {
-		___syscall3(tls, int64(72), int64(*(*int32)(unsafe.Pointer(fd))), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
-		___syscall3(tls, int64(72), int64(*(*int32)(unsafe.Pointer(fd + 1*4))), int64(Int32FromInt32(2)), int64(Int32FromInt32(1)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(*(*int32)(unsafe.Pointer(fd))), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(*(*int32)(unsafe.Pointer(fd + 1*4))), int64(Int32FromInt32(m_F_SETFD)), int64(Int32FromInt32(m_FD_CLOEXEC)))
 	}
 	if flag&int32(m_O_NONBLOCK) != 0 {
-		___syscall3(tls, int64(72), int64(*(*int32)(unsafe.Pointer(fd))), int64(Int32FromInt32(4)), int64(Int32FromInt32(04000)))
-		___syscall3(tls, int64(72), int64(*(*int32)(unsafe.Pointer(fd + 1*4))), int64(Int32FromInt32(4)), int64(Int32FromInt32(04000)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(*(*int32)(unsafe.Pointer(fd))), int64(Int32FromInt32(m_F_SETFL)), int64(Int32FromInt32(m_O_NONBLOCK)))
+		___syscall3(tls, int64(m_SYS_fcntl), int64(*(*int32)(unsafe.Pointer(fd + 1*4))), int64(Int32FromInt32(m_F_SETFL)), int64(Int32FromInt32(m_O_NONBLOCK)))
 	}
 	return 0
 }
@@ -150413,24 +150825,32 @@ func x_posix_close(tls *TLS, fd int32, flags int32) (r int32) {
 	return x_close(tls, fd)
 }
 
+const m_SYS_pread64 = 17
+
 func x_pread(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(17), int64(fd), int64(buf), int64(size), ofs, 0, 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_pread64), int64(fd), int64(buf), int64(size), ofs, 0, 0)))
 }
+
+const m_SYS_preadv = 295
 
 func x_preadv(tls *TLS, fd int32, iov uintptr, count int32, ofs int64) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(295), int64(fd), int64(iov), int64(count), ofs, ofs>>Int32FromInt32(32), 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_preadv), int64(fd), int64(iov), int64(count), ofs, ofs>>Int32FromInt32(32), 0)))
 }
+
+const m_SYS_pwrite64 = 18
 
 func x_pwrite(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(18), int64(fd), int64(buf), int64(size), ofs, 0, 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_pwrite64), int64(fd), int64(buf), int64(size), ofs, 0, 0)))
 }
 
+const m_SYS_pwritev = 296
+
 func x_pwritev(tls *TLS, fd int32, iov uintptr, count int32, ofs int64) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(296), int64(fd), int64(iov), int64(count), ofs, ofs>>Int32FromInt32(32), 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_pwritev), int64(fd), int64(iov), int64(count), ofs, ofs>>Int32FromInt32(32), 0)))
 }
 
 func x_read(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, 0, int64(fd), int64(buf), int64(count), 0, 0, 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, m_SYS_read, int64(fd), int64(buf), int64(count), 0, 0, 0)))
 }
 
 func x_readlink(tls *TLS, path uintptr, buf uintptr, bufsize uint64) (r1 int64) {
@@ -150442,12 +150862,14 @@ func x_readlink(tls *TLS, path uintptr, buf uintptr, bufsize uint64) (r1 int64) 
 		buf = bp
 		bufsize = uint64(1)
 	}
-	r = int32(___syscall3(tls, int64(89), int64(path), int64(buf), int64(bufsize)))
+	r = int32(___syscall3(tls, int64(m_SYS_readlink), int64(path), int64(buf), int64(bufsize)))
 	if buf == bp && r > 0 {
 		r = 0
 	}
 	return x___syscall_ret(tls, uint64(r))
 }
+
+const m_SYS_readlinkat = 267
 
 func x_readlinkat(tls *TLS, fd int32, path uintptr, buf uintptr, bufsize uint64) (r1 int64) {
 	bp := tls.Alloc(8) /* tlsAllocs 8 maxVaListSize 0 */
@@ -150458,7 +150880,7 @@ func x_readlinkat(tls *TLS, fd int32, path uintptr, buf uintptr, bufsize uint64)
 		buf = bp
 		bufsize = uint64(1)
 	}
-	r = int32(___syscall4(tls, int64(267), int64(fd), int64(path), int64(buf), int64(bufsize)))
+	r = int32(___syscall4(tls, int64(m_SYS_readlinkat), int64(fd), int64(path), int64(buf), int64(bufsize)))
 	if buf == bp && r > 0 {
 		r = 0
 	}
@@ -150466,15 +150888,17 @@ func x_readlinkat(tls *TLS, fd int32, path uintptr, buf uintptr, bufsize uint64)
 }
 
 func x_readv(tls *TLS, fd int32, iov uintptr, count int32) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(19), int64(fd), int64(iov), int64(count), 0, 0, 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_readv), int64(fd), int64(iov), int64(count), 0, 0, 0)))
 }
 
+const m_SYS_renameat = 264
+
 func x_renameat(tls *TLS, oldfd int32, old uintptr, newfd int32, new1 uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(264), int64(oldfd), int64(old), int64(newfd), int64(new1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_renameat), int64(oldfd), int64(old), int64(newfd), int64(new1)))))
 }
 
 func x_rmdir(tls *TLS, path uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(84), int64(path)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_rmdir), int64(path)))))
 }
 
 const m_SYS_setresgid = 119
@@ -150489,21 +150913,17 @@ func x_seteuid(tls *TLS, euid uint32) (r int32) {
 	return x___setxid(tls, int32(m_SYS_setresuid), -int32(1), int32(euid), -int32(1))
 }
 
-const m_SYS_setgid = 106
-
 func x_setgid(tls *TLS, gid uint32) (r int32) {
 	return x___setxid(tls, int32(m_SYS_setgid), int32(gid), 0, 0)
 }
 
 func x_setpgid(tls *TLS, pid int32, pgid int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(109), int64(pid), int64(pgid)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_setpgid), int64(pid), int64(pgid)))))
 }
 
 func x_setpgrp(tls *TLS) (r int32) {
 	return x_setpgid(tls, 0, 0)
 }
-
-const m_SYS_setregid = 114
 
 func x_setregid(tls *TLS, rgid uint32, egid uint32) (r int32) {
 	return x___setxid(tls, int32(m_SYS_setregid), int32(rgid), int32(egid), 0)
@@ -150517,17 +150937,13 @@ func x_setresuid(tls *TLS, ruid uint32, euid uint32, suid uint32) (r int32) {
 	return x___setxid(tls, int32(m_SYS_setresuid), int32(ruid), int32(euid), int32(suid))
 }
 
-const m_SYS_setreuid = 113
-
 func x_setreuid(tls *TLS, ruid uint32, euid uint32) (r int32) {
 	return x___setxid(tls, int32(m_SYS_setreuid), int32(ruid), int32(euid), 0)
 }
 
 func x_setsid(tls *TLS) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(112)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(m_SYS_setsid)))))
 }
-
-const m_SYS_setuid = 105
 
 func x_setuid(tls *TLS, uid uint32) (r int32) {
 	return x___setxid(tls, int32(m_SYS_setuid), int32(uid), 0, 0)
@@ -150555,7 +150971,7 @@ func _do_setxid(tls *TLS, p uintptr) {
 		 * thing to do. State is inconsistent and dangerous. Use
 		 * SIGKILL because it is uncatchable. */
 		x___block_all_sigs(tls, uintptr(0))
-		___syscall2(tls, int64(62), ___syscall0(tls, int64(39)), int64(Int32FromInt32(9)))
+		___syscall2(tls, int64(m_SYS_kill), ___syscall0(tls, int64(m_SYS_getpid)), int64(Int32FromInt32(m_SIGKILL)))
 	}
 	(*Tctx3)(unsafe.Pointer(c)).Fret = ret
 }
@@ -150591,16 +151007,22 @@ func x_sleep(tls *TLS, seconds uint32) (r uint32) {
 	return uint32(0)
 }
 
+const m_SYS_symlink = 88
+
 func x_symlink(tls *TLS, existing uintptr, new1 uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(88), int64(existing), int64(new1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_symlink), int64(existing), int64(new1)))))
 }
+
+const m_SYS_symlinkat = 266
 
 func x_symlinkat(tls *TLS, existing uintptr, fd int32, new1 uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(266), int64(existing), int64(fd), int64(new1)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_symlinkat), int64(existing), int64(fd), int64(new1)))))
 }
 
+const m_SYS_sync = 162
+
 func x_sync(tls *TLS) {
-	___syscall0(tls, int64(162))
+	___syscall0(tls, int64(m_SYS_sync))
 }
 
 const m_TIOCGPGRP = 21519
@@ -150625,8 +151047,10 @@ func x_tcsetpgrp(tls *TLS, fd int32, pgrp int32) (r int32) {
 	return x_ioctl(tls, fd, int32(m_TIOCSPGRP), VaList(bp+16, bp))
 }
 
+const m_SYS_truncate = 76
+
 func x_truncate(tls *TLS, path uintptr, length int64) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(76), int64(path), length))))
+	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_truncate), int64(path), length))))
 }
 
 func x_ttyname(tls *TLS, fd int32) (r uintptr) {
@@ -150687,11 +151111,13 @@ func x_ualarm(tls *TLS, value uint32, interval uint32) (r uint32) {
 }
 
 func x_unlink(tls *TLS, path uintptr) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(87), int64(path)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_unlink), int64(path)))))
 }
 
+const m_SYS_unlinkat = 263
+
 func x_unlinkat(tls *TLS, fd int32, path uintptr, flag int32) (r int32) {
-	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(263), int64(fd), int64(path), int64(flag)))))
+	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_unlinkat), int64(fd), int64(path), int64(flag)))))
 }
 
 func x_usleep(tls *TLS, useconds uint32) (r int32) {
@@ -150706,11 +151132,11 @@ func x_usleep(tls *TLS, useconds uint32) (r int32) {
 }
 
 func x_write(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(1), int64(fd), int64(buf), int64(count), 0, 0, 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_write), int64(fd), int64(buf), int64(count), 0, 0, 0)))
 }
 
 func x_writev(tls *TLS, fd int32, iov uintptr, count int32) (r int64) {
-	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(20), int64(fd), int64(iov), int64(count), 0, 0, 0)))
+	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_writev), int64(fd), int64(iov), int64(count), 0, 0, 0)))
 }
 
 const m_AT_BASE = 7
@@ -150880,6 +151306,7 @@ const m_DT_GNU_HASH = 1879047925
 const m_DT_INIT = 12
 const m_DT_INIT_ARRAY = 25
 const m_DT_INIT_ARRAYSZ = 27
+const m_DT_JMPREL = 23
 const m_DT_MIPS_GOTSYM = 1879048211
 const m_DT_MIPS_SYMTABNO = 1879048209
 const m_DT_NEEDED = 1
@@ -150888,7 +151315,6 @@ const m_DT_PLTRELSZ = 2
 const m_DT_RPATH = 15
 const m_DT_RUNPATH = 29
 const m_DT_TEXTREL = 22
-const m_ENOEXEC = 8
 const m_ET_DYN = 3
 const m_ET_EXEC = 2
 const m_FDPIC_CONSTDISP_FLAG = 0
@@ -150898,6 +151324,7 @@ const m_PT_INTERP = 3
 const m_RTLD_GLOBAL = 256
 const m_RTLD_LAZY = 1
 const m_RTLD_NOLOAD = 4
+const m_R_MIPS_JUMP_SLOT = 127
 const m_R_X86_64_64 = 1
 const m_R_X86_64_COPY = 5
 const m_R_X86_64_DTPMOD64 = 16
@@ -152038,10 +152465,10 @@ func _decode_dyn(tls *TLS, p uintptr) {
 	defer tls.Free(296)
 	var _ /* dyn at bp+0 */ [37]uint64
 	_decode_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DYN_CNT))
-	(*Tdso)(unsafe.Pointer(p)).Fsyms = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(6)])
-	(*Tdso)(unsafe.Pointer(p)).Fstrings = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(5)])
+	(*Tdso)(unsafe.Pointer(p)).Fsyms = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_SYMTAB)])
+	(*Tdso)(unsafe.Pointer(p)).Fstrings = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_STRTAB)])
 	if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_HASH)) != 0 {
-		(*Tdso)(unsafe.Pointer(p)).Fhashtab = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(4)])
+		(*Tdso)(unsafe.Pointer(p)).Fhashtab = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_HASH)])
 	}
 	if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_RPATH)) != 0 {
 		(*Tdso)(unsafe.Pointer(p)).Frpath_orig = (*Tdso)(unsafe.Pointer(p)).Fstrings + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RPATH)])
@@ -152050,7 +152477,7 @@ func _decode_dyn(tls *TLS, p uintptr) {
 		(*Tdso)(unsafe.Pointer(p)).Frpath_orig = (*Tdso)(unsafe.Pointer(p)).Fstrings + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RUNPATH)])
 	}
 	if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_PLTGOT)) != 0 {
-		(*Tdso)(unsafe.Pointer(p)).Fgot = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(3)])
+		(*Tdso)(unsafe.Pointer(p)).Fgot = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_PLTGOT)])
 	}
 	if _search_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DT_GNU_HASH)) != 0 {
 		(*Tdso)(unsafe.Pointer(p)).Fghashtab = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr(*(*uint64)(unsafe.Pointer(bp)))
@@ -152096,7 +152523,7 @@ func _dl_mmap(tls *TLS, n uint64) (r uintptr) {
 	var p, v1 uintptr
 	prot = Int32FromInt32(m_PROT_READ) | Int32FromInt32(m_PROT_WRITE)
 	flags = Int32FromInt32(m_MAP_ANON) | Int32FromInt32(m_MAP_PRIVATE)
-	p = uintptr(___syscall6(tls, int64(9), int64(Int32FromInt32(0)), int64(n), int64(prot), int64(flags), int64(-Int32FromInt32(1)), int64(Int32FromInt32(0))))
+	p = uintptr(___syscall6(tls, int64(m_SYS_mmap), int64(Int32FromInt32(0)), int64(n), int64(prot), int64(flags), int64(-Int32FromInt32(1)), int64(Int32FromInt32(0))))
 	if uint64(p) > -Uint64FromUint64(4096) {
 		v1 = uintptr(0)
 	} else {
@@ -152682,7 +153109,7 @@ func _do_mips_relocs(tls *TLS, p uintptr, got uintptr) {
 	sym = (*Tdso)(unsafe.Pointer(p)).Fsyms + uintptr(*(*uint64)(unsafe.Pointer(bp + 8)))*24
 	(*(*[2]uint64)(unsafe.Pointer(bp + 16)))[0] = uint64(int64(got) - int64(base))
 	for *(*uint64)(unsafe.Pointer(bp)) -= *(*uint64)(unsafe.Pointer(bp + 8)); *(*uint64)(unsafe.Pointer(bp)) != 0; {
-		(*(*[2]uint64)(unsafe.Pointer(bp + 16)))[int32(1)] = uint64((int64(sym)-int64((*Tdso)(unsafe.Pointer(p)).Fsyms))/24)<<Int32FromInt32(32) + uint64(Int32FromInt32(127))
+		(*(*[2]uint64)(unsafe.Pointer(bp + 16)))[int32(1)] = uint64((int64(sym)-int64((*Tdso)(unsafe.Pointer(p)).Fsyms))/24)<<Int32FromInt32(32) + uint64(Int32FromInt32(m_R_MIPS_JUMP_SLOT))
 		_do_relocs(tls, p, bp+16, uint64(16), uint64(2))
 		goto _3
 	_3:
@@ -152703,16 +153130,16 @@ func _reloc_all(tls *TLS, p uintptr) {
 		}
 		_decode_vec(tls, (*Tdso)(unsafe.Pointer(p)).Fdynv, bp, uint64(m_DYN_CNT))
 		if m_NEED_MIPS_GOT_RELOCS != 0 {
-			_do_mips_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(3)]))
+			_do_mips_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_PLTGOT)]))
 		}
-		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(23)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_PLTRELSZ)], uint64(int32(2)+BoolInt32((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_PLTREL)] == uint64(m_DT_RELA))))
-		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(17)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELSZ)], uint64(2))
-		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(7)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELASZ)], uint64(3))
+		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_JMPREL)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_PLTRELSZ)], uint64(int32(2)+BoolInt32((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_PLTREL)] == uint64(m_DT_RELA))))
+		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_REL)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELSZ)], uint64(2))
+		_do_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELA)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELASZ)], uint64(3))
 		if !(Int32FromInt32(m_DL_FDPIC) != 0) {
-			_do_relr_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(36)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELRSZ)])
+			_do_relr_relocs(tls, p, (*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELR)]), (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_RELRSZ)])
 		}
 		if _head1 != uintptr(unsafe.Pointer(&_ldso)) && (*Tdso)(unsafe.Pointer(p)).Frelro_start != (*Tdso)(unsafe.Pointer(p)).Frelro_end {
-			ret = ___syscall3(tls, int64(10), int64((*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*Tdso)(unsafe.Pointer(p)).Frelro_start)), int64((*Tdso)(unsafe.Pointer(p)).Frelro_end-(*Tdso)(unsafe.Pointer(p)).Frelro_start), int64(Int32FromInt32(1)))
+			ret = ___syscall3(tls, int64(m_SYS_mprotect), int64((*Tdso)(unsafe.Pointer(p)).Fbase+uintptr((*Tdso)(unsafe.Pointer(p)).Frelro_start)), int64((*Tdso)(unsafe.Pointer(p)).Frelro_end-(*Tdso)(unsafe.Pointer(p)).Frelro_start), int64(Int32FromInt32(m_PROT_READ)))
 			if ret != 0 && ret != int64(-int32(m_ENOSYS)) {
 				(*(*func(*TLS, uintptr, uintptr))(unsafe.Pointer(&struct{ uintptr }{_error})))(tls, ts+3434, VaList(bp+304, (*Tdso)(unsafe.Pointer(p)).Fname))
 				if _runtime != 0 {
@@ -152903,11 +153330,11 @@ func _do_init_fini(tls *TLS, queue uintptr) {
 		}
 		x___pthread_mutex_unlock(tls, uintptr(unsafe.Pointer(&_init_fini_lock)))
 		if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_INIT)) != 0 && (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_INIT)] != 0 {
-			(*(*func(*TLS))(unsafe.Pointer(&struct{ uintptr }{(*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(12)])})))(tls)
+			(*(*func(*TLS))(unsafe.Pointer(&struct{ uintptr }{(*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_INIT)])})))(tls)
 		}
 		if (*(*[37]uint64)(unsafe.Pointer(bp)))[0]&uint64(Int32FromInt32(1)<<Int32FromInt32(m_DT_INIT_ARRAY)) != 0 {
 			n = (*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_INIT_ARRAYSZ)] / uint64(8)
-			fn = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(25)])
+			fn = (*Tdso)(unsafe.Pointer(p)).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp)))[int32(m_DT_INIT_ARRAY)])
 			for {
 				v2 = n
 				n--
@@ -153057,7 +153484,7 @@ func x___dls2(tls *TLS, base uintptr, sp uintptr) {
 	 * something goes wrong and there are a huge number, abort
 	 * instead of risking stack overflow. */
 	_decode_vec(tls, _ldso.Fdynv, bp+256, uint64(m_DYN_CNT))
-	rel = (*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_ldso)))).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp + 256)))[int32(17)])
+	rel = (*Tdso)(unsafe.Pointer(uintptr(unsafe.Pointer(&_ldso)))).Fbase + uintptr((*(*[37]uint64)(unsafe.Pointer(bp + 256)))[int32(m_DT_REL)])
 	rel_size = (*(*[37]uint64)(unsafe.Pointer(bp + 256)))[int32(m_DT_RELSZ)]
 	symbolic_rel_cnt = uint64(0)
 	_apply_addends_to = rel
@@ -153126,7 +153553,7 @@ func x___dls3(tls *TLS, sp uintptr, auxv uintptr) {
 	envp = argv + uintptr(argc)*8 + uintptr(1)*8
 	/* Find aux vector just past environ[] and use it to initialize
 	 * global data that may be needed before we can make syscalls. */
-	x___environ = envp
+	Xenviron = envp
 	_decode_vec(tls, auxv, bp, uint64(m_AUX_CNT1))
 	_search_vec(tls, auxv, uintptr(unsafe.Pointer(&x___sysinfo)), uint64(m_AT_SYSINFO))
 	(*T__pthread)(unsafe.Pointer(___get_tp(tls))).Fsysinfo = x___sysinfo
@@ -153890,7 +154317,7 @@ var x___default_stacksize = uint32(m_DEFAULT_STACK_SIZE)
 
 var x___eintr_valid_flag int32
 
-var x___environ uintptr
+var Xenviron uintptr
 
 var x___exp2f_data = Texp2f_data{
 	Ftab: [32]uint64{
