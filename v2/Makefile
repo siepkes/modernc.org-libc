@@ -41,7 +41,7 @@ generate:
 	go build -v ./...  | tee -a log-generate
 	go test -v -count=1 ./... 2>&1 | tee -a log-generate
 	git status
-	grep TODO log-generate || true
+	grep 'TRC\|TODO\|ERRORF\|FAIL' log-generate || true
 
 dev:
 	echo -n > /tmp/ccgo.log
@@ -52,8 +52,8 @@ dev:
 	go build -v ./...  | tee -a log-generate
 	go test -v -count=1 ./... 2>&1 | tee -a log-generate
 	git status
-	grep FAIL /tmp/ccgo.log || true
-	grep TODO log-generate || true
+	grep 'TRC\|TODO\|ERRORF\|FAIL' /tmp/ccgo.log || true
+	grep 'TRC\|TODO\|ERRORF\|FAIL' log-generate || true
 
 test:
 	go test -v -timeout 24h 2>&1 | tee log-test
