@@ -441,10 +441,8 @@ func _a_barrier(tls *TLS) {
 }
 
 func ___syscall0(tls *TLS, n int64) int64 {
-	// #define __NR_sched_yield		24
-	const m___NR_sched_yield = 24
 	switch n {
-	case m___NR_sched_yield:
+	case m_SYS_sched_yield:
 		runtime.Gosched()
 		return 0
 	default:
@@ -828,15 +826,7 @@ func Xdlopen(tls *TLS, filename uintptr, flags int32) uintptr {
 	panic(todo(""))
 }
 
-func Xdlerror(tls *TLS) uintptr {
-	panic(todo(""))
-}
-
 func Xdlsym(tls *TLS, handle, symbol uintptr) uintptr {
-	panic(todo(""))
-}
-
-func Xdlclose(tls *TLS, handle uintptr) int32 {
 	panic(todo(""))
 }
 

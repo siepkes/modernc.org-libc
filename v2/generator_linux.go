@@ -110,13 +110,13 @@ func main() {
 	util.MustCopyDir(true, filepath.Join(tempDir, extractedArchivePath), filepath.Join("overlay", extractedArchivePath, "all"), nil)
 	util.MustCopyDir(true, filepath.Join(tempDir, extractedArchivePath), filepath.Join("overlay", extractedArchivePath, goarch), nil)
 	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(muslRoot, "COPYRIGHT"), nil)
-	result := filepath.FromSlash("lib/libc.so.go")
+	result := "libc.a.go"
 	util.MustInDir(true, muslRoot, func() (err error) {
 		var cflags string
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
 			cflags = fmt.Sprintf("CFLAGS=%s", s)
 		}
-		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-static --disable-optimize", cCompiler, cflags))
+		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-shared --disable-optimize", cCompiler, cflags))
 		args := []string{os.Args[0]}
 		if dev {
 			args = append(
@@ -141,7 +141,8 @@ func main() {
 			"--prefix-undefined=_",
 			"-exec-cc", cCompiler,
 			"-extended-errors",
-			"-ignore-asm-errors",               //TODO- it is possible
+			"-ignore-asm-errors", //TODO- it is possible
+			"-ignore-link-errors",
 			"-ignore-unsupported-alignment",    //TODO- only if possible
 			"-ignore-unsupported-atomic-sizes", //TODO- it is possible
 			"-isystem", "",
@@ -152,10 +153,14 @@ func main() {
 			"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS",
 			"-hide", "a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32",
 			"-hide", "fabs,fabsf,fabsl,sqrt,sqrtf,sqrtl",
-			"-hide", "dlopen,dlerror,dlclose,fork,system",
-			"-hide", "__init_tls,__libc_start_init,__libc_exit_fini,__dl_invalid_handle",
+			"-hide", "fork,system",
 		)
-		return ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.so"), os.Stdout, os.Stderr, nil).Main()
+		if err := ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.a"), os.Stdout, os.Stderr, nil).Main(); err != nil {
+			return err
+		}
+
+		os.Setenv(ccgo.CCEnvVar, "")
+		return ccgo.NewTask(goos, goarch, append(args, "-o", result, "-nostdlib", "lib/libc.a"), os.Stdout, os.Stderr, nil).Main()
 	})
 
 	util.MustCopyDir(true, filepath.Join("include", goos, goarch), filepath.Join(tempDir, extractedArchivePath, "include"), nil)
@@ -166,8 +171,8 @@ func main() {
 	fn := fmt.Sprintf("ccgo_%s_%s.go", goos, goarch)
 	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fn)
 	util.MustShell(true, "sed", "-i", `s/\<T__\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/t__\1/g`, fn)
-	util.MustShell(true, "sed", "-i", `s/\<Xpthread_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/x_pthread_\1/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<x_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/X\1/g`, fn)
+	util.MustShell(true, "sed", "-i", `s/\<Xpthread_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/x_pthread_\1/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<x___environ\>/Xenviron/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<x___errno_location\>/X__errno_location/g`, fn)
 	for _, v := range []string{
