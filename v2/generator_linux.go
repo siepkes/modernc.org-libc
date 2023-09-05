@@ -173,9 +173,9 @@ func main() {
 	util.MustShell(true, "sed", "-i", `s/\<T__\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/t__\1/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<x_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/X\1/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<Xpthread_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/x_pthread_\1/g`, fn)
-	util.MustShell(true, "sed", "-i", `s/\<x___environ\>/Xenviron/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<x___errno_location\>/X__errno_location/g`, fn)
 	for _, v := range []string{
+		"environ",
 		"fdopen",
 		"fstat",
 		"gmtime_r",
@@ -185,6 +185,7 @@ func main() {
 		"mremap",
 		"munmap",
 		"nl_langinfo",
+		"sigaction",
 	} {
 		util.MustShell(true, "sed", "-i", fmt.Sprintf(`s/\<x___%s\>/X%[1]s/g`, v), fn)
 	}

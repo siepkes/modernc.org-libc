@@ -32548,8 +32548,6 @@ type Tcpu_set_t = struct {
 	F__bits [16]uint64
 }
 
-type Tcpu_set_t1 = Tcpu_set_t
-
 type Ttm1 = struct {
 	Ftm_sec    int32
 	Ftm_min    int32
@@ -32562,6 +32560,10 @@ type Ttm1 = struct {
 	Ftm_isdst  int32
 	Ftm_gmtoff int64
 	Ftm_zone   uintptr
+}
+
+type Tcpu_set_t1 = struct {
+	F__bits [16]uint64
 }
 
 const _REG_R8 = 0
@@ -134250,7 +134252,7 @@ func x___libc_sigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r1 int32)
 	return int32(x___syscall_ret(tls, uint64(r)))
 }
 
-func x___sigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r1 int32) {
+func Xsigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r1 int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var r int32
@@ -134365,20 +134367,20 @@ func Xsigignore(tls *TLS, sig int32) (r int32) {
 	Xsigemptyset(tls, uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).Fsa_mask)))
 	*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).F__sa_handler)))) = UintptrFromInt32(1)
 	(*(*Tsigaction)(unsafe.Pointer(bp))).Fsa_flags = 0
-	return x___sigaction(tls, sig, bp, uintptr(0))
+	return Xsigaction(tls, sig, bp, uintptr(0))
 }
 
 func Xsiginterrupt(tls *TLS, sig int32, flag int32) (r int32) {
 	bp := tls.Alloc(160) /* tlsAllocs 152 maxVaListSize 0 */
 	defer tls.Free(160)
 	var _ /* sa at bp+0 */ Tsigaction
-	x___sigaction(tls, sig, uintptr(0), bp)
+	Xsigaction(tls, sig, uintptr(0), bp)
 	if flag != 0 {
 		*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).Fsa_flags)))) &= ^Int32FromInt32(m_SA_RESTART)
 	} else {
 		*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).Fsa_flags)))) |= int32(m_SA_RESTART)
 	}
-	return x___sigaction(tls, sig, bp, uintptr(0))
+	return Xsigaction(tls, sig, bp, uintptr(0))
 }
 
 func Xsigisemptyset(tls *TLS, set uintptr) (r int32) {
@@ -134425,7 +134427,7 @@ func Xsignal(tls *TLS, sig int32, func1 uintptr) (r uintptr) {
 	*(*Tsigaction)(unsafe.Pointer(bp + 152)) = Tsigaction{}
 	*(*uintptr)(unsafe.Pointer(bp + 152)) = func1
 	*(*int32)(unsafe.Pointer(bp + 288)) = int32(m_SA_RESTART)
-	if x___sigaction(tls, sig, bp+152, bp) < 0 {
+	if Xsigaction(tls, sig, bp+152, bp) < 0 {
 		return uintptr(-Int32FromInt32(1))
 	}
 	return *(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).F__sa_handler))))
@@ -134519,7 +134521,7 @@ func Xsigset(tls *TLS, sig int32, handler uintptr) (r uintptr) {
 		return uintptr(-Int32FromInt32(1))
 	}
 	if handler == UintptrFromInt32(2) {
-		if x___sigaction(tls, sig, uintptr(0), bp+152) < 0 {
+		if Xsigaction(tls, sig, uintptr(0), bp+152) < 0 {
 			return uintptr(-Int32FromInt32(1))
 		}
 		if Xsigprocmask(tls, m_SIG_BLOCK, bp+304, bp+432) < 0 {
@@ -134529,7 +134531,7 @@ func Xsigset(tls *TLS, sig int32, handler uintptr) (r uintptr) {
 		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).F__sa_handler)))) = handler
 		(*(*Tsigaction)(unsafe.Pointer(bp))).Fsa_flags = 0
 		Xsigemptyset(tls, uintptr(unsafe.Pointer(&(*(*Tsigaction)(unsafe.Pointer(bp))).Fsa_mask)))
-		if x___sigaction(tls, sig, bp, bp+152) < 0 {
+		if Xsigaction(tls, sig, bp, bp+152) < 0 {
 			return uintptr(-Int32FromInt32(1))
 		}
 		if Xsigprocmask(tls, int32(m_SIG_UNBLOCK), bp+304, bp+432) < 0 {

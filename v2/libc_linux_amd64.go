@@ -71,9 +71,9 @@ func initLibc(tls *TLS) {
 
 // CString returns a pointer to a zero-terminated version of s. The caller is
 // responsible for freeing the allocated memory using Xfree.
-func CString(s string) (uintptr, error) {
+func CString(tls *TLS, s string) (uintptr, error) {
 	n := len(s)
-	p := Xmalloc(nil, uint64(n)+1)
+	p := Xmalloc(tls, uint64(n)+1)
 	if p == 0 {
 		return 0, fmt.Errorf("CString: cannot allocate %d bytes", n+1)
 	}
