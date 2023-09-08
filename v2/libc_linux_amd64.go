@@ -22,6 +22,10 @@ import (
 	"modernc.org/memory"
 )
 
+const (
+	ENOENT = m_ENOENT
+)
+
 var (
 	initLibcOnce sync.Once
 
