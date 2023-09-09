@@ -21,7 +21,7 @@ check:
 
 edit:
 	@touch log
-	@if [ -f "Session.vim" ]; then novim -S & else gvim -p Makefile *.go & fi
+	@if [ -f "Session.vim" ]; then novim -S & else novim-p Makefile *.go & fi
 
 editor:
 	gofmt -l -s -w . 2>&1 | tee log-editor

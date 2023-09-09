@@ -2167,7 +2167,6 @@ func PostIncBitFieldPtr64Uint64(p uintptr, d uint64, w, off int, mask uint64) (r
 	return r
 }
 
-
 func GetEnviron() (r []string) {
 	for p := Xenviron; ; p += unsafe.Sizeof(p) {
 		q := *(*uintptr)(unsafe.Pointer(p))

@@ -28,12 +28,10 @@ import (
 
 const (
 	defaultArchivePath = "assets/musl.libc.org/releases/musl-1.2.4.tar.gz"
-	defaultCCompiler   = "gcc"
 )
 
 var (
 	archivePath          = defaultArchivePath
-	cCompiler            = defaultCCompiler
 	extractedArchivePath string
 	goarch               = runtime.GOARCH
 	goos                 = runtime.GOOS
@@ -51,7 +49,7 @@ func fail(rc int, msg string, args ...any) {
 }
 
 func main() {
-	if os.Getenv(ccgo.CCEnvVar) != "" {
+	if ccgo.IsExecEnv() {
 		if err := ccgo.NewTask(goos, goarch, os.Args, os.Stdout, os.Stderr, nil).Main(); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
@@ -116,18 +114,13 @@ func main() {
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
 			cflags = fmt.Sprintf("CFLAGS=%s", s)
 		}
-		util.MustShell(true, "sh", "-c", fmt.Sprintf("CC=%s %s ./configure --disable-shared --disable-optimize", cCompiler, cflags))
-		args := []string{os.Args[0]}
-		if dev {
-			args = append(
-				args,
-				"-absolute-paths",
-				"-positions",
-				// "-verify-types",
-			)
-		}
-		args = append(args,
+		util.MustShell(true, "sh", "-c", fmt.Sprintf("%s ./configure --disable-shared --disable-optimize", cflags))
+		args := []string{
+			os.Args[0],
+
 			"--package-name=libc",
+			"--predef=float __builtin_inff(void);",
+			"--predef=long __builtin_expect(long, long);",
 			"--prefix-enumerator=_",
 			"--prefix-external=x_",
 			"--prefix-field=F",
@@ -139,28 +132,27 @@ func main() {
 			"--prefix-tagged-union=T",
 			"--prefix-typename=T",
 			"--prefix-undefined=_",
-			"-exec-cc", cCompiler,
 			"-extended-errors",
-			"-ignore-asm-errors", //TODO- it is possible
-			"-ignore-link-errors",
-			"-ignore-unsupported-alignment",    //TODO- only if possible
-			"-ignore-unsupported-atomic-sizes", //TODO- it is possible
-			"-isystem", "",
-		)
-		args = append(args,
-			"--predef=float __builtin_inff(void);",
-			"--predef=long __builtin_expect(long, long);",
 			"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS",
 			"-hide", "a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32",
 			"-hide", "fabs,fabsf,fabsl,sqrt,sqrtf,sqrtl",
 			"-hide", "fork,system",
-		)
-		if err := ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.a"), os.Stdout, os.Stderr, nil).Main(); err != nil {
+			"-ignore-asm-errors",
+			"-isystem", "",
+		}
+		if dev {
+			args = append(
+				args,
+				"-absolute-paths",
+				"-positions",
+				// "-verify-types",
+			)
+		}
+		if err := ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.a"), os.Stdout, os.Stderr, nil).Exec(); err != nil {
 			return err
 		}
 
-		os.Setenv(ccgo.CCEnvVar, "")
-		return ccgo.NewTask(goos, goarch, append(args, "-o", result, "-nostdlib", "lib/libc.a"), os.Stdout, os.Stderr, nil).Main()
+		return ccgo.NewTask(goos, goarch, append(args, "-o", result, "-nostdlib", "-ignore-link-errors", "lib/libc.a"), os.Stdout, os.Stderr, nil).Main()
 	})
 
 	util.MustCopyDir(true, filepath.Join("include", goos, goarch), filepath.Join(tempDir, extractedArchivePath, "include"), nil)

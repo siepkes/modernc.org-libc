@@ -1,6 +1,8 @@
 module modernc.org/libc/v2
 
-go 1.21.0
+go 1.21
+
+toolchain go1.21.1
 
 require (
 	modernc.org/mathutil v1.6.0
@@ -20,7 +22,7 @@ require (
 	modernc.org/cc/v3 v3.41.0 // indirect
 	modernc.org/cc/v4 v4.13.5 // indirect
 	modernc.org/ccgo/v3 v3.16.15 // indirect
-	modernc.org/ccgo/v4 v4.0.0-20230907145325-3a718de89576 // indirect
+	modernc.org/ccgo/v4 v4.0.0-20230909153428-d304221a1bb7 // indirect
 	modernc.org/ccorpus2 v1.5.1 // indirect
 	modernc.org/gc/v2 v2.3.0 // indirect
 	modernc.org/libc v1.24.1 // indirect
