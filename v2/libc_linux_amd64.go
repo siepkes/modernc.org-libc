@@ -210,6 +210,10 @@ func NewTLS() (r *TLS) {
 	return r
 }
 
+func (t *TLS) String() string {
+	return fmt.Sprintf("{%p: ID=%v fs=%#0x}", t, t.ID, t.fs)
+}
+
 // // var nallocs, nmallocs, nreallocs int //TODO-
 
 // Alloc allocates n bytes in t's local storage.
@@ -330,10 +334,16 @@ func _longjmp(tls *TLS, env uintptr, val int32) int64 {
 }
 
 func Xlongjmp(tls *TLS, env uintptr, val int32) int64 {
+	if __ccgo_strace {
+		trc("tls=%v env=%v val=%v, (%v:)", tls, env, val, origin(2))
+	}
 	panic(todo(""))
 }
 
 func X__builtin_longjmp(tls *TLS, env uintptr, val int32) int64 {
+	if __ccgo_strace {
+		trc("tls=%v env=%v val=%v, (%v:)", tls, env, val, origin(2))
+	}
 	panic(todo(""))
 }
 
@@ -415,6 +425,9 @@ func _a_ctz_32(tls *TLS, x uint32) int32 {
 }
 
 func X__builtin_ctz(tls *TLS, x uint32) int32 {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+	}
 	return int32(bits.TrailingZeros32(x))
 }
 
@@ -523,22 +536,40 @@ func ___unmapself(tls *TLS, base uintptr, size uint64) {
 }
 
 func X__builtin_vsnprintf(tls *TLS, str uintptr, n uint64, format uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v str=%v n=%v format=%v ap=%v, (%v:)", tls, str, n, format, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xvsnprintf(tls, str, n, format, ap)
 }
 
 func X__builtin_sprintf(tls *TLS, str uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v str=%v fmt=%v va=%v, (%v:)", tls, str, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xsprintf(tls, str, fmt, va)
 }
 
 func X__builtin_rintf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xrintf(tls, x)
 }
 
 func Xmemset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v n=%v, (%v:)", tls, s, c, n, origin(2))
+	}
 	return _memset(tls, s, c, n)
 }
 
 func X__builtin_memset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v n=%v, (%v:)", tls, s, c, n, origin(2))
+	}
 	return Xmemset(tls, s, c, n)
 }
 
@@ -554,50 +585,96 @@ func _memset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
 }
 
 func X__builtin_snprintf(tls *TLS, str uintptr, size uint64, format, args uintptr) int32 {
+	if __ccgo_strace {
+		trc("tls=%v str=%v size=%v args=%v, (%v:)", tls, str, size, args, origin(2))
+	}
 	return Xsnprintf(tls, str, size, format, args)
 }
 
 func Xmalloc(tls *TLS, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _default_malloc(tls, n)
 }
 
 func X__builtin_malloc(tls *TLS, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmalloc(tls, n)
 }
 
 func X__builtin_free(tls *TLS, p uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+	}
 	Xfree(tls, p)
 }
 
 func X__builtin_printf(tls *TLS, format, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v va=%v, (%v:)", tls, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xprintf(tls, format, va)
 }
 
 func X__builtin_round(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xround(tls, x)
 }
 
 func X__builtin_strcpy(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v, (%v:)", tls, dest, src, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrcpy(tls, dest, src)
 }
 
 func X__builtin_strncpy(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v n=%v, (%v:)", tls, dest, src, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrncpy(tls, dest, src, n)
 }
 
 func X__builtin_strcmp(tls *TLS, s1 uintptr, s2 uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s1=%v s2=%v, (%v:)", tls, s1, s2, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrcmp(tls, s1, s2)
 }
 
 func X__builtin_strlen(tls *TLS, s uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrlen(tls, s)
 }
 
 func Xmemcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v src=%v n=%v, (%v:)", tls, src, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _memcpy(tls, dest, src, n)
 }
 
 func X__builtin_memcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v src=%v n=%v, (%v:)", tls, src, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmemcpy(tls, dest, src, n)
 }
 
@@ -606,50 +683,94 @@ func _memcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
 }
 
 func X__builtin_memcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint64) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v s1=%v s2=%v n=%v, (%v:)", tls, s1, s2, n, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	return Xmemcmp(tls, s1, s2, n)
 }
 
 func X__builtin_fprintf(tls *TLS, stream uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v stream=%v fmt=%v va=%v, (%v:)", tls, stream, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfprintf(tls, stream, fmt, va)
 }
 
 func X__builtin_exit(tls *TLS, code int32) {
+	if __ccgo_strace {
+		trc("tls=%v code=%v, (%v:)", tls, code, origin(2))
+	}
 	Xexit(tls, code)
 }
 
 func X__builtin_ffs(tls *TLS, i int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v i=%v, (%v:)", tls, i, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xffs(tls, i)
 }
 
 func Xfabs(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _fabs(tls, x)
 }
 
 func X__builtin_fabs(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfabs(tls, x)
 }
 
 func Xfabsf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _fabsf(tls, x)
 }
 
 func X__assert_fail(tls *TLS, expr uintptr, file uintptr, line int32, func1 uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v expr=%v file=%v line=%v func1=%v, (%v:)", tls, expr, file, line, func1, origin(2))
+	}
 	x___assert_fail(tls, expr, file, line, func1)
 }
 
 func Xsqrt(tls *TLS, x float64) float64 {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+	}
 	return _sqrt(tls, x)
 }
 
 func Xsqrtf(tls *TLS, x float32) float32 {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+	}
 	return _sqrtf(tls, x)
 }
 
 func Xmemmove(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v n=%v, (%v:)", tls, dest, src, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _memmove(tls, dest, src, n)
 }
 
 func X__builtin_memmove(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v n=%v, (%v:)", tls, dest, src, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmemmove(tls, dest, src, n)
 }
 
@@ -661,26 +782,46 @@ func _memmove(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
 }
 
 func X__builtin_abort(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	Xabort(tls)
 }
 
 func X__builtin_llabs(tls *TLS, j int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v j=%v, (%v:)", tls, j, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xllabs(tls, j)
 }
 
 func X__builtin_abs(tls *TLS, j int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v j=%v, (%v:)", tls, j, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xabs(tls, j)
 }
 
 func X__builtin_bswap16(t *TLS, x uint16) uint16 {
+	if __ccgo_strace {
+		trc("t=%v x=%v, (%v:)", t, x, origin(2))
+	}
 	return x<<8 | x>>8
 }
 
 func X__builtin_bswap32(tls *TLS, x uint32) uint32 {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+	}
 	return x>>int32(24) | x>>int32(8)&uint32(0xff00) | x<<int32(8)&uint32(0xff0000) | x<<int32(24)
 }
 
 func X__builtin_bswap64(tls *TLS, x uint64) uint64 {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+	}
 	return x<<56 |
 		x&0xff00<<40 |
 		x&0xff0000<<24 |
@@ -692,26 +833,46 @@ func X__builtin_bswap64(tls *TLS, x uint64) uint64 {
 }
 
 func Xalloca(tls *TLS, size uint64) uintptr {
+	if __ccgo_strace {
+		trc("tls=%v size=%v, (%v:)", tls, size, origin(2))
+	}
 	return tls.alloca(size)
 }
 
 func X__builtin_alloca(tls *TLS, size uint64) uintptr {
+	if __ccgo_strace {
+		trc("tls=%v size=%v, (%v:)", tls, size, origin(2))
+	}
 	return Xalloca(tls, size)
 }
 
 func X__builtin_copysign(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcopysign(tls, x, y)
 }
 
 func X__builtin_copysignf(tls *TLS, x float32, y float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcopysignf(tls, x, y)
 }
 
 func X__builtin_copysignl(t *TLS, x, y float64) float64 {
+	if __ccgo_strace {
+		trc("t=%v y=%v, (%v:)", t, y, origin(2))
+	}
 	return Xcopysign(t, x, y)
 }
 
 func X__builtin_expect(t *TLS, exp, c int64) int64 {
+	if __ccgo_strace {
+		trc("t=%v c=%v, (%v:)", t, c, origin(2))
+	}
 	return exp
 }
 
@@ -720,30 +881,51 @@ func ___builtin_expect(t *TLS, exp, c int64) int64 {
 }
 
 func X__builtin_huge_val(t *TLS) float64 {
+	if __ccgo_strace {
+		trc("t=%v, (%v:)", t, origin(2))
+	}
 	return math.Inf(1)
 }
 
 func X__builtin_huge_valf(t *TLS) float32 {
+	if __ccgo_strace {
+		trc("t=%v, (%v:)", t, origin(2))
+	}
 	return float32(math.Inf(1))
 }
 
 func X__builtin_inf(t *TLS) float64 {
+	if __ccgo_strace {
+		trc("t=%v, (%v:)", t, origin(2))
+	}
 	return math.Inf(1)
 }
 
 func X__builtin_inff(t *TLS) float32 {
+	if __ccgo_strace {
+		trc("t=%v, (%v:)", t, origin(2))
+	}
 	return ___builtin_inff(t)
 }
 
 func X__builtin_isinfl(t *TLS, x float64) int32 {
+	if __ccgo_strace {
+		trc("t=%v x=%v, (%v:)", t, x, origin(2))
+	}
 	return Bool32(math.IsInf(x, 0))
 }
 
 func X__builtin_isinff(t *TLS, x float32) int32 {
+	if __ccgo_strace {
+		trc("t=%v x=%v, (%v:)", t, x, origin(2))
+	}
 	return Bool32(math.IsInf(float64(x), 0))
 }
 
 func X__builtin_isinf(t *TLS, x float64) int32 {
+	if __ccgo_strace {
+		trc("t=%v x=%v, (%v:)", t, x, origin(2))
+	}
 	return Bool32(math.IsInf(x, 0))
 }
 
@@ -752,18 +934,30 @@ func ___builtin_inff(t *TLS) float32 {
 }
 
 func X__builtin_infl(t *TLS) float64 {
+	if __ccgo_strace {
+		trc("t=%v, (%v:)", t, origin(2))
+	}
 	return math.Inf(1)
 }
 
 func X__builtin_isunordered(t *TLS, a, b float64) int32 {
+	if __ccgo_strace {
+		trc("t=%v b=%v, (%v:)", t, b, origin(2))
+	}
 	return Bool32(math.IsNaN(a) || math.IsNaN(b))
 }
 
 func X__builtin_nan(t *TLS, s uintptr) float64 {
+	if __ccgo_strace {
+		trc("t=%v s=%v, (%v:)", t, s, origin(2))
+	}
 	return math.NaN()
 }
 
 func X__builtin_nanf(t *TLS, s uintptr) float32 {
+	if __ccgo_strace {
+		trc("t=%v s=%v, (%v:)", t, s, origin(2))
+	}
 	return ___builtin_nanf(t, s)
 }
 
@@ -772,22 +966,39 @@ func ___builtin_nanf(t *TLS, s uintptr) float32 {
 }
 
 func X__builtin_nanl(t *TLS, s uintptr) float64 {
+	if __ccgo_strace {
+		trc("t=%v s=%v, (%v:)", t, s, origin(2))
+	}
 	return math.NaN()
 }
 
-func X__builtin_prefetch(t *TLS, addr, args uintptr) {}
+func X__builtin_prefetch(t *TLS, addr, args uintptr) {
+	if __ccgo_strace {
+		trc("t=%v args=%v, (%v:)", t, args, origin(2))
+	}
+	// nop
+}
 
 func X__builtin_unreachable(t *TLS) {
+	if __ccgo_strace {
+		trc("t=%v, (%v:)", t, origin(2))
+	}
 	fmt.Fprintf(os.Stderr, "unrechable\n")
 	os.Stderr.Sync()
 	Xexit(t, 1)
 }
 
 func X__builtin_trap(t *TLS) {
+	if __ccgo_strace {
+		trc("t=%v, (%v:)", t, origin(2))
+	}
 	Xabort(t)
 }
 
 func Xsystem(t *TLS, command uintptr) int32 {
+	if __ccgo_strace {
+		trc("t=%v command=%v, (%v:)", t, command, origin(2))
+	}
 	s := GoString(command)
 	if command == 0 {
 		_, err := exec.LookPath("sh")
@@ -807,62 +1018,108 @@ func Xsystem(t *TLS, command uintptr) int32 {
 }
 
 func X__builtin_isprint(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xisprint(tls, c)
 }
 
 func X__builtin_isalnum(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xisalnum(tls, c)
 }
 
 func X__builtin_isblank(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xisblank(tls, c)
 }
 
 func X__builtin_clz(t *TLS, n uint32) int32 {
+	if __ccgo_strace {
+		trc("t=%v n=%v, (%v:)", t, n, origin(2))
+	}
 	return int32(bits.LeadingZeros32(n))
 }
 
 func X__builtin_clzll(t *TLS, n uint64) int32 {
+	if __ccgo_strace {
+		trc("t=%v n=%v, (%v:)", t, n, origin(2))
+	}
 	return int32(bits.LeadingZeros64(n))
 }
 
 func Xdlopen(tls *TLS, filename uintptr, flags int32) uintptr {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v flags=%v, (%v:)", tls, filename, flags, origin(2))
+	}
 	panic(todo(""))
 }
 
 func Xdlsym(tls *TLS, handle, symbol uintptr) uintptr {
+	if __ccgo_strace {
+		trc("tls=%v symbol=%v, (%v:)", tls, symbol, origin(2))
+	}
 	panic(todo(""))
 }
 
 func Xtzset(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	___tzset(tls)
 }
 
 func Xfork(tls *TLS) int32 {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	return _fork(tls)
 }
 
 func X_exit(tls *TLS, status int32) {
+	if __ccgo_strace {
+		trc("tls=%v status=%v, (%v:)", tls, status, origin(2))
+	}
 	x__exit(tls, status)
 }
 
 func X__builtin_ldexp(tls *TLS, x float64, n int32) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xldexp(tls, x, n)
 }
 
 func X__builtin_add_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
+	if __ccgo_strace {
+		trc("t=%v b=%v res=%v, (%v:)", t, b, res, origin(2))
+	}
 	r, ovf := mathutil.AddOverflowInt64(a, b)
 	*(*int64)(unsafe.Pointer(res)) = r
 	return Bool32(ovf)
 }
 
 func X__builtin_sub_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
+	if __ccgo_strace {
+		trc("t=%v b=%v res=%v, (%v:)", t, b, res, origin(2))
+	}
 	r, ovf := mathutil.SubOverflowInt64(a, b)
 	*(*int64)(unsafe.Pointer(res)) = r
 	return Bool32(ovf)
 }
 
 func X__builtin_mul_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
+	if __ccgo_strace {
+		trc("t=%v b=%v res=%v, (%v:)", t, b, res, origin(2))
+	}
 	r, ovf := mathutil.MulOverflowInt64(a, b)
 	*(*int64)(unsafe.Pointer(res)) = r
 	return Bool32(ovf)
@@ -921,6 +1178,9 @@ func _setjmp(tls *TLS, jmp_buf uintptr) int32 {
 }
 
 func X__builtin_setjmp(tls *TLS, jmp_buf uintptr) int32 {
+	if __ccgo_strace {
+		trc("tls=%v jmp_buf=%v, (%v:)", tls, jmp_buf, origin(2))
+	}
 	return _setjmp(tls, jmp_buf)
 }
 

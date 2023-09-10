@@ -181,4 +181,72 @@ func main() {
 	} {
 		util.MustShell(true, "sed", "-i", fmt.Sprintf(`s/\<x___%s\>/X%[1]s/g`, v), fn)
 	}
+
+	m, err := filepath.Glob(fmt.Sprintf("*_%s_%s.go", runtime.GOOS, runtime.GOARCH))
+	if err != nil {
+		fail(1, "%s\n", err)
+	}
+
+	format := false
+	for _, fn := range m {
+		b, err := os.ReadFile(fn)
+		if err != nil {
+			fail(1, "%s\n", err)
+		}
+
+		a := strings.Split(string(b), "\n")
+		w := false
+		for i, v := range a {
+			if strings.HasPrefix(v, "func X") {
+				if i+1 < len(a) && !strings.Contains(a[i+1], `if __ccgo_strace {"`) {
+					a[i] += "\n\t" + traceLine(v)
+					w = true
+					format = true
+				}
+			}
+		}
+		if w {
+			if err := os.WriteFile(fn, []byte(strings.Join(a, "\n")), 0660); err != nil {
+				fail(1, "%s\n", err)
+			}
+		}
+	}
+	if format {
+		util.MustShell(true, "gofmt", "-w", ".")
+	}
+}
+
+// func Xaio_fsync(tls *TLS, op int32, cb uintptr) (r int32) {
+func traceLine(s string) string {
+	var b strings.Builder
+	parts := strings.Split(s, "(")
+	for i, v := range parts {
+		switch i {
+		case 0:
+			// "func Xaio_fsync"
+		case 1:
+			// "tls *TLS, op int32, cb uintptr) "
+			a := strings.Split(v, ",")
+			b.WriteString(`if __ccgo_strace { trc("`)
+			var vals []string
+			for j, w := range a {
+				w = strings.TrimSpace(w)
+				if x := strings.Index(w, " "); x > 0 {
+					w := w[:x]
+					if j != 0 {
+						b.WriteString(" ")
+					}
+					fmt.Fprintf(&b, "%s=%%v", w)
+					vals = append(vals, w)
+				}
+			}
+			fmt.Fprintf(&b, `, (%%v:)", %s, origin(2))`, strings.Join(vals, ", "))
+		case 2:
+			// "r int32) {"
+			r := v[:strings.Index(v, " ")]
+			fmt.Fprintf(&b, `; defer func() { trc("-> %%v", %s)}()`, r)
+		}
+	}
+	b.WriteString("}")
+	return b.String()
 }

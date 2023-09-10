@@ -1284,14 +1284,26 @@ func _submit(tls *TLS, cb uintptr, op int32) (r int32) {
 }
 
 func Xaio_read(tls *TLS, cb uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v cb=%v, (%v:)", tls, cb, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _submit(tls, cb, m_LIO_READ)
 }
 
 func Xaio_write(tls *TLS, cb uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v cb=%v, (%v:)", tls, cb, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _submit(tls, cb, int32(m_LIO_WRITE))
 }
 
 func Xaio_fsync(tls *TLS, op int32, cb uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v op=%v cb=%v, (%v:)", tls, op, cb, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if op != int32(m_O_SYNC) && op != int32(m_O_DSYNC) {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return -int32(1)
@@ -1300,15 +1312,27 @@ func Xaio_fsync(tls *TLS, op int32, cb uintptr) (r int32) {
 }
 
 func Xaio_return(tls *TLS, cb uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v cb=%v, (%v:)", tls, cb, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return (*Taiocb)(unsafe.Pointer(cb)).F__ret
 }
 
 func Xaio_error(tls *TLS, cb uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v cb=%v, (%v:)", tls, cb, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	_a_barrier(tls)
 	return AtomicLoadPInt32(cb+112) & int32(0x7fffffff)
 }
 
 func Xaio_cancel(tls *TLS, fd int32, cb uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v cb=%v, (%v:)", tls, fd, cb, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(256) /* tlsAllocs 256 maxVaListSize 0 */
 	defer tls.Free(256)
 	var p, q, v1 uintptr
@@ -1412,6 +1436,10 @@ const m_EINTR = 4
 const m_ETIMEDOUT = 110
 
 func Xaio_suspend(tls *TLS, cbs uintptr, cnt int32, ts uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v cbs=%v cnt=%v ts=%v, (%v:)", tls, cbs, cnt, ts, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var cb, pfut, v2, p1 uintptr
@@ -1574,6 +1602,10 @@ func _wait_thread(tls *TLS, p uintptr) (r uintptr) {
 }
 
 func Xlio_listio(tls *TLS, mode int32, cbs uintptr, cnt int32, sev uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mode=%v cbs=%v cnt=%v sev=%v, (%v:)", tls, mode, cbs, cnt, sev, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(320) /* tlsAllocs 320 maxVaListSize 0 */
 	defer tls.Free(320)
 	var i, ret int32
@@ -1776,18 +1808,34 @@ func x___ldexp_cexpf(tls *TLS, z complex64, expt int32) (r complex64) {
 }
 
 func Xcabs(tls *TLS, z complex128) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xhypot(tls, Float64FromComplex128(z), +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)])
 }
 
 func Xcabsf(tls *TLS, z complex64) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xhypotf(tls, Float32FromComplex64(z), +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)])
 }
 
 func Xcabsl(tls *TLS, z complex128) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcabs(tls, Complex128FromComplex128(z))
 }
 
 func Xcacos(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 [2]float64
 	z = Xcasin(tls, z)
 	v1 = [2]float64{
@@ -1802,6 +1850,10 @@ func Xcacos(tls *TLS, z complex128) (r complex128) {
 var _float_pi_2 = float32(1.5707963267948966)
 
 func Xcacosf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 [2]float32
 	z = Xcasinf(tls, z)
 	v1 = [2]float32{
@@ -1812,6 +1864,10 @@ func Xcacosf(tls *TLS, z complex64) (r complex64) {
 }
 
 func Xcacosh(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var zineg int32
 	var v1, v2 [2]float64
 	zineg = int32(___DOUBLE_BITS(tls, +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]) >> Int32FromInt32(63))
@@ -1833,6 +1889,10 @@ func Xcacosh(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xcacoshf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var zineg int32
 	var v1, v2 [2]float32
 	zineg = int32(___FLOAT_BITS(tls, +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)]) >> Int32FromInt32(31))
@@ -1854,26 +1914,50 @@ func Xcacoshf(tls *TLS, z complex64) (r complex64) {
 }
 
 func Xcacoshl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcacosh(tls, Complex128FromComplex128(z)))
 }
 
 func Xcacosl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcacos(tls, Complex128FromComplex128(z)))
 }
 
 func Xcarg(tls *TLS, z complex128) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xatan2(tls, +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)], Float64FromComplex128(z))
 }
 
 func Xcargf(tls *TLS, z complex64) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xatan2f(tls, +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)], Float32FromComplex64(z))
 }
 
 func Xcargl(tls *TLS, z complex128) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcarg(tls, Complex128FromComplex128(z))
 }
 
 func Xcasin(tls *TLS, z complex128) (r1 complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, w complex128
 	var x, y float64
 	var v1, v2, v3 [2]float64
@@ -1897,6 +1981,10 @@ func Xcasin(tls *TLS, z complex128) (r1 complex128) {
 }
 
 func Xcasinf(tls *TLS, z complex64) (r1 complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, w complex64
 	var x, y float32
 	var v1, v2, v3 [2]float32
@@ -1920,6 +2008,10 @@ func Xcasinf(tls *TLS, z complex64) (r1 complex64) {
 }
 
 func Xcasinh(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
@@ -1934,6 +2026,10 @@ func Xcasinh(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xcasinhf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
@@ -1948,10 +2044,18 @@ func Xcasinhf(tls *TLS, z complex64) (r complex64) {
 }
 
 func Xcasinhl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcasinh(tls, Complex128FromComplex128(z)))
 }
 
 func Xcasinl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcasin(tls, Complex128FromComplex128(z)))
 }
 
@@ -1975,6 +2079,10 @@ func __redupi(tls *TLS, x float64) (r float64) {
 }
 
 func Xcatan(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, t, x, x2, y float64
 	var w complex128
 	var v1 [2]float64
@@ -2019,6 +2127,10 @@ func __redupif(tls *TLS, xx float32) (r float32) {
 }
 
 func Xcatanf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, t, x, x2, y float32
 	var w complex64
 	var v1 [2]float32
@@ -2041,6 +2153,10 @@ func Xcatanf(tls *TLS, z complex64) (r complex64) {
 }
 
 func Xcatanh(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
@@ -2055,6 +2171,10 @@ func Xcatanh(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xcatanhf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
@@ -2069,14 +2189,26 @@ func Xcatanhf(tls *TLS, z complex64) (r complex64) {
 }
 
 func Xcatanhl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcatanh(tls, Complex128FromComplex128(z)))
 }
 
 func Xcatanl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcatan(tls, Complex128FromComplex128(z)))
 }
 
 func Xccos(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
@@ -2086,6 +2218,10 @@ func Xccos(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xccosf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
@@ -2097,6 +2233,10 @@ func Xccosf(tls *TLS, z complex64) (r complex64) {
 var _huge = float64(8.98846567431158e+307)
 
 func Xccosh(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __u, __u1 uint64
 	var h, x, y float64
 	var hx, hy, ix, iy, lx, ly int32
@@ -2255,6 +2395,10 @@ func Xccosh(tls *TLS, z complex128) (r complex128) {
 var _huge1 = float32(1.7014118346046923e+38)
 
 func Xccoshf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var h, x, y float32
 	var hx, hy, ix, iy int32
 	var v1, v10, v11, v12, v13, v2, v3, v4, v5, v6, v7, v8, v9 [2]float32
@@ -2365,10 +2509,18 @@ func Xccoshf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func Xccoshl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xccosh(tls, Complex128FromComplex128(z)))
 }
 
 func Xccosl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xccos(tls, Complex128FromComplex128(z)))
 }
 
@@ -2376,6 +2528,10 @@ var _exp_ovfl = uint32(0x40862e42) /* high bits of MAX_EXP * ln2 ~= 710 */
 var _cexp_ovfl = uint32(0x4096b8e4)
 
 func Xcexp(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __u, __u1 uint64
 	var exp_x, x, y float64
 	var hx, hy, lx, ly uint32
@@ -2456,6 +2612,10 @@ var _exp_ovfl1 = uint32(0x42b17218) /* MAX_EXP * ln2 ~= 88.722839355 */
 var _cexp_ovfl1 = uint32(0x43400074)
 
 func Xcexpf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var exp_x, x, y float32
 	var hx, hy uint32
 	var v1, v2, v3, v4, v5, v6 [2]float32
@@ -2531,22 +2691,42 @@ func Xcexpf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func Xcexpl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcexp(tls, Complex128FromComplex128(z)))
 }
 
 func Xcimag(tls *TLS, z complex128) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]
 }
 
 func Xcimagf(tls *TLS, z complex64) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)]
 }
 
 func Xcimagl(tls *TLS, z complex128) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]
 }
 
 func Xclog(tls *TLS, z complex128) (r1 complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var phi, r float64
 	var v1 [2]float64
 	r = Xcabs(tls, z)
@@ -2559,6 +2739,10 @@ func Xclog(tls *TLS, z complex128) (r1 complex128) {
 }
 
 func Xclogf(tls *TLS, z complex64) (r1 complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var phi, r float32
 	var v1 [2]float32
 	r = Xcabsf(tls, z)
@@ -2571,10 +2755,18 @@ func Xclogf(tls *TLS, z complex64) (r1 complex64) {
 }
 
 func Xclogl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xclog(tls, Complex128FromComplex128(z)))
 }
 
 func Xconj(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 [2]float64
 	v1 = [2]float64{
 		0: Float64FromComplex128(z),
@@ -2584,6 +2776,10 @@ func Xconj(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xconjf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 [2]float32
 	v1 = [2]float32{
 		0: Float32FromComplex64(z),
@@ -2593,6 +2789,10 @@ func Xconjf(tls *TLS, z complex64) (r complex64) {
 }
 
 func Xconjl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 [2]float64
 	v1 = [2]float64{
 		0: Float64FromComplex128(z),
@@ -2602,20 +2802,36 @@ func Xconjl(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xcpow(tls *TLS, z complex128, c complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v c=%v, (%v:)", tls, z, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcexp(tls, c*Xclog(tls, z))
 }
 
 func Xcpowf(tls *TLS, z complex64, c complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v c=%v, (%v:)", tls, z, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcexpf(tls, c*Xclogf(tls, z))
 }
 
 func Xcpowl(tls *TLS, z complex128, c complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v c=%v, (%v:)", tls, z, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcpow(tls, Complex128FromComplex128(z), Complex128FromComplex128(c)))
 }
 
 const m_FP_INFINITE = 1
 
 func Xcproj(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 [2]float64
 	if BoolInt32(___DOUBLE_BITS(tls, Float64FromComplex128(z))&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 || BoolInt32(___DOUBLE_BITS(tls, +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)])&(-Uint64FromUint64(1)>>Int32FromInt32(1)) == Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 		v1 = [2]float64{
@@ -2628,6 +2844,10 @@ func Xcproj(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xcprojf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 [2]float32
 	if BoolInt32(___FLOAT_BITS(tls, Float32FromComplex64(z))&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 || BoolInt32(___FLOAT_BITS(tls, +(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)])&uint32(0x7fffffff) == uint32(0x7f800000)) != 0 {
 		v1 = [2]float32{
@@ -2640,22 +2860,42 @@ func Xcprojf(tls *TLS, z complex64) (r complex64) {
 }
 
 func Xcprojl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcproj(tls, Complex128FromComplex128(z)))
 }
 
 func Xcreal(tls *TLS, z complex128) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Float64FromComplex128(z)
 }
 
 func Xcrealf(tls *TLS, z complex64) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Float32FromComplex64(z)
 }
 
 func Xcreall(tls *TLS, z complex128) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Float64FromComplex128(z)
 }
 
 func Xcsin(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
@@ -2670,6 +2910,10 @@ func Xcsin(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xcsinf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
@@ -2686,6 +2930,10 @@ func Xcsinf(tls *TLS, z complex64) (r complex64) {
 var _huge2 = float64(8.98846567431158e+307)
 
 func Xcsinh(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __u, __u1 uint64
 	var h, x, y float64
 	var hx, hy, ix, iy, lx, ly int32
@@ -2845,6 +3093,10 @@ func Xcsinh(tls *TLS, z complex128) (r complex128) {
 var _huge3 = float32(1.7014118346046923e+38)
 
 func Xcsinhf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var h, x, y float32
 	var hx, hy, ix, iy int32
 	var v1, v10, v11, v12, v13, v2, v3, v4, v5, v6, v7, v8, v9 [2]float32
@@ -2955,14 +3207,26 @@ func Xcsinhf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func Xcsinhl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcsinh(tls, Complex128FromComplex128(z)))
 }
 
 func Xcsinl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcsin(tls, Complex128FromComplex128(z)))
 }
 
 func Xcsqrt(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, b, t float64
 	var result complex128
 	var scale int32
@@ -3049,6 +3313,10 @@ func Xcsqrt(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xcsqrtf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, b float32
 	var t float64
 	var v1, v2, v3, v4, v5, v6, v7 [2]float32
@@ -3129,10 +3397,18 @@ func Xcsqrtf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func Xcsqrtl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xcsqrt(tls, Complex128FromComplex128(z)))
 }
 
 func Xctan(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 [2]float64
 	v1 = [2]float64{
 		0: -+(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)],
@@ -3147,6 +3423,10 @@ func Xctan(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xctanf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 [2]float32
 	v1 = [2]float32{
 		0: -+(*(*[2]float32)(unsafe.Pointer(&z)))[int32(1)],
@@ -3161,6 +3441,10 @@ func Xctanf(tls *TLS, z complex64) (r complex64) {
 }
 
 func Xctanh(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __u, v3 uint64
 	var beta, denom, exp_mx, rho, s, t, x, y, v2, v5, v7 float64
 	var hx, ix, lx uint32
@@ -3258,6 +3542,10 @@ func Xctanh(tls *TLS, z complex128) (r complex128) {
 }
 
 func Xctanhf(tls *TLS, z complex64) (r complex64) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var beta, denom, exp_mx, rho, s, t, x, y, v2, v5, v7 float32
 	var hx, ix, v3 uint32
 	var v1, v4, v6, v8, v9 [2]float32
@@ -3327,16 +3615,28 @@ func Xctanhf(tls *TLS, z complex64) (r complex64) {
 //
 //	//FIXME
 func Xctanhl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xctanh(tls, Complex128FromComplex128(z)))
 }
 
 func Xctanl(tls *TLS, z complex128) (r complex128) {
+	if __ccgo_strace {
+		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Complex128FromComplex128(Xctan(tls, Complex128FromComplex128(z)))
 }
 
 const m__CS_POSIX_V6_ILP32_OFF32_CFLAGS = 1116
 
 func Xconfstr(tls *TLS, name int32, buf uintptr, len1 uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v buf=%v len1=%v, (%v:)", tls, name, buf, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	var s uintptr
@@ -3382,6 +3682,10 @@ const m__POSIX_MAX_CANON = 255
 const m__POSIX_MAX_INPUT = 255
 
 func Xfpathconf(tls *TLS, fd int32, name int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v name=%v, (%v:)", tls, fd, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if uint64(name) >= Uint64FromInt64(42)/Uint64FromInt64(2) {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return int64(-int32(1))
@@ -3437,22 +3741,42 @@ type Tsysinfo = struct {
 }
 
 func Xget_nprocs_conf(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(Xsysconf(tls, int32(m__SC_NPROCESSORS_CONF)))
 }
 
 func Xget_nprocs(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(Xsysconf(tls, int32(m__SC_NPROCESSORS_ONLN)))
 }
 
 func Xget_phys_pages(tls *TLS) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xsysconf(tls, int32(m__SC_PHYS_PAGES))
 }
 
 func Xget_avphys_pages(tls *TLS) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xsysconf(tls, int32(m__SC_AVPHYS_PAGES))
 }
 
 func Xpathconf(tls *TLS, path uintptr, name int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v name=%v, (%v:)", tls, path, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfpathconf(tls, -int32(1), name)
 }
 
@@ -3671,6 +3995,10 @@ type Trusage = struct {
 }
 
 func Xsysconf(tls *TLS, name int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(512) /* tlsAllocs 512 maxVaListSize 0 */
 	defer tls.Free(512)
 	var cnt, i, v2 int32
@@ -3919,6 +4247,10 @@ type Tcrypt_data = struct {
 }
 
 func Xcrypt(tls *TLS, key uintptr, salt uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v salt=%v, (%v:)", tls, key, salt, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___crypt_r(tls, key, salt, uintptr(unsafe.Pointer(&_buf)))
 }
 
@@ -9451,6 +9783,9 @@ var _testhash2 = [116]int8{'$', '6', '$', 'r', 'o', 'u', 'n', 'd', 's', '=', '1'
 var ___encrypt_key Texpanded_key
 
 func Xsetkey(tls *TLS, key uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v, (%v:)", tls, key, origin(2))
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var i, j int32
@@ -9471,6 +9806,9 @@ func Xsetkey(tls *TLS, key uintptr) {
 }
 
 func Xencrypt(tls *TLS, block uintptr, edflag int32) {
+	if __ccgo_strace {
+		trc("tls=%v block=%v edflag=%v, (%v:)", tls, block, edflag, origin(2))
+	}
 	bp := tls.Alloc(144) /* tlsAllocs 136 maxVaListSize 0 */
 	defer tls.Free(144)
 	var i, j int32
@@ -10735,6 +11073,10 @@ func x___ctype_toupper_loc(tls *TLS) (r uintptr) {
 }
 
 func Xisalnum(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(BoolInt32(uint32(c)|uint32(32)-uint32('a') < uint32(26)) != 0 || BoolInt32(uint32(c)-uint32('0') < uint32(10)) != 0)
 }
 
@@ -10743,6 +11085,10 @@ func x___isalnum_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xisalpha(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(uint32(c)|uint32(32)-uint32('a') < uint32(26))
 }
 
@@ -10751,10 +11097,18 @@ func x___isalpha_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xisascii(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(!(c & ^Int32FromInt32(0x7f) != 0))
 }
 
 func Xisblank(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(c == int32(' ') || c == int32('\t'))
 }
 
@@ -10763,6 +11117,10 @@ func x___isblank_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xiscntrl(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(uint32(c) < uint32(0x20) || c == int32(0x7f))
 }
 
@@ -10771,6 +11129,10 @@ func x___iscntrl_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xisdigit(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(uint32(c)-uint32('0') < uint32(10))
 }
 
@@ -10779,6 +11141,10 @@ func x___isdigit_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xisgraph(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(uint32(c)-uint32(0x21) < uint32(0x5e))
 }
 
@@ -10787,6 +11153,10 @@ func x___isgraph_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xislower(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(uint32(c)-uint32('a') < uint32(26))
 }
 
@@ -10795,6 +11165,10 @@ func x___islower_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xisprint(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(uint32(c)-uint32(0x20) < uint32(0x5f))
 }
 
@@ -10803,6 +11177,10 @@ func x___isprint_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xispunct(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(BoolInt32(uint32(c)-uint32(0x21) < uint32(0x5e)) != 0 && !(Xisalnum(tls, c) != 0))
 }
 
@@ -10811,6 +11189,10 @@ func x___ispunct_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xisspace(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(c == int32(' ') || uint32(c)-uint32('\t') < uint32(5))
 }
 
@@ -10819,6 +11201,10 @@ func x___isspace_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xisupper(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(uint32(c)-uint32('A') < uint32(26))
 }
 
@@ -10833,6 +11219,10 @@ type Twctype_t = uint64
 type Twctrans_t = uintptr
 
 func Xiswalnum(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(BoolInt32(wc-uint32('0') < uint32(10)) != 0 || Xiswalpha(tls, wc) != 0)
 }
 
@@ -14748,6 +15138,10 @@ var _table3 = [3904]uint8{
 }
 
 func Xiswalpha(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if wc < uint32(0x20000) {
 		return int32(_table3[uint32(int32(_table3[wc>>int32(8)])*int32(32))+wc&uint32(255)>>int32(3)]) >> (wc & uint32(7)) & int32(1)
 	}
@@ -14762,6 +15156,10 @@ func x___iswalpha_l(tls *TLS, c uint32, l uintptr) (r int32) {
 }
 
 func Xiswblank(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xisblank(tls, int32(wc))
 }
 
@@ -14770,6 +15168,10 @@ func x___iswblank_l(tls *TLS, c uint32, l uintptr) (r int32) {
 }
 
 func Xiswcntrl(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(wc < uint32(32) || wc-Uint32FromInt32(0x7f) < uint32(33) || wc-Uint32FromInt32(0x2028) < uint32(2) || wc-Uint32FromInt32(0xfff9) < uint32(3))
 }
 
@@ -14791,6 +15193,10 @@ const m_WCTYPE_UPPER = 11
 const m_WCTYPE_XDIGIT = 12
 
 func Xiswctype(tls *TLS, wc uint32, type1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v type1=%v, (%v:)", tls, wc, type1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	switch type1 {
 	case uint64(m_WCTYPE_ALNUM):
 		return Xiswalnum(tls, wc)
@@ -14821,6 +15227,10 @@ func Xiswctype(tls *TLS, wc uint32, type1 uint64) (r int32) {
 }
 
 func Xwctype(tls *TLS, s uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var i int32
 	var p uintptr
 	i = int32(1)
@@ -14849,6 +15259,10 @@ func x___wctype_l(tls *TLS, s uintptr, l uintptr) (r uint64) {
 }
 
 func Xiswdigit(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(wc-uint32('0') < uint32(10))
 }
 
@@ -14857,6 +15271,10 @@ func x___iswdigit_l(tls *TLS, c uint32, l uintptr) (r int32) {
 }
 
 func Xiswgraph(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* ISO C defines this function as: */
 	return BoolInt32(!(Xiswspace(tls, wc) != 0) && Xiswprint(tls, wc) != 0)
 }
@@ -14866,6 +15284,10 @@ func x___iswgraph_l(tls *TLS, c uint32, l uintptr) (r int32) {
 }
 
 func Xiswlower(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(Xtowupper(tls, wc) != wc)
 }
 
@@ -14874,6 +15296,10 @@ func x___iswlower_l(tls *TLS, c uint32, l uintptr) (r int32) {
 }
 
 func Xiswprint(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if wc < uint32(0xff) {
 		return BoolInt32((wc+uint32(1))&uint32(0x7f) >= uint32(0x21))
 	}
@@ -18894,6 +19320,10 @@ var _table4 = [4000]uint8{
 }
 
 func Xiswpunct(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if wc < uint32(0x20000) {
 		return int32(_table4[uint32(int32(_table4[wc>>int32(8)])*int32(32))+wc&uint32(255)>>int32(3)]) >> (wc & uint32(7)) & int32(1)
 	}
@@ -18912,6 +19342,10 @@ type Tmbstate_t = struct {
 type t__mbstate_t = Tmbstate_t
 
 func Xiswspace(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(wc != 0 && Xwcschr(tls, uintptr(unsafe.Pointer(&_spaces)), int32(wc)) != 0)
 }
 
@@ -18945,6 +19379,10 @@ func x___iswspace_l(tls *TLS, c uint32, l uintptr) (r int32) {
 }
 
 func Xiswupper(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(Xtowlower(tls, wc) != wc)
 }
 
@@ -18953,6 +19391,10 @@ func x___iswupper_l(tls *TLS, c uint32, l uintptr) (r int32) {
 }
 
 func Xiswxdigit(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(wc-Uint32FromUint8('0') < uint32(10) || wc|Uint32FromInt32(32)-Uint32FromUint8('a') < uint32(6))
 }
 
@@ -18961,6 +19403,10 @@ func x___iswxdigit_l(tls *TLS, c uint32, l uintptr) (r int32) {
 }
 
 func Xisxdigit(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(BoolInt32(uint32(c)-uint32('0') < uint32(10)) != 0 || uint32(c)|uint32(32)-uint32('a') < uint32(6))
 }
 
@@ -18972,10 +19418,18 @@ func x___isxdigit_l(tls *TLS, c int32, l uintptr) (r int32) {
 //
 //	/* nonsense function that should NEVER be used! */
 func Xtoascii(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return c & int32(0x7f)
 }
 
 func Xtolower(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if BoolInt32(uint32(c)-uint32('A') < uint32(26)) != 0 {
 		return c | int32(32)
 	}
@@ -18987,6 +19441,10 @@ func x___tolower_l(tls *TLS, c int32, l uintptr) (r int32) {
 }
 
 func Xtoupper(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if BoolInt32(uint32(c)-uint32('a') < uint32(26)) != 0 {
 		return c & int32(0x5f)
 	}
@@ -23288,10 +23746,18 @@ var _mt = [3]int32{
 }
 
 func Xtowlower(tls *TLS, wc uint32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uint32(_casemap(tls, wc, 0))
 }
 
 func Xtowupper(tls *TLS, wc uint32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uint32(_casemap(tls, wc, int32(1)))
 }
 
@@ -23304,6 +23770,10 @@ func x___towlower_l(tls *TLS, c uint32, l uintptr) (r uint32) {
 }
 
 func Xwcswidth(tls *TLS, wcs uintptr, n uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wcs=%v n=%v, (%v:)", tls, wcs, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var k, l, v2, v5 int32
 	var v1 uint64
 	var v3 bool
@@ -23333,6 +23803,10 @@ func Xwcswidth(tls *TLS, wcs uintptr, n uint64) (r int32) {
 }
 
 func Xwctrans(tls *TLS, class uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v class=%v, (%v:)", tls, class, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if !(Xstrcmp(tls, class, ts+191) != 0) {
 		return UintptrFromInt32(1)
 	}
@@ -23343,6 +23817,10 @@ func Xwctrans(tls *TLS, class uintptr) (r uintptr) {
 }
 
 func Xtowctrans(tls *TLS, wc uint32, trans uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v trans=%v, (%v:)", tls, wc, trans, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if trans == UintptrFromInt32(1) {
 		return Xtowupper(tls, wc)
 	}
@@ -27751,6 +28229,10 @@ var _wtable = [1600]uint8{
 }
 
 func Xwcwidth(tls *TLS, wc int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 int32
 	if uint32(wc) < uint32(0xff) {
 		if (wc+int32(1))&int32(0x7f) >= int32(0x21) {
@@ -27798,6 +28280,10 @@ type Tdirent = struct {
 }
 
 func Xalphasort(tls *TLS, a uintptr, b uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v b=%v, (%v:)", tls, a, b, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrcoll(tls, *(*uintptr)(unsafe.Pointer(a))+19, *(*uintptr)(unsafe.Pointer(b))+19)
 }
 
@@ -27813,6 +28299,10 @@ type TDIR = struct {
 type t__dirstream = TDIR
 
 func Xclosedir(tls *TLS, dir uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v dir=%v, (%v:)", tls, dir, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	ret = Xclose(tls, (*TDIR)(unsafe.Pointer(dir)).Ffd)
 	Xfree(tls, dir)
@@ -27820,6 +28310,10 @@ func Xclosedir(tls *TLS, dir uintptr) (r int32) {
 }
 
 func Xdirfd(tls *TLS, d uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v, (%v:)", tls, d, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return (*TDIR)(unsafe.Pointer(d)).Ffd
 }
 
@@ -27857,6 +28351,10 @@ type Tstat = struct {
 }
 
 func Xfdopendir(tls *TLS, fd int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(160) /* tlsAllocs 144 maxVaListSize 8 */
 	defer tls.Free(160)
 	var dir, v1 uintptr
@@ -27903,6 +28401,10 @@ type Tf_owner_ex = struct {
 }
 
 func Xopendir(tls *TLS, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var dir, v2 uintptr
 	var fd, v1 int32
 	v1 = Xopen(tls, name, Int32FromInt32(m_O_RDONLY)|Int32FromInt32(m_O_DIRECTORY)|Int32FromInt32(m_O_CLOEXEC), 0)
@@ -27927,6 +28429,10 @@ type Tptrdiff_t = int64
 type Tdirstream_buf_alignment_check = [1]int8
 
 func Xreaddir(tls *TLS, dir uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dir=%v, (%v:)", tls, dir, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var de uintptr
 	var len1 int32
 	if (*TDIR)(unsafe.Pointer(dir)).Fbuf_pos >= (*TDIR)(unsafe.Pointer(dir)).Fbuf_end {
@@ -27947,6 +28453,10 @@ func Xreaddir(tls *TLS, dir uintptr) (r uintptr) {
 }
 
 func Xreaddir_r(tls *TLS, dir uintptr, buf uintptr, result uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v dir=%v buf=%v result=%v, (%v:)", tls, dir, buf, result, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var de uintptr
 	var errno_save, ret, v1 int32
 	errno_save = *(*int32)(unsafe.Pointer(X__errno_location(tls)))
@@ -27973,6 +28483,9 @@ func Xreaddir_r(tls *TLS, dir uintptr, buf uintptr, result uintptr) (r int32) {
 const m_SEEK_SET = 0
 
 func Xrewinddir(tls *TLS, dir uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dir=%v, (%v:)", tls, dir, origin(2))
+	}
 	var v1 int32
 	x___lock(tls, dir+20)
 	Xlseek(tls, (*TDIR)(unsafe.Pointer(dir)).Ffd, 0, m_SEEK_SET)
@@ -27986,6 +28499,10 @@ func Xrewinddir(tls *TLS, dir uintptr) {
 const m_UINT64_MAX = 18446744073709551615
 
 func Xscandir(tls *TLS, path uintptr, res uintptr, sel uintptr, cmp uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v res=%v sel=%v cmp=%v, (%v:)", tls, path, res, sel, cmp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var cnt, len1, v2, v3 uint64
 	var d, de, names, tmp, v1 uintptr
 	var old_errno int32
@@ -28050,6 +28567,9 @@ func Xscandir(tls *TLS, path uintptr, res uintptr, sel uintptr, cmp uintptr) (r 
 }
 
 func Xseekdir(tls *TLS, dir uintptr, off int64) {
+	if __ccgo_strace {
+		trc("tls=%v dir=%v off=%v, (%v:)", tls, dir, off, origin(2))
+	}
 	var v1 int32
 	x___lock(tls, dir+20)
 	(*TDIR)(unsafe.Pointer(dir)).Ftell = Xlseek(tls, (*TDIR)(unsafe.Pointer(dir)).Ffd, off, m_SEEK_SET)
@@ -28060,10 +28580,18 @@ func Xseekdir(tls *TLS, dir uintptr, off int64) {
 }
 
 func Xtelldir(tls *TLS, dir uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v dir=%v, (%v:)", tls, dir, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return (*TDIR)(unsafe.Pointer(dir)).Ftell
 }
 
 func Xversionsort(tls *TLS, a uintptr, b uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v b=%v, (%v:)", tls, a, b, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrverscmp(tls, *(*uintptr)(unsafe.Pointer(a))+19, *(*uintptr)(unsafe.Pointer(b))+19)
 }
 
@@ -28384,6 +28912,10 @@ func _dummy2(tls *TLS, old uintptr, new1 uintptr) {
 }
 
 func Xclearenv(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var e, v1 uintptr
 	e = Xenviron
 	Xenviron = uintptr(0)
@@ -28398,6 +28930,10 @@ func Xclearenv(tls *TLS) (r int32) {
 }
 
 func Xgetenv(tls *TLS, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var e uintptr
 	var l uint64
 	l = uint64(int64(x___strchrnul(tls, name, int32('='))) - int64(name))
@@ -28466,6 +29002,10 @@ oom:
 var _oldenv uintptr
 
 func Xputenv(tls *TLS, s uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l uint64
 	l = uint64(int64(x___strchrnul(tls, s, int32('='))) - int64(s))
 	if !(l != 0) || !(*(*int8)(unsafe.Pointer(s + uintptr(l))) != 0) {
@@ -28484,6 +29024,10 @@ type Tcookie_io_functions_t = struct {
 type T_IO_cookie_io_functions_t = Tcookie_io_functions_t
 
 func Xsecure_getenv(tls *TLS, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 uintptr
 	if x___libc.Fsecure != 0 {
 		v1 = UintptrFromInt32(0)
@@ -28526,6 +29070,10 @@ var _env_alloced uintptr
 var _env_alloced_n uint64
 
 func Xsetenv(tls *TLS, var1 uintptr, value uintptr, overwrite int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v var1=%v value=%v overwrite=%v, (%v:)", tls, var1, value, overwrite, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l1, l2, v1 uint64
 	var s uintptr
 	var v2 bool
@@ -28555,6 +29103,10 @@ func _dummy4(tls *TLS, old uintptr, new1 uintptr) {
 }
 
 func Xunsetenv(tls *TLS, name uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var e, eo, v1 uintptr
 	var l uint64
 	l = uint64(int64(x___strchrnul(tls, name, int32('='))) - int64(name))
@@ -28586,6 +29138,10 @@ func Xunsetenv(tls *TLS, name uintptr) (r int32) {
 }
 
 func X__errno_location(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return ___get_tp(tls) + 52
 }
 
@@ -28973,6 +29529,10 @@ func x___strerror_l(tls *TLS, e int32, loc uintptr) (r uintptr) {
 }
 
 func Xstrerror(tls *TLS, e int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v e=%v, (%v:)", tls, e, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___strerror_l(tls, e, (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Flocale)
 }
 
@@ -29001,6 +29561,9 @@ type Tk_sigaction = struct {
 }
 
 func Xabort(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(48)
 	Xraise(tls, int32(m_SIGABRT))
@@ -29052,6 +29615,10 @@ func x___funcs_on_quick_exit(tls *TLS) {
 }
 
 func Xat_quick_exit(tls *TLS, func1 uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v func1=%v, (%v:)", tls, func1, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v1 int32
 	r = 0
 	x___lock(tls, uintptr(unsafe.Pointer(&_lock)))
@@ -29138,6 +29705,10 @@ func _call(tls *TLS, p uintptr) {
 }
 
 func Xatexit(tls *TLS, func1 uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v func1=%v, (%v:)", tls, func1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___cxa_atexit(tls, __ccgo_fp(_call), uintptr(uint64(func1)), uintptr(0))
 }
 
@@ -29155,6 +29726,9 @@ func _libc_exit_fini(tls *TLS) {
 }
 
 func Xexit(tls *TLS, code int32) {
+	if __ccgo_strace {
+		trc("tls=%v code=%v, (%v:)", tls, code, origin(2))
+	}
 	x___funcs_on_exit(tls)
 	_libc_exit_fini(tls)
 	x___stdio_exit(tls)
@@ -29165,6 +29739,9 @@ func _dummy6(tls *TLS) {
 }
 
 func Xquick_exit(tls *TLS, code int32) {
+	if __ccgo_strace {
+		trc("tls=%v code=%v, (%v:)", tls, code, origin(2))
+	}
 	x___funcs_on_quick_exit(tls)
 	x__Exit(tls, code)
 }
@@ -29174,6 +29751,10 @@ const m_O_TRUNC = 512
 const m_O_WRONLY = 1
 
 func Xcreat(tls *TLS, filename uintptr, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v mode=%v, (%v:)", tls, filename, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	return Xopen(tls, filename, Int32FromInt32(m_O_CREAT)|Int32FromInt32(m_O_WRONLY)|Int32FromInt32(m_O_TRUNC), VaList(bp+8, mode))
@@ -29192,6 +29773,10 @@ const m_F_SETOWN_EX = 15
 const m_SYS_fcntl = 72
 
 func Xfcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v cmd=%v va=%v, (%v:)", tls, fd, cmd, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ap uintptr
@@ -29261,6 +29846,10 @@ func Xfcntl(tls *TLS, fd int32, cmd int32, va uintptr) (r int32) {
 const m_O_TMPFILE = 4259840
 
 func Xopen(tls *TLS, filename uintptr, flags int32, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v flags=%v va=%v, (%v:)", tls, filename, flags, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var fd int32
 	var mode uint32
@@ -29280,6 +29869,10 @@ func Xopen(tls *TLS, filename uintptr, flags int32, va uintptr) (r int32) {
 const m_SYS_openat = 257
 
 func Xopenat(tls *TLS, fd int32, filename uintptr, flags int32, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v filename=%v flags=%v va=%v, (%v:)", tls, fd, filename, flags, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var mode uint32
 	mode = uint32(0)
@@ -29294,12 +29887,20 @@ func Xopenat(tls *TLS, fd int32, filename uintptr, flags int32, va uintptr) (r i
 const m_SYS_fadvise64 = 221
 
 func Xposix_fadvise(tls *TLS, fd int32, base int64, len1 int64, advice int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v base=%v len1=%v advice=%v, (%v:)", tls, fd, base, len1, advice, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(-___syscall4(tls, int64(m_SYS_fadvise64), int64(fd), base, len1, int64(advice)))
 }
 
 const m_SYS_fallocate = 285
 
 func Xposix_fallocate(tls *TLS, fd int32, base int64, len1 int64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v base=%v len1=%v, (%v:)", tls, fd, base, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(-___syscall4(tls, int64(m_SYS_fallocate), int64(fd), int64(Int32FromInt32(0)), base, len1))
 }
 
@@ -29342,6 +29943,10 @@ func x___flt_rounds(tls *TLS) (r int32) {
 }
 
 func Xfegetexceptflag(tls *TLS, fp uintptr, mask int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fp=%v mask=%v, (%v:)", tls, fp, mask, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	*(*uint16)(unsafe.Pointer(fp)) = uint16(_fetestexcept(tls, mask))
 	return 0
 }
@@ -29349,12 +29954,20 @@ func Xfegetexceptflag(tls *TLS, fp uintptr, mask int32) (r int32) {
 const m_FE_ALL_EXCEPT = 63
 
 func Xfeholdexcept(tls *TLS, envp uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v envp=%v, (%v:)", tls, envp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	_fegetenv(tls, envp)
 	_feclearexcept(tls, int32(m_FE_ALL_EXCEPT))
 	return 0
 }
 
 func Xfesetexceptflag(tls *TLS, fp uintptr, mask int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fp=%v mask=%v, (%v:)", tls, fp, mask, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	_feclearexcept(tls, ^int32(*(*uint16)(unsafe.Pointer(fp)))&mask)
 	_feraiseexcept(tls, int32(*(*uint16)(unsafe.Pointer(fp)))&mask)
 	return 0
@@ -29363,6 +29976,10 @@ func Xfesetexceptflag(tls *TLS, fp uintptr, mask int32) (r int32) {
 /* __fesetround wrapper for arch independent argument check */
 
 func Xfesetround(tls *TLS, r int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v r=%v, (%v:)", tls, r, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	if r != m_FE_TONEAREST && r != int32(m_FE_DOWNWARD) && r != int32(m_FE_UPWARD) && r != int32(m_FE_TOWARDZERO) {
 		return -int32(1)
 	}
@@ -29370,6 +29987,10 @@ func Xfesetround(tls *TLS, r int32) (r1 int32) {
 }
 
 func Xfeupdateenv(tls *TLS, envp uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v envp=%v, (%v:)", tls, envp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ex int32
 	ex = _fetestexcept(tls, int32(m_FE_ALL_EXCEPT))
 	_fesetenv(tls, envp)
@@ -31013,6 +31634,10 @@ type Tipc_perm = struct {
 }
 
 func Xftok(tls *TLS, path uintptr, id int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v id=%v, (%v:)", tls, path, id, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(144) /* tlsAllocs 144 maxVaListSize 0 */
 	defer tls.Free(144)
 	var _ /* st at bp+0 */ Tstat
@@ -31056,6 +31681,10 @@ type Tmsginfo = struct {
 }
 
 func Xmsgctl(tls *TLS, q int32, cmd int32, buf uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v q=%v cmd=%v buf=%v, (%v:)", tls, q, cmd, buf, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = int32(___syscall3(tls, int64(m_SYS_msgctl), int64(q), int64(cmd & ^(Int32FromInt32(m_IPC_STAT)&Int32FromInt32(0x100)) | Int32FromInt32(m_IPC_64)), int64(buf)))
 	return int32(x___syscall_ret(tls, uint64(r)))
@@ -31064,18 +31693,30 @@ func Xmsgctl(tls *TLS, q int32, cmd int32, buf uintptr) (r1 int32) {
 const m_SYS_msgget = 68
 
 func Xmsgget(tls *TLS, k int32, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v k=%v flag=%v, (%v:)", tls, k, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_msgget), int64(k), int64(flag)))))
 }
 
 const m_SYS_msgrcv = 70
 
 func Xmsgrcv(tls *TLS, q int32, m uintptr, len1 uint64, type1 int64, flag int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v q=%v m=%v len1=%v type1=%v flag=%v, (%v:)", tls, q, m, len1, type1, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_msgrcv), int64(q), int64(m), int64(len1), type1, int64(flag), 0)))
 }
 
 const m_SYS_msgsnd = 69
 
 func Xmsgsnd(tls *TLS, q int32, m uintptr, len1 uint64, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v q=%v m=%v len1=%v flag=%v, (%v:)", tls, q, m, len1, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_msgsnd), int64(q), int64(m), int64(len1), int64(flag), 0, 0))))
 }
 
@@ -31126,6 +31767,10 @@ type Tsemun = struct {
 }
 
 func Xsemctl(tls *TLS, id int32, num int32, cmd int32, va uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v id=%v num=%v cmd=%v va=%v, (%v:)", tls, id, num, cmd, va, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ap uintptr
@@ -31163,6 +31808,10 @@ const m_SYS_semget = 64
 const m_USHRT_MAX = 65535
 
 func Xsemget(tls *TLS, key int32, n int32, fl int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v n=%v fl=%v, (%v:)", tls, key, n, fl, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* The kernel uses the wrong type for the sem_nsems member
 	 * of struct semid_ds, and thus might not check that the
 	 * n fits in the correct (per POSIX) userspace type, so
@@ -31176,6 +31825,10 @@ func Xsemget(tls *TLS, key int32, n int32, fl int32) (r int32) {
 const m_SYS_semop = 65
 
 func Xsemop(tls *TLS, id int32, buf uintptr, n uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v id=%v buf=%v n=%v, (%v:)", tls, id, buf, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_semop), int64(id), int64(buf), int64(n)))))
 }
 
@@ -31206,6 +31859,10 @@ type Tsemid_ds1 = struct {
 }
 
 func Xsemtimedop(tls *TLS, id int32, buf uintptr, n uint64, ts uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v id=%v buf=%v n=%v ts=%v, (%v:)", tls, id, buf, n, ts, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_semtimedop), int64(id), int64(buf), int64(n), int64(ts)))))
 }
 
@@ -31245,12 +31902,20 @@ type Tshm_info = struct {
 type Tshmatt_t = uint64
 
 func Xshmat(tls *TLS, id int32, addr uintptr, flag int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v id=%v addr=%v flag=%v, (%v:)", tls, id, addr, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uintptr(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_shmat), int64(id), int64(addr), int64(flag)))))
 }
 
 const m_SYS_shmctl = 31
 
 func Xshmctl(tls *TLS, id int32, cmd int32, buf uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v id=%v cmd=%v buf=%v, (%v:)", tls, id, cmd, buf, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = int32(___syscall3(tls, int64(m_SYS_shmctl), int64(id), int64(cmd & ^(Int32FromInt32(m_IPC_STAT)&Int32FromInt32(0x100)) | Int32FromInt32(m_IPC_64)), int64(buf)))
 	return int32(x___syscall_ret(tls, uint64(r)))
@@ -31259,6 +31924,10 @@ func Xshmctl(tls *TLS, id int32, cmd int32, buf uintptr) (r1 int32) {
 const m_SYS_shmdt = 67
 
 func Xshmdt(tls *TLS, addr uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v addr=%v, (%v:)", tls, addr, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_shmdt), int64(addr)))))
 }
 
@@ -31266,6 +31935,10 @@ const m_INT64_MAX = 9223372036854775807
 const m_SYS_shmget = 29
 
 func Xshmget(tls *TLS, key int32, size uint64, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v size=%v flag=%v, (%v:)", tls, key, size, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if size > uint64(Int64FromInt64(m_INT64_MAX)) {
 		size = Uint64FromUint64(0xffffffffffffffff)
 	}
@@ -31385,10 +32058,18 @@ func _stub_dladdr(tls *TLS, addr uintptr, info uintptr) (r int32) {
 }
 
 func Xdlclose(tls *TLS, p uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _stub_invalid_handle(tls, p)
 }
 
 func Xdlerror(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var s, self uintptr
 	self = ___get_tp(tls)
 	if !(int32(*(*uint8)(unsafe.Pointer(self + 66))&0x2>>1) != 0) {
@@ -31472,6 +32153,10 @@ func _stub_invalid_handle(tls *TLS, h uintptr) (r int32) {
 const m_RTLD_DI_LINKMAP = 2
 
 func Xdlinfo(tls *TLS, dso uintptr, req int32, res uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v dso=%v req=%v res=%v, (%v:)", tls, dso, req, res, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	if _stub_invalid_handle(tls, dso) != 0 {
@@ -31503,6 +32188,10 @@ type Tpasswd = struct {
 }
 
 func Xcuserid(tls *TLS, buf uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v buf=%v, (%v:)", tls, buf, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(2112) /* tlsAllocs 2104 maxVaListSize 0 */
 	defer tls.Free(2112)
 	var len1 uint64
@@ -31530,6 +32219,10 @@ func Xcuserid(tls *TLS, buf uintptr) (r uintptr) {
 var _usridbuf [20]int8
 
 func Xdaemon(tls *TLS, nochdir int32, noclose int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v nochdir=%v noclose=%v, (%v:)", tls, nochdir, noclose, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var failed, fd, v1 int32
 	if !(nochdir != 0) && Xchdir(tls, ts+463) != 0 {
 		return -int32(1)
@@ -31572,6 +32265,9 @@ func Xdaemon(tls *TLS, nochdir int32, noclose int32) (r int32) {
 }
 
 func Xvwarn(tls *TLS, fmt uintptr, ap uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v ap=%v, (%v:)", tls, fmt, ap, origin(2))
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	Xfprintf(tls, uintptr(unsafe.Pointer(&x___stderr_FILE)), ts+465, VaList(bp+8, x___progname))
@@ -31583,6 +32279,9 @@ func Xvwarn(tls *TLS, fmt uintptr, ap uintptr) {
 }
 
 func Xvwarnx(tls *TLS, fmt uintptr, ap uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v ap=%v, (%v:)", tls, fmt, ap, origin(2))
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	Xfprintf(tls, uintptr(unsafe.Pointer(&x___stderr_FILE)), ts+465, VaList(bp+8, x___progname))
@@ -31593,16 +32292,25 @@ func Xvwarnx(tls *TLS, fmt uintptr, ap uintptr) {
 }
 
 func Xverr(tls *TLS, status int32, fmt uintptr, ap uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v status=%v fmt=%v ap=%v, (%v:)", tls, status, fmt, ap, origin(2))
+	}
 	Xvwarn(tls, fmt, ap)
 	Xexit(tls, status)
 }
 
 func Xverrx(tls *TLS, status int32, fmt uintptr, ap uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v status=%v fmt=%v ap=%v, (%v:)", tls, status, fmt, ap, origin(2))
+	}
 	Xvwarnx(tls, fmt, ap)
 	Xexit(tls, status)
 }
 
 func Xwarn(tls *TLS, fmt uintptr, va uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v va=%v, (%v:)", tls, fmt, va, origin(2))
+	}
 	var ap uintptr
 	ap = va
 	Xvwarn(tls, fmt, ap)
@@ -31610,6 +32318,9 @@ func Xwarn(tls *TLS, fmt uintptr, va uintptr) {
 }
 
 func Xwarnx(tls *TLS, fmt uintptr, va uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v va=%v, (%v:)", tls, fmt, va, origin(2))
+	}
 	var ap uintptr
 	ap = va
 	Xvwarnx(tls, fmt, ap)
@@ -31617,6 +32328,9 @@ func Xwarnx(tls *TLS, fmt uintptr, va uintptr) {
 }
 
 func Xerr(tls *TLS, status int32, fmt uintptr, va uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v status=%v fmt=%v va=%v, (%v:)", tls, status, fmt, va, origin(2))
+	}
 	var ap uintptr
 	ap = va
 	Xverr(tls, status, fmt, ap)
@@ -31624,6 +32338,9 @@ func Xerr(tls *TLS, status int32, fmt uintptr, va uintptr) {
 }
 
 func Xerrx(tls *TLS, status int32, fmt uintptr, va uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v status=%v fmt=%v va=%v, (%v:)", tls, status, fmt, va, origin(2))
+	}
 	var ap uintptr
 	ap = va
 	Xverrx(tls, status, fmt, ap)
@@ -31633,6 +32350,10 @@ func Xerrx(tls *TLS, status int32, fmt uintptr, va uintptr) {
 const m_AT_EACCESS = 512
 
 func Xeuidaccess(tls *TLS, filename uintptr, amode int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v amode=%v, (%v:)", tls, filename, amode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfaccessat(tls, -int32(100), filename, amode, int32(m_AT_EACCESS))
 }
 
@@ -31644,6 +32365,10 @@ type TFTW = struct {
 }
 
 func Xftw(tls *TLS, path uintptr, fn uintptr, fd_limit int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v fn=%v fd_limit=%v, (%v:)", tls, path, fn, fd_limit, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* The following cast assumes that calling a function with one
 	 * argument more than it needs behaves as expected. This is
 	 * actually undefined, but works on all real-world machines. */
@@ -31656,6 +32381,10 @@ type Ttimezone = struct {
 }
 
 func Xfutimes(tls *TLS, fd int32, tv uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v tv=%v, (%v:)", tls, fd, tv, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var _ /* times at bp+0 */ [2]Ttimespec
@@ -31670,6 +32399,10 @@ func Xfutimes(tls *TLS, fd int32, tv uintptr) (r int32) {
 }
 
 func Xgetdtablesize(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var v1 uint64
@@ -31686,6 +32419,10 @@ func Xgetdtablesize(tls *TLS) (r int32) {
 const m_SI_LOAD_SHIFT = 16
 
 func Xgetloadavg(tls *TLS, a uintptr, n int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v n=%v, (%v:)", tls, a, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(368) /* tlsAllocs 368 maxVaListSize 0 */
 	defer tls.Free(368)
 	var i, v1 int32
@@ -31710,6 +32447,10 @@ func Xgetloadavg(tls *TLS, a uintptr, n int32) (r int32) {
 }
 
 func Xgetpagesize(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(m_PAGESIZE)
 }
 
@@ -31748,6 +32489,10 @@ type Ttermios = struct {
 }
 
 func Xgetpass(tls *TLS, prompt uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v prompt=%v, (%v:)", tls, prompt, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(144) /* tlsAllocs 120 maxVaListSize 8 */
 	defer tls.Free(144)
 	var fd, v1 int32
@@ -31796,6 +32541,9 @@ var _linesize uint64
 var _f uintptr
 
 func Xendusershell(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	if _f != 0 {
 		Xfclose(tls, _f)
 	}
@@ -31803,6 +32551,9 @@ func Xendusershell(tls *TLS) {
 }
 
 func Xsetusershell(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	if !(_f != 0) {
 		_f = Xfopen(tls, ts+484, ts+496)
 	}
@@ -31812,6 +32563,10 @@ func Xsetusershell(tls *TLS) {
 }
 
 func Xgetusershell(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l int64
 	if !(_f != 0) {
 		Xsetusershell(tls)
@@ -31882,6 +32637,10 @@ type Tstr_list = struct {
 }
 
 func Xisastream(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	if Xfcntl(tls, fd, int32(m_F_GETFD), 0) < 0 {
 		v1 = -int32(1)
@@ -31894,6 +32653,10 @@ func Xisastream(tls *TLS, fd int32) (r int32) {
 const m_AT_SYMLINK_NOFOLLOW = 256
 
 func Xlutimes(tls *TLS, filename uintptr, tv uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v tv=%v, (%v:)", tls, filename, tv, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var v1 uintptr
@@ -31916,6 +32679,10 @@ const m_RLIMIT_FSIZE = 1
 const m_UL_SETFSIZE = 2
 
 func Xulimit(tls *TLS, cmd int32, va uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v cmd=%v va=%v, (%v:)", tls, cmd, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ap uintptr
@@ -31955,28 +32722,53 @@ type Tutmpx = struct {
 }
 
 func Xendutxent(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 }
 
 func Xsetutxent(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 }
 
 func Xgetutxent(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return UintptrFromInt32(0)
 }
 
 func Xgetutxid(tls *TLS, ut uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v ut=%v, (%v:)", tls, ut, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return UintptrFromInt32(0)
 }
 
 func Xgetutxline(tls *TLS, ut uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v ut=%v, (%v:)", tls, ut, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return UintptrFromInt32(0)
 }
 
 func Xpututxline(tls *TLS, ut uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v ut=%v, (%v:)", tls, ut, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return UintptrFromInt32(0)
 }
 
 func Xupdwtmpx(tls *TLS, f uintptr, u uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v u=%v, (%v:)", tls, f, u, origin(2))
+	}
 }
 
 func ___utmpxname(tls *TLS, f uintptr) (r int32) {
@@ -31985,6 +32777,10 @@ func ___utmpxname(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xvalloc(tls *TLS, size uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v size=%v, (%v:)", tls, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmemalign(tls, uint64(m_PAGESIZE), size)
 }
 
@@ -32021,6 +32817,10 @@ type Ttimex = struct {
 }
 
 func Xadjtime(tls *TLS, in uintptr, out uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v in=%v out=%v, (%v:)", tls, in, out, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(208) /* tlsAllocs 208 maxVaListSize 0 */
 	defer tls.Free(208)
 	var v1 int64
@@ -32052,16 +32852,28 @@ func Xadjtime(tls *TLS, in uintptr, out uintptr) (r int32) {
 const m_CLOCK_REALTIME = 0
 
 func Xadjtimex(tls *TLS, tx uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v tx=%v, (%v:)", tls, tx, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xclock_adjtime(tls, m_CLOCK_REALTIME, tx)
 }
 
 const m_SYS_arch_prctl = 158
 
 func Xarch_prctl(tls *TLS, code int32, addr uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v code=%v addr=%v, (%v:)", tls, code, addr, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_arch_prctl), int64(code), int64(addr)))))
 }
 
 func Xbrk(tls *TLS, end uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v end=%v, (%v:)", tls, end, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOMEM))))
 }
 
@@ -32069,16 +32881,28 @@ const m_SYS_capget = 125
 const m_SYS_capset = 126
 
 func Xcapset(tls *TLS, a uintptr, b uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v b=%v, (%v:)", tls, a, b, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_capset), int64(a), int64(b)))))
 }
 
 func Xcapget(tls *TLS, a uintptr, b uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v b=%v, (%v:)", tls, a, b, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_capget), int64(a), int64(b)))))
 }
 
 const m_SYS_chroot = 161
 
 func Xchroot(tls *TLS, path uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v, (%v:)", tls, path, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_chroot), int64(path)))))
 }
 
@@ -32139,6 +32963,10 @@ type Tktimex = struct {
 }
 
 func Xclock_adjtime(tls *TLS, clock_id int32, utx uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v clock_id=%v utx=%v, (%v:)", tls, clock_id, utx, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(208) /* tlsAllocs 208 maxVaListSize 0 */
 	defer tls.Free(208)
 	var r int32
@@ -32329,6 +33157,10 @@ type Tsig_t = uintptr
 type Tsighandler_t = uintptr
 
 func Xclone(tls1 *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls1=%v func1=%v stack=%v flags=%v arg=%v va=%v, (%v:)", tls1, func1, stack, flags, arg, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls1.Alloc(32) /* tlsAllocs 0 maxVaListSize 24 */
 	defer tls1.Free(32)
 	var ap, ctid, ptid, tls uintptr
@@ -32343,6 +33175,10 @@ func Xclone(tls1 *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, v
 const m_SYS_copy_file_range = 326
 
 func Xcopy_file_range(tls *TLS, fd_in int32, off_in uintptr, fd_out int32, off_out uintptr, len1 uint64, flags uint32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd_in=%v off_in=%v fd_out=%v off_out=%v len1=%v flags=%v, (%v:)", tls, fd_in, off_in, fd_out, off_out, len1, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(m_SYS_copy_file_range), int64(fd_in), int64(off_in), int64(fd_out), int64(off_out), int64(len1), int64(flags))))
 }
 
@@ -32384,6 +33220,10 @@ type Tucontext_t2 = struct {
 }
 
 func Xepoll_create(tls *TLS, size int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v size=%v, (%v:)", tls, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if size <= 0 {
 		return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EINVAL))))
 	}
@@ -32391,6 +33231,10 @@ func Xepoll_create(tls *TLS, size int32) (r int32) {
 }
 
 func Xepoll_create1(tls *TLS, flags int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v flags=%v, (%v:)", tls, flags, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = int32(___syscall1(tls, int64(m_SYS_epoll_create1), int64(flags)))
 	if r == -int32(m_ENOSYS) && !(flags != 0) {
@@ -32400,10 +33244,18 @@ func Xepoll_create1(tls *TLS, flags int32) (r1 int32) {
 }
 
 func Xepoll_ctl(tls *TLS, fd int32, op int32, fd2 int32, ev uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v op=%v fd2=%v ev=%v, (%v:)", tls, fd, op, fd2, ev, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_epoll_ctl), int64(fd), int64(op), int64(fd2), int64(ev)))))
 }
 
 func Xepoll_pwait(tls *TLS, fd int32, ev uintptr, cnt int32, to int32, sigs uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v ev=%v cnt=%v to=%v sigs=%v, (%v:)", tls, fd, ev, cnt, to, sigs, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = int32(x___syscall_cp(tls, int64(m_SYS_epoll_pwait), int64(fd), int64(ev), int64(cnt), int64(to), int64(sigs), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8))))
 	if r == -int32(m_ENOSYS) && !(sigs != 0) {
@@ -32413,6 +33265,10 @@ func Xepoll_pwait(tls *TLS, fd int32, ev uintptr, cnt int32, to int32, sigs uint
 }
 
 func Xepoll_wait(tls *TLS, fd int32, ev uintptr, cnt int32, to int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v ev=%v cnt=%v to=%v, (%v:)", tls, fd, ev, cnt, to, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xepoll_pwait(tls, fd, ev, cnt, to, uintptr(0))
 }
 
@@ -32422,6 +33278,10 @@ const m_SYS_eventfd2 = 290
 type Teventfd_t = uint64
 
 func Xeventfd(tls *TLS, count uint32, flags int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v count=%v flags=%v, (%v:)", tls, count, flags, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = int32(___syscall2(tls, int64(m_SYS_eventfd2), int64(count), int64(flags)))
 	if r == -int32(m_ENOSYS) && !(flags != 0) {
@@ -32431,6 +33291,10 @@ func Xeventfd(tls *TLS, count uint32, flags int32) (r1 int32) {
 }
 
 func Xeventfd_read(tls *TLS, fd int32, value uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v value=%v, (%v:)", tls, fd, value, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	if uint64(8) == uint64(Xread(tls, fd, value, uint64(8))) {
 		v1 = 0
@@ -32441,6 +33305,10 @@ func Xeventfd_read(tls *TLS, fd int32, value uintptr) (r int32) {
 }
 
 func Xeventfd_write(tls *TLS, fd int32, _value uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v _value=%v, (%v:)", tls, fd, _value, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	*(*uint64)(unsafe.Pointer(bp)) = _value
@@ -32454,6 +33322,10 @@ func Xeventfd_write(tls *TLS, fd int32, _value uint64) (r int32) {
 }
 
 func Xfallocate(tls *TLS, fd int32, mode int32, base int64, len1 int64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v mode=%v base=%v len1=%v, (%v:)", tls, fd, mode, base, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_fallocate), int64(fd), int64(mode), base, len1))))
 }
 
@@ -32523,20 +33395,36 @@ type Tfanotify_response = struct {
 }
 
 func Xfanotify_init(tls *TLS, flags uint32, event_f_flags uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v flags=%v event_f_flags=%v, (%v:)", tls, flags, event_f_flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_fanotify_init), int64(flags), int64(event_f_flags)))))
 }
 
 func Xfanotify_mark(tls *TLS, fanotify_fd int32, flags uint32, mask uint64, dfd int32, pathname uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fanotify_fd=%v flags=%v mask=%v dfd=%v pathname=%v, (%v:)", tls, fanotify_fd, flags, mask, dfd, pathname, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_fanotify_mark), int64(fanotify_fd), int64(flags), int64(mask), int64(dfd), int64(pathname)))))
 }
 
 const m_SYS_flock = 73
 
 func Xflock(tls *TLS, fd int32, op int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v op=%v, (%v:)", tls, fd, op, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_flock), int64(fd), int64(op)))))
 }
 
 func Xgetdents(tls *TLS, fd int32, buf uintptr, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v len1=%v, (%v:)", tls, fd, buf, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if len1 > uint64(m_INT_MAX) {
 		len1 = uint64(m_INT_MAX)
 	}
@@ -32546,6 +33434,10 @@ func Xgetdents(tls *TLS, fd int32, buf uintptr, len1 uint64) (r int32) {
 const m_SYS_getrandom = 318
 
 func Xgetrandom(tls *TLS, buf uintptr, buflen uint64, flags uint32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v buf=%v buflen=%v flags=%v, (%v:)", tls, buf, buflen, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_getrandom), int64(buf), int64(buflen), int64(flags), 0, 0, 0)))
 }
 
@@ -32559,6 +33451,10 @@ type Tucontext_t3 = struct {
 }
 
 func Xgettid(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Ftid
 }
 
@@ -32575,10 +33471,18 @@ type Tinotify_event = struct {
 }
 
 func Xinotify_init(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xinotify_init1(tls, 0)
 }
 
 func Xinotify_init1(tls *TLS, flags int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v flags=%v, (%v:)", tls, flags, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = int32(___syscall1(tls, int64(m_SYS_inotify_init1), int64(flags)))
 	if r == -int32(m_ENOSYS) && !(flags != 0) {
@@ -32588,28 +33492,48 @@ func Xinotify_init1(tls *TLS, flags int32) (r1 int32) {
 }
 
 func Xinotify_add_watch(tls *TLS, fd int32, pathname uintptr, mask uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v pathname=%v mask=%v, (%v:)", tls, fd, pathname, mask, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_inotify_add_watch), int64(fd), int64(pathname), int64(mask)))))
 }
 
 func Xinotify_rm_watch(tls *TLS, fd int32, wd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v wd=%v, (%v:)", tls, fd, wd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_inotify_rm_watch), int64(fd), int64(wd)))))
 }
 
 const m_SYS_ioperm = 173
 
 func Xioperm(tls *TLS, from uint64, num uint64, turn_on int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v from=%v num=%v turn_on=%v, (%v:)", tls, from, num, turn_on, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_ioperm), int64(from), int64(num), int64(turn_on)))))
 }
 
 const m_SYS_iopl = 172
 
 func Xiopl(tls *TLS, level int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v level=%v, (%v:)", tls, level, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_iopl), int64(level)))))
 }
 
 const m_SYS_syslog = 103
 
 func Xklogctl(tls *TLS, type1 int32, buf uintptr, len1 int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v type1=%v buf=%v len1=%v, (%v:)", tls, type1, buf, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_syslog), int64(type1), int64(buf), int64(len1)))))
 }
 
@@ -32692,12 +33616,20 @@ func x___membarrier_init(tls *TLS) {
 const m_SYS_memfd_create = 319
 
 func Xmemfd_create(tls *TLS, name uintptr, flags uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v flags=%v, (%v:)", tls, name, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_memfd_create), int64(name), int64(flags)))))
 }
 
 const m_SYS_mlock2 = 325
 
 func Xmlock2(tls *TLS, addr uintptr, len1 uint64, flags uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v addr=%v len1=%v flags=%v, (%v:)", tls, addr, len1, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if flags == uint32(0) {
 		return Xmlock(tls, addr, len1)
 	}
@@ -32708,10 +33640,18 @@ const m_SYS_delete_module = 176
 const m_SYS_init_module = 175
 
 func Xinit_module(tls *TLS, a uintptr, b uint64, c uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v b=%v c=%v, (%v:)", tls, a, b, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_init_module), int64(a), int64(b), int64(c)))))
 }
 
 func Xdelete_module(tls *TLS, a uintptr, b uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v b=%v, (%v:)", tls, a, b, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_delete_module), int64(a), int64(b)))))
 }
 
@@ -32719,44 +33659,76 @@ const m_SYS_mount = 165
 const m_SYS_umount2 = 166
 
 func Xmount(tls *TLS, special uintptr, dir uintptr, fstype uintptr, flags uint64, data uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v special=%v dir=%v fstype=%v flags=%v data=%v, (%v:)", tls, special, dir, fstype, flags, data, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_mount), int64(special), int64(dir), int64(fstype), int64(flags), int64(data)))))
 }
 
 func Xumount(tls *TLS, special uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v special=%v, (%v:)", tls, special, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_umount2), int64(special), int64(Int32FromInt32(0))))))
 }
 
 func Xumount2(tls *TLS, special uintptr, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v special=%v flags=%v, (%v:)", tls, special, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_umount2), int64(special), int64(flags)))))
 }
 
 const m_SYS_name_to_handle_at = 303
 
 func Xname_to_handle_at(tls *TLS, dirfd int32, pathname uintptr, handle uintptr, mount_id uintptr, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v dirfd=%v pathname=%v handle=%v mount_id=%v flags=%v, (%v:)", tls, dirfd, pathname, handle, mount_id, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_name_to_handle_at), int64(dirfd), int64(pathname), int64(handle), int64(mount_id), int64(flags)))))
 }
 
 const m_SYS_open_by_handle_at = 304
 
 func Xopen_by_handle_at(tls *TLS, mount_fd int32, handle uintptr, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mount_fd=%v handle=%v flags=%v, (%v:)", tls, mount_fd, handle, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_open_by_handle_at), int64(mount_fd), int64(handle), int64(flags)))))
 }
 
 const m_SYS_personality = 135
 
 func Xpersonality(tls *TLS, persona uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v persona=%v, (%v:)", tls, persona, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_personality), int64(persona)))))
 }
 
 const m_SYS_pivot_root = 155
 
 func Xpivot_root(tls *TLS, new1 uintptr, old uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v new1=%v old=%v, (%v:)", tls, new1, old, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_pivot_root), int64(new1), int64(old)))))
 }
 
 const m_SYS_ppoll = 271
 
 func Xppoll(tls *TLS, fds uintptr, n uint64, to uintptr, mask uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fds=%v n=%v to=%v mask=%v, (%v:)", tls, fds, n, to, mask, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ns, s, v1, v2 int64
@@ -32805,6 +33777,10 @@ type Tprctl_mm_map = struct {
 }
 
 func Xprctl(tls *TLS, op int32, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v op=%v va=%v, (%v:)", tls, op, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var i int32
 	var x [4]uint64
@@ -32819,6 +33795,10 @@ func Xprctl(tls *TLS, op int32, va uintptr) (r int32) {
 const m_SYS_prlimit64 = 302
 
 func Xprlimit(tls *TLS, pid int32, resource int32, new_limit uintptr, old_limit uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v resource=%v new_limit=%v old_limit=%v, (%v:)", tls, pid, resource, new_limit, old_limit, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var r int32
@@ -32849,10 +33829,18 @@ const m_SYS_process_vm_readv = 310
 const m_SYS_process_vm_writev = 311
 
 func Xprocess_vm_writev(tls *TLS, pid int32, lvec uintptr, liovcnt uint64, rvec uintptr, riovcnt uint64, flags uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v lvec=%v liovcnt=%v rvec=%v riovcnt=%v flags=%v, (%v:)", tls, pid, lvec, liovcnt, rvec, riovcnt, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(m_SYS_process_vm_writev), int64(pid), int64(lvec), int64(liovcnt), int64(rvec), int64(riovcnt), int64(flags))))
 }
 
 func Xprocess_vm_readv(tls *TLS, pid int32, lvec uintptr, liovcnt uint64, rvec uintptr, riovcnt uint64, flags uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v lvec=%v liovcnt=%v rvec=%v riovcnt=%v flags=%v, (%v:)", tls, pid, lvec, liovcnt, rvec, riovcnt, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(m_SYS_process_vm_readv), int64(pid), int64(lvec), int64(liovcnt), int64(rvec), int64(riovcnt), int64(flags))))
 }
 
@@ -32904,6 +33892,10 @@ type t__ptrace_rseq_configuration = struct {
 }
 
 func Xptrace(tls *TLS, req int32, va uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v req=%v va=%v, (%v:)", tls, req, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var addr, addr2, ap, data uintptr
@@ -32950,30 +33942,50 @@ type Tdqinfo = struct {
 }
 
 func Xquotactl(tls *TLS, cmd int32, special uintptr, id int32, addr uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v cmd=%v special=%v id=%v addr=%v, (%v:)", tls, cmd, special, id, addr, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_quotactl), int64(cmd), int64(special), int64(id), int64(addr)))))
 }
 
 const m_SYS_readahead = 187
 
 func Xreadahead(tls *TLS, fd int32, pos int64, len1 uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v pos=%v len1=%v, (%v:)", tls, fd, pos, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_readahead), int64(fd), pos, int64(len1))))
 }
 
 const m_SYS_reboot = 169
 
 func Xreboot(tls *TLS, type1 int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v type1=%v, (%v:)", tls, type1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_reboot), int64(Uint32FromUint32(0xfee1dead)), int64(Int32FromInt32(672274793)), int64(type1)))))
 }
 
 const m_SYS_remap_file_pages = 216
 
 func Xremap_file_pages(tls *TLS, addr uintptr, size uint64, prot int32, pgoff uint64, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v addr=%v size=%v prot=%v pgoff=%v flags=%v, (%v:)", tls, addr, size, prot, pgoff, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_remap_file_pages), int64(addr), int64(size), int64(prot), int64(pgoff), int64(flags)))))
 }
 
 const m_SYS_brk = 12
 
 func Xsbrk(tls *TLS, inc int64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v inc=%v, (%v:)", tls, inc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if inc != 0 {
 		return uintptr(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOMEM))))
 	}
@@ -32983,18 +33995,30 @@ func Xsbrk(tls *TLS, inc int64) (r uintptr) {
 const m_SYS_sendfile = 40
 
 func Xsendfile(tls *TLS, out_fd int32, in_fd int32, ofs uintptr, count uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v out_fd=%v in_fd=%v ofs=%v count=%v, (%v:)", tls, out_fd, in_fd, ofs, count, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_sendfile), int64(out_fd), int64(in_fd), int64(ofs), int64(count))))
 }
 
 const m_SYS_setfsgid = 123
 
 func Xsetfsgid(tls *TLS, gid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v gid=%v, (%v:)", tls, gid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_setfsgid), int64(gid)))))
 }
 
 const m_SYS_setfsuid = 122
 
 func Xsetfsuid(tls *TLS, uid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v uid=%v, (%v:)", tls, uid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_setfsuid), int64(uid)))))
 }
 
@@ -33029,6 +34053,10 @@ func _do_setgroups(tls *TLS, p uintptr) {
 }
 
 func Xsetgroups(tls *TLS, count uint64, list uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v count=%v list=%v, (%v:)", tls, count, list, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var _ /* c at bp+0 */ Tctx
@@ -33046,16 +34074,28 @@ func Xsetgroups(tls *TLS, count uint64, list uintptr) (r int32) {
 const m_SYS_sethostname = 170
 
 func Xsethostname(tls *TLS, name uintptr, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v len1=%v, (%v:)", tls, name, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_sethostname), int64(name), int64(len1)))))
 }
 
 const m_SYS_setns = 308
 
 func Xsetns(tls *TLS, fd int32, nstype int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v nstype=%v, (%v:)", tls, fd, nstype, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_setns), int64(fd), int64(nstype)))))
 }
 
 func Xsettimeofday(tls *TLS, tv uintptr, tz uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v tv=%v tz=%v, (%v:)", tls, tv, tz, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	if !(tv != 0) {
@@ -33101,6 +34141,10 @@ type Tsignalfd_siginfo = struct {
 }
 
 func Xsignalfd(tls *TLS, fd int32, sigs uintptr, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v sigs=%v flags=%v, (%v:)", tls, fd, sigs, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	ret = int32(___syscall4(tls, int64(m_SYS_signalfd4), int64(fd), int64(sigs), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)), int64(flags)))
 	if ret != -int32(m_ENOSYS) {
@@ -33121,10 +34165,18 @@ func Xsignalfd(tls *TLS, fd int32, sigs uintptr, flags int32) (r int32) {
 const m_SYS_splice = 275
 
 func Xsplice(tls *TLS, fd_in int32, off_in uintptr, fd_out int32, off_out uintptr, len1 uint64, flags uint32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd_in=%v off_in=%v fd_out=%v off_out=%v len1=%v flags=%v, (%v:)", tls, fd_in, off_in, fd_out, off_out, len1, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall6(tls, int64(m_SYS_splice), int64(fd_in), int64(off_in), int64(fd_out), int64(off_out), int64(len1), int64(flags))))
 }
 
 func Xstime(tls *TLS, t uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v, (%v:)", tls, t, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimeval
@@ -33139,22 +34191,38 @@ const m_SYS_swapoff = 168
 const m_SYS_swapon = 167
 
 func Xswapon(tls *TLS, path uintptr, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v flags=%v, (%v:)", tls, path, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_swapon), int64(path), int64(flags)))))
 }
 
 func Xswapoff(tls *TLS, path uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v, (%v:)", tls, path, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_swapoff), int64(path)))))
 }
 
 const m_SYS_sync_file_range = 277
 
 func Xsync_file_range(tls *TLS, fd int32, pos int64, len1 int64, flags uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v pos=%v len1=%v flags=%v, (%v:)", tls, fd, pos, len1, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_sync_file_range), int64(fd), pos, len1, int64(flags)))))
 }
 
 const m_SYS_syncfs = 306
 
 func Xsyncfs(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_syncfs), int64(fd)))))
 }
 
@@ -33167,6 +34235,10 @@ func x___lsysinfo(tls *TLS, info uintptr) (r int32) {
 const m_SYS_tee = 276
 
 func Xtee(tls *TLS, src int32, dest int32, len1 uint64, flags uint32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v src=%v dest=%v len1=%v flags=%v, (%v:)", tls, src, dest, len1, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_tee), int64(src), int64(dest), int64(len1), int64(flags))))
 }
 
@@ -33175,36 +34247,64 @@ const m_SYS_timerfd_gettime = 287
 const m_SYS_timerfd_settime = 286
 
 func Xtimerfd_create(tls *TLS, clockid int32, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v clockid=%v flags=%v, (%v:)", tls, clockid, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_timerfd_create), int64(clockid), int64(flags)))))
 }
 
 func Xtimerfd_settime(tls *TLS, fd int32, flags int32, new1 uintptr, old uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v flags=%v new1=%v old=%v, (%v:)", tls, fd, flags, new1, old, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_timerfd_settime), int64(fd), int64(flags), int64(new1), int64(old)))))
 }
 
 func Xtimerfd_gettime(tls *TLS, fd int32, cur uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v cur=%v, (%v:)", tls, fd, cur, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_timerfd_gettime), int64(fd), int64(cur)))))
 }
 
 const m_SYS_unshare = 272
 
 func Xunshare(tls *TLS, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v flags=%v, (%v:)", tls, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_unshare), int64(flags)))))
 }
 
 func Xutimes(tls *TLS, path uintptr, times uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v times=%v, (%v:)", tls, path, times, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___futimesat(tls, -int32(100), path, times)
 }
 
 const m_SYS_vhangup = 153
 
 func Xvhangup(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(m_SYS_vhangup)))))
 }
 
 const m_SYS_vmsplice = 278
 
 func Xvmsplice(tls *TLS, fd int32, iov uintptr, cnt uint64, flags uint32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v iov=%v cnt=%v flags=%v, (%v:)", tls, fd, iov, cnt, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_vmsplice), int64(fd), int64(iov), int64(cnt), int64(flags))))
 }
 
@@ -33216,12 +34316,20 @@ const _P_PGID = 2
 const _P_PIDFD = 3
 
 func Xwait3(tls *TLS, status uintptr, options int32, usage uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v status=%v options=%v usage=%v, (%v:)", tls, status, options, usage, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xwait4(tls, -int32(1), status, options, usage)
 }
 
 const m_SYS_wait4 = 61
 
 func Xwait4(tls *TLS, pid int32, status uintptr, options int32, ru uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v status=%v options=%v ru=%v, (%v:)", tls, pid, status, options, ru, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var dest, v1 uintptr
@@ -33262,50 +34370,98 @@ const m_SYS_removexattr = 197
 const m_SYS_setxattr = 188
 
 func Xgetxattr(tls *TLS, path uintptr, name uintptr, value uintptr, size uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v name=%v value=%v size=%v, (%v:)", tls, path, name, value, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_getxattr), int64(path), int64(name), int64(value), int64(size))))
 }
 
 func Xlgetxattr(tls *TLS, path uintptr, name uintptr, value uintptr, size uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v name=%v value=%v size=%v, (%v:)", tls, path, name, value, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_lgetxattr), int64(path), int64(name), int64(value), int64(size))))
 }
 
 func Xfgetxattr(tls *TLS, filedes int32, name uintptr, value uintptr, size uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v filedes=%v name=%v value=%v size=%v, (%v:)", tls, filedes, name, value, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_fgetxattr), int64(filedes), int64(name), int64(value), int64(size))))
 }
 
 func Xlistxattr(tls *TLS, path uintptr, list uintptr, size uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v list=%v size=%v, (%v:)", tls, path, list, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_listxattr), int64(path), int64(list), int64(size))))
 }
 
 func Xllistxattr(tls *TLS, path uintptr, list uintptr, size uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v list=%v size=%v, (%v:)", tls, path, list, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_llistxattr), int64(path), int64(list), int64(size))))
 }
 
 func Xflistxattr(tls *TLS, filedes int32, list uintptr, size uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v filedes=%v list=%v size=%v, (%v:)", tls, filedes, list, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_flistxattr), int64(filedes), int64(list), int64(size))))
 }
 
 func Xsetxattr(tls *TLS, path uintptr, name uintptr, value uintptr, size uint64, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v name=%v value=%v size=%v flags=%v, (%v:)", tls, path, name, value, size, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_setxattr), int64(path), int64(name), int64(value), int64(size), int64(flags)))))
 }
 
 func Xlsetxattr(tls *TLS, path uintptr, name uintptr, value uintptr, size uint64, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v name=%v value=%v size=%v flags=%v, (%v:)", tls, path, name, value, size, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_lsetxattr), int64(path), int64(name), int64(value), int64(size), int64(flags)))))
 }
 
 func Xfsetxattr(tls *TLS, filedes int32, name uintptr, value uintptr, size uint64, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v filedes=%v name=%v value=%v size=%v flags=%v, (%v:)", tls, filedes, name, value, size, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_fsetxattr), int64(filedes), int64(name), int64(value), int64(size), int64(flags)))))
 }
 
 func Xremovexattr(tls *TLS, path uintptr, name uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v name=%v, (%v:)", tls, path, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_removexattr), int64(path), int64(name)))))
 }
 
 func Xlremovexattr(tls *TLS, path uintptr, name uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v name=%v, (%v:)", tls, path, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_lremovexattr), int64(path), int64(name)))))
 }
 
 func Xfremovexattr(tls *TLS, fd int32, name uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v name=%v, (%v:)", tls, fd, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_fremovexattr), int64(fd), int64(name)))))
 }
 
@@ -33377,6 +34533,10 @@ func x___mo_lookup(tls *TLS, p uintptr, size uint64, s uintptr) (r uintptr) {
 }
 
 func Xbind_textdomain_codeset(tls *TLS, domainname uintptr, codeset uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v domainname=%v codeset=%v, (%v:)", tls, domainname, codeset, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if codeset != 0 && Xstrcasecmp(tls, codeset, ts+503) != 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 	}
@@ -33396,6 +34556,10 @@ type Tnl_item = int32
 type Tnl_catd = uintptr
 
 func Xcatclose(tls *TLS, catd uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v catd=%v, (%v:)", tls, catd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var map1 uintptr
 	var v1, v2 uint32
 	map1 = catd
@@ -33434,6 +34598,10 @@ _6:
 }
 
 func Xcatgets(tls *TLS, catd uintptr, set_id int32, msg_id int32, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v catd=%v set_id=%v msg_id=%v s=%v, (%v:)", tls, catd, set_id, msg_id, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var map1, msg, msgs, set, sets, strings uintptr
@@ -33527,6 +34695,10 @@ func _do_catopen(tls *TLS, name uintptr) (r uintptr) {
 }
 
 func Xcatopen(tls *TLS, name uintptr, oflag int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v oflag=%v, (%v:)", tls, name, oflag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(4096) /* tlsAllocs 4096 maxVaListSize 0 */
 	defer tls.Free(4096)
 	var catd, lang, p, path, v, z, v1, v3, v5, v6 uintptr
@@ -33652,6 +34824,10 @@ func _gettextdir(tls *TLS, domainname uintptr, dirlen uintptr) (r uintptr) {
 var _lock2 [1]int32
 
 func Xbindtextdomain(tls *TLS, domainname uintptr, dirname uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v domainname=%v dirname=%v, (%v:)", tls, domainname, dirname, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var dirlen, domlen uint64
@@ -33740,6 +34916,10 @@ func _dummy_gettextdomain(tls *TLS) (r uintptr) {
 }
 
 func Xdcngettext(tls *TLS, domainname uintptr, msgid1 uintptr, msgid2 uintptr, n uint64, category int32) (r1 uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v domainname=%v msgid1=%v msgid2=%v n=%v category=%v, (%v:)", tls, domainname, msgid1, msgid2, n, category, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(80) /* tlsAllocs 16 maxVaListSize 56 */
 	defer tls.Free(80)
 	var alt_modlen, catlen, dirlen, domlen, l, loclen, modlen, np, plural, rem, v16, v5, v6 uint64
@@ -33940,14 +35120,26 @@ _2:
 var _cats uintptr
 
 func Xdcgettext(tls *TLS, domainname uintptr, msgid uintptr, category int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v domainname=%v msgid=%v category=%v, (%v:)", tls, domainname, msgid, category, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xdcngettext(tls, domainname, msgid, uintptr(0), uint64(1), category)
 }
 
 func Xdngettext(tls *TLS, domainname uintptr, msgid1 uintptr, msgid2 uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v domainname=%v msgid1=%v msgid2=%v n=%v, (%v:)", tls, domainname, msgid1, msgid2, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xdcngettext(tls, domainname, msgid1, msgid2, n, int32(m_LC_MESSAGES))
 }
 
 func Xdgettext(tls *TLS, domainname uintptr, msgid uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v domainname=%v msgid=%v, (%v:)", tls, domainname, msgid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xdcngettext(tls, domainname, msgid, uintptr(0), uint64(1), int32(m_LC_MESSAGES))
 }
 
@@ -33965,6 +35157,9 @@ func x___duplocale(tls *TLS, old uintptr) (r uintptr) {
 }
 
 func Xfreelocale(tls *TLS, l uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v, (%v:)", tls, l, origin(2))
+	}
 	if x___loc_is_allocated(tls, l) != 0 {
 		x___libc_free(tls, l)
 	}
@@ -101040,6 +102235,10 @@ func _extract_to(tls *TLS, cd uintptr) (r uint64) {
 }
 
 func Xiconv_open(tls *TLS, to uintptr, from uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v to=%v from=%v, (%v:)", tls, to, from, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var cd, scd uintptr
 	var f, t, v1, v2 uint64
 	var v3 bool
@@ -101139,6 +102338,10 @@ func _uni_to_jis(tls *TLS, c uint32) (r uint32) {
 }
 
 func Xiconv(tls *TLS, cd uintptr, in uintptr, inb uintptr, out uintptr, outb uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v cd=%v in=%v inb=%v out=%v outb=%v, (%v:)", tls, cd, in, inb, out, outb, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var c, d, from, to, v55 uint32
@@ -101990,6 +103193,10 @@ end:
 }
 
 func Xiconv_close(tls *TLS, cd uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v cd=%v, (%v:)", tls, cd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if !(uint64(cd)&Uint64FromInt32(1) != 0) {
 		Xfree(tls, cd)
 	}
@@ -102067,6 +103274,10 @@ func x___nl_langinfo_l(tls *TLS, item int32, loc uintptr) (r uintptr) {
 }
 
 func Xnl_langinfo(tls *TLS, item int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v item=%v, (%v:)", tls, item, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___nl_langinfo_l(tls, item, (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Flocale)
 }
 
@@ -102242,6 +103453,10 @@ var _posix_lconv = Tlconv{
 }
 
 func Xlocaleconv(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uintptr(unsafe.Pointer(&_posix_lconv))
 }
 
@@ -102568,6 +103783,10 @@ func x___pleval(tls *TLS, s uintptr, n uint64) (r uint64) {
 var _buf1 [144]int8
 
 func Xsetlocale(tls *TLS, cat int32, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v cat=%v name=%v, (%v:)", tls, cat, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(80) /* tlsAllocs 72 maxVaListSize 0 */
 	defer tls.Free(80)
 	var i, same int32
@@ -102660,6 +103879,10 @@ func x___strcoll_l(tls *TLS, l uintptr, r uintptr, loc uintptr) (r1 int32) {
 }
 
 func Xstrcoll(tls *TLS, l uintptr, r uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v, (%v:)", tls, l, r, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	return x___strcoll_l(tls, l, r, (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Flocale)
 }
 
@@ -102768,6 +103991,10 @@ _1:
 }
 
 func Xstrfmon_l(tls *TLS, s uintptr, n uint64, loc uintptr, fmt uintptr, va uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v loc=%v fmt=%v va=%v, (%v:)", tls, s, n, loc, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int64
 	ap = va
@@ -102777,6 +104004,10 @@ func Xstrfmon_l(tls *TLS, s uintptr, n uint64, loc uintptr, fmt uintptr, va uint
 }
 
 func Xstrfmon(tls *TLS, s uintptr, n uint64, fmt uintptr, va uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v fmt=%v va=%v, (%v:)", tls, s, n, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int64
 	ap = va
@@ -102786,14 +104017,26 @@ func Xstrfmon(tls *TLS, s uintptr, n uint64, fmt uintptr, va uintptr) (r int64) 
 }
 
 func Xstrtof_l(tls *TLS, s uintptr, p uintptr, l uintptr) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v l=%v, (%v:)", tls, s, p, l, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrtof(tls, s, p)
 }
 
 func Xstrtod_l(tls *TLS, s uintptr, p uintptr, l uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v l=%v, (%v:)", tls, s, p, l, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrtod(tls, s, p)
 }
 
 func Xstrtold_l(tls *TLS, s uintptr, p uintptr, l uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v l=%v, (%v:)", tls, s, p, l, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrtold(tls, s, p)
 }
 
@@ -102810,6 +104053,10 @@ func x___strxfrm_l(tls *TLS, dest uintptr, src uintptr, n uint64, loc uintptr) (
 }
 
 func Xstrxfrm(tls *TLS, dest uintptr, src uintptr, n uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v n=%v, (%v:)", tls, dest, src, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___strxfrm_l(tls, dest, src, n, (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Flocale)
 }
 
@@ -102835,6 +104082,10 @@ func x___gettextdomain(tls *TLS) (r uintptr) {
 }
 
 func Xtextdomain(tls *TLS, domainname uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v domainname=%v, (%v:)", tls, domainname, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var domlen uint64
 	if !(domainname != 0) {
 		return x___gettextdomain(tls)
@@ -102855,10 +104106,18 @@ func Xtextdomain(tls *TLS, domainname uintptr) (r uintptr) {
 }
 
 func Xgettext(tls *TLS, msgid uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v msgid=%v, (%v:)", tls, msgid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xdgettext(tls, uintptr(0), msgid)
 }
 
 func Xngettext(tls *TLS, msgid1 uintptr, msgid2 uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v msgid1=%v msgid2=%v n=%v, (%v:)", tls, msgid1, msgid2, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xdngettext(tls, uintptr(0), msgid1, msgid2, n)
 }
 
@@ -102891,6 +104150,10 @@ func x___wcscoll_l(tls *TLS, l uintptr, r uintptr, locale uintptr) (r1 int32) {
 }
 
 func Xwcscoll(tls *TLS, l uintptr, r uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v, (%v:)", tls, l, r, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	return x___wcscoll_l(tls, l, r, (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Flocale)
 }
 
@@ -102910,6 +104173,10 @@ func x___wcsxfrm_l(tls *TLS, dest uintptr, src uintptr, n uint64, loc uintptr) (
 }
 
 func Xwcsxfrm(tls *TLS, dest uintptr, src uintptr, n uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v n=%v, (%v:)", tls, dest, src, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___wcsxfrm_l(tls, dest, src, n, (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Flocale)
 }
 
@@ -102945,6 +104212,10 @@ func _allzerop(tls *TLS, p uintptr) (r int32) {
 }
 
 func Xcalloc(tls *TLS, m uint64, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v m=%v n=%v, (%v:)", tls, m, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var p uintptr
 	if n != 0 && m > uint64(-Int32FromInt32(1))/n {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENOMEM)
@@ -102960,6 +104231,9 @@ func Xcalloc(tls *TLS, m uint64, n uint64) (r uintptr) {
 }
 
 func Xfree(tls *TLS, p uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+	}
 	x___libc_free(tls, p)
 }
 
@@ -103171,6 +104445,10 @@ type Tmalloc_context = struct {
 }
 
 func Xaligned_alloc(tls *TLS, align uint64, len1 uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v align=%v len1=%v, (%v:)", tls, align, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var adj, stride, v9 uint64
 	var area, base, end, g, meta, p, start, v1, v11, v12, v13, v14, v4, v8 uintptr
 	var idx, index, offset, reserved, v2, v6 int32
@@ -104672,6 +105950,10 @@ _5:
 }
 
 func Xmalloc_usable_size(tls *TLS, p uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var area, base, end, g, meta, start, v1, v11, v12, v4, v8 uintptr
 	var idx, index, offset, v2, v6 int32
 	var reserved, stride, v13, v9 uint64
@@ -105000,10 +106282,18 @@ _16:
 }
 
 func Xmemalign(tls *TLS, align uint64, len1 uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v align=%v len1=%v, (%v:)", tls, align, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xaligned_alloc(tls, align, len1)
 }
 
 func Xposix_memalign(tls *TLS, res uintptr, align uint64, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v res=%v align=%v len1=%v, (%v:)", tls, res, align, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var mem uintptr
 	if align < uint64(8) {
 		return int32(m_EINVAL)
@@ -105017,10 +106307,18 @@ func Xposix_memalign(tls *TLS, res uintptr, align uint64, len1 uint64) (r int32)
 }
 
 func Xrealloc(tls *TLS, p uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v n=%v, (%v:)", tls, p, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___libc_realloc(tls, p, n)
 }
 
 func Xreallocarray(tls *TLS, ptr uintptr, m uint64, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v ptr=%v m=%v n=%v, (%v:)", tls, ptr, m, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if n != 0 && m > uint64(-Int32FromInt32(1))/n {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENOMEM)
 		return uintptr(0)
@@ -106098,6 +107396,10 @@ func _R(tls *TLS, z float64) (r float64) {
 }
 
 func Xacos(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var c, df, s, w, z float64
 	var hx, ix, lx uint32
 	var v1 uint64
@@ -106155,6 +107457,10 @@ func _R1(tls *TLS, z float32) (r float32) {
 }
 
 func Xacosf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var c, df, s, w, z float32
 	var hx, ix, v1 uint32
 	hx = *(*uint32)(unsafe.Pointer(&x))
@@ -106198,6 +107504,10 @@ func Xacosf(tls *TLS, x float32) (r float32) {
 //
 //	/* acosh(x) = log(x + sqrt(x*x-1)) */
 func Xacosh(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var e uint32
@@ -106231,6 +107541,10 @@ func Xacosh(tls *TLS, x float64) (r float64) {
 //
 //	/* acosh(x) = log(x + sqrt(x*x-1)) */
 func Xacoshf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var a uint32
@@ -106261,6 +107575,10 @@ func Xacoshf(tls *TLS, x float32) (r float32) {
 }
 
 func Xacoshl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xacosh(tls, x)
 }
 
@@ -106286,6 +107604,10 @@ func _R2(tls *TLS, z float64) (r float64) {
 }
 
 func Xasin(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var c, f, r, s, z float64
 	var hx, ix, lx uint32
 	var v1 uint64
@@ -106344,6 +107666,10 @@ func _R3(tls *TLS, z float32) (r float32) {
 }
 
 func Xasinf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var hx, ix uint32
 	var s float64
 	var z float32
@@ -106376,6 +107702,10 @@ func Xasinf(tls *TLS, x float32) (r float32) {
 //
 //	/* asinh(x) = sign(x)*log(|x|+sqrt(x*x+1)) ~= x - x^3/6 + o(x^5) */
 func Xasinh(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e, s uint32
@@ -106437,6 +107767,10 @@ func Xasinh(tls *TLS, x float64) (r float64) {
 //
 //	/* asinh(x) = sign(x)*log(|x|+sqrt(x*x+1)) ~= x - x^3/6 + o(x^5) */
 func Xasinhf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var i, s uint32
@@ -106495,6 +107829,10 @@ func Xasinhf(tls *TLS, x float32) (r float32) {
 }
 
 func Xasinhl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xasinh(tls, x)
 }
 
@@ -106527,6 +107865,10 @@ var _aT = [11]float64{
 }
 
 func Xatan(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var id int32
@@ -106609,6 +107951,10 @@ var _pi = float64(3.141592653589793) /* 0x400921FB, 0x54442D18 */
 var _pi_lo = float64(1.2246467991473532e-16)
 
 func Xatan2(tls *TLS, y float64, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v y=%v x=%v, (%v:)", tls, y, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __u, __u1 uint64
 	var ix, iy, lx, ly, m uint32
 	var z, v1, v2 float64
@@ -106707,6 +108053,10 @@ var _pi1 = float32(3.141592741) /* 0x40490fdb */
 var _pi_lo1 = float32(-Float64FromFloat64(8.7422776573e-08))
 
 func Xatan2f(tls *TLS, y float32, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v y=%v x=%v, (%v:)", tls, y, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ix, iy, m uint32
 	var z, v1, v2 float32
 	if BoolInt32(___FLOAT_BITS(tls, x)&uint32(0x7fffffff) > uint32(0x7f800000)) != 0 || BoolInt32(___FLOAT_BITS(tls, y)&uint32(0x7fffffff) > uint32(0x7f800000)) != 0 {
@@ -106819,6 +108169,10 @@ var _aT1 = [5]float32{
 }
 
 func Xatanf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var id int32
@@ -106901,6 +108255,10 @@ func Xatanf(tls *TLS, x float32) (r float32) {
 //
 //	/* atanh(x) = log((1+x)/(1-x))/2 = log1p(2x/(1-x))/2 ~= x + x^3/3 + o(x^5) */
 func Xatanh(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e, s uint32
@@ -106959,6 +108317,10 @@ func Xatanh(tls *TLS, x float64) (r float64) {
 //
 //	/* atanh(x) = log((1+x)/(1-x))/2 = log1p(2x/(1-x))/2 ~= x + x^3/3 + o(x^5) */
 func Xatanhf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var s uint32
@@ -107013,6 +108375,10 @@ func Xatanhf(tls *TLS, x float32) (r float32) {
 }
 
 func Xatanhl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xatanh(tls, x)
 }
 
@@ -107028,6 +108394,10 @@ var _P3 = -Float64FromFloat64(0.758397934778766)  /* 0xbfe844cb, 0xbee751d9 */
 var _P4 = float64(0.14599619288661245)
 
 func Xcbrt(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var hx uint32
@@ -107116,6 +108486,10 @@ var _B11 = uint32(709958130) /* B1 = (127-127.0/3-0.03306235651)*2**23 */
 var _B21 = uint32(642849266)
 
 func Xcbrtf(tls *TLS, x float32) (r1 float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var T, r float64
@@ -107168,12 +108542,20 @@ func Xcbrtf(tls *TLS, x float32) (r1 float32) {
 }
 
 func Xcbrtl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcbrt(tls, x)
 }
 
 var _toint2 = Float64FromInt32(1) / Float64FromFloat64(2.220446049250313e-16)
 
 func Xceil(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e int32
@@ -107228,6 +108610,10 @@ func Xceil(tls *TLS, x float64) (r float64) {
 }
 
 func Xceilf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e int32
@@ -107289,6 +108675,10 @@ func Xceilf(tls *TLS, x float32) (r float32) {
 }
 
 func Xcopysign(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var p1, p2 uintptr
@@ -107324,6 +108714,10 @@ func Xcopysign(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func Xcopysignf(tls *TLS, x float32, y float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* ux at bp+0 */ struct {
@@ -107356,10 +108750,18 @@ func Xcopysignf(tls *TLS, x float32, y float32) (r float32) {
 }
 
 func Xcopysignl(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcopysign(tls, x, y)
 }
 
 func Xcos(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(48)
 	var ix, n uint32
@@ -107413,6 +108815,10 @@ var _c3pio2 = Float64FromInt32(3) * Float64FromFloat64(1.5707963267948966) /* 0x
 var _c4pio2 = Float64FromInt32(4) * Float64FromFloat64(1.5707963267948966)
 
 func Xcosf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ix, n, sign uint32
@@ -107498,6 +108904,10 @@ func Xcosf(tls *TLS, x float32) (r float32) {
 //	 *         = 1 + x*x/2 + o(x^4)
 //	 */
 func Xcosh(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var t float64
@@ -107552,6 +108962,10 @@ func Xcosh(tls *TLS, x float64) (r float64) {
 }
 
 func Xcoshf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var t float32
@@ -107603,10 +109017,18 @@ func Xcoshf(tls *TLS, x float32) (r float32) {
 }
 
 func Xcoshl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcosh(tls, x)
 }
 
 func Xcosl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcos(tls, x)
 }
 
@@ -107708,6 +109130,10 @@ func _erfc2(tls *TLS, ix uint32, x float64) (r float64) {
 }
 
 func Xerf(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var ix uint32
 	var r, s, y, z, v1 float64
 	var sign int32
@@ -107743,6 +109169,10 @@ func Xerf(tls *TLS, x float64) (r1 float64) {
 }
 
 func Xerfc(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var ix uint32
 	var r, s, y, z, v1, v2 float64
 	var sign int32
@@ -107880,6 +109310,10 @@ func _erfc21(tls *TLS, ix uint32, x float32) (r float32) {
 }
 
 func Xerff(tls *TLS, x float32) (r1 float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var ix uint32
 	var r, s, y, z, v1 float32
 	var sign int32
@@ -107915,6 +109349,10 @@ func Xerff(tls *TLS, x float32) (r1 float32) {
 }
 
 func Xerfcf(tls *TLS, x float32) (r1 float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var ix uint32
 	var r, s, y, z, v1, v2 float32
 	var sign int32
@@ -107955,10 +109393,18 @@ func Xerfcf(tls *TLS, x float32) (r1 float32) {
 }
 
 func Xerfl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xerf(tls, x)
 }
 
 func Xerfcl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xerfc(tls, x)
 }
 
@@ -108037,6 +109483,10 @@ func _top12(tls *TLS, x float64) (r uint32) {
 }
 
 func Xexp(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var abstop uint32
 	var idx, ki, sbits, top, v5 uint64
 	var kd, r, r2, scale, tail, tmp, y, z, v1, v2, v4, v6 float64
@@ -108104,6 +109554,10 @@ _7:
 }
 
 func Xexp10(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var y float64
@@ -108167,6 +109621,10 @@ var _p10 = [31]float64{
 }
 
 func Xexp10f(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var y float32
@@ -108214,6 +109672,10 @@ var _p101 = [15]float32{
 }
 
 func Xexp10l(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xexp10(tls, x)
 }
 
@@ -108287,6 +109749,10 @@ func _top121(tls *TLS, x float64) (r uint32) {
 }
 
 func Xexp2(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var abstop uint32
 	var idx, ki, sbits, top, v7 uint64
 	var kd, r, r2, scale, tail, tmp, y, v1, v2, v3, v4, v6, v8 float64
@@ -108365,6 +109831,10 @@ func _top122(tls *TLS, x float32) (r uint32) {
 }
 
 func Xexp2f(tls *TLS, x float32) (r1 float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var abstop uint32
 	var kd, r, r2, s, xd, y1, y2, z, v2, v4 float64
 	var ki, t uint64
@@ -108438,6 +109908,10 @@ func _top123(tls *TLS, x float32) (r uint32) {
 }
 
 func Xexpf(tls *TLS, x float32) (r1 float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var abstop uint32
 	var kd, r, r2, s, xd, y1, y2, z, v2, v4 float64
 	var ki, t uint64
@@ -108502,6 +109976,10 @@ var _Q4 = float64(4.008217827329362e-06)            /* 3ED0CFCA 86E65239 */
 var _Q5 = -Float64FromFloat64(2.0109921818362437e-07)
 
 func Xexpm1(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var c, e, hfx, hi, hxs, lo, r1, t, twopk, y3, v1 float64
@@ -108633,6 +110111,10 @@ var _Q11 = float32(-Float64FromFloat64(0.033333212137)) /* -0x888868.0p-28 */
 var _Q21 = float32(0.0015807170421)
 
 func Xexpm1f(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var c, e, hfx, hi, hxs, lo, r1, t, twopk, y3, v1 float32
@@ -108753,6 +110235,10 @@ func Xexpm1f(tls *TLS, x float32) (r float32) {
 }
 
 func Xfdim(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 float64
 	if BoolInt32(___DOUBLE_BITS(tls, x)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) > Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 		return x
@@ -108769,6 +110255,10 @@ func Xfdim(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func Xfdimf(tls *TLS, x float32, y float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 float32
 	if BoolInt32(___FLOAT_BITS(tls, x)&uint32(0x7fffffff) > uint32(0x7f800000)) != 0 {
 		return x
@@ -108785,20 +110275,36 @@ func Xfdimf(tls *TLS, x float32, y float32) (r float32) {
 }
 
 func Xfdiml(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfdim(tls, x, y)
 }
 
 func Xfinite(tls *TLS, x float64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(___DOUBLE_BITS(tls, x)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) < Uint64FromUint64(0x7ff)<<Int32FromInt32(52))
 }
 
 func Xfinitef(tls *TLS, x float32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(___FLOAT_BITS(tls, x)&uint32(0x7fffffff) < uint32(0x7f800000))
 }
 
 var _toint3 = Float64FromInt32(1) / Float64FromFloat64(2.220446049250313e-16)
 
 func Xfloor(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e, v1 int32
@@ -108853,6 +110359,10 @@ func Xfloor(tls *TLS, x float64) (r float64) {
 }
 
 func Xfloorf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e int32
@@ -108914,10 +110424,18 @@ func Xfloorf(tls *TLS, x float32) (r float32) {
 }
 
 func Xfmal(tls *TLS, x float64, y float64, z float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v z=%v, (%v:)", tls, x, y, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfma(tls, x, y, z)
 }
 
 func Xfmax(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 float64
 	if BoolInt32(___DOUBLE_BITS(tls, x)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) > Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 		return y
@@ -108943,6 +110461,10 @@ func Xfmax(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func Xfmaxf(tls *TLS, x float32, y float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 float32
 	if BoolInt32(___FLOAT_BITS(tls, x)&uint32(0x7fffffff) > uint32(0x7f800000)) != 0 {
 		return y
@@ -108968,10 +110490,18 @@ func Xfmaxf(tls *TLS, x float32, y float32) (r float32) {
 }
 
 func Xfmaxl(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfmax(tls, x, y)
 }
 
 func Xfmin(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 float64
 	if BoolInt32(___DOUBLE_BITS(tls, x)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) > Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 		return y
@@ -108997,6 +110527,10 @@ func Xfmin(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func Xfminf(tls *TLS, x float32, y float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v2 float32
 	if BoolInt32(___FLOAT_BITS(tls, x)&uint32(0x7fffffff) > uint32(0x7f800000)) != 0 {
 		return y
@@ -109022,10 +110556,18 @@ func Xfminf(tls *TLS, x float32, y float32) (r float32) {
 }
 
 func Xfminl(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfmin(tls, x, y)
 }
 
 func Xfmod(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ex, ey, sx int32
@@ -109134,6 +110676,10 @@ func Xfmod(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func Xfmodf(tls *TLS, x float32, y float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ex, ey int32
@@ -109237,6 +110783,10 @@ func Xfmodf(tls *TLS, x float32, y float32) (r float32) {
 }
 
 func Xfrexp(tls *TLS, x float64, e uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v e=%v, (%v:)", tls, x, e, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ee int32
@@ -109274,6 +110824,10 @@ func Xfrexp(tls *TLS, x float64, e uintptr) (r float64) {
 }
 
 func Xfrexpf(tls *TLS, x float32, e uintptr) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v e=%v, (%v:)", tls, x, e, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ee int32
@@ -109311,6 +110865,10 @@ func Xfrexpf(tls *TLS, x float32, e uintptr) (r float32) {
 }
 
 func Xfrexpl(tls *TLS, x float64, e uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v e=%v, (%v:)", tls, x, e, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfrexp(tls, x, e)
 }
 
@@ -109324,6 +110882,10 @@ func _sq(tls *TLS, hi uintptr, lo uintptr, x float64) {
 }
 
 func Xhypot(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 48 maxVaListSize 0 */
 	defer tls.Free(48)
 	var ex, ey int32
@@ -109418,6 +110980,10 @@ func Xhypot(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func Xhypotf(tls *TLS, x float32, y float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ut struct {
@@ -109490,10 +111056,18 @@ func Xhypotf(tls *TLS, x float32, y float32) (r float32) {
 }
 
 func Xhypotl(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xhypot(tls, x, y)
 }
 
 func Xilogb(tls *TLS, x float64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e, v2 int32
@@ -109559,6 +111133,10 @@ func Xilogb(tls *TLS, x float64) (r int32) {
 }
 
 func Xilogbf(tls *TLS, x float32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e, v2 int32
@@ -109624,6 +111202,10 @@ func Xilogbf(tls *TLS, x float32) (r int32) {
 }
 
 func Xilogbl(tls *TLS, x float64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xilogb(tls, x)
 }
 
@@ -109680,6 +111262,10 @@ var _S03 = float64(5.135465502073181e-07)              /* 0x3EA13B54, 0xCE84D5A9
 var _S04 = float64(1.1661400333379e-09)
 
 func Xj0(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var ix uint32
 	var r, s, z float64
 	ix = uint32(*(*uint64)(unsafe.Pointer(&x)) >> int32(32))
@@ -109723,6 +111309,10 @@ var _v03 = float64(2.591508518404578e-07)              /* 0x3E91642D, 0x7FF202FD
 var _v04 = float64(4.4111031133267547e-10)
 
 func Xy0(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __u uint64
 	var ix, lx uint32
 	var u, v, z float64
@@ -110007,6 +111597,10 @@ var _S031 = float32(5.1354652442e-07)                      /* 0x3509daa6 */
 var _S041 = float32(1.1661400734e-09)
 
 func Xj0f(tls *TLS, x float32) (r1 float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var ix uint32
 	var r, s, z float32
 	ix = *(*uint32)(unsafe.Pointer(&x))
@@ -110045,6 +111639,10 @@ var _v031 = float32(2.5915085189e-07)                      /* 0x348b216c */
 var _v041 = float32(4.4111031494e-10)
 
 func Xy0f(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ix uint32
 	var u, v, z float32
 	ix = *(*uint32)(unsafe.Pointer(&x))
@@ -110332,6 +111930,10 @@ var _s04 = float64(5.0463625707621704e-09)            /* 0x3E35AC88, 0xC97DFF2C 
 var _s05 = float64(1.2354227442613791e-11)
 
 func Xj1(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var ix uint32
 	var r, s, z float64
 	var sign int32
@@ -110372,6 +111974,10 @@ var _V0 = [5]float64{
 }
 
 func Xy1(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __u uint64
 	var ix, lx uint32
 	var u, v, z float64
@@ -110655,6 +112261,10 @@ var _s041 = float32(5.046362439e-09)                       /* 0x31ad6446 */
 var _s051 = float32(1.2354227016e-11)
 
 func Xj1f(tls *TLS, x float32) (r1 float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var ix uint32
 	var r, s, z float32
 	var sign int32
@@ -110694,6 +112304,10 @@ var _V01 = [5]float32{
 }
 
 func Xy1f(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ix uint32
 	var u, v, z float32
 	ix = *(*uint32)(unsafe.Pointer(&x))
@@ -110931,6 +112545,10 @@ func _qonef(tls *TLS, x float32) (r1 float32) {
 var _invsqrtpi4 = float64(0.5641895835477563)
 
 func Xjn(tls *TLS, n int32, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v x=%v, (%v:)", tls, n, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __u uint64
 	var a, b, h, nf, q0, q1, t, temp, tmp, w, z, v1 float64
 	var i, k, nm1, sign int32
@@ -111120,6 +112738,10 @@ func Xjn(tls *TLS, n int32, x float64) (r float64) {
 }
 
 func Xyn(tls *TLS, n int32, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v x=%v, (%v:)", tls, n, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __u uint64
 	var a, b, temp, v1, v2 float64
 	var i, nm1, sign int32
@@ -111206,6 +112828,10 @@ func Xyn(tls *TLS, n int32, x float64) (r float64) {
 }
 
 func Xjnf(tls *TLS, n int32, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v x=%v, (%v:)", tls, n, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, b, h, nf, q0, q1, t, temp, tmp, w, z, v1 float32
 	var i, k, nm1, sign int32
 	var ix uint32
@@ -111358,6 +112984,10 @@ func Xjnf(tls *TLS, n int32, x float32) (r float32) {
 }
 
 func Xynf(tls *TLS, n int32, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v x=%v, (%v:)", tls, n, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, b, temp, v1, v2 float32
 	var i, nm1, sign int32
 	var ib, ix uint32
@@ -111411,18 +113041,34 @@ func Xynf(tls *TLS, n int32, x float32) (r float32) {
 }
 
 func Xldexp(tls *TLS, x float64, n int32) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xscalbn(tls, x, n)
 }
 
 func Xldexpf(tls *TLS, x float32, n int32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xscalbnf(tls, x, n)
 }
 
 func Xldexpl(tls *TLS, x float64, n int32) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xscalbnl(tls, x, n)
 }
 
 func Xlgamma(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___lgamma_r(tls, x, uintptr(unsafe.Pointer(&x___signgam)))
 }
 
@@ -111661,6 +113307,10 @@ func x___lgamma_r(tls *TLS, x float64, signgamp uintptr) (r1 float64) {
 }
 
 func Xlgammaf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___lgammaf_r(tls, x, uintptr(unsafe.Pointer(&x___signgam)))
 }
 
@@ -111904,18 +113554,34 @@ func x___lgammal_r(tls *TLS, x float64, sg uintptr) (r float64) {
 }
 
 func Xlgammal(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___lgammal_r(tls, x, uintptr(unsafe.Pointer(&x___signgam)))
 }
 
 func Xllround(tls *TLS, x float64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(Xround(tls, x))
 }
 
 func Xllroundf(tls *TLS, x float32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(Xroundf(tls, x))
 }
 
 func Xllroundl(tls *TLS, x float64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(Xroundl(tls, x))
 }
 
@@ -111932,6 +113598,10 @@ func _top16(tls *TLS, x float64) (r uint32) {
 }
 
 func Xlog(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var hi, invc, kd, lo, logc, r, r2, r3, rhi, rlo, w, y, y1, z, v1, v10, v2, v3, v4, v6, v8, v9 float64
 	var i, k int32
 	var ix, iz, tmp uint64
@@ -112046,6 +113716,10 @@ var _Lg6 = float64(0.15313837699209373)         /* 3FC39A09 D078C69F */
 var _Lg7 = float64(0.14798198605116586)
 
 func Xlog10(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var R, dk, f, hfsq, hi, lo, s, t1, t2, val_hi, val_lo, w, y, z float64
@@ -112133,6 +113807,10 @@ var _Lg31 = float32(0.2849878668785095)  /* 0.28498786688 */
 var _Lg41 = float32(0.24279078841209412)
 
 func Xlog10f(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var R, dk, f, hfsq, hi, lo, s, t1, t2, w, z float32
@@ -112205,6 +113883,10 @@ var _Lg61 = float64(0.15313837699209373)       /* 3FC39A09 D078C69F */
 var _Lg71 = float64(0.14798198605116586)
 
 func Xlog1p(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var R, c, dk, f, hfsq, s, t1, t2, w, z, v1 float64
@@ -112299,6 +113981,10 @@ var _Lg33 = float32(0.2849878668785095)  /* 0.28498786688 */
 var _Lg43 = float32(0.24279078841209412)
 
 func Xlog1pf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var R, c, dk, f, hfsq, s, t1, t2, w, z, v1 float32
@@ -112396,6 +114082,10 @@ func _top161(tls *TLS, x float64) (r uint32) {
 }
 
 func Xlog2(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var hi, invc, kd, lo, logc, p, r, r2, r4, rhi, rhi1, rlo, rlo1, t1, t2, t3, y, y1, z, v1, v10, v11, v13, v14, v2, v3, v4, v7, v8 float64
 	var i, k int32
 	var ix, iz, tmp, v12, v6 uint64
@@ -112525,6 +114215,10 @@ const m_LOG2F_TABLE_BITS = 4
 const m_OFF1 = 1060306944
 
 func Xlog2f(tls *TLS, x float32) (r1 float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var i, k int32
 	var invc, logc, p, r, r2, y0, y1, z float64
 	var ix, iz, tmp, top uint32
@@ -112607,6 +114301,10 @@ type Tlog_data = struct {
 }
 
 func Xlogb(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if !(BoolInt32(___DOUBLE_BITS(tls, x)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) < Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0) {
 		return x * x
 	}
@@ -112617,6 +114315,10 @@ func Xlogb(tls *TLS, x float64) (r float64) {
 }
 
 func Xlogbf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if !(BoolInt32(___FLOAT_BITS(tls, x)&Uint32FromInt32(0x7fffffff) < Uint32FromInt32(0x7f800000)) != 0) {
 		return x * x
 	}
@@ -112627,6 +114329,10 @@ func Xlogbf(tls *TLS, x float32) (r float32) {
 }
 
 func Xlogbl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if !(BoolInt32(___DOUBLE_BITS(tls, x)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) < Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0) {
 		return x * x
 	}
@@ -112640,6 +114346,10 @@ const m_LOGF_POLY_ORDER = 4
 const m_LOGF_TABLE_BITS = 4
 
 func Xlogf(tls *TLS, x float32) (r1 float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var i, k int32
 	var invc, logc, r, r2, y0, y1, z float64
 	var ix, iz, tmp uint32
@@ -112706,18 +114416,34 @@ type Tlogf_data = struct {
 }
 
 func Xlround(tls *TLS, x float64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(Xround(tls, x))
 }
 
 func Xlroundf(tls *TLS, x float32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(Xroundf(tls, x))
 }
 
 func Xlroundl(tls *TLS, x float64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(Xroundl(tls, x))
 }
 
 func Xmodf(tls *TLS, x float64, iptr uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v iptr=%v, (%v:)", tls, x, iptr, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var e int32
@@ -112766,6 +114492,10 @@ func Xmodf(tls *TLS, x float64, iptr uintptr) (r float64) {
 }
 
 func Xmodff(tls *TLS, x float32, iptr uintptr) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v iptr=%v, (%v:)", tls, x, iptr, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var e int32
@@ -112810,6 +114540,10 @@ func Xmodff(tls *TLS, x float32, iptr uintptr) (r float32) {
 }
 
 func Xmodfl(tls *TLS, x float64, iptr uintptr) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v iptr=%v, (%v:)", tls, x, iptr, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var r float64
@@ -112820,20 +114554,36 @@ func Xmodfl(tls *TLS, x float64, iptr uintptr) (r1 float64) {
 }
 
 func Xnan(tls *TLS, s uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return float64(___builtin_nanf(tls, ts))
 }
 
 func Xnanf(tls *TLS, s uintptr) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return ___builtin_nanf(tls, ts)
 }
 
 func Xnanl(tls *TLS, s uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return float64(___builtin_nanf(tls, ts))
 }
 
 const m_FE_INEXACT = 32
 
 func Xnearbyint(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var e int32
 	e = _fetestexcept(tls, int32(m_FE_INEXACT))
 	x = Xrint(tls, x)
@@ -112844,6 +114594,10 @@ func Xnearbyint(tls *TLS, x float64) (r float64) {
 }
 
 func Xnearbyintf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var e int32
 	e = _fetestexcept(tls, int32(m_FE_INEXACT))
 	x = Xrintf(tls, x)
@@ -112854,10 +114608,18 @@ func Xnearbyintf(tls *TLS, x float32) (r float32) {
 }
 
 func Xnearbyintl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xnearbyint(tls, x)
 }
 
 func Xnextafter(tls *TLS, x float64, y3 float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y3=%v, (%v:)", tls, x, y3, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(48)
 	var ax, ay uint64
@@ -112938,6 +114700,10 @@ func Xnextafter(tls *TLS, x float64, y3 float64) (r float64) {
 }
 
 func Xnextafterf(tls *TLS, x float32, y3 float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y3=%v, (%v:)", tls, x, y3, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ax, ay, e uint32
@@ -113017,14 +114783,26 @@ func Xnextafterf(tls *TLS, x float32, y3 float32) (r float32) {
 }
 
 func Xnextafterl(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xnextafter(tls, x, y)
 }
 
 func Xnexttoward(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xnextafter(tls, x, y)
 }
 
 func Xnexttowardf(tls *TLS, x float32, y3 float64) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y3=%v, (%v:)", tls, x, y3, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e uint32
@@ -113098,6 +114876,10 @@ func Xnexttowardf(tls *TLS, x float32, y3 float64) (r float32) {
 }
 
 func Xnexttowardl(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xnextafterl(tls, x, y)
 }
 
@@ -113364,6 +115146,10 @@ func _zeroinfnan(tls *TLS, i uint64) (r int32) {
 }
 
 func Xpow(tls *TLS, x float64, y1 float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y1=%v, (%v:)", tls, x, y1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ehi, elo, hi, lhi, llo, x2, yhi, ylo, v1, v10, v11, v12, v13, v14, v15, v18, v2, v3, v5, v6, v7, v8 float64
@@ -113617,6 +115403,10 @@ func _zeroinfnan1(tls *TLS, ix uint32) (r int32) {
 }
 
 func Xpowf(tls *TLS, x float32, y1 float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y1=%v, (%v:)", tls, x, y1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ix, iy, sign_bias uint32
@@ -113710,10 +115500,18 @@ type Tpowf_log2_data = struct {
 }
 
 func Xpowl(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xpow(tls, x, y)
 }
 
 func Xremainder(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* q at bp+0 */ int32
@@ -113721,6 +115519,10 @@ func Xremainder(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func Xremainderf(tls *TLS, x float32, y float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* q at bp+0 */ int32
@@ -113728,6 +115530,10 @@ func Xremainderf(tls *TLS, x float32, y float32) (r float32) {
 }
 
 func Xremquo(tls *TLS, x float64, y float64, quo uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v quo=%v, (%v:)", tls, x, y, quo, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ex, ey, sx, sy, v6 int32
@@ -113863,6 +115669,10 @@ end:
 }
 
 func Xremquof(tls *TLS, x float32, y float32, quo uintptr) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v quo=%v, (%v:)", tls, x, y, quo, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ex, ey, sx, sy, v4 int32
@@ -113996,6 +115806,10 @@ end:
 var _toint4 = Float64FromInt32(1) / Float64FromFloat64(2.220446049250313e-16)
 
 func Xrint(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var e, s int32
@@ -114036,6 +115850,10 @@ func Xrint(tls *TLS, x float64) (r float64) {
 var _toint5 = Float32FromInt32(1) / Float32FromFloat32(1.1920928955078125e-07)
 
 func Xrintf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var e, s int32
@@ -114076,6 +115894,10 @@ func Xrintf(tls *TLS, x float32) (r float32) {
 var _toint6 = Float64FromInt32(1) / Float64FromFloat64(2.220446049250313e-16)
 
 func Xround(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e int32
@@ -114134,6 +115956,10 @@ func Xround(tls *TLS, x float64) (r float64) {
 var _toint7 = Float32FromInt32(1) / Float32FromFloat32(1.1920928955078125e-07)
 
 func Xroundf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e int32
@@ -114189,10 +116015,18 @@ func Xroundf(tls *TLS, x float32) (r float32) {
 }
 
 func Xroundl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xround(tls, x)
 }
 
 func Xscalb(tls *TLS, x float64, fn float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v fn=%v, (%v:)", tls, x, fn, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if BoolInt32(___DOUBLE_BITS(tls, x)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) > Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 || BoolInt32(___DOUBLE_BITS(tls, fn)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) > Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0 {
 		return x * fn
 	}
@@ -114216,6 +116050,10 @@ func Xscalb(tls *TLS, x float64, fn float64) (r float64) {
 }
 
 func Xscalbf(tls *TLS, x float32, fn float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v fn=%v, (%v:)", tls, x, fn, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if BoolInt32(___FLOAT_BITS(tls, x)&uint32(0x7fffffff) > uint32(0x7f800000)) != 0 || BoolInt32(___FLOAT_BITS(tls, fn)&uint32(0x7fffffff) > uint32(0x7f800000)) != 0 {
 		return x * fn
 	}
@@ -114239,6 +116077,10 @@ func Xscalbf(tls *TLS, x float32, fn float32) (r float32) {
 }
 
 func Xscalbln(tls *TLS, x float64, n int64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if n > int64(m_INT_MAX) {
 		n = int64(m_INT_MAX)
 	} else if n < int64(-Int32FromInt32(1)-Int32FromInt32(0x7fffffff)) {
@@ -114248,6 +116090,10 @@ func Xscalbln(tls *TLS, x float64, n int64) (r float64) {
 }
 
 func Xscalblnf(tls *TLS, x float32, n int64) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if n > int64(m_INT_MAX) {
 		n = int64(m_INT_MAX)
 	} else if n < int64(-Int32FromInt32(1)-Int32FromInt32(0x7fffffff)) {
@@ -114257,10 +116103,18 @@ func Xscalblnf(tls *TLS, x float32, n int64) (r float32) {
 }
 
 func Xscalblnl(tls *TLS, x float64, n int64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xscalbln(tls, x, n)
 }
 
 func Xscalbn(tls *TLS, x float64, n int32) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var y float64
@@ -114298,6 +116152,10 @@ func Xscalbn(tls *TLS, x float64, n int32) (r float64) {
 }
 
 func Xscalbnf(tls *TLS, x float32, n int32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var y float32
@@ -114333,18 +116191,34 @@ func Xscalbnf(tls *TLS, x float32, n int32) (r float32) {
 }
 
 func Xscalbnl(tls *TLS, x float64, n int32) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xscalbn(tls, x, n)
 }
 
 func Xsignificand(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xscalbn(tls, x, -Xilogb(tls, x))
 }
 
 func Xsignificandf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xscalbnf(tls, x, -Xilogbf(tls, x))
 }
 
 func Xsin(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(48)
 	var ix, n uint32
@@ -114408,6 +116282,9 @@ func Xsin(tls *TLS, x float64) (r float64) {
 }
 
 func Xsincos(tls *TLS, x float64, sin uintptr, cos uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v sin=%v cos=%v, (%v:)", tls, x, sin, cos, origin(2))
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(48)
 	var c, s, v1, v2, v3, v4 float64
@@ -114493,6 +116370,9 @@ var _s3pio2 = Float64FromInt32(3) * Float64FromFloat64(1.5707963267948966) /* 0x
 var _s4pio2 = Float64FromInt32(4) * Float64FromFloat64(1.5707963267948966)
 
 func Xsincosf(tls *TLS, x float32, sin uintptr, cos uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v sin=%v cos=%v, (%v:)", tls, x, sin, cos, origin(2))
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var c, s, v1, v2, v3, v8 float32
@@ -114626,6 +116506,9 @@ func Xsincosf(tls *TLS, x float32, sin uintptr, cos uintptr) {
 }
 
 func Xsincosl(tls *TLS, x float64, sin uintptr, cos uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v sin=%v cos=%v, (%v:)", tls, x, sin, cos, origin(2))
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* cosd at bp+8 */ float64
@@ -114643,6 +116526,10 @@ var _s3pio21 = Float64FromInt32(3) * Float64FromFloat64(1.5707963267948966) /* 0
 var _s4pio21 = Float64FromInt32(4) * Float64FromFloat64(1.5707963267948966)
 
 func Xsinf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ix uint32
@@ -114743,6 +116630,10 @@ func Xsinf(tls *TLS, x float32) (r float32) {
 //	 *         = x + x^3/6 + o(x^5)
 //	 */
 func Xsinh(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var absx, h, t float64
@@ -114788,6 +116679,10 @@ func Xsinh(tls *TLS, x float64) (r float64) {
 }
 
 func Xsinhf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var absx, h, t float32
@@ -114829,14 +116724,26 @@ func Xsinhf(tls *TLS, x float32) (r float32) {
 }
 
 func Xsinhl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xsinh(tls, x)
 }
 
 func Xsinl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xsin(tls, x)
 }
 
 func Xtan(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(48)
 	var ix, n uint32
@@ -114896,6 +116803,10 @@ var _t3pio2 = Float64FromInt32(3) * Float64FromFloat64(1.5707963267948966) /* 0x
 var _t4pio2 = Float64FromInt32(4) * Float64FromFloat64(1.5707963267948966)
 
 func Xtanf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ix, n, sign uint32
@@ -114989,6 +116900,10 @@ func Xtanf(tls *TLS, x float32) (r float32) {
 //	 *         = (1 - exp(-2*x))/(exp(-2*x) - 1 + 2)
 //	 */
 func Xtanh(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var sign int32
@@ -115059,6 +116974,10 @@ func Xtanh(tls *TLS, x float64) (r float64) {
 }
 
 func Xtanhf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var sign int32
@@ -115127,10 +117046,18 @@ func Xtanhf(tls *TLS, x float32) (r float32) {
 }
 
 func Xtanhl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xtanh(tls, x)
 }
 
 func Xtanl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xtan(tls, x)
 }
 
@@ -115251,6 +117178,10 @@ func _S(tls *TLS, x float64) (r float64) {
 }
 
 func Xtgamma(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var absx, dy, r, y3, z, v1 float64
@@ -115344,14 +117275,26 @@ func Xtgamma(tls *TLS, x float64) (r1 float64) {
 }
 
 func Xtgammaf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return float32(Xtgamma(tls, float64(x)))
 }
 
 func Xtgammal(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xtgamma(tls, x)
 }
 
 func Xtrunc(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e int32
@@ -115396,6 +117339,10 @@ func Xtrunc(tls *TLS, x float64) (r float64) {
 }
 
 func Xtruncf(tls *TLS, x float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var e int32
@@ -115489,6 +117436,10 @@ func _mul(tls *TLS, hi uintptr, lo uintptr, x uint64, y uint64) {
 }
 
 func Xfma(tls *TLS, x float64, y float64, z float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v z=%v, (%v:)", tls, x, y, z, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var c, r, tiny float64
@@ -115651,6 +117602,10 @@ const m_FE_UNDERFLOW = 16
 //	 * rounding occurs.
 //	 */
 func Xfmaf(tls *TLS, x float32, y float32, z float32) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v z=%v, (%v:)", tls, x, y, z, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var e, neg int32
@@ -115704,6 +117659,10 @@ func Xfmaf(tls *TLS, x float32, y float32, z float32) (r float32) {
 }
 
 func Xfmodl(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var fpsr uint16
 	for cond := true; cond; cond = int32(fpsr)&int32(0x400) != 0 {
 		// __asm__ ("fprem; fnstsw %%ax" : "+t"(x), "=a"(fpsr) : "u"(y));
@@ -115713,6 +117672,10 @@ func Xfmodl(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func Xllrint(tls *TLS, x float64) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int64
 	// __asm__ ("cvtsd2si %1, %0" : "=r"(r) : "x"(x));
 	x___assert_fail(tls, ts+672, ts+721, 6, ts+730)
@@ -115720,6 +117683,10 @@ func Xllrint(tls *TLS, x float64) (r1 int64) {
 }
 
 func Xllrintf(tls *TLS, x float32) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int64
 	// __asm__ ("cvtss2si %1, %0" : "=r"(r) : "x"(x));
 	x___assert_fail(tls, ts+672, ts+737, 6, ts+747)
@@ -115727,6 +117694,10 @@ func Xllrintf(tls *TLS, x float32) (r1 int64) {
 }
 
 func Xllrintl(tls *TLS, x float64) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int64
 	// __asm__ ("fistpll %0" : "=m"(r) : "t"(x) : "st");
 	x___assert_fail(tls, ts+672, ts+755, 6, ts+765)
@@ -115734,6 +117705,10 @@ func Xllrintl(tls *TLS, x float64) (r1 int64) {
 }
 
 func Xlrint(tls *TLS, x float64) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int64
 	// __asm__ ("cvtsd2si %1, %0" : "=r"(r) : "x"(x));
 	x___assert_fail(tls, ts+672, ts+773, 6, ts+781)
@@ -115741,6 +117716,10 @@ func Xlrint(tls *TLS, x float64) (r1 int64) {
 }
 
 func Xlrintf(tls *TLS, x float32) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int64
 	// __asm__ ("cvtss2si %1, %0" : "=r"(r) : "x"(x));
 	x___assert_fail(tls, ts+672, ts+787, 6, ts+796)
@@ -115748,6 +117727,10 @@ func Xlrintf(tls *TLS, x float32) (r1 int64) {
 }
 
 func Xlrintl(tls *TLS, x float64) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int64
 	// __asm__ ("fistpll %0" : "=m"(r) : "t"(x) : "st");
 	x___assert_fail(tls, ts+672, ts+803, 6, ts+812)
@@ -115755,6 +117738,10 @@ func Xlrintl(tls *TLS, x float64) (r1 int64) {
 }
 
 func Xremainderl(tls *TLS, x float64, y float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var fpsr uint16
 	for cond := true; cond; cond = int32(fpsr)&int32(0x400) != 0 {
 		// __asm__ ("fprem1; fnstsw %%ax" : "+t"(x), "=a"(fpsr) : "u"(y));
@@ -115764,6 +117751,10 @@ func Xremainderl(tls *TLS, x float64, y float64) (r float64) {
 }
 
 func Xremquol(tls *TLS, _x float64, _y float64, quo uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v _x=%v _y=%v quo=%v, (%v:)", tls, _x, _y, quo, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	*(*float64)(unsafe.Pointer(bp)) = _x
@@ -115816,6 +117807,10 @@ func Xremquol(tls *TLS, _x float64, _y float64, quo uintptr) (r float64) {
 }
 
 func Xrintl(tls *TLS, x float64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	// __asm__ ("frndint" : "+t"(x));
 	x___assert_fail(tls, ts+672, ts+861, 5, ts+869)
 	return x
@@ -115824,6 +117819,10 @@ func Xrintl(tls *TLS, x float64) (r float64) {
 var _digits = [65]int8{'.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
 func Xa64l(tls *TLS, s uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var d uintptr
 	var e int32
 	var x uint32
@@ -115843,6 +117842,10 @@ func Xa64l(tls *TLS, s uintptr) (r int64) {
 }
 
 func Xl64a(tls *TLS, x0 int64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v x0=%v, (%v:)", tls, x0, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var p uintptr
 	var x uint32
 	x = uint32(x0)
@@ -115860,6 +117863,10 @@ func Xl64a(tls *TLS, x0 int64) (r uintptr) {
 var _s [7]int8
 
 func Xbasename(tls *TLS, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var i uint64
 	if !(s != 0) || !(*(*int8)(unsafe.Pointer(s)) != 0) {
 		return ts + 664
@@ -115874,6 +117881,10 @@ func Xbasename(tls *TLS, s uintptr) (r uintptr) {
 }
 
 func Xdirname(tls *TLS, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var i uint64
 	if !(s != 0) || !(*(*int8)(unsafe.Pointer(s)) != 0) {
 		return ts + 664
@@ -115899,6 +117910,10 @@ func Xdirname(tls *TLS, s uintptr) (r uintptr) {
 }
 
 func Xffs(tls *TLS, i int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v i=%v, (%v:)", tls, i, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v3 int32
 	var v2 uint64
 	if i != 0 {
@@ -115914,6 +117929,10 @@ func Xffs(tls *TLS, i int32) (r int32) {
 }
 
 func Xffsl(tls *TLS, i int64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v i=%v, (%v:)", tls, i, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v3 int32
 	var v2 uint64
 	if i != 0 {
@@ -115929,6 +117948,10 @@ func Xffsl(tls *TLS, i int64) (r int32) {
 }
 
 func Xffsll(tls *TLS, i int64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v i=%v, (%v:)", tls, i, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	if i != 0 {
 		v1 = _a_ctz_64(tls, uint64(i)) + int32(1)
@@ -115968,6 +117991,10 @@ func __strcolcmp(tls *TLS, lstr uintptr, bstr uintptr) (r int32) {
 }
 
 func Xfmtmsg(tls *TLS, classification int64, label uintptr, severity int32, text uintptr, action uintptr, tag uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v classification=%v label=%v severity=%v text=%v action=%v tag=%v, (%v:)", tls, classification, label, severity, text, action, tag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(80) /* tlsAllocs 8 maxVaListSize 64 */
 	defer tls.Free(80)
 	var cmsg, errstring, v1, v10, v11, v12, v13, v14, v15, v16, v2, v3, v4, v5, v6, v7, v8, v9 uintptr
@@ -116134,6 +118161,10 @@ type Tlastlog = struct {
 }
 
 func Xforkpty(tls *TLS, pm uintptr, name uintptr, tio uintptr, ws uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pm=%v name=%v tio=%v ws=%v, (%v:)", tls, pm, name, tio, ws, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(288) /* tlsAllocs 288 maxVaListSize 0 */
 	defer tls.Free(288)
 	var pid int32
@@ -116190,6 +118221,10 @@ out:
 }
 
 func Xget_current_dir_name(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(288) /* tlsAllocs 288 maxVaListSize 0 */
 	defer tls.Free(288)
 	var res uintptr
@@ -116230,6 +118265,10 @@ type Tutsname = struct {
 }
 
 func Xgetdomainname(tls *TLS, name uintptr, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v len1=%v, (%v:)", tls, name, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(400) /* tlsAllocs 392 maxVaListSize 0 */
 	defer tls.Free(400)
 	var _ /* temp at bp+0 */ Tutsname
@@ -116243,6 +118282,10 @@ func Xgetdomainname(tls *TLS, name uintptr, len1 uint64) (r int32) {
 }
 
 func Xgetentropy(tls *TLS, buffer uintptr, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v buffer=%v len1=%v, (%v:)", tls, buffer, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var pos uintptr
@@ -116273,6 +118316,10 @@ func Xgetentropy(tls *TLS, buffer uintptr, len1 uint64) (r int32) {
 }
 
 func Xgethostid(tls *TLS) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return 0
 }
 
@@ -116298,6 +118345,10 @@ func x___getopt_msg(tls *TLS, a uintptr, b uintptr, c uintptr, l uint64) {
 }
 
 func Xgetopt(tls *TLS, argc int32, argv uintptr, optstring uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v argc=%v argv=%v optstring=%v, (%v:)", tls, argc, argv, optstring, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var i, k, l, v1, v2, v3 int32
@@ -116542,16 +118593,28 @@ func ___getopt_long_core(tls *TLS, argc int32, argv uintptr, optstring uintptr, 
 }
 
 func Xgetopt_long(tls *TLS, argc int32, argv uintptr, optstring uintptr, longopts uintptr, idx uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v argc=%v argv=%v optstring=%v longopts=%v idx=%v, (%v:)", tls, argc, argv, optstring, longopts, idx, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return ___getopt_long(tls, argc, argv, optstring, longopts, idx, 0)
 }
 
 func Xgetopt_long_only(tls *TLS, argc int32, argv uintptr, optstring uintptr, longopts uintptr, idx uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v argc=%v argv=%v optstring=%v longopts=%v idx=%v, (%v:)", tls, argc, argv, optstring, longopts, idx, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return ___getopt_long(tls, argc, argv, optstring, longopts, idx, int32(1))
 }
 
 const m_SYS_getpriority = 140
 
 func Xgetpriority(tls *TLS, which int32, who uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v which=%v who=%v, (%v:)", tls, which, who, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	ret = int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_getpriority), int64(which), int64(who)))))
 	if ret < 0 {
@@ -116563,18 +118626,30 @@ func Xgetpriority(tls *TLS, which int32, who uint32) (r int32) {
 const m_SYS_getresgid = 120
 
 func Xgetresgid(tls *TLS, rgid uintptr, egid uintptr, sgid uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v rgid=%v egid=%v sgid=%v, (%v:)", tls, rgid, egid, sgid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_getresgid), int64(rgid), int64(egid), int64(sgid)))))
 }
 
 const m_SYS_getresuid = 118
 
 func Xgetresuid(tls *TLS, ruid uintptr, euid uintptr, suid uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v ruid=%v euid=%v suid=%v, (%v:)", tls, ruid, euid, suid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_getresuid), int64(ruid), int64(euid), int64(suid)))))
 }
 
 const m_SYS_getrlimit = 97
 
 func Xgetrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v resource=%v rlim=%v, (%v:)", tls, resource, rlim, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ret int32
@@ -116619,6 +118694,10 @@ func Xgetrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 const m_SYS_getrusage = 98
 
 func Xgetrusage(tls *TLS, who int32, ru uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v who=%v ru=%v, (%v:)", tls, who, ru, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var dest uintptr
@@ -116641,6 +118720,10 @@ func Xgetrusage(tls *TLS, who int32, ru uintptr) (r1 int32) {
 }
 
 func Xgetsubopt(tls *TLS, opt uintptr, keys uintptr, val uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v opt=%v keys=%v val=%v, (%v:)", tls, opt, keys, val, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var i int32
 	var l uint64
 	var s, v1, v2 uintptr
@@ -116680,6 +118763,10 @@ type Tgroup1 = struct {
 }
 
 func Xinitgroups(tls *TLS, user uintptr, gid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v user=%v gid=%v, (%v:)", tls, user, gid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(144) /* tlsAllocs 136 maxVaListSize 0 */
 	defer tls.Free(144)
 	var _ /* count at bp+128 */ int32
@@ -117035,6 +119122,10 @@ func _convert_ioctl_struct(tls *TLS, map1 uintptr, old uintptr, new1 uintptr, di
 }
 
 func Xioctl(tls *TLS, fd int32, req int32, va uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v req=%v va=%v, (%v:)", tls, fd, req, va, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(256) /* tlsAllocs 256 maxVaListSize 0 */
 	defer tls.Free(256)
 	var ap, arg uintptr
@@ -117067,6 +119158,10 @@ func Xioctl(tls *TLS, fd int32, req int32, va uintptr) (r1 int32) {
 }
 
 func Xissetugid(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___libc.Fsecure)
 }
 
@@ -117079,6 +119174,10 @@ const m_F_UNLCK = 2
 const m_F_WRLCK = 1
 
 func Xlockf(tls *TLS, fd int32, op int32, size int64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v op=%v size=%v, (%v:)", tls, fd, op, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 32 maxVaListSize 8 */
 	defer tls.Free(48)
 	var _ /* l at bp+0 */ Tflock
@@ -117113,6 +119212,10 @@ func Xlockf(tls *TLS, fd int32, op int32, size int64) (r int32) {
 const m_TIOCSCTTY = 21518
 
 func Xlogin_tty(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	Xsetsid(tls)
@@ -117152,10 +119255,18 @@ var _internal_buf uintptr
 var _internal_bufsize uint64
 
 func Xsetmntent(tls *TLS, name uintptr, mode uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v mode=%v, (%v:)", tls, name, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfopen(tls, name, mode)
 }
 
 func Xendmntent(tls *TLS, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if f != 0 {
 		Xfclose(tls, f)
 	}
@@ -117163,6 +119274,10 @@ func Xendmntent(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xgetmntent_r(tls *TLS, f uintptr, mnt uintptr, linebuf uintptr, buflen int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v mnt=%v linebuf=%v buflen=%v, (%v:)", tls, f, mnt, linebuf, buflen, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(128) /* tlsAllocs 32 maxVaListSize 80 */
 	defer tls.Free(128)
 	var i, len1 uint64
@@ -117207,12 +119322,20 @@ func Xgetmntent_r(tls *TLS, f uintptr, mnt uintptr, linebuf uintptr, buflen int3
 }
 
 func Xgetmntent(tls *TLS, f uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xgetmntent_r(tls, f, uintptr(unsafe.Pointer(&_mnt)), uintptr(unsafe.Pointer(&_internal_buf)), 0)
 }
 
 var _mnt Tmntent
 
 func Xaddmntent(tls *TLS, f uintptr, mnt uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v mnt=%v, (%v:)", tls, f, mnt, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 0 maxVaListSize 48 */
 	defer tls.Free(64)
 	if Xfseek(tls, f, 0, int32(m_SEEK_END)) != 0 {
@@ -117222,6 +119345,10 @@ func Xaddmntent(tls *TLS, f uintptr, mnt uintptr) (r int32) {
 }
 
 func Xhasmntopt(tls *TLS, mnt uintptr, opt uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v mnt=%v opt=%v, (%v:)", tls, mnt, opt, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrstr(tls, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_opts, opt)
 }
 
@@ -117394,6 +119521,10 @@ func _do_nftw(tls *TLS, path uintptr, fn uintptr, fd_limit int32, flags int32, h
 }
 
 func Xnftw(tls *TLS, path uintptr, fn uintptr, fd_limit int32, flags int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v fn=%v fd_limit=%v flags=%v, (%v:)", tls, path, fn, fd_limit, flags, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(4112) /* tlsAllocs 4104 maxVaListSize 0 */
 	defer tls.Free(4112)
 	var l uint64
@@ -117421,6 +119552,10 @@ const m_TIOCSPTLCK = 1074025521
 const m_TIOCSWINSZ = 21524
 
 func Xopenpty(tls *TLS, pm uintptr, ps uintptr, name uintptr, tio uintptr, ws uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pm=%v ps=%v name=%v tio=%v ws=%v, (%v:)", tls, pm, ps, name, tio, ws, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 32 maxVaListSize 8 */
 	defer tls.Free(48)
 	var m, s, v1 int32
@@ -117462,6 +119597,10 @@ fail:
 }
 
 func Xptsname(tls *TLS, fd int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var err int32
 	err = x___ptsname_r(tls, fd, uintptr(unsafe.Pointer(&_buf2)), uint64(22))
 	if err != 0 {
@@ -117474,6 +119613,10 @@ func Xptsname(tls *TLS, fd int32) (r uintptr) {
 var _buf2 [22]int8
 
 func Xposix_openpt(tls *TLS, flags int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v flags=%v, (%v:)", tls, flags, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = Xopen(tls, ts+1180, flags, 0)
 	if r < 0 && *(*int32)(unsafe.Pointer(X__errno_location(tls))) == int32(m_ENOSPC) {
@@ -117483,10 +119626,18 @@ func Xposix_openpt(tls *TLS, flags int32) (r1 int32) {
 }
 
 func Xgrantpt(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return 0
 }
 
 func Xunlockpt(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(32)
 	var _ /* unlock at bp+0 */ int32
@@ -117523,6 +119674,10 @@ func _slash_len(tls *TLS, s uintptr) (r uint64) {
 }
 
 func Xrealpath(tls *TLS, filename uintptr, resolved uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v resolved=%v, (%v:)", tls, filename, resolved, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(8208) /* tlsAllocs 8200 maxVaListSize 0 */
 	defer tls.Free(8208)
 	var check_dir, up int32
@@ -117670,9 +119825,9 @@ _8:
 	/* Skip the stack advancement in case we have a new
 	 * absolute base path. */
 	goto restart
-	p += _slash_len(tls, bp+uintptr(p))
 	goto _2
 _2:
+	p += _slash_len(tls, bp+uintptr(p))
 	goto _3
 	goto _1
 _1:
@@ -117726,12 +119881,20 @@ toolong:
 const m_SYS_setdomainname = 171
 
 func Xsetdomainname(tls *TLS, name uintptr, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v len1=%v, (%v:)", tls, name, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_setdomainname), int64(name), int64(len1)))))
 }
 
 const m_SYS_setpriority = 141
 
 func Xsetpriority(tls *TLS, which int32, who uint32, prio int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v which=%v who=%v prio=%v, (%v:)", tls, which, who, prio, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_setpriority), int64(which), int64(who), int64(prio)))))
 }
 
@@ -117753,6 +119916,10 @@ func _do_setrlimit(tls *TLS, p uintptr) {
 }
 
 func Xsetrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v resource=%v rlim=%v, (%v:)", tls, resource, rlim, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 40 maxVaListSize 0 */
 	defer tls.Free(48)
 	var ret int32
@@ -117802,6 +119969,10 @@ func Xsetrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 }
 
 func Xsyscall(tls *TLS, n int64, va uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v va=%v, (%v:)", tls, n, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, b, c, d, e, f int64
 	var ap uintptr
 	ap = va
@@ -117874,6 +120045,10 @@ var _log_mask = int32(0xff)
 var _log_fd = -int32(1)
 
 func Xsetlogmask(tls *TLS, maskpri int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v maskpri=%v, (%v:)", tls, maskpri, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	x___lock(tls, uintptr(unsafe.Pointer(&_lock4)))
 	ret = _log_mask
@@ -117894,6 +120069,9 @@ var _log_addr = struct {
 }
 
 func Xcloselog(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* cs at bp+0 */ int32
@@ -117913,6 +120091,9 @@ func ___openlog(tls *TLS) {
 }
 
 func Xopenlog(tls *TLS, ident uintptr, opt int32, facility int32) {
+	if __ccgo_strace {
+		trc("tls=%v ident=%v opt=%v facility=%v, (%v:)", tls, ident, opt, facility, origin(2))
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var n uint64
@@ -118006,6 +120187,9 @@ func ___vsyslog(tls *TLS, priority int32, message uintptr, ap uintptr) {
 }
 
 func Xsyslog(tls *TLS, priority int32, message uintptr, va uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v priority=%v message=%v va=%v, (%v:)", tls, priority, message, va, origin(2))
+	}
 	var ap uintptr
 	ap = va
 	___vsyslog(tls, priority, message, ap)
@@ -118024,6 +120208,10 @@ type Tutsname1 = struct {
 }
 
 func Xuname(tls *TLS, uts uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v uts=%v, (%v:)", tls, uts, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_uname), int64(uts)))))
 }
 
@@ -118268,6 +120456,10 @@ nospace:
 }
 
 func Xwordexp(tls *TLS, s uintptr, we uintptr, flags int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v we=%v flags=%v, (%v:)", tls, s, we, flags, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var r int32
@@ -118279,6 +120471,9 @@ func Xwordexp(tls *TLS, s uintptr, we uintptr, flags int32) (r1 int32) {
 }
 
 func Xwordfree(tls *TLS, we uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v we=%v, (%v:)", tls, we, origin(2))
+	}
 	var i uint64
 	if !((*Twordexp_t)(unsafe.Pointer(we)).Fwe_wordv != 0) {
 		return
@@ -118300,18 +120495,30 @@ func x___madvise(tls *TLS, addr uintptr, len1 uint64, advice int32) (r int32) {
 const m_SYS_mincore = 27
 
 func Xmincore(tls *TLS, addr uintptr, len1 uint64, vec uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v addr=%v len1=%v vec=%v, (%v:)", tls, addr, len1, vec, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mincore), int64(addr), int64(len1), int64(vec)))))
 }
 
 const m_SYS_mlock = 149
 
 func Xmlock(tls *TLS, addr uintptr, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v addr=%v len1=%v, (%v:)", tls, addr, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_mlock), int64(addr), int64(len1)))))
 }
 
 const m_SYS_mlockall = 151
 
 func Xmlockall(tls *TLS, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v flags=%v, (%v:)", tls, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_mlockall), int64(flags)))))
 }
 
@@ -118321,6 +120528,10 @@ func _dummy8(tls *TLS) {
 }
 
 func Xmmap(tls *TLS, start uintptr, len1 uint64, prot int32, flags int32, fd int32, off int64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v start=%v len1=%v prot=%v flags=%v fd=%v off=%v, (%v:)", tls, start, len1, prot, flags, fd, off, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int64
 	if uint64(off)&(-Uint64FromUint64(0x2000)<<(Uint64FromInt32(8)*Uint64FromInt64(8)-Uint64FromInt32(1))|(Uint64FromUint64(4096)-Uint64FromInt32(1))) != 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
@@ -118357,6 +120568,10 @@ func _dummy9(tls *TLS) {
 }
 
 func Xmremap(tls *TLS, old_addr uintptr, old_len uint64, new_len uint64, flags int32, va uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v old_addr=%v old_len=%v new_len=%v flags=%v va=%v, (%v:)", tls, old_addr, old_len, new_len, flags, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap, new_addr uintptr
 	new_addr = uintptr(0)
 	if new_len >= uint64(Int64FromInt64(m_INT64_MAX)) {
@@ -118375,18 +120590,30 @@ func Xmremap(tls *TLS, old_addr uintptr, old_len uint64, new_len uint64, flags i
 const m_SYS_msync = 26
 
 func Xmsync(tls *TLS, start uintptr, len1 uint64, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v start=%v len1=%v flags=%v, (%v:)", tls, start, len1, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_msync), int64(start), int64(len1), int64(flags), 0, 0, 0))))
 }
 
 const m_SYS_munlock = 150
 
 func Xmunlock(tls *TLS, addr uintptr, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v addr=%v len1=%v, (%v:)", tls, addr, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_munlock), int64(addr), int64(len1)))))
 }
 
 const m_SYS_munlockall = 152
 
 func Xmunlockall(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(m_SYS_munlockall)))))
 }
 
@@ -118396,6 +120623,10 @@ func _dummy10(tls *TLS) {
 }
 
 func Xmunmap(tls *TLS, start uintptr, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v start=%v len1=%v, (%v:)", tls, start, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	x___vm_wait(tls)
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_munmap), int64(start), int64(len1)))))
 }
@@ -118403,6 +120634,10 @@ func Xmunmap(tls *TLS, start uintptr, len1 uint64) (r int32) {
 const m_MADV_DONTNEED = 4
 
 func Xposix_madvise(tls *TLS, addr uintptr, len1 uint64, advice int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v addr=%v len1=%v advice=%v, (%v:)", tls, addr, len1, advice, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if advice == int32(m_MADV_DONTNEED) {
 		return 0
 	}
@@ -118432,6 +120667,10 @@ func x___shm_mapname(tls *TLS, name uintptr, buf uintptr) (r uintptr) {
 }
 
 func Xshm_open(tls *TLS, name uintptr, flag int32, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v flag=%v mode=%v, (%v:)", tls, name, flag, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(288) /* tlsAllocs 272 maxVaListSize 8 */
 	defer tls.Free(288)
 	var fd int32
@@ -118450,6 +120689,10 @@ func Xshm_open(tls *TLS, name uintptr, flag int32, mode uint32) (r int32) {
 }
 
 func Xshm_unlink(tls *TLS, name uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(272) /* tlsAllocs 272 maxVaListSize 0 */
 	defer tls.Free(272)
 	var v1 uintptr
@@ -118473,10 +120716,18 @@ type Tmq_attr = struct {
 }
 
 func Xmq_close(tls *TLS, mqd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mqd=%v, (%v:)", tls, mqd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_close), int64(mqd)))))
 }
 
 func Xmq_getattr(tls *TLS, mqd int32, attr uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mqd=%v attr=%v, (%v:)", tls, mqd, attr, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmq_setattr(tls, mqd, uintptr(0), attr)
 }
 
@@ -118533,6 +120784,10 @@ func _start(tls *TLS, p uintptr) (r uintptr) {
 var _zeros [32]int8
 
 func Xmq_notify(tls *TLS, mqd int32, sev uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mqd=%v sev=%v, (%v:)", tls, mqd, sev, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(384) /* tlsAllocs 384 maxVaListSize 0 */
 	defer tls.Free(384)
 	var s int32
@@ -118593,6 +120848,10 @@ func Xmq_notify(tls *TLS, mqd int32, sev uintptr) (r int32) {
 const m_SYS_mq_open = 240
 
 func Xmq_open(tls *TLS, name uintptr, flags int32, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v flags=%v va=%v, (%v:)", tls, name, flags, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap, attr uintptr
 	var mode uint32
 	mode = uint32(0)
@@ -118610,34 +120869,58 @@ func Xmq_open(tls *TLS, name uintptr, flags int32, va uintptr) (r int32) {
 }
 
 func Xmq_receive(tls *TLS, mqd int32, msg uintptr, len1 uint64, prio uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v mqd=%v msg=%v len1=%v prio=%v, (%v:)", tls, mqd, msg, len1, prio, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmq_timedreceive(tls, mqd, msg, len1, prio, uintptr(0))
 }
 
 func Xmq_send(tls *TLS, mqd int32, msg uintptr, len1 uint64, prio uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mqd=%v msg=%v len1=%v prio=%v, (%v:)", tls, mqd, msg, len1, prio, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmq_timedsend(tls, mqd, msg, len1, prio, uintptr(0))
 }
 
 const m_SYS_mq_getsetattr = 245
 
 func Xmq_setattr(tls *TLS, mqd int32, new1 uintptr, old uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mqd=%v new1=%v old=%v, (%v:)", tls, mqd, new1, old, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mq_getsetattr), int64(mqd), int64(new1), int64(old)))))
 }
 
 const m_SYS_mq_timedreceive = 243
 
 func Xmq_timedreceive(tls *TLS, mqd int32, msg uintptr, len1 uint64, prio uintptr, at uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v mqd=%v msg=%v len1=%v prio=%v at=%v, (%v:)", tls, mqd, msg, len1, prio, at, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_mq_timedreceive), int64(mqd), int64(msg), int64(len1), int64(prio), int64(at), 0)))
 }
 
 const m_SYS_mq_timedsend = 242
 
 func Xmq_timedsend(tls *TLS, mqd int32, msg uintptr, len1 uint64, prio uint32, at uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mqd=%v msg=%v len1=%v prio=%v at=%v, (%v:)", tls, mqd, msg, len1, prio, at, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_mq_timedsend), int64(mqd), int64(msg), int64(len1), int64(prio), int64(at), 0))))
 }
 
 const m_SYS_mq_unlink = 241
 
 func Xmq_unlink(tls *TLS, name uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	if int32(*(*int8)(unsafe.Pointer(name))) == int32('/') {
 		name++
@@ -118656,6 +120939,10 @@ func Xmq_unlink(tls *TLS, name uintptr) (r int32) {
 const m_WEOF = 4294967295
 
 func Xbtowc(tls *TLS, c int32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var b, v3 int32
 	var v1, v2 uint32
 	b = int32(uint8(c))
@@ -118682,6 +120969,10 @@ type Tchar16_t = uint16
 type Tchar32_t = uint32
 
 func Xc16rtomb(tls *TLS, s uintptr, c16 uint16, ps uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c16=%v ps=%v, (%v:)", tls, s, c16, ps, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var wc int32
 	var x uintptr
 	if !(ps != 0) {
@@ -118718,14 +121009,26 @@ ilseq:
 var _internal_state uint32
 
 func Xc32rtomb(tls *TLS, s uintptr, c32 uint32, ps uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c32=%v ps=%v, (%v:)", tls, s, c32, ps, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xwcrtomb(tls, s, int32(c32), ps)
 }
 
 func Xmblen(tls *TLS, s uintptr, n uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v, (%v:)", tls, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmbtowc(tls, uintptr(0), s, n)
 }
 
 func Xmbrlen(tls *TLS, s uintptr, n uint64, st uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v st=%v, (%v:)", tls, s, n, st, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 uintptr
 	if st != 0 {
 		v1 = st
@@ -118738,6 +121041,10 @@ func Xmbrlen(tls *TLS, s uintptr, n uint64, st uintptr) (r uint64) {
 var _internal uint32
 
 func Xmbrtoc16(tls *TLS, pc16 uintptr, s uintptr, n uint64, ps uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v pc16=%v s=%v n=%v ps=%v, (%v:)", tls, pc16, s, n, ps, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var pending uintptr
@@ -118775,6 +121082,10 @@ func Xmbrtoc16(tls *TLS, pc16 uintptr, s uintptr, n uint64, ps uintptr) (r uint6
 var _internal_state1 uint32
 
 func Xmbrtoc32(tls *TLS, pc32 uintptr, s uintptr, n uint64, ps uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v pc32=%v s=%v n=%v ps=%v, (%v:)", tls, pc32, s, n, ps, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ret uint64
@@ -118798,6 +121109,10 @@ const m_SA = 194
 const m_SB = 244
 
 func Xmbrtowc(tls *TLS, wc uintptr, src uintptr, n uint64, st uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v src=%v n=%v st=%v, (%v:)", tls, wc, src, n, st, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var N, c uint32
@@ -118876,10 +121191,18 @@ ilseq:
 var _internal_state3 uint32
 
 func Xmbsinit(tls *TLS, st uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v st=%v, (%v:)", tls, st, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return BoolInt32(!(st != 0) || !(*(*uint32)(unsafe.Pointer(st)) != 0))
 }
 
 func Xmbsnrtowcs(tls *TLS, wcs uintptr, src uintptr, n uint64, wn uint64, st uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v wcs=%v src=%v n=%v wn=%v st=%v, (%v:)", tls, wcs, src, n, wn, st, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(1040) /* tlsAllocs 1032 maxVaListSize 0 */
 	defer tls.Free(1040)
 	var cnt, l, n2, v1, v3 uint64
@@ -118959,6 +121282,10 @@ func Xmbsnrtowcs(tls *TLS, wcs uintptr, src uintptr, n uint64, wn uint64, st uin
 }
 
 func Xmbsrtowcs(tls *TLS, ws uintptr, src uintptr, wn uint64, st uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v ws=%v src=%v wn=%v st=%v, (%v:)", tls, ws, src, wn, st, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var c, v1 uint32
 	var s, v11, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v4, v5 uintptr
 	var wn0 uint64
@@ -119155,6 +121482,10 @@ _7:
 }
 
 func Xmbstowcs(tls *TLS, ws uintptr, _s uintptr, wn uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v ws=%v _s=%v wn=%v, (%v:)", tls, ws, _s, wn, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	*(*uintptr)(unsafe.Pointer(bp)) = _s
@@ -119162,6 +121493,10 @@ func Xmbstowcs(tls *TLS, ws uintptr, _s uintptr, wn uint64) (r uint64) {
 }
 
 func Xmbtowc(tls *TLS, wc uintptr, src uintptr, n uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v src=%v n=%v, (%v:)", tls, wc, src, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var c uint32
@@ -119237,6 +121572,10 @@ ilseq:
 }
 
 func Xwcrtomb(tls *TLS, s uintptr, wc int32, st uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v wc=%v st=%v, (%v:)", tls, s, wc, st, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	var v2, v3, v4, v5, v6, v7 uintptr
 	if !(s != 0) {
@@ -119296,6 +121635,10 @@ func Xwcrtomb(tls *TLS, s uintptr, wc int32, st uintptr) (r uint64) {
 }
 
 func Xwcsnrtombs(tls *TLS, dst uintptr, wcs uintptr, wn uint64, n uint64, st uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v dst=%v wcs=%v wn=%v n=%v st=%v, (%v:)", tls, dst, wcs, wn, n, st, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var cnt, l uint64
@@ -119342,6 +121685,10 @@ func Xwcsnrtombs(tls *TLS, dst uintptr, wcs uintptr, wn uint64, n uint64, st uin
 }
 
 func Xwcsrtombs(tls *TLS, s uintptr, ws uintptr, n uint64, st uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v ws=%v n=%v st=%v, (%v:)", tls, s, ws, n, st, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var N, l uint64
@@ -119414,6 +121761,10 @@ func Xwcsrtombs(tls *TLS, s uintptr, ws uintptr, n uint64, st uintptr) (r uint64
 }
 
 func Xwcstombs(tls *TLS, s uintptr, ws uintptr, n uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v ws=%v n=%v, (%v:)", tls, s, ws, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	*(*uintptr)(unsafe.Pointer(bp)) = ws
@@ -119421,6 +121772,10 @@ func Xwcstombs(tls *TLS, s uintptr, ws uintptr, n uint64) (r uint64) {
 }
 
 func Xwctob(tls *TLS, c uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	if c < uint32(128) {
 		return int32(c)
@@ -119437,6 +121792,10 @@ func Xwctob(tls *TLS, c uint32) (r int32) {
 }
 
 func Xwctomb(tls *TLS, s uintptr, wc int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v wc=%v, (%v:)", tls, s, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if !(s != 0) {
 		return 0
 	}
@@ -119447,6 +121806,10 @@ const m_SYS_accept = 43
 const m___SC_accept = 5
 
 func Xaccept(tls *TLS, fd int32, addr uintptr, len1 uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v addr=%v len1=%v, (%v:)", tls, fd, addr, len1, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var v1 int32
 	v1 = int32(m_SYS_accept)
@@ -119489,6 +121852,10 @@ type Tmmsghdr = struct {
 }
 
 func Xaccept4(tls *TLS, fd int32, addr uintptr, len1 uintptr, flg int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v addr=%v len1=%v flg=%v, (%v:)", tls, fd, addr, len1, flg, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var ret, v1 int32
 	if !(flg != 0) {
@@ -119539,6 +121906,10 @@ const m_SYS_bind = 49
 const m___SC_bind = 2
 
 func Xbind(tls *TLS, fd int32, addr uintptr, len1 uint32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v addr=%v len1=%v, (%v:)", tls, fd, addr, len1, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var v1 int32
 	v1 = int32(m_SYS_bind)
@@ -119568,6 +121939,10 @@ const m_SYS_connect = 42
 const m___SC_connect = 3
 
 func Xconnect(tls *TLS, fd int32, addr uintptr, len1 uint32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v addr=%v len1=%v, (%v:)", tls, fd, addr, len1, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var v1 int32
 	v1 = int32(m_SYS_connect)
@@ -120045,6 +122420,10 @@ func _match(tls *TLS, offset uintptr, base uintptr, dn uintptr, end uintptr, len
 }
 
 func Xdn_comp(tls *TLS, src uintptr, dst uintptr, space int32, dnptrs uintptr, lastdnptr uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v src=%v dst=%v space=%v dnptrs=%v lastdnptr=%v, (%v:)", tls, src, dst, space, dnptrs, lastdnptr, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(144) /* tlsAllocs 136 maxVaListSize 0 */
 	defer tls.Free(144)
 	var bestlen, bestoff, i, j, m, n, v1, v2, v4, v5, v6 int32
@@ -120198,6 +122577,10 @@ func x___dn_expand(tls *TLS, base uintptr, end uintptr, src uintptr, dest uintpt
 }
 
 func Xdn_skipname(tls *TLS, s uintptr, end uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v end=%v, (%v:)", tls, s, end, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var p uintptr
 	p = s
 	for p < end {
@@ -120356,17 +122739,31 @@ type Tsa = struct {
 }
 
 func Xsethostent(tls *TLS, x int32) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+	}
 }
 
 func Xgethostent(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uintptr(0)
 }
 
 func Xgetnetent(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uintptr(0)
 }
 
 func Xendhostent(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 }
 
 const m_ETH_ALEN = 6
@@ -120430,6 +122827,10 @@ type Tether_arp = struct {
 }
 
 func Xether_aton_r(tls *TLS, x uintptr, p_a uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v p_a=%v, (%v:)", tls, x, p_a, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var ii int32
@@ -120460,12 +122861,20 @@ func Xether_aton_r(tls *TLS, x uintptr, p_a uintptr) (r uintptr) {
 }
 
 func Xether_aton(tls *TLS, x uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xether_aton_r(tls, x, uintptr(unsafe.Pointer(&_a)))
 }
 
 var _a Tether_addr
 
 func Xether_ntoa_r(tls *TLS, p_a uintptr, x uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v p_a=%v x=%v, (%v:)", tls, p_a, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	var ii int32
@@ -120484,24 +122893,43 @@ func Xether_ntoa_r(tls *TLS, p_a uintptr, x uintptr) (r uintptr) {
 }
 
 func Xether_ntoa(tls *TLS, p_a uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v p_a=%v, (%v:)", tls, p_a, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xether_ntoa_r(tls, p_a, uintptr(unsafe.Pointer(&_x)))
 }
 
 var _x [18]int8
 
 func Xether_line(tls *TLS, l uintptr, e uintptr, hostname uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v e=%v hostname=%v, (%v:)", tls, l, e, hostname, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return -int32(1)
 }
 
 func Xether_ntohost(tls *TLS, hostname uintptr, e uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v hostname=%v e=%v, (%v:)", tls, hostname, e, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return -int32(1)
 }
 
 func Xether_hostton(tls *TLS, hostname uintptr, e uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v hostname=%v e=%v, (%v:)", tls, hostname, e, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return -int32(1)
 }
 
 func Xfreeaddrinfo(tls *TLS, p uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+	}
 	var b, p2 uintptr
 	var cnt uint64
 	for cnt = uint64(1); (*Taddrinfo)(unsafe.Pointer(p)).Fai_next != 0; {
@@ -120525,6 +122953,10 @@ func Xfreeaddrinfo(tls *TLS, p uintptr) {
 var _msgs = [252]int8{'I', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 'f', 'l', 'a', 'g', 's', 0, 'N', 'a', 'm', 'e', ' ', 'd', 'o', 'e', 's', ' ', 'n', 'o', 't', ' ', 'r', 'e', 's', 'o', 'l', 'v', 'e', 0, 'T', 'r', 'y', ' ', 'a', 'g', 'a', 'i', 'n', 0, 'N', 'o', 'n', '-', 'r', 'e', 'c', 'o', 'v', 'e', 'r', 'a', 'b', 'l', 'e', ' ', 'e', 'r', 'r', 'o', 'r', 0, 'N', 'a', 'm', 'e', ' ', 'h', 'a', 's', ' ', 'n', 'o', ' ', 'u', 's', 'a', 'b', 'l', 'e', ' ', 'a', 'd', 'd', 'r', 'e', 's', 's', 0, 'U', 'n', 'r', 'e', 'c', 'o', 'g', 'n', 'i', 'z', 'e', 'd', ' ', 'a', 'd', 'd', 'r', 'e', 's', 's', ' ', 'f', 'a', 'm', 'i', 'l', 'y', ' ', 'o', 'r', ' ', 'i', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 'l', 'e', 'n', 'g', 't', 'h', 0, 'U', 'n', 'r', 'e', 'c', 'o', 'g', 'n', 'i', 'z', 'e', 'd', ' ', 's', 'o', 'c', 'k', 'e', 't', ' ', 't', 'y', 'p', 'e', 0, 'U', 'n', 'r', 'e', 'c', 'o', 'g', 'n', 'i', 'z', 'e', 'd', ' ', 's', 'e', 'r', 'v', 'i', 'c', 'e', 0, 'U', 'n', 'k', 'n', 'o', 'w', 'n', ' ', 'e', 'r', 'r', 'o', 'r', 0, 'O', 'u', 't', ' ', 'o', 'f', ' ', 'm', 'e', 'm', 'o', 'r', 'y', 0, 'S', 'y', 's', 't', 'e', 'm', ' ', 'e', 'r', 'r', 'o', 'r', 0, 'O', 'v', 'e', 'r', 'f', 'l', 'o', 'w', 0, 0, 'U', 'n', 'k', 'n', 'o', 'w', 'n', ' ', 'e', 'r', 'r', 'o', 'r'}
 
 func Xgai_strerror(tls *TLS, ecode int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v ecode=%v, (%v:)", tls, ecode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var s uintptr
 	s = uintptr(unsafe.Pointer(&_msgs))
 	ecode++
@@ -120555,6 +122987,10 @@ const m_PF_INET6 = 10
 const m_PF_UNSPEC = 0
 
 func Xgetaddrinfo(tls *TLS, host uintptr, serv uintptr, hint uintptr, res uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v host=%v serv=%v hint=%v res=%v, (%v:)", tls, host, serv, hint, res, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(1616) /* tlsAllocs 1616 maxVaListSize 0 */
 	defer tls.Free(1616)
 	var canon_len, family, flags, i, j, k, mask, naddrs, nais, no_family, nservs, proto, r, s, saved_errno, socktype, v1 int32
@@ -120813,6 +123249,10 @@ type Tip6_mtuinfo = struct {
 }
 
 func Xgethostbyaddr(tls *TLS, a uintptr, l uint32, af int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v l=%v af=%v, (%v:)", tls, a, l, af, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var err int32
@@ -120837,6 +123277,10 @@ var _h uintptr
 const m_TRY_AGAIN = 2
 
 func Xgethostbyaddr_r(tls *TLS, a uintptr, l uint32, af int32, h uintptr, buf uintptr, buflen uint64, res uintptr, err uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v l=%v af=%v h=%v buf=%v buflen=%v res=%v err=%v, (%v:)", tls, a, l, af, h, buf, buflen, res, err, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var i int32
@@ -120920,10 +123364,18 @@ func Xgethostbyaddr_r(tls *TLS, a uintptr, l uint32, af int32, h uintptr, buf ui
 }
 
 func Xgethostbyname(tls *TLS, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xgethostbyname2(tls, name, int32(m_PF_INET))
 }
 
 func Xgethostbyname2(tls *TLS, name uintptr, af int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v af=%v, (%v:)", tls, name, af, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var err int32
@@ -120949,6 +123401,10 @@ const m_HOST_NOT_FOUND = 1
 const m_NO_DATA = 4
 
 func Xgethostbyname2_r(tls *TLS, name uintptr, af int32, h uintptr, buf uintptr, buflen uint64, res uintptr, err uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v af=%v h=%v buf=%v buflen=%v res=%v err=%v, (%v:)", tls, name, af, h, buf, buflen, res, err, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(1600) /* tlsAllocs 1600 maxVaListSize 0 */
 	defer tls.Free(1600)
 	var align, need uint64
@@ -121025,6 +123481,10 @@ func Xgethostbyname2_r(tls *TLS, name uintptr, af int32, h uintptr, buf uintptr,
 }
 
 func Xgethostbyname_r(tls *TLS, name uintptr, h uintptr, buf uintptr, buflen uint64, res uintptr, err uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v h=%v buf=%v buflen=%v res=%v err=%v, (%v:)", tls, name, h, buf, buflen, res, err, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xgethostbyname2_r(tls, name, int32(m_PF_INET), h, buf, buflen, res, err)
 }
 
@@ -121182,6 +123642,9 @@ type Tifaddrs_ctx = struct {
 }
 
 func Xfreeifaddrs(tls *TLS, ifp uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v ifp=%v, (%v:)", tls, ifp, origin(2))
+	}
 	var n uintptr
 	for ifp != 0 {
 		n = (*Tifaddrs)(unsafe.Pointer(ifp)).Fifa_next
@@ -121363,6 +123826,10 @@ func _netlink_msg_to_ifaddr(tls *TLS, pctx uintptr, h uintptr) (r int32) {
 }
 
 func Xgetifaddrs(tls *TLS, ifap uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v ifap=%v, (%v:)", tls, ifap, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(528) /* tlsAllocs 528 maxVaListSize 0 */
 	defer tls.Free(528)
 	var ctx uintptr
@@ -121588,6 +124055,10 @@ func _dns_parse_callback(tls *TLS, c uintptr, rr int32, data uintptr, len1 int32
 }
 
 func Xgetnameinfo(tls *TLS, sa uintptr, sl uint32, node uintptr, nodelen uint32, serv uintptr, servlen uint32, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sa=%v sl=%v node=%v nodelen=%v serv=%v servlen=%v flags=%v, (%v:)", tls, sa, sl, node, nodelen, serv, servlen, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(976) /* tlsAllocs 976 maxVaListSize 0 */
 	defer tls.Free(976)
 	var a, p, p1, v1 uintptr
@@ -121682,6 +124153,10 @@ const m_SYS_getpeername = 52
 const m___SC_getpeername = 7
 
 func Xgetpeername(tls *TLS, fd int32, addr uintptr, len1 uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v addr=%v len1=%v, (%v:)", tls, fd, addr, len1, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var v1 int32
 	v1 = int32(m_SYS_getpeername)
@@ -121708,6 +124183,10 @@ _9:
 }
 
 func Xgetservbyname(tls *TLS, name uintptr, prots uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v prots=%v, (%v:)", tls, name, prots, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* res at bp+0 */ uintptr
@@ -121724,6 +124203,10 @@ var _buf3 [2]uintptr
 const m_IPPROTO_TCP = 6
 
 func Xgetservbyname_r(tls *TLS, name uintptr, prots uintptr, se uintptr, buf uintptr, buflen uint64, res uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v prots=%v se=%v buf=%v buflen=%v res=%v, (%v:)", tls, name, prots, se, buf, buflen, res, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var align, cnt, proto int32
@@ -121783,6 +124266,10 @@ func Xgetservbyname_r(tls *TLS, name uintptr, prots uintptr, se uintptr, buf uin
 }
 
 func Xgetservbyport(tls *TLS, port int32, prots uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v port=%v prots=%v, (%v:)", tls, port, prots, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* res at bp+0 */ uintptr
@@ -121797,6 +124284,10 @@ var _se1 Tservent
 var _buf4 [4]int64
 
 func Xgetservbyport_r(tls *TLS, port int32, prots uintptr, se uintptr, buf uintptr, buflen uint64, res uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v port=%v prots=%v se=%v buf=%v buflen=%v res=%v, (%v:)", tls, port, prots, se, buf, buflen, res, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var i, r, v2 int32
@@ -121865,6 +124356,10 @@ const m_SYS_getsockname = 51
 const m___SC_getsockname = 6
 
 func Xgetsockname(tls *TLS, fd int32, addr uintptr, len1 uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v addr=%v len1=%v, (%v:)", tls, fd, addr, len1, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var v1 int32
 	v1 = int32(m_SYS_getsockname)
@@ -121903,6 +124398,10 @@ const m_SYS_getsockopt = 55
 const m___SC_getsockopt = 15
 
 func Xgetsockopt(tls *TLS, fd int32, level int32, optname int32, optval uintptr, optlen uintptr) (r2 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v level=%v optname=%v optval=%v optlen=%v, (%v:)", tls, fd, level, optname, optval, optlen, origin(2))
+		defer func() { trc("-> %v", r2) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var r, v11, v12, v13, v14, v15, v16, v17, v2, v20, v21, v22, v23, v24, v25, v26, v3, v4, v5, v6, v7, v8 int64
@@ -122028,6 +124527,9 @@ func x___h_errno_location(tls *TLS) (r uintptr) {
 }
 
 func Xherror(tls *TLS, msg uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v msg=%v, (%v:)", tls, msg, origin(2))
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 0 maxVaListSize 24 */
 	defer tls.Free(32)
 	var v1, v2 uintptr
@@ -122056,6 +124558,10 @@ type Tucontext_t5 = struct {
 var _msgs1 = [84]int8{'H', 'o', 's', 't', ' ', 'n', 'o', 't', ' ', 'f', 'o', 'u', 'n', 'd', 0, 'T', 'r', 'y', ' ', 'a', 'g', 'a', 'i', 'n', 0, 'N', 'o', 'n', '-', 'r', 'e', 'c', 'o', 'v', 'e', 'r', 'a', 'b', 'l', 'e', ' ', 'e', 'r', 'r', 'o', 'r', 0, 'A', 'd', 'd', 'r', 'e', 's', 's', ' ', 'n', 'o', 't', ' ', 'a', 'v', 'a', 'i', 'l', 'a', 'b', 'l', 'e', 0, 0, 'U', 'n', 'k', 'n', 'o', 'w', 'n', ' ', 'e', 'r', 'r', 'o', 'r'}
 
 func Xhstrerror(tls *TLS, ecode int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v ecode=%v, (%v:)", tls, ecode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var s uintptr
 	s = uintptr(unsafe.Pointer(&_msgs1))
 	ecode--
@@ -122074,6 +124580,10 @@ func Xhstrerror(tls *TLS, ecode int32) (r uintptr) {
 }
 
 func Xhtonl(tls *TLS, n uint32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var u struct {
 		Fc [0]int8
 		Fi int32
@@ -122096,6 +124606,10 @@ func Xhtonl(tls *TLS, n uint32) (r uint32) {
 }
 
 func Xhtons(tls *TLS, n uint16) (r uint16) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var u struct {
 		Fc [0]int8
 		Fi int32
@@ -122119,12 +124633,19 @@ func Xhtons(tls *TLS, n uint16) (r uint16) {
 }
 
 func Xif_freenameindex(tls *TLS, idx uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v idx=%v, (%v:)", tls, idx, origin(2))
+	}
 	Xfree(tls, idx)
 }
 
 const m_SIOCGIFNAME = 35088
 
 func Xif_indextoname(tls *TLS, index uint32, name uintptr) (r1 uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v index=%v name=%v, (%v:)", tls, index, name, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 40 maxVaListSize 8 */
 	defer tls.Free(64)
 	var fd, r, v1 int32
@@ -122231,6 +124752,10 @@ func _netlink_msg_to_nameindex(tls *TLS, pctx uintptr, h uintptr) (r int32) {
 }
 
 func Xif_nameindex(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(288) /* tlsAllocs 288 maxVaListSize 0 */
 	defer tls.Free(288)
 	var ctx, d, ifs, p, s, v2 uintptr
@@ -122278,6 +124803,10 @@ err:
 const m_SIOCGIFINDEX = 35123
 
 func Xif_nametoindex(tls *TLS, name uintptr) (r1 uint32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 40 maxVaListSize 8 */
 	defer tls.Free(64)
 	var fd, r, v1, v2 int32
@@ -122299,6 +124828,10 @@ func Xif_nametoindex(tls *TLS, name uintptr) (r1 uint32) {
 }
 
 func Xinet_addr(tls *TLS, p uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* a at bp+0 */ Tin_addr
@@ -122354,10 +124887,18 @@ func x___inet_aton(tls *TLS, s0 uintptr, dest uintptr) (r int32) {
 }
 
 func Xinet_network(tls *TLS, p uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xntohl(tls, Xinet_addr(tls, p))
 }
 
 func Xinet_makeaddr(tls *TLS, n uint32, h uint32) (r Tin_addr) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v h=%v, (%v:)", tls, n, h, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if n < uint32(256) {
 		h |= n << int32(24)
 	} else {
@@ -122373,6 +124914,10 @@ func Xinet_makeaddr(tls *TLS, n uint32, h uint32) (r Tin_addr) {
 }
 
 func Xinet_lnaof(tls *TLS, in Tin_addr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v in=%v, (%v:)", tls, in, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var h uint32
 	h = in.Fs_addr
 	if h>>int32(24) < uint32(128) {
@@ -122385,6 +124930,10 @@ func Xinet_lnaof(tls *TLS, in Tin_addr) (r uint32) {
 }
 
 func Xinet_netof(tls *TLS, in Tin_addr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v in=%v, (%v:)", tls, in, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var h uint32
 	h = in.Fs_addr
 	if h>>int32(24) < uint32(128) {
@@ -122397,6 +124946,10 @@ func Xinet_netof(tls *TLS, in Tin_addr) (r uint32) {
 }
 
 func Xinet_ntoa(tls *TLS, _in Tin_addr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v _in=%v, (%v:)", tls, _in, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(48) /* tlsAllocs 8 maxVaListSize 32 */
 	defer tls.Free(48)
 	*(*Tin_addr)(unsafe.Pointer(bp)) = _in
@@ -122409,6 +124962,10 @@ func Xinet_ntoa(tls *TLS, _in Tin_addr) (r uintptr) {
 var _buf5 [16]int8
 
 func Xinet_ntop(tls *TLS, af int32, a0 uintptr, s uintptr, l uint32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v af=%v a0=%v s=%v l=%v, (%v:)", tls, af, a0, s, l, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(192) /* tlsAllocs 104 maxVaListSize 80 */
 	defer tls.Free(192)
 	var a uintptr
@@ -122472,6 +125029,10 @@ func _hexval(tls *TLS, c uint32) (r int32) {
 }
 
 func Xinet_pton(tls *TLS, af int32, s uintptr, a0 uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v af=%v s=%v a0=%v, (%v:)", tls, af, s, a0, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var a, v2, v4, v8, v9 uintptr
@@ -122585,6 +125146,10 @@ const m_SYS_listen = 50
 const m___SC_listen = 4
 
 func Xlisten(tls *TLS, fd int32, backlog int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v backlog=%v, (%v:)", tls, fd, backlog, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var v1 int32
 	v1 = int32(m_SYS_listen)
@@ -123655,10 +126220,18 @@ func x___rtnetlink_enumerate(tls *TLS, link_af int32, addr_af int32, cb uintptr,
 }
 
 func Xgetnetbyaddr(tls *TLS, net uint32, type1 int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v net=%v type1=%v, (%v:)", tls, net, type1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uintptr(0)
 }
 
 func Xgetnetbyname(tls *TLS, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uintptr(0)
 }
 
@@ -123666,14 +126239,25 @@ const m_NS_INT16SZ = 2
 const m_NS_INT32SZ = 4
 
 func Xns_get16(tls *TLS, cp uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v cp=%v, (%v:)", tls, cp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uint32(int32(*(*uint8)(unsafe.Pointer(cp)))<<int32(8) | int32(*(*uint8)(unsafe.Pointer(cp + 1))))
 }
 
 func Xns_get32(tls *TLS, cp uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v cp=%v, (%v:)", tls, cp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uint64(uint32(*(*uint8)(unsafe.Pointer(cp)))<<int32(24) | uint32(int32(*(*uint8)(unsafe.Pointer(cp + 1)))<<int32(16)) | uint32(int32(*(*uint8)(unsafe.Pointer(cp + 2)))<<int32(8)) | uint32(*(*uint8)(unsafe.Pointer(cp + 3))))
 }
 
 func Xns_put16(tls *TLS, s uint32, cp uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v cp=%v, (%v:)", tls, s, cp, origin(2))
+	}
 	var v1, v2 uintptr
 	v1 = cp
 	cp++
@@ -123684,6 +126268,9 @@ func Xns_put16(tls *TLS, s uint32, cp uintptr) {
 }
 
 func Xns_put32(tls *TLS, l uint64, cp uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v cp=%v, (%v:)", tls, l, cp, origin(2))
+	}
 	var v1, v2, v3, v4 uintptr
 	v1 = cp
 	cp++
@@ -123700,6 +126287,10 @@ func Xns_put32(tls *TLS, l uint64, cp uintptr) {
 }
 
 func Xns_initparse(tls *TLS, msg uintptr, msglen int32, handle uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v msg=%v msglen=%v handle=%v, (%v:)", tls, msg, msglen, handle, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var i, r int32
 	(*Tns_msg)(unsafe.Pointer(handle)).F_msg = msg
 	(*Tns_msg)(unsafe.Pointer(handle)).F_eom = msg + uintptr(msglen)
@@ -123739,6 +126330,10 @@ bad:
 }
 
 func Xns_skiprr(tls *TLS, ptr uintptr, eom uintptr, section ___ns_sect, count int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v ptr=%v eom=%v section=%v count=%v, (%v:)", tls, ptr, eom, section, count, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var p uintptr
 	var r, v1 int32
 	p = ptr
@@ -123776,6 +126371,10 @@ bad:
 }
 
 func Xns_parserr(tls *TLS, handle uintptr, section ___ns_sect, rrnum int32, rr uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v handle=%v section=%v rrnum=%v rr=%v, (%v:)", tls, handle, section, rrnum, rr, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	var p1, p2, p3, p4 uintptr
 	if section < 0 || section >= int32(_ns_s_max) {
@@ -123858,6 +126457,10 @@ size:
 }
 
 func Xns_name_uncompress(tls *TLS, msg uintptr, eom uintptr, src uintptr, dst uintptr, dstsiz uint64) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v msg=%v eom=%v src=%v dst=%v dstsiz=%v, (%v:)", tls, msg, eom, src, dst, dstsiz, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = x___dn_expand(tls, msg, eom, src, dst, int32(dstsiz))
 	if r < 0 {
@@ -123867,6 +126470,10 @@ func Xns_name_uncompress(tls *TLS, msg uintptr, eom uintptr, src uintptr, dst ui
 }
 
 func Xntohl(tls *TLS, n uint32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var u struct {
 		Fc [0]int8
 		Fi int32
@@ -123889,6 +126496,10 @@ func Xntohl(tls *TLS, n uint32) (r uint32) {
 }
 
 func Xntohs(tls *TLS, n uint16) (r uint16) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var u struct {
 		Fc [0]int8
 		Fi int32
@@ -123917,14 +126528,24 @@ var _idx int32
 var _protos = [239]uint8{0, 'i', 'p', 0, 1, 'i', 'c', 'm', 'p', 0, 2, 'i', 'g', 'm', 'p', 0, 3, 'g', 'g', 'p', 0, 4, 'i', 'p', 'e', 'n', 'c', 'a', 'p', 0, 5, 's', 't', 0, 6, 't', 'c', 'p', 0, 8, 'e', 'g', 'p', 0, 12, 'p', 'u', 'p', 0, 17, 'u', 'd', 'p', 0, 20, 'h', 'm', 'p', 0, 22, 'x', 'n', 's', '-', 'i', 'd', 'p', 0, 27, 'r', 'd', 'p', 0, 29, 'i', 's', 'o', '-', 't', 'p', '4', 0, '$', 'x', 't', 'p', 0, '%', 'd', 'd', 'p', 0, '&', 'i', 'd', 'p', 'r', '-', 'c', 'm', 't', 'p', 0, ')', 'i', 'p', 'v', '6', 0, '+', 'i', 'p', 'v', '6', '-', 'r', 'o', 'u', 't', 'e', 0, ',', 'i', 'p', 'v', '6', '-', 'f', 'r', 'a', 'g', 0, '-', 'i', 'd', 'r', 'p', 0, '.', 'r', 's', 'v', 'p', 0, '/', 'g', 'r', 'e', 0, '2', 'e', 's', 'p', 0, '3', 'a', 'h', 0, '9', 's', 'k', 'i', 'p', 0, ':', 'i', 'p', 'v', '6', '-', 'i', 'c', 'm', 'p', 0, ';', 'i', 'p', 'v', '6', '-', 'n', 'o', 'n', 'x', 't', 0, '<', 'i', 'p', 'v', '6', '-', 'o', 'p', 't', 's', 0, 'I', 'r', 's', 'p', 'f', 0, 'Q', 'v', 'm', 't', 'p', 0, 'Y', 'o', 's', 'p', 'f', 0, '^', 'i', 'p', 'i', 'p', 0, 'b', 'e', 'n', 'c', 'a', 'p', 0, 'g', 'p', 'i', 'm', 0, 255, 'r', 'a', 'w'}
 
 func Xendprotoent(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	_idx = 0
 }
 
 func Xsetprotoent(tls *TLS, stayopen int32) {
+	if __ccgo_strace {
+		trc("tls=%v stayopen=%v, (%v:)", tls, stayopen, origin(2))
+	}
 	_idx = 0
 }
 
 func Xgetprotoent(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if uint64(_idx) >= uint64(239) {
 		return UintptrFromInt32(0)
 	}
@@ -123940,6 +126561,10 @@ var _p Tprotoent
 var _aliases uintptr
 
 func Xgetprotobyname(tls *TLS, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var p uintptr
 	Xendprotoent(tls)
 	for cond := true; cond; cond = p != 0 && Xstrcmp(tls, name, (*Tprotoent)(unsafe.Pointer(p)).Fp_name) != 0 {
@@ -123949,6 +126574,10 @@ func Xgetprotobyname(tls *TLS, name uintptr) (r uintptr) {
 }
 
 func Xgetprotobynumber(tls *TLS, num int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v num=%v, (%v:)", tls, num, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var p uintptr
 	Xendprotoent(tls)
 	for cond := true; cond; cond = p != 0 && (*Tprotoent)(unsafe.Pointer(p)).Fp_proto != num {
@@ -123958,6 +126587,10 @@ func Xgetprotobynumber(tls *TLS, num int32) (r uintptr) {
 }
 
 func Xrecv(tls *TLS, fd int32, buf uintptr, len1 uint64, flags int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v len1=%v flags=%v, (%v:)", tls, fd, buf, len1, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xrecvfrom(tls, fd, buf, len1, flags, uintptr(0), uintptr(0))
 }
 
@@ -123965,6 +126598,10 @@ const m_SYS_recvfrom = 45
 const m___SC_recvfrom = 12
 
 func Xrecvfrom(tls *TLS, fd int32, buf uintptr, len1 uint64, flags int32, addr uintptr, alen uintptr) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v len1=%v flags=%v addr=%v alen=%v, (%v:)", tls, fd, buf, len1, flags, addr, alen, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var v1 int32
 	v1 = int32(m_SYS_recvfrom)
@@ -123993,6 +126630,10 @@ _9:
 const m_SYS_recvmmsg = 299
 
 func Xrecvmmsg(tls *TLS, fd int32, msgvec uintptr, vlen uint32, flags uint32, timeout uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v msgvec=%v vlen=%v flags=%v timeout=%v, (%v:)", tls, fd, msgvec, vlen, flags, timeout, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var i uint32
 	var mh uintptr
 	var v2 int32
@@ -124091,6 +126732,10 @@ func x___convert_scm_timestamps(tls *TLS, msg uintptr, csize uint32) {
 }
 
 func Xrecvmsg(tls *TLS, fd int32, msg uintptr, flags int32) (r2 int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v msg=%v flags=%v, (%v:)", tls, fd, msg, flags, origin(2))
+		defer func() { trc("-> %v", r2) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(64)
 	var orig uintptr
@@ -124138,6 +126783,10 @@ _10:
 }
 
 func Xres_init(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return 0
 }
 
@@ -124664,6 +127313,10 @@ func x___res_msend(tls *TLS, nqueries int32, queries uintptr, qlens uintptr, ans
 }
 
 func Xres_query(tls *TLS, name uintptr, class int32, type1 int32, dest uintptr, len1 int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v class=%v type1=%v dest=%v len1=%v, (%v:)", tls, name, class, type1, dest, len1, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(288) /* tlsAllocs 280 maxVaListSize 0 */
 	defer tls.Free(288)
 	var ql, r int32
@@ -124689,6 +127342,10 @@ func Xres_query(tls *TLS, name uintptr, class int32, type1 int32, dest uintptr, 
 }
 
 func Xres_querydomain(tls *TLS, name uintptr, domain uintptr, class int32, type1 int32, dest uintptr, len1 int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v domain=%v class=%v type1=%v dest=%v len1=%v, (%v:)", tls, name, domain, class, type1, dest, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(256) /* tlsAllocs 256 maxVaListSize 0 */
 	defer tls.Free(256)
 	var dl, nl uint64
@@ -124905,10 +127562,18 @@ no_resolv_conf:
 }
 
 func Xsend(tls *TLS, fd int32, buf uintptr, len1 uint64, flags int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v len1=%v flags=%v, (%v:)", tls, fd, buf, len1, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xsendto(tls, fd, buf, len1, flags, uintptr(0), uint32(0))
 }
 
 func Xsendmmsg(tls *TLS, fd int32, msgvec uintptr, vlen uint32, flags uint32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v msgvec=%v vlen=%v flags=%v, (%v:)", tls, fd, msgvec, vlen, flags, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var i, v1 int32
 	var r int64
 	/* Can't use the syscall directly because the kernel has the wrong
@@ -124945,6 +127610,10 @@ const m_SYS_sendmsg = 46
 const m___SC_sendmsg = 16
 
 func Xsendmsg(tls *TLS, fd int32, msg uintptr, flags int32) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v msg=%v flags=%v, (%v:)", tls, fd, msg, flags, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(1120) /* tlsAllocs 1112 maxVaListSize 0 */
 	defer tls.Free(1120)
 	var c, v2, v3 uintptr
@@ -125014,6 +127683,10 @@ const m_SYS_sendto = 44
 const m___SC_sendto = 11
 
 func Xsendto(tls *TLS, fd int32, buf uintptr, len1 uint64, flags int32, addr uintptr, alen uint32) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v len1=%v flags=%v addr=%v alen=%v, (%v:)", tls, fd, buf, len1, flags, addr, alen, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var v1 int32
 	v1 = int32(m_SYS_sendto)
@@ -125040,12 +127713,22 @@ _9:
 }
 
 func Xendservent(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 }
 
 func Xsetservent(tls *TLS, stayopen int32) {
+	if __ccgo_strace {
+		trc("tls=%v stayopen=%v, (%v:)", tls, stayopen, origin(2))
+	}
 }
 
 func Xgetservent(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uintptr(0)
 }
 
@@ -125053,6 +127736,10 @@ const m_SYS_setsockopt = 54
 const m___SC_setsockopt = 14
 
 func Xsetsockopt(tls *TLS, fd int32, level int32, optname int32, optval uintptr, optlen uint32) (r2 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v level=%v optname=%v optval=%v optlen=%v, (%v:)", tls, fd, level, optname, optval, optlen, origin(2))
+		defer func() { trc("-> %v", r2) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var r, s, us, v12, v13, v14, v15, v16, v17, v18, v2, v21, v22, v23, v24, v25, v26, v27, v3, v4, v5, v6, v7, v8 int64
@@ -125179,6 +127866,10 @@ const m_SYS_shutdown = 48
 const m___SC_shutdown = 13
 
 func Xshutdown(tls *TLS, fd int32, how int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v how=%v, (%v:)", tls, fd, how, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v2, v3, v4, v5, v6, v7, v8 int64
 	var v1 int32
 	v1 = int32(m_SYS_shutdown)
@@ -125207,6 +127898,10 @@ _9:
 const m_SIOCATMARK = 35077
 
 func Xsockatmark(tls *TLS, s int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(32)
 	var _ /* ret at bp+0 */ int32
@@ -125220,6 +127915,10 @@ const m_SYS_socket = 41
 const m___SC_socket = 1
 
 func Xsocket(tls *TLS, domain int32, type1 int32, protocol int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v domain=%v type1=%v protocol=%v, (%v:)", tls, domain, type1, protocol, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v11, v12, v13, v14, v15, v16, v17, v2, v3, v4, v5, v6, v7, v8 int64
 	var s, v1, v10 int32
 	v1 = int32(m_SYS_socket)
@@ -125282,6 +127981,10 @@ const m_SYS_socketpair = 53
 const m___SC_socketpair = 8
 
 func Xsocketpair(tls *TLS, domain int32, type1 int32, protocol int32, fd uintptr) (r2 int32) {
+	if __ccgo_strace {
+		trc("tls=%v domain=%v type1=%v protocol=%v fd=%v, (%v:)", tls, domain, type1, protocol, fd, origin(2))
+		defer func() { trc("-> %v", r2) }()
+	}
 	var r, v11, v12, v13, v14, v15, v16, v17, v2, v3, v4, v5, v6, v7, v8 int64
 	var r1, v1, v10 int32
 	v1 = int32(m_SYS_socketpair)
@@ -125355,6 +128058,10 @@ type Tspwd = struct {
 }
 
 func Xfgetgrent(tls *TLS, f uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var _ /* nmem at bp+16 */ uint64
@@ -125373,6 +128080,10 @@ var _mem uintptr
 var _gr Tgroup1
 
 func Xfgetpwent(tls *TLS, f uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* res at bp+8 */ uintptr
@@ -125387,6 +128098,10 @@ var _line2 uintptr
 var _pw Tpasswd
 
 func Xfgetspent(tls *TLS, f uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var res uintptr
@@ -125644,10 +128359,18 @@ func _getgr_r(tls *TLS, name uintptr, gid uint32, gr uintptr, buf uintptr, size 
 }
 
 func Xgetgrnam_r(tls *TLS, name uintptr, gr uintptr, buf uintptr, size uint64, res uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v gr=%v buf=%v size=%v res=%v, (%v:)", tls, name, gr, buf, size, res, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _getgr_r(tls, name, uint32(0), gr, buf, size, res)
 }
 
 func Xgetgrgid_r(tls *TLS, gid uint32, gr uintptr, buf uintptr, size uint64, res uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v gid=%v gr=%v buf=%v size=%v res=%v, (%v:)", tls, gid, gr, buf, size, res, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _getgr_r(tls, uintptr(0), gid, gr, buf, size, res)
 }
 
@@ -125657,6 +128380,9 @@ var _mem1 uintptr
 var _gr1 Tgroup1
 
 func Xsetgrent(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	if _f1 != 0 {
 		Xfclose(tls, _f1)
 	}
@@ -125664,6 +128390,10 @@ func Xsetgrent(tls *TLS) {
 }
 
 func Xgetgrent(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var _ /* nmem at bp+16 */ uint64
@@ -125682,6 +128412,10 @@ func Xgetgrent(tls *TLS) (r uintptr) {
 }
 
 func Xgetgrgid(tls *TLS, gid uint32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v gid=%v, (%v:)", tls, gid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var _ /* nmem at bp+16 */ uint64
@@ -125694,6 +128428,10 @@ func Xgetgrgid(tls *TLS, gid uint32) (r uintptr) {
 }
 
 func Xgetgrnam(tls *TLS, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var _ /* nmem at bp+16 */ uint64
@@ -125821,6 +128559,10 @@ const m_INITGRNGRPS = 2
 const m_INITGR_LEN = 3
 
 func Xgetgrouplist(tls *TLS, user uintptr, gid uint32, groups uintptr, ngroups uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v user=%v gid=%v groups=%v ngroups=%v, (%v:)", tls, user, gid, groups, ngroups, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(96) /* tlsAllocs 88 maxVaListSize 0 */
 	defer tls.Free(96)
 	var f, nscdbuf, v1, v7, v9 uintptr
@@ -126128,10 +128870,18 @@ func _getpw_r(tls *TLS, name uintptr, uid uint32, pw uintptr, buf uintptr, size 
 }
 
 func Xgetpwnam_r(tls *TLS, name uintptr, pw uintptr, buf uintptr, size uint64, res uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v pw=%v buf=%v size=%v res=%v, (%v:)", tls, name, pw, buf, size, res, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _getpw_r(tls, name, uint32(0), pw, buf, size, res)
 }
 
 func Xgetpwuid_r(tls *TLS, uid uint32, pw uintptr, buf uintptr, size uint64, res uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v uid=%v pw=%v buf=%v size=%v res=%v, (%v:)", tls, uid, pw, buf, size, res, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _getpw_r(tls, uintptr(0), uid, pw, buf, size, res)
 }
 
@@ -126141,6 +128891,9 @@ var _pw1 Tpasswd
 var _size uint64
 
 func Xsetpwent(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	if _f2 != 0 {
 		Xfclose(tls, _f2)
 	}
@@ -126148,6 +128901,10 @@ func Xsetpwent(tls *TLS) {
 }
 
 func Xgetpwent(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* res at bp+0 */ uintptr
@@ -126162,6 +128919,10 @@ func Xgetpwent(tls *TLS) (r uintptr) {
 }
 
 func Xgetpwuid(tls *TLS, uid uint32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v uid=%v, (%v:)", tls, uid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* res at bp+0 */ uintptr
@@ -126170,6 +128931,10 @@ func Xgetpwuid(tls *TLS, uid uint32) (r uintptr) {
 }
 
 func Xgetpwnam(tls *TLS, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* res at bp+0 */ uintptr
@@ -126276,18 +129041,32 @@ func x___getpwent_a(tls *TLS, f uintptr, pw uintptr, line uintptr, size uintptr,
 }
 
 func Xsetspent(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 }
 
 func Xendspent(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 }
 
 func Xgetspent(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uintptr(0)
 }
 
 const m_LINE_LIM = 256
 
 func Xgetspnam(tls *TLS, name uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var e, orig_errno, v1 int32
@@ -126390,6 +129169,10 @@ func _cleanup2(tls *TLS, p uintptr) {
 }
 
 func Xgetspnam_r(tls *TLS, name uintptr, sp uintptr, buf uintptr, size uint64, res uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v sp=%v buf=%v size=%v res=%v, (%v:)", tls, name, sp, buf, size, res, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(464) /* tlsAllocs 448 maxVaListSize 8 */
 	defer tls.Free(464)
 	var f, v4 uintptr
@@ -126484,10 +129267,18 @@ func Xgetspnam_r(tls *TLS, name uintptr, sp uintptr, buf uintptr, size uint64, r
 }
 
 func Xlckpwdf(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return 0
 }
 
 func Xulckpwdf(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return 0
 }
 
@@ -126621,6 +129412,10 @@ error:
 }
 
 func Xputgrent(tls *TLS, gr uintptr, f uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v gr=%v f=%v, (%v:)", tls, gr, f, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 0 maxVaListSize 24 */
 	defer tls.Free(32)
 	var i uint64
@@ -126658,6 +129453,10 @@ done:
 }
 
 func Xputpwent(tls *TLS, pw uintptr, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pw=%v f=%v, (%v:)", tls, pw, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 0 maxVaListSize 56 */
 	defer tls.Free(64)
 	var v1 int32
@@ -126670,6 +129469,10 @@ func Xputpwent(tls *TLS, pw uintptr, f uintptr) (r int32) {
 }
 
 func Xputspent(tls *TLS, sp uintptr, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sp=%v f=%v, (%v:)", tls, sp, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(144) /* tlsAllocs 0 maxVaListSize 128 */
 	defer tls.Free(144)
 	var v1, v10, v12, v14, v16, v4, v6, v8 int32
@@ -126776,6 +129579,10 @@ func x___rand48_step(tls *TLS, xi uintptr, lc uintptr) (r uint64) {
 }
 
 func Xerand48(tls *TLS, s uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* x at bp+0 */ struct {
@@ -126794,36 +129601,66 @@ func Xerand48(tls *TLS, s uintptr) (r float64) {
 }
 
 func Xdrand48(tls *TLS) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xerand48(tls, uintptr(unsafe.Pointer(&x___seed48)))
 }
 
 func Xlcong48(tls *TLS, p uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+	}
 	_memcpy(tls, uintptr(unsafe.Pointer(&x___seed48)), p, uint64(14))
 }
 
 func Xnrand48(tls *TLS, s uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(x___rand48_step(tls, s, uintptr(unsafe.Pointer(&x___seed48))+uintptr(3)*2) >> int32(17))
 }
 
 func Xlrand48(tls *TLS) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xnrand48(tls, uintptr(unsafe.Pointer(&x___seed48)))
 }
 
 func Xjrand48(tls *TLS, s uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(int32(x___rand48_step(tls, s, uintptr(unsafe.Pointer(&x___seed48))+uintptr(3)*2) >> Int32FromInt32(16)))
 }
 
 func Xmrand48(tls *TLS) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xjrand48(tls, uintptr(unsafe.Pointer(&x___seed48)))
 }
 
 var _seed uint64
 
 func Xsrand(tls *TLS, s uint32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+	}
 	_seed = uint64(s - uint32(1))
 }
 
 func Xrand(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	_seed = uint64(6364136223846793005)*_seed + uint64(1)
 	return int32(_seed >> int32(33))
 }
@@ -126837,6 +129674,10 @@ func _temper(tls *TLS, x uint32) (r uint32) {
 }
 
 func Xrand_r(tls *TLS, seed uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v seed=%v, (%v:)", tls, seed, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 uint32
 	v1 = *(*uint32)(unsafe.Pointer(seed))*Uint32FromInt32(1103515245) + Uint32FromInt32(12345)
 	*(*uint32)(unsafe.Pointer(seed)) = v1
@@ -126934,12 +129775,19 @@ func ___srandom(tls *TLS, seed uint32) {
 }
 
 func Xsrandom(tls *TLS, seed uint32) {
+	if __ccgo_strace {
+		trc("tls=%v seed=%v, (%v:)", tls, seed, origin(2))
+	}
 	x___lock(tls, uintptr(unsafe.Pointer(&_lock5)))
 	___srandom(tls, seed)
 	x___unlock(tls, uintptr(unsafe.Pointer(&_lock5)))
 }
 
 func Xinitstate(tls *TLS, seed uint32, state uintptr, size uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v seed=%v state=%v size=%v, (%v:)", tls, seed, state, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var old uintptr
 	if size < uint64(8) {
 		return uintptr(0)
@@ -126971,6 +129819,10 @@ func Xinitstate(tls *TLS, seed uint32, state uintptr, size uint64) (r uintptr) {
 }
 
 func Xsetstate(tls *TLS, state uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v state=%v, (%v:)", tls, state, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var old uintptr
 	x___lock(tls, uintptr(unsafe.Pointer(&_lock5)))
 	old = _savestate(tls)
@@ -126980,6 +129832,10 @@ func Xsetstate(tls *TLS, state uintptr) (r uintptr) {
 }
 
 func Xrandom(tls *TLS) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var k int64
 	var v1 uint32
 	var v2, v3 int32
@@ -127008,6 +129864,10 @@ end:
 }
 
 func Xseed48(tls *TLS, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	_memcpy(tls, uintptr(unsafe.Pointer(&_p1)), uintptr(unsafe.Pointer(&x___seed48)), uint64(6))
 	_memcpy(tls, uintptr(unsafe.Pointer(&x___seed48)), s, uint64(6))
 	return uintptr(unsafe.Pointer(&_p1))
@@ -127016,6 +129876,9 @@ func Xseed48(tls *TLS, s uintptr) (r uintptr) {
 var _p1 [3]uint16
 
 func Xsrand48(tls *TLS, seed int64) {
+	if __ccgo_strace {
+		trc("tls=%v seed=%v, (%v:)", tls, seed, origin(2))
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	*(*[3]uint16)(unsafe.Pointer(bp)) = [3]uint16{
@@ -127064,6 +129927,10 @@ func x__Fork(tls *TLS) (r int32) {
 }
 
 func Xexecl(tls *TLS, path uintptr, argv0 uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v argv0=%v va=%v, (%v:)", tls, path, argv0, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap, argv uintptr
 	var argc, i int32
 	var v1 uint64
@@ -127086,6 +129953,10 @@ func Xexecl(tls *TLS, path uintptr, argv0 uintptr, va uintptr) (r int32) {
 }
 
 func Xexecle(tls *TLS, path uintptr, argv0 uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v argv0=%v va=%v, (%v:)", tls, path, argv0, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap, argv, envp uintptr
 	var argc, i int32
 	var v1 uint64
@@ -127108,6 +129979,10 @@ func Xexecle(tls *TLS, path uintptr, argv0 uintptr, va uintptr) (r int32) {
 }
 
 func Xexeclp(tls *TLS, file uintptr, argv0 uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v file=%v argv0=%v va=%v, (%v:)", tls, file, argv0, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap, argv uintptr
 	var argc, i int32
 	var v1 uint64
@@ -127130,12 +130005,20 @@ func Xexeclp(tls *TLS, file uintptr, argv0 uintptr, va uintptr) (r int32) {
 }
 
 func Xexecv(tls *TLS, path uintptr, argv uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v argv=%v, (%v:)", tls, path, argv, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xexecve(tls, path, argv, Xenviron)
 }
 
 const m_SYS_execve = 59
 
 func Xexecve(tls *TLS, path uintptr, argv uintptr, envp uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v argv=%v envp=%v, (%v:)", tls, path, argv, envp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* do we need to use environ if envp is null? */
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_execve), int64(path), int64(argv), int64(envp)))))
 }
@@ -127214,6 +130097,10 @@ func x___execvpe(tls *TLS, file uintptr, argv uintptr, envp uintptr) (r int32) {
 }
 
 func Xexecvp(tls *TLS, file uintptr, argv uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v file=%v argv=%v, (%v:)", tls, file, argv, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___execvpe(tls, file, argv, Xenviron)
 }
 
@@ -127221,6 +130108,10 @@ const m_AT_EMPTY_PATH = 4096
 const m_SYS_execveat = 322
 
 func Xfexecve(tls *TLS, fd int32, argv uintptr, envp uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v argv=%v envp=%v, (%v:)", tls, fd, argv, envp, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var r int32
@@ -127510,6 +130401,10 @@ fail:
 }
 
 func Xposix_spawn(tls *TLS, res uintptr, path uintptr, fa uintptr, attr uintptr, argv uintptr, envp uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v res=%v path=%v fa=%v attr=%v argv=%v envp=%v, (%v:)", tls, res, path, fa, attr, argv, envp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(5664) /* tlsAllocs 5664 maxVaListSize 0 */
 	defer tls.Free(5664)
 	var pid int32
@@ -127568,6 +130463,10 @@ fail:
 }
 
 func Xposix_spawn_file_actions_addchdir_np(tls *TLS, fa uintptr, path uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fa=%v path=%v, (%v:)", tls, fa, path, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var op, v1 uintptr
 	op = x___libc_malloc(tls, uint64(40)+Xstrlen(tls, path)+uint64(1))
 	if !(op != 0) {
@@ -127587,6 +130486,10 @@ func Xposix_spawn_file_actions_addchdir_np(tls *TLS, fa uintptr, path uintptr) (
 }
 
 func Xposix_spawn_file_actions_addclose(tls *TLS, fa uintptr, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fa=%v fd=%v, (%v:)", tls, fa, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var op, v1 uintptr
 	if fd < 0 {
 		return int32(m_EBADF)
@@ -127608,6 +130511,10 @@ func Xposix_spawn_file_actions_addclose(tls *TLS, fa uintptr, fd int32) (r int32
 }
 
 func Xposix_spawn_file_actions_adddup2(tls *TLS, fa uintptr, srcfd int32, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fa=%v srcfd=%v fd=%v, (%v:)", tls, fa, srcfd, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var op, v1 uintptr
 	if srcfd < 0 || fd < 0 {
 		return int32(m_EBADF)
@@ -127630,6 +130537,10 @@ func Xposix_spawn_file_actions_adddup2(tls *TLS, fa uintptr, srcfd int32, fd int
 }
 
 func Xposix_spawn_file_actions_addfchdir_np(tls *TLS, fa uintptr, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fa=%v fd=%v, (%v:)", tls, fa, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var op, v1 uintptr
 	if fd < 0 {
 		return int32(m_EBADF)
@@ -127651,6 +130562,10 @@ func Xposix_spawn_file_actions_addfchdir_np(tls *TLS, fa uintptr, fd int32) (r i
 }
 
 func Xposix_spawn_file_actions_addopen(tls *TLS, fa uintptr, fd int32, path uintptr, flags int32, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fa=%v fd=%v path=%v flags=%v mode=%v, (%v:)", tls, fa, fd, path, flags, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var op, v1 uintptr
 	if fd < 0 {
 		return int32(m_EBADF)
@@ -127675,6 +130590,10 @@ func Xposix_spawn_file_actions_addopen(tls *TLS, fa uintptr, fd int32, path uint
 }
 
 func Xposix_spawn_file_actions_destroy(tls *TLS, fa uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fa=%v, (%v:)", tls, fa, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var next, op uintptr
 	op = (*Tposix_spawn_file_actions_t)(unsafe.Pointer(fa)).F__actions
 	for op != 0 {
@@ -127686,52 +130605,96 @@ func Xposix_spawn_file_actions_destroy(tls *TLS, fa uintptr) (r int32) {
 }
 
 func Xposix_spawn_file_actions_init(tls *TLS, fa uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fa=%v, (%v:)", tls, fa, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	(*Tposix_spawn_file_actions_t)(unsafe.Pointer(fa)).F__actions = uintptr(0)
 	return 0
 }
 
 func Xposix_spawnattr_destroy(tls *TLS, attr uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v, (%v:)", tls, attr, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return 0
 }
 
 func Xposix_spawnattr_getflags(tls *TLS, attr uintptr, flags uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v flags=%v, (%v:)", tls, attr, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	*(*int16)(unsafe.Pointer(flags)) = int16((*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__flags)
 	return 0
 }
 
 func Xposix_spawnattr_getpgroup(tls *TLS, attr uintptr, pgrp uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v pgrp=%v, (%v:)", tls, attr, pgrp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	*(*int32)(unsafe.Pointer(pgrp)) = (*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__pgrp
 	return 0
 }
 
 func Xposix_spawnattr_getsigdefault(tls *TLS, attr uintptr, def uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v def=%v, (%v:)", tls, attr, def, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	*(*Tsigset_t)(unsafe.Pointer(def)) = (*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__def
 	return 0
 }
 
 func Xposix_spawnattr_getsigmask(tls *TLS, attr uintptr, mask uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v mask=%v, (%v:)", tls, attr, mask, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	*(*Tsigset_t)(unsafe.Pointer(mask)) = (*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__mask
 	return 0
 }
 
 func Xposix_spawnattr_init(tls *TLS, attr uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v, (%v:)", tls, attr, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	*(*Tposix_spawnattr_t)(unsafe.Pointer(attr)) = Tposix_spawnattr_t{}
 	return 0
 }
 
 func Xposix_spawnattr_getschedparam(tls *TLS, attr uintptr, schedparam uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v schedparam=%v, (%v:)", tls, attr, schedparam, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(m_ENOSYS)
 }
 
 func Xposix_spawnattr_setschedparam(tls *TLS, attr uintptr, schedparam uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v schedparam=%v, (%v:)", tls, attr, schedparam, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(m_ENOSYS)
 }
 
 func Xposix_spawnattr_getschedpolicy(tls *TLS, attr uintptr, policy uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v policy=%v, (%v:)", tls, attr, policy, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(m_ENOSYS)
 }
 
 func Xposix_spawnattr_setschedpolicy(tls *TLS, attr uintptr, policy int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v policy=%v, (%v:)", tls, attr, policy, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(m_ENOSYS)
 }
 
@@ -127740,6 +130703,10 @@ const m_POSIX_SPAWN_SETSCHEDULER = 32
 const m_POSIX_SPAWN_USEVFORK = 64
 
 func Xposix_spawnattr_setflags(tls *TLS, attr uintptr, flags int16) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v flags=%v, (%v:)", tls, attr, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var all_flags uint32
 	all_flags = uint32(Int32FromInt32(m_POSIX_SPAWN_RESETIDS) | Int32FromInt32(m_POSIX_SPAWN_SETPGROUP) | Int32FromInt32(m_POSIX_SPAWN_SETSIGDEF) | Int32FromInt32(m_POSIX_SPAWN_SETSIGMASK) | Int32FromInt32(m_POSIX_SPAWN_SETSCHEDPARAM) | Int32FromInt32(m_POSIX_SPAWN_SETSCHEDULER) | Int32FromInt32(m_POSIX_SPAWN_USEVFORK) | Int32FromInt32(m_POSIX_SPAWN_SETSID))
 	if uint32(flags) & ^all_flags != 0 {
@@ -127750,21 +130717,37 @@ func Xposix_spawnattr_setflags(tls *TLS, attr uintptr, flags int16) (r int32) {
 }
 
 func Xposix_spawnattr_setpgroup(tls *TLS, attr uintptr, pgrp int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v pgrp=%v, (%v:)", tls, attr, pgrp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	(*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__pgrp = pgrp
 	return 0
 }
 
 func Xposix_spawnattr_setsigdefault(tls *TLS, attr uintptr, def uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v def=%v, (%v:)", tls, attr, def, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	(*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__def = *(*Tsigset_t)(unsafe.Pointer(def))
 	return 0
 }
 
 func Xposix_spawnattr_setsigmask(tls *TLS, attr uintptr, mask uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v attr=%v mask=%v, (%v:)", tls, attr, mask, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	(*Tposix_spawnattr_t)(unsafe.Pointer(attr)).F__mask = *(*Tsigset_t)(unsafe.Pointer(mask))
 	return 0
 }
 
 func Xposix_spawnp(tls *TLS, res uintptr, file uintptr, fa uintptr, attr uintptr, argv uintptr, envp uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v res=%v file=%v fa=%v attr=%v argv=%v envp=%v, (%v:)", tls, res, file, fa, attr, argv, envp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(336) /* tlsAllocs 336 maxVaListSize 0 */
 	defer tls.Free(336)
 	var _ /* spawnp_attr at bp+0 */ Tposix_spawnattr_t
@@ -127780,16 +130763,28 @@ const m_SIGINT = 2
 const m_SIGQUIT = 3
 
 func Xwait(tls *TLS, status uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v status=%v, (%v:)", tls, status, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xwaitpid(tls, -Int32FromInt32(1), status, 0)
 }
 
 const m_SYS_waitid = 247
 
 func Xwaitid(tls *TLS, type1 int32, id uint32, info uintptr, options int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v type1=%v id=%v info=%v options=%v, (%v:)", tls, type1, id, info, options, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_waitid), int64(type1), int64(id), int64(info), int64(options), int64(Int32FromInt32(0)), 0))))
 }
 
 func Xwaitpid(tls *TLS, pid int32, status uintptr, options int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v status=%v options=%v, (%v:)", tls, pid, status, options, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_wait4), int64(pid), int64(status), int64(options), int64(Int32FromInt32(0)), 0, 0))))
 }
 
@@ -128170,6 +131165,10 @@ func _fnmatch_internal(tls *TLS, pat uintptr, m uint64, str uintptr, n uint64, f
 }
 
 func Xfnmatch(tls *TLS, pat uintptr, str uintptr, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pat=%v str=%v flags=%v, (%v:)", tls, pat, str, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var c, v1 int32
@@ -128561,6 +131560,10 @@ func _expand_tilde(tls *TLS, pat uintptr, buf uintptr, pos uintptr) (r int32) {
 }
 
 func Xglob(tls *TLS, pat uintptr, flags int32, errfunc uintptr, g uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pat=%v flags=%v errfunc=%v g=%v, (%v:)", tls, pat, flags, errfunc, g, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(4128) /* tlsAllocs 4128 maxVaListSize 0 */
 	defer tls.Free(4128)
 	var cnt, i, offs, v1 uint64
@@ -128665,6 +131668,9 @@ func Xglob(tls *TLS, pat uintptr, flags int32, errfunc uintptr, g uintptr) (r in
 }
 
 func Xglobfree(tls *TLS, g uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v g=%v, (%v:)", tls, g, origin(2))
+	}
 	var i uint64
 	for i = uint64(0); i < (*Tglob_t)(unsafe.Pointer(g)).Fgl_pathc; i++ {
 		Xfree(tls, *(*uintptr)(unsafe.Pointer((*Tglob_t)(unsafe.Pointer(g)).Fgl_pathv + uintptr((*Tglob_t)(unsafe.Pointer(g)).Fgl_offs+i)*8))-uintptr(uint64(UintptrFromInt32(0)+8)))
@@ -131526,6 +134532,10 @@ func _tre_ast_to_tnfa(tls *TLS, node uintptr, transitions uintptr, counts uintpt
 }
 
 func Xregcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v preg=%v regex=%v cflags=%v, (%v:)", tls, preg, regex, cflags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(64)
 	var add, errcode, i, j, v1 int32
@@ -131771,6 +134781,9 @@ error_exit:
 }
 
 func Xregfree(tls *TLS, preg uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v preg=%v, (%v:)", tls, preg, origin(2))
+	}
 	var i uint32
 	var tnfa, trans uintptr
 	tnfa = (*Tregex_t)(unsafe.Pointer(preg)).F__opaque
@@ -131827,6 +134840,10 @@ func Xregfree(tls *TLS, preg uintptr) {
 var _messages = [286]int8{'N', 'o', ' ', 'e', 'r', 'r', 'o', 'r', 0, 'N', 'o', ' ', 'm', 'a', 't', 'c', 'h', 0, 'I', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 'r', 'e', 'g', 'e', 'x', 'p', 0, 'U', 'n', 'k', 'n', 'o', 'w', 'n', ' ', 'c', 'o', 'l', 'l', 'a', 't', 'i', 'n', 'g', ' ', 'e', 'l', 'e', 'm', 'e', 'n', 't', 0, 'U', 'n', 'k', 'n', 'o', 'w', 'n', ' ', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r', ' ', 'c', 'l', 'a', 's', 's', ' ', 'n', 'a', 'm', 'e', 0, 'T', 'r', 'a', 'i', 'l', 'i', 'n', 'g', ' ', 'b', 'a', 'c', 'k', 's', 'l', 'a', 's', 'h', 0, 'I', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 'b', 'a', 'c', 'k', ' ', 'r', 'e', 'f', 'e', 'r', 'e', 'n', 'c', 'e', 0, 'M', 'i', 's', 's', 'i', 'n', 'g', ' ', '\'', ']', '\'', 0, 'M', 'i', 's', 's', 'i', 'n', 'g', ' ', '\'', ')', '\'', 0, 'M', 'i', 's', 's', 'i', 'n', 'g', ' ', '\'', '}', '\'', 0, 'I', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 'c', 'o', 'n', 't', 'e', 'n', 't', 's', ' ', 'o', 'f', ' ', '{', '}', 0, 'I', 'n', 'v', 'a', 'l', 'i', 'd', ' ', 'c', 'h', 'a', 'r', 'a', 'c', 't', 'e', 'r', ' ', 'r', 'a', 'n', 'g', 'e', 0, 'O', 'u', 't', ' ', 'o', 'f', ' ', 'm', 'e', 'm', 'o', 'r', 'y', 0, 'R', 'e', 'p', 'e', 't', 'i', 't', 'i', 'o', 'n', ' ', 'n', 'o', 't', ' ', 'p', 'r', 'e', 'c', 'e', 'd', 'e', 'd', ' ', 'b', 'y', ' ', 'v', 'a', 'l', 'i', 'd', ' ', 'e', 'x', 'p', 'r', 'e', 's', 's', 'i', 'o', 'n', 0, 0, 'U', 'n', 'k', 'n', 'o', 'w', 'n', ' ', 'e', 'r', 'r', 'o', 'r'}
 
 func Xregerror(tls *TLS, e int32, preg uintptr, buf uintptr, size uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v e=%v preg=%v buf=%v size=%v, (%v:)", tls, e, preg, buf, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	var s uintptr
@@ -132689,6 +135706,10 @@ func _tre_fill_pmatch(tls *TLS, nmatch uint64, pmatch uintptr, cflags int32, tnf
 }
 
 func Xregexec(tls *TLS, preg uintptr, string1 uintptr, nmatch uint64, pmatch uintptr, eflags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v preg=%v string1=%v nmatch=%v pmatch=%v eflags=%v, (%v:)", tls, preg, string1, nmatch, pmatch, eflags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var status int32
@@ -132835,6 +135856,10 @@ func x___tre_mem_alloc_impl(tls *TLS, mem uintptr, provided int32, provided_bloc
 const m_SYS_sched_setaffinity = 203
 
 func Xsched_setaffinity(tls *TLS, tid int32, size uint64, set uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v tid=%v size=%v set=%v, (%v:)", tls, tid, size, set, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_sched_setaffinity), int64(tid), int64(size), int64(set)))))
 }
 
@@ -132855,6 +135880,10 @@ func _do_getaffinity(tls *TLS, tid int32, size uint64, set uintptr) (r int32) {
 }
 
 func Xsched_getaffinity(tls *TLS, tid int32, size uint64, set uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v tid=%v size=%v set=%v, (%v:)", tls, tid, size, set, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(_do_getaffinity(tls, tid, size, set))))
 }
 
@@ -132881,10 +135910,18 @@ const m_SYS_sched_get_priority_max = 146
 const m_SYS_sched_get_priority_min = 147
 
 func Xsched_get_priority_max(tls *TLS, policy int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v policy=%v, (%v:)", tls, policy, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_sched_get_priority_max), int64(policy)))))
 }
 
 func Xsched_get_priority_min(tls *TLS, policy int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v policy=%v, (%v:)", tls, policy, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_sched_get_priority_min), int64(policy)))))
 }
 
@@ -132916,6 +135953,10 @@ func init() {
 }
 
 func Xsched_getcpu(tls *TLS) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var f uintptr
@@ -132939,32 +135980,56 @@ func Xsched_getcpu(tls *TLS) (r1 int32) {
 }
 
 func Xsched_getparam(tls *TLS, pid int32, param uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v param=%v, (%v:)", tls, pid, param, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOSYS))))
 }
 
 func Xsched_getscheduler(tls *TLS, pid int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v, (%v:)", tls, pid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOSYS))))
 }
 
 const m_SYS_sched_rr_get_interval = 148
 
 func Xsched_rr_get_interval(tls *TLS, pid int32, ts uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v ts=%v, (%v:)", tls, pid, ts, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* If reaching this point, it's a 64-bit arch or time64-only
 	 * 32-bit arch and we can get result directly into timespec. */
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_sched_rr_get_interval), int64(pid), int64(ts)))))
 }
 
 func Xsched_setparam(tls *TLS, pid int32, param uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v param=%v, (%v:)", tls, pid, param, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOSYS))))
 }
 
 func Xsched_setscheduler(tls *TLS, pid int32, sched int32, param uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v sched=%v param=%v, (%v:)", tls, pid, sched, param, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_ENOSYS))))
 }
 
 const m_SYS_sched_yield = 24
 
 func Xsched_yield(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(m_SYS_sched_yield)))))
 }
 
@@ -133077,10 +136142,17 @@ func _resize(tls *TLS, nel uint64, htab uintptr) (r int32) {
 }
 
 func Xhcreate(tls *TLS, nel uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v nel=%v, (%v:)", tls, nel, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return ___hcreate_r(tls, nel, uintptr(unsafe.Pointer(&_htab)))
 }
 
 func Xhdestroy(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	___hdestroy_r(tls, uintptr(unsafe.Pointer(&_htab)))
 }
 
@@ -133104,6 +136176,10 @@ func _lookup(tls *TLS, key uintptr, hash uint64, htab uintptr) (r uintptr) {
 }
 
 func Xhsearch(tls *TLS, item TENTRY, action int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v item=%v action=%v, (%v:)", tls, item, action, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* e at bp+0 */ uintptr
@@ -133169,6 +136245,9 @@ type Tnode = struct {
 }
 
 func Xinsque(tls *TLS, element uintptr, pred uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v element=%v pred=%v, (%v:)", tls, element, pred, origin(2))
+	}
 	var e, p, v1 uintptr
 	e = element
 	p = pred
@@ -133187,6 +136266,9 @@ func Xinsque(tls *TLS, element uintptr, pred uintptr) {
 }
 
 func Xremque(tls *TLS, element uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v element=%v, (%v:)", tls, element, origin(2))
+	}
 	var e uintptr
 	e = element
 	if (*Tnode)(unsafe.Pointer(e)).Fnext != 0 {
@@ -133198,6 +136280,10 @@ func Xremque(tls *TLS, element uintptr) {
 }
 
 func Xlsearch(tls *TLS, key uintptr, base uintptr, nelp uintptr, width uint64, compar uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v base=%v nelp=%v width=%v compar=%v, (%v:)", tls, key, base, nelp, width, compar, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var i, n, v1 uint64
 	var p uintptr
 	defer func() { Xrealloc(tls, p, 0) }()
@@ -133214,6 +136300,10 @@ func Xlsearch(tls *TLS, key uintptr, base uintptr, nelp uintptr, width uint64, c
 }
 
 func Xlfind(tls *TLS, key uintptr, base uintptr, nelp uintptr, width uint64, compar uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v base=%v nelp=%v width=%v compar=%v, (%v:)", tls, key, base, nelp, width, compar, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var i, n, v1 uint64
 	var p uintptr
 	defer func() { Xrealloc(tls, p, 0) }()
@@ -133236,6 +136326,10 @@ type Tnode1 = struct {
 }
 
 func Xtdelete(tls *TLS, key uintptr, rootp uintptr, cmp uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v rootp=%v cmp=%v, (%v:)", tls, key, rootp, cmp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a [97]uintptr
 	var c, i, v1, v2, v3, v4, v5, v6, v7 int32
 	var child, deleted, n, parent uintptr
@@ -133300,6 +136394,9 @@ func Xtdelete(tls *TLS, key uintptr, rootp uintptr, cmp uintptr) (r uintptr) {
 }
 
 func Xtdestroy(tls *TLS, root uintptr, freekey uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v root=%v freekey=%v, (%v:)", tls, root, freekey, origin(2))
+	}
 	var r uintptr
 	r = root
 	if r == uintptr(0) {
@@ -133314,6 +136411,10 @@ func Xtdestroy(tls *TLS, root uintptr, freekey uintptr) {
 }
 
 func Xtfind(tls *TLS, key uintptr, rootp uintptr, cmp uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v rootp=%v cmp=%v, (%v:)", tls, key, rootp, cmp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var c int32
 	var n uintptr
 	if !(rootp != 0) {
@@ -133404,6 +136505,10 @@ func x___tsearch_balance(tls *TLS, p uintptr) (r int32) {
 }
 
 func Xtsearch(tls *TLS, key uintptr, rootp uintptr, cmp uintptr) (r1 uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v rootp=%v cmp=%v, (%v:)", tls, key, rootp, cmp, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var a [96]uintptr
 	var c, i, v1, v2, v4, v5 int32
 	var n, r, v3 uintptr
@@ -133470,16 +136575,27 @@ func _walk(tls *TLS, r uintptr, action uintptr, d int32) {
 }
 
 func Xtwalk(tls *TLS, root uintptr, action uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v root=%v action=%v, (%v:)", tls, root, action, origin(2))
+	}
 	_walk(tls, root, action, 0)
 }
 
 func Xpoll(tls *TLS, fds uintptr, n uint64, timeout int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fds=%v n=%v timeout=%v, (%v:)", tls, fds, n, timeout, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_poll), int64(fds), int64(n), int64(timeout), 0, 0, 0))))
 }
 
 const m_SYS_pselect6 = 270
 
 func Xpselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, ts uintptr, mask uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v rfds=%v wfds=%v efds=%v ts=%v mask=%v, (%v:)", tls, n, rfds, wfds, efds, ts, mask, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ns, s, v1, v2 int64
@@ -133516,6 +136632,10 @@ func Xpselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, ts ui
 const m_SYS_select = 23
 
 func Xselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, tv uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v n=%v rfds=%v wfds=%v efds=%v tv=%v, (%v:)", tls, n, rfds, wfds, efds, tv, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var max_time, ns, s, us, v1, v2 int64
@@ -133581,6 +136701,10 @@ func x___restore_sigs(tls *TLS, set uintptr) {
 const m_SYS_getitimer = 36
 
 func Xgetitimer(tls *TLS, which int32, old uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v which=%v old=%v, (%v:)", tls, which, old, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var r int32
@@ -133599,10 +136723,18 @@ func Xgetitimer(tls *TLS, which int32, old uintptr) (r1 int32) {
 }
 
 func Xkill(tls *TLS, pid int32, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v sig=%v, (%v:)", tls, pid, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_kill), int64(pid), int64(sig)))))
 }
 
 func Xkillpg(tls *TLS, pgid int32, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pgid=%v sig=%v, (%v:)", tls, pgid, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if pgid < 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return -int32(1)
@@ -133611,10 +136743,16 @@ func Xkillpg(tls *TLS, pgid int32, sig int32) (r int32) {
 }
 
 func Xpsiginfo(tls *TLS, si uintptr, msg uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v si=%v msg=%v, (%v:)", tls, si, msg, origin(2))
+	}
 	Xpsignal(tls, (*Tsiginfo_t)(unsafe.Pointer(si)).Fsi_signo, msg)
 }
 
 func Xpsignal(tls *TLS, sig int32, msg uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v msg=%v, (%v:)", tls, sig, msg, origin(2))
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 0 maxVaListSize 24 */
 	defer tls.Free(32)
 	var __need_unlock, old_errno, old_mode, v1 int32
@@ -133655,6 +136793,10 @@ func Xpsignal(tls *TLS, sig int32, msg uintptr) {
 }
 
 func Xraise(tls *TLS, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v, (%v:)", tls, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var ret int32
@@ -133668,6 +136810,10 @@ func Xraise(tls *TLS, sig int32) (r int32) {
 const m_SYS_setitimer = 38
 
 func Xsetitimer(tls *TLS, which int32, new1 uintptr, old uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v which=%v new1=%v old=%v, (%v:)", tls, which, new1, old, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var is, ius, vs, vus int64
@@ -133776,6 +136922,10 @@ func x___libc_sigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r1 int32)
 }
 
 func Xsigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v sa=%v old=%v, (%v:)", tls, sig, sa, old, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var r int32
@@ -133800,6 +136950,10 @@ func Xsigaction(tls *TLS, sig int32, sa uintptr, old uintptr) (r1 int32) {
 }
 
 func Xsigaddset(tls *TLS, set uintptr, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v set=%v sig=%v, (%v:)", tls, set, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var s uint32
 	s = uint32(sig - int32(1))
 	if s >= uint32(Int32FromInt32(m__NSIG)-Int32FromInt32(1)) || uint32(sig)-uint32(32) < uint32(3) {
@@ -133815,6 +136969,10 @@ const m_SS_ONSTACK = 1
 const m_SYS_sigaltstack = 131
 
 func Xsigaltstack(tls *TLS, ss uintptr, old uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v ss=%v old=%v, (%v:)", tls, ss, old, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if ss != 0 {
 		if !((*Tstack_t)(unsafe.Pointer(ss)).Fss_flags&Int32FromInt32(m_SS_DISABLE) != 0) && (*Tstack_t)(unsafe.Pointer(ss)).Fss_size < uint64(m_MINSIGSTKSZ) {
 			*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENOMEM)
@@ -133829,6 +136987,10 @@ func Xsigaltstack(tls *TLS, ss uintptr, old uintptr) (r int32) {
 }
 
 func Xsigandset(tls *TLS, dest uintptr, left uintptr, right uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v left=%v right=%v, (%v:)", tls, dest, left, right, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var d, l, r uintptr
 	var i uint64
 	i = uint64(0)
@@ -133842,6 +137004,10 @@ func Xsigandset(tls *TLS, dest uintptr, left uintptr, right uintptr) (r1 int32) 
 }
 
 func Xsigdelset(tls *TLS, set uintptr, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v set=%v sig=%v, (%v:)", tls, set, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var s uint32
 	s = uint32(sig - int32(1))
 	if s >= uint32(Int32FromInt32(m__NSIG)-Int32FromInt32(1)) || uint32(sig)-uint32(32) < uint32(3) {
@@ -133853,6 +137019,10 @@ func Xsigdelset(tls *TLS, set uintptr, sig int32) (r int32) {
 }
 
 func Xsigemptyset(tls *TLS, set uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v set=%v, (%v:)", tls, set, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	*(*uint64)(unsafe.Pointer(set)) = uint64(0)
 	if uint64(8) == uint64(4) || int32(m__NSIG) > int32(65) {
 		*(*uint64)(unsafe.Pointer(set + 1*8)) = uint64(0)
@@ -133865,6 +137035,10 @@ func Xsigemptyset(tls *TLS, set uintptr) (r int32) {
 }
 
 func Xsigfillset(tls *TLS, set uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v set=%v, (%v:)", tls, set, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	*(*uint64)(unsafe.Pointer(set)) = uint64(0xfffffffc7fffffff)
 	if int32(m__NSIG) > int32(65) {
 		*(*uint64)(unsafe.Pointer(set + 1*8)) = uint64(0xffffffffffffffff)
@@ -133873,6 +137047,10 @@ func Xsigfillset(tls *TLS, set uintptr) (r int32) {
 }
 
 func Xsighold(tls *TLS, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v, (%v:)", tls, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* mask at bp+0 */ Tsigset_t
@@ -133884,6 +137062,10 @@ func Xsighold(tls *TLS, sig int32) (r int32) {
 }
 
 func Xsigignore(tls *TLS, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v, (%v:)", tls, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(160) /* tlsAllocs 152 maxVaListSize 0 */
 	defer tls.Free(160)
 	var _ /* sa at bp+0 */ Tsigaction
@@ -133894,6 +137076,10 @@ func Xsigignore(tls *TLS, sig int32) (r int32) {
 }
 
 func Xsiginterrupt(tls *TLS, sig int32, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v flag=%v, (%v:)", tls, sig, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(160) /* tlsAllocs 152 maxVaListSize 0 */
 	defer tls.Free(160)
 	var _ /* sa at bp+0 */ Tsigaction
@@ -133907,6 +137093,10 @@ func Xsiginterrupt(tls *TLS, sig int32, flag int32) (r int32) {
 }
 
 func Xsigisemptyset(tls *TLS, set uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v set=%v, (%v:)", tls, set, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var i uint64
 	i = uint64(0)
 	for ; i < uint64(Int32FromInt32(m__NSIG)/Int32FromInt32(8))/Uint64FromInt64(8); i++ {
@@ -133918,6 +137108,10 @@ func Xsigisemptyset(tls *TLS, set uintptr) (r int32) {
 }
 
 func Xsigismember(tls *TLS, set uintptr, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v set=%v sig=%v, (%v:)", tls, set, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var s uint32
 	s = uint32(sig - int32(1))
 	if s >= uint32(Int32FromInt32(m__NSIG)-Int32FromInt32(1)) {
@@ -133939,10 +137133,17 @@ type t__jmp_buf_tag = struct {
 type Tsigjmp_buf = [1]t__jmp_buf_tag
 
 func Xsiglongjmp(tls *TLS, buf uintptr, ret int32) {
+	if __ccgo_strace {
+		trc("tls=%v buf=%v ret=%v, (%v:)", tls, buf, ret, origin(2))
+	}
 	_longjmp(tls, buf, ret)
 }
 
 func Xsignal(tls *TLS, sig int32, func1 uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v func1=%v, (%v:)", tls, sig, func1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(304) /* tlsAllocs 304 maxVaListSize 0 */
 	defer tls.Free(304)
 	var _ /* sa at bp+152 */ Tsigaction
@@ -133957,6 +137158,10 @@ func Xsignal(tls *TLS, sig int32, func1 uintptr) (r uintptr) {
 }
 
 func Xsigorset(tls *TLS, dest uintptr, left uintptr, right uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v left=%v right=%v, (%v:)", tls, dest, left, right, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var d, l, r uintptr
 	var i uint64
 	i = uint64(0)
@@ -133970,6 +137175,10 @@ func Xsigorset(tls *TLS, dest uintptr, left uintptr, right uintptr) (r1 int32) {
 }
 
 func Xsigpause(tls *TLS, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v, (%v:)", tls, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* mask at bp+0 */ Tsigset_t
@@ -133981,10 +137190,18 @@ func Xsigpause(tls *TLS, sig int32) (r int32) {
 const m_SYS_rt_sigpending = 127
 
 func Xsigpending(tls *TLS, set uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v set=%v, (%v:)", tls, set, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_rt_sigpending), int64(set), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8))))))
 }
 
 func Xsigprocmask(tls *TLS, how int32, set uintptr, old uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v how=%v set=%v old=%v, (%v:)", tls, how, set, old, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = x_pthread_sigmask(tls, how, set, old)
 	if !(r != 0) {
@@ -133995,6 +137212,10 @@ func Xsigprocmask(tls *TLS, how int32, set uintptr, old uintptr) (r1 int32) {
 }
 
 func Xsigqueue(tls *TLS, pid int32, sig int32, value Tsigval) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v sig=%v value=%v, (%v:)", tls, pid, sig, value, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(256) /* tlsAllocs 256 maxVaListSize 0 */
 	defer tls.Free(256)
 	var r int32
@@ -134013,6 +137234,10 @@ func Xsigqueue(tls *TLS, pid int32, sig int32, value Tsigval) (r1 int32) {
 }
 
 func Xsigrelse(tls *TLS, sig int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v, (%v:)", tls, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* mask at bp+0 */ Tsigset_t
@@ -134032,6 +137257,10 @@ func x___libc_current_sigrtmin(tls *TLS) (r int32) {
 }
 
 func Xsigset(tls *TLS, sig int32, handler uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v sig=%v handler=%v, (%v:)", tls, sig, handler, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(560) /* tlsAllocs 560 maxVaListSize 0 */
 	defer tls.Free(560)
 	var v1 uintptr
@@ -134089,6 +137318,10 @@ func x___sigsetjmp_tail(tls *TLS, jb uintptr, ret int32) (r int32) {
 const m_SYS_rt_sigsuspend = 130
 
 func Xsigsuspend(tls *TLS, mask uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mask=%v, (%v:)", tls, mask, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_rt_sigsuspend), int64(mask), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)), 0, 0, 0, 0))))
 }
 
@@ -134099,6 +137332,10 @@ func _do_sigtimedwait(tls *TLS, mask uintptr, si uintptr, ts uintptr) (r int32) 
 }
 
 func Xsigtimedwait(tls *TLS, mask uintptr, si uintptr, timeout uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mask=%v si=%v timeout=%v, (%v:)", tls, mask, si, timeout, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	for cond := true; cond; cond = ret == -int32(m_EINTR) {
 		ret = _do_sigtimedwait(tls, mask, si, timeout)
@@ -134107,6 +137344,10 @@ func Xsigtimedwait(tls *TLS, mask uintptr, si uintptr, timeout uintptr) (r int32
 }
 
 func Xsigwait(tls *TLS, mask uintptr, sig uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mask=%v sig=%v, (%v:)", tls, mask, sig, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* si at bp+0 */ Tsiginfo_t
@@ -134118,6 +137359,10 @@ func Xsigwait(tls *TLS, mask uintptr, sig uintptr) (r int32) {
 }
 
 func Xsigwaitinfo(tls *TLS, mask uintptr, si uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mask=%v si=%v, (%v:)", tls, mask, si, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xsigtimedwait(tls, mask, si, uintptr(0))
 }
 
@@ -134148,12 +137393,20 @@ func x___xmknodat(tls *TLS, ver int32, fd int32, path uintptr, mode uint32, dev 
 const m_SYS_chmod = 90
 
 func Xchmod(tls *TLS, path uintptr, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v mode=%v, (%v:)", tls, path, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_chmod), int64(path), int64(mode)))))
 }
 
 const m_SYS_fchmod = 91
 
 func Xfchmod(tls *TLS, fd int32, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v mode=%v, (%v:)", tls, fd, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ret int32
@@ -134169,6 +137422,10 @@ func Xfchmod(tls *TLS, fd int32, mode uint32) (r int32) {
 const m_SYS_fchmodat = 268
 
 func Xfchmodat(tls *TLS, fd int32, path uintptr, mode uint32, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v path=%v mode=%v flag=%v, (%v:)", tls, fd, path, mode, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(176) /* tlsAllocs 176 maxVaListSize 0 */
 	defer tls.Free(176)
 	var fd2, ret, v1 int32
@@ -134208,6 +137465,10 @@ func Xfchmodat(tls *TLS, fd int32, path uintptr, mode uint32, flag int32) (r int
 }
 
 func Xfstat(tls *TLS, fd int32, st uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v st=%v, (%v:)", tls, fd, st, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if fd < 0 {
 		return int32(x___syscall_ret(tls, uint64(-Int32FromInt32(m_EBADF))))
 	}
@@ -134386,6 +137647,10 @@ func x___fstatat(tls *TLS, fd int32, path uintptr, st uintptr, flag int32) (r in
 }
 
 func Xfutimens(tls *TLS, fd int32, times uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v times=%v, (%v:)", tls, fd, times, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xutimensat(tls, fd, uintptr(0), times, 0)
 }
 
@@ -134413,48 +137678,84 @@ func x___futimesat(tls *TLS, dirfd int32, pathname uintptr, times uintptr) (r in
 }
 
 func Xlchmod(tls *TLS, path uintptr, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v mode=%v, (%v:)", tls, path, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfchmodat(tls, -int32(100), path, mode, int32(m_AT_SYMLINK_NOFOLLOW))
 }
 
 func Xlstat(tls *TLS, path uintptr, buf uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v buf=%v, (%v:)", tls, path, buf, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___fstatat(tls, -int32(100), path, buf, int32(m_AT_SYMLINK_NOFOLLOW))
 }
 
 const m_SYS_mkdir = 83
 
 func Xmkdir(tls *TLS, path uintptr, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v mode=%v, (%v:)", tls, path, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_mkdir), int64(path), int64(mode)))))
 }
 
 const m_SYS_mkdirat = 258
 
 func Xmkdirat(tls *TLS, fd int32, path uintptr, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v path=%v mode=%v, (%v:)", tls, fd, path, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mkdirat), int64(fd), int64(path), int64(mode)))))
 }
 
 const m_S_IFIFO = 4096
 
 func Xmkfifo(tls *TLS, path uintptr, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v mode=%v, (%v:)", tls, path, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmknod(tls, path, mode|uint32(m_S_IFIFO), uint64(0))
 }
 
 func Xmkfifoat(tls *TLS, fd int32, path uintptr, mode uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v path=%v mode=%v, (%v:)", tls, fd, path, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmknodat(tls, fd, path, mode|uint32(m_S_IFIFO), uint64(0))
 }
 
 const m_SYS_mknod = 133
 
 func Xmknod(tls *TLS, path uintptr, mode uint32, dev uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v mode=%v dev=%v, (%v:)", tls, path, mode, dev, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_mknod), int64(path), int64(mode), int64(dev)))))
 }
 
 const m_SYS_mknodat = 259
 
 func Xmknodat(tls *TLS, fd int32, path uintptr, mode uint32, dev uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v path=%v mode=%v dev=%v, (%v:)", tls, fd, path, mode, dev, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_mknodat), int64(fd), int64(path), int64(mode), int64(dev)))))
 }
 
 func Xstat(tls *TLS, path uintptr, buf uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v buf=%v, (%v:)", tls, path, buf, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___fstatat(tls, -int32(100), path, buf, 0)
 }
 
@@ -134493,6 +137794,10 @@ func _fixup(tls *TLS, out uintptr, in uintptr) {
 }
 
 func Xstatvfs(tls *TLS, path uintptr, buf uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v buf=%v, (%v:)", tls, path, buf, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(128) /* tlsAllocs 120 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* kbuf at bp+0 */ Tstatfs
@@ -134504,6 +137809,10 @@ func Xstatvfs(tls *TLS, path uintptr, buf uintptr) (r int32) {
 }
 
 func Xfstatvfs(tls *TLS, fd int32, buf uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v, (%v:)", tls, fd, buf, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(128) /* tlsAllocs 120 maxVaListSize 0 */
 	defer tls.Free(128)
 	var _ /* kbuf at bp+0 */ Tstatfs
@@ -134517,6 +137826,10 @@ func Xfstatvfs(tls *TLS, fd int32, buf uintptr) (r int32) {
 const m_SYS_umask = 95
 
 func Xumask(tls *TLS, mode uint32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v mode=%v, (%v:)", tls, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uint32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_umask), int64(mode)))))
 }
 
@@ -134527,6 +137840,10 @@ const m_UTIME_NOW = 1073741823
 const m_UTIME_OMIT = 1073741822
 
 func Xutimensat(tls *TLS, fd int32, path uintptr, times uintptr, flags int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v path=%v times=%v flags=%v, (%v:)", tls, fd, path, times, flags, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var i, r int32
@@ -134573,6 +137890,10 @@ const m_TIOCGWINSZ = 21523
 const m_UNGET = 8
 
 func Xfdopen(tls *TLS, fd int32, mode uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v mode=%v, (%v:)", tls, fd, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var f, v1 uintptr
@@ -134985,6 +138306,10 @@ func x___uflow(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xasprintf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v fmt=%v va=%v, (%v:)", tls, s, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -134994,6 +138319,9 @@ func Xasprintf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
 }
 
 func Xclearerr(tls *TLS, f uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+	}
 	var __need_unlock, v1 int32
 	if AtomicLoadPInt32(f+140) >= 0 {
 		v1 = x___lockfile(tls, f)
@@ -135008,6 +138336,10 @@ func Xclearerr(tls *TLS, f uintptr) {
 }
 
 func Xdprintf(tls *TLS, fd int32, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v fmt=%v va=%v, (%v:)", tls, fd, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -135101,6 +138433,10 @@ func _dummy14(tls *TLS, f uintptr) {
 }
 
 func Xfclose(tls *TLS, f uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var __need_unlock, r, v1 int32
 	var head uintptr
 	if AtomicLoadPInt32(f+140) >= 0 {
@@ -135142,6 +138478,10 @@ func Xfclose(tls *TLS, f uintptr) (r1 int32) {
 }
 
 func Xfeof(tls *TLS, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, ret, v1 int32
 	if AtomicLoadPInt32(f+140) >= 0 {
 		v1 = x___lockfile(tls, f)
@@ -135157,6 +138497,10 @@ func Xfeof(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xferror(tls *TLS, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, ret, v1 int32
 	if AtomicLoadPInt32(f+140) >= 0 {
 		v1 = x___lockfile(tls, f)
@@ -135175,6 +138519,10 @@ func Xferror(tls *TLS, f uintptr) (r int32) {
 var _dummy15 = uintptr(0)
 
 func Xfflush(tls *TLS, f uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var __need_unlock, __need_unlock1, r, v2, v3 int32
 	var v4, v5, v6 uintptr
 	if !(f != 0) {
@@ -135271,6 +138619,10 @@ func _locking_getc(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xfgetc(tls *TLS, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l, v2, v4 int32
 	var v1, v5, v6 uintptr
 	v1 = f
@@ -135294,6 +138646,10 @@ _3:
 }
 
 func Xfgetln(tls *TLS, f uintptr, plen uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v plen=%v, (%v:)", tls, f, plen, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var __need_unlock, v1, v2 int32
@@ -135342,6 +138698,10 @@ func Xfgetln(tls *TLS, f uintptr, plen uintptr) (r uintptr) {
 }
 
 func Xfgetpos(tls *TLS, f uintptr, pos uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v pos=%v, (%v:)", tls, f, pos, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var off int64
 	off = x___ftello(tls, f)
 	if off < 0 {
@@ -135352,6 +138712,10 @@ func Xfgetpos(tls *TLS, f uintptr, pos uintptr) (r int32) {
 }
 
 func Xfgets(tls *TLS, s uintptr, n int32, f uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v f=%v, (%v:)", tls, s, n, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, c, v1, v4, v5 int32
 	var k, v3 uint64
 	var p, z, v6, v7, v9 uintptr
@@ -135500,6 +138864,10 @@ func x___fgetwc_unlocked(tls *TLS, f uintptr) (r uint32) {
 }
 
 func Xfgetwc(tls *TLS, f uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, v1 int32
 	var c uint32
 	if AtomicLoadPInt32(f+140) >= 0 {
@@ -135516,6 +138884,10 @@ func Xfgetwc(tls *TLS, f uintptr) (r uint32) {
 }
 
 func Xfgetws(tls *TLS, s uintptr, n int32, f uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v f=%v, (%v:)", tls, s, n, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, v1, v2 int32
 	var c uint32
 	var p, v3, v4 uintptr
@@ -135559,6 +138931,10 @@ func Xfgetws(tls *TLS, s uintptr, n int32, f uintptr) (r uintptr) {
 }
 
 func Xfileno(tls *TLS, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, fd, v1 int32
 	if AtomicLoadPInt32(f+140) >= 0 {
 		v1 = x___lockfile(tls, f)
@@ -135578,6 +138954,9 @@ func Xfileno(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xflockfile(tls *TLS, f uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+	}
 	if !(Xftrylockfile(tls, f) != 0) {
 		return
 	}
@@ -135689,6 +139068,10 @@ func _mclose(tls *TLS, m uintptr) (r int32) {
 }
 
 func Xfmemopen(tls *TLS, buf uintptr, size uint64, mode uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v buf=%v size=%v mode=%v, (%v:)", tls, buf, size, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var f uintptr
 	var plus, v2 int32
 	var v1, v3 uint64
@@ -135753,6 +139136,10 @@ func Xfmemopen(tls *TLS, buf uintptr, size uint64, mode uintptr) (r uintptr) {
 }
 
 func Xfopen(tls *TLS, filename uintptr, mode uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v mode=%v, (%v:)", tls, filename, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var f uintptr
 	var fd, flags int32
 	/* Check for valid initial mode character */
@@ -135898,6 +139285,10 @@ func _cookieclose(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xfopencookie(tls *TLS, cookie uintptr, mode uintptr, iofuncs Tcookie_io_functions_t) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v cookie=%v mode=%v iofuncs=%v, (%v:)", tls, cookie, mode, iofuncs, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var f, v1 uintptr
 	var v2 int32
 	/* Check for valid initial mode character */
@@ -135940,6 +139331,10 @@ func Xfopencookie(tls *TLS, cookie uintptr, mode uintptr, iofuncs Tcookie_io_fun
 }
 
 func Xfprintf(tls *TLS, f uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v fmt=%v va=%v, (%v:)", tls, f, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -135982,6 +139377,10 @@ func _locking_putc(tls *TLS, c int32, f uintptr) (r int32) {
 }
 
 func Xfputc(tls *TLS, c int32, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v f=%v, (%v:)", tls, c, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l, v1, v3, v5 int32
 	var v2, v7, v8 uintptr
 	var v6 uint8
@@ -136009,6 +139408,10 @@ _4:
 }
 
 func Xfputs(tls *TLS, s uintptr, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v f=%v, (%v:)", tls, s, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l uint64
 	l = Xstrlen(tls, s)
 	return BoolInt32(Xfwrite(tls, s, uint64(1), l, f) == l) - int32(1)
@@ -136062,6 +139465,10 @@ func x___fputwc_unlocked(tls *TLS, c int32, f uintptr) (r uint32) {
 }
 
 func Xfputwc(tls *TLS, c int32, f uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v f=%v, (%v:)", tls, c, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, v1 int32
 	if AtomicLoadPInt32(f+140) >= 0 {
 		v1 = x___lockfile(tls, f)
@@ -136077,6 +139484,10 @@ func Xfputwc(tls *TLS, c int32, f uintptr) (r uint32) {
 }
 
 func Xfputws(tls *TLS, _ws uintptr, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v _ws=%v f=%v, (%v:)", tls, _ws, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(1040) /* tlsAllocs 1032 maxVaListSize 0 */
 	defer tls.Free(1040)
 	*(*uintptr)(unsafe.Pointer(bp)) = _ws
@@ -136120,6 +139531,10 @@ func Xfputws(tls *TLS, _ws uintptr, f uintptr) (r int32) {
 }
 
 func Xfread(tls *TLS, destv uintptr, size uint64, nmemb uint64, f uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v destv=%v size=%v nmemb=%v f=%v, (%v:)", tls, destv, size, nmemb, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, v1 int32
 	var dest uintptr
 	var k, l, len1, v2, v4 uint64
@@ -136175,6 +139590,10 @@ func Xfread(tls *TLS, destv uintptr, size uint64, nmemb uint64, f uintptr) (r ui
 }
 
 func Xfreopen(tls *TLS, filename uintptr, mode uintptr, f uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v mode=%v f=%v, (%v:)", tls, filename, mode, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, fl, v1 int32
 	var f2 uintptr
 	fl = x___fmodeflags(tls, mode)
@@ -136224,6 +139643,10 @@ fail:
 }
 
 func Xfscanf(tls *TLS, f uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v fmt=%v va=%v, (%v:)", tls, f, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -136284,10 +139707,18 @@ func x___fseeko(tls *TLS, f uintptr, off int64, whence int32) (r int32) {
 }
 
 func Xfseek(tls *TLS, f uintptr, off int64, whence int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v off=%v whence=%v, (%v:)", tls, f, off, whence, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___fseeko(tls, f, off, whence)
 }
 
 func Xfsetpos(tls *TLS, f uintptr, pos uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v pos=%v, (%v:)", tls, f, pos, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___fseeko(tls, f, *(*int64)(unsafe.Pointer(pos)), m_SEEK_SET)
 }
 
@@ -136329,6 +139760,10 @@ func x___ftello(tls *TLS, f uintptr) (r int64) {
 }
 
 func Xftell(tls *TLS, f uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var pos int64
 	pos = x___ftello(tls, f)
 	if pos > int64(0x7fffffffffffffff) {
@@ -136372,6 +139807,10 @@ func x___register_locked_file(tls *TLS, f uintptr, self uintptr) {
 }
 
 func Xftrylockfile(tls *TLS, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var owner, tid, v1 int32
 	var self uintptr
 	self = ___get_tp(tls)
@@ -136397,6 +139836,9 @@ func Xftrylockfile(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xfunlockfile(tls *TLS, f uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+	}
 	if (*TFILE)(unsafe.Pointer(f)).Flockcount == int64(1) {
 		x___unlist_locked_file(tls, f)
 		(*TFILE)(unsafe.Pointer(f)).Flockcount = 0
@@ -136407,6 +139849,10 @@ func Xfunlockfile(tls *TLS, f uintptr) {
 }
 
 func Xfwide(tls *TLS, f uintptr, mode int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v mode=%v, (%v:)", tls, f, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, v1, v3, v4 int32
 	var v2 uintptr
 	if AtomicLoadPInt32(f+140) >= 0 {
@@ -136446,6 +139892,10 @@ func Xfwide(tls *TLS, f uintptr, mode int32) (r int32) {
 }
 
 func Xfwprintf(tls *TLS, f uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v fmt=%v va=%v, (%v:)", tls, f, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -136482,6 +139932,10 @@ func x___fwritex(tls *TLS, s uintptr, l uint64, f uintptr) (r uint64) {
 }
 
 func Xfwrite(tls *TLS, src uintptr, size uint64, nmemb uint64, f uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v src=%v size=%v nmemb=%v f=%v, (%v:)", tls, src, size, nmemb, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, v1 int32
 	var k, l, v2 uint64
 	l = size * nmemb
@@ -136507,6 +139961,10 @@ func Xfwrite(tls *TLS, src uintptr, size uint64, nmemb uint64, f uintptr) (r uin
 }
 
 func Xfwscanf(tls *TLS, f uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v fmt=%v va=%v, (%v:)", tls, f, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -136546,6 +140004,10 @@ func _locking_getc1(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xgetc(tls *TLS, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l, v2, v4 int32
 	var v1, v5, v6 uintptr
 	v1 = f
@@ -136569,6 +140031,10 @@ _3:
 }
 
 func Xgetc_unlocked(tls *TLS, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	var v2, v3 uintptr
 	if (*TFILE)(unsafe.Pointer(f)).Frpos != (*TFILE)(unsafe.Pointer(f)).Frend {
@@ -136613,6 +140079,10 @@ func _locking_getc2(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xgetchar(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l, v2, v4 int32
 	var v1, v5, v6 uintptr
 	v1 = uintptr(unsafe.Pointer(&x___stdin_FILE))
@@ -136636,6 +140106,10 @@ _3:
 }
 
 func Xgetchar_unlocked(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	var v2, v3 uintptr
 	if (*TFILE)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___stdin_FILE)))).Frpos != (*TFILE)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___stdin_FILE)))).Frend {
@@ -136650,6 +140124,10 @@ func Xgetchar_unlocked(tls *TLS) (r int32) {
 }
 
 func Xgetdelim(tls *TLS, s uintptr, n uintptr, delim int32, f uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v delim=%v f=%v, (%v:)", tls, s, n, delim, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, c, v1, v3, v4 int32
 	var i, k, m, v10 uint64
 	var tmp, z, v5, v6, v7, v8 uintptr
@@ -136766,10 +140244,18 @@ func Xgetdelim(tls *TLS, s uintptr, n uintptr, delim int32, f uintptr) (r int64)
 }
 
 func Xgetline(tls *TLS, s uintptr, n uintptr, f uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v f=%v, (%v:)", tls, s, n, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xgetdelim(tls, s, n, int32('\n'), f)
 }
 
 func Xgets(tls *TLS, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, c, v1, v2, v3 int32
 	var i, v6 uint64
 	var v4, v5 uintptr
@@ -136809,6 +140295,10 @@ func Xgets(tls *TLS, s uintptr) (r uintptr) {
 }
 
 func Xgetw(tls *TLS, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var v1 int32
@@ -136822,10 +140312,18 @@ func Xgetw(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xgetwc(tls *TLS, f uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfgetwc(tls, f)
 }
 
 func Xgetwchar(tls *TLS) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfgetwc(tls, uintptr(unsafe.Pointer(&x___stdin_FILE)))
 }
 
@@ -136933,6 +140431,10 @@ func _ms_close(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xopen_memstream(tls *TLS, bufp uintptr, sizep uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v bufp=%v sizep=%v, (%v:)", tls, bufp, sizep, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var buf, f, v1, v2, v6 uintptr
 	var v3, v4, v5 uint64
 	v1 = _default_malloc(tls, uint64(1304))
@@ -137069,6 +140571,10 @@ func _wms_close(tls *TLS, f uintptr) (r int32) {
 }
 
 func Xopen_wmemstream(tls *TLS, bufp uintptr, sizep uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v bufp=%v sizep=%v, (%v:)", tls, bufp, sizep, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var buf, f, v1, v2, v6 uintptr
 	var v3, v4, v5 uint64
 	v1 = _default_malloc(tls, uint64(296))
@@ -137114,6 +140620,10 @@ func Xopen_wmemstream(tls *TLS, bufp uintptr, sizep uintptr) (r uintptr) {
 }
 
 func Xpclose(tls *TLS, f uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var pid, r, v1 int32
@@ -137134,6 +140644,9 @@ func Xpclose(tls *TLS, f uintptr) (r1 int32) {
 }
 
 func Xperror(tls *TLS, msg uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v msg=%v, (%v:)", tls, msg, origin(2))
+	}
 	var __need_unlock, old_mode, v1 int32
 	var errstr, f, old_locale uintptr
 	f = uintptr(unsafe.Pointer(&x___stderr_FILE))
@@ -137163,6 +140676,10 @@ func Xperror(tls *TLS, msg uintptr) {
 }
 
 func Xpopen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v cmd=%v mode=%v, (%v:)", tls, cmd, mode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(144) /* tlsAllocs 128 maxVaListSize 8 */
 	defer tls.Free(144)
 	var e, op, v2 int32
@@ -137231,6 +140748,10 @@ func Xpopen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
 }
 
 func Xprintf(tls *TLS, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v va=%v, (%v:)", tls, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -137273,6 +140794,10 @@ func _locking_putc1(tls *TLS, c int32, f uintptr) (r int32) {
 }
 
 func Xputc(tls *TLS, c int32, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v f=%v, (%v:)", tls, c, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l, v1, v3, v5 int32
 	var v2, v7, v8 uintptr
 	var v6 uint8
@@ -137300,6 +140825,10 @@ _4:
 }
 
 func Xputc_unlocked(tls *TLS, c int32, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v f=%v, (%v:)", tls, c, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	var v2 uint8
 	var v3, v4 uintptr
@@ -137350,6 +140879,10 @@ func _locking_putc2(tls *TLS, c int32, f uintptr) (r int32) {
 }
 
 func Xputchar(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l, v1, v3, v5 int32
 	var v2, v7, v8 uintptr
 	var v6 uint8
@@ -137377,6 +140910,10 @@ _4:
 }
 
 func Xputchar_unlocked(tls *TLS, c int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	var v2 uint8
 	var v3, v4 uintptr
@@ -137394,6 +140931,10 @@ func Xputchar_unlocked(tls *TLS, c int32) (r int32) {
 }
 
 func Xputs(tls *TLS, s uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var __need_unlock, r, v1, v2 int32
 	var v3 uint8
 	var v4, v5 uintptr
@@ -137424,6 +140965,10 @@ func Xputs(tls *TLS, s uintptr) (r1 int32) {
 }
 
 func Xputw(tls *TLS, _x int32, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v _x=%v f=%v, (%v:)", tls, _x, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	*(*int32)(unsafe.Pointer(bp)) = _x
@@ -137431,10 +140976,18 @@ func Xputw(tls *TLS, _x int32, f uintptr) (r int32) {
 }
 
 func Xputwc(tls *TLS, c int32, f uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v f=%v, (%v:)", tls, c, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfputwc(tls, c, f)
 }
 
 func Xputwchar(tls *TLS, c int32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xfputwc(tls, c, uintptr(unsafe.Pointer(&x___stdout_FILE)))
 }
 
@@ -137442,6 +140995,10 @@ const m_SYS_rmdir = 84
 const m_SYS_unlink = 87
 
 func Xremove(tls *TLS, path uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v, (%v:)", tls, path, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	r = int32(___syscall1(tls, int64(m_SYS_unlink), int64(path)))
 	if r == -int32(m_EISDIR) {
@@ -137453,10 +141010,17 @@ func Xremove(tls *TLS, path uintptr) (r1 int32) {
 const m_SYS_rename = 82
 
 func Xrename(tls *TLS, old uintptr, new1 uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v old=%v new1=%v, (%v:)", tls, old, new1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_rename), int64(old), int64(new1)))))
 }
 
 func Xrewind(tls *TLS, f uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+	}
 	var __need_unlock, v1 int32
 	if AtomicLoadPInt32(f+140) >= 0 {
 		v1 = x___lockfile(tls, f)
@@ -137472,6 +141036,10 @@ func Xrewind(tls *TLS, f uintptr) {
 }
 
 func Xscanf(tls *TLS, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v va=%v, (%v:)", tls, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -137484,6 +141052,9 @@ const m__IOFBF = 0
 const m__IONBF = 2
 
 func Xsetbuf(tls *TLS, f uintptr, buf uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v buf=%v, (%v:)", tls, f, buf, origin(2))
+	}
 	var v1 int32
 	if buf != 0 {
 		v1 = m__IOFBF
@@ -137494,6 +141065,9 @@ func Xsetbuf(tls *TLS, f uintptr, buf uintptr) {
 }
 
 func Xsetbuffer(tls *TLS, f uintptr, buf uintptr, size uint64) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v buf=%v size=%v, (%v:)", tls, f, buf, size, origin(2))
+	}
 	var v1 int32
 	if buf != 0 {
 		v1 = m__IOFBF
@@ -137506,10 +141080,17 @@ func Xsetbuffer(tls *TLS, f uintptr, buf uintptr, size uint64) {
 const m__IOLBF = 1
 
 func Xsetlinebuf(tls *TLS, f uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v, (%v:)", tls, f, origin(2))
+	}
 	Xsetvbuf(tls, f, uintptr(0), int32(m__IOLBF), uint64(0))
 }
 
 func Xsetvbuf(tls *TLS, f uintptr, buf uintptr, type1 int32, size uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v buf=%v type1=%v size=%v, (%v:)", tls, f, buf, type1, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	(*TFILE)(unsafe.Pointer(f)).Flbf = -int32(1)
 	if type1 == int32(m__IONBF) {
 		(*TFILE)(unsafe.Pointer(f)).Fbuf_size = uint64(0)
@@ -137531,6 +141112,10 @@ func Xsetvbuf(tls *TLS, f uintptr, buf uintptr, type1 int32, size uint64) (r int
 }
 
 func Xsnprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v fmt=%v va=%v, (%v:)", tls, s, n, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -137540,6 +141125,10 @@ func Xsnprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, va uintptr) (r int32)
 }
 
 func Xsprintf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v fmt=%v va=%v, (%v:)", tls, s, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -137549,6 +141138,10 @@ func Xsprintf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
 }
 
 func Xsscanf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v fmt=%v va=%v, (%v:)", tls, s, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -137585,6 +141178,10 @@ func init() {
 }
 
 func Xswprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v fmt=%v va=%v, (%v:)", tls, s, n, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -137594,6 +141191,10 @@ func Xswprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, va uintptr) (r int32)
 }
 
 func Xswscanf(tls *TLS, s uintptr, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v fmt=%v va=%v, (%v:)", tls, s, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -137607,6 +141208,10 @@ const m_P_tmpdir = "/tmp"
 const m_SYS_readlink = 89
 
 func Xtempnam(tls *TLS, dir uintptr, pfx uintptr) (r1 uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dir=%v pfx=%v, (%v:)", tls, dir, pfx, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(4112) /* tlsAllocs 4104 maxVaListSize 0 */
 	defer tls.Free(4112)
 	var dl, l, pl uint64
@@ -137642,6 +141247,10 @@ func Xtempnam(tls *TLS, dir uintptr, pfx uintptr) (r1 uintptr) {
 }
 
 func Xtmpfile(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var f uintptr
@@ -137666,6 +141275,10 @@ func Xtmpfile(tls *TLS) (r uintptr) {
 const m_L_tmpnam = 20
 
 func Xtmpnam(tls *TLS, buf uintptr) (r1 uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v buf=%v, (%v:)", tls, buf, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var r, try int32
@@ -137691,6 +141304,10 @@ func Xtmpnam(tls *TLS, buf uintptr) (r1 uintptr) {
 var _internal1 [20]int8
 
 func Xungetc(tls *TLS, c int32, f uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v f=%v, (%v:)", tls, c, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var __need_unlock, v1 int32
 	var v2, v3 uintptr
 	if c == -int32(1) {
@@ -137723,6 +141340,10 @@ func Xungetc(tls *TLS, c int32, f uintptr) (r int32) {
 }
 
 func Xungetwc(tls *TLS, c uint32, f uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v f=%v, (%v:)", tls, c, f, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var __need_unlock, l, v1, v2 int32
@@ -137774,6 +141395,10 @@ func Xungetwc(tls *TLS, c uint32, f uintptr) (r uint32) {
 }
 
 func Xvasprintf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v fmt=%v ap=%v, (%v:)", tls, s, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap2, v1 uintptr
 	var l int32
 	var v2 bool
@@ -137791,6 +141416,10 @@ func Xvasprintf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
 }
 
 func Xvdprintf(tls *TLS, fd int32, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v fmt=%v ap=%v, (%v:)", tls, fd, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(240) /* tlsAllocs 232 maxVaListSize 0 */
 	defer tls.Free(240)
 	var _ /* f at bp+0 */ TFILE
@@ -139059,6 +142688,10 @@ overflow:
 }
 
 func Xvfprintf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v fmt=%v ap=%v, (%v:)", tls, f, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(208) /* tlsAllocs 208 maxVaListSize 0 */
 	defer tls.Free(208)
 	var __need_unlock, olderr, ret, v1 int32
@@ -139159,6 +142792,10 @@ func _arg_n(tls *TLS, ap uintptr, n uint32) (r uintptr) {
 }
 
 func Xvfscanf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v fmt=%v ap=%v, (%v:)", tls, f, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(288) /* tlsAllocs 280 maxVaListSize 0 */
 	defer tls.Free(288)
 	var __need_unlock, alloc, base, c, invert, matches, size, t, width, v1, v11, v12, v15, v16, v19, v2, v20, v22, v27, v3, v30, v31, v34, v5, v6, v60, v61, v65, v66, v71, v72, v76, v77, v8 int32
@@ -140265,6 +143902,10 @@ overflow:
 }
 
 func Xvfwprintf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v fmt=%v ap=%v, (%v:)", tls, f, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
 	defer tls.Free(128)
 	var __need_unlock, olderr, ret, v1 int32
@@ -140364,6 +144005,10 @@ func _in_set(tls *TLS, set uintptr, c int32) (r int32) {
 }
 
 func Xvfwscanf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v f=%v fmt=%v ap=%v, (%v:)", tls, f, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(80) /* tlsAllocs 32 maxVaListSize 40 */
 	defer tls.Free(80)
 	var __need_unlock, alloc, c, gotmatch, invert, l, matches, size, t, width, v1, v2, v20, v34, v9 int32
@@ -140869,10 +144514,18 @@ var _spaces1 = [22]int32{
 }
 
 func Xvprintf(tls *TLS, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v ap=%v, (%v:)", tls, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xvfprintf(tls, uintptr(unsafe.Pointer(&x___stdout_FILE)), fmt, ap)
 }
 
 func Xvscanf(tls *TLS, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v ap=%v, (%v:)", tls, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xvfscanf(tls, uintptr(unsafe.Pointer(&x___stdin_FILE)), fmt, ap)
 }
 
@@ -140916,6 +144569,10 @@ func _sn_write(tls *TLS, f uintptr, s uintptr, l uint64) (r uint64) {
 }
 
 func Xvsnprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v fmt=%v ap=%v, (%v:)", tls, s, n, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(256) /* tlsAllocs 256 maxVaListSize 0 */
 	defer tls.Free(256)
 	var v1 uintptr
@@ -140954,6 +144611,10 @@ func Xvsnprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, ap uintptr) (r int32
 }
 
 func Xvsprintf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v fmt=%v ap=%v, (%v:)", tls, s, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xvsnprintf(tls, s, uint64(m_INT_MAX), fmt, ap)
 }
 
@@ -140977,6 +144638,10 @@ func _string_read(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 }
 
 func Xvsscanf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v fmt=%v ap=%v, (%v:)", tls, s, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(240) /* tlsAllocs 232 maxVaListSize 0 */
 	defer tls.Free(240)
 	var _ /* f at bp+0 */ TFILE
@@ -141039,6 +144704,10 @@ func _sw_write(tls *TLS, f uintptr, s uintptr, l uint64) (r uint64) {
 }
 
 func Xvswprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, ap uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v fmt=%v ap=%v, (%v:)", tls, s, n, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(512) /* tlsAllocs 504 maxVaListSize 0 */
 	defer tls.Free(512)
 	var r, v1 int32
@@ -141104,6 +144773,10 @@ func _wstring_read(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 }
 
 func Xvswscanf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v fmt=%v ap=%v, (%v:)", tls, s, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(496) /* tlsAllocs 488 maxVaListSize 0 */
 	defer tls.Free(496)
 	var _ /* buf at bp+0 */ [256]uint8
@@ -141119,14 +144792,26 @@ func Xvswscanf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
 }
 
 func Xvwprintf(tls *TLS, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v ap=%v, (%v:)", tls, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xvfwprintf(tls, uintptr(unsafe.Pointer(&x___stdout_FILE)), fmt, ap)
 }
 
 func Xvwscanf(tls *TLS, fmt uintptr, ap uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v ap=%v, (%v:)", tls, fmt, ap, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xvfwscanf(tls, uintptr(unsafe.Pointer(&x___stdin_FILE)), fmt, ap)
 }
 
 func Xwprintf(tls *TLS, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v va=%v, (%v:)", tls, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -141136,6 +144821,10 @@ func Xwprintf(tls *TLS, fmt uintptr, va uintptr) (r int32) {
 }
 
 func Xwscanf(tls *TLS, fmt uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fmt=%v va=%v, (%v:)", tls, fmt, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ap uintptr
 	var ret int32
 	ap = va
@@ -141145,6 +144834,10 @@ func Xwscanf(tls *TLS, fmt uintptr, va uintptr) (r int32) {
 }
 
 func Xabs(tls *TLS, a int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v, (%v:)", tls, a, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	if a > 0 {
 		v1 = a
@@ -141155,10 +144848,18 @@ func Xabs(tls *TLS, a int32) (r int32) {
 }
 
 func Xatof(tls *TLS, s uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrtod(tls, s, uintptr(0))
 }
 
 func Xatoi(tls *TLS, s uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var n, neg, v1, v2, v5 int32
 	var v4 uintptr
 	n = 0
@@ -141195,6 +144896,10 @@ func Xatoi(tls *TLS, s uintptr) (r int32) {
 }
 
 func Xatol(tls *TLS, s uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var n, v5 int64
 	var neg, v1, v2 int32
 	var v4 uintptr
@@ -141232,6 +144937,10 @@ func Xatol(tls *TLS, s uintptr) (r int64) {
 }
 
 func Xatoll(tls *TLS, s uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var n, v5 int64
 	var neg, v1, v2 int32
 	var v4 uintptr
@@ -141269,6 +144978,10 @@ func Xatoll(tls *TLS, s uintptr) (r int64) {
 }
 
 func Xbsearch(tls *TLS, key uintptr, base uintptr, nel uint64, width uint64, cmp uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v base=%v nel=%v width=%v cmp=%v, (%v:)", tls, key, base, nel, width, cmp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var sign int32
 	var try uintptr
 	for nel > uint64(0) {
@@ -141289,6 +145002,10 @@ func Xbsearch(tls *TLS, key uintptr, base uintptr, nel uint64, width uint64, cmp
 }
 
 func Xdiv(tls *TLS, num int32, den int32) (r Tdiv_t) {
+	if __ccgo_strace {
+		trc("tls=%v num=%v den=%v, (%v:)", tls, num, den, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Tdiv_t{
 		Fquot: num / den,
 		Frem:  num % den,
@@ -141296,6 +145013,10 @@ func Xdiv(tls *TLS, num int32, den int32) (r Tdiv_t) {
 }
 
 func Xecvt(tls *TLS, x float64, n int32, dp uintptr, sign uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v dp=%v sign=%v, (%v:)", tls, x, n, dp, sign, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 32 maxVaListSize 16 */
 	defer tls.Free(64)
 	var i, j, v1, v2 int32
@@ -141323,6 +145044,10 @@ func Xecvt(tls *TLS, x float64, n int32, dp uintptr, sign uintptr) (r uintptr) {
 var _buf9 [16]int8
 
 func Xfcvt(tls *TLS, x float64, n int32, dp uintptr, sign uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v dp=%v sign=%v, (%v:)", tls, x, n, dp, sign, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(1536) /* tlsAllocs 1504 maxVaListSize 16 */
 	defer tls.Free(1536)
 	var i, lz int32
@@ -141349,6 +145074,10 @@ func Xfcvt(tls *TLS, x float64, n int32, dp uintptr, sign uintptr) (r uintptr) {
 }
 
 func Xgcvt(tls *TLS, x float64, n int32, b uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v n=%v b=%v, (%v:)", tls, x, n, b, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 0 maxVaListSize 16 */
 	defer tls.Free(32)
 	Xsprintf(tls, b, ts+2017, VaList(bp+8, n, x))
@@ -141356,6 +145085,10 @@ func Xgcvt(tls *TLS, x float64, n int32, b uintptr) (r uintptr) {
 }
 
 func Ximaxabs(tls *TLS, a int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v, (%v:)", tls, a, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int64
 	if a > 0 {
 		v1 = a
@@ -141366,6 +145099,10 @@ func Ximaxabs(tls *TLS, a int64) (r int64) {
 }
 
 func Ximaxdiv(tls *TLS, num int64, den int64) (r Timaxdiv_t) {
+	if __ccgo_strace {
+		trc("tls=%v num=%v den=%v, (%v:)", tls, num, den, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Timaxdiv_t{
 		Fquot: num / den,
 		Frem:  num % den,
@@ -141373,6 +145110,10 @@ func Ximaxdiv(tls *TLS, num int64, den int64) (r Timaxdiv_t) {
 }
 
 func Xlabs(tls *TLS, a int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v, (%v:)", tls, a, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int64
 	if a > 0 {
 		v1 = a
@@ -141383,6 +145124,10 @@ func Xlabs(tls *TLS, a int64) (r int64) {
 }
 
 func Xldiv(tls *TLS, num int64, den int64) (r Tldiv_t) {
+	if __ccgo_strace {
+		trc("tls=%v num=%v den=%v, (%v:)", tls, num, den, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Tldiv_t{
 		Fquot: num / den,
 		Frem:  num % den,
@@ -141390,6 +145135,10 @@ func Xldiv(tls *TLS, num int64, den int64) (r Tldiv_t) {
 }
 
 func Xllabs(tls *TLS, a int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v a=%v, (%v:)", tls, a, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int64
 	if a > 0 {
 		v1 = a
@@ -141400,6 +145149,10 @@ func Xllabs(tls *TLS, a int64) (r int64) {
 }
 
 func Xlldiv(tls *TLS, num int64, den int64) (r Tlldiv_t) {
+	if __ccgo_strace {
+		trc("tls=%v num=%v den=%v, (%v:)", tls, num, den, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Tlldiv_t{
 		Fquot: num / den,
 		Frem:  num % den,
@@ -141629,6 +145382,9 @@ func _wrapper_cmp(tls *TLS, v1 uintptr, v2 uintptr, cmp uintptr) (r int32) {
 }
 
 func Xqsort(tls *TLS, base uintptr, nel uint64, width uint64, cmp uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v base=%v nel=%v width=%v cmp=%v, (%v:)", tls, base, nel, width, cmp, origin(2))
+	}
 	x___qsort_r(tls, base, nel, width, __ccgo_fp(_wrapper_cmp), cmp)
 }
 
@@ -141658,14 +145414,26 @@ func _strtox(tls *TLS, s uintptr, p uintptr, prec int32) (r float64) {
 }
 
 func Xstrtof(tls *TLS, s uintptr, p uintptr) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v, (%v:)", tls, s, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return float32(_strtox(tls, s, p, 0))
 }
 
 func Xstrtod(tls *TLS, s uintptr, p uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v, (%v:)", tls, s, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _strtox(tls, s, p, int32(1))
 }
 
 func Xstrtold(tls *TLS, s uintptr, p uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v, (%v:)", tls, s, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _strtox(tls, s, p, int32(2))
 }
 
@@ -141689,26 +145457,50 @@ func _strtox1(tls *TLS, s uintptr, p uintptr, base int32, lim uint64) (r uint64)
 }
 
 func Xstrtoull(tls *TLS, s uintptr, p uintptr, base int32) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _strtox1(tls, s, p, base, Uint64FromUint64(2)*Uint64FromInt64(0x7fffffffffffffff)+Uint64FromInt32(1))
 }
 
 func Xstrtoll(tls *TLS, s uintptr, p uintptr, base int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(_strtox1(tls, s, p, base, uint64(-Int64FromInt64(0x7fffffffffffffff)-Int64FromInt32(1))))
 }
 
 func Xstrtoul(tls *TLS, s uintptr, p uintptr, base int32) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _strtox1(tls, s, p, base, Uint64FromUint64(2)*Uint64FromInt64(0x7fffffffffffffff)+Uint64FromInt32(1))
 }
 
 func Xstrtol(tls *TLS, s uintptr, p uintptr, base int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(_strtox1(tls, s, p, base, Uint64FromUint64(0)+uint64(-Int64FromInt64(0x7fffffffffffffff)-Int64FromInt32(1))))
 }
 
 func Xstrtoimax(tls *TLS, s uintptr, p uintptr, base int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrtoll(tls, s, p, base)
 }
 
 func Xstrtoumax(tls *TLS, s uintptr, p uintptr, base int32) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrtoull(tls, s, p, base)
 }
 
@@ -141779,14 +145571,26 @@ func _wcstox(tls *TLS, s uintptr, p uintptr, prec int32) (r float64) {
 }
 
 func Xwcstof(tls *TLS, s uintptr, p uintptr) (r float32) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v, (%v:)", tls, s, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return float32(_wcstox(tls, s, p, 0))
 }
 
 func Xwcstod(tls *TLS, s uintptr, p uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v, (%v:)", tls, s, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _wcstox(tls, s, p, int32(1))
 }
 
 func Xwcstold(tls *TLS, s uintptr, p uintptr) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v, (%v:)", tls, s, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _wcstox(tls, s, p, int32(2))
 }
 
@@ -141856,54 +145660,99 @@ func _wcstox1(tls *TLS, s uintptr, p uintptr, base int32, lim uint64) (r uint64)
 }
 
 func Xwcstoull(tls *TLS, s uintptr, p uintptr, base int32) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _wcstox1(tls, s, p, base, Uint64FromUint64(2)*Uint64FromInt64(0x7fffffffffffffff)+Uint64FromInt32(1))
 }
 
 func Xwcstoll(tls *TLS, s uintptr, p uintptr, base int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(_wcstox1(tls, s, p, base, uint64(-Int64FromInt64(0x7fffffffffffffff)-Int64FromInt32(1))))
 }
 
 func Xwcstoul(tls *TLS, s uintptr, p uintptr, base int32) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _wcstox1(tls, s, p, base, Uint64FromUint64(2)*Uint64FromInt64(0x7fffffffffffffff)+Uint64FromInt32(1))
 }
 
 func Xwcstol(tls *TLS, s uintptr, p uintptr, base int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int64(_wcstox1(tls, s, p, base, Uint64FromUint64(0)+uint64(-Int64FromInt64(0x7fffffffffffffff)-Int64FromInt32(1))))
 }
 
 func Xwcstoimax(tls *TLS, s uintptr, p uintptr, base int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xwcstoll(tls, s, p, base)
 }
 
 func Xwcstoumax(tls *TLS, s uintptr, p uintptr, base int32) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v base=%v, (%v:)", tls, s, p, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xwcstoull(tls, s, p, base)
 }
 
 func Xbcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v s1=%v s2=%v n=%v, (%v:)", tls, s1, s2, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xmemcmp(tls, s1, s2, n)
 }
 
 func Xbcopy(tls *TLS, s1 uintptr, s2 uintptr, n uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s1=%v s2=%v n=%v, (%v:)", tls, s1, s2, n, origin(2))
+	}
 	_memmove(tls, s2, s1, n)
 }
 
 func Xbzero(tls *TLS, s uintptr, n uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v, (%v:)", tls, s, n, origin(2))
+	}
 	_memset(tls, s, 0, n)
 }
 
 func Xexplicit_bzero(tls *TLS, d uintptr, n uint64) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v n=%v, (%v:)", tls, d, n, origin(2))
+	}
 	d = _memset(tls, d, 0, n)
 	// __asm__ __volatile__ ("" : : "r"(d) : "memory");
 	x___assert_fail(tls, ts+672, ts+2030, 7, ts+2047)
 }
 
 func Xindex(tls *TLS, s uintptr, c int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrchr(tls, s, c)
 }
 
 const m_UCHAR_MAX = 255
 
 func Xmemccpy(tls *TLS, dest uintptr, src uintptr, c int32, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v c=%v n=%v, (%v:)", tls, dest, src, c, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var d, s, wd, ws uintptr
 	var k uint64
 	var v1, v5 uint8
@@ -141965,6 +145814,10 @@ tail:
 }
 
 func Xmemchr(tls *TLS, src uintptr, c int32, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v src=%v c=%v n=%v, (%v:)", tls, src, c, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var k uint64
 	var s, w, v4 uintptr
 	s = src
@@ -142000,6 +145853,10 @@ func Xmemchr(tls *TLS, src uintptr, c int32, n uint64) (r uintptr) {
 }
 
 func Xmemcmp(tls *TLS, vl uintptr, vr uintptr, n uint64) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v vl=%v vr=%v n=%v, (%v:)", tls, vl, vr, n, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var l, r uintptr
 	var v2 int32
 	l = vl
@@ -142236,6 +146093,10 @@ func _twoway_memmem(tls *TLS, h uintptr, z uintptr, n uintptr, l uint64) (r uint
 }
 
 func Xmemmem(tls *TLS, h0 uintptr, k uint64, n0 uintptr, l uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v h0=%v k=%v n0=%v l=%v, (%v:)", tls, h0, k, n0, l, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var h, n uintptr
 	h = h0
 	n = n0
@@ -142269,6 +146130,10 @@ func Xmemmem(tls *TLS, h0 uintptr, k uint64, n0 uintptr, l uint64) (r uintptr) {
 }
 
 func Xmempcpy(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v n=%v, (%v:)", tls, dest, src, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return _memcpy(tls, dest, src, n) + uintptr(n)
 }
 
@@ -142291,6 +146156,10 @@ func x___memrchr(tls *TLS, m uintptr, c int32, n uint64) (r uintptr) {
 }
 
 func Xrindex(tls *TLS, s uintptr, c int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xstrrchr(tls, s, c)
 }
 
@@ -142392,6 +146261,10 @@ tail:
 }
 
 func Xstrcasecmp(tls *TLS, _l uintptr, _r uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v _l=%v _r=%v, (%v:)", tls, _l, _r, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var l, r uintptr
 	l = _l
 	r = _r
@@ -142409,6 +146282,10 @@ func x___strcasecmp_l(tls *TLS, l uintptr, r uintptr, loc uintptr) (r1 int32) {
 }
 
 func Xstrcasestr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v h=%v n=%v, (%v:)", tls, h, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l uint64
 	l = Xstrlen(tls, n)
 	for ; *(*int8)(unsafe.Pointer(h)) != 0; h++ {
@@ -142420,11 +146297,19 @@ func Xstrcasestr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
 }
 
 func Xstrcat(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v, (%v:)", tls, dest, src, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	Xstrcpy(tls, dest+uintptr(Xstrlen(tls, dest)), src)
 	return dest
 }
 
 func Xstrchr(tls *TLS, s uintptr, c int32) (r1 uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v1 uintptr
 	r = x___strchrnul(tls, s, c)
 	if int32(*(*uint8)(unsafe.Pointer(r))) == int32(uint8(c)) {
@@ -142457,6 +146342,10 @@ func x___strchrnul(tls *TLS, s uintptr, c int32) (r uintptr) {
 }
 
 func Xstrcmp(tls *TLS, l uintptr, r uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v, (%v:)", tls, l, r, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	for int32(*(*int8)(unsafe.Pointer(l))) == int32(*(*int8)(unsafe.Pointer(r))) && *(*int8)(unsafe.Pointer(l)) != 0 {
 		goto _1
 	_1:
@@ -142467,11 +146356,19 @@ func Xstrcmp(tls *TLS, l uintptr, r uintptr) (r1 int32) {
 }
 
 func Xstrcpy(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v, (%v:)", tls, dest, src, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	x___stpcpy(tls, dest, src)
 	return dest
 }
 
 func Xstrcspn(tls *TLS, s uintptr, c uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var a, p1 uintptr
@@ -142497,6 +146394,10 @@ func Xstrcspn(tls *TLS, s uintptr, c uintptr) (r uint64) {
 }
 
 func Xstrdup(tls *TLS, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var d uintptr
 	var l uint64
 	l = Xstrlen(tls, s)
@@ -142508,6 +146409,10 @@ func Xstrdup(tls *TLS, s uintptr) (r uintptr) {
 }
 
 func Xstrerror_r(tls *TLS, err int32, buf uintptr, buflen uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v err=%v buf=%v buflen=%v, (%v:)", tls, err, buf, buflen, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l uint64
 	var msg uintptr
 	msg = Xstrerror(tls, err)
@@ -142524,6 +146429,10 @@ func Xstrerror_r(tls *TLS, err int32, buf uintptr, buflen uint64) (r int32) {
 }
 
 func Xstrlcat(tls *TLS, d uintptr, s uintptr, n uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l uint64
 	l = Xstrnlen(tls, d, n)
 	if l == n {
@@ -142533,6 +146442,10 @@ func Xstrlcat(tls *TLS, d uintptr, s uintptr, n uint64) (r uint64) {
 }
 
 func Xstrlcpy(tls *TLS, d uintptr, s uintptr, n uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var d0, wd, ws uintptr
 	var v1 uint64
 	var v2, v6 int8
@@ -142594,6 +146507,10 @@ finish:
 }
 
 func Xstrlen(tls *TLS, s uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, w uintptr
 	a = s
 	for ; uint64(s)%Uint64FromInt64(8) != 0; s++ {
@@ -142610,6 +146527,10 @@ func Xstrlen(tls *TLS, s uintptr) (r uint64) {
 }
 
 func Xstrncasecmp(tls *TLS, _l uintptr, _r uintptr, n uint64) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v _l=%v _r=%v n=%v, (%v:)", tls, _l, _r, n, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var l, r uintptr
 	var v1 uint64
 	l = _l
@@ -142634,6 +146555,10 @@ func x___strncasecmp_l(tls *TLS, l uintptr, r uintptr, n uint64, loc uintptr) (r
 }
 
 func Xstrncat(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, v1, v2, v3 uintptr
 	a = d
 	d += uintptr(Xstrlen(tls, d))
@@ -142652,6 +146577,10 @@ func Xstrncat(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
 }
 
 func Xstrncmp(tls *TLS, _l uintptr, _r uintptr, n uint64) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v _l=%v _r=%v n=%v, (%v:)", tls, _l, _r, n, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var l, r uintptr
 	var v1 uint64
 	l = _l
@@ -142672,11 +146601,19 @@ func Xstrncmp(tls *TLS, _l uintptr, _r uintptr, n uint64) (r1 int32) {
 }
 
 func Xstrncpy(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	x___stpncpy(tls, d, s, n)
 	return d
 }
 
 func Xstrndup(tls *TLS, s uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v, (%v:)", tls, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var d uintptr
 	var l uint64
 	l = Xstrnlen(tls, s, n)
@@ -142690,6 +146627,10 @@ func Xstrndup(tls *TLS, s uintptr, n uint64) (r uintptr) {
 }
 
 func Xstrnlen(tls *TLS, s uintptr, n uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v, (%v:)", tls, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var p uintptr
 	var v1 uint64
 	p = Xmemchr(tls, s, 0, n)
@@ -142702,6 +146643,10 @@ func Xstrnlen(tls *TLS, s uintptr, n uint64) (r uint64) {
 }
 
 func Xstrpbrk(tls *TLS, s uintptr, b uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v b=%v, (%v:)", tls, s, b, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 uintptr
 	s += uintptr(Xstrcspn(tls, s, b))
 	if *(*int8)(unsafe.Pointer(s)) != 0 {
@@ -142713,10 +146658,18 @@ func Xstrpbrk(tls *TLS, s uintptr, b uintptr) (r uintptr) {
 }
 
 func Xstrrchr(tls *TLS, s uintptr, c int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___memrchr(tls, s, c, Xstrlen(tls, s)+uint64(1))
 }
 
 func Xstrsep(tls *TLS, str uintptr, sep uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v str=%v sep=%v, (%v:)", tls, str, sep, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var end, s, v1 uintptr
 	s = *(*uintptr)(unsafe.Pointer(str))
 	if !(s != 0) {
@@ -142737,6 +146690,10 @@ func Xstrsep(tls *TLS, str uintptr, sep uintptr) (r uintptr) {
 var _strings = [671]int8{'U', 'n', 'k', 'n', 'o', 'w', 'n', ' ', 's', 'i', 'g', 'n', 'a', 'l', 0, 'H', 'a', 'n', 'g', 'u', 'p', 0, 'I', 'n', 't', 'e', 'r', 'r', 'u', 'p', 't', 0, 'Q', 'u', 'i', 't', 0, 'I', 'l', 'l', 'e', 'g', 'a', 'l', ' ', 'i', 'n', 's', 't', 'r', 'u', 'c', 't', 'i', 'o', 'n', 0, 'T', 'r', 'a', 'c', 'e', '/', 'b', 'r', 'e', 'a', 'k', 'p', 'o', 'i', 'n', 't', ' ', 't', 'r', 'a', 'p', 0, 'A', 'b', 'o', 'r', 't', 'e', 'd', 0, 'B', 'u', 's', ' ', 'e', 'r', 'r', 'o', 'r', 0, 'A', 'r', 'i', 't', 'h', 'm', 'e', 't', 'i', 'c', ' ', 'e', 'x', 'c', 'e', 'p', 't', 'i', 'o', 'n', 0, 'K', 'i', 'l', 'l', 'e', 'd', 0, 'U', 's', 'e', 'r', ' ', 'd', 'e', 'f', 'i', 'n', 'e', 'd', ' ', 's', 'i', 'g', 'n', 'a', 'l', ' ', '1', 0, 'S', 'e', 'g', 'm', 'e', 'n', 't', 'a', 't', 'i', 'o', 'n', ' ', 'f', 'a', 'u', 'l', 't', 0, 'U', 's', 'e', 'r', ' ', 'd', 'e', 'f', 'i', 'n', 'e', 'd', ' ', 's', 'i', 'g', 'n', 'a', 'l', ' ', '2', 0, 'B', 'r', 'o', 'k', 'e', 'n', ' ', 'p', 'i', 'p', 'e', 0, 'A', 'l', 'a', 'r', 'm', ' ', 'c', 'l', 'o', 'c', 'k', 0, 'T', 'e', 'r', 'm', 'i', 'n', 'a', 't', 'e', 'd', 0, 'S', 't', 'a', 'c', 'k', ' ', 'f', 'a', 'u', 'l', 't', 0, 'C', 'h', 'i', 'l', 'd', ' ', 'p', 'r', 'o', 'c', 'e', 's', 's', ' ', 's', 't', 'a', 't', 'u', 's', 0, 'C', 'o', 'n', 't', 'i', 'n', 'u', 'e', 'd', 0, 'S', 't', 'o', 'p', 'p', 'e', 'd', ' ', '(', 's', 'i', 'g', 'n', 'a', 'l', ')', 0, 'S', 't', 'o', 'p', 'p', 'e', 'd', 0, 'S', 't', 'o', 'p', 'p', 'e', 'd', ' ', '(', 't', 't', 'y', ' ', 'i', 'n', 'p', 'u', 't', ')', 0, 'S', 't', 'o', 'p', 'p', 'e', 'd', ' ', '(', 't', 't', 'y', ' ', 'o', 'u', 't', 'p', 'u', 't', ')', 0, 'U', 'r', 'g', 'e', 'n', 't', ' ', 'I', '/', 'O', ' ', 'c', 'o', 'n', 'd', 'i', 't', 'i', 'o', 'n', 0, 'C', 'P', 'U', ' ', 't', 'i', 'm', 'e', ' ', 'l', 'i', 'm', 'i', 't', ' ', 'e', 'x', 'c', 'e', 'e', 'd', 'e', 'd', 0, 'F', 'i', 'l', 'e', ' ', 's', 'i', 'z', 'e', ' ', 'l', 'i', 'm', 'i', 't', ' ', 'e', 'x', 'c', 'e', 'e', 'd', 'e', 'd', 0, 'V', 'i', 'r', 't', 'u', 'a', 'l', ' ', 't', 'i', 'm', 'e', 'r', ' ', 'e', 'x', 'p', 'i', 'r', 'e', 'd', 0, 'P', 'r', 'o', 'f', 'i', 'l', 'i', 'n', 'g', ' ', 't', 'i', 'm', 'e', 'r', ' ', 'e', 'x', 'p', 'i', 'r', 'e', 'd', 0, 'W', 'i', 'n', 'd', 'o', 'w', ' ', 'c', 'h', 'a', 'n', 'g', 'e', 'd', 0, 'I', '/', 'O', ' ', 'p', 'o', 's', 's', 'i', 'b', 'l', 'e', 0, 'P', 'o', 'w', 'e', 'r', ' ', 'f', 'a', 'i', 'l', 'u', 'r', 'e', 0, 'B', 'a', 'd', ' ', 's', 'y', 's', 't', 'e', 'm', ' ', 'c', 'a', 'l', 'l', 0, 'R', 'T', '3', '2', 0, 'R', 'T', '3', '3', 0, 'R', 'T', '3', '4', 0, 'R', 'T', '3', '5', 0, 'R', 'T', '3', '6', 0, 'R', 'T', '3', '7', 0, 'R', 'T', '3', '8', 0, 'R', 'T', '3', '9', 0, 'R', 'T', '4', '0', 0, 'R', 'T', '4', '1', 0, 'R', 'T', '4', '2', 0, 'R', 'T', '4', '3', 0, 'R', 'T', '4', '4', 0, 'R', 'T', '4', '5', 0, 'R', 'T', '4', '6', 0, 'R', 'T', '4', '7', 0, 'R', 'T', '4', '8', 0, 'R', 'T', '4', '9', 0, 'R', 'T', '5', '0', 0, 'R', 'T', '5', '1', 0, 'R', 'T', '5', '2', 0, 'R', 'T', '5', '3', 0, 'R', 'T', '5', '4', 0, 'R', 'T', '5', '5', 0, 'R', 'T', '5', '6', 0, 'R', 'T', '5', '7', 0, 'R', 'T', '5', '8', 0, 'R', 'T', '5', '9', 0, 'R', 'T', '6', '0', 0, 'R', 'T', '6', '1', 0, 'R', 'T', '6', '2', 0, 'R', 'T', '6', '3', 0, 'R', 'T', '6', '4'}
 
 func Xstrsignal(tls *TLS, signum int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v signum=%v, (%v:)", tls, signum, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var s uintptr
 	var v1 int32
 	s = uintptr(unsafe.Pointer(&_strings))
@@ -142757,6 +146714,10 @@ func Xstrsignal(tls *TLS, signum int32) (r uintptr) {
 }
 
 func Xstrspn(tls *TLS, s uintptr, c uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var a, p1 uintptr
@@ -143001,6 +146962,10 @@ func _twoway_strstr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
 }
 
 func Xstrstr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v h=%v n=%v, (%v:)", tls, h, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* Return immediately on empty needle */
 	if !(*(*int8)(unsafe.Pointer(n)) != 0) {
 		return h
@@ -143032,6 +146997,10 @@ func Xstrstr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
 }
 
 func Xstrtok(tls *TLS, s uintptr, sep uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v sep=%v, (%v:)", tls, s, sep, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v3, v4 uintptr
 	var v2 bool
 	if v2 = !(s != 0); v2 {
@@ -143061,6 +147030,10 @@ func Xstrtok(tls *TLS, s uintptr, sep uintptr) (r uintptr) {
 var _p2 uintptr
 
 func Xstrtok_r(tls *TLS, s uintptr, sep uintptr, p uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v sep=%v p=%v, (%v:)", tls, s, sep, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v3, v4, v5 uintptr
 	var v2 bool
 	if v2 = !(s != 0); v2 {
@@ -143089,6 +147062,10 @@ func Xstrtok_r(tls *TLS, s uintptr, sep uintptr, p uintptr) (r uintptr) {
 }
 
 func Xstrverscmp(tls *TLS, l0 uintptr, r0 uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l0=%v r0=%v, (%v:)", tls, l0, r0, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var c, z int32
 	var dp, i, j, v1 uint64
 	var l, r uintptr
@@ -143132,6 +147109,9 @@ func Xstrverscmp(tls *TLS, l0 uintptr, r0 uintptr) (r1 int32) {
 }
 
 func Xswab(tls *TLS, _src uintptr, _dest uintptr, n int64) {
+	if __ccgo_strace {
+		trc("tls=%v _src=%v _dest=%v n=%v, (%v:)", tls, _src, _dest, n, origin(2))
+	}
 	var dest, src uintptr
 	src = _src
 	dest = _dest
@@ -143147,27 +147127,51 @@ func Xswab(tls *TLS, _src uintptr, _dest uintptr, n int64) {
 }
 
 func Xwcpcpy(tls *TLS, d uintptr, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v, (%v:)", tls, d, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xwcscpy(tls, d, s) + uintptr(Xwcslen(tls, s))*4
 }
 
 func Xwcpncpy(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xwcsncpy(tls, d, s, n) + uintptr(Xwcsnlen(tls, s, n))*4
 }
 
 func Xwcscasecmp(tls *TLS, l uintptr, r uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v, (%v:)", tls, l, r, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	return Xwcsncasecmp(tls, l, r, uint64(-Int32FromInt32(1)))
 }
 
 func Xwcscasecmp_l(tls *TLS, l uintptr, r uintptr, locale uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v locale=%v, (%v:)", tls, l, r, locale, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	return Xwcscasecmp(tls, l, r)
 }
 
 func Xwcscat(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v dest=%v src=%v, (%v:)", tls, dest, src, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	Xwcscpy(tls, dest+uintptr(Xwcslen(tls, dest))*4, src)
 	return dest
 }
 
 func Xwcschr(tls *TLS, s uintptr, c int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 uintptr
 	if !(c != 0) {
 		return s + uintptr(Xwcslen(tls, s))*4
@@ -143183,6 +147187,10 @@ func Xwcschr(tls *TLS, s uintptr, c int32) (r uintptr) {
 }
 
 func Xwcscmp(tls *TLS, l uintptr, r uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v, (%v:)", tls, l, r, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var v2 int32
 	for *(*int32)(unsafe.Pointer(l)) == *(*int32)(unsafe.Pointer(r)) && *(*int32)(unsafe.Pointer(l)) != 0 && *(*int32)(unsafe.Pointer(r)) != 0 {
 		goto _1
@@ -143199,6 +147207,10 @@ func Xwcscmp(tls *TLS, l uintptr, r uintptr) (r1 int32) {
 }
 
 func Xwcscpy(tls *TLS, d uintptr, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v, (%v:)", tls, d, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, v2, v3 uintptr
 	var v1 int32
 	a = d
@@ -143217,6 +147229,10 @@ func Xwcscpy(tls *TLS, d uintptr, s uintptr) (r uintptr) {
 }
 
 func Xwcscspn(tls *TLS, s uintptr, c uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, v2, v3 uintptr
 	var v1 uint64
 	if !(*(*int32)(unsafe.Pointer(c)) != 0) {
@@ -143240,6 +147256,10 @@ func Xwcscspn(tls *TLS, s uintptr, c uintptr) (r uint64) {
 }
 
 func Xwcsdup(tls *TLS, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var d uintptr
 	var l uint64
 	l = Xwcslen(tls, s)
@@ -143251,6 +147271,10 @@ func Xwcsdup(tls *TLS, s uintptr) (r uintptr) {
 }
 
 func Xwcslen(tls *TLS, s uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a uintptr
 	for a = s; *(*int32)(unsafe.Pointer(s)) != 0; s += 4 {
 	}
@@ -143258,6 +147282,10 @@ func Xwcslen(tls *TLS, s uintptr) (r uint64) {
 }
 
 func Xwcsncasecmp(tls *TLS, l uintptr, r uintptr, n uint64) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v n=%v, (%v:)", tls, l, r, n, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var v1 uint64
 	v1 = n
 	n--
@@ -143275,10 +147303,18 @@ func Xwcsncasecmp(tls *TLS, l uintptr, r uintptr, n uint64) (r1 int32) {
 }
 
 func Xwcsncasecmp_l(tls *TLS, l uintptr, r uintptr, n uint64, locale uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v n=%v locale=%v, (%v:)", tls, l, r, n, locale, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	return Xwcsncasecmp(tls, l, r, n)
 }
 
 func Xwcsncat(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, v1, v2, v3 uintptr
 	a = d
 	d += uintptr(Xwcslen(tls, d)) * 4
@@ -143297,6 +147333,10 @@ func Xwcsncat(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
 }
 
 func Xwcsncmp(tls *TLS, l uintptr, r uintptr, n uint64) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v n=%v, (%v:)", tls, l, r, n, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var v2, v3 int32
 	for n != 0 && *(*int32)(unsafe.Pointer(l)) == *(*int32)(unsafe.Pointer(r)) && *(*int32)(unsafe.Pointer(l)) != 0 && *(*int32)(unsafe.Pointer(r)) != 0 {
 		goto _1
@@ -143319,6 +147359,10 @@ func Xwcsncmp(tls *TLS, l uintptr, r uintptr, n uint64) (r1 int32) {
 }
 
 func Xwcsncpy(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, v1, v2 uintptr
 	a = d
 	for n != 0 && *(*int32)(unsafe.Pointer(s)) != 0 {
@@ -143334,6 +147378,10 @@ func Xwcsncpy(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
 }
 
 func Xwcsnlen(tls *TLS, s uintptr, n uint64) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v, (%v:)", tls, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var z uintptr
 	z = Xwmemchr(tls, s, 0, n)
 	if z != 0 {
@@ -143343,6 +147391,10 @@ func Xwcsnlen(tls *TLS, s uintptr, n uint64) (r uint64) {
 }
 
 func Xwcspbrk(tls *TLS, s uintptr, b uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v b=%v, (%v:)", tls, s, b, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 uintptr
 	s += uintptr(Xwcscspn(tls, s, b)) * 4
 	if *(*int32)(unsafe.Pointer(s)) != 0 {
@@ -143354,6 +147406,10 @@ func Xwcspbrk(tls *TLS, s uintptr, b uintptr) (r uintptr) {
 }
 
 func Xwcsrchr(tls *TLS, s uintptr, c int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var p, v1 uintptr
 	for p = s + uintptr(Xwcslen(tls, s))*4; p >= s && *(*int32)(unsafe.Pointer(p)) != c; p -= 4 {
 	}
@@ -143366,6 +147422,10 @@ func Xwcsrchr(tls *TLS, s uintptr, c int32) (r uintptr) {
 }
 
 func Xwcsspn(tls *TLS, s uintptr, c uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a uintptr
 	for a = s; *(*int32)(unsafe.Pointer(s)) != 0 && Xwcschr(tls, c, *(*int32)(unsafe.Pointer(s))) != 0; s += 4 {
 	}
@@ -143504,6 +147564,10 @@ func _twoway_wcsstr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
 }
 
 func Xwcsstr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v h=%v n=%v, (%v:)", tls, h, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* Return immediately on empty needle or haystack */
 	if !(*(*int32)(unsafe.Pointer(n)) != 0) {
 		return h
@@ -143523,6 +147587,10 @@ func Xwcsstr(tls *TLS, h uintptr, n uintptr) (r uintptr) {
 }
 
 func Xwcstok(tls *TLS, s uintptr, sep uintptr, p uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v sep=%v p=%v, (%v:)", tls, s, sep, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1, v3, v4, v5 uintptr
 	var v2 bool
 	if v2 = !(s != 0); v2 {
@@ -143551,10 +147619,18 @@ func Xwcstok(tls *TLS, s uintptr, sep uintptr, p uintptr) (r uintptr) {
 }
 
 func Xwcswcs(tls *TLS, haystack uintptr, needle uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v haystack=%v needle=%v, (%v:)", tls, haystack, needle, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xwcsstr(tls, haystack, needle)
 }
 
 func Xwmemchr(tls *TLS, s uintptr, c int32, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v n=%v, (%v:)", tls, s, c, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v2 uintptr
 	for n != 0 && *(*int32)(unsafe.Pointer(s)) != c {
 		goto _1
@@ -143571,6 +147647,10 @@ func Xwmemchr(tls *TLS, s uintptr, c int32, n uint64) (r uintptr) {
 }
 
 func Xwmemcmp(tls *TLS, l uintptr, r uintptr, n uint64) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v l=%v r=%v n=%v, (%v:)", tls, l, r, n, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var v2, v3 int32
 	for n != 0 && *(*int32)(unsafe.Pointer(l)) == *(*int32)(unsafe.Pointer(r)) {
 		goto _1
@@ -143593,6 +147673,10 @@ func Xwmemcmp(tls *TLS, l uintptr, r uintptr, n uint64) (r1 int32) {
 }
 
 func Xwmemcpy(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var a, v2, v3 uintptr
 	var v1 uint64
 	a = d
@@ -143612,6 +147696,10 @@ func Xwmemcpy(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
 }
 
 func Xwmemmove(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var d0, v3, v4 uintptr
 	var v1, v2 uint64
 	d0 = d
@@ -143645,6 +147733,10 @@ func Xwmemmove(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
 }
 
 func Xwmemset(tls *TLS, d uintptr, c int32, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v c=%v n=%v, (%v:)", tls, d, c, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret, v2 uintptr
 	var v1 uint64
 	ret = d
@@ -143684,6 +147776,10 @@ func x___randname(tls *TLS, template uintptr) (r1 uintptr) {
 }
 
 func Xmkdtemp(tls *TLS, template uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v template=%v, (%v:)", tls, template, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var l uint64
 	var retries, v1 int32
 	l = Xstrlen(tls, template)
@@ -143710,6 +147806,10 @@ func Xmkdtemp(tls *TLS, template uintptr) (r uintptr) {
 }
 
 func Xmkostemp(tls *TLS, template uintptr, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v template=%v flags=%v, (%v:)", tls, template, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___mkostemps(tls, template, 0, flags)
 }
 
@@ -143745,14 +147845,26 @@ func x___mkostemps(tls *TLS, template uintptr, len1 int32, flags int32) (r int32
 }
 
 func Xmkstemp(tls *TLS, template uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v template=%v, (%v:)", tls, template, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___mkostemps(tls, template, 0, 0)
 }
 
 func Xmkstemps(tls *TLS, template uintptr, len1 int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v template=%v len1=%v, (%v:)", tls, template, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___mkostemps(tls, template, len1, 0)
 }
 
 func Xmktemp(tls *TLS, template uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v template=%v, (%v:)", tls, template, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(144) /* tlsAllocs 144 maxVaListSize 0 */
 	defer tls.Free(144)
 	var l uint64
@@ -143789,10 +147901,18 @@ func Xmktemp(tls *TLS, template uintptr) (r uintptr) {
 const m_CBAUD = 4111
 
 func Xcfgetospeed(tls *TLS, tio uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v tio=%v, (%v:)", tls, tio, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return (*Ttermios)(unsafe.Pointer(tio)).Fc_cflag & uint32(m_CBAUD)
 }
 
 func Xcfgetispeed(tls *TLS, tio uintptr) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v tio=%v, (%v:)", tls, tio, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xcfgetospeed(tls, tio)
 }
 
@@ -143811,6 +147931,9 @@ const m_VMIN = 6
 const m_VTIME = 5
 
 func Xcfmakeraw(tls *TLS, t uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v, (%v:)", tls, t, origin(2))
+	}
 	*(*uint32)(unsafe.Pointer(t)) &= uint32(^(Int32FromInt32(m_IGNBRK) | Int32FromInt32(m_BRKINT) | Int32FromInt32(m_PARMRK) | Int32FromInt32(m_ISTRIP) | Int32FromInt32(m_INLCR) | Int32FromInt32(m_IGNCR) | Int32FromInt32(m_ICRNL) | Int32FromInt32(m_IXON)))
 	*(*uint32)(unsafe.Pointer(t + 4)) &= uint32(^Int32FromInt32(m_OPOST))
 	*(*uint32)(unsafe.Pointer(t + 12)) &= uint32(^(Int32FromInt32(m_ECHO) | Int32FromInt32(m_ECHONL) | Int32FromInt32(m_ICANON) | Int32FromInt32(m_ISIG) | Int32FromInt32(m_IEXTEN)))
@@ -143821,6 +147944,10 @@ func Xcfmakeraw(tls *TLS, t uintptr) {
 }
 
 func Xcfsetospeed(tls *TLS, tio uintptr, speed uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v tio=%v speed=%v, (%v:)", tls, tio, speed, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if speed&uint32(^Int32FromInt32(m_CBAUD)) != 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return -int32(1)
@@ -143831,6 +147958,10 @@ func Xcfsetospeed(tls *TLS, tio uintptr, speed uint32) (r int32) {
 }
 
 func Xcfsetispeed(tls *TLS, tio uintptr, speed uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v tio=%v speed=%v, (%v:)", tls, tio, speed, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	if speed != 0 {
 		v1 = Xcfsetospeed(tls, tio, speed)
@@ -143843,12 +147974,20 @@ func Xcfsetispeed(tls *TLS, tio uintptr, speed uint32) (r int32) {
 const m_TCSBRK = 21513
 
 func Xtcdrain(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_ioctl), int64(fd), int64(Int32FromInt32(m_TCSBRK)), int64(Int32FromInt32(1)), 0, 0, 0))))
 }
 
 const m_TCXONC = 21514
 
 func Xtcflow(tls *TLS, fd int32, action int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v action=%v, (%v:)", tls, fd, action, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	return Xioctl(tls, fd, int32(m_TCXONC), VaList(bp+8, action))
@@ -143857,6 +147996,10 @@ func Xtcflow(tls *TLS, fd int32, action int32) (r int32) {
 const m_TCFLSH = 21515
 
 func Xtcflush(tls *TLS, fd int32, queue int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v queue=%v, (%v:)", tls, fd, queue, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	return Xioctl(tls, fd, int32(m_TCFLSH), VaList(bp+8, queue))
@@ -143865,6 +148008,10 @@ func Xtcflush(tls *TLS, fd int32, queue int32) (r int32) {
 const m_TCGETS = 21505
 
 func Xtcgetattr(tls *TLS, fd int32, tio uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v tio=%v, (%v:)", tls, fd, tio, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	if Xioctl(tls, fd, int32(m_TCGETS), VaList(bp+8, tio)) != 0 {
@@ -143876,6 +148023,10 @@ func Xtcgetattr(tls *TLS, fd int32, tio uintptr) (r int32) {
 const m_TIOCGSID = 21545
 
 func Xtcgetsid(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(32)
 	var _ /* sid at bp+0 */ int32
@@ -143886,10 +148037,18 @@ func Xtcgetsid(tls *TLS, fd int32) (r int32) {
 }
 
 func Xtcgetwinsize(tls *TLS, fd int32, wsz uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v wsz=%v, (%v:)", tls, fd, wsz, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(Int32FromInt32(m_TIOCGWINSZ)), int64(wsz)))))
 }
 
 func Xtcsendbreak(tls *TLS, fd int32, dur int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v dur=%v, (%v:)", tls, fd, dur, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	/* nonzero duration is implementation-defined, so ignore it */
@@ -143899,6 +148058,10 @@ func Xtcsendbreak(tls *TLS, fd int32, dur int32) (r int32) {
 const m_TCSETS = 21506
 
 func Xtcsetattr(tls *TLS, fd int32, act int32, tio uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v act=%v tio=%v, (%v:)", tls, fd, act, tio, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 0 maxVaListSize 8 */
 	defer tls.Free(16)
 	if act < 0 || act > int32(2) {
@@ -143909,6 +148072,10 @@ func Xtcsetattr(tls *TLS, fd int32, act int32, tio uintptr) (r int32) {
 }
 
 func Xtcsetwinsize(tls *TLS, fd int32, wsz uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v wsz=%v, (%v:)", tls, fd, wsz, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(Int32FromInt32(m_TIOCSWINSZ)), int64(wsz)))))
 }
 
@@ -144133,31 +148300,53 @@ const _mtx_recursive = 1
 const _mtx_timed = 2
 
 func Xcall_once(tls *TLS, flag uintptr, func1 uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v flag=%v func1=%v, (%v:)", tls, flag, func1, origin(2))
+	}
 	x___pthread_once(tls, flag, func1)
 }
 
 func Xcnd_broadcast(tls *TLS, c uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* This internal function never fails, and always returns zero,
 	 * which matches the value thrd_success is defined with. */
 	return x___private_cond_signal(tls, c, -int32(1))
 }
 
 func Xcnd_destroy(tls *TLS, c uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+	}
 	/* For private cv this is a no-op */
 }
 
 func Xcnd_init(tls *TLS, c uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	*(*Tcnd_t)(unsafe.Pointer(c)) = Tcnd_t{}
 	return int32(_thrd_success)
 }
 
 func Xcnd_signal(tls *TLS, c uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* This internal function never fails, and always returns zero,
 	 * which matches the value thrd_success is defined with. */
 	return x___private_cond_signal(tls, c, int32(1))
 }
 
 func Xcnd_timedwait(tls *TLS, c uintptr, m uintptr, ts uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v m=%v ts=%v, (%v:)", tls, c, m, ts, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	ret = x___pthread_cond_timedwait(tls, c, m, ts)
 	switch ret {
@@ -144173,6 +148362,10 @@ func Xcnd_timedwait(tls *TLS, c uintptr, m uintptr, ts uintptr) (r int32) {
 }
 
 func Xcnd_wait(tls *TLS, c uintptr, m uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v c=%v m=%v, (%v:)", tls, c, m, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* Calling cnd_timedwait with a null pointer is an extension.
 	 * It is convenient here to avoid duplication of the logic
 	 * for return values. */
@@ -144197,12 +148390,19 @@ func x___release_ptc(tls *TLS) {
 }
 
 func Xmtx_destroy(tls *TLS, mtx uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v mtx=%v, (%v:)", tls, mtx, origin(2))
+	}
 }
 
 const m_PTHREAD_MUTEX_NORMAL = 0
 const m_PTHREAD_MUTEX_RECURSIVE = 1
 
 func Xmtx_init(tls *TLS, m uintptr, type1 int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v m=%v type1=%v, (%v:)", tls, m, type1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	if type1&int32(_mtx_recursive) != 0 {
 		v1 = int32(m_PTHREAD_MUTEX_RECURSIVE)
@@ -144223,6 +148423,10 @@ func Xmtx_init(tls *TLS, m uintptr, type1 int32) (r int32) {
 }
 
 func Xmtx_lock(tls *TLS, m uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v m=%v, (%v:)", tls, m, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if *(*int32)(unsafe.Pointer(m)) == m_PTHREAD_MUTEX_NORMAL && !(_a_cas(tls, m+1*4, 0, int32(m_EBUSY)) != 0) {
 		return int32(_thrd_success)
 	}
@@ -144233,6 +148437,10 @@ func Xmtx_lock(tls *TLS, m uintptr) (r int32) {
 }
 
 func Xmtx_timedlock(tls *TLS, m uintptr, ts uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v m=%v ts=%v, (%v:)", tls, m, ts, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	ret = x___pthread_mutex_timedlock(tls, m, ts)
 	switch ret {
@@ -144247,6 +148455,10 @@ func Xmtx_timedlock(tls *TLS, m uintptr, ts uintptr) (r int32) {
 }
 
 func Xmtx_trylock(tls *TLS, m uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v m=%v, (%v:)", tls, m, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret, v1 int32
 	if *(*int32)(unsafe.Pointer(m)) == m_PTHREAD_MUTEX_NORMAL {
 		if _a_cas(tls, m+1*4, 0, int32(m_EBUSY))&int32(m_EBUSY) != 0 {
@@ -144269,6 +148481,10 @@ func Xmtx_trylock(tls *TLS, m uintptr) (r int32) {
 }
 
 func Xmtx_unlock(tls *TLS, mtx uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v mtx=%v, (%v:)", tls, mtx, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* The only cases where pthread_mutex_unlock can return an
 	 * error are undefined behavior for C11 mtx_unlock, so we can
 	 * assume it does not return an error and simply tail call. */
@@ -146987,10 +151203,18 @@ func x___pthread_testcancel(tls *TLS) {
 }
 
 func Xsem_destroy(tls *TLS, sem uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sem=%v, (%v:)", tls, sem, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return 0
 }
 
 func Xsem_getvalue(tls *TLS, sem uintptr, valp uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sem=%v valp=%v, (%v:)", tls, sem, valp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var val int32
 	val = *(*int32)(unsafe.Pointer(sem))
 	*(*int32)(unsafe.Pointer(valp)) = val & int32(m_SEM_VALUE_MAX)
@@ -146998,6 +151222,10 @@ func Xsem_getvalue(tls *TLS, sem uintptr, valp uintptr) (r int32) {
 }
 
 func Xsem_init(tls *TLS, sem uintptr, pshared int32, value uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sem=%v pshared=%v value=%v, (%v:)", tls, sem, pshared, value, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	if value > uint32(m_SEM_VALUE_MAX) {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
@@ -147021,6 +151249,10 @@ var _semtab uintptr
 var _lock9 [1]int32
 
 func Xsem_open(tls *TLS, name uintptr, flags int32, va uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v flags=%v va=%v, (%v:)", tls, name, flags, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(560) /* tlsAllocs 536 maxVaListSize 8 */
 	defer tls.Free(560)
 	var ap, map1, v1, v2, v5, v7 uintptr
@@ -147231,6 +151463,10 @@ fail:
 }
 
 func Xsem_close(tls *TLS, sem uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sem=%v, (%v:)", tls, sem, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var i, v1 int32
 	var v2 uintptr
 	x___lock(tls, uintptr(unsafe.Pointer(&_lock9)))
@@ -147266,6 +151502,10 @@ func Xsem_close(tls *TLS, sem uintptr) (r int32) {
 }
 
 func Xsem_post(tls *TLS, sem uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sem=%v, (%v:)", tls, sem, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var new1, priv, val, waiters, v1, v3, v4 int32
 	var v2 uintptr
 	priv = *(*int32)(unsafe.Pointer(sem + 2*4))
@@ -147306,6 +151546,10 @@ func _cleanup3(tls *TLS, p uintptr) {
 }
 
 func Xsem_timedwait(tls *TLS, sem uintptr, at uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v sem=%v at=%v, (%v:)", tls, sem, at, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var priv, r, spins, v1 int32
@@ -147339,6 +151583,10 @@ func Xsem_timedwait(tls *TLS, sem uintptr, at uintptr) (r1 int32) {
 }
 
 func Xsem_trywait(tls *TLS, sem uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sem=%v, (%v:)", tls, sem, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var val, v1 int32
 	for {
 		v1 = *(*int32)(unsafe.Pointer(sem))
@@ -147355,10 +151603,18 @@ func Xsem_trywait(tls *TLS, sem uintptr) (r int32) {
 }
 
 func Xsem_unlink(tls *TLS, name uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xshm_unlink(tls, name)
 }
 
 func Xsem_wait(tls *TLS, sem uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v sem=%v, (%v:)", tls, sem, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xsem_timedwait(tls, sem, uintptr(0))
 }
 
@@ -147480,6 +151736,10 @@ single_threaded:
 }
 
 func Xthrd_create(tls *TLS, thr uintptr, func1 uintptr, arg uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v thr=%v func1=%v arg=%v, (%v:)", tls, thr, func1, arg, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	ret = x___pthread_create(tls, thr, uintptr(uint64(-Int32FromInt32(1))), func1, arg)
 	switch ret {
@@ -147494,10 +151754,17 @@ func Xthrd_create(tls *TLS, thr uintptr, func1 uintptr, arg uintptr) (r int32) {
 }
 
 func Xthrd_exit(tls *TLS, result int32) {
+	if __ccgo_strace {
+		trc("tls=%v result=%v, (%v:)", tls, result, origin(2))
+	}
 	x___pthread_exit(tls, uintptr(int64(result)))
 }
 
 func Xthrd_join(tls *TLS, t uintptr, res uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v res=%v, (%v:)", tls, t, res, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* pthread_res at bp+0 */ uintptr
@@ -147509,6 +151776,10 @@ func Xthrd_join(tls *TLS, t uintptr, res uintptr) (r int32) {
 }
 
 func Xthrd_sleep(tls *TLS, req uintptr, rem uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v req=%v rem=%v, (%v:)", tls, req, rem, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	ret = -x___clock_nanosleep(tls, m_CLOCK_REALTIME, 0, req, rem)
 	switch ret {
@@ -147523,10 +151794,17 @@ func Xthrd_sleep(tls *TLS, req uintptr, rem uintptr) (r int32) {
 }
 
 func Xthrd_yield(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	___syscall0(tls, int64(m_SYS_sched_yield))
 }
 
 func Xtss_create(tls *TLS, tss uintptr, dtor uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v tss=%v dtor=%v, (%v:)", tls, tss, dtor, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 int32
 	/* Different error returns are possible. C glues them together into
 	 * just failure notification. Can't be optimized to a tail call,
@@ -147540,10 +151818,17 @@ func Xtss_create(tls *TLS, tss uintptr, dtor uintptr) (r int32) {
 }
 
 func Xtss_delete(tls *TLS, key uint32) {
+	if __ccgo_strace {
+		trc("tls=%v key=%v, (%v:)", tls, key, origin(2))
+	}
 	x___pthread_key_delete(tls, key)
 }
 
 func Xtss_set(tls *TLS, k uint32, x uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v k=%v x=%v, (%v:)", tls, k, x, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var self uintptr
 	self = ___get_tp(tls)
 	/* Avoid unnecessary COW */
@@ -148335,6 +152620,10 @@ func x___year_to_secs(tls *TLS, year int64, is_leap uintptr) (r int64) {
 }
 
 func Xasctime(tls *TLS, tm uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v tm=%v, (%v:)", tls, tm, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___asctime_r(tls, tm, uintptr(unsafe.Pointer(&_buf10)))
 }
 
@@ -148362,6 +152651,10 @@ func x___asctime_r(tls *TLS, tm uintptr, buf uintptr) (r uintptr) {
 const m_CLOCK_PROCESS_CPUTIME_ID = 2
 
 func Xclock(tls *TLS) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* ts at bp+0 */ Ttimespec
@@ -148377,6 +152670,10 @@ func Xclock(tls *TLS) (r int64) {
 const m_SYS_clock_getres = 229
 
 func Xclock_getcpuclockid(tls *TLS, pid int32, clk uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v clk=%v, (%v:)", tls, pid, clk, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var id, ret int32
@@ -148394,6 +152691,10 @@ func Xclock_getcpuclockid(tls *TLS, pid int32, clk uintptr) (r int32) {
 }
 
 func Xclock_getres(tls *TLS, clk int32, ts uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v clk=%v ts=%v, (%v:)", tls, clk, ts, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* If reaching this point, it's a 64-bit arch or time64-only
 	 * 32-bit arch and we can get result directly into timespec. */
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_clock_getres), int64(clk), int64(ts)))))
@@ -148472,10 +152773,18 @@ func x___clock_nanosleep(tls *TLS, clk int32, flags int32, req uintptr, rem uint
 const m_SYS_clock_settime = 227
 
 func Xclock_settime(tls *TLS, clk int32, ts uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v clk=%v ts=%v, (%v:)", tls, clk, ts, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_clock_settime), int64(clk), int64(ts)))))
 }
 
 func Xctime(tls *TLS, t uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v, (%v:)", tls, t, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var tm uintptr
 	tm = Xlocaltime(tls, t)
 	if !(tm != 0) {
@@ -148485,6 +152794,10 @@ func Xctime(tls *TLS, t uintptr) (r uintptr) {
 }
 
 func Xctime_r(tls *TLS, t uintptr, buf uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v buf=%v, (%v:)", tls, t, buf, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(64)
 	var tm_p, v1 uintptr
@@ -148499,6 +152812,10 @@ func Xctime_r(tls *TLS, t uintptr, buf uintptr) (r uintptr) {
 }
 
 func Xdifftime(tls *TLS, t1 int64, t0 int64) (r float64) {
+	if __ccgo_strace {
+		trc("tls=%v t1=%v t0=%v, (%v:)", tls, t1, t0, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return float64(t1 - t0)
 }
 
@@ -148511,6 +152828,10 @@ type Ttimeb = struct {
 }
 
 func Xftime(tls *TLS, tp uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v tp=%v, (%v:)", tls, tp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var v1 int16
@@ -148527,6 +152848,10 @@ func Xftime(tls *TLS, tp uintptr) (r int32) {
 const m_PTHREAD_CANCEL_DEFERRED = 0
 
 func Xgetdate(tls *TLS, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(112) /* tlsAllocs 104 maxVaListSize 0 */
 	defer tls.Free(112)
 	var datemsk, f, p, ret uintptr
@@ -148572,6 +152897,10 @@ out:
 var _tmbuf Ttm
 
 func Xgettimeofday(tls *TLS, tv uintptr, tz uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v tv=%v tz=%v, (%v:)", tls, tv, tz, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* ts at bp+0 */ Ttimespec
@@ -148585,12 +152914,20 @@ func Xgettimeofday(tls *TLS, tv uintptr, tz uintptr) (r int32) {
 }
 
 func Xgmtime(tls *TLS, t uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v, (%v:)", tls, t, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xgmtime_r(tls, t, uintptr(unsafe.Pointer(&_tm)))
 }
 
 var _tm Ttm
 
 func Xgmtime_r(tls *TLS, t uintptr, tm uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v tm=%v, (%v:)", tls, t, tm, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	if x___secs_to_tm(tls, *(*int64)(unsafe.Pointer(t)), tm) < 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EOVERFLOW)
 		return uintptr(0)
@@ -148602,12 +152939,20 @@ func Xgmtime_r(tls *TLS, t uintptr, tm uintptr) (r uintptr) {
 }
 
 func Xlocaltime(tls *TLS, t uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v, (%v:)", tls, t, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xlocaltime_r(tls, t, uintptr(unsafe.Pointer(&_tm1)))
 }
 
 var _tm1 Ttm
 
 func Xlocaltime_r(tls *TLS, t uintptr, tm uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v tm=%v, (%v:)", tls, t, tm, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	/* Reject time_t values whose year would overflow int because
 	 * __secs_to_zone cannot safely handle them. */
 	if *(*int64)(unsafe.Pointer(t)) < int64(-Int32FromInt32(1)-Int32FromInt32(0x7fffffff))*Int64FromInt64(31622400) || *(*int64)(unsafe.Pointer(t)) > Int64FromInt32(m_INT_MAX)*Int64FromInt64(31622400) {
@@ -148623,6 +152968,10 @@ func Xlocaltime_r(tls *TLS, t uintptr, tm uintptr) (r uintptr) {
 }
 
 func Xmktime(tls *TLS, tm uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v tm=%v, (%v:)", tls, tm, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var t int64
@@ -148649,6 +152998,10 @@ error:
 }
 
 func Xnanosleep(tls *TLS, req uintptr, rem uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v req=%v rem=%v, (%v:)", tls, req, rem, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(-x___clock_nanosleep(tls, m_CLOCK_REALTIME, 0, req, rem))))
 }
 
@@ -149022,10 +153375,18 @@ func x___strftime_l(tls *TLS, s uintptr, n uint64, f uintptr, tm uintptr, loc ui
 }
 
 func Xstrftime(tls *TLS, s uintptr, n uint64, f uintptr, tm uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v n=%v f=%v tm=%v, (%v:)", tls, s, n, f, tm, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___strftime_l(tls, s, n, f, tm, (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Flocale)
 }
 
 func Xstrptime(tls *TLS, s uintptr, f uintptr, tm uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v f=%v tm=%v, (%v:)", tls, s, f, tm, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
 	var adj, i, min, neg, range1, w, want_century, v1, v2, v4, v44, v45, v5, v51 int32
@@ -149391,6 +153752,10 @@ func Xstrptime(tls *TLS, s uintptr, f uintptr, tm uintptr) (r uintptr) {
 }
 
 func Xtime(tls *TLS, t uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v, (%v:)", tls, t, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* ts at bp+0 */ Ttimespec
@@ -149402,6 +153767,10 @@ func Xtime(tls *TLS, t uintptr) (r int64) {
 }
 
 func Xtimegm(tls *TLS, tm uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v tm=%v, (%v:)", tls, tm, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 56 maxVaListSize 0 */
 	defer tls.Free(64)
 	var t int64
@@ -149493,6 +153862,10 @@ func _start2(tls *TLS, arg uintptr) (r uintptr) {
 }
 
 func Xtimer_create(tls *TLS, clk int32, evp uintptr, res uintptr) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v clk=%v evp=%v res=%v, (%v:)", tls, clk, evp, res, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(432) /* tlsAllocs 424 maxVaListSize 0 */
 	defer tls.Free(432)
 	var ksevp uintptr
@@ -149587,6 +153960,10 @@ func Xtimer_create(tls *TLS, clk int32, evp uintptr, res uintptr) (r1 int32) {
 var _init2 int32
 
 func Xtimer_delete(tls *TLS, t uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v, (%v:)", tls, t, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var td uintptr
 	if int64(t) < 0 {
 		td = uintptr(uint64(t) << Int32FromInt32(1))
@@ -149600,6 +153977,10 @@ func Xtimer_delete(tls *TLS, t uintptr) (r int32) {
 const m_SYS_timer_getoverrun = 225
 
 func Xtimer_getoverrun(tls *TLS, t uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v, (%v:)", tls, t, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var td uintptr
 	if int64(t) < 0 {
 		td = uintptr(uint64(t) << Int32FromInt32(1))
@@ -149611,6 +153992,10 @@ func Xtimer_getoverrun(tls *TLS, t uintptr) (r int32) {
 const m_SYS_timer_gettime = 224
 
 func Xtimer_gettime(tls *TLS, t uintptr, val uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v val=%v, (%v:)", tls, t, val, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var td uintptr
 	if int64(t) < 0 {
 		td = uintptr(uint64(t) << Int32FromInt32(1))
@@ -149622,6 +154007,10 @@ func Xtimer_gettime(tls *TLS, t uintptr, val uintptr) (r int32) {
 const m_SYS_timer_settime = 223
 
 func Xtimer_settime(tls *TLS, t uintptr, flags int32, val uintptr, old uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v t=%v flags=%v val=%v old=%v, (%v:)", tls, t, flags, val, old, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var td uintptr
 	if int64(t) < 0 {
 		td = uintptr(uint64(t) << Int32FromInt32(1))
@@ -149640,6 +154029,10 @@ type Ttms = struct {
 }
 
 func Xtimes(tls *TLS, tms uintptr) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v tms=%v, (%v:)", tls, tms, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return ___syscall1(tls, int64(m_SYS_times), int64(tms))
 }
 
@@ -149650,6 +154043,10 @@ const m_TIME_UTC = 1
 //	/* There is no other implemented value than TIME_UTC; all other values
 //	 * are considered erroneous. */
 func Xtimespec_get(tls *TLS, ts uintptr, base int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v ts=%v base=%v, (%v:)", tls, ts, base, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret, v1 int32
 	if base != int32(m_TIME_UTC) {
 		return 0
@@ -149669,6 +154066,10 @@ type Tutimbuf = struct {
 }
 
 func Xutime(tls *TLS, path uintptr, times uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v times=%v, (%v:)", tls, path, times, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var v1 uintptr
@@ -149785,6 +154186,10 @@ func x___wcsftime_l(tls *TLS, s uintptr, n uint64, f uintptr, tm uintptr, loc ui
 }
 
 func Xwcsftime(tls *TLS, wcs uintptr, n uint64, f uintptr, tm uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v wcs=%v n=%v f=%v tm=%v, (%v:)", tls, wcs, n, f, tm, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___wcsftime_l(tls, wcs, n, f, tm, (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Flocale)
 }
 
@@ -149795,18 +154200,30 @@ func x__exit(tls *TLS, status int32) {
 const m_SYS_access = 21
 
 func Xaccess(tls *TLS, filename uintptr, amode int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v amode=%v, (%v:)", tls, filename, amode, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_access), int64(filename), int64(amode)))))
 }
 
 const m_SYS_acct = 163
 
 func Xacct(tls *TLS, filename uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v filename=%v, (%v:)", tls, filename, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_acct), int64(filename)))))
 }
 
 const m_ITIMER_REAL = 0
 
 func Xalarm(tls *TLS, seconds uint32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v seconds=%v, (%v:)", tls, seconds, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var _ /* it at bp+0 */ Titimerval
@@ -149822,12 +154239,20 @@ func Xalarm(tls *TLS, seconds uint32) (r uint32) {
 }
 
 func Xchdir(tls *TLS, path uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v, (%v:)", tls, path, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_chdir), int64(path)))))
 }
 
 const m_SYS_chown = 92
 
 func Xchown(tls *TLS, path uintptr, uid uint32, gid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v uid=%v gid=%v, (%v:)", tls, path, uid, gid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_chown), int64(path), int64(uid), int64(gid)))))
 }
 
@@ -149836,6 +154261,10 @@ func _dummy22(tls *TLS, fd int32) (r int32) {
 }
 
 func Xclose(tls *TLS, fd int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r int32
 	fd = x___aio_close(tls, fd)
 	r = int32(x___syscall_cp(tls, int64(m_SYS_close), int64(fd), 0, 0, 0, 0, 0))
@@ -149846,6 +154275,10 @@ func Xclose(tls *TLS, fd int32) (r1 int32) {
 }
 
 func Xctermid(tls *TLS, s uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var v1 uintptr
 	if s != 0 {
 		v1 = Xstrcpy(tls, s, ts+473)
@@ -149856,10 +154289,18 @@ func Xctermid(tls *TLS, s uintptr) (r uintptr) {
 }
 
 func Xdup(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_dup), int64(fd)))))
 }
 
 func Xdup2(tls *TLS, old int32, new1 int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v old=%v new1=%v, (%v:)", tls, old, new1, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	var r, v1 int32
 	for {
 		v1 = int32(___syscall2(tls, int64(m_SYS_dup2), int64(old), int64(new1)))
@@ -149936,6 +154377,10 @@ func _checker(tls *TLS, p uintptr) (r int32) {
 }
 
 func Xfaccessat(tls *TLS, fd int32, filename uintptr, amode int32, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v filename=%v amode=%v flag=%v, (%v:)", tls, fd, filename, amode, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(1200) /* tlsAllocs 1192 maxVaListSize 0 */
 	defer tls.Free(1200)
 	var pid, ret int32
@@ -149979,6 +154424,10 @@ func Xfaccessat(tls *TLS, fd int32, filename uintptr, amode int32, flag int32) (
 }
 
 func Xfchdir(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ret int32
@@ -149994,6 +154443,10 @@ func Xfchdir(tls *TLS, fd int32) (r int32) {
 const m_SYS_fchown = 93
 
 func Xfchown(tls *TLS, fd int32, uid uint32, gid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v uid=%v gid=%v, (%v:)", tls, fd, uid, gid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 32 maxVaListSize 0 */
 	defer tls.Free(32)
 	var ret int32
@@ -150009,30 +154462,50 @@ func Xfchown(tls *TLS, fd int32, uid uint32, gid uint32) (r int32) {
 const m_SYS_fchownat = 260
 
 func Xfchownat(tls *TLS, fd int32, path uintptr, uid uint32, gid uint32, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v path=%v uid=%v gid=%v flag=%v, (%v:)", tls, fd, path, uid, gid, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_fchownat), int64(fd), int64(path), int64(uid), int64(gid), int64(flag)))))
 }
 
 const m_SYS_fdatasync = 75
 
 func Xfdatasync(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_fdatasync), int64(fd), 0, 0, 0, 0, 0))))
 }
 
 const m_SYS_fsync = 74
 
 func Xfsync(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_fsync), int64(fd), 0, 0, 0, 0, 0))))
 }
 
 const m_SYS_ftruncate = 77
 
 func Xftruncate(tls *TLS, fd int32, length int64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v length=%v, (%v:)", tls, fd, length, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_ftruncate), int64(fd), length))))
 }
 
 const m_SYS_getcwd = 79
 
 func Xgetcwd(tls *TLS, buf uintptr, size uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v buf=%v size=%v, (%v:)", tls, buf, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int64
 	var tmp, v3 uintptr
 	var v1 uint64
@@ -150069,24 +154542,44 @@ func Xgetcwd(tls *TLS, buf uintptr, size uint64) (r uintptr) {
 }
 
 func Xgetegid(tls *TLS) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uint32(___syscall0(tls, int64(m_SYS_getegid)))
 }
 
 func Xgeteuid(tls *TLS) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uint32(___syscall0(tls, int64(m_SYS_geteuid)))
 }
 
 func Xgetgid(tls *TLS) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uint32(___syscall0(tls, int64(m_SYS_getgid)))
 }
 
 const m_SYS_getgroups = 115
 
 func Xgetgroups(tls *TLS, count int32, list uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v count=%v list=%v, (%v:)", tls, count, list, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_getgroups), int64(count), int64(list)))))
 }
 
 func Xgethostname(tls *TLS, name uintptr, len1 uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v len1=%v, (%v:)", tls, name, len1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(400) /* tlsAllocs 392 maxVaListSize 0 */
 	defer tls.Free(400)
 	var i uint64
@@ -150115,10 +154608,18 @@ func Xgethostname(tls *TLS, name uintptr, len1 uint64) (r int32) {
 }
 
 func Xgetlogin(tls *TLS) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xgetenv(tls, ts+2341)
 }
 
 func Xgetlogin_r(tls *TLS, name uintptr, size uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v name=%v size=%v, (%v:)", tls, name, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var logname uintptr
 	logname = Xgetlogin(tls)
 	if !(logname != 0) {
@@ -150134,34 +154635,62 @@ func Xgetlogin_r(tls *TLS, name uintptr, size uint64) (r int32) {
 const m_SYS_getpgid = 121
 
 func Xgetpgid(tls *TLS, pid int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v, (%v:)", tls, pid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_getpgid), int64(pid)))))
 }
 
 func Xgetpgrp(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(___syscall1(tls, int64(m_SYS_getpgid), int64(Int32FromInt32(0))))
 }
 
 func Xgetpid(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(___syscall0(tls, int64(m_SYS_getpid)))
 }
 
 const m_SYS_getppid = 110
 
 func Xgetppid(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(___syscall0(tls, int64(m_SYS_getppid)))
 }
 
 const m_SYS_getsid = 124
 
 func Xgetsid(tls *TLS, pid int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v, (%v:)", tls, pid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_getsid), int64(pid)))))
 }
 
 func Xgetuid(tls *TLS) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return uint32(___syscall0(tls, int64(m_SYS_getuid)))
 }
 
 func Xisatty(tls *TLS, fd int32) (r1 int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var r uint64
@@ -150179,30 +154708,50 @@ func Xisatty(tls *TLS, fd int32) (r1 int32) {
 const m_SYS_lchown = 94
 
 func Xlchown(tls *TLS, path uintptr, uid uint32, gid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v uid=%v gid=%v, (%v:)", tls, path, uid, gid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_lchown), int64(path), int64(uid), int64(gid)))))
 }
 
 const m_SYS_link = 86
 
 func Xlink(tls *TLS, existing uintptr, new1 uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v existing=%v new1=%v, (%v:)", tls, existing, new1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_link), int64(existing), int64(new1)))))
 }
 
 const m_SYS_linkat = 265
 
 func Xlinkat(tls *TLS, fd1 int32, existing uintptr, fd2 int32, new1 uintptr, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd1=%v existing=%v fd2=%v new1=%v flag=%v, (%v:)", tls, fd1, existing, fd2, new1, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall5(tls, int64(m_SYS_linkat), int64(fd1), int64(existing), int64(fd2), int64(new1), int64(flag)))))
 }
 
 const m_SYS_lseek = 8
 
 func Xlseek(tls *TLS, fd int32, offset int64, whence int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v offset=%v whence=%v, (%v:)", tls, fd, offset, whence, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_lseek), int64(fd), offset, int64(whence))))
 }
 
 const m_PRIO_PROCESS = 0
 
 func Xnice(tls *TLS, inc int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v inc=%v, (%v:)", tls, inc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var prio int32
 	prio = inc
 	// Only query old priority if it can affect the result.
@@ -150230,18 +154779,30 @@ func Xnice(tls *TLS, inc int32) (r int32) {
 const m_SYS_pause = 34
 
 func Xpause(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_pause), 0, 0, 0, 0, 0, 0))))
 }
 
 const m_SYS_pipe = 22
 
 func Xpipe(tls *TLS, fd uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_pipe), int64(fd)))))
 }
 
 const m_SYS_pipe2 = 293
 
 func Xpipe2(tls *TLS, fd uintptr, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v flag=%v, (%v:)", tls, fd, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var ret int32
 	if !(flag != 0) {
 		return Xpipe(tls, fd)
@@ -150269,38 +154830,66 @@ func Xpipe2(tls *TLS, fd uintptr, flag int32) (r int32) {
 }
 
 func Xposix_close(tls *TLS, fd int32, flags int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v flags=%v, (%v:)", tls, fd, flags, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xclose(tls, fd)
 }
 
 const m_SYS_pread64 = 17
 
 func Xpread(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_pread64), int64(fd), int64(buf), int64(size), ofs, 0, 0)))
 }
 
 const m_SYS_preadv = 295
 
 func Xpreadv(tls *TLS, fd int32, iov uintptr, count int32, ofs int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v iov=%v count=%v ofs=%v, (%v:)", tls, fd, iov, count, ofs, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_preadv), int64(fd), int64(iov), int64(count), ofs, ofs>>Int32FromInt32(32), 0)))
 }
 
 const m_SYS_pwrite64 = 18
 
 func Xpwrite(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_pwrite64), int64(fd), int64(buf), int64(size), ofs, 0, 0)))
 }
 
 const m_SYS_pwritev = 296
 
 func Xpwritev(tls *TLS, fd int32, iov uintptr, count int32, ofs int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v iov=%v count=%v ofs=%v, (%v:)", tls, fd, iov, count, ofs, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_pwritev), int64(fd), int64(iov), int64(count), ofs, ofs>>Int32FromInt32(32), 0)))
 }
 
 func Xread(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v count=%v, (%v:)", tls, fd, buf, count, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, m_SYS_read, int64(fd), int64(buf), int64(count), 0, 0, 0)))
 }
 
 func Xreadlink(tls *TLS, path uintptr, buf uintptr, bufsize uint64) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v buf=%v bufsize=%v, (%v:)", tls, path, buf, bufsize, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var r int32
@@ -150319,6 +154908,10 @@ func Xreadlink(tls *TLS, path uintptr, buf uintptr, bufsize uint64) (r1 int64) {
 const m_SYS_readlinkat = 267
 
 func Xreadlinkat(tls *TLS, fd int32, path uintptr, buf uintptr, bufsize uint64) (r1 int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v path=%v buf=%v bufsize=%v, (%v:)", tls, fd, path, buf, bufsize, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
 	var r int32
@@ -150335,64 +154928,120 @@ func Xreadlinkat(tls *TLS, fd int32, path uintptr, buf uintptr, bufsize uint64) 
 }
 
 func Xreadv(tls *TLS, fd int32, iov uintptr, count int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v iov=%v count=%v, (%v:)", tls, fd, iov, count, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_readv), int64(fd), int64(iov), int64(count), 0, 0, 0)))
 }
 
 const m_SYS_renameat = 264
 
 func Xrenameat(tls *TLS, oldfd int32, old uintptr, newfd int32, new1 uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v oldfd=%v old=%v newfd=%v new1=%v, (%v:)", tls, oldfd, old, newfd, new1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall4(tls, int64(m_SYS_renameat), int64(oldfd), int64(old), int64(newfd), int64(new1)))))
 }
 
 func Xrmdir(tls *TLS, path uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v, (%v:)", tls, path, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_rmdir), int64(path)))))
 }
 
 const m_SYS_setresgid = 119
 
 func Xsetegid(tls *TLS, egid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v egid=%v, (%v:)", tls, egid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___setxid(tls, int32(m_SYS_setresgid), -int32(1), int32(egid), -int32(1))
 }
 
 const m_SYS_setresuid = 117
 
 func Xseteuid(tls *TLS, euid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v euid=%v, (%v:)", tls, euid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___setxid(tls, int32(m_SYS_setresuid), -int32(1), int32(euid), -int32(1))
 }
 
 func Xsetgid(tls *TLS, gid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v gid=%v, (%v:)", tls, gid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___setxid(tls, int32(m_SYS_setgid), int32(gid), 0, 0)
 }
 
 func Xsetpgid(tls *TLS, pid int32, pgid int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v pid=%v pgid=%v, (%v:)", tls, pid, pgid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_setpgid), int64(pid), int64(pgid)))))
 }
 
 func Xsetpgrp(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Xsetpgid(tls, 0, 0)
 }
 
 func Xsetregid(tls *TLS, rgid uint32, egid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v rgid=%v egid=%v, (%v:)", tls, rgid, egid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___setxid(tls, int32(m_SYS_setregid), int32(rgid), int32(egid), 0)
 }
 
 func Xsetresgid(tls *TLS, rgid uint32, egid uint32, sgid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v rgid=%v egid=%v sgid=%v, (%v:)", tls, rgid, egid, sgid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___setxid(tls, int32(m_SYS_setresgid), int32(rgid), int32(egid), int32(sgid))
 }
 
 func Xsetresuid(tls *TLS, ruid uint32, euid uint32, suid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v ruid=%v euid=%v suid=%v, (%v:)", tls, ruid, euid, suid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___setxid(tls, int32(m_SYS_setresuid), int32(ruid), int32(euid), int32(suid))
 }
 
 func Xsetreuid(tls *TLS, ruid uint32, euid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v ruid=%v euid=%v, (%v:)", tls, ruid, euid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___setxid(tls, int32(m_SYS_setreuid), int32(ruid), int32(euid), 0)
 }
 
 func Xsetsid(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall0(tls, int64(m_SYS_setsid)))))
 }
 
 func Xsetuid(tls *TLS, uid uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v uid=%v, (%v:)", tls, uid, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___setxid(tls, int32(m_SYS_setuid), int32(uid), 0, 0)
 }
 
@@ -150441,6 +155090,10 @@ func x___setxid(tls *TLS, nr int32, id int32, eid int32, sid int32) (r int32) {
 }
 
 func Xsleep(tls *TLS, seconds uint32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v seconds=%v, (%v:)", tls, seconds, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimespec
@@ -150457,24 +155110,39 @@ func Xsleep(tls *TLS, seconds uint32) (r uint32) {
 const m_SYS_symlink = 88
 
 func Xsymlink(tls *TLS, existing uintptr, new1 uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v existing=%v new1=%v, (%v:)", tls, existing, new1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_symlink), int64(existing), int64(new1)))))
 }
 
 const m_SYS_symlinkat = 266
 
 func Xsymlinkat(tls *TLS, existing uintptr, fd int32, new1 uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v existing=%v fd=%v new1=%v, (%v:)", tls, existing, fd, new1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_symlinkat), int64(existing), int64(fd), int64(new1)))))
 }
 
 const m_SYS_sync = 162
 
 func Xsync(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
 	___syscall0(tls, int64(m_SYS_sync))
 }
 
 const m_TIOCGPGRP = 21519
 
 func Xtcgetpgrp(tls *TLS, fd int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(32)
 	var _ /* pgrp at bp+0 */ int32
@@ -150487,6 +155155,10 @@ func Xtcgetpgrp(tls *TLS, fd int32) (r int32) {
 const m_TIOCSPGRP = 21520
 
 func Xtcsetpgrp(tls *TLS, fd int32, pgrp int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v pgrp=%v, (%v:)", tls, fd, pgrp, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(32) /* tlsAllocs 8 maxVaListSize 8 */
 	defer tls.Free(32)
 	var _ /* pgrp_int at bp+0 */ int32
@@ -150497,10 +155169,18 @@ func Xtcsetpgrp(tls *TLS, fd int32, pgrp int32) (r int32) {
 const m_SYS_truncate = 76
 
 func Xtruncate(tls *TLS, path uintptr, length int64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v length=%v, (%v:)", tls, path, length, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_truncate), int64(path), length))))
 }
 
 func Xttyname(tls *TLS, fd int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var result, v1 int32
 	v1 = Xttyname_r(tls, fd, uintptr(unsafe.Pointer(&_buf11)), uint64(32))
 	result = v1
@@ -150514,6 +155194,10 @@ func Xttyname(tls *TLS, fd int32) (r uintptr) {
 var _buf11 [32]int8
 
 func Xttyname_r(tls *TLS, fd int32, name uintptr, size uint64) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v name=%v size=%v, (%v:)", tls, fd, name, size, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(320) /* tlsAllocs 320 maxVaListSize 0 */
 	defer tls.Free(320)
 	var l int64
@@ -150541,6 +155225,10 @@ func Xttyname_r(tls *TLS, fd int32, name uintptr, size uint64) (r int32) {
 }
 
 func Xualarm(tls *TLS, value uint32, interval uint32) (r uint32) {
+	if __ccgo_strace {
+		trc("tls=%v value=%v interval=%v, (%v:)", tls, value, interval, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(64) /* tlsAllocs 64 maxVaListSize 0 */
 	defer tls.Free(64)
 	var _ /* it at bp+0 */ Titimerval
@@ -150558,16 +155246,28 @@ func Xualarm(tls *TLS, value uint32, interval uint32) (r uint32) {
 }
 
 func Xunlink(tls *TLS, path uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v path=%v, (%v:)", tls, path, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_unlink), int64(path)))))
 }
 
 const m_SYS_unlinkat = 263
 
 func Xunlinkat(tls *TLS, fd int32, path uintptr, flag int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v path=%v flag=%v, (%v:)", tls, fd, path, flag, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_unlinkat), int64(fd), int64(path), int64(flag)))))
 }
 
 func Xusleep(tls *TLS, useconds uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v useconds=%v, (%v:)", tls, useconds, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
 	defer tls.Free(16)
 	var _ /* tv at bp+0 */ Ttimespec
@@ -150579,10 +155279,18 @@ func Xusleep(tls *TLS, useconds uint32) (r int32) {
 }
 
 func Xwrite(tls *TLS, fd int32, buf uintptr, count uint64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v count=%v, (%v:)", tls, fd, buf, count, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_write), int64(fd), int64(buf), int64(count), 0, 0, 0)))
 }
 
 func Xwritev(tls *TLS, fd int32, iov uintptr, count int32) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v iov=%v count=%v, (%v:)", tls, fd, iov, count, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_writev), int64(fd), int64(iov), int64(count), 0, 0, 0)))
 }
 
