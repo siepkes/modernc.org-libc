@@ -797,6 +797,14 @@ func Xpwrite64(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64
 	return Xpwrite(tls, fd, buf, size, ofs)
 }
 
+func Xstrchrnul(tls *TLS, s uintptr, c int32) (r uintptr) {
+	return x___strchrnul(tls, s, c)
+}
+
+func X__builtin_log2(tls *TLS, x float64) (r1 float64) {
+	return Xlog2(tls, x)
+}
+
 func X__builtin_abort(tls *TLS) {
 	if __ccgo_strace {
 		trc("tls=%v, (%v:)", tls, origin(2))
