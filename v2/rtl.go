@@ -288,6 +288,14 @@ func AtomicStoreNUintptr(ptr uintptr, val uintptr, memorder int32) {
 	atomic.StoreUintptr((*uintptr)(unsafe.Pointer(ptr)), val)
 }
 
+func AtomicLoadNUint8(ptr uintptr, memorder int32) uint8 {
+	return byte(a_load_8(ptr))
+}
+
+func AtomicLoadNUint16(ptr uintptr, memorder int32) uint16 {
+	return uint16(a_load_16(ptr))
+}
+
 func AtomicLoadNInt32(ptr uintptr, memorder int32) int32 {
 	return atomic.LoadInt32((*int32)(unsafe.Pointer(ptr)))
 }

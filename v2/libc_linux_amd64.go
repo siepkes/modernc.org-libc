@@ -781,6 +781,22 @@ func _memmove(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
 	return dest
 }
 
+func Xpread64(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
+	return Xpread(tls, fd, buf, size, ofs)
+}
+
+func Xpwrite64(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
+	return Xpwrite(tls, fd, buf, size, ofs)
+}
+
 func X__builtin_abort(tls *TLS) {
 	if __ccgo_strace {
 		trc("tls=%v, (%v:)", tls, origin(2))

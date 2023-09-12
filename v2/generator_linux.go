@@ -198,7 +198,7 @@ func main() {
 		w := false
 		for i, v := range a {
 			if strings.HasPrefix(v, "func X") {
-				if i+1 < len(a) && !strings.Contains(a[i+1], `if __ccgo_strace {"`) {
+				if i+1 < len(a) && !strings.Contains(a[i+1], "__ccgo_strace") {
 					a[i] += "\n\t" + traceLine(v)
 					w = true
 					format = true

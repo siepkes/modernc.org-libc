@@ -1831,6 +1831,11 @@ func Xcabsl(tls *TLS, z complex128) (r float64) {
 	return Xcabs(tls, Complex128FromComplex128(z))
 }
 
+// FIXME: Hull et al. "Implementing the complex arcsine and arccosine functions using exception handling" 1997
+
+// C documentation
+//
+//	/* acos(z) = pi/2 - asin(z) */
 func Xcacos(tls *TLS, z complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -1863,6 +1868,9 @@ func Xcacosf(tls *TLS, z complex64) (r complex64) {
 	return *(*complex64)(unsafe.Pointer(&v1))
 }
 
+// C documentation
+//
+//	/* acosh(z) = i acos(z) */
 func Xcacosh(tls *TLS, z complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -1953,6 +1961,11 @@ func Xcargl(tls *TLS, z complex128) (r float64) {
 	return Xcarg(tls, Complex128FromComplex128(z))
 }
 
+// FIXME
+
+// C documentation
+//
+//	/* asin(z) = -i log(i z + sqrt(1 - z*z)) */
 func Xcasin(tls *TLS, z complex128) (r1 complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -1980,6 +1993,9 @@ func Xcasin(tls *TLS, z complex128) (r1 complex128) {
 	return *(*complex128)(unsafe.Pointer(&v3))
 }
 
+// C documentation
+//
+//	// FIXME
 func Xcasinf(tls *TLS, z complex64) (r1 complex64) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -2007,6 +2023,9 @@ func Xcasinf(tls *TLS, z complex64) (r1 complex64) {
 	return *(*complex64)(unsafe.Pointer(&v3))
 }
 
+// C documentation
+//
+//	/* asinh(z) = -i asin(i z) */
 func Xcasinh(tls *TLS, z complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -2152,6 +2171,9 @@ func Xcatanf(tls *TLS, z complex64) (r complex64) {
 	return w
 }
 
+// C documentation
+//
+//	/* atanh = -i atan(i z) */
 func Xcatanh(tls *TLS, z complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -2204,6 +2226,9 @@ func Xcatanl(tls *TLS, z complex128) (r complex128) {
 	return Complex128FromComplex128(Xcatan(tls, Complex128FromComplex128(z)))
 }
 
+// C documentation
+//
+//	/* cos(z) = cosh(i z) */
 func Xccos(tls *TLS, z complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -2527,6 +2552,9 @@ func Xccosl(tls *TLS, z complex128) (r complex128) {
 var _exp_ovfl = uint32(0x40862e42) /* high bits of MAX_EXP * ln2 ~= 710 */
 var _cexp_ovfl = uint32(0x4096b8e4)
 
+// C documentation
+//
+//	/* (MAX_EXP - MIN_DENORM_EXP) * ln2 */
 func Xcexp(tls *TLS, z complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -2611,6 +2639,9 @@ func Xcexp(tls *TLS, z complex128) (r complex128) {
 var _exp_ovfl1 = uint32(0x42b17218) /* MAX_EXP * ln2 ~= 88.722839355 */
 var _cexp_ovfl1 = uint32(0x43400074)
 
+// C documentation
+//
+//	/* (MAX_EXP - MIN_DENORM_EXP) * ln2 */
 func Xcexpf(tls *TLS, z complex64) (r complex64) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -2722,6 +2753,11 @@ func Xcimagl(tls *TLS, z complex128) (r float64) {
 	return +(*(*[2]float64)(unsafe.Pointer(&z)))[int32(1)]
 }
 
+// FIXME
+
+// C documentation
+//
+//	/* log(z) = log(|z|) + i arg(z) */
 func Xclog(tls *TLS, z complex128) (r1 complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -2738,6 +2774,9 @@ func Xclog(tls *TLS, z complex128) (r1 complex128) {
 	return *(*complex128)(unsafe.Pointer(&v1))
 }
 
+// C documentation
+//
+//	// FIXME
 func Xclogf(tls *TLS, z complex64) (r1 complex64) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -2801,6 +2840,9 @@ func Xconjl(tls *TLS, z complex128) (r complex128) {
 	return *(*complex128)(unsafe.Pointer(&v1))
 }
 
+// C documentation
+//
+//	/* pow(z, c) = exp(c log(z)), See C99 G.6.4.1 */
 func Xcpow(tls *TLS, z complex128, c complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v c=%v, (%v:)", tls, z, c, origin(2))
@@ -2891,6 +2933,9 @@ func Xcreall(tls *TLS, z complex128) (r float64) {
 	return Float64FromComplex128(z)
 }
 
+// C documentation
+//
+//	/* sin(z) = -i sinh(i z) */
 func Xcsin(tls *TLS, z complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -3222,6 +3267,17 @@ func Xcsinl(tls *TLS, z complex128) (r complex128) {
 	return Complex128FromComplex128(Xcsin(tls, Complex128FromComplex128(z)))
 }
 
+/*
+ * gcc doesn't implement complex multiplication or division correctly,
+ * so we need to handle infinities specially. We turn on this pragma to
+ * notify conforming c99 compilers that the fast-but-incorrect code that
+ * gcc generates is acceptable, since the special cases have already been
+ * handled.
+ */
+
+// C documentation
+//
+//	/* We risk spurious overflow for components >= DBL_MAX / (1 + sqrt(2)). */
 func Xcsqrt(tls *TLS, z complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -3312,6 +3368,15 @@ func Xcsqrt(tls *TLS, z complex128) (r complex128) {
 	return result
 }
 
+// C documentation
+//
+//	/*
+//	 * gcc doesn't implement complex multiplication or division correctly,
+//	 * so we need to handle infinities specially. We turn on this pragma to
+//	 * notify conforming c99 compilers that the fast-but-incorrect code that
+//	 * gcc generates is acceptable, since the special cases have already been
+//	 * handled.
+//	 */
 func Xcsqrtf(tls *TLS, z complex64) (r complex64) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -3404,6 +3469,9 @@ func Xcsqrtl(tls *TLS, z complex128) (r complex128) {
 	return Complex128FromComplex128(Xcsqrt(tls, Complex128FromComplex128(z)))
 }
 
+// C documentation
+//
+//	/* tan(z) = -i tanh(i z) */
 func Xctan(tls *TLS, z complex128) (r complex128) {
 	if __ccgo_strace {
 		trc("tls=%v z=%v, (%v:)", tls, z, origin(2))
@@ -7998,6 +8066,7 @@ var _comp_maskr1 = [4][16]uint32{
 var _ascii64 = [65]uint8{'.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
 /*   0000000000111111111122222222223333333333444444444455555555556666 */
+
 /*   0123456789012345678901234567890123456789012345678901234567890123 */
 
 // C documentation
@@ -15295,6 +15364,14 @@ func x___iswlower_l(tls *TLS, c uint32, l uintptr) (r int32) {
 	return Xiswlower(tls, c)
 }
 
+// C documentation
+//
+//	/* Consider all legal codepoints as printable except for:
+//	 * - C0 and C1 control characters
+//	 * - U+2028 and U+2029 (line/para break)
+//	 * - U+FFF9 through U+FFFB (interlinear annotation controls)
+//	 * The following code is optimized heavily to make hot paths for the
+//	 * expected printable characters. */
 func Xiswprint(tls *TLS, wc uint32) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
@@ -19341,6 +19418,11 @@ type Tmbstate_t = struct {
 
 type t__mbstate_t = Tmbstate_t
 
+// C documentation
+//
+//	/* Our definition of whitespace is the Unicode White_Space property,
+//	 * minus non-breaking spaces (U+00A0, U+2007, and U+202F) and script-
+//	 * specific characters with non-blank glyphs (U+1680 and U+180E). */
 func Xiswspace(tls *TLS, wc uint32) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
@@ -31379,6 +31461,12 @@ func x___procfdname(tls *TLS, buf uintptr, fd uint32) {
 	}
 }
 
+// C documentation
+//
+//	/* The shcnt field stores the number of bytes read so far, offset by
+//	 * the value of buf-rpos at the last function call (__shlim or __shgetc),
+//	 * so that between calls the inline shcnt macro can add rpos-buf to get
+//	 * the actual count. */
 func x___shlim(tls *TLS, f uintptr, lim int64) {
 	(*TFILE)(unsafe.Pointer(f)).Fshlim = lim
 	(*TFILE)(unsafe.Pointer(f)).Fshcnt = int64((*TFILE)(unsafe.Pointer(f)).Fbuf) - int64((*TFILE)(unsafe.Pointer(f)).Frpos)
@@ -102296,6 +102384,9 @@ func _put_32(tls *TLS, s uintptr, c uint32, e int32) {
 	*(*uint8)(unsafe.Pointer(s + uintptr(e^int32(3)))) = uint8(c)
 }
 
+// C documentation
+//
+//	/* Adapt as needed */
 func _legacy_map(tls *TLS, map1 uintptr, c uint32) (r uint32) {
 	var x, v1 uint32
 	if c < uint32(int32(4)*int32(*(*uint8)(unsafe.Pointer(map1 + uintptr(-Int32FromInt32(1)))))) {
@@ -104285,6 +104376,13 @@ func x___libc_calloc(tls *TLS, m uint64, n uint64) (r uintptr) {
 
 const m_ALIGN = 16
 
+// C documentation
+//
+//	/* This function returns true if the interval [old,new]
+//	 * intersects the 'len'-sized interval below &libc.auxv
+//	 * (interpreted as the main-thread stack) or below &b
+//	 * (the current stack). It is used to defend against
+//	 * buggy brk implementations that can cross the stack. */
 func _traverses_stack_p(tls *TLS, old uint64, new1 uint64) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
@@ -106333,6 +106431,9 @@ var _C4 = -Float64FromFloat64(2.7557314351390663e-07) /* 0xBE927E4F, 0x809C52AD 
 var _C5 = float64(2.087572321298175e-09)              /* 0x3E21EE9E, 0xBDB4B1C4 */
 var _C6 = -Float64FromFloat64(1.1359647557788195e-11)
 
+// C documentation
+//
+//	/* 0xBDA8FAE9, 0xBE8838D4 */
 func x___cos(tls *TLS, x float64, y float64) (r1 float64) {
 	var hz, r, w, z float64
 	z = x * x
@@ -106350,6 +106451,9 @@ var _C11 = float64(0.04166662332373906)              /*  0.041666623323739063189
 var _C21 = -Float64FromFloat64(0.001388676377460993) /* -0.00138867637746099294692 */
 var _C31 = float64(2.439044879627741e-05)
 
+// C documentation
+//
+//	/*  0.0000243904487962774090654 */
 func x___cosdf(tls *TLS, x float64) (r1 float32) {
 	var r, w, z float64
 	/* Try to optimize for parallel evaluation as in __tandf.c. */
@@ -107121,6 +107225,9 @@ var _invpio21 = float64(0.6366197723675814) /* 0x3FE45F30, 0x6DC9C883 */
 var _pio2_11 = float64(1.5707963109016418)  /* 0x3FF921FB, 0x50000000 */
 var _pio2_1t1 = float64(1.5893254773528196e-08)
 
+// C documentation
+//
+//	/* 0x3E5110b4, 0x611A6263 */
 func x___rem_pio2f(tls *TLS, x float32, y uintptr) (r int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
@@ -107231,6 +107338,9 @@ var _S4 = float64(2.7557313707070068e-06)             /* 0x3EC71DE3, 0x57B1FE7D 
 var _S5 = -Float64FromFloat64(2.5050760253406863e-08) /* 0xBE5AE5E6, 0x8A2B9CEB */
 var _S6 = float64(1.58969099521155e-10)
 
+// C documentation
+//
+//	/* 0x3DE5D93A, 0x5ACFD57C */
 func x___sin(tls *TLS, x float64, y float64, iy int32) (r1 float64) {
 	var r, v, w, z float64
 	z = x * x
@@ -107252,6 +107362,9 @@ var _S21 = float64(0.008333329385889463)               /*  0.0083333293858894631
 var _S31 = -Float64FromFloat64(0.00019839334836096632) /* -0.000198393348360966317347 */
 var _S41 = float64(2.718311493989822e-06)
 
+// C documentation
+//
+//	/*  0.0000027183114939898219064 */
 func x___sindf(tls *TLS, x float64) (r1 float32) {
 	var r, s, w, z float64
 	/* Try to optimize for parallel evaluation as in __tandf.c. */
@@ -107280,6 +107393,9 @@ var _T = [13]float64{
 var _pio42 = float64(0.7853981633974483) /* 3FE921FB, 54442D18 */
 var _pio4lo = float64(3.061616997868383e-17)
 
+// C documentation
+//
+//	/* 3C81A626, 33145C07 */
 func x___tan(tls *TLS, x float64, y float64, odd int32) (r1 float64) {
 	var a, a0, r, s, v, w, w0, z, v1, v3 float64
 	var big, sign int32
@@ -107388,6 +107504,9 @@ var _qS2 = float64(2.0209457602335057)              /* 0x40002AE5, 0x9C598AC8 */
 var _qS3 = -Float64FromFloat64(0.6882839716054533)  /* 0xBFE6066C, 0x1B8D0159 */
 var _qS4 = float64(0.07703815055590194)
 
+// C documentation
+//
+//	/* 0x3FB3B8C5, 0xB12E9282 */
 func _R(tls *TLS, z float64) (r float64) {
 	var p, q float64
 	p = z * (_pS0 + z*(_pS1+z*(_pS2+z*(_pS3+z*(_pS4+z*_pS5)))))
@@ -107596,6 +107715,9 @@ var _qS21 = float64(2.0209457602335057)              /* 0x40002AE5, 0x9C598AC8 *
 var _qS31 = -Float64FromFloat64(0.6882839716054533)  /* 0xBFE6066C, 0x1B8D0159 */
 var _qS41 = float64(0.07703815055590194)
 
+// C documentation
+//
+//	/* 0x3FB3B8C5, 0xB12E9282 */
 func _R2(tls *TLS, z float64) (r float64) {
 	var p, q float64
 	p = z * (_pS02 + z*(_pS12+z*(_pS22+z*(_pS31+z*(_pS41+z*_pS51)))))
@@ -107950,6 +108072,9 @@ func Xatan(tls *TLS, x float64) (r float64) {
 var _pi = float64(3.141592653589793) /* 0x400921FB, 0x54442D18 */
 var _pi_lo = float64(1.2246467991473532e-16)
 
+// C documentation
+//
+//	/* 0x3CA1A626, 0x33145C07 */
 func Xatan2(tls *TLS, y float64, x float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v y=%v x=%v, (%v:)", tls, y, x, origin(2))
@@ -108052,6 +108177,9 @@ func Xatan2(tls *TLS, y float64, x float64) (r float64) {
 var _pi1 = float32(3.141592741) /* 0x40490fdb */
 var _pi_lo1 = float32(-Float64FromFloat64(8.7422776573e-08))
 
+// C documentation
+//
+//	/* 0xb3bbbd2e */
 func Xatan2f(tls *TLS, y float32, x float32) (r float32) {
 	if __ccgo_strace {
 		trc("tls=%v y=%v x=%v, (%v:)", tls, y, x, origin(2))
@@ -108393,6 +108521,9 @@ var _P2 = float64(1.6214297201053545)             /* 0x3ff9f160, 0x4a49d6c2 */
 var _P3 = -Float64FromFloat64(0.758397934778766)  /* 0xbfe844cb, 0xbee751d9 */
 var _P4 = float64(0.14599619288661245)
 
+// C documentation
+//
+//	/* 0x3fc2b000, 0xd4e4edd7 */
 func Xcbrt(tls *TLS, x float64) (r1 float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -108485,6 +108616,9 @@ func Xcbrt(tls *TLS, x float64) (r1 float64) {
 var _B11 = uint32(709958130) /* B1 = (127-127.0/3-0.03306235651)*2**23 */
 var _B21 = uint32(642849266)
 
+// C documentation
+//
+//	/* B2 = (127-127.0/3-24/3-0.03306235651)*2**23 */
 func Xcbrtf(tls *TLS, x float32) (r1 float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -108814,6 +108948,9 @@ var _c2pio2 = Float64FromInt32(2) * Float64FromFloat64(1.5707963267948966) /* 0x
 var _c3pio2 = Float64FromInt32(3) * Float64FromFloat64(1.5707963267948966) /* 0x4012D97C, 0x7F3321D2 */
 var _c4pio2 = Float64FromInt32(4) * Float64FromFloat64(1.5707963267948966)
 
+// C documentation
+//
+//	/* 0x401921FB, 0x54442D18 */
 func Xcosf(tls *TLS, x float32) (r float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -109100,6 +109237,9 @@ var _sb5 = float64(2553.0504064331644)             /* 0x40A3F219, 0xCEDF3BE6 */
 var _sb6 = float64(474.52854120695537)             /* 0x407DA874, 0xE79FE763 */
 var _sb7 = -Float64FromFloat64(22.44095244658582)
 
+// C documentation
+//
+//	/* 0xC03670E2, 0x42712D62 */
 func _erfc1(tls *TLS, x float64) (r float64) {
 	var P, Q, s float64
 	s = _fabs(tls, x) - Float64FromInt32(1)
@@ -109280,6 +109420,9 @@ var _sb51 = float32(2553.050293)                         /* 0x451f90ce */
 var _sb61 = float32(474.52853394)                        /* 0x43ed43a7 */
 var _sb71 = float32(-Float64FromFloat64(22.440952301))
 
+// C documentation
+//
+//	/* 0xc1b38712 */
 func _erfc11(tls *TLS, x float32) (r float32) {
 	var P, Q, s float32
 	s = _fabsf(tls, x) - Float32FromInt32(1)
@@ -109826,6 +109969,17 @@ _9:
 const m_EXP2F_POLY_ORDER = 3
 const m_EXP2F_TABLE_BITS = 5
 
+// C documentation
+//
+//	/*
+//	EXP2F_TABLE_BITS = 5
+//	EXP2F_POLY_ORDER = 3
+//
+//	ULP error: 0.502 (nearest rounding.)
+//	Relative error: 1.69 * 2^-34 in [-1/64, 1/64] (before rounding.)
+//	Wrong count: 168353 (all nearest rounding wrong results with fma.)
+//	Non-nearest ULP error: 1 (rounded ULP error)
+//	*/
 func _top122(tls *TLS, x float32) (r uint32) {
 	return *(*uint32)(unsafe.Pointer(&x)) >> int32(20)
 }
@@ -109903,6 +110057,17 @@ type Texp_data = struct {
 	Ftab        [256]uint64
 }
 
+// C documentation
+//
+//	/*
+//	EXP2F_TABLE_BITS = 5
+//	EXP2F_POLY_ORDER = 3
+//
+//	ULP error: 0.502 (nearest rounding.)
+//	Relative error: 1.69 * 2^-34 in [-ln2/64, ln2/64] (before rounding.)
+//	Wrong count: 170635 (all nearest rounding wrong results with fma.)
+//	Non-nearest ULP error: 1 (rounded ULP error)
+//	*/
 func _top123(tls *TLS, x float32) (r uint32) {
 	return *(*uint32)(unsafe.Pointer(&x)) >> int32(20)
 }
@@ -109975,6 +110140,9 @@ var _Q3 = -Float64FromFloat64(7.93650757867488e-05) /* BF14CE19 9EAADBB7 */
 var _Q4 = float64(4.008217827329362e-06)            /* 3ED0CFCA 86E65239 */
 var _Q5 = -Float64FromFloat64(2.0109921818362437e-07)
 
+// C documentation
+//
+//	/* BE8AFDB7 6E09C32D */
 func Xexpm1(tls *TLS, x float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -110110,6 +110278,9 @@ var _invln21 = float32(1.4426950216)     /* 0x3fb8aa3b */
 var _Q11 = float32(-Float64FromFloat64(0.033333212137)) /* -0x888868.0p-28 */
 var _Q21 = float32(0.0015807170421)
 
+// C documentation
+//
+//	/*  0xcf3010.0p-33 */
 func Xexpm1f(tls *TLS, x float32) (r float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -110274,6 +110445,28 @@ func Xfdimf(tls *TLS, x float32, y float32) (r float32) {
 	return v1
 }
 
+// C documentation
+//
+//	// #ifdef __FLT_EVAL_METHOD__
+//	// #define FLT_EVAL_METHOD __FLT_EVAL_METHOD__
+//	// #else
+//	// #define FLT_EVAL_METHOD 0
+//	// #endif
+//	//
+//	// #define LDBL_TRUE_MIN 3.6451995318824746025e-4951L
+//	// #define LDBL_MIN     3.3621031431120935063e-4932L
+//	// #define LDBL_MAX     1.1897314953572317650e+4932L
+//	// #define LDBL_EPSILON 1.0842021724855044340e-19L
+//	//
+//	// #define LDBL_MANT_DIG 64
+//	// #define LDBL_MIN_EXP (-16381)
+//	// #define LDBL_MAX_EXP 16384
+//	//
+//	// #define LDBL_DIG 18
+//	// #define LDBL_MIN_10_EXP (-4931)
+//	// #define LDBL_MAX_10_EXP 4932
+//	//
+//	// #define DECIMAL_DIG 21
 func Xfdiml(tls *TLS, x float64, y float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
@@ -110489,6 +110682,28 @@ func Xfmaxf(tls *TLS, x float32, y float32) (r float32) {
 	return v2
 }
 
+// C documentation
+//
+//	// #ifdef __FLT_EVAL_METHOD__
+//	// #define FLT_EVAL_METHOD __FLT_EVAL_METHOD__
+//	// #else
+//	// #define FLT_EVAL_METHOD 0
+//	// #endif
+//	//
+//	// #define LDBL_TRUE_MIN 3.6451995318824746025e-4951L
+//	// #define LDBL_MIN     3.3621031431120935063e-4932L
+//	// #define LDBL_MAX     1.1897314953572317650e+4932L
+//	// #define LDBL_EPSILON 1.0842021724855044340e-19L
+//	//
+//	// #define LDBL_MANT_DIG 64
+//	// #define LDBL_MIN_EXP (-16381)
+//	// #define LDBL_MAX_EXP 16384
+//	//
+//	// #define LDBL_DIG 18
+//	// #define LDBL_MIN_10_EXP (-4931)
+//	// #define LDBL_MAX_10_EXP 4932
+//	//
+//	// #define DECIMAL_DIG 21
 func Xfmaxl(tls *TLS, x float64, y float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
@@ -110555,6 +110770,28 @@ func Xfminf(tls *TLS, x float32, y float32) (r float32) {
 	return v2
 }
 
+// C documentation
+//
+//	// #ifdef __FLT_EVAL_METHOD__
+//	// #define FLT_EVAL_METHOD __FLT_EVAL_METHOD__
+//	// #else
+//	// #define FLT_EVAL_METHOD 0
+//	// #endif
+//	//
+//	// #define LDBL_TRUE_MIN 3.6451995318824746025e-4951L
+//	// #define LDBL_MIN     3.3621031431120935063e-4932L
+//	// #define LDBL_MAX     1.1897314953572317650e+4932L
+//	// #define LDBL_EPSILON 1.0842021724855044340e-19L
+//	//
+//	// #define LDBL_MANT_DIG 64
+//	// #define LDBL_MIN_EXP (-16381)
+//	// #define LDBL_MAX_EXP 16384
+//	//
+//	// #define LDBL_DIG 18
+//	// #define LDBL_MIN_10_EXP (-4931)
+//	// #define LDBL_MAX_10_EXP 4932
+//	//
+//	// #define DECIMAL_DIG 21
 func Xfminl(tls *TLS, x float64, y float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
@@ -110872,6 +111109,28 @@ func Xfrexpl(tls *TLS, x float64, e uintptr) (r float64) {
 	return Xfrexp(tls, x, e)
 }
 
+// C documentation
+//
+//	// #ifdef __FLT_EVAL_METHOD__
+//	// #define FLT_EVAL_METHOD __FLT_EVAL_METHOD__
+//	// #else
+//	// #define FLT_EVAL_METHOD 0
+//	// #endif
+//	//
+//	// #define LDBL_TRUE_MIN 3.6451995318824746025e-4951L
+//	// #define LDBL_MIN     3.3621031431120935063e-4932L
+//	// #define LDBL_MAX     1.1897314953572317650e+4932L
+//	// #define LDBL_EPSILON 1.0842021724855044340e-19L
+//	//
+//	// #define LDBL_MANT_DIG 64
+//	// #define LDBL_MIN_EXP (-16381)
+//	// #define LDBL_MAX_EXP 16384
+//	//
+//	// #define LDBL_DIG 18
+//	// #define LDBL_MIN_10_EXP (-4931)
+//	// #define LDBL_MAX_10_EXP 4932
+//	//
+//	// #define DECIMAL_DIG 21
 func _sq(tls *TLS, hi uintptr, lo uintptr, x float64) {
 	var xc, xh, xl float64
 	xc = x * (Float64FromFloat64(1.34217728e+08) + Float64FromInt32(1))
@@ -111261,6 +111520,9 @@ var _S02 = float64(0.00011692678466333745)             /* 0x3F1EA6D2, 0xDD57DBF4
 var _S03 = float64(5.135465502073181e-07)              /* 0x3EA13B54, 0xCE84D5A9 */
 var _S04 = float64(1.1661400333379e-09)
 
+// C documentation
+//
+//	/* 0x3E1408BC, 0xF4745D8F */
 func Xj0(tls *TLS, x float64) (r1 float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -111308,6 +111570,9 @@ var _v02 = float64(7.600686273503533e-05)              /* 0x3F13ECBB, 0xF578C6C1
 var _v03 = float64(2.591508518404578e-07)              /* 0x3E91642D, 0x7FF202FD */
 var _v04 = float64(4.4111031133267547e-10)
 
+// C documentation
+//
+//	/* 0x3DFE5018, 0x3BD6D9EF */
 func Xy0(tls *TLS, x float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -111555,6 +111820,9 @@ func _qzero(tls *TLS, x float64) (r1 float64) {
 var _invsqrtpi1 = float32(0.56418961287) /* 0x3f106ebb */
 var _tpi1 = float32(0.63661974669)
 
+// C documentation
+//
+//	/* 0x3f22f983 */
 func _common1(tls *TLS, ix uint32, x float32, y0 int32) (r float32) {
 	var c, cc, s, ss, z float32
 	/*
@@ -111596,6 +111864,9 @@ var _S021 = float32(0.00011692678527)                      /* 0x38f53697 */
 var _S031 = float32(5.1354652442e-07)                      /* 0x3509daa6 */
 var _S041 = float32(1.1661400734e-09)
 
+// C documentation
+//
+//	/* 0x30a045e8 */
 func Xj0f(tls *TLS, x float32) (r1 float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -111638,6 +111909,9 @@ var _v021 = float32(7.6006865129e-05)                      /* 0x389f65e0 */
 var _v031 = float32(2.5915085189e-07)                      /* 0x348b216c */
 var _v041 = float32(4.4111031494e-10)
 
+// C documentation
+//
+//	/* 0x2ff280c2 */
 func Xy0f(tls *TLS, x float32) (r float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -111879,6 +112153,9 @@ func _qzerof(tls *TLS, x float32) (r1 float32) {
 var _invsqrtpi2 = float64(0.5641895835477563) /* 0x3FE20DD7, 0x50429B6D */
 var _tpi2 = float64(0.6366197723675814)
 
+// C documentation
+//
+//	/* 0x3FE45F30, 0x6DC9C883 */
 func _common2(tls *TLS, ix uint32, x float64, y1 int32, sign int32) (r float64) {
 	var c, cc, s, ss, z float64
 	/*
@@ -111929,6 +112206,9 @@ var _s03 = float64(1.1771846404262368e-06)            /* 0x3EB3BFF8, 0x333F8498 
 var _s04 = float64(5.0463625707621704e-09)            /* 0x3E35AC88, 0xC97DFF2C */
 var _s05 = float64(1.2354227442613791e-11)
 
+// C documentation
+//
+//	/* 0x3DAB2ACF, 0xCFB97ED8 */
 func Xj1(tls *TLS, x float64) (r1 float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -112219,6 +112499,9 @@ func _qone(tls *TLS, x float64) (r1 float64) {
 var _invsqrtpi3 = float32(0.56418961287) /* 0x3f106ebb */
 var _tpi3 = float32(0.63661974669)
 
+// C documentation
+//
+//	/* 0x3f22f983 */
 func _common3(tls *TLS, ix uint32, x float32, y1 int32, sign int32) (r float32) {
 	var c, cc, s, ss, z float64
 	s = float64(Xsinf(tls, x))
@@ -112260,6 +112543,9 @@ var _s031 = float32(1.1771846857e-06)                      /* 0x359dffc2 */
 var _s041 = float32(5.046362439e-09)                       /* 0x31ad6446 */
 var _s051 = float32(1.2354227016e-11)
 
+// C documentation
+//
+//	/* 0x2d59567e */
 func Xj1f(tls *TLS, x float32) (r1 float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -112544,6 +112830,9 @@ func _qonef(tls *TLS, x float32) (r1 float32) {
 
 var _invsqrtpi4 = float64(0.5641895835477563)
 
+// C documentation
+//
+//	/* 0x3FE20DD7, 0x50429B6D */
 func Xjn(tls *TLS, n int32, x float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v n=%v x=%v, (%v:)", tls, n, x, origin(2))
@@ -113715,6 +114004,9 @@ var _Lg5 = float64(0.1818357216161805)          /* 3FC74664 96CB03DE */
 var _Lg6 = float64(0.15313837699209373)         /* 3FC39A09 D078C69F */
 var _Lg7 = float64(0.14798198605116586)
 
+// C documentation
+//
+//	/* 3FC2F112 DF3E5244 */
 func Xlog10(tls *TLS, x float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -113806,6 +114098,9 @@ var _Lg21 = float32(0.40000972151756287) /* 0.40000972152 */
 var _Lg31 = float32(0.2849878668785095)  /* 0.28498786688 */
 var _Lg41 = float32(0.24279078841209412)
 
+// C documentation
+//
+//	/* 0.24279078841 */
 func Xlog10f(tls *TLS, x float32) (r float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -113882,6 +114177,9 @@ var _Lg51 = float64(0.1818357216161805)        /* 3FC74664 96CB03DE */
 var _Lg61 = float64(0.15313837699209373)       /* 3FC39A09 D078C69F */
 var _Lg71 = float64(0.14798198605116586)
 
+// C documentation
+//
+//	/* 3FC2F112 DF3E5244 */
 func Xlog1p(tls *TLS, x float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -113980,6 +114278,9 @@ var _Lg23 = float32(0.40000972151756287) /* 0.40000972152 */
 var _Lg33 = float32(0.2849878668785095)  /* 0.28498786688 */
 var _Lg43 = float32(0.24279078841209412)
 
+// C documentation
+//
+//	/* 0.24279078841 */
 func Xlog1pf(tls *TLS, x float32) (r float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -114214,6 +114515,15 @@ const m_LOG2F_POLY_ORDER = 4
 const m_LOG2F_TABLE_BITS = 4
 const m_OFF1 = 1060306944
 
+// C documentation
+//
+//	/*
+//	LOG2F_TABLE_BITS = 4
+//	LOG2F_POLY_ORDER = 4
+//
+//	ULP error: 0.752 (nearest rounding.)
+//	Relative error: 1.9 * 2^-26 (before rounding.)
+//	*/
 func Xlog2f(tls *TLS, x float32) (r1 float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -114300,6 +114610,14 @@ type Tlog_data = struct {
 	}
 }
 
+// C documentation
+//
+//	/*
+//	special cases:
+//		logb(+-0) = -inf, and raise divbyzero
+//		logb(+-inf) = +inf
+//		logb(nan) = nan
+//	*/
 func Xlogb(tls *TLS, x float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -114345,6 +114663,15 @@ func Xlogbl(tls *TLS, x float64) (r float64) {
 const m_LOGF_POLY_ORDER = 4
 const m_LOGF_TABLE_BITS = 4
 
+// C documentation
+//
+//	/*
+//	LOGF_TABLE_BITS = 4
+//	LOGF_POLY_ORDER = 4
+//
+//	ULP error: 0.818 (nearest rounding.)
+//	Relative error: 1.957 * 2^-26 (before rounding.)
+//	*/
 func Xlogf(tls *TLS, x float32) (r1 float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -114579,6 +114906,9 @@ func Xnanl(tls *TLS, s uintptr) (r float64) {
 
 const m_FE_INEXACT = 32
 
+// C documentation
+//
+//	/* nearbyint is the same as rint, but it must not raise the inexact exception */
 func Xnearbyint(tls *TLS, x float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -114607,6 +114937,28 @@ func Xnearbyintf(tls *TLS, x float32) (r float32) {
 	return x
 }
 
+// C documentation
+//
+//	// #ifdef __FLT_EVAL_METHOD__
+//	// #define FLT_EVAL_METHOD __FLT_EVAL_METHOD__
+//	// #else
+//	// #define FLT_EVAL_METHOD 0
+//	// #endif
+//	//
+//	// #define LDBL_TRUE_MIN 3.6451995318824746025e-4951L
+//	// #define LDBL_MIN     3.3621031431120935063e-4932L
+//	// #define LDBL_MAX     1.1897314953572317650e+4932L
+//	// #define LDBL_EPSILON 1.0842021724855044340e-19L
+//	//
+//	// #define LDBL_MANT_DIG 64
+//	// #define LDBL_MIN_EXP (-16381)
+//	// #define LDBL_MAX_EXP 16384
+//	//
+//	// #define LDBL_DIG 18
+//	// #define LDBL_MIN_10_EXP (-4931)
+//	// #define LDBL_MAX_10_EXP 4932
+//	//
+//	// #define DECIMAL_DIG 21
 func Xnearbyintl(tls *TLS, x float64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -116102,6 +116454,28 @@ func Xscalblnf(tls *TLS, x float32, n int64) (r float32) {
 	return Xscalbnf(tls, x, int32(n))
 }
 
+// C documentation
+//
+//	// #ifdef __FLT_EVAL_METHOD__
+//	// #define FLT_EVAL_METHOD __FLT_EVAL_METHOD__
+//	// #else
+//	// #define FLT_EVAL_METHOD 0
+//	// #endif
+//	//
+//	// #define LDBL_TRUE_MIN 3.6451995318824746025e-4951L
+//	// #define LDBL_MIN     3.3621031431120935063e-4932L
+//	// #define LDBL_MAX     1.1897314953572317650e+4932L
+//	// #define LDBL_EPSILON 1.0842021724855044340e-19L
+//	//
+//	// #define LDBL_MANT_DIG 64
+//	// #define LDBL_MIN_EXP (-16381)
+//	// #define LDBL_MAX_EXP 16384
+//	//
+//	// #define LDBL_DIG 18
+//	// #define LDBL_MIN_10_EXP (-4931)
+//	// #define LDBL_MAX_10_EXP 4932
+//	//
+//	// #define DECIMAL_DIG 21
 func Xscalblnl(tls *TLS, x float64, n int64) (r float64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v n=%v, (%v:)", tls, x, n, origin(2))
@@ -116369,6 +116743,9 @@ var _s2pio2 = Float64FromInt32(2) * Float64FromFloat64(1.5707963267948966) /* 0x
 var _s3pio2 = Float64FromInt32(3) * Float64FromFloat64(1.5707963267948966) /* 0x4012D97C, 0x7F3321D2 */
 var _s4pio2 = Float64FromInt32(4) * Float64FromFloat64(1.5707963267948966)
 
+// C documentation
+//
+//	/* 0x401921FB, 0x54442D18 */
 func Xsincosf(tls *TLS, x float32, sin uintptr, cos uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v sin=%v cos=%v, (%v:)", tls, x, sin, cos, origin(2))
@@ -116525,6 +116902,9 @@ var _s2pio21 = Float64FromInt32(2) * Float64FromFloat64(1.5707963267948966) /* 0
 var _s3pio21 = Float64FromInt32(3) * Float64FromFloat64(1.5707963267948966) /* 0x4012D97C, 0x7F3321D2 */
 var _s4pio21 = Float64FromInt32(4) * Float64FromFloat64(1.5707963267948966)
 
+// C documentation
+//
+//	/* 0x401921FB, 0x54442D18 */
 func Xsinf(tls *TLS, x float32) (r float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -116802,6 +117182,9 @@ var _t2pio2 = Float64FromInt32(2) * Float64FromFloat64(1.5707963267948966) /* 0x
 var _t3pio2 = Float64FromInt32(3) * Float64FromFloat64(1.5707963267948966) /* 0x4012D97C, 0x7F3321D2 */
 var _t4pio2 = Float64FromInt32(4) * Float64FromFloat64(1.5707963267948966)
 
+// C documentation
+//
+//	/* 0x401921FB, 0x54442D18 */
 func Xtanf(tls *TLS, x float32) (r float32) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -118762,6 +119145,16 @@ type Tgroup1 = struct {
 	Fgr_mem    uintptr
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xinitgroups(tls *TLS, user uintptr, gid uint32) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v user=%v gid=%v, (%v:)", tls, user, gid, origin(2))
@@ -119551,6 +119944,9 @@ const m_TIOCGPTN = 2147767344
 const m_TIOCSPTLCK = 1074025521
 const m_TIOCSWINSZ = 21524
 
+// C documentation
+//
+//	/* Nonstandard, but vastly superior to the standard functions */
 func Xopenpty(tls *TLS, pm uintptr, ps uintptr, name uintptr, tio uintptr, ws uintptr) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v pm=%v ps=%v name=%v tio=%v ws=%v, (%v:)", tls, pm, ps, name, tio, ws, origin(2))
@@ -126958,6 +127354,11 @@ func _step_mh(tls *TLS, mh uintptr, n uint64) {
 	*(*uint64)(unsafe.Pointer((*Tmsghdr)(unsafe.Pointer(mh)).Fmsg_iov + 8)) -= n
 }
 
+// C documentation
+//
+//	/* Internal contract for __res_msend[_rc]: asize must be >=512, nqueries
+//	 * must be sufficiently small to be safe as VLA size. In practice it's
+//	 * either 1 or 2, anyway. */
 func x___res_msend_rc(tls *TLS, nqueries int32, queries uintptr, qlens uintptr, answers uintptr, alens uintptr, asize int32, conf uintptr) (r1 int32) {
 	bp := tls.Alloc(400) /* tlsAllocs 400 maxVaListSize 0 */
 	defer tls.Free(400)
@@ -127391,6 +127792,9 @@ func x___res_send(tls *TLS, _msg uintptr, _msglen int32, _answer uintptr, _ansle
 	return v2
 }
 
+// C documentation
+//
+//	/* This is completely unused, and exists purely to satisfy broken apps. */
 func x___res_state(tls *TLS) (r uintptr) {
 	return uintptr(unsafe.Pointer(&_res))
 }
@@ -129094,6 +129498,14 @@ var _line6 uintptr
 
 const m_S_IFREG = 32768
 
+// C documentation
+//
+//	/* This implementation support Openwall-style TCB passwords in place of
+//	 * traditional shadow, if the appropriate directories and files exist.
+//	 * Thus, it is careful to avoid following symlinks or blocking on fifos
+//	 * which a malicious user might create in place of his or her TCB shadow
+//	 * file. It also avoids any allocation to prevent memory-exhaustion
+//	 * attacks via huge TCB shadow files. */
 func _xatol(tls *TLS, s uintptr) (r int64) {
 	var x int64
 	if int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(s))))) == int32(':') || int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(s))))) == int32('\n') {
@@ -132052,7 +132464,6 @@ func _tre_stack_push(tls *TLS, s uintptr, value Ttre_stack_item) (r int32) {
 			if new_buffer == UintptrFromInt32(0) {
 				return int32(m_REG_ESPACE)
 			}
-			_ = 0
 			(*Ttre_stack_t)(unsafe.Pointer(s)).Fsize = new_size
 			(*Ttre_stack_t)(unsafe.Pointer(s)).Fstack = new_buffer
 			_tre_stack_push(tls, s, value)
@@ -132278,6 +132689,27 @@ type Tneg = struct {
 	Fa      [64]uint64
 }
 
+// TODO: parse bracket into a set of non-overlapping [lo,hi] ranges
+
+// C documentation
+//
+//	/*
+//	bracket grammar:
+//	Bracket  =  '[' List ']'  |  '[^' List ']'
+//	List     =  Term  |  List Term
+//	Term     =  Char  |  Range  |  Chclass  |  Eqclass
+//	Range    =  Char '-' Char  |  Char '-' '-'
+//	Char     =  Coll  |  coll_single
+//	Meta     =  ']'  |  '-'
+//	Coll     =  '[.' coll_single '.]'  |  '[.' coll_multi '.]'  |  '[.' Meta '.]'
+//	Eqclass  =  '[=' coll_single '=]'  |  '[=' coll_multi '=]'
+//	Chclass  =  '[:' class ':]'
+//
+//	coll_single is a single char collating element but it can be
+//	 '-' only at the beginning or end of a List and
+//	 ']' only at the beginning of a List and
+//	 '^' anywhere except after the openning '['
+//	*/
 func _parse_bracket_terms(tls *TLS, ctx uintptr, s uintptr, ls uintptr, neg uintptr) (r int32) {
 	bp := tls.Alloc(32) /* tlsAllocs 24 maxVaListSize 0 */
 	defer tls.Free(32)
@@ -132556,6 +132988,25 @@ func _marksub(tls *TLS, ctx uintptr, node uintptr, subid int32) (r int32) {
 	return m_REG_OK
 }
 
+// C documentation
+//
+//	/*
+//	BRE grammar:
+//	Regex  =  Branch  |  '^'  |  '$'  |  '^$'  |  '^' Branch  |  Branch '$'  |  '^' Branch '$'
+//	Branch =  Atom  |  Branch Atom
+//	Atom   =  char  |  quoted_char  |  '.'  |  Bracket  |  Atom Dup  |  '\(' Branch '\)'  |  back_ref
+//	Dup    =  '*'  |  '\{' Count '\}'  |  '\{' Count ',\}'  |  '\{' Count ',' Count '\}'
+//
+//	(leading ^ and trailing $ in a sub expr may be an anchor or literal as well)
+//
+//	ERE grammar:
+//	Regex  =  Branch  |  Regex '|' Branch
+//	Branch =  Atom  |  Branch Atom
+//	Atom   =  char  |  quoted_char  |  '.'  |  Bracket  |  Atom Dup  |  '(' Regex ')'  |  '^'  |  '$'
+//	Dup    =  '*'  |  '+'  |  '?'  |  '{' Count '}'  |  '{' Count ',}'  |  '{' Count ',' Count '}'
+//
+//	(a*+?, ^*, $+, \X, {, (|a) are unspecified)
+//	*/
 func _parse_atom(tls *TLS, ctx uintptr, s uintptr) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
@@ -133144,7 +133595,6 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 						status = int32(m_REG_ESPACE)
 						goto _9
 					}
-					_ = 0
 					(*(*Ttre_submatch_data_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fsubmatch_data + uintptr(id1)*16))).Fparents = p
 					for i2 = 0; *(*int32)(unsafe.Pointer(parents + uintptr(i2)*4)) >= 0; i2++ {
 						*(*int32)(unsafe.Pointer(p + uintptr(i2)*4)) = *(*int32)(unsafe.Pointer(parents + uintptr(i2)*4))
@@ -133192,7 +133642,6 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 					next_tag++
 				}
 			} else {
-				_ = 0
 			}
 		case int32(_CATENATION):
 			cat = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
@@ -133493,7 +133942,6 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 		direction = int32(_TRE_TAG_MAXIMIZE)
 		goto _9
 	_8:
-		_ = 0
 		goto _9
 	_9: /* end switch(symbol) */
 	} /* end while(tre_stack_num_objects(stack) > bottom) */
@@ -133509,7 +133957,6 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 		minimal_tag = -int32(1)
 		num_minimals++
 	}
-	_ = 0
 	(*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fend_tag = num_tags
 	(*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags = num_tags
 	(*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_minimals = num_minimals
@@ -133528,6 +133975,9 @@ type Ttre_copyast_symbol_t = int32
 const _COPY_RECURSE = 0
 const _COPY_SET_RESULT_PTR = 1
 
+// C documentation
+//
+//	/* Flags for tre_copy_ast(). */
 func _tre_copy_ast(tls *TLS, mem uintptr, stack uintptr, ast uintptr, flags int32, pos_add uintptr, tag_directions uintptr, copy1 uintptr, max_pos uintptr) (r int32) {
 	var bottom, first_tag, max, min, num_copied, pos, status, symbol, v1 int32
 	var cat, iter, lit, node, p, result, tmp, tmp1, uni uintptr
@@ -133670,7 +134120,6 @@ func _tre_copy_ast(tls *TLS, mem uintptr, stack uintptr, ast uintptr, flags int3
 				iter = (*Ttre_ast_node_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(result)))).Fobj
 				result = iter
 			default:
-				_ = 0
 				break
 			}
 			break
@@ -133796,7 +134245,6 @@ func _tre_expand_ast(tls *TLS, mem uintptr, stack uintptr, ast uintptr, position
 				}
 				iter_depth++
 			default:
-				_ = 0
 				break
 			}
 		case int32(_EXPAND_AFTER_ITER):
@@ -133884,7 +134332,6 @@ func _tre_expand_ast(tls *TLS, mem uintptr, stack uintptr, ast uintptr, position
 				*(*int32)(unsafe.Pointer(bp)) = pos_add_total
 			}
 		default:
-			_ = 0
 			break
 		}
 	}
@@ -134039,14 +134486,12 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 					}
 				}
 			case int64(-int32(2)):
-				_ = 0
 				if assertions != UintptrFromInt32(0) {
 					p1 = assertions
 					*(*int32)(unsafe.Pointer(p1)) = int32(int64(*(*int32)(unsafe.Pointer(p1))) | (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_max)
 				}
 			case int64(-int32(1)):
 			default:
-				_ = 0
 				break
 			}
 		case int32(_UNION):
@@ -134066,14 +134511,11 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 						break
 					}
 				} else {
-					_ = 0
 				}
 			}
 		case int32(_CATENATION):
 			/* The path must go through both children. */
 			cat = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
-			_ = 0
-			_ = 0
 			status = _tre_stack_push_voidptr(tls, stack, (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fleft)
 			if status != m_REG_OK {
 				break
@@ -134093,7 +134535,6 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 				}
 			}
 		default:
-			_ = 0
 			break
 		}
 	}
@@ -134335,7 +134776,6 @@ func _tre_compute_nfl(tls *TLS, mem uintptr, stack uintptr, tree uintptr) (r int
 				(*Ttre_ast_node_t)(unsafe.Pointer(node)).Flastpos = (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_catenation_t)(unsafe.Pointer(cat)).Fright)).Flastpos
 			}
 		default:
-			_ = 0
 			break
 		}
 	}
@@ -134387,8 +134827,6 @@ func _tre_make_trans(tls *TLS, p1 uintptr, p2 uintptr, transitions uintptr, coun
 				}
 				(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fassertions = (*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fassertions | (*Ttre_pos_and_tags_t)(unsafe.Pointer(p2)).Fassertions | v1 | v2
 				if (*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fbackref >= 0 {
-					_ = 0
-					_ = 0
 					*(*int32)(unsafe.Pointer(&(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fu)) = (*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fbackref
 					*(*int32)(unsafe.Pointer(trans + 32)) |= int32(m_ASSERT_BACKREF)
 				} else {
@@ -134515,9 +134953,7 @@ func _tre_ast_to_tnfa(tls *TLS, node uintptr, transitions uintptr, counts uintpt
 		errcode = _tre_ast_to_tnfa(tls, (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fright, transitions, counts, offs)
 	case int32(_ITERATION):
 		iter = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
-		_ = 0
 		if (*Ttre_iteration_t)(unsafe.Pointer(iter)).Fmax == -int32(1) {
-			_ = 0
 			/* Add a transition from each last position in the iterated
 			   expression to each first position. */
 			errcode = _tre_make_trans(tls, (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_iteration_t)(unsafe.Pointer(iter)).Farg)).Flastpos, (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_iteration_t)(unsafe.Pointer(iter)).Farg)).Ffirstpos, transitions, counts, offs)
@@ -135184,7 +135620,6 @@ func _tre_tnfa_run_parallel(tls *TLS, tnfa uintptr, string1 uintptr, match_tags 
 						}
 						reach_next_i += 16
 					} else {
-						_ = 0
 						/* Another path has also reached this state.  We choose
 						the winner by examining the tag values for both
 						paths. */
@@ -135594,7 +136029,6 @@ backtrack:
 		if (*Ttre_tnfa_transition_t)(unsafe.Pointer((*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fitem.Fstate)).Fassertions&int32(m_ASSERT_BACKREF) != 0 {
 			*(*int32)(unsafe.Pointer(states_seen + uintptr((*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fitem.Fstate_id)*4)) = 0
 		}
-		_ = 0
 		pos = (*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fitem.Fpos
 		str_byte = (*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fitem.Fstr_byte
 		state = (*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fitem.Fstate
@@ -135682,9 +136116,7 @@ func _tre_fill_pmatch(tls *TLS, nmatch uint64, pmatch uintptr, cflags int32, tnf
 		i = uint32(0)
 		for i < (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches && uint64(i) < nmatch {
 			if (*(*Tregmatch_t)(unsafe.Pointer(pmatch + uintptr(i)*16))).Frm_eo == int64(-int32(1)) {
-				_ = 0
 			}
-			_ = 0
 			parents = (*(*Ttre_submatch_data_t)(unsafe.Pointer(submatch_data + uintptr(i)*16))).Fparents
 			if parents != UintptrFromInt32(0) {
 				for j = uint32(0); *(*int32)(unsafe.Pointer(parents + uintptr(j)*4)) >= 0; j++ {
@@ -135705,6 +136137,11 @@ func _tre_fill_pmatch(tls *TLS, nmatch uint64, pmatch uintptr, cflags int32, tnf
 	}
 }
 
+// C documentation
+//
+//	/*
+//	  Wrapper functions for POSIX compatible regexp matching.
+//	*/
 func Xregexec(tls *TLS, preg uintptr, string1 uintptr, nmatch uint64, pmatch uintptr, eflags int32) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v preg=%v string1=%v nmatch=%v pmatch=%v eflags=%v, (%v:)", tls, preg, string1, nmatch, pmatch, eflags, origin(2))
@@ -137034,6 +137471,16 @@ func Xsigemptyset(tls *TLS, set uintptr) (r int32) {
 	return 0
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xsigfillset(tls *TLS, set uintptr) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v set=%v, (%v:)", tls, set, origin(2))
@@ -138295,6 +138742,10 @@ func x___towrite_needs_stdio_exit(tls *TLS) {
 	x___stdio_exit(tls)
 }
 
+// C documentation
+//
+//	/* This function assumes it will never be called if there is already
+//	 * data buffered for reading. */
 func x___uflow(tls *TLS, f uintptr) (r int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
@@ -139589,6 +140040,15 @@ func Xfread(tls *TLS, destv uintptr, size uint64, nmemb uint64, f uintptr) (r ui
 	return nmemb
 }
 
+/* The basic idea of this implementation is to open a new FILE,
+ * hack the necessary parts of the new FILE into the old one, then
+ * close the new FILE. */
+
+// C documentation
+//
+//	/* Locking IS necessary because another thread may provably hold the
+//	 * lock, via flockfile or otherwise, when freopen is called, and in that
+//	 * case, freopen cannot act until the lock is released. */
 func Xfreopen(tls *TLS, filename uintptr, mode uintptr, f uintptr) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v filename=%v mode=%v f=%v, (%v:)", tls, filename, mode, f, origin(2))
@@ -139722,6 +140182,16 @@ func Xfsetpos(tls *TLS, f uintptr, pos uintptr) (r int32) {
 	return x___fseeko(tls, f, *(*int64)(unsafe.Pointer(pos)), m_SEEK_SET)
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func x___ftello_unlocked(tls *TLS, f uintptr) (r int64) {
 	var pos int64
 	var v1 int32
@@ -141086,6 +141556,13 @@ func Xsetlinebuf(tls *TLS, f uintptr) {
 	Xsetvbuf(tls, f, uintptr(0), int32(m__IOLBF), uint64(0))
 }
 
+// C documentation
+//
+//	/* The behavior of this function is undefined except when it is the first
+//	 * operation on the stream, so the presence or absence of locking is not
+//	 * observable in a program whose behavior is defined. Thus no locking is
+//	 * performed here. No allocation of buffers is performed, but a buffer
+//	 * provided by the caller is used as long as it is suitably sized. */
 func Xsetvbuf(tls *TLS, f uintptr, buf uintptr, type1 int32, size uint64) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v f=%v buf=%v type1=%v size=%v, (%v:)", tls, f, buf, type1, size, origin(2))
@@ -144610,6 +145087,16 @@ func Xvsnprintf(tls *TLS, s uintptr, n uint64, fmt uintptr, ap uintptr) (r int32
 	return Xvfprintf(tls, bp+24, fmt, ap)
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xvsprintf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v s=%v fmt=%v ap=%v, (%v:)", tls, s, fmt, ap, origin(2))
@@ -145504,6 +145991,11 @@ func Xstrtoumax(tls *TLS, s uintptr, p uintptr, base int32) (r uint64) {
 	return Xstrtoull(tls, s, p, base)
 }
 
+// C documentation
+//
+//	/* This read function heavily cheats. It knows:
+//	 *  (1) len will always be 1
+//	 *  (2) non-ascii characters don't matter */
 func _do_read(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 	var i uint64
 	var wcs, v2, v3 uintptr
@@ -145594,6 +146086,11 @@ func Xwcstold(tls *TLS, s uintptr, p uintptr) (r float64) {
 	return _wcstox(tls, s, p, int32(2))
 }
 
+// C documentation
+//
+//	/* This read function heavily cheats. It knows:
+//	 *  (1) len will always be 1
+//	 *  (2) non-ascii characters don't matter */
 func _do_read1(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 	var i uint64
 	var wcs, v2, v3 uintptr
@@ -145748,6 +146245,16 @@ func Xindex(tls *TLS, s uintptr, c int32) (r uintptr) {
 
 const m_UCHAR_MAX = 255
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xmemccpy(tls *TLS, dest uintptr, src uintptr, c int32, n uint64) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v dest=%v src=%v c=%v n=%v, (%v:)", tls, dest, src, c, n, origin(2))
@@ -145813,6 +146320,16 @@ tail:
 	return uintptr(0)
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xmemchr(tls *TLS, src uintptr, c int32, n uint64) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v src=%v c=%v n=%v, (%v:)", tls, src, c, n, origin(2))
@@ -146163,6 +146680,16 @@ func Xrindex(tls *TLS, s uintptr, c int32) (r uintptr) {
 	return Xstrrchr(tls, s, c)
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func x___stpcpy(tls *TLS, d uintptr, s uintptr) (r uintptr) {
 	var wd, ws, v3, v4 uintptr
 	var v2, v6 int8
@@ -146206,6 +146733,16 @@ func x___stpcpy(tls *TLS, d uintptr, s uintptr) (r uintptr) {
 	return d
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func x___stpncpy(tls *TLS, d uintptr, s uintptr, n uint64) (r uintptr) {
 	var wd, ws uintptr
 	var v1, v5 int8
@@ -146320,6 +146857,16 @@ func Xstrchr(tls *TLS, s uintptr, c int32) (r1 uintptr) {
 	return v1
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func x___strchrnul(tls *TLS, s uintptr, c int32) (r uintptr) {
 	var k uint64
 	var w uintptr
@@ -146441,6 +146988,16 @@ func Xstrlcat(tls *TLS, d uintptr, s uintptr, n uint64) (r uint64) {
 	return l + Xstrlcpy(tls, d+uintptr(l), s, n-l)
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xstrlcpy(tls *TLS, d uintptr, s uintptr, n uint64) (r uint64) {
 	if __ccgo_strace {
 		trc("tls=%v d=%v s=%v n=%v, (%v:)", tls, d, s, n, origin(2))
@@ -146506,6 +147063,16 @@ finish:
 	return r
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xstrlen(tls *TLS, s uintptr) (r uint64) {
 	if __ccgo_strace {
 		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
@@ -148079,6 +148646,23 @@ func Xtcsetwinsize(tls *TLS, fd int32, wsz uintptr) (r int32) {
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_ioctl), int64(fd), int64(Int32FromInt32(m_TIOCSWINSZ)), int64(wsz)))))
 }
 
+// C documentation
+//
+//	/* This lock primitive combines a flag (in the sign bit) and a
+//	 * congestion count (= threads inside the critical section, CS) in a
+//	 * single int that is accessed through atomic operations. The states
+//	 * of the int for value x are:
+//	 *
+//	 * x == 0: unlocked and no thread inside the critical section
+//	 *
+//	 * x < 0: locked with a congestion of x-INT_MIN, including the thread
+//	 * that holds the lock
+//	 *
+//	 * x > 0: unlocked with a congestion of x
+//	 *
+//	 * or in an equivalent formulation x is the congestion count or'ed
+//	 * with INT_MIN as a lock flag.
+//	 */
 func x___lock(tls *TLS, l uintptr) {
 	var current, need_locks, val, val1, v2, v3 int32
 	var i uint32
@@ -149253,6 +149837,9 @@ type Twaiter = struct {
 	Fnotify  uintptr
 }
 
+// C documentation
+//
+//	/* Self-synchronized-destruction-safe lock functions */
 func _lock8(tls *TLS, l uintptr) {
 	if _a_cas(tls, l, 0, int32(1)) != 0 {
 		_a_cas(tls, l, int32(1), int32(2))
@@ -151210,6 +151797,16 @@ func Xsem_destroy(tls *TLS, sem uintptr) (r int32) {
 	return 0
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xsem_getvalue(tls *TLS, sem uintptr, valp uintptr) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v sem=%v valp=%v, (%v:)", tls, sem, valp, origin(2))
@@ -151922,6 +152519,18 @@ var _secs_through_month = [12]int32{
 	11: Int32FromInt32(334) * Int32FromInt32(86400),
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+/* POSIX/SUS requirements follow. These numbers come directly
+ * from SUS and have nothing to do with the host system. */
+
+// C documentation
+//
+//	/* 2000-03-01 (mod 400 year, immediately after feb29 */
 func x___secs_to_tm(tls *TLS, t int64, tm uintptr) (r int32) {
 	var c_cycles, leap, months, q_cycles, qc_cycles, remdays, remsecs, remyears, wday, yday int32
 	var days, secs, years int64
@@ -152347,6 +152956,10 @@ func _do_tzset(tls *TLS) {
 
 var _search = [54]int8{'/', 'u', 's', 'r', '/', 's', 'h', 'a', 'r', 'e', '/', 'z', 'o', 'n', 'e', 'i', 'n', 'f', 'o', '/', 0, '/', 's', 'h', 'a', 'r', 'e', '/', 'z', 'o', 'n', 'e', 'i', 'n', 'f', 'o', '/', 0, '/', 'e', 't', 'c', '/', 'z', 'o', 'n', 'e', 'i', 'n', 'f', 'o', '/'}
 
+// C documentation
+//
+//	/* Search zoneinfo rules to find the one that applies to the given time,
+//	 * and determine alternate opposite-DST-status rule that may be needed. */
 func _scan_trans(tls *TLS, t int64, local int32, alt uintptr) (r uint64) {
 	var a, i, j, m, n, x uint64
 	var off, scale int32
@@ -152439,6 +153052,9 @@ func _days_in_month1(tls *TLS, m int32, is_leap int32) (r int32) {
 	return r
 }
 
+// C documentation
+//
+//	/* Convert a POSIX DST rule plus year to seconds since epoch. */
 func _rule_to_secs(tls *TLS, rule uintptr, year int32) (r int64) {
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
@@ -152471,6 +153087,14 @@ func _rule_to_secs(tls *TLS, rule uintptr, year int32) (r int64) {
 	return t
 }
 
+// C documentation
+//
+//	/* Determine the time zone in effect for a given time in seconds since the
+//	 * epoch. It can be given in local or universal time. The results will
+//	 * indicate whether DST is in effect at the queried time, and will give both
+//	 * the GMT offset for the active zone/DST rule and the opposite DST. This
+//	 * enables a caller to efficiently adjust for the case where an explicit
+//	 * DST specification mismatches what would be in effect at the time. */
 func x___secs_to_zone(tls *TLS, t int64, local int32, isdst uintptr, offset uintptr, oppoff uintptr, zonename uintptr) {
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
@@ -152650,6 +153274,16 @@ func x___asctime_r(tls *TLS, tm uintptr, buf uintptr) (r uintptr) {
 
 const m_CLOCK_PROCESS_CPUTIME_ID = 2
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xclock(tls *TLS) (r int64) {
 	if __ccgo_strace {
 		trc("tls=%v, (%v:)", tls, origin(2))
@@ -152948,6 +153582,16 @@ func Xlocaltime(tls *TLS, t uintptr) (r uintptr) {
 
 var _tm1 Ttm
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xlocaltime_r(tls *TLS, t uintptr, tm uintptr) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v t=%v tm=%v, (%v:)", tls, t, tm, origin(2))
@@ -155176,6 +155820,16 @@ func Xtruncate(tls *TLS, path uintptr, length int64) (r int32) {
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_truncate), int64(path), length))))
 }
 
+/* Support signed or unsigned plain-char */
+
+/* Implementation choices... */
+
+/* Arbitrary numbers... */
+
+// C documentation
+//
+//	/* POSIX/SUS requirements follow. These numbers come directly
+//	 * from SUS and have nothing to do with the host system. */
 func Xttyname(tls *TLS, fd int32) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v fd=%v, (%v:)", tls, fd, origin(2))
