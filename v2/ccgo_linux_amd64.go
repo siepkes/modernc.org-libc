@@ -131027,9 +131027,6 @@ func Xposix_spawnp(tls *TLS, res uintptr, file uintptr, fa uintptr, attr uintptr
 	return Xposix_spawn(tls, res, file, fa, bp, argv, envp)
 }
 
-const m_SIGINT = 2
-const m_SIGQUIT = 3
-
 func Xwait(tls *TLS, status uintptr) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v status=%v, (%v:)", tls, status, origin(2))
@@ -136262,6 +136259,7 @@ func init() {
 	p := unsafe.Pointer(&_vdso_func)
 	*(*uintptr)(unsafe.Add(p, 0)) = __ccgo_fp(_getcpu_init)
 }
+
 func Xsched_getcpu(tls *TLS) (r1 int32) {
 	if __ccgo_strace {
 		trc("tls=%v, (%v:)", tls, origin(2))
@@ -153205,6 +153203,7 @@ func init() {
 	p := unsafe.Pointer(&_vdso_func1)
 	*(*uintptr)(unsafe.Add(p, 0)) = __ccgo_fp(_cgt_init)
 }
+
 func x___clock_gettime(tls *TLS, clk int32, ts uintptr) (r1 int32) {
 	var f uintptr
 	var r int32

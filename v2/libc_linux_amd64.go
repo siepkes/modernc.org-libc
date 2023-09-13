@@ -366,6 +366,15 @@ func a_load_16(addr uintptr) uint32 {
 	return uint32(*(*uint16)(unsafe.Pointer(addr)))
 }
 
+// int16 stores are atomic on this CPU when properly aligned.
+func a_store_16(addr uintptr, val uint16) {
+	if addr&1 != 0 {
+		panic(fmt.Errorf("unaligned atomic 16 bit access at %#0x", addr))
+	}
+
+	*(*uint16)(unsafe.Pointer(addr)) = val
+}
+
 func _a_crash(tls *TLS) {
 	panic(todo(""))
 }
@@ -798,10 +807,18 @@ func Xpwrite64(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64
 }
 
 func Xstrchrnul(tls *TLS, s uintptr, c int32) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v s=%v c=%v, (%v:)", tls, s, c, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return x___strchrnul(tls, s, c)
 }
 
 func X__builtin_log2(tls *TLS, x float64) (r1 float64) {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+		defer func() { trc("-> %v", r1) }()
+	}
 	return Xlog2(tls, x)
 }
 

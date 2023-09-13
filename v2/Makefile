@@ -2,9 +2,11 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-.PHONY:	all build_all_targets check clean edit editor generate dev test tidy work
+.PHONY:	all build_all_targets check clean download edit editor generate dev test tidy work
 
-DIR=/tmp/libc
+DIR = /tmp/libc
+TAR = musl-1.2.4.tar.gz
+URL = https://musl.libc.org/releases/$(TAR)
 
 all: editor
 	golint 2>&1
@@ -21,6 +23,9 @@ clean:
 check:
 	staticcheck 2>&1 | grep -v U1000
 
+download:
+	@if [ ! -f $(TAR) ]; then wget $(URL) ; fi
+
 edit:
 	@touch log
 	@if [ -f "Session.vim" ]; then novim -S & else novim-p Makefile *.go & fi
@@ -31,7 +36,7 @@ editor:
 	go install -v  ./... 2>&1 | tee -a log-editor
 	go build -o /dev/null generator*.go
 
-generate:
+generate: download
 	mkdir -p $(DIR) || true
 	rm -rf $(DIR)/*
 	echo -n > log-generate
@@ -47,7 +52,7 @@ generate:
 	grep 'TRC\|TODO\|ERRORF\|FAIL' log-generate || true
 	grep 'TRC\|TODO\|ERRORF\|FAIL' log-generate-errors || true
 
-dev:
+dev: download
 	mkdir -p $(DIR) || true
 	rm -rf $(DIR)/*
 	echo -n > /tmp/ccgo.log

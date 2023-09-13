@@ -265,7 +265,7 @@ func AtomicLoadPFloat64(addr uintptr) (val float64) {
 }
 
 func AtomicStoreNUint16(ptr uintptr, val uint16, memorder int32) {
-	panic(todo(""))
+	a_store_16(ptr, val)
 }
 
 func AtomicStoreNInt32(ptr uintptr, val int32, memorder int32) {
