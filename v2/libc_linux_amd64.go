@@ -128,6 +128,30 @@ func mustPrivateMalloc(sz int) uintptr {
 	panic(todo("OOM"))
 }
 
+func mustPrivateResize(p uintptr, size int) (r uintptr) {
+	switch {
+	case p == 0:
+		r, _ := privateMalloc(size)
+		return r
+	case size == 0 && p != 0:
+		privateFree(p)
+		return 0
+	}
+
+	us := Xmalloc_usable_size(nil, p)
+	if us >= uint64(size) {
+		return p
+	}
+
+	var err error
+	if r, err = privateMalloc(size); err != nil {
+		return 0
+	}
+
+	privateFree(p)
+	return r
+}
+
 // Go libc private heap, outside of the C heap.
 func mustPrivateRealloc(p uintptr, sz int) uintptr {
 	if p, _ := privateRealloc(p, sz); p != 0 || sz == 0 {
@@ -204,9 +228,6 @@ func NewTLS() (r *TLS) {
 		Ftid: r.ID,
 	}
 	initLibcOnce.Do(func() { initLibc(r) })
-	if r.ID > 1 {
-		x___libc.Fneed_locks = -1
-	}
 	return r
 }
 
@@ -246,7 +267,7 @@ func (t *TLS) Alloc(n int) (r uintptr) {
 			return s.p
 		}
 
-		r = mustPrivateRealloc(s.p, n) //TODO resize
+		r = mustPrivateResize(s.p, n)
 		// nreallocs++
 		t.stack[sp].p = r
 		t.stack[sp].sz = n
@@ -293,7 +314,7 @@ func (t *TLS) Close() {
 }
 
 func (tls *TLS) setErrno(err int32) {
-	*(*int32)(unsafe.Pointer(X__errno_location(tls))) = m_ENOSYS
+	*(*int32)(unsafe.Pointer(X__errno_location(tls))) = err
 }
 
 // musl-1.2.4/src/env/__init_tls.c:81:extern weak hidden const Tsize_t _DYNAMIC[];
@@ -535,11 +556,6 @@ func ___syscall6(tls *TLS, n, a1, a2, a3, a4, a5, a6 int64) int64 {
 	return int64(r1)
 }
 
-func _fork(tls *TLS) int32 {
-	tls.setErrno(m_ENOSYS)
-	return -1
-}
-
 func ___unmapself(tls *TLS, base uintptr, size uint64) {
 	panic(todo(""))
 }
@@ -605,7 +621,13 @@ func Xmalloc(tls *TLS, n uint64) (r uintptr) {
 		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
-	return _default_malloc(tls, n)
+	if n <= math.MaxInt {
+		if r, err := privateMalloc(int(n)); err == nil {
+			return r
+		}
+	}
+
+	return 0
 }
 
 func X__builtin_malloc(tls *TLS, n uint64) (r uintptr) {
@@ -1245,4 +1267,70 @@ func ___get_tp(tls *TLS) uintptr {
 func ___set_thread_area(tls *TLS, p uintptr) int32 {
 	tls.fs = p
 	return 0
+}
+
+func _fork(tls *TLS) int32 {
+	tls.setErrno(m_ENOSYS)
+	return -1
+}
+
+func Xclone(tls *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v func1=%v stack=%v flags=%v arg=%v va=%v, (%v:)", tls, func1, stack, flags, arg, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
+	tls.setErrno(m_ENOMEM)
+	return -1
+}
+
+func _abort(tls *TLS) {
+	Xabort(tls)
+}
+
+func Xabort(tls *TLS) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+	}
+	panic("abort")
+}
+
+func Xcalloc(tls *TLS, m uint64, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v m=%v n=%v, (%v:)", tls, m, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
+	panic(todo(""))
+}
+
+func Xmalloc_usable_size(tls *TLS, p uintptr) (r uint64) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
+	allocatorMu.Lock()
+
+	defer allocatorMu.Unlock()
+
+	return uint64(memory.UintptrUsableSize(p))
+}
+
+func Xrealloc(tls *TLS, p uintptr, n uint64) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v n=%v, (%v:)", tls, p, n, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
+	if n <= math.MaxInt {
+		if r, err := privateRealloc(p, int(n)); err == nil {
+			return r
+		}
+	}
+
+	return 0
+}
+
+func Xfree(tls *TLS, p uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
+	}
+	privateFree(p)
 }

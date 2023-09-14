@@ -31,12 +31,16 @@ type block struct {
 }
 
 func TestAllocator(t *testing.T) {
+	if testing.Short() {
+		t.Skip("-short")
+	}
+
 	t.Run("small1", func(t *testing.T) { testAllocator1(t, max) })
 	t.Run("big1", func(t *testing.T) { testAllocator1(t, bigMax) })
 	t.Run("small2", func(t *testing.T) { testAllocator2(t, max) })
 	t.Run("big2", func(t *testing.T) { testAllocator2(t, bigMax) })
 	t.Run("small3", func(t *testing.T) { testAllocator3(t, max) })
-	//TODO fail in v0.6.0 t.Run("big3", func(t *testing.T) { testAllocator3(t, bigMax) })
+	t.Run("big3", func(t *testing.T) { testAllocator3(t, bigMax) })
 }
 
 func testAllocator1(t *testing.T, max int) {

@@ -281,8 +281,6 @@ func TestReallocArray(t *testing.T) {
 		t.Fatal()
 	}
 
-	//TODO defer Xfree(tls, p), crashes
-
 	for i := 0; i < size; i++ {
 		unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i] = byte(i ^ 0x55)
 	}
@@ -292,8 +290,10 @@ func TestReallocArray(t *testing.T) {
 		t.Fatal()
 	}
 
+	defer Xfree(tls, q)
+
 	for i := 0; i < size; i++ {
-		if g, e := unsafe.Slice((*byte)(unsafe.Pointer(p)), size)[i], byte(i^0x55); g != e {
+		if g, e := unsafe.Slice((*byte)(unsafe.Pointer(q)), size)[i], byte(i^0x55); g != e {
 			t.Fatal(i, g, e)
 		}
 	}

@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'generator_linux --package-name=libc --predef=float __builtin_inff(void); --predef=long __builtin_expect(long, long); --prefix-enumerator=_ --prefix-external=x_ --prefix-field=F --prefix-macro=m_ --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-enum=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --prefix-undefined=_ -extended-errors -hide __syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS -hide a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32 -hide fabs,fabsf,fabsl,sqrt,sqrtf,sqrtl -hide fork,system -ignore-asm-errors -isystem  -o libc.a.go -nostdlib -ignore-link-errors lib/libc.a', DO NOT EDIT.
+// Code generated for linux/amd64 by 'generator_linux --package-name=libc --predef=float __builtin_inff(void); --predef=long __builtin_expect(long, long); --prefix-enumerator=_ --prefix-external=x_ --prefix-field=F --prefix-macro=m_ --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-enum=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --prefix-undefined=_ -extended-errors -hide __syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS -hide a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32 -hide fabs,fabsf,fabsl,sqrt,sqrtf,sqrtl -hide abort,clone,_Fork,fork,system,__synccall -hide calloc,free,malloc,malloc_usable_size,realloc -hide __libc_calloc,__libc_free,__libc_malloc,__libc_malloc_impl,__libc_realloc -hide __malloc_allzerop,__malloc_atfork,__malloc_donate,__simple_malloc, -ignore-asm-errors -isystem  -o libc.a.go -nostdlib -ignore-link-errors lib/libc.a', DO NOT EDIT.
 
 //go:build linux && amd64
 // +build linux,amd64
@@ -922,6 +922,7 @@ type Taio_args = struct {
 var _maplock = Tpthread_rwlock_t{}
 var _map uintptr
 var _aio_fd_cnt int32
+
 var _io_thread_stack_size uint64
 
 func ___aio_get_queue(tls *TLS, fd int32, need int32) (r uintptr) {
@@ -968,25 +969,25 @@ func ___aio_get_queue(tls *TLS, fd int32, need int32) (r uintptr) {
 			_io_thread_stack_size = v3
 		}
 		if !(_map != 0) {
-			_map = x___libc_calloc(tls, uint64(8), uint64((-Uint32FromUint32(1)/Uint32FromInt32(2)+Uint32FromInt32(1))>>Int32FromInt32(24)))
+			_map = Xcalloc(tls, uint64(8), uint64((-Uint32FromUint32(1)/Uint32FromInt32(2)+Uint32FromInt32(1))>>Int32FromInt32(24)))
 		}
 		if !(_map != 0) {
 			goto out
 		}
 		if !(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) != 0) {
-			*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) = x___libc_calloc(tls, uint64(8), uint64(256))
+			*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) = Xcalloc(tls, uint64(8), uint64(256))
 		}
 		if !(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) != 0) {
 			goto out
 		}
 		if !(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) != 0) {
-			*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) = x___libc_calloc(tls, uint64(8), uint64(256))
+			*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) = Xcalloc(tls, uint64(8), uint64(256))
 		}
 		if !(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) != 0) {
 			goto out
 		}
 		if !(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) + uintptr(c)*8)) != 0) {
-			*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) + uintptr(c)*8)) = x___libc_calloc(tls, uint64(8), uint64(256))
+			*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) + uintptr(c)*8)) = Xcalloc(tls, uint64(8), uint64(256))
 		}
 		if !(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) + uintptr(c)*8)) != 0) {
 			goto out
@@ -994,7 +995,7 @@ func ___aio_get_queue(tls *TLS, fd int32, need int32) (r uintptr) {
 		v4 = *(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) + uintptr(c)*8)) + uintptr(d)*8))
 		q = v4
 		if !(v4 != 0) {
-			v5 = x___libc_calloc(tls, uint64(120), uint64(1))
+			v5 = Xcalloc(tls, uint64(120), uint64(1))
 			q = v5
 			*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(_map + uintptr(a)*8)) + uintptr(b)*8)) + uintptr(c)*8)) + uintptr(d)*8)) = v5
 			if q != 0 {
@@ -1040,7 +1041,7 @@ func ___aio_unref_queue(tls *TLS, q uintptr) {
 		_a_dec(tls, uintptr(unsafe.Pointer(&_aio_fd_cnt)))
 		x___pthread_rwlock_unlock(tls, uintptr(unsafe.Pointer(&_maplock)))
 		x___pthread_mutex_unlock(tls, q+24)
-		x___libc_free(tls, q)
+		Xfree(tls, q)
 	} else {
 		(*Taio_queue)(unsafe.Pointer(q)).Fref--
 		x___pthread_rwlock_unlock(tls, uintptr(unsafe.Pointer(&_maplock)))
@@ -1619,7 +1620,7 @@ func Xlio_listio(tls *TLS, mode int32, cbs uintptr, cnt int32, sev uintptr) (r i
 		return -int32(1)
 	}
 	if mode == m_LIO_WAIT || sev != 0 && (*Tsigevent)(unsafe.Pointer(sev)).Fsigev_notify != int32(m_SIGEV_NONE) {
-		v1 = _default_malloc(tls, uint64(16)+uint64(cnt)*uint64(8))
+		v1 = Xmalloc(tls, uint64(16)+uint64(cnt)*uint64(8))
 		st = v1
 		if !(v1 != 0) {
 			*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EAGAIN)
@@ -2120,6 +2121,7 @@ func Xcatan(tls *TLS, z complex128) (r complex128) {
 var _DP11 = float64(3.140625)
 var _DP21 = float64(0.0009675025939941406)
 var _DP31 = float64(1.5099579909783765e-07)
+
 var _float_pi = float32(3.141592653589793)
 
 func __redupif(tls *TLS, xx float32) (r float32) {
@@ -5405,7 +5407,9 @@ var _BF_init_state = *(*TBF_ctx)(unsafe.Pointer(&struct {
 		},
 	},
 }))
+
 var _BF_itoa64 = [65]uint8{'.', '/', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
+
 var _BF_atoi64 = [96]uint8{
 	0:  uint8(64),
 	1:  uint8(64),
@@ -6043,6 +6047,7 @@ var _key_shifts = [16]uint8{
 	14: uint8(2),
 	15: uint8(1),
 }
+
 var _psbox = [8][64]uint32{
 	0: {
 		0:  uint32(0x00808200),
@@ -8041,6 +8046,7 @@ var _comp_maskr1 = [4][16]uint32{
 		15: uint32(0x00040140),
 	},
 }
+
 var _ascii64 = [65]uint8{'.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
 
 /*   0000000000111111111122222222223333333333444444444455555555556666 */
@@ -10277,6 +10283,7 @@ var _table = [384]uint16{
 	382: uint16(0),
 	383: uint16(0),
 }
+
 var _ptable = uintptr(unsafe.Pointer(&_table)) + uintptr(128)*2
 
 func x___ctype_b_loc(tls *TLS) (r uintptr) {
@@ -10717,6 +10724,7 @@ var _table1 = [384]int32{
 	382: int32(0),
 	383: int32(0),
 }
+
 var _ptable1 = uintptr(unsafe.Pointer(&_table1)) + uintptr(128)*4
 
 func x___ctype_tolower_loc(tls *TLS) (r uintptr) {
@@ -11109,6 +11117,7 @@ var _table2 = [384]int32{
 	382: int32(0),
 	383: int32(0),
 }
+
 var _ptable2 = uintptr(unsafe.Pointer(&_table2)) + uintptr(128)*4
 
 func x___ctype_toupper_loc(tls *TLS) (r uintptr) {
@@ -26678,6 +26687,7 @@ var _table5 = [2784]uint8{
 	2782: uint8(0),
 	2783: uint8(0),
 }
+
 var _wtable = [1600]uint8{
 	0:    uint8(16),
 	1:    uint8(16),
@@ -28588,7 +28598,7 @@ func Xscandir(tls *TLS, path uintptr, res uintptr, sel uintptr, cmp uintptr) (r 
 			}
 			names = tmp
 		}
-		*(*uintptr)(unsafe.Pointer(names + uintptr(cnt)*8)) = _default_malloc(tls, uint64((*Tdirent)(unsafe.Pointer(de)).Fd_reclen))
+		*(*uintptr)(unsafe.Pointer(names + uintptr(cnt)*8)) = Xmalloc(tls, uint64((*Tdirent)(unsafe.Pointer(de)).Fd_reclen))
 		if !(*(*uintptr)(unsafe.Pointer(names + uintptr(cnt)*8)) != 0) {
 			break
 		}
@@ -28661,7 +28671,6 @@ const m_PT_GNU_STACK = 1685382481
 const m_PT_PHDR = 6
 const m_PT_TLS = 7
 const m_SYS_mmap = 9
-const m_SYS_set_tid_address = 218
 
 func x___init_tp(tls *TLS, p uintptr) (r1 int32) {
 	var r int32
@@ -28676,7 +28685,8 @@ func x___init_tp(tls *TLS, p uintptr) (r1 int32) {
 		x___libc.Fcan_do_threads = int8(1)
 	}
 	AtomicStorePInt32(td+56, int32(_DT_JOINABLE))
-	(*t__pthread)(unsafe.Pointer(td)).Ftid = int32(___syscall1(tls, int64(m_SYS_set_tid_address), int64(uintptr(unsafe.Pointer(&x___thread_list_lock)))))
+	// NewTLS handles the tid.
+	// td->tid = __syscall(SYS_set_tid_address, &__thread_list_lock);
 	(*t__pthread)(unsafe.Pointer(td)).Flocale = uintptr(unsafe.Pointer(&x___libc)) + 56
 	(*t__pthread)(unsafe.Pointer(td)).Frobust_list.Fhead = td + 136
 	(*t__pthread)(unsafe.Pointer(td)).Fsysinfo = x___sysinfo
@@ -28693,6 +28703,7 @@ type Tbuiltin_tls = struct {
 }
 
 var _builtin_tls [1]Tbuiltin_tls
+
 var _main_tls Ttls_module
 
 func x___copy_tls(tls *TLS, mem uintptr) (r uintptr) {
@@ -29028,7 +29039,7 @@ func x___putenv(tls *TLS, s uintptr, l uint64, r uintptr) (r1 int32) {
 			goto oom
 		}
 	} else {
-		newenv = _default_malloc(tls, uint64(8)*(i+uint64(2)))
+		newenv = Xmalloc(tls, uint64(8)*(i+uint64(2)))
 		if !(newenv != 0) {
 			goto oom
 		}
@@ -29141,7 +29152,7 @@ func Xsetenv(tls *TLS, var1 uintptr, value uintptr, overwrite int32) (r int32) {
 		return 0
 	}
 	l2 = Xstrlen(tls, value)
-	s = _default_malloc(tls, l1+l2+uint64(2))
+	s = Xmalloc(tls, l1+l2+uint64(2))
 	if !(s != 0) {
 		return -int32(1)
 	}
@@ -29379,6 +29390,9 @@ type Terrmsgstr_t = struct {
 	FstrEKEYREJECTED    [28]int8
 }
 
+/* mips has one error code outside of the 8-bit range due to a
+ * historical typo, so we just remap it. */
+
 var _errmsgstr = Terrmsgstr_t{
 	Fstr0:               [21]int8{'N', 'o', ' ', 'e', 'r', 'r', 'o', 'r', ' ', 'i', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 'n'},
 	FstrEILSEQ:          [22]int8{'I', 'l', 'l', 'e', 'g', 'a', 'l', ' ', 'b', 'y', 't', 'e', ' ', 's', 'e', 'q', 'u', 'e', 'n', 'c', 'e'},
@@ -29474,6 +29488,7 @@ var _errmsgstr = Terrmsgstr_t{
 	FstrEKEYREVOKED:     [21]int8{'K', 'e', 'y', ' ', 'h', 'a', 's', ' ', 'b', 'e', 'e', 'n', ' ', 'r', 'e', 'v', 'o', 'k', 'e', 'd'},
 	FstrEKEYREJECTED:    [28]int8{'K', 'e', 'y', ' ', 'w', 'a', 's', ' ', 'r', 'e', 'j', 'e', 'c', 't', 'e', 'd', ' ', 'b', 'y', ' ', 's', 'e', 'r', 'v', 'i', 'c', 'e'},
 }
+
 var _errmsgidx = [132]uint16{
 	0:   uint16(uint64(UintptrFromInt32(0))),
 	1:   uint16(uint64(UintptrFromInt32(0) + 109)),
@@ -29597,52 +29612,11 @@ func x__Exit(tls *TLS, ec int32) {
 	}
 }
 
-const m_SIGABRT = 6
-const m_SIGKILL = 9
-const m_SIG_UNBLOCK = 1
-const m_SYS_rt_sigaction = 13
-const m_SYS_rt_sigprocmask = 14
-const m_SYS_tkill = 200
-
-type Tk_sigaction = struct {
-	Fhandler  uintptr
-	Fflags    uint64
-	Frestorer uintptr
-	Fmask     [2]uint32
-}
-
-func Xabort(tls *TLS) {
-	if __ccgo_strace {
-		trc("tls=%v, (%v:)", tls, origin(2))
-	}
-	bp := tls.Alloc(48) /* tlsAllocs 40 maxVaListSize 0 */
-	defer tls.Free(48)
-	Xraise(tls, int32(m_SIGABRT))
-	/* If there was a SIGABRT handler installed and it returned, or if
-	 * SIGABRT was blocked or ignored, take an AS-safe lock to prevent
-	 * sigaction from installing a new SIGABRT handler, uninstall any
-	 * handler that may be present, and re-raise the signal to generate
-	 * the default action of abnormal termination. */
-	x___block_all_sigs(tls, uintptr(0))
-	x___lock(tls, uintptr(unsafe.Pointer(&x___abort_lock)))
-	*(*Tk_sigaction)(unsafe.Pointer(bp)) = Tk_sigaction{}
-	___syscall4(tls, int64(m_SYS_rt_sigaction), int64(Int32FromInt32(m_SIGABRT)), int64(bp), int64(Int32FromInt32(0)), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
-	___syscall2(tls, int64(m_SYS_tkill), int64((*t__pthread)(unsafe.Pointer(___get_tp(tls))).Ftid), int64(Int32FromInt32(m_SIGABRT)))
-	*(*[1]int64)(unsafe.Pointer(bp + 32)) = [1]int64{
-		0: int64(Uint64FromUint64(1) << (Int32FromInt32(m_SIGABRT) - Int32FromInt32(1))),
-	}
-	___syscall4(tls, int64(m_SYS_rt_sigprocmask), int64(Int32FromInt32(m_SIG_UNBLOCK)), int64(bp+32), int64(Int32FromInt32(0)), int64(Int32FromInt32(m__NSIG)/Int32FromInt32(8)))
-	/* Beyond this point should be unreachable. */
-	_a_crash(tls)
-	Xraise(tls, int32(m_SIGKILL))
-	x__Exit(tls, int32(127))
-}
-
 func x___assert_fail(tls *TLS, expr uintptr, file uintptr, line int32, func1 uintptr) {
 	bp := tls.Alloc(48) /* tlsAllocs 0 maxVaListSize 32 */
 	defer tls.Free(48)
 	Xfprintf(tls, uintptr(unsafe.Pointer(&x___stderr_FILE)), ts+217, VaList(bp+8, expr, file, func1, line))
-	Xabort(tls)
+	_abort(tls)
 }
 
 const m_COUNT = 32
@@ -29692,8 +29666,11 @@ type Tfl = struct {
 	Fa    [32]uintptr
 }
 
+/* Ensure that at least 32 atexit handlers can be registered without malloc */
+
 var _builtin Tfl
 var _head uintptr
+
 var _slot int32
 var _lock1 [1]int32
 
@@ -29733,7 +29710,7 @@ func x___cxa_atexit(tls *TLS, func1 uintptr, arg uintptr, dso uintptr) (r int32)
 	}
 	/* If the current function list is full, add a new one */
 	if _slot == int32(m_COUNT) {
-		new_fl = x___libc_calloc(tls, uint64(520), uint64(1))
+		new_fl = Xcalloc(tls, uint64(520), uint64(1))
 		if !(new_fl != 0) {
 			x___unlock(tls, uintptr(unsafe.Pointer(&_lock1)))
 			return -int32(1)
@@ -29765,10 +29742,6 @@ func Xatexit(tls *TLS, func1 uintptr) (r int32) {
 func _dummy5(tls *TLS) {
 }
 
-// C documentation
-//
-//	/* atexit.c and __stdio_exit.c override these. the latter is linked
-//	 * as a consequence of linking either __toread.c or __towrite.c. */
 func _libc_exit_fini(tls *TLS) {
 	// uintptr_t a = (uintptr_t)&__fini_array_end;
 	// for (; a>(uintptr_t)&__fini_array_start; a-=sizeof(void(*)()))
@@ -30024,7 +29997,6 @@ func Xfesetexceptflag(tls *TLS, fp uintptr, mask int32) (r int32) {
 	return 0
 }
 
-/* __fesetround wrapper for arch independent argument check */
 func Xfesetround(tls *TLS, r int32) (r1 int32) {
 	if __ccgo_strace {
 		trc("tls=%v r=%v, (%v:)", tls, r, origin(2))
@@ -32170,20 +32142,20 @@ func x___dl_vseterr(tls *TLS, fmt uintptr, ap uintptr) {
 	}
 	for q != 0 {
 		p = *(*uintptr)(unsafe.Pointer(q))
-		x___libc_free(tls, q)
+		Xfree(tls, q)
 		q = p
 	}
 	ap2 = ap
 	self = ___get_tp(tls)
 	if (*t__pthread)(unsafe.Pointer(self)).Fdlerror_buf != uintptr(-Int32FromInt32(1)) {
-		x___libc_free(tls, (*t__pthread)(unsafe.Pointer(self)).Fdlerror_buf)
+		Xfree(tls, (*t__pthread)(unsafe.Pointer(self)).Fdlerror_buf)
 	}
 	len1 = uint64(Xvsnprintf(tls, uintptr(0), uint64(0), fmt, ap2))
 	if len1 < uint64(8) {
 		len1 = uint64(8)
 	}
 	_ = ap2
-	buf = x___libc_malloc(tls, len1+uint64(1))
+	buf = Xmalloc(tls, len1+uint64(1))
 	if buf != 0 {
 		Xvsnprintf(tls, buf, len1+uint64(1), fmt, ap)
 	} else {
@@ -32592,6 +32564,7 @@ func Xgetpass(tls *TLS, prompt uintptr) (r uintptr) {
 var _password [128]int8
 
 var _defshells = [18]int8{'/', 'b', 'i', 'n', '/', 's', 'h', 10, '/', 'b', 'i', 'n', '/', 'c', 's', 'h', 10}
+
 var _line uintptr
 var _linesize uint64
 var _f uintptr
@@ -33088,146 +33061,6 @@ func Xclock_adjtime(tls *TLS, clock_id int32, utx uintptr) (r1 int32) {
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_clock_adjtime), int64(clock_id), int64(utx)))))
 }
 
-type Tcpu_set_t = struct {
-	F__bits [16]uint64
-}
-
-type Ttm1 = struct {
-	Ftm_sec    int32
-	Ftm_min    int32
-	Ftm_hour   int32
-	Ftm_mday   int32
-	Ftm_mon    int32
-	Ftm_year   int32
-	Ftm_wday   int32
-	Ftm_yday   int32
-	Ftm_isdst  int32
-	Ftm_gmtoff int64
-	Ftm_zone   uintptr
-}
-
-type Tcpu_set_t1 = struct {
-	F__bits [16]uint64
-}
-
-const _REG_R8 = 0
-const _REG_R9 = 1
-const _REG_R10 = 2
-const _REG_R11 = 3
-const _REG_R12 = 4
-const _REG_R13 = 5
-const _REG_R14 = 6
-const _REG_R15 = 7
-const _REG_RDI = 8
-const _REG_RSI = 9
-const _REG_RBP = 10
-const _REG_RBX = 11
-const _REG_RDX = 12
-const _REG_RAX = 13
-const _REG_RCX = 14
-const _REG_RSP = 15
-const _REG_RIP = 16
-const _REG_EFL = 17
-const _REG_CSGSFS = 18
-const _REG_ERR = 19
-const _REG_TRAPNO = 20
-const _REG_OLDMASK = 21
-const _REG_CR2 = 22
-
-type Tgreg_t = int64
-
-type Tgregset_t = [23]int64
-
-type Tfpregset_t = uintptr
-
-type T_fpstate = struct {
-	Fcwd       uint16
-	Fswd       uint16
-	Fftw       uint16
-	Ffop       uint16
-	Frip       uint64
-	Frdp       uint64
-	Fmxcsr     uint32
-	Fmxcr_mask uint32
-	F_st       [8]struct {
-		Fsignificand [4]uint16
-		Fexponent    uint16
-		Fpadding     [3]uint16
-	}
-	F_xmm [16]struct {
-		Felement [4]uint32
-	}
-	Fpadding [24]uint32
-}
-
-type Tsigcontext = struct {
-	Fr8          uint64
-	Fr9          uint64
-	Fr10         uint64
-	Fr11         uint64
-	Fr12         uint64
-	Fr13         uint64
-	Fr14         uint64
-	Fr15         uint64
-	Frdi         uint64
-	Frsi         uint64
-	Frbp         uint64
-	Frbx         uint64
-	Frdx         uint64
-	Frax         uint64
-	Frcx         uint64
-	Frsp         uint64
-	Frip         uint64
-	Feflags      uint64
-	Fcs          uint16
-	Fgs          uint16
-	Ffs          uint16
-	F__pad0      uint16
-	Ferr         uint64
-	Ftrapno      uint64
-	Foldmask     uint64
-	Fcr2         uint64
-	Ffpstate     uintptr
-	F__reserved1 [8]uint64
-}
-
-type Tmcontext_t1 = struct {
-	Fgregs       Tgregset_t
-	Ffpregs      uintptr
-	F__reserved1 [8]uint64
-}
-
-type Tucontext_t1 = struct {
-	Fuc_flags     uint64
-	Fuc_link      uintptr
-	Fuc_stack     Tstack_t
-	Fuc_mcontext  Tmcontext_t1
-	Fuc_sigmask   Tsigset_t
-	F__fpregs_mem [64]uint64
-}
-
-type Tucontext = Tucontext_t1
-
-type Tsig_t = uintptr
-
-type Tsighandler_t = uintptr
-
-func Xclone(tls1 *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va uintptr) (r int32) {
-	if __ccgo_strace {
-		trc("tls1=%v func1=%v stack=%v flags=%v arg=%v va=%v, (%v:)", tls1, func1, stack, flags, arg, va, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	bp := tls1.Alloc(32) /* tlsAllocs 0 maxVaListSize 24 */
-	defer tls1.Free(32)
-	var ap, ctid, ptid, tls uintptr
-	ap = va
-	ptid = VaUintptr(&ap)
-	tls = VaUintptr(&ap)
-	ctid = VaUintptr(&ap)
-	_ = ap
-	return int32(x___syscall_ret(tls1, uint64(___clone(tls1, func1, stack, flags, arg, VaList(bp+8, ptid, tls, ctid)))))
-}
-
 const m_SYS_copy_file_range = 326
 
 func Xcopy_file_range(tls *TLS, fd_in int32, off_in uintptr, fd_out int32, off_out uintptr, len1 uint64, flags uint32) (r int64) {
@@ -33264,15 +33097,6 @@ type Tepoll_data = Tepoll_data_t
 type Tepoll_event = struct {
 	Fevents uint32
 	Fdata   Tepoll_data_t
-}
-
-type Tucontext_t2 = struct {
-	Fuc_flags     uint64
-	Fuc_link      uintptr
-	Fuc_stack     Tstack_t
-	Fuc_mcontext  Tmcontext_t
-	Fuc_sigmask   Tsigset_t
-	F__fpregs_mem [64]uint64
 }
 
 func Xepoll_create(tls *TLS, size int32) (r int32) {
@@ -33497,7 +33321,116 @@ func Xgetrandom(tls *TLS, buf uintptr, buflen uint64, flags uint32) (r int64) {
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_getrandom), int64(buf), int64(buflen), int64(flags), 0, 0, 0)))
 }
 
-type Tucontext_t3 = struct {
+type Tcpu_set_t = struct {
+	F__bits [16]uint64
+}
+
+type Ttm1 = struct {
+	Ftm_sec    int32
+	Ftm_min    int32
+	Ftm_hour   int32
+	Ftm_mday   int32
+	Ftm_mon    int32
+	Ftm_year   int32
+	Ftm_wday   int32
+	Ftm_yday   int32
+	Ftm_isdst  int32
+	Ftm_gmtoff int64
+	Ftm_zone   uintptr
+}
+
+type Tcpu_set_t1 = struct {
+	F__bits [16]uint64
+}
+
+const _REG_R8 = 0
+const _REG_R9 = 1
+const _REG_R10 = 2
+const _REG_R11 = 3
+const _REG_R12 = 4
+const _REG_R13 = 5
+const _REG_R14 = 6
+const _REG_R15 = 7
+const _REG_RDI = 8
+const _REG_RSI = 9
+const _REG_RBP = 10
+const _REG_RBX = 11
+const _REG_RDX = 12
+const _REG_RAX = 13
+const _REG_RCX = 14
+const _REG_RSP = 15
+const _REG_RIP = 16
+const _REG_EFL = 17
+const _REG_CSGSFS = 18
+const _REG_ERR = 19
+const _REG_TRAPNO = 20
+const _REG_OLDMASK = 21
+const _REG_CR2 = 22
+
+type Tgreg_t = int64
+
+type Tgregset_t = [23]int64
+
+type Tfpregset_t = uintptr
+
+type T_fpstate = struct {
+	Fcwd       uint16
+	Fswd       uint16
+	Fftw       uint16
+	Ffop       uint16
+	Frip       uint64
+	Frdp       uint64
+	Fmxcsr     uint32
+	Fmxcr_mask uint32
+	F_st       [8]struct {
+		Fsignificand [4]uint16
+		Fexponent    uint16
+		Fpadding     [3]uint16
+	}
+	F_xmm [16]struct {
+		Felement [4]uint32
+	}
+	Fpadding [24]uint32
+}
+
+type Tsigcontext = struct {
+	Fr8          uint64
+	Fr9          uint64
+	Fr10         uint64
+	Fr11         uint64
+	Fr12         uint64
+	Fr13         uint64
+	Fr14         uint64
+	Fr15         uint64
+	Frdi         uint64
+	Frsi         uint64
+	Frbp         uint64
+	Frbx         uint64
+	Frdx         uint64
+	Frax         uint64
+	Frcx         uint64
+	Frsp         uint64
+	Frip         uint64
+	Feflags      uint64
+	Fcs          uint16
+	Fgs          uint16
+	Ffs          uint16
+	F__pad0      uint16
+	Ferr         uint64
+	Ftrapno      uint64
+	Foldmask     uint64
+	Fcr2         uint64
+	Ffpstate     uintptr
+	F__reserved1 [8]uint64
+}
+
+type Tmcontext_t1 = struct {
+	Fgregs       Tgregset_t
+	Ffpregs      uintptr
+	F__reserved1 [8]uint64
+}
+
+type Tucontext_t1 = struct {
 	Fuc_flags     uint64
 	Fuc_link      uintptr
 	Fuc_stack     Tstack_t
@@ -33505,6 +33438,12 @@ type Tucontext_t3 = struct {
 	Fuc_sigmask   Tsigset_t
 	F__fpregs_mem [64]uint64
 }
+
+type Tucontext = Tucontext_t1
+
+type Tsig_t = uintptr
+
+type Tsighandler_t = uintptr
 
 func Xgettid(tls *TLS) (r int32) {
 	if __ccgo_strace {
@@ -33599,6 +33538,16 @@ const m_SA_ONSTACK = 134217728
 const m_SA_RESTART = 268435456
 const m_SIGSYNCCALL = 34
 const m_SYS_membarrier = 324
+const m_SYS_tkill = 200
+
+type Tucontext_t2 = struct {
+	Fuc_flags     uint64
+	Fuc_link      uintptr
+	Fuc_stack     Tstack_t
+	Fuc_mcontext  Tmcontext_t
+	Fuc_sigmask   Tsigset_t
+	F__fpregs_mem [64]uint64
+}
 
 func _dummy_0(tls *TLS) {
 }
@@ -33779,6 +33728,15 @@ func Xpivot_root(tls *TLS, new1 uintptr, old uintptr) (r int32) {
 }
 
 const m_SYS_ppoll = 271
+
+type Tucontext_t3 = struct {
+	Fuc_flags     uint64
+	Fuc_link      uintptr
+	Fuc_stack     Tstack_t
+	Fuc_mcontext  Tmcontext_t1
+	Fuc_sigmask   Tsigset_t
+	F__fpregs_mem [64]uint64
+}
 
 func Xppoll(tls *TLS, fds uintptr, n uint64, to uintptr, mask uintptr) (r int32) {
 	if __ccgo_strace {
@@ -34078,6 +34036,7 @@ func Xsetfsuid(tls *TLS, uid uint32) (r int32) {
 	return int32(x___syscall_ret(tls, uint64(___syscall1(tls, int64(m_SYS_setfsuid), int64(uid)))))
 }
 
+const m_SIGKILL = 9
 const m_SYS_getpid = 39
 const m_SYS_kill = 62
 const m_SYS_setgroups = 116
@@ -34123,7 +34082,8 @@ func Xsetgroups(tls *TLS, count uint64, list uintptr) (r int32) {
 		Flist:  list,
 		Fret:   int32(1),
 	}
-	x___synccall(tls, __ccgo_fp(_do_setgroups), bp)
+	// __synccall(do_setgroups, &c);
+	_do_setgroups(tls, bp)
 	return int32(x___syscall_ret(tls, uint64((*(*Tctx)(unsafe.Pointer(bp))).Fret)))
 }
 
@@ -34911,7 +34871,7 @@ func Xbindtextdomain(tls *TLS, domainname uintptr, dirname uintptr) (r uintptr) 
 		p = (*Tbinding)(unsafe.Pointer(p)).Fnext
 	}
 	if !(p != 0) {
-		p = x___libc_calloc(tls, uint64(32)+domlen+dirlen+uint64(2), uint64(1))
+		p = Xcalloc(tls, uint64(32)+domlen+dirlen+uint64(2), uint64(1))
 		if !(p != 0) {
 			x___unlock(tls, uintptr(unsafe.Pointer(&_lock2)))
 			return uintptr(0)
@@ -34945,6 +34905,7 @@ var _catnames = [6][12]int8{
 	4: {'L', 'C', '_', 'M', 'O', 'N', 'E', 'T', 'A', 'R', 'Y'},
 	5: {'L', 'C', '_', 'M', 'E', 'S', 'S', 'A', 'G', 'E', 'S'},
 }
+
 var _catlens = [6]int8{
 	0: int8(8),
 	1: int8(10),
@@ -35078,7 +35039,7 @@ _2:
 		if !(map1 != 0) {
 			goto notrans
 		}
-		p = x___libc_calloc(tls, uint64(64), uint64(1))
+		p = Xcalloc(tls, uint64(64), uint64(1))
 		if !(p != 0) {
 			Xmunmap(tls, map1, *(*uint64)(unsafe.Pointer(bp)))
 			goto notrans
@@ -35200,7 +35161,7 @@ func Xdgettext(tls *TLS, domainname uintptr, msgid uintptr) (r uintptr) {
 
 func x___duplocale(tls *TLS, old uintptr) (r uintptr) {
 	var new1 uintptr
-	new1 = x___libc_malloc(tls, uint64(48))
+	new1 = Xmalloc(tls, uint64(48))
 	if !(new1 != 0) {
 		return uintptr(0)
 	}
@@ -35216,7 +35177,7 @@ func Xfreelocale(tls *TLS, l uintptr) {
 		trc("tls=%v l=%v, (%v:)", tls, l, origin(2))
 	}
 	if x___loc_is_allocated(tls, l) != 0 {
-		x___libc_free(tls, l)
+		Xfree(tls, l)
 	}
 }
 
@@ -35871,6 +35832,7 @@ var _legacy_chars = [612]uint16{
 	610: uint16(9619),
 	611: uint16(9632),
 }
+
 var _jis0208 = [84][94]uint16{
 	0: {
 		0:  uint16(12288),
@@ -43272,6 +43234,7 @@ var _jis0208 = [84][94]uint16{
 		93: uint16(0),
 	},
 }
+
 var _gb18030 = [126][190]uint16{
 	0: {
 		0:   uint16(19970),
@@ -67466,6 +67429,7 @@ var _gb18030 = [126][190]uint16{
 		189: uint16(58565),
 	},
 }
+
 var _big5 = [89][157]uint16{
 	0: {
 		0:   uint16(12288),
@@ -81619,6 +81583,7 @@ var _big5 = [89][157]uint16{
 		156: uint16(9619),
 	},
 }
+
 var _hkscs = [5172]uint16{
 	0:    uint16(17392),
 	1:    uint16(19506),
@@ -86793,6 +86758,7 @@ var _hkscs = [5172]uint16{
 	5170: uint16(17678),
 	5171: uint16(2),
 }
+
 var _ksc = [93][94]uint16{
 	0: {
 		0:  uint16(12288),
@@ -95343,6 +95309,7 @@ var _ksc = [93][94]uint16{
 		93: uint16(35440),
 	},
 }
+
 var _rev_jis = [6879]uint16{
 	0:    uint16(31),
 	1:    uint16(80),
@@ -102312,7 +102279,7 @@ func Xiconv_open(tls *TLS, to uintptr, from uintptr) (r uintptr) {
 	case int32(m_UCS2):
 		fallthrough
 	case int32(m_ISO2022_JP):
-		scd = _default_malloc(tls, uint64(16))
+		scd = Xmalloc(tls, uint64(16))
 		if !(scd != 0) {
 			return uintptr(-Int32FromInt32(1))
 		}
@@ -103262,6 +103229,7 @@ const m_LC_NUMERIC = 1
 const m_LC_TIME = 2
 
 var _c_time = [314]int8{'S', 'u', 'n', 0, 'M', 'o', 'n', 0, 'T', 'u', 'e', 0, 'W', 'e', 'd', 0, 'T', 'h', 'u', 0, 'F', 'r', 'i', 0, 'S', 'a', 't', 0, 'S', 'u', 'n', 'd', 'a', 'y', 0, 'M', 'o', 'n', 'd', 'a', 'y', 0, 'T', 'u', 'e', 's', 'd', 'a', 'y', 0, 'W', 'e', 'd', 'n', 'e', 's', 'd', 'a', 'y', 0, 'T', 'h', 'u', 'r', 's', 'd', 'a', 'y', 0, 'F', 'r', 'i', 'd', 'a', 'y', 0, 'S', 'a', 't', 'u', 'r', 'd', 'a', 'y', 0, 'J', 'a', 'n', 0, 'F', 'e', 'b', 0, 'M', 'a', 'r', 0, 'A', 'p', 'r', 0, 'M', 'a', 'y', 0, 'J', 'u', 'n', 0, 'J', 'u', 'l', 0, 'A', 'u', 'g', 0, 'S', 'e', 'p', 0, 'O', 'c', 't', 0, 'N', 'o', 'v', 0, 'D', 'e', 'c', 0, 'J', 'a', 'n', 'u', 'a', 'r', 'y', 0, 'F', 'e', 'b', 'r', 'u', 'a', 'r', 'y', 0, 'M', 'a', 'r', 'c', 'h', 0, 'A', 'p', 'r', 'i', 'l', 0, 'M', 'a', 'y', 0, 'J', 'u', 'n', 'e', 0, 'J', 'u', 'l', 'y', 0, 'A', 'u', 'g', 'u', 's', 't', 0, 'S', 'e', 'p', 't', 'e', 'm', 'b', 'e', 'r', 0, 'O', 'c', 't', 'o', 'b', 'e', 'r', 0, 'N', 'o', 'v', 'e', 'm', 'b', 'e', 'r', 0, 'D', 'e', 'c', 'e', 'm', 'b', 'e', 'r', 0, 'A', 'M', 0, 'P', 'M', 0, '%', 'a', ' ', '%', 'b', ' ', '%', 'e', ' ', '%', 'T', ' ', '%', 'Y', 0, '%', 'm', '/', '%', 'd', '/', '%', 'y', 0, '%', 'H', ':', '%', 'M', ':', '%', 'S', 0, '%', 'I', ':', '%', 'M', ':', '%', 'S', ' ', '%', 'p', 0, 0, 0, '%', 'm', '/', '%', 'd', '/', '%', 'y', 1, '2', '3', '4', '5', '6', '7', '8', '9', 0, '%', 'a', ' ', '%', 'b', ' ', '%', 'e', ' ', '%', 'T', ' ', '%', 'Y', 0, '%', 'H', ':', '%', 'M', ':', '%', 'S'}
+
 var _c_messages = [19]int8{'^', '[', 'y', 'Y', ']', 0, '^', '[', 'n', 'N', ']', 0, 'y', 'e', 's', 0, 'n', 'o'}
 var _c_numeric = [3]int8{'.'}
 
@@ -103422,7 +103390,7 @@ func x___get_locale(tls *TLS, cat int32, val uintptr) (r uintptr) {
 			(*(*[256]int8)(unsafe.Pointer(bp)))[l+uint64(1)+n] = 0
 			map1 = x___map_file(tls, bp, bp+256)
 			if map1 != 0 {
-				new1 = x___libc_malloc(tls, uint64(48))
+				new1 = Xmalloc(tls, uint64(48))
 				if !(new1 != 0) {
 					Xmunmap(tls, map1, *(*uint64)(unsafe.Pointer(bp + 256)))
 					break
@@ -103445,7 +103413,7 @@ func x___get_locale(tls *TLS, cat int32, val uintptr) (r uintptr) {
 	 * sake of being able to do message translations at the
 	 * application level. */
 	if v11 = !(new1 != 0); v11 {
-		v10 = x___libc_malloc(tls, uint64(48))
+		v10 = Xmalloc(tls, uint64(48))
 		new1 = v10
 	}
 	if v11 && v10 != 0 {
@@ -103574,7 +103542,7 @@ func _do_newlocale(tls *TLS, mask int32, name uintptr, loc uintptr) (r uintptr) 
 		return uintptr(unsafe.Pointer(&_default_ctype_locale))
 	}
 	/* If no builtin locale matched, attempt to allocate and copy. */
-	v3 = x___libc_malloc(tls, uint64(48))
+	v3 = Xmalloc(tls, uint64(48))
 	loc = v3
 	if v3 != 0 {
 		*(*t__locale_struct)(unsafe.Pointer(loc)) = *(*t__locale_struct)(unsafe.Pointer(bp))
@@ -104148,7 +104116,7 @@ func Xtextdomain(tls *TLS, domainname uintptr) (r uintptr) {
 		return uintptr(0)
 	}
 	if !(_current_domain != 0) {
-		_current_domain = _default_malloc(tls, uint64(Int32FromInt32(m_NAME_MAX)+Int32FromInt32(1)))
+		_current_domain = Xmalloc(tls, uint64(Int32FromInt32(m_NAME_MAX)+Int32FromInt32(1)))
 		if !(_current_domain != 0) {
 			return uintptr(0)
 		}
@@ -104263,200 +104231,7 @@ func _allzerop(tls *TLS, p uintptr) (r int32) {
 	return 0
 }
 
-func Xcalloc(tls *TLS, m uint64, n uint64) (r uintptr) {
-	if __ccgo_strace {
-		trc("tls=%v m=%v n=%v, (%v:)", tls, m, n, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	var p uintptr
-	if n != 0 && m > uint64(-Int32FromInt32(1))/n {
-		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENOMEM)
-		return uintptr(0)
-	}
-	n *= m
-	p = _default_malloc(tls, n)
-	if !(p != 0) || !(x___malloc_replaced != 0) && x___malloc_allzerop(tls, p) != 0 {
-		return p
-	}
-	n = _mal0_clear(tls, p, n)
-	return _memset(tls, p, 0, n)
-}
-
-func Xfree(tls *TLS, p uintptr) {
-	if __ccgo_strace {
-		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
-	}
-	x___libc_free(tls, p)
-}
-
-func _mal0_clear1(tls *TLS, p uintptr, n uint64) (r uint64) {
-	var i, pagesz uint64
-	var pp uintptr
-	pagesz = uint64(4096) /* arbitrary */
-	if n < pagesz {
-		return n
-	}
-	pp = p + uintptr(n)
-	i = uint64(pp) & (pagesz - uint64(1))
-	for {
-		pp = _memset(tls, pp-uintptr(i), 0, i)
-		if uint64(int64(pp)-int64(p)) < pagesz {
-			return uint64(int64(pp) - int64(p))
-		}
-		for i = pagesz; i != 0; {
-			if *(*uint64)(unsafe.Pointer(pp + uintptr(-Int32FromInt32(1))*8))|*(*uint64)(unsafe.Pointer(pp + uintptr(-Int32FromInt32(2))*8)) != 0 {
-				break
-			}
-			goto _1
-		_1:
-			i -= Uint64FromInt32(2) * Uint64FromInt64(8)
-			pp -= uintptr(Uint64FromInt32(2) * Uint64FromInt64(8))
-		}
-	}
-	return r
-}
-
-func _allzerop1(tls *TLS, p uintptr) (r int32) {
-	return 0
-}
-
-func x___libc_calloc(tls *TLS, m uint64, n uint64) (r uintptr) {
-	var p uintptr
-	if n != 0 && m > uint64(-Int32FromInt32(1))/n {
-		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENOMEM)
-		return uintptr(0)
-	}
-	n *= m
-	p = x___libc_malloc(tls, n)
-	if !(p != 0) || !(x___malloc_replaced != 0) && x___malloc_allzerop(tls, p) != 0 {
-		return p
-	}
-	n = _mal0_clear1(tls, p, n)
-	return _memset(tls, p, 0, n)
-}
-
-const m_ALIGN = 16
-
-/* This function returns true if the interval [old,new]
- * intersects the 'len'-sized interval below &libc.auxv
- * (interpreted as the main-thread stack) or below &b
- * (the current stack). It is used to defend against
- * buggy brk implementations that can cross the stack. */
-
-func _traverses_stack_p(tls *TLS, old uint64, new1 uint64) (r int32) {
-	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
-	defer tls.Free(16)
-	var a, len1, v1, v2 uint64
-	var _ /* b at bp+0 */ uint64
-	len1 = uint64(Int32FromInt32(8) << Int32FromInt32(20))
-	*(*uint64)(unsafe.Pointer(bp)) = uint64(x___libc.Fauxv)
-	if *(*uint64)(unsafe.Pointer(bp)) > len1 {
-		v1 = *(*uint64)(unsafe.Pointer(bp)) - len1
-	} else {
-		v1 = uint64(0)
-	}
-	a = v1
-	if new1 > a && old < *(*uint64)(unsafe.Pointer(bp)) {
-		return int32(1)
-	}
-	*(*uint64)(unsafe.Pointer(bp)) = uint64(bp)
-	if *(*uint64)(unsafe.Pointer(bp)) > len1 {
-		v2 = *(*uint64)(unsafe.Pointer(bp)) - len1
-	} else {
-		v2 = uint64(0)
-	}
-	a = v2
-	if new1 > a && old < *(*uint64)(unsafe.Pointer(bp)) {
-		return int32(1)
-	}
-	return 0
-}
-
 var _lock3 [1]int32
-
-func ___simple_malloc(tls *TLS, n uint64) (r uintptr) {
-	var align, min, req, v1 uint64
-	var mem, p, v2 uintptr
-	var new_area int32
-	align = uint64(1)
-	if n > Uint64FromUint64(0xffffffffffffffff)/Uint64FromInt32(2) {
-		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENOMEM)
-		return uintptr(0)
-	}
-	if !(n != 0) {
-		n++
-	}
-	for align < n && align < uint64(m_ALIGN) {
-		align += align
-	}
-	x___lock(tls, uintptr(unsafe.Pointer(&_lock3)))
-	_cur += -_cur & (align - uint64(1))
-	if n > _end-_cur {
-		req = (n - (_end - _cur) + uint64(m_PAGESIZE) - uint64(1)) & uint64(-Int32FromInt32(m_PAGESIZE))
-		if !(_cur != 0) {
-			_brk = uint64(___syscall1(tls, int64(m_SYS_brk), int64(Int32FromInt32(0))))
-			_brk += -_brk & uint64(Int32FromInt32(m_PAGESIZE)-Int32FromInt32(1))
-			v1 = _brk
-			_end = v1
-			_cur = v1
-		}
-		if _brk == _end && req < uint64(0xffffffffffffffff)-_brk && !(_traverses_stack_p(tls, _brk, _brk+req) != 0) && uint64(___syscall1(tls, int64(m_SYS_brk), int64(_brk+req))) == _brk+req {
-			_end += req
-			_brk = _end
-		} else {
-			new_area = 0
-			req = (n + uint64(m_PAGESIZE) - uint64(1)) & uint64(-Int32FromInt32(m_PAGESIZE))
-			/* Only make a new area rather than individual mmap
-			 * if wasted space would be over 1/8 of the map. */
-			if req-n > req/uint64(8) {
-				/* Geometric area size growth up to 64 pages,
-				 * bounding waste by 1/8 of the area. */
-				min = uint64(int32(m_PAGESIZE) << (_mmap_step / uint32(2)))
-				if min-n > _end-_cur {
-					if req < min {
-						req = min
-						if _mmap_step < uint32(12) {
-							_mmap_step++
-						}
-					}
-					new_area = int32(1)
-				}
-			}
-			mem = Xmmap(tls, uintptr(0), req, Int32FromInt32(m_PROT_READ)|Int32FromInt32(m_PROT_WRITE), Int32FromInt32(m_MAP_PRIVATE)|Int32FromInt32(m_MAP_ANON), -int32(1), 0)
-			if mem == uintptr(-Int32FromInt32(1)) || !(new_area != 0) {
-				x___unlock(tls, uintptr(unsafe.Pointer(&_lock3)))
-				if mem == uintptr(-Int32FromInt32(1)) {
-					v2 = uintptr(0)
-				} else {
-					v2 = mem
-				}
-				return v2
-			}
-			_cur = uint64(mem)
-			_end = _cur + req
-		}
-	}
-	p = uintptr(_cur)
-	_cur += n
-	x___unlock(tls, uintptr(unsafe.Pointer(&_lock3)))
-	return p
-}
-
-var _brk uint64
-
-var _cur uint64
-
-var _end uint64
-
-var _mmap_step uint32
-
-func x___libc_malloc(tls *TLS, n uint64) (r uintptr) {
-	return x___libc_malloc_impl(tls, n)
-}
-
-func _default_malloc(tls *TLS, n uint64) (r uintptr) {
-	return x___libc_malloc_impl(tls, n)
-}
 
 const m_IB = 4
 const m_UNIT = 16
@@ -104526,7 +104301,7 @@ func Xaligned_alloc(tls *TLS, align uint64, len1 uint64) (r uintptr) {
 	if align <= uint64(m_UNIT) {
 		align = uint64(m_UNIT)
 	}
-	p = x___libc_malloc_impl(tls, len1+align-uint64(m_UNIT))
+	p = Xmalloc(tls, len1+align-uint64(m_UNIT))
 	if !(p != 0) {
 		return uintptr(0)
 	}
@@ -104653,498 +104428,10 @@ _10:
 	return p
 }
 
-func _donate(tls *TLS, base uintptr, len1 uint64) {
-	var a, b uint64
-	var head, m, v2, v3, v4, v5 uintptr
-	var sc int32
-	a = uint64(base)
-	b = a + len1
-	a += -a & uint64(Int32FromInt32(m_UNIT)-Int32FromInt32(1))
-	b -= b & uint64(Int32FromInt32(m_UNIT)-Int32FromInt32(1))
-	_memset(tls, base, 0, len1)
-	sc = int32(47)
-	for sc > 0 && b > a {
-		if b-a < uint64((int32(x___malloc_size_classes[sc])+int32(1))*int32(m_UNIT)) {
-			goto _1
-		}
-		m = x___malloc_alloc_meta(tls)
-		AtomicStorePInt32(m+24, 0)
-		AtomicStorePInt32(m+28, int32(1))
-		(*Tmeta)(unsafe.Pointer(m)).Fmem = uintptr(a)
-		(*Tgroup)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(m)).Fmem)).Fmeta = m
-		SetBitFieldPtr64Uint64(m+32, Uint64FromInt32(0), 0, 0x1f)
-		SetBitFieldPtr64Uint64(m+32, Uint64FromInt32(0), 5, 0x20)
-		SetBitFieldPtr64Uint64(m+32, uint64(sc), 6, 0xfc0)
-		SetBitFieldPtr64Uint64(m+32, Uint64FromInt32(0), 12, 0xfffffffffffff000)
-		*(*uint8)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(m)).Fmem + UintptrFromInt32(m_UNIT) - UintptrFromInt32(4))) = uint8(0)
-		*(*uint8)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(m)).Fmem + UintptrFromInt32(m_UNIT) - UintptrFromInt32(3))) = uint8(255)
-		*(*uint8)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(m)).Fmem + 16 + uintptr(int32(x___malloc_size_classes[sc])*int32(m_UNIT)-int32(4)))) = uint8(0)
-		v2 = uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8
-		v3 = m
-		if !!((*Tmeta)(unsafe.Pointer(v3)).Fnext != 0) {
-			_a_crash(tls)
-		}
-		if !!((*Tmeta)(unsafe.Pointer(v3)).Fprev != 0) {
-			_a_crash(tls)
-		}
-		if *(*uintptr)(unsafe.Pointer(v2)) != 0 {
-			head = *(*uintptr)(unsafe.Pointer(v2))
-			(*Tmeta)(unsafe.Pointer(v3)).Fnext = head
-			(*Tmeta)(unsafe.Pointer(v3)).Fprev = (*Tmeta)(unsafe.Pointer(head)).Fprev
-			v4 = v3
-			(*Tmeta)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(v3)).Fprev)).Fnext = v4
-			(*Tmeta)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(v3)).Fnext)).Fprev = v4
-		} else {
-			v5 = v3
-			(*Tmeta)(unsafe.Pointer(v3)).Fnext = v5
-			(*Tmeta)(unsafe.Pointer(v3)).Fprev = v5
-			*(*uintptr)(unsafe.Pointer(v2)) = v3
-		}
-		a += uint64((int32(x___malloc_size_classes[sc]) + int32(1)) * int32(m_UNIT))
-		goto _1
-	_1:
-		sc -= int32(4)
-	}
-}
-
-func x___malloc_donate(tls *TLS, start uintptr, end uintptr) {
-	_donate(tls, start, uint64(int64(end)-int64(start)))
-}
-
-const m_MADV_FREE = 8
-const m_USE_MADV_FREE = 0
-
-type Tmapinfo = struct {
-	Fbase uintptr
-	Flen1 uint64
-}
-
-func _free_group(tls *TLS, g uintptr) (r Tmapinfo) {
-	var area, base, head, m, meta, p, v10, v11, v12, v13, v2, v5, v9 uintptr
-	var i, idx, index, offset, sc, v1, v3, v7 int32
-	var mi Tmapinfo
-	mi = Tmapinfo{}
-	sc = int32(*(*uint64)(unsafe.Pointer(g + 32)) & 0xfc0 >> 6)
-	if sc < int32(48) {
-		*(*uint64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 464 + uintptr(sc)*8)) -= uint64(int32(*(*uint64)(unsafe.Pointer(g + 32))&0x1f>>0) + int32(1))
-	}
-	if *(*uint64)(unsafe.Pointer(g + 32))&0xfffffffffffff000>>12 != 0 {
-		if int32(x___malloc_context.Fseq) == Int32FromInt32(255) {
-			i = 0
-			for ; i < Int32FromInt32(32); i++ {
-				*(*uint8)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 848 + uintptr(i))) = uint8(0)
-			}
-			x___malloc_context.Fseq = uint8(1)
-		} else {
-			x___malloc_context.Fseq++
-		}
-		v1 = sc
-		if uint32(v1)-Uint32FromUint32(7) < Uint32FromInt32(32) {
-			*(*uint8)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 848 + uintptr(v1-int32(7)))) = x___malloc_context.Fseq
-		}
-		mi.Fbase = (*Tmeta)(unsafe.Pointer(g)).Fmem
-		mi.Flen1 = *(*uint64)(unsafe.Pointer(g + 32)) & 0xfffffffffffff000 >> 12 * uint64(4096) & 0xfffffffffffff
-	} else {
-		p = (*Tmeta)(unsafe.Pointer(g)).Fmem
-		v2 = p
-		if !!(uint64(v2)&Uint64FromInt32(15) != 0) {
-			_a_crash(tls)
-		}
-		offset = int32(*(*uint16)(unsafe.Pointer(v2 - UintptrFromInt32(2))))
-		v3 = int32(*(*uint8)(unsafe.Pointer(v2 + uintptr(-Int32FromInt32(3))))) & int32(31)
-		goto _4
-	_4:
-		index = v3
-		if *(*uint8)(unsafe.Pointer(v2 + uintptr(-Int32FromInt32(4)))) != 0 {
-			if !!(offset != 0) {
-				_a_crash(tls)
-			}
-			offset = int32(*(*uint32)(unsafe.Pointer(v2 - UintptrFromInt32(8))))
-			if !(offset > Int32FromInt32(0xffff)) {
-				_a_crash(tls)
-			}
-		}
-		base = v2 - uintptr(Int32FromInt32(m_UNIT)*offset) - UintptrFromInt32(m_UNIT)
-		meta = (*Tgroup)(unsafe.Pointer(base)).Fmeta
-		if !((*Tmeta)(unsafe.Pointer(meta)).Fmem == base) {
-			_a_crash(tls)
-		}
-		if !(index <= int32(*(*uint64)(unsafe.Pointer(meta + 32))&0x1f>>0)) {
-			_a_crash(tls)
-		}
-		if !!(uint32(AtomicLoadPInt32(meta+24))&(Uint32FromUint32(1)<<index) != 0) {
-			_a_crash(tls)
-		}
-		if !!(uint32(AtomicLoadPInt32(meta+28))&(Uint32FromUint32(1)<<index) != 0) {
-			_a_crash(tls)
-		}
-		area = uintptr(uint64(meta) & uint64(-Int32FromInt32(4096)))
-		if !((*Tmeta_area)(unsafe.Pointer(area)).Fcheck == x___malloc_context.Fsecret) {
-			_a_crash(tls)
-		}
-		if int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) < Int32FromInt32(48) {
-			if !(offset >= int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*index) {
-				_a_crash(tls)
-			}
-			if !(offset < int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*(index+Int32FromInt32(1))) {
-				_a_crash(tls)
-			}
-		} else {
-			if !(int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) == Int32FromInt32(63)) {
-				_a_crash(tls)
-			}
-		}
-		if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-			if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
-				_a_crash(tls)
-			}
-		}
-		v5 = meta
-		goto _6
-	_6:
-		m = v5
-		v7 = int32(*(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(3))))) & int32(31)
-		goto _8
-	_8:
-		idx = v7
-		(*Tgroup)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(g)).Fmem)).Fmeta = uintptr(0)
-		// not checking size/reserved here; it's intentionally invalid
-		mi = _nontrivial_free(tls, m, idx)
-	}
-	v9 = g
-	*(*Tmeta)(unsafe.Pointer(v9)) = Tmeta{}
-	v10 = uintptr(unsafe.Pointer(&x___malloc_context)) + 16
-	v11 = v9
-	if !!((*Tmeta)(unsafe.Pointer(v11)).Fnext != 0) {
-		_a_crash(tls)
-	}
-	if !!((*Tmeta)(unsafe.Pointer(v11)).Fprev != 0) {
-		_a_crash(tls)
-	}
-	if *(*uintptr)(unsafe.Pointer(v10)) != 0 {
-		head = *(*uintptr)(unsafe.Pointer(v10))
-		(*Tmeta)(unsafe.Pointer(v11)).Fnext = head
-		(*Tmeta)(unsafe.Pointer(v11)).Fprev = (*Tmeta)(unsafe.Pointer(head)).Fprev
-		v12 = v11
-		(*Tmeta)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(v11)).Fprev)).Fnext = v12
-		(*Tmeta)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(v11)).Fnext)).Fprev = v12
-	} else {
-		v13 = v11
-		(*Tmeta)(unsafe.Pointer(v11)).Fnext = v13
-		(*Tmeta)(unsafe.Pointer(v11)).Fprev = v13
-		*(*uintptr)(unsafe.Pointer(v10)) = v11
-	}
-	return mi
-}
-
-func _okay_to_free(tls *TLS, g uintptr) (r int32) {
-	var cnt, usage, v2 uint64
-	var sc, v5, v6 int32
-	var v1 uintptr
-	var v4 bool
-	sc = int32(*(*uint64)(unsafe.Pointer(g + 32)) & 0xfc0 >> 6)
-	if !(int32(*(*uint64)(unsafe.Pointer(g + 32))&0x20>>5) != 0) {
-		return 0
-	}
-	// always free individual mmaps not suitable for reuse
-	if v4 = sc >= int32(48); !v4 {
-		v1 = g
-		if !(int32(*(*uint64)(unsafe.Pointer(v1 + 32))&0x1f>>0) != 0) && *(*uint64)(unsafe.Pointer(v1 + 32))&0xfffffffffffff000>>12 != 0 {
-			v2 = (*(*uint64)(unsafe.Pointer(v1 + 32))&0xfffffffffffff000>>12*uint64(4096)&0xfffffffffffff - uint64(m_UNIT)) & 0xfffffffffffff
-			goto _3
-		} else {
-			v2 = uint64(int32(m_UNIT) * int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(v1 + 32))&0xfc0>>6)]))
-			goto _3
-		}
-	_3:
-	}
-	if v4 || v2 < uint64(int32(m_UNIT)*int32(x___malloc_size_classes[sc])) {
-		return int32(1)
-	}
-	// always free groups allocated inside another group's slot
-	// since recreating them should not be expensive and they
-	// might be blocking freeing of a much larger group.
-	if !(*(*uint64)(unsafe.Pointer(g + 32))&0xfffffffffffff000>>12 != 0) {
-		return int32(1)
-	}
-	// if there is another non-full group, free this one to
-	// consolidate future allocations, reduce fragmentation.
-	if (*Tmeta)(unsafe.Pointer(g)).Fnext != g {
-		return int32(1)
-	}
-	// free any group in a size class that's not bouncing
-	v5 = sc
-	v6 = BoolInt32(uint32(v5)-uint32(7) < uint32(32) && int32(*(*uint8)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 880 + uintptr(v5-int32(7))))) >= int32(100))
-	goto _7
-_7:
-	if !(v6 != 0) {
-		return int32(1)
-	}
-	cnt = uint64(int32(*(*uint64)(unsafe.Pointer(g + 32))&0x1f>>0) + int32(1))
-	usage = *(*uint64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 464 + uintptr(sc)*8))
-	// if usage is high enough that a larger count should be
-	// used, free the low-count group so a new one will be made.
-	if uint64(9)*cnt <= usage && cnt < uint64(20) {
-		return int32(1)
-	}
-	// otherwise, keep the last group in a bouncing class.
-	return 0
-}
-
-func _nontrivial_free(tls *TLS, g uintptr, i int32) (r Tmapinfo) {
-	var act, mask, mask1, self uint32
-	var activate_new, sc int32
-	var head, v1, v2, v3, v4, v6, v7, v8, v9 uintptr
-	self = uint32(1) << i
-	sc = int32(*(*uint64)(unsafe.Pointer(g + 32)) & 0xfc0 >> 6)
-	mask1 = uint32(AtomicLoadPInt32(g+28) | AtomicLoadPInt32(g+24))
-	if mask1+self == uint32(2)<<int32(*(*uint64)(unsafe.Pointer(g + 32))&0x1f>>0)-uint32(1) && _okay_to_free(tls, g) != 0 {
-		// any multi-slot group is necessarily on an active list
-		// here, but single-slot groups might or might not be.
-		if (*Tmeta)(unsafe.Pointer(g)).Fnext != 0 {
-			if !(sc < Int32FromInt32(48)) {
-				_a_crash(tls)
-			}
-			activate_new = BoolInt32(*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8)) == g)
-			v1 = uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8
-			v2 = g
-			if (*Tmeta)(unsafe.Pointer(v2)).Fnext != v2 {
-				(*Tmeta)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(v2)).Fprev)).Fnext = (*Tmeta)(unsafe.Pointer(v2)).Fnext
-				(*Tmeta)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(v2)).Fnext)).Fprev = (*Tmeta)(unsafe.Pointer(v2)).Fprev
-				if *(*uintptr)(unsafe.Pointer(v1)) == v2 {
-					*(*uintptr)(unsafe.Pointer(v1)) = (*Tmeta)(unsafe.Pointer(v2)).Fnext
-				}
-			} else {
-				*(*uintptr)(unsafe.Pointer(v1)) = uintptr(0)
-			}
-			v3 = UintptrFromInt32(0)
-			(*Tmeta)(unsafe.Pointer(v2)).Fnext = v3
-			(*Tmeta)(unsafe.Pointer(v2)).Fprev = v3
-			if activate_new != 0 && *(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8)) != 0 {
-				v4 = *(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8))
-				if !!(AtomicLoadPInt32(v4+24) != 0) {
-					_a_crash(tls)
-				}
-				act = uint32(2)<<int32(*(*uint8)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(v4)).Fmem + 8))&0x1f>>0) - uint32(1)
-				for cond := true; cond; cond = uint32(_a_cas(tls, v4+28, int32(mask), int32(mask & ^act))) != mask {
-					mask = uint32(AtomicLoadPInt32(v4 + 28))
-				}
-				_ = AtomicStorePInt32(v4+24, int32(mask&act))
-				goto _5
-			_5:
-			}
-		}
-		return _free_group(tls, g)
-	} else if !(mask1 != 0) {
-		if !(sc < Int32FromInt32(48)) {
-			_a_crash(tls)
-		}
-		// might still be active if there were no allocations
-		// after last available slot was taken.
-		if *(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8)) != g {
-			v6 = uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8
-			v7 = g
-			if !!((*Tmeta)(unsafe.Pointer(v7)).Fnext != 0) {
-				_a_crash(tls)
-			}
-			if !!((*Tmeta)(unsafe.Pointer(v7)).Fprev != 0) {
-				_a_crash(tls)
-			}
-			if *(*uintptr)(unsafe.Pointer(v6)) != 0 {
-				head = *(*uintptr)(unsafe.Pointer(v6))
-				(*Tmeta)(unsafe.Pointer(v7)).Fnext = head
-				(*Tmeta)(unsafe.Pointer(v7)).Fprev = (*Tmeta)(unsafe.Pointer(head)).Fprev
-				v8 = v7
-				(*Tmeta)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(v7)).Fprev)).Fnext = v8
-				(*Tmeta)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(v7)).Fnext)).Fprev = v8
-			} else {
-				v9 = v7
-				(*Tmeta)(unsafe.Pointer(v7)).Fnext = v9
-				(*Tmeta)(unsafe.Pointer(v7)).Fprev = v9
-				*(*uintptr)(unsafe.Pointer(v6)) = v7
-			}
-		}
-	}
-	_a_or(tls, g+28, int32(self))
-	return Tmapinfo{}
-}
-
-func x___libc_free(tls *TLS, p uintptr) {
-	var all, avail, freed, mask, self uint32
-	var area, base, base1, end, g, meta, start, v1, v11, v12, v4, v8 uintptr
-	var e, e1, idx, index, offset, v2, v6 int32
-	var len1, reserved, stride, v9 uint64
-	var mi Tmapinfo
-	if !(p != 0) {
-		return
-	}
-	v1 = p
-	if !!(uint64(v1)&Uint64FromInt32(15) != 0) {
-		_a_crash(tls)
-	}
-	offset = int32(*(*uint16)(unsafe.Pointer(v1 - UintptrFromInt32(2))))
-	v2 = int32(*(*uint8)(unsafe.Pointer(v1 + uintptr(-Int32FromInt32(3))))) & int32(31)
-	goto _3
-_3:
-	index = v2
-	if *(*uint8)(unsafe.Pointer(v1 + uintptr(-Int32FromInt32(4)))) != 0 {
-		if !!(offset != 0) {
-			_a_crash(tls)
-		}
-		offset = int32(*(*uint32)(unsafe.Pointer(v1 - UintptrFromInt32(8))))
-		if !(offset > Int32FromInt32(0xffff)) {
-			_a_crash(tls)
-		}
-	}
-	base = v1 - uintptr(Int32FromInt32(m_UNIT)*offset) - UintptrFromInt32(m_UNIT)
-	meta = (*Tgroup)(unsafe.Pointer(base)).Fmeta
-	if !((*Tmeta)(unsafe.Pointer(meta)).Fmem == base) {
-		_a_crash(tls)
-	}
-	if !(index <= int32(*(*uint64)(unsafe.Pointer(meta + 32))&0x1f>>0)) {
-		_a_crash(tls)
-	}
-	if !!(uint32(AtomicLoadPInt32(meta+24))&(Uint32FromUint32(1)<<index) != 0) {
-		_a_crash(tls)
-	}
-	if !!(uint32(AtomicLoadPInt32(meta+28))&(Uint32FromUint32(1)<<index) != 0) {
-		_a_crash(tls)
-	}
-	area = uintptr(uint64(meta) & uint64(-Int32FromInt32(4096)))
-	if !((*Tmeta_area)(unsafe.Pointer(area)).Fcheck == x___malloc_context.Fsecret) {
-		_a_crash(tls)
-	}
-	if int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) < Int32FromInt32(48) {
-		if !(offset >= int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*index) {
-			_a_crash(tls)
-		}
-		if !(offset < int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*(index+Int32FromInt32(1))) {
-			_a_crash(tls)
-		}
-	} else {
-		if !(int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) == Int32FromInt32(63)) {
-			_a_crash(tls)
-		}
-	}
-	if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
-			_a_crash(tls)
-		}
-	}
-	v4 = meta
-	goto _5
-_5:
-	g = v4
-	v6 = int32(*(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(3))))) & int32(31)
-	goto _7
-_7:
-	idx = v6
-	v8 = g
-	if !(int32(*(*uint64)(unsafe.Pointer(v8 + 32))&0x1f>>0) != 0) && *(*uint64)(unsafe.Pointer(v8 + 32))&0xfffffffffffff000>>12 != 0 {
-		v9 = (*(*uint64)(unsafe.Pointer(v8 + 32))&0xfffffffffffff000>>12*uint64(4096)&0xfffffffffffff - uint64(m_UNIT)) & 0xfffffffffffff
-		goto _10
-	} else {
-		v9 = uint64(int32(m_UNIT) * int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(v8 + 32))&0xfc0>>6)]))
-		goto _10
-	}
-_10:
-	stride = v9
-	start = (*Tmeta)(unsafe.Pointer(g)).Fmem + 16 + uintptr(stride*uint64(idx))
-	end = start + uintptr(stride) - uintptr(m_IB)
-	v11 = p
-	v12 = end
-	reserved = uint64(int32(*(*uint8)(unsafe.Pointer(v11 + uintptr(-Int32FromInt32(3))))) >> int32(5))
-	if reserved >= Uint64FromInt32(5) {
-		if !(reserved == Uint64FromInt32(5)) {
-			_a_crash(tls)
-		}
-		reserved = uint64(*(*uint32)(unsafe.Pointer(v12 - UintptrFromInt32(4))))
-		if !(reserved >= Uint64FromInt32(5)) {
-			_a_crash(tls)
-		}
-		if !!(*(*uint8)(unsafe.Pointer(v12 + uintptr(-Int32FromInt32(5)))) != 0) {
-			_a_crash(tls)
-		}
-	}
-	if !(reserved <= uint64(int64(v12)-int64(v11))) {
-		_a_crash(tls)
-	}
-	if !!(*(*uint8)(unsafe.Pointer(v12 - uintptr(reserved))) != 0) {
-		_a_crash(tls)
-	}
-	if !!(*(*uint8)(unsafe.Pointer(v12)) != 0) {
-		_a_crash(tls)
-	}
-	_ = int64(v12-uintptr(reserved)) - int64(v11)
-	goto _13
-_13:
-	self = uint32(1) << idx
-	all = uint32(2)<<int32(*(*uint64)(unsafe.Pointer(g + 32))&0x1f>>0) - uint32(1)
-	*(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(3)))) = uint8(255)
-	// invalidate offset to group header, and cycle offset of
-	// used region within slot if current offset is zero.
-	*(*uint16)(unsafe.Pointer(p - UintptrFromInt32(2))) = uint16(0)
-	// release any whole pages contained in the slot to be freed
-	// unless it's a single-slot group that will be unmapped.
-	if uint64(start-UintptrFromInt32(1))^uint64(end) >= uint64(Int32FromInt32(2)*Int32FromInt32(m_PAGESIZE)) && int32(*(*uint64)(unsafe.Pointer(g + 32))&0x1f>>0) != 0 {
-		base1 = start + uintptr(-uint64(start)&uint64(Int32FromInt32(m_PAGESIZE)-Int32FromInt32(1)))
-		len1 = uint64((int64(end) - int64(base1)) & int64(-int32(m_PAGESIZE)))
-		if len1 != 0 && m_USE_MADV_FREE != 0 {
-			e = *(*int32)(unsafe.Pointer(X__errno_location(tls)))
-			x___madvise(tls, base1, len1, int32(m_MADV_FREE))
-			*(*int32)(unsafe.Pointer(X__errno_location(tls))) = e
-		}
-	}
-	// atomic free without locking if this is neither first or last slot
-	for {
-		freed = uint32(AtomicLoadPInt32(g + 28))
-		avail = uint32(AtomicLoadPInt32(g + 24))
-		mask = freed | avail
-		if !!(mask&self != 0) {
-			_a_crash(tls)
-		}
-		if !(freed != 0) || mask+self == all {
-			break
-		}
-		if !(AtomicLoadPInt8(uintptr(unsafe.Pointer(&x___libc))+3) != 0) {
-			AtomicStorePInt32(g+28, int32(freed+self))
-		} else if uint32(_a_cas(tls, g+28, int32(freed), int32(freed+self))) != freed {
-			continue
-		}
-		return
-	}
-	if AtomicLoadPInt8(uintptr(unsafe.Pointer(&x___libc))+3) != 0 {
-		x___lock(tls, uintptr(unsafe.Pointer(&x___malloc_lock)))
-	}
-	mi = _nontrivial_free(tls, g, idx)
-	x___unlock(tls, uintptr(unsafe.Pointer(&x___malloc_lock)))
-	if mi.Flen1 != 0 {
-		e1 = *(*int32)(unsafe.Pointer(X__errno_location(tls)))
-		Xmunmap(tls, mi.Fbase, mi.Flen1)
-		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = e1
-	}
-}
-
 const m_MAP_FIXED = 16
 const m_MMAP_THRESHOLD = 131052
 const m_PROT_NONE = 0
 const m_RDLOCK_IS_EXCLUSIVE = 1
-
-func x___malloc_atfork(tls *TLS, who int32) {
-	var v1 int32
-	v1 = who
-	if v1 < Int32FromInt32(0) {
-		if AtomicLoadPInt8(uintptr(unsafe.Pointer(&x___libc))+3) != 0 {
-			x___lock(tls, uintptr(unsafe.Pointer(&x___malloc_lock)))
-		}
-	} else {
-		if v1 > Int32FromInt32(0) {
-			x___malloc_lock[0] = 0
-		} else {
-			x___unlock(tls, uintptr(unsafe.Pointer(&x___malloc_lock)))
-		}
-	}
-}
 
 var _small_cnt_tab = [9][3]uint8{
 	0: {
@@ -105193,6 +104480,7 @@ var _small_cnt_tab = [9][3]uint8{
 		2: uint8(6),
 	},
 }
+
 var _med_cnt_tab = [4]uint8{
 	0: uint8(28),
 	1: uint8(24),
@@ -105456,13 +104744,13 @@ func _alloc_group(tls *TLS, sc int32, req uint64) (r uintptr) {
 	// All choices of size*cnt are "just below" a power of two, so anything
 	// larger than half the page size should be allocated as whole pages.
 	if size*uint64(cnt)+uint64(m_UNIT) > pagesize/uint64(2) {
-		// check/update bounce counter to start/increase retention
-		// of freed maps, and inhibit use of low-count, odd-size
-		// small mappings and single-slot groups if activated.
 		v1 = sc
 		v2 = BoolInt32(uint32(v1)-uint32(7) < uint32(32) && int32(*(*uint8)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 880 + uintptr(v1-int32(7))))) >= int32(100))
 		goto _3
 	_3:
+		// check/update bounce counter to start/increase retention
+		// of freed maps, and inhibit use of low-count, odd-size
+		// small mappings and single-slot groups if activated.
 		nosmall = v2
 		v4 = sc
 		if uint32(v4)-Uint32FromUint32(7) < Uint32FromInt32(32) {
@@ -105736,608 +105024,6 @@ func _alloc_slot(tls *TLS, sc int32, req uint64) (r int32) {
 	return 0
 }
 
-func x___libc_malloc_impl(tls *TLS, n uint64) (r uintptr) {
-	var ctr, i, i1, idx, off, reserved, sc, v1, v11, v16, v4, v7, v9 int32
-	var end, g, p, p1, v10, v13, v17, v18, v19 uintptr
-	var first, mask, v6 uint32
-	var m, needed, slack, stride, usage, v12, v14, v3 uint64
-	if n >= Uint64FromUint64(0xffffffffffffffff)/Uint64FromInt32(2)-Uint64FromInt32(4096) {
-		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENOMEM)
-		v1 = int32(1)
-		goto _2
-	}
-	v1 = 0
-	goto _2
-_2:
-	if v1 != 0 {
-		return uintptr(0)
-	}
-	if n >= uint64(m_MMAP_THRESHOLD) {
-		needed = n + uint64(m_IB) + uint64(m_UNIT)
-		p1 = Xmmap(tls, uintptr(0), needed, Int32FromInt32(m_PROT_READ)|Int32FromInt32(m_PROT_WRITE), Int32FromInt32(m_MAP_PRIVATE)|Int32FromInt32(m_MAP_ANON), -int32(1), 0)
-		if p1 == uintptr(-Int32FromInt32(1)) {
-			return uintptr(0)
-		}
-		if AtomicLoadPInt8(uintptr(unsafe.Pointer(&x___libc))+3) != 0 {
-			x___lock(tls, uintptr(unsafe.Pointer(&x___malloc_lock)))
-		}
-		if int32(x___malloc_context.Fseq) == Int32FromInt32(255) {
-			i1 = 0
-			for ; i1 < Int32FromInt32(32); i1++ {
-				*(*uint8)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 848 + uintptr(i1))) = uint8(0)
-			}
-			x___malloc_context.Fseq = uint8(1)
-		} else {
-			x___malloc_context.Fseq++
-		}
-		g = x___malloc_alloc_meta(tls)
-		if !(g != 0) {
-			x___unlock(tls, uintptr(unsafe.Pointer(&x___malloc_lock)))
-			Xmunmap(tls, p1, needed)
-			return uintptr(0)
-		}
-		(*Tmeta)(unsafe.Pointer(g)).Fmem = p1
-		(*Tgroup)(unsafe.Pointer((*Tmeta)(unsafe.Pointer(g)).Fmem)).Fmeta = g
-		SetBitFieldPtr64Uint64(g+32, Uint64FromInt32(0), 0, 0x1f)
-		SetBitFieldPtr64Uint64(g+32, Uint64FromInt32(1), 5, 0x20)
-		SetBitFieldPtr64Uint64(g+32, Uint64FromInt32(63), 6, 0xfc0)
-		SetBitFieldPtr64Uint64(g+32, (needed+Uint64FromInt32(4095))/Uint64FromInt32(4096), 12, 0xfffffffffffff000)
-		AtomicStorePInt32(g+24, AtomicStorePInt32(g+28, 0))
-		// use a global counter to cycle offset in
-		// individually-mmapped allocations.
-		x___malloc_context.Fmmap_counter++
-		idx = 0
-		goto success
-	}
-	v3 = n
-	v3 = (v3 + uint64(m_IB) - uint64(1)) >> int32(4)
-	if v3 < Uint64FromInt32(10) {
-		v4 = int32(v3)
-		goto _5
-	}
-	v3++
-	v6 = uint32(v3)
-	v6 >>= uint32(1)
-	v6 |= v6 >> int32(1)
-	v6 |= v6 >> int32(2)
-	v6 |= v6 >> int32(4)
-	v6 |= v6 >> int32(8)
-	v6 |= v6 >> int32(16)
-	v6++
-	v7 = int32(31) - _a_ctz_32(tls, v6)
-	goto _8
-_8:
-	i = (int32(28)-v7)*int32(4) + int32(8)
-	if v3 > uint64(x___malloc_size_classes[i+int32(1)]) {
-		i += int32(2)
-	}
-	if v3 > uint64(x___malloc_size_classes[i]) {
-		i++
-	}
-	v4 = i
-	goto _5
-_5:
-	sc = v4
-	if AtomicLoadPInt8(uintptr(unsafe.Pointer(&x___libc))+3) != 0 {
-		x___lock(tls, uintptr(unsafe.Pointer(&x___malloc_lock)))
-	}
-	g = *(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8))
-	// use coarse size classes initially when there are not yet
-	// any groups of desired size. this allows counts of 2 or 3
-	// to be allocated at first rather than having to start with
-	// 7 or 5, the min counts for even size classes.
-	if !(g != 0) && sc >= int32(4) && sc < int32(32) && sc != int32(6) && !(sc&Int32FromInt32(1) != 0) && !(*(*uint64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 464 + uintptr(sc)*8)) != 0) {
-		usage = *(*uint64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 464 + uintptr(sc|int32(1))*8))
-		// if a new group may be allocated, count it toward
-		// usage in deciding if we can use coarse class.
-		if !(*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc|int32(1))*8)) != 0) || !(AtomicLoadPInt32(*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc|int32(1))*8))+24) != 0) && !(AtomicLoadPInt32(*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc|int32(1))*8))+28) != 0) {
-			usage += uint64(3)
-		}
-		if usage <= uint64(12) {
-			sc |= int32(1)
-		}
-		g = *(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8))
-	}
-	for {
-		if g != 0 {
-			v9 = AtomicLoadPInt32(g + 24)
-		} else {
-			v9 = 0
-		}
-		mask = uint32(v9)
-		first = mask & -mask
-		if !(first != 0) {
-			break
-		}
-		if int32(m_RDLOCK_IS_EXCLUSIVE) != 0 || !(AtomicLoadPInt8(uintptr(unsafe.Pointer(&x___libc))+3) != 0) {
-			AtomicStorePInt32(g+24, int32(mask-first))
-		} else if uint32(_a_cas(tls, g+24, int32(mask), int32(mask-first))) != mask {
-			continue
-		}
-		idx = _a_ctz_32(tls, first)
-		goto success
-	}
-	idx = _alloc_slot(tls, sc, n)
-	if idx < 0 {
-		x___unlock(tls, uintptr(unsafe.Pointer(&x___malloc_lock)))
-		return uintptr(0)
-	}
-	g = *(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___malloc_context)) + 80 + uintptr(sc)*8))
-success:
-	ctr = int32(x___malloc_context.Fmmap_counter)
-	x___unlock(tls, uintptr(unsafe.Pointer(&x___malloc_lock)))
-	v10 = g
-	v11 = idx
-	v12 = n
-	v13 = v10
-	if !(int32(*(*uint64)(unsafe.Pointer(v13 + 32))&0x1f>>0) != 0) && *(*uint64)(unsafe.Pointer(v13 + 32))&0xfffffffffffff000>>12 != 0 {
-		v14 = (*(*uint64)(unsafe.Pointer(v13 + 32))&0xfffffffffffff000>>12*uint64(4096)&0xfffffffffffff - uint64(m_UNIT)) & 0xfffffffffffff
-		goto _15
-	} else {
-		v14 = uint64(int32(m_UNIT) * int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(v13 + 32))&0xfc0>>6)]))
-		goto _15
-	}
-_15:
-	stride = v14
-	slack = (stride - uint64(m_IB) - v12) / uint64(m_UNIT)
-	p = (*Tmeta)(unsafe.Pointer(v10)).Fmem + 16 + uintptr(stride*uint64(v11))
-	end = p + uintptr(stride) - uintptr(m_IB)
-	if *(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(3)))) != 0 {
-		v16 = int32(*(*uint16)(unsafe.Pointer(p - UintptrFromInt32(2)))) + int32(1)
-	} else {
-		v16 = ctr
-	}
-	off = v16 & int32(255)
-	if !!(*(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(4)))) != 0) {
-		_a_crash(tls)
-	}
-	if uint64(off) > slack {
-		m = slack
-		m |= m >> int32(1)
-		m |= m >> int32(2)
-		m |= m >> int32(4)
-		off = int32(uint64(off) & m)
-		if uint64(off) > slack {
-			off = int32(uint64(off) - (slack + Uint64FromInt32(1)))
-		}
-		if !(uint64(off) <= slack) {
-			_a_crash(tls)
-		}
-	}
-	if off != 0 {
-		*(*uint16)(unsafe.Pointer(p - UintptrFromInt32(2))) = uint16(off)
-		*(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(3)))) = uint8(Int32FromInt32(7) << Int32FromInt32(5))
-		p += uintptr(int32(m_UNIT) * off)
-		*(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(4)))) = uint8(0)
-	}
-	*(*uint16)(unsafe.Pointer(p - UintptrFromInt32(2))) = uint16(uint64(int64(p)-int64((*Tmeta)(unsafe.Pointer(v10)).Fmem+16)) / uint64(m_UNIT))
-	*(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(3)))) = uint8(v11)
-	v17 = p
-	v18 = end
-	reserved = int32(uint64(int64(v18)-int64(v17)) - v12)
-	if reserved != 0 {
-		*(*uint8)(unsafe.Pointer(v18 + uintptr(-reserved))) = uint8(0)
-	}
-	if reserved >= Int32FromInt32(5) {
-		*(*uint32)(unsafe.Pointer(v18 - UintptrFromInt32(4))) = uint32(reserved)
-		*(*uint8)(unsafe.Pointer(v18 + uintptr(-Int32FromInt32(5)))) = uint8(0)
-		reserved = int32(5)
-	}
-	*(*uint8)(unsafe.Pointer(v17 + uintptr(-Int32FromInt32(3)))) = uint8(int32(*(*uint8)(unsafe.Pointer(v17 + uintptr(-Int32FromInt32(3)))))&int32(31) + reserved<<int32(5))
-	v19 = p
-	goto _20
-_20:
-	return v19
-}
-
-func x___malloc_allzerop(tls *TLS, p uintptr) (r int32) {
-	var area, base, g, meta, v1, v4, v6 uintptr
-	var index, offset, v2 int32
-	var v7 uint64
-	var v9 bool
-	v1 = p
-	if !!(uint64(v1)&Uint64FromInt32(15) != 0) {
-		_a_crash(tls)
-	}
-	offset = int32(*(*uint16)(unsafe.Pointer(v1 - UintptrFromInt32(2))))
-	v2 = int32(*(*uint8)(unsafe.Pointer(v1 + uintptr(-Int32FromInt32(3))))) & int32(31)
-	goto _3
-_3:
-	index = v2
-	if *(*uint8)(unsafe.Pointer(v1 + uintptr(-Int32FromInt32(4)))) != 0 {
-		if !!(offset != 0) {
-			_a_crash(tls)
-		}
-		offset = int32(*(*uint32)(unsafe.Pointer(v1 - UintptrFromInt32(8))))
-		if !(offset > Int32FromInt32(0xffff)) {
-			_a_crash(tls)
-		}
-	}
-	base = v1 - uintptr(Int32FromInt32(m_UNIT)*offset) - UintptrFromInt32(m_UNIT)
-	meta = (*Tgroup)(unsafe.Pointer(base)).Fmeta
-	if !((*Tmeta)(unsafe.Pointer(meta)).Fmem == base) {
-		_a_crash(tls)
-	}
-	if !(index <= int32(*(*uint64)(unsafe.Pointer(meta + 32))&0x1f>>0)) {
-		_a_crash(tls)
-	}
-	if !!(uint32(AtomicLoadPInt32(meta+24))&(Uint32FromUint32(1)<<index) != 0) {
-		_a_crash(tls)
-	}
-	if !!(uint32(AtomicLoadPInt32(meta+28))&(Uint32FromUint32(1)<<index) != 0) {
-		_a_crash(tls)
-	}
-	area = uintptr(uint64(meta) & uint64(-Int32FromInt32(4096)))
-	if !((*Tmeta_area)(unsafe.Pointer(area)).Fcheck == x___malloc_context.Fsecret) {
-		_a_crash(tls)
-	}
-	if int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) < Int32FromInt32(48) {
-		if !(offset >= int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*index) {
-			_a_crash(tls)
-		}
-		if !(offset < int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*(index+Int32FromInt32(1))) {
-			_a_crash(tls)
-		}
-	} else {
-		if !(int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) == Int32FromInt32(63)) {
-			_a_crash(tls)
-		}
-	}
-	if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
-			_a_crash(tls)
-		}
-	}
-	v4 = meta
-	goto _5
-_5:
-	g = v4
-	if v9 = int32(*(*uint64)(unsafe.Pointer(g + 32))&0xfc0>>6) >= int32(48); !v9 {
-		v6 = g
-		if !(int32(*(*uint64)(unsafe.Pointer(v6 + 32))&0x1f>>0) != 0) && *(*uint64)(unsafe.Pointer(v6 + 32))&0xfffffffffffff000>>12 != 0 {
-			v7 = (*(*uint64)(unsafe.Pointer(v6 + 32))&0xfffffffffffff000>>12*uint64(4096)&0xfffffffffffff - uint64(m_UNIT)) & 0xfffffffffffff
-			goto _8
-		} else {
-			v7 = uint64(int32(m_UNIT) * int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(v6 + 32))&0xfc0>>6)]))
-			goto _8
-		}
-	_8:
-	}
-	return BoolInt32(v9 || v7 < uint64(int32(m_UNIT)*int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(g + 32))&0xfc0>>6)])))
-}
-
-func Xmalloc_usable_size(tls *TLS, p uintptr) (r uint64) {
-	if __ccgo_strace {
-		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	var area, base, end, g, meta, start, v1, v11, v12, v4, v8 uintptr
-	var idx, index, offset, v2, v6 int32
-	var reserved, stride, v13, v9 uint64
-	if !(p != 0) {
-		return uint64(0)
-	}
-	v1 = p
-	if !!(uint64(v1)&Uint64FromInt32(15) != 0) {
-		_a_crash(tls)
-	}
-	offset = int32(*(*uint16)(unsafe.Pointer(v1 - UintptrFromInt32(2))))
-	v2 = int32(*(*uint8)(unsafe.Pointer(v1 + uintptr(-Int32FromInt32(3))))) & int32(31)
-	goto _3
-_3:
-	index = v2
-	if *(*uint8)(unsafe.Pointer(v1 + uintptr(-Int32FromInt32(4)))) != 0 {
-		if !!(offset != 0) {
-			_a_crash(tls)
-		}
-		offset = int32(*(*uint32)(unsafe.Pointer(v1 - UintptrFromInt32(8))))
-		if !(offset > Int32FromInt32(0xffff)) {
-			_a_crash(tls)
-		}
-	}
-	base = v1 - uintptr(Int32FromInt32(m_UNIT)*offset) - UintptrFromInt32(m_UNIT)
-	meta = (*Tgroup)(unsafe.Pointer(base)).Fmeta
-	if !((*Tmeta)(unsafe.Pointer(meta)).Fmem == base) {
-		_a_crash(tls)
-	}
-	if !(index <= int32(*(*uint64)(unsafe.Pointer(meta + 32))&0x1f>>0)) {
-		_a_crash(tls)
-	}
-	if !!(uint32(AtomicLoadPInt32(meta+24))&(Uint32FromUint32(1)<<index) != 0) {
-		_a_crash(tls)
-	}
-	if !!(uint32(AtomicLoadPInt32(meta+28))&(Uint32FromUint32(1)<<index) != 0) {
-		_a_crash(tls)
-	}
-	area = uintptr(uint64(meta) & uint64(-Int32FromInt32(4096)))
-	if !((*Tmeta_area)(unsafe.Pointer(area)).Fcheck == x___malloc_context.Fsecret) {
-		_a_crash(tls)
-	}
-	if int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) < Int32FromInt32(48) {
-		if !(offset >= int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*index) {
-			_a_crash(tls)
-		}
-		if !(offset < int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*(index+Int32FromInt32(1))) {
-			_a_crash(tls)
-		}
-	} else {
-		if !(int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) == Int32FromInt32(63)) {
-			_a_crash(tls)
-		}
-	}
-	if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
-			_a_crash(tls)
-		}
-	}
-	v4 = meta
-	goto _5
-_5:
-	g = v4
-	v6 = int32(*(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(3))))) & int32(31)
-	goto _7
-_7:
-	idx = v6
-	v8 = g
-	if !(int32(*(*uint64)(unsafe.Pointer(v8 + 32))&0x1f>>0) != 0) && *(*uint64)(unsafe.Pointer(v8 + 32))&0xfffffffffffff000>>12 != 0 {
-		v9 = (*(*uint64)(unsafe.Pointer(v8 + 32))&0xfffffffffffff000>>12*uint64(4096)&0xfffffffffffff - uint64(m_UNIT)) & 0xfffffffffffff
-		goto _10
-	} else {
-		v9 = uint64(int32(m_UNIT) * int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(v8 + 32))&0xfc0>>6)]))
-		goto _10
-	}
-_10:
-	stride = v9
-	start = (*Tmeta)(unsafe.Pointer(g)).Fmem + 16 + uintptr(stride*uint64(idx))
-	end = start + uintptr(stride) - uintptr(m_IB)
-	v11 = p
-	v12 = end
-	reserved = uint64(int32(*(*uint8)(unsafe.Pointer(v11 + uintptr(-Int32FromInt32(3))))) >> int32(5))
-	if reserved >= Uint64FromInt32(5) {
-		if !(reserved == Uint64FromInt32(5)) {
-			_a_crash(tls)
-		}
-		reserved = uint64(*(*uint32)(unsafe.Pointer(v12 - UintptrFromInt32(4))))
-		if !(reserved >= Uint64FromInt32(5)) {
-			_a_crash(tls)
-		}
-		if !!(*(*uint8)(unsafe.Pointer(v12 + uintptr(-Int32FromInt32(5)))) != 0) {
-			_a_crash(tls)
-		}
-	}
-	if !(reserved <= uint64(int64(v12)-int64(v11))) {
-		_a_crash(tls)
-	}
-	if !!(*(*uint8)(unsafe.Pointer(v12 - uintptr(reserved))) != 0) {
-		_a_crash(tls)
-	}
-	if !!(*(*uint8)(unsafe.Pointer(v12)) != 0) {
-		_a_crash(tls)
-	}
-	v13 = uint64(int64(v12-uintptr(reserved)) - int64(v11))
-	goto _14
-_14:
-	return v13
-}
-
-const m_MREMAP_MAYMOVE = 1
-
-func x___libc_realloc(tls *TLS, p uintptr, n uint64) (r uintptr) {
-	var area, base, end, g, meta, new1, start, v10, v13, v14, v24, v25, v26, v27, v28, v3, v6 uintptr
-	var avail_size, base1, needed, old_size, reserved, stride, v11, v15, v17, v29 uint64
-	var i, idx, index, offset, reserved1, v1, v18, v21, v4, v8 int32
-	var v20 uint32
-	var v23 bool
-	if !(p != 0) {
-		return x___libc_malloc_impl(tls, n)
-	}
-	if n >= Uint64FromUint64(0xffffffffffffffff)/Uint64FromInt32(2)-Uint64FromInt32(4096) {
-		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENOMEM)
-		v1 = int32(1)
-		goto _2
-	}
-	v1 = 0
-	goto _2
-_2:
-	if v1 != 0 {
-		return uintptr(0)
-	}
-	v3 = p
-	if !!(uint64(v3)&Uint64FromInt32(15) != 0) {
-		_a_crash(tls)
-	}
-	offset = int32(*(*uint16)(unsafe.Pointer(v3 - UintptrFromInt32(2))))
-	v4 = int32(*(*uint8)(unsafe.Pointer(v3 + uintptr(-Int32FromInt32(3))))) & int32(31)
-	goto _5
-_5:
-	index = v4
-	if *(*uint8)(unsafe.Pointer(v3 + uintptr(-Int32FromInt32(4)))) != 0 {
-		if !!(offset != 0) {
-			_a_crash(tls)
-		}
-		offset = int32(*(*uint32)(unsafe.Pointer(v3 - UintptrFromInt32(8))))
-		if !(offset > Int32FromInt32(0xffff)) {
-			_a_crash(tls)
-		}
-	}
-	base = v3 - uintptr(Int32FromInt32(m_UNIT)*offset) - UintptrFromInt32(m_UNIT)
-	meta = (*Tgroup)(unsafe.Pointer(base)).Fmeta
-	if !((*Tmeta)(unsafe.Pointer(meta)).Fmem == base) {
-		_a_crash(tls)
-	}
-	if !(index <= int32(*(*uint64)(unsafe.Pointer(meta + 32))&0x1f>>0)) {
-		_a_crash(tls)
-	}
-	if !!(uint32(AtomicLoadPInt32(meta+24))&(Uint32FromUint32(1)<<index) != 0) {
-		_a_crash(tls)
-	}
-	if !!(uint32(AtomicLoadPInt32(meta+28))&(Uint32FromUint32(1)<<index) != 0) {
-		_a_crash(tls)
-	}
-	area = uintptr(uint64(meta) & uint64(-Int32FromInt32(4096)))
-	if !((*Tmeta_area)(unsafe.Pointer(area)).Fcheck == x___malloc_context.Fsecret) {
-		_a_crash(tls)
-	}
-	if int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) < Int32FromInt32(48) {
-		if !(offset >= int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*index) {
-			_a_crash(tls)
-		}
-		if !(offset < int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6)])*(index+Int32FromInt32(1))) {
-			_a_crash(tls)
-		}
-	} else {
-		if !(int32(*(*uint64)(unsafe.Pointer(meta + 32))&0xfc0>>6) == Int32FromInt32(63)) {
-			_a_crash(tls)
-		}
-	}
-	if *(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12 != 0 {
-		if !(uint64(offset) <= (*(*uint64)(unsafe.Pointer(meta + 32))&0xfffffffffffff000>>12*Uint64FromUint64(4096)&0xfffffffffffff/Uint64FromInt32(m_UNIT)&0xfffffffffffff-Uint64FromInt32(1))&0xfffffffffffff) {
-			_a_crash(tls)
-		}
-	}
-	v6 = meta
-	goto _7
-_7:
-	g = v6
-	v8 = int32(*(*uint8)(unsafe.Pointer(p + uintptr(-Int32FromInt32(3))))) & int32(31)
-	goto _9
-_9:
-	idx = v8
-	v10 = g
-	if !(int32(*(*uint64)(unsafe.Pointer(v10 + 32))&0x1f>>0) != 0) && *(*uint64)(unsafe.Pointer(v10 + 32))&0xfffffffffffff000>>12 != 0 {
-		v11 = (*(*uint64)(unsafe.Pointer(v10 + 32))&0xfffffffffffff000>>12*uint64(4096)&0xfffffffffffff - uint64(m_UNIT)) & 0xfffffffffffff
-		goto _12
-	} else {
-		v11 = uint64(int32(m_UNIT) * int32(x___malloc_size_classes[int32(*(*uint64)(unsafe.Pointer(v10 + 32))&0xfc0>>6)]))
-		goto _12
-	}
-_12:
-	stride = v11
-	start = (*Tmeta)(unsafe.Pointer(g)).Fmem + 16 + uintptr(stride*uint64(idx))
-	end = start + uintptr(stride) - uintptr(m_IB)
-	v13 = p
-	v14 = end
-	reserved = uint64(int32(*(*uint8)(unsafe.Pointer(v13 + uintptr(-Int32FromInt32(3))))) >> int32(5))
-	if reserved >= Uint64FromInt32(5) {
-		if !(reserved == Uint64FromInt32(5)) {
-			_a_crash(tls)
-		}
-		reserved = uint64(*(*uint32)(unsafe.Pointer(v14 - UintptrFromInt32(4))))
-		if !(reserved >= Uint64FromInt32(5)) {
-			_a_crash(tls)
-		}
-		if !!(*(*uint8)(unsafe.Pointer(v14 + uintptr(-Int32FromInt32(5)))) != 0) {
-			_a_crash(tls)
-		}
-	}
-	if !(reserved <= uint64(int64(v14)-int64(v13))) {
-		_a_crash(tls)
-	}
-	if !!(*(*uint8)(unsafe.Pointer(v14 - uintptr(reserved))) != 0) {
-		_a_crash(tls)
-	}
-	if !!(*(*uint8)(unsafe.Pointer(v14)) != 0) {
-		_a_crash(tls)
-	}
-	v15 = uint64(int64(v14-uintptr(reserved)) - int64(v13))
-	goto _16
-_16:
-	old_size = v15
-	avail_size = uint64(int64(end) - int64(p))
-	// only resize in-place if size class matches
-	if v23 = n <= avail_size && n < uint64(m_MMAP_THRESHOLD); v23 {
-		v17 = n
-		v17 = (v17 + uint64(m_IB) - uint64(1)) >> int32(4)
-		if v17 < Uint64FromInt32(10) {
-			v18 = int32(v17)
-			goto _19
-		}
-		v17++
-		v20 = uint32(v17)
-		v20 >>= uint32(1)
-		v20 |= v20 >> int32(1)
-		v20 |= v20 >> int32(2)
-		v20 |= v20 >> int32(4)
-		v20 |= v20 >> int32(8)
-		v20 |= v20 >> int32(16)
-		v20++
-		v21 = int32(31) - _a_ctz_32(tls, v20)
-		goto _22
-	_22:
-		i = (int32(28)-v21)*int32(4) + int32(8)
-		if v17 > uint64(x___malloc_size_classes[i+int32(1)]) {
-			i += int32(2)
-		}
-		if v17 > uint64(x___malloc_size_classes[i]) {
-			i++
-		}
-		v18 = i
-		goto _19
-	_19:
-	}
-	if v23 && v18+int32(1) >= int32(*(*uint64)(unsafe.Pointer(g + 32))&0xfc0>>6) {
-		v24 = p
-		v25 = end
-		reserved1 = int32(uint64(int64(v25)-int64(v24)) - n)
-		if reserved1 != 0 {
-			*(*uint8)(unsafe.Pointer(v25 + uintptr(-reserved1))) = uint8(0)
-		}
-		if reserved1 >= Int32FromInt32(5) {
-			*(*uint32)(unsafe.Pointer(v25 - UintptrFromInt32(4))) = uint32(reserved1)
-			*(*uint8)(unsafe.Pointer(v25 + uintptr(-Int32FromInt32(5)))) = uint8(0)
-			reserved1 = int32(5)
-		}
-		*(*uint8)(unsafe.Pointer(v24 + uintptr(-Int32FromInt32(3)))) = uint8(int32(*(*uint8)(unsafe.Pointer(v24 + uintptr(-Int32FromInt32(3)))))&int32(31) + reserved1<<int32(5))
-		return p
-	}
-	// use mremap if old and new size are both mmap-worthy
-	if int32(*(*uint64)(unsafe.Pointer(g + 32))&0xfc0>>6) >= int32(48) && n >= uint64(m_MMAP_THRESHOLD) {
-		if !(int32(*(*uint64)(unsafe.Pointer(g + 32))&0xfc0>>6) == Int32FromInt32(63)) {
-			_a_crash(tls)
-		}
-		base1 = uint64(int64(p) - int64(start))
-		needed = (n + base1 + uint64(m_UNIT) + uint64(m_IB) + uint64(4095)) & uint64(-Int32FromInt32(4096))
-		if *(*uint64)(unsafe.Pointer(g + 32))&0xfffffffffffff000>>12*uint64(4096)&0xfffffffffffff == needed {
-			v26 = (*Tmeta)(unsafe.Pointer(g)).Fmem
-		} else {
-			v26 = Xmremap(tls, (*Tmeta)(unsafe.Pointer(g)).Fmem, *(*uint64)(unsafe.Pointer(g + 32))&0xfffffffffffff000>>12*uint64(4096)&0xfffffffffffff, needed, int32(m_MREMAP_MAYMOVE), 0)
-		}
-		new1 = v26
-		if new1 != uintptr(-Int32FromInt32(1)) {
-			(*Tmeta)(unsafe.Pointer(g)).Fmem = new1
-			SetBitFieldPtr64Uint64(g+32, needed/Uint64FromInt32(4096), 12, 0xfffffffffffff000)
-			p = (*Tmeta)(unsafe.Pointer(g)).Fmem + 16 + uintptr(base1)
-			end = (*Tmeta)(unsafe.Pointer(g)).Fmem + 16 + uintptr(needed-Uint64FromInt32(m_UNIT)) - uintptr(m_IB)
-			*(*uint8)(unsafe.Pointer(end)) = uint8(0)
-			v27 = p
-			v28 = end
-			reserved1 = int32(uint64(int64(v28)-int64(v27)) - n)
-			if reserved1 != 0 {
-				*(*uint8)(unsafe.Pointer(v28 + uintptr(-reserved1))) = uint8(0)
-			}
-			if reserved1 >= Int32FromInt32(5) {
-				*(*uint32)(unsafe.Pointer(v28 - UintptrFromInt32(4))) = uint32(reserved1)
-				*(*uint8)(unsafe.Pointer(v28 + uintptr(-Int32FromInt32(5)))) = uint8(0)
-				reserved1 = int32(5)
-			}
-			*(*uint8)(unsafe.Pointer(v27 + uintptr(-Int32FromInt32(3)))) = uint8(int32(*(*uint8)(unsafe.Pointer(v27 + uintptr(-Int32FromInt32(3)))))&int32(31) + reserved1<<int32(5))
-			return p
-		}
-	}
-	new1 = x___libc_malloc_impl(tls, n)
-	if !(new1 != 0) {
-		return uintptr(0)
-	}
-	if n < old_size {
-		v29 = n
-	} else {
-		v29 = old_size
-	}
-	_memcpy(tls, new1, p, v29)
-	x___libc_free(tls, p)
-	return new1
-}
-
 func Xmemalign(tls *TLS, align uint64, len1 uint64) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v align=%v len1=%v, (%v:)", tls, align, len1, origin(2))
@@ -106361,14 +105047,6 @@ func Xposix_memalign(tls *TLS, res uintptr, align uint64, len1 uint64) (r int32)
 	}
 	*(*uintptr)(unsafe.Pointer(res)) = mem
 	return 0
-}
-
-func Xrealloc(tls *TLS, p uintptr, n uint64) (r uintptr) {
-	if __ccgo_strace {
-		trc("tls=%v p=%v n=%v, (%v:)", tls, p, n, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	return x___libc_realloc(tls, p, n)
 }
 
 func Xreallocarray(tls *TLS, ptr uintptr, m uint64, n uint64) (r uintptr) {
@@ -106915,6 +105593,7 @@ var _ipio2 = [66]int32{
 	64: int32(0x60E27B),
 	65: int32(0xC08C6B),
 }
+
 var _PIo2 = [8]float64{
 	0: float64(1.570796251296997),
 	1: float64(7.549789415861596e-08),
@@ -107914,12 +106593,14 @@ var _atanhi = [4]float64{
 	2: float64(0.982793723247329),
 	3: float64(1.5707963267948966),
 }
+
 var _atanlo = [4]float64{
 	0: float64(2.2698777452961687e-17),
 	1: float64(3.061616997868383e-17),
 	2: float64(1.3903311031230998e-17),
 	3: float64(6.123233995736766e-17),
 }
+
 var _aT = [11]float64{
 	0:  float64(0.3333333333333293),
 	1:  -Float64FromFloat64(0.19999999999876483),
@@ -108222,12 +106903,14 @@ var _atanhi1 = [4]float32{
 	2: float32(0.98279368877),
 	3: float32(1.5707962513),
 }
+
 var _atanlo1 = [4]float32{
 	0: float32(5.012158244e-09),
 	1: float32(3.7748947079e-08),
 	2: float32(3.447321717e-08),
 	3: float32(7.5497894159e-08),
 }
+
 var _aT1 = [5]float32{
 	0: float32(0.33333328366),
 	1: float32(-Float64FromFloat64(0.19999158382)),
@@ -109516,10 +108199,6 @@ func _specialcase(tls *TLS, tmp float64, sbits uint64, ki uint64) (r float64) {
 	scale = *(*float64)(unsafe.Pointer(&sbits))
 	y3 = scale + scale*tmp
 	if y3 < float64(1) {
-		/* Round y to the right precision before scaling it into the subnormal
-		range to avoid double rounding that can cause 0.5+E/2 ulp error where
-		E is the worst-case ulp error outside the subnormal range.  So this
-		is only useful if the goal is better than 1 ulp worst-case error.  */
 		lo = scale - y3 + scale*tmp
 		hi = float64(1) + y3
 		lo = float64(1) - hi + y3 + lo
@@ -109782,10 +108461,6 @@ func _specialcase1(tls *TLS, tmp float64, sbits uint64, ki uint64) (r float64) {
 	scale = *(*float64)(unsafe.Pointer(&sbits))
 	y3 = scale + scale*tmp
 	if y3 < float64(1) {
-		/* Round y to the right precision before scaling it into the subnormal
-		   range to avoid double rounding that can cause 0.5+E/2 ulp error where
-		   E is the worst-case ulp error outside the subnormal range.  So this
-		   is only useful if the goal is better than 1 ulp worst-case error.  */
 		lo = scale - y3 + scale*tmp
 		hi = float64(1) + y3
 		lo = float64(1) - hi + y3 + lo
@@ -111548,6 +110223,7 @@ var _pS8 = [5]float64{
 	3: float64(116752.97256437592),
 	4: float64(47627.728414673096),
 }
+
 var _pR5 = [6]float64{
 	0: -Float64FromFloat64(1.141254646918945e-11),
 	1: -Float64FromFloat64(0.07031249408735993),
@@ -111563,6 +110239,7 @@ var _pS52 = [5]float64{
 	3: float64(9625.445143577745),
 	4: float64(2406.058159229391),
 }
+
 var _pR3 = [6]float64{
 	0: -Float64FromFloat64(2.547046017719519e-09),
 	1: -Float64FromFloat64(0.07031196163814817),
@@ -111578,6 +110255,7 @@ var _pS32 = [5]float64{
 	3: float64(1127.9967985690741),
 	4: float64(173.58093081333575),
 }
+
 var _pR2 = [6]float64{
 	0: -Float64FromFloat64(8.875343330325264e-08),
 	1: -Float64FromFloat64(0.07030309954836247),
@@ -111650,6 +110328,7 @@ var _qS8 = [6]float64{
 	4: float64(840501.5798190605),
 	5: -Float64FromFloat64(343899.2935378666),
 }
+
 var _qR5 = [6]float64{
 	0: float64(1.8408596359451553e-11),
 	1: float64(0.07324217666126848),
@@ -111666,6 +110345,7 @@ var _qS5 = [6]float64{
 	4: float64(35976.75384251145),
 	5: -Float64FromFloat64(5354.342756019448),
 }
+
 var _qR3 = [6]float64{
 	0: float64(4.377410140897386e-09),
 	1: float64(0.07324111800429114),
@@ -111682,6 +110362,7 @@ var _qS32 = [6]float64{
 	4: float64(2516.3336892036896),
 	5: -Float64FromFloat64(149.2474518361564),
 }
+
 var _qR2 = [6]float64{
 	0: float64(1.5044444488698327e-07),
 	1: float64(0.07322342659630793),
@@ -111888,6 +110569,7 @@ var _pS53 = [5]float32{
 	3: float32(9625.4453125),
 	4: float32(2406.0581055),
 }
+
 var _pR31 = [6]float32{
 	0: float32(-Float64FromFloat64(2.5470459075e-09)),
 	1: float32(-Float64FromFloat64(0.070311963558)),
@@ -111903,6 +110585,7 @@ var _pS33 = [5]float32{
 	3: float32(1127.9968262),
 	4: float32(173.58093262),
 }
+
 var _pR21 = [6]float32{
 	0: float32(-Float64FromFloat64(8.8753431271e-08)),
 	1: float32(-Float64FromFloat64(0.070303097367)),
@@ -111975,6 +110658,7 @@ var _qS81 = [6]float32{
 	4: float32(840501.5625),
 	5: float32(-Float64FromFloat64(343899.28125)),
 }
+
 var _qR51 = [6]float32{
 	0: float32(1.8408595828e-11),
 	1: float32(0.073242180049),
@@ -111991,6 +110675,7 @@ var _qS51 = [6]float32{
 	4: float32(35976.753906),
 	5: float32(-Float64FromFloat64(5354.3427734)),
 }
+
 var _qR31 = [6]float32{
 	0: float32(4.37740999e-09),
 	1: float32(0.073241114616),
@@ -112007,6 +110692,7 @@ var _qS33 = [6]float32{
 	4: float32(2516.3337402),
 	5: float32(-Float64FromFloat64(149.24745178)),
 }
+
 var _qR21 = [6]float32{
 	0: float32(1.5044444979e-07),
 	1: float32(0.073223426938),
@@ -112210,6 +110896,7 @@ var _ps8 = [5]float64{
 	3: float64(97602.79359349508),
 	4: float64(30804.27206278888),
 }
+
 var _pr5 = [6]float64{
 	0: float64(1.3199051955624352e-11),
 	1: float64(0.1171874931906141),
@@ -112225,6 +110912,7 @@ var _ps5 = [5]float64{
 	3: float64(7844.690317495512),
 	4: float64(1504.0468881036106),
 }
+
 var _pr3 = [6]float64{
 	0: float64(3.025039161373736e-09),
 	1: float64(0.11718686556725359),
@@ -112240,6 +110928,7 @@ var _ps3 = [5]float64{
 	3: float64(890.8113463982564),
 	4: float64(103.78793243963928),
 }
+
 var _pr2 = [6]float64{
 	0: float64(1.0771083010687374e-07),
 	1: float64(0.11717621946268335),
@@ -112311,6 +111000,7 @@ var _qs8 = [6]float64{
 	4: float64(666601.2326177764),
 	5: -Float64FromFloat64(294490.26430383464),
 }
+
 var _qr5 = [6]float64{
 	0: -Float64FromFloat64(2.089799311417641e-11),
 	1: -Float64FromFloat64(0.10253905024137543),
@@ -112327,6 +111017,7 @@ var _qs5 = [6]float64{
 	4: float64(27948.075163891812),
 	5: -Float64FromFloat64(4719.183547951285),
 }
+
 var _qr3 = [6]float64{
 	0: -Float64FromFloat64(5.078312264617666e-09),
 	1: -Float64FromFloat64(0.10253782982083709),
@@ -112343,6 +111034,7 @@ var _qs3 = [6]float64{
 	4: float64(1903.119193388108),
 	5: -Float64FromFloat64(135.20119144430734),
 }
+
 var _qr2 = [6]float64{
 	0: -Float64FromFloat64(1.7838172751095887e-07),
 	1: -Float64FromFloat64(0.10251704260798555),
@@ -112532,6 +111224,7 @@ var _ps81 = [5]float32{
 	3: float32(97602.796875),
 	4: float32(30804.271484),
 }
+
 var _pr51 = [6]float32{
 	0: float32(1.3199052094e-11),
 	1: float32(0.11718749255),
@@ -112547,6 +111240,7 @@ var _ps51 = [5]float32{
 	3: float32(7844.6904297),
 	4: float32(1504.046875),
 }
+
 var _pr31 = [6]float32{
 	0: float32(3.0250391081e-09),
 	1: float32(0.1171868667),
@@ -112562,6 +111256,7 @@ var _ps31 = [5]float32{
 	3: float32(890.81134033),
 	4: float32(103.78793335),
 }
+
 var _pr21 = [6]float32{
 	0: float32(1.0771083225e-07),
 	1: float32(0.11717621982),
@@ -112633,6 +111328,7 @@ var _qs81 = [6]float32{
 	4: float32(666601.25),
 	5: float32(-Float64FromFloat64(294490.25)),
 }
+
 var _qr51 = [6]float32{
 	0: float32(-Float64FromFloat64(2.0897993405e-11)),
 	1: float32(-Float64FromFloat64(0.1025390476)),
@@ -112649,6 +111345,7 @@ var _qs51 = [6]float32{
 	4: float32(27948.074219),
 	5: float32(-Float64FromFloat64(4719.1835938)),
 }
+
 var _qr31 = [6]float32{
 	0: float32(-Float64FromFloat64(5.0783124372e-09)),
 	1: float32(-Float64FromFloat64(0.10253783315)),
@@ -112665,6 +111362,7 @@ var _qs31 = [6]float32{
 	4: float32(1903.1191406),
 	5: float32(-Float64FromFloat64(135.20118713)),
 }
+
 var _qr21 = [6]float32{
 	0: float32(-Float64FromFloat64(1.7838172539e-07)),
 	1: float32(-Float64FromFloat64(0.10251704603)),
@@ -112810,35 +111508,6 @@ func Xjn(tls *TLS, n int32, x float64) (r float64) {
 					b = b / a
 				}
 			} else {
-				/* use backward recurrence */
-				/*                      x      x^2      x^2
-				 *  J(n,x)/J(n-1,x) =  ----   ------   ------   .....
-				 *                      2n  - 2(n+1) - 2(n+2)
-				 *
-				 *                      1      1        1
-				 *  (for large x)   =  ----  ------   ------   .....
-				 *                      2n   2(n+1)   2(n+2)
-				 *                      -- - ------ - ------ -
-				 *                       x     x         x
-				 *
-				 * Let w = 2n/x and h=2/x, then the above quotient
-				 * is equal to the continued fraction:
-				 *                  1
-				 *      = -----------------------
-				 *                     1
-				 *         w - -----------------
-				 *                        1
-				 *              w+h - ---------
-				 *                     w+2h - ...
-				 *
-				 * To determine how many terms needed, let
-				 * Q(0) = w, Q(1) = w(w+h) - 1,
-				 * Q(k) = (w+k*h)*Q(k-1) - Q(k-2),
-				 * When Q(k) > 1e4      good for single
-				 * When Q(k) > 1e9      good for double
-				 * When Q(k) > 1e17     good for quadruple
-				 */
-				/* determine k */
 				nf = float64(nm1) + float64(1)
 				w = Float64FromInt32(2) * nf / x
 				h = Float64FromInt32(2) / x
@@ -113056,35 +111725,6 @@ func Xjnf(tls *TLS, n int32, x float32) (r float32) {
 				}
 				b = b / a
 			} else {
-				/* use backward recurrence */
-				/*                      x      x^2      x^2
-				 *  J(n,x)/J(n-1,x) =  ----   ------   ------   .....
-				 *                      2n  - 2(n+1) - 2(n+2)
-				 *
-				 *                      1      1        1
-				 *  (for large x)   =  ----  ------   ------   .....
-				 *                      2n   2(n+1)   2(n+2)
-				 *                      -- - ------ - ------ -
-				 *                       x     x         x
-				 *
-				 * Let w = 2n/x and h=2/x, then the above quotient
-				 * is equal to the continued fraction:
-				 *                  1
-				 *      = -----------------------
-				 *                     1
-				 *         w - -----------------
-				 *                        1
-				 *              w+h - ---------
-				 *                     w+2h - ...
-				 *
-				 * To determine how many terms needed, let
-				 * Q(0) = w, Q(1) = w(w+h) - 1,
-				 * Q(k) = (w+k*h)*Q(k-1) - Q(k-2),
-				 * When Q(k) > 1e4      good for single
-				 * When Q(k) > 1e9      good for double
-				 * When Q(k) > 1e17     good for quadruple
-				 */
-				/* determine k */
 				nf = float32(nm1) + Float32FromFloat32(1)
 				w = Float32FromInt32(2) * nf / x
 				h = Float32FromInt32(2) / x
@@ -114329,8 +112969,6 @@ func Xlog2(tls *TLS, x float64) (r1 float64) {
 	})(unsafe.Pointer(uintptr(unsafe.Pointer(&x___log2_data)) + 144 + uintptr(i)*16))).Flogc
 	z = *(*float64)(unsafe.Pointer(&iz))
 	kd = float64(k)
-	/* log2(x) = log2(z/c) + log2(c) + k.  */
-	/* r ~= z/c - 1, |r| < 1/(2*N).  */
 	/* rounding error: 0x1p-55/N + 0x1p-65.  */
 	r = (z - (*(*struct {
 		Fchi float64
@@ -115124,7 +113762,6 @@ func _log_inline(tls *TLS, ix uint64, tail uintptr) (r1 float64) {
 	var ar, ar2, ar3, arhi, arhi2, hi, invc, kd, lo, lo1, lo2, lo3, lo4, logc, logctail, p, r, rhi, rlo, t1, t2, y, z, zhi, zlo float64
 	var i, k int32
 	var iz, tmp, v1 uint64
-	/* double_t for better performance on targets with FLT_EVAL_METHOD==2.  */
 	/* x = 2^k z; where z is in range [OFF,2*OFF) and exact.
 	   The range is split into N subintervals.
 	   The ith subinterval contains z and c is near its center.  */
@@ -115153,10 +113790,10 @@ func _log_inline(tls *TLS, ix uint64, tail uintptr) (r1 float64) {
 		Flogc     float64
 		Flogctail float64
 	})(unsafe.Pointer(uintptr(unsafe.Pointer(&x___pow_log_data)) + 72 + uintptr(i)*32))).Flogctail
+	v1 = (iz + Uint64FromUint64(1)<<Int32FromInt32(31)) & (-Uint64FromUint64(1) << Int32FromInt32(32))
 	/* Note: 1/c is j/N or j/N/2 where j is an integer in [N,2N) and
 	   |z/c - 1| < 1/N, so r = z/c - 1 is exactly representible.  */
 	/* Split z such that rhi, rlo and rhi*rhi are exact and |rlo| <= |r|.  */
-	v1 = (iz + Uint64FromUint64(1)<<Int32FromInt32(31)) & (-Uint64FromUint64(1) << Int32FromInt32(32))
 	zhi = *(*float64)(unsafe.Pointer(&v1))
 	zlo = z - zhi
 	rhi = zhi*invc - float64(1)
@@ -115167,7 +113804,6 @@ func _log_inline(tls *TLS, ix uint64, tail uintptr) (r1 float64) {
 	t2 = t1 + r
 	lo1 = kd*x___pow_log_data.Fln2lo + logctail
 	lo2 = t1 - t2 + r
-	/* Evaluation is optimized assuming superscalar pipelined execution.  */
 	ar = *(*float64)(unsafe.Pointer(uintptr(unsafe.Pointer(&x___pow_log_data)) + 16)) * r /* A[0] = -0.5.  */
 	ar2 = r * ar
 	ar3 = r * ar2
@@ -115218,10 +113854,6 @@ func _specialcase2(tls *TLS, tmp float64, sbits uint64, ki uint64) (r float64) {
 	scale = *(*float64)(unsafe.Pointer(&sbits))
 	y3 = scale + scale*tmp
 	if _fabs(tls, y3) < float64(1) {
-		/* Round y to the right precision before scaling it into the subnormal
-		   range to avoid double rounding that can cause 0.5+E/2 ulp error where
-		   E is the worst-case ulp error outside the subnormal range.  So this
-		   is only useful if the goal is better than 1 ulp worst-case error.  */
 		one = float64(1)
 		if y3 < float64(0) {
 			one = -Float64FromFloat64(1)
@@ -115262,7 +113894,6 @@ func _exp_inline(tls *TLS, x float64, xtail float64, sign_bias uint32) (r1 float
 	var abstop uint32
 	var idx, ki, sbits, top, v6 uint64
 	var kd, one, r, r2, scale, tail, tmp, y, z, v1, v2, v3, v5, v7 float64
-	/* double_t for better performance on targets with FLT_EVAL_METHOD==2.  */
 	abstop = _top124(tls, x) & uint32(0x7ff)
 	if ___builtin_expect(tls, BoolInt64(abstop-_top124(tls, float64(5.551115123125783e-17)) >= _top124(tls, float64(512))-_top124(tls, float64(5.551115123125783e-17))), 0) != 0 {
 		if abstop-_top124(tls, float64(5.551115123125783e-17)) >= uint32(0x80000000) {
@@ -117696,7 +116327,6 @@ func Xfma(tls *TLS, x float64, y float64, z float64) (r1 float64) {
 	var t, zhi, zlo uint64
 	var _ /* rhi at bp+0 */ uint64
 	var _ /* rlo at bp+8 */ uint64
-	/* normalize so top 10bits and last bit are 0 */
 	nx = _normalize(tls, x)
 	ny = _normalize(tls, y)
 	nz = _normalize(tls, z)
@@ -117709,7 +116339,6 @@ func Xfma(tls *TLS, x float64, y float64, z float64) (r1 float64) {
 		}
 		return z
 	}
-	/* mul: r = x*y */
 	_mul(tls, bp, bp+8, nx.Fm, ny.Fm)
 	/* either top 20 or 21 bits of rhi and last 2 bits of rlo are 0 */
 	/* align exponents */
@@ -117885,10 +116514,6 @@ func Xfmaf(tls *TLS, x float32, y float32, z float32) (r float32) {
 		z = float32(result)
 		return z
 	}
-	/*
-	 * If result is inexact, and exactly halfway between two float values,
-	 * we need to adjust the low-order bit in the direction of the error.
-	 */
 	neg = int32(*(*uint64)(unsafe.Pointer(bp)) >> int32(63))
 	if neg == BoolInt32(float64(z) > xy) {
 		err = xy - result + float64(z)
@@ -120215,7 +118840,8 @@ func Xsetrlimit(tls *TLS, resource int32, rlim uintptr) (r int32) {
 		Fres: resource,
 		Ferr: -int32(1),
 	}
-	x___synccall(tls, __ccgo_fp(_do_setrlimit), bp+16)
+	//__synccall(do_setrlimit, &c);
+	_do_setrlimit(tls, bp+16)
 	if (*(*Tctx1)(unsafe.Pointer(bp + 16))).Ferr != 0 {
 		if (*(*Tctx1)(unsafe.Pointer(bp + 16))).Ferr > 0 {
 			*(*int32)(unsafe.Pointer(X__errno_location(tls))) = (*(*Tctx1)(unsafe.Pointer(bp + 16))).Ferr
@@ -123519,7 +122145,7 @@ func Xgethostbyaddr(tls *TLS, a uintptr, l uint32, af int32) (r uintptr) {
 	for cond := true; cond; cond = err == int32(m_ERANGE) {
 		Xfree(tls, _h)
 		size += size + uint64(1)
-		_h = _default_malloc(tls, size)
+		_h = Xmalloc(tls, size)
 		if !(_h != 0) {
 			*(*int32)(unsafe.Pointer(x___h_errno_location(tls))) = int32(m_NO_RECOVERY)
 			return uintptr(0)
@@ -123642,7 +122268,7 @@ func Xgethostbyname2(tls *TLS, name uintptr, af int32) (r uintptr) {
 	for cond := true; cond; cond = err == int32(m_ERANGE) {
 		Xfree(tls, _h1)
 		size += size + uint64(1)
-		_h1 = _default_malloc(tls, size)
+		_h1 = Xmalloc(tls, size)
 		if !(_h1 != 0) {
 			*(*int32)(unsafe.Pointer(x___h_errno_location(tls))) = int32(m_NO_RECOVERY)
 			return uintptr(0)
@@ -125026,7 +123652,7 @@ func Xif_nameindex(tls *TLS) (r uintptr) {
 	if x___rtnetlink_enumerate(tls, m_PF_UNSPEC, int32(m_PF_INET), __ccgo_fp(_netlink_msg_to_nameindex), ctx) < 0 {
 		goto err
 	}
-	ifs = _default_malloc(tls, uint64((*Tifnameindexctx)(unsafe.Pointer(ctx)).Fnum+Uint32FromInt32(1))*16+uint64((*Tifnameindexctx)(unsafe.Pointer(ctx)).Fstr_bytes))
+	ifs = Xmalloc(tls, uint64((*Tifnameindexctx)(unsafe.Pointer(ctx)).Fnum+Uint32FromInt32(1))*16+uint64((*Tifnameindexctx)(unsafe.Pointer(ctx)).Fstr_bytes))
 	if !(ifs != 0) {
 		goto err
 	}
@@ -125988,10 +124614,6 @@ func _scopeof(tls *TLS, a uintptr) (r int32) {
 
 func _prefixmatch(tls *TLS, s uintptr, d uintptr) (r int32) {
 	var i uint32
-	/* FIXME: The common prefix length should be limited to no greater
-	 * than the nominal length of the prefix portion of the source
-	 * address. However the definition of the source prefix length is
-	 * not clear and thus this limiting is not yet implemented. */
 	for i = uint32(0); i < uint32(128) && !((int32(*(*uint8)(unsafe.Pointer(s + uintptr(i/uint32(8)))))^int32(*(*uint8)(unsafe.Pointer(d + uintptr(i/uint32(8))))))&(Int32FromInt32(128)>>(i%Uint32FromInt32(8))) != 0); i++ {
 	}
 	return int32(i)
@@ -127695,8 +126317,6 @@ func x___get_resolv_conf(tls *TLS, conf uintptr, search uintptr, search_sz uint6
 	}
 	for Xfgets(tls, bp, int32(256), f) != 0 {
 		if !(Xstrchr(tls, bp, int32('\n')) != 0) && !((*TFILE)(unsafe.Pointer(f)).Fflags&Uint32FromInt32(m_F_EOF) != 0) {
-			/* Ignore lines that get truncated rather than
-			 * potentially misinterpreting them. */
 			for cond := true; cond; cond = c != int32('\n') && c != -int32(1) {
 				c = Xgetc(tls, f)
 			}
@@ -127839,9 +126459,6 @@ func Xsendmmsg(tls *TLS, fd int32, msgvec uintptr, vlen uint32, flags uint32) (r
 	}
 	var i, v1 int32
 	var r int64
-	/* Can't use the syscall directly because the kernel has the wrong
-	 * idea for the types of msg_iovlen, msg_controllen, and cmsg_len,
-	 * and the cmsg blocks cannot be modified in-place. */
 	if vlen > uint32(m_IOV_MAX) {
 		vlen = uint32(m_IOV_MAX)
 	} /* This matches the kernel. */
@@ -127884,9 +126501,6 @@ func Xsendmsg(tls *TLS, fd int32, msg uintptr, flags int32) (r1 int64) {
 	var v1, v5 int32
 	var _ /* chbuf at bp+56 */ [66]Tcmsghdr
 	var _ /* h at bp+0 */ Tmsghdr
-	/* Kernels before 2.6.38 set SCM_MAX_FD to 255, allocate enough
-	 * space to support an SCM_RIGHTS ancillary message with 255 fds.
-	 * Kernels since 2.6.38 set SCM_MAX_FD to 253. */
 	if msg != 0 {
 		*(*Tmsghdr)(unsafe.Pointer(bp)) = *(*Tmsghdr)(unsafe.Pointer(msg))
 		v1 = Int32FromInt32(0)
@@ -129336,7 +127950,7 @@ func Xgetspnam(tls *TLS, name uintptr) (r uintptr) {
 	var _ /* res at bp+0 */ uintptr
 	orig_errno = *(*int32)(unsafe.Pointer(X__errno_location(tls)))
 	if !(_line6 != 0) {
-		_line6 = _default_malloc(tls, uint64(m_LINE_LIM))
+		_line6 = Xmalloc(tls, uint64(m_LINE_LIM))
 	}
 	if !(_line6 != 0) {
 		return uintptr(0)
@@ -129994,6 +128608,7 @@ var _init = [32]uint32{
 	30: uint32(0x398150e9),
 	31: uint32(0x37521657),
 }
+
 var _n = int32(31)
 var _i = int32(3)
 var _j = int32(0)
@@ -130158,43 +128773,6 @@ func Xsrand48(tls *TLS, seed int64) {
 	Xseed48(tls, bp)
 }
 
-const m_SYS_fork = 57
-const m_SYS_gettid = 186
-
-func _dummy11(tls *TLS, x int32) {
-}
-
-func x__Fork(tls *TLS) (r int32) {
-	bp := tls.Alloc(128) /* tlsAllocs 128 maxVaListSize 0 */
-	defer tls.Free(128)
-	var ret int32
-	var self, v1 uintptr
-	var _ /* set at bp+0 */ Tsigset_t
-	x___block_all_sigs(tls, bp)
-	x___lock(tls, uintptr(unsafe.Pointer(&x___abort_lock)))
-	ret = int32(___syscall0(tls, int64(m_SYS_fork)))
-	if !(ret != 0) {
-		self = ___get_tp(tls)
-		(*t__pthread)(unsafe.Pointer(self)).Ftid = int32(___syscall0(tls, int64(m_SYS_gettid)))
-		(*t__pthread)(unsafe.Pointer(self)).Frobust_list.Foff = 0
-		(*t__pthread)(unsafe.Pointer(self)).Frobust_list.Fpending = uintptr(0)
-		v1 = self
-		(*t__pthread)(unsafe.Pointer(self)).Fprev = v1
-		(*t__pthread)(unsafe.Pointer(self)).Fnext = v1
-		AtomicStorePInt32(uintptr(unsafe.Pointer(&x___thread_list_lock)), 0)
-		x___libc.Fthreads_minus_1 = 0
-		if AtomicLoadPInt8(uintptr(unsafe.Pointer(&x___libc))+3) != 0 {
-			AtomicStorePInt8(uintptr(unsafe.Pointer(&x___libc))+3, int8(-int32(1)))
-		}
-	}
-	x___unlock(tls, uintptr(unsafe.Pointer(&x___abort_lock)))
-	if !(ret != 0) {
-		x___aio_atfork(tls, int32(1))
-	}
-	x___restore_sigs(tls, bp)
-	return int32(x___syscall_ret(tls, uint64(ret)))
-}
-
 func Xexecl(tls *TLS, path uintptr, argv0 uintptr, va uintptr) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v path=%v argv0=%v va=%v, (%v:)", tls, path, argv0, va, origin(2))
@@ -130291,15 +128869,6 @@ func Xexecve(tls *TLS, path uintptr, argv uintptr, envp uintptr) (r int32) {
 	/* do we need to use environ if envp is null? */
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_execve), int64(path), int64(argv), int64(envp)))))
 }
-
-/* Support signed or unsigned plain-char */
-
-/* Implementation choices... */
-
-/* Arbitrary numbers... */
-
-/* POSIX/SUS requirements follow. These numbers come directly
- * from SUS and have nothing to do with the host system. */
 
 func x___execvpe(tls *TLS, file uintptr, argv uintptr, envp uintptr) (r int32) {
 	var b, p, path, z, v3, v4 uintptr
@@ -130398,6 +128967,7 @@ func Xfexecve(tls *TLS, fd int32, argv uintptr, envp uintptr) (r1 int32) {
 }
 
 var _dummy_lockptr = uintptr(0)
+
 var _atfork_locks = [10]uintptr{
 	0: uintptr(unsafe.Pointer(&x___at_quick_exit_lockptr)),
 	1: uintptr(unsafe.Pointer(&x___atexit_lockptr)),
@@ -130411,7 +128981,7 @@ var _atfork_locks = [10]uintptr{
 	9: uintptr(unsafe.Pointer(&x___bump_lockptr)),
 }
 
-func _dummy12(tls *TLS, x int32) {
+func _dummy11(tls *TLS, x int32) {
 }
 
 func _dummy_01(tls *TLS) {
@@ -130736,7 +129306,7 @@ func Xposix_spawn_file_actions_addchdir_np(tls *TLS, fa uintptr, path uintptr) (
 		defer func() { trc("-> %v", r) }()
 	}
 	var op, v1 uintptr
-	op = x___libc_malloc(tls, uint64(40)+Xstrlen(tls, path)+uint64(1))
+	op = Xmalloc(tls, uint64(40)+Xstrlen(tls, path)+uint64(1))
 	if !(op != 0) {
 		return int32(m_ENOMEM)
 	}
@@ -130762,7 +129332,7 @@ func Xposix_spawn_file_actions_addclose(tls *TLS, fa uintptr, fd int32) (r int32
 	if fd < 0 {
 		return int32(m_EBADF)
 	}
-	op = x___libc_malloc(tls, uint64(40))
+	op = Xmalloc(tls, uint64(40))
 	if !(op != 0) {
 		return int32(m_ENOMEM)
 	}
@@ -130787,7 +129357,7 @@ func Xposix_spawn_file_actions_adddup2(tls *TLS, fa uintptr, srcfd int32, fd int
 	if srcfd < 0 || fd < 0 {
 		return int32(m_EBADF)
 	}
-	op = x___libc_malloc(tls, uint64(40))
+	op = Xmalloc(tls, uint64(40))
 	if !(op != 0) {
 		return int32(m_ENOMEM)
 	}
@@ -130813,7 +129383,7 @@ func Xposix_spawn_file_actions_addfchdir_np(tls *TLS, fa uintptr, fd int32) (r i
 	if fd < 0 {
 		return int32(m_EBADF)
 	}
-	op = x___libc_malloc(tls, uint64(40))
+	op = Xmalloc(tls, uint64(40))
 	if !(op != 0) {
 		return int32(m_ENOMEM)
 	}
@@ -130838,7 +129408,7 @@ func Xposix_spawn_file_actions_addopen(tls *TLS, fa uintptr, fd int32, path uint
 	if fd < 0 {
 		return int32(m_EBADF)
 	}
-	op = x___libc_malloc(tls, uint64(40)+Xstrlen(tls, path)+uint64(1))
+	op = Xmalloc(tls, uint64(40)+Xstrlen(tls, path)+uint64(1))
 	if !(op != 0) {
 		return int32(m_ENOMEM)
 	}
@@ -130866,7 +129436,7 @@ func Xposix_spawn_file_actions_destroy(tls *TLS, fa uintptr) (r int32) {
 	op = (*Tposix_spawn_file_actions_t)(unsafe.Pointer(fa)).F__actions
 	for op != 0 {
 		next = (*Tfdop)(unsafe.Pointer(op)).Fnext
-		x___libc_free(tls, op)
+		Xfree(tls, op)
 		op = next
 	}
 	return 0
@@ -131509,7 +130079,7 @@ type Tmatch = struct {
 
 func _append(tls *TLS, tail uintptr, name uintptr, len1 uint64, mark int32) (r int32) {
 	var new1 uintptr
-	new1 = _default_malloc(tls, uint64(8)+len1+uint64(2))
+	new1 = Xmalloc(tls, uint64(8)+len1+uint64(2))
 	if !(new1 != 0) {
 		return -int32(1)
 	}
@@ -131615,15 +130185,6 @@ func _do_glob(tls *TLS, buf uintptr, pos uint64, type1 int32, pat uintptr, flags
 	}
 	*(*int8)(unsafe.Pointer(buf + uintptr(pos))) = 0
 	if !(*(*int8)(unsafe.Pointer(pat)) != 0) {
-		/* If we consumed any components above, or if GLOB_MARK is
-		 * requested and we don't yet know if the match is a dir,
-		 * we must confirm the file exists and/or determine its type.
-		 *
-		 * If marking dirs, symlink type is inconclusive; we need the
-		 * type for the symlink target, and therefore must try stat
-		 * first unless type is known not to be a symlink. Otherwise,
-		 * or if that fails, use lstat for determining existence to
-		 * avoid false negatives in the case of broken symlinks. */
 		if flags&int32(m_GLOB_MARK) != 0 && (!(type1 != 0) || type1 == int32(m_DT_LNK)) && !(Xstat(tls, buf, bp) != 0) {
 			if (*(*Tstat)(unsafe.Pointer(bp))).Fst_mode&uint32(m_S_IFMT) == uint32(m_S_IFDIR) {
 				type1 = int32(m_DT_DIR)
@@ -131906,7 +130467,7 @@ func Xglob(tls *TLS, pat uintptr, flags int32, errfunc uintptr, g uintptr) (r in
 		(*Tglob_t)(unsafe.Pointer(g)).Fgl_pathv = pathv
 		offs += (*Tglob_t)(unsafe.Pointer(g)).Fgl_pathc
 	} else {
-		(*Tglob_t)(unsafe.Pointer(g)).Fgl_pathv = _default_malloc(tls, (offs+cnt+uint64(1))*uint64(8))
+		(*Tglob_t)(unsafe.Pointer(g)).Fgl_pathv = Xmalloc(tls, (offs+cnt+uint64(1))*uint64(8))
 		if !((*Tglob_t)(unsafe.Pointer(g)).Fgl_pathv != 0) {
 			_freelist(tls, bp)
 			return int32(m_GLOB_NOSPACE)
@@ -132099,7 +130660,6 @@ type Ttre_pos_and_tags_t = struct {
 // C documentation
 //
 //	/* The different AST node types. */
-
 type Ttre_ast_type_t = int32
 
 const _LITERAL = 0
@@ -132113,7 +130673,6 @@ const _UNION = 3
 //
 //	/* A generic AST node.  All AST nodes consist of this node on the top
 //	   level with `obj' pointing to the actual content. */
-
 type Ttre_ast_node_t = struct {
 	Ftype1          int32
 	Fobj            uintptr
@@ -132130,7 +130689,6 @@ type Ttre_ast_node_t = struct {
 //	/* A "literal" node.  These are created for assertions, back references,
 //	   tags, matching parameter settings, and all expressions that match one
 //	   character. */
-
 type Ttre_literal_t = struct {
 	Fcode_min    int64
 	Fcode_max    int64
@@ -132145,7 +130703,6 @@ type Ttre_literal_t = struct {
 //	   If there are more than one subexpressions in sequence, the `left' part
 //	   holds all but the last, and `right' part holds the last subexpression
 //	   (catenation is left associative). */
-
 type Ttre_catenation_t = struct {
 	Fleft  uintptr
 	Fright uintptr
@@ -132155,7 +130712,6 @@ type Ttre_catenation_t = struct {
 //
 //	/* An "iteration" node.	 These are created for the "*", "+", "?", and "{m,n}"
 //	   operators. */
-
 type Ttre_iteration_t = struct {
 	Farg         uintptr
 	Fmin         int32
@@ -132167,7 +130723,6 @@ type Ttre_iteration_t = struct {
 // C documentation
 //
 //	/* An "union" node.  These are created for the "|" operator. */
-
 type Ttre_union_t = struct {
 	Fleft  uintptr
 	Fright uintptr
@@ -132258,31 +130813,11 @@ type Ttre_stack_t = struct {
 	Fstack     uintptr
 }
 
+/***********************************************************************
+ from tre-stack.c and tre-stack.h
+***********************************************************************/
+
 type Ttre_stack_rec = Ttre_stack_t
-
-// C documentation
-//
-//	/* Creates a new stack object.	`size' is initial size in bytes, `max_size'
-//	   is maximum size, and `increment' specifies how much more space will be
-//	   allocated with realloc() if all space gets used up.	Returns the stack
-//	   object or NULL if out of memory. */
-
-// C documentation
-//
-//	/* Frees the stack object. */
-
-// C documentation
-//
-//	/* Returns the current number of objects in the stack. */
-
-/* Each tre_stack_push_*(tre_stack_t *s, <type> value) function pushes
-   `value' on top of stack `s'.  Returns REG_ESPACE if out of memory.
-   This tries to realloc() more space before failing if maximum size
-   has not yet been reached.  Returns REG_OK if successful. */
-
-/* Each tre_stack_pop_*(tre_stack_t *s) function pops the topmost
-   element off of stack `s' and returns it.  The stack must not be
-   empty. */
 
 /* Just to save some typing. */
 
@@ -132293,9 +130828,9 @@ type Ttre_stack_item = struct {
 
 func _tre_stack_new(tls *TLS, size int32, max_size int32, increment int32) (r uintptr) {
 	var s uintptr
-	s = _default_malloc(tls, uint64(24))
+	s = Xmalloc(tls, uint64(24))
 	if s != UintptrFromInt32(0) {
-		(*Ttre_stack_t)(unsafe.Pointer(s)).Fstack = _default_malloc(tls, uint64(8)*uint64(size))
+		(*Ttre_stack_t)(unsafe.Pointer(s)).Fstack = Xmalloc(tls, uint64(8)*uint64(size))
 		if (*Ttre_stack_t)(unsafe.Pointer(s)).Fstack == UintptrFromInt32(0) {
 			Xfree(tls, s)
 			return UintptrFromInt32(0)
@@ -132382,7 +130917,6 @@ func _tre_stack_pop_voidptr(tls *TLS, s uintptr) (r uintptr) {
 // C documentation
 //
 //	/* Parse context. */
-
 type Ttre_parse_ctx_t = struct {
 	Fmem         uintptr
 	Fstack       uintptr
@@ -132694,7 +131228,7 @@ func _parse_bracket(tls *TLS, ctx uintptr, s uintptr) (r int32) {
 	(*(*Tliterals)(unsafe.Pointer(bp))).Fmem = (*Ttre_parse_ctx_t)(unsafe.Pointer(ctx)).Fmem
 	(*(*Tliterals)(unsafe.Pointer(bp))).Flen1 = 0
 	(*(*Tliterals)(unsafe.Pointer(bp))).Fcap1 = int32(32)
-	(*(*Tliterals)(unsafe.Pointer(bp))).Fa = _default_malloc(tls, uint64((*(*Tliterals)(unsafe.Pointer(bp))).Fcap1)*uint64(8))
+	(*(*Tliterals)(unsafe.Pointer(bp))).Fa = Xmalloc(tls, uint64((*(*Tliterals)(unsafe.Pointer(bp))).Fcap1)*uint64(8))
 	if !((*(*Tliterals)(unsafe.Pointer(bp))).Fa != 0) {
 		return int32(m_REG_ESPACE)
 	}
@@ -133380,28 +131914,27 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 	num_tags = 0        /* Total number of tags. */
 	num_minimals = 0    /* Number of special minimal tags. */
 	tag = 0             /* The tag that is to be added next. */
-	next_tag = int32(1) /* Next tag to use after this one. */
-	/* Stack of submatches the current submatch is
+	next_tag = int32(1) /* Stack of submatches the current submatch is
 	   contained in. */
-	minimal_tag = -int32(1) /* Tag that marks the beginning of a minimal match. */
+	minimal_tag = -int32(1)
 	direction = int32(_TRE_TAG_MINIMIZE)
 	if !(first_pass != 0) {
 		(*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fend_tag = 0
 		*(*int32)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fminimal_tags)) = -int32(1)
 	}
-	regset = _default_malloc(tls, uint64(4)*uint64(((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches+Uint32FromInt32(1))*Uint32FromInt32(2)))
+	regset = Xmalloc(tls, uint64(4)*uint64(((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches+Uint32FromInt32(1))*Uint32FromInt32(2)))
 	if regset == UintptrFromInt32(0) {
 		return int32(m_REG_ESPACE)
 	}
 	*(*int32)(unsafe.Pointer(regset)) = -int32(1)
 	orig_regset = regset
-	parents = _default_malloc(tls, uint64(4)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches+Uint32FromInt32(1)))
+	parents = Xmalloc(tls, uint64(4)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches+Uint32FromInt32(1)))
 	if parents == UintptrFromInt32(0) {
 		Xfree(tls, regset)
 		return int32(m_REG_ESPACE)
 	}
 	*(*int32)(unsafe.Pointer(parents)) = -int32(1)
-	saved_states = _default_malloc(tls, uint64(8)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches+Uint32FromInt32(1)))
+	saved_states = Xmalloc(tls, uint64(8)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches+Uint32FromInt32(1)))
 	if saved_states == UintptrFromInt32(0) {
 		Xfree(tls, regset)
 		Xfree(tls, parents)
@@ -133463,7 +131996,7 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 				}
 				(*(*Ttre_submatch_data_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fsubmatch_data + uintptr(id1)*16))).Fparents = UintptrFromInt32(0)
 				if i2 > 0 {
-					p = _default_malloc(tls, uint64(4)*uint64(i2+Int32FromInt32(1)))
+					p = Xmalloc(tls, uint64(4)*uint64(i2+Int32FromInt32(1)))
 					if p == UintptrFromInt32(0) {
 						status = int32(m_REG_ESPACE)
 						goto _9
@@ -134129,12 +132662,12 @@ func _tre_expand_ast(tls *TLS, mem uintptr, stack uintptr, ast uintptr, position
 				pos_add_save = *(*int32)(unsafe.Pointer(bp))
 				/* Create a catenated sequence of copies of the node. */
 				for j = 0; j < (*Ttre_iteration_t)(unsafe.Pointer(iter1)).Fmin; j++ {
-					/* Remove tags from all but the last copy. */
 					if j+int32(1) < (*Ttre_iteration_t)(unsafe.Pointer(iter1)).Fmin {
 						v1 = int32(m_COPY_REMOVE_TAGS)
 					} else {
 						v1 = int32(m_COPY_MAXIMIZE_FIRST_TAG)
 					}
+					/* Remove tags from all but the last copy. */
 					flags = v1
 					pos_add_save = *(*int32)(unsafe.Pointer(bp))
 					status = _tre_copy_ast(tls, mem, stack, (*Ttre_iteration_t)(unsafe.Pointer(iter1)).Farg, flags, bp, tag_directions, bp+16, bp+4)
@@ -134595,7 +133128,7 @@ func _tre_compute_nfl(tls *TLS, mem uintptr, stack uintptr, tree uintptr) (r int
 					return status
 				}
 				/* Allocate arrays for the tags and parameters. */
-				tags = _default_malloc(tls, uint64(4)*uint64(*(*int32)(unsafe.Pointer(bp))+Int32FromInt32(1)))
+				tags = Xmalloc(tls, uint64(4)*uint64(*(*int32)(unsafe.Pointer(bp))+Int32FromInt32(1)))
 				if !(tags != 0) {
 					return int32(m_REG_ESPACE)
 				}
@@ -134626,7 +133159,7 @@ func _tre_compute_nfl(tls *TLS, mem uintptr, stack uintptr, tree uintptr) (r int
 					return status
 				}
 				/* Allocate arrays for the tags and parameters. */
-				tags = _default_malloc(tls, uint64(4)*uint64(*(*int32)(unsafe.Pointer(bp))+Int32FromInt32(1)))
+				tags = Xmalloc(tls, uint64(4)*uint64(*(*int32)(unsafe.Pointer(bp))+Int32FromInt32(1)))
 				if !(tags != 0) {
 					return int32(m_REG_ESPACE)
 				}
@@ -134707,7 +133240,7 @@ func _tre_make_trans(tls *TLS, p1 uintptr, p2 uintptr, transitions uintptr, coun
 				if (*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fneg_classes != UintptrFromInt32(0) {
 					for i = 0; *(*uint64)(unsafe.Pointer((*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fneg_classes + uintptr(i)*8)) != Uint64FromInt32(0); i++ {
 					}
-					(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fneg_classes = _default_malloc(tls, uint64(8)*uint64(i+Int32FromInt32(1)))
+					(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fneg_classes = Xmalloc(tls, uint64(8)*uint64(i+Int32FromInt32(1)))
 					if (*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fneg_classes == UintptrFromInt32(0) {
 						return int32(m_REG_ESPACE)
 					}
@@ -134738,7 +133271,7 @@ func _tre_make_trans(tls *TLS, p1 uintptr, p2 uintptr, transitions uintptr, coun
 				(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Ftags = UintptrFromInt32(0)
 				/* If there were any tags, allocate an array and fill it. */
 				if i+j > 0 {
-					(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Ftags = _default_malloc(tls, uint64(4)*uint64(i+j+Int32FromInt32(1)))
+					(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Ftags = Xmalloc(tls, uint64(4)*uint64(i+j+Int32FromInt32(1)))
 					if !((*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Ftags != 0) {
 						return int32(m_REG_ESPACE)
 					}
@@ -134854,7 +133387,6 @@ func Xregcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 	add = 0
 	tnfa = UintptrFromInt32(0)
 	tag_directions = UintptrFromInt32(0)
-	/* Parse context. */
 	/* Allocate a stack used throughout the compilation process for various
 	   purposes. */
 	stack = _tre_stack_new(tls, int32(512), int32(1024000), int32(128))
@@ -134913,7 +133445,7 @@ func Xregcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 			}
 		}
 		if (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags > 0 {
-			tag_directions = _default_malloc(tls, uint64(4)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags+Int32FromInt32(1)))
+			tag_directions = Xmalloc(tls, uint64(4)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags+Int32FromInt32(1)))
 			if tag_directions == UintptrFromInt32(0) {
 				errcode = int32(m_REG_ESPACE)
 				if int32(1) != 0 {
@@ -134983,14 +133515,14 @@ func Xregcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 			goto error_exit
 		}
 	}
-	counts = _default_malloc(tls, uint64(4)*uint64((*(*Ttre_parse_ctx_t)(unsafe.Pointer(bp))).Fposition))
+	counts = Xmalloc(tls, uint64(4)*uint64((*(*Ttre_parse_ctx_t)(unsafe.Pointer(bp))).Fposition))
 	if counts == UintptrFromInt32(0) {
 		errcode = int32(m_REG_ESPACE)
 		if int32(1) != 0 {
 			goto error_exit
 		}
 	}
-	offs = _default_malloc(tls, uint64(4)*uint64((*(*Ttre_parse_ctx_t)(unsafe.Pointer(bp))).Fposition))
+	offs = Xmalloc(tls, uint64(4)*uint64((*(*Ttre_parse_ctx_t)(unsafe.Pointer(bp))).Fposition))
 	if offs == UintptrFromInt32(0) {
 		errcode = int32(m_REG_ESPACE)
 		if int32(1) != 0 {
@@ -135048,7 +133580,7 @@ func Xregcomp(tls *TLS, preg uintptr, regex uintptr, cflags int32) (r int32) {
 		if (*Ttre_pos_and_tags_t)(unsafe.Pointer(p)).Ftags != 0 {
 			for j = 0; *(*int32)(unsafe.Pointer((*Ttre_pos_and_tags_t)(unsafe.Pointer(p)).Ftags + uintptr(j)*4)) >= 0; j++ {
 			}
-			(*(*Ttre_tnfa_transition_t)(unsafe.Pointer(initial + uintptr(i)*56))).Ftags = _default_malloc(tls, uint64(4)*uint64(j+Int32FromInt32(1)))
+			(*(*Ttre_tnfa_transition_t)(unsafe.Pointer(initial + uintptr(i)*56))).Ftags = Xmalloc(tls, uint64(4)*uint64(j+Int32FromInt32(1)))
 			if !((*(*Ttre_tnfa_transition_t)(unsafe.Pointer(initial + uintptr(i)*56))).Ftags != 0) {
 				errcode = int32(m_REG_ESPACE)
 				if int32(1) != 0 {
@@ -135586,19 +134118,13 @@ func _tre_tnfa_run_backtrack(tls *TLS, tnfa uintptr, string1 uintptr, match_tags
 	reg_notbol = eflags & int32(m_REG_NOTBOL)
 	reg_noteol = eflags & int32(m_REG_NOTEOL)
 	reg_newline = (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fcflags & int32(m_REG_NEWLINE)
-	/* These are used to remember the necessary values of the above
-	   variables to return to the position where the current search
-	   started from. */
 	pos_start = int64(-int32(1))
 	/* End offset of best match so far, or -1 if no match found yet. */
 	match_eo = int64(-int32(1))
-	/* Tag arrays. */
 	tags = UintptrFromInt32(0)
-	/* Current TNFA state. */
 	states_seen = UintptrFromInt32(0)
 	/* Memory allocator to for allocating the backtracking stack. */
 	mem = x___tre_mem_new_impl(tls, 0, UintptrFromInt32(0))
-	/* The backtracking stack. */
 	pmatch = UintptrFromInt32(0)
 	if !(mem != 0) {
 		return int32(m_REG_ESPACE)
@@ -135611,21 +134137,21 @@ func _tre_tnfa_run_backtrack(tls *TLS, tnfa uintptr, string1 uintptr, match_tags
 	(*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fprev = UintptrFromInt32(0)
 	(*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fnext = UintptrFromInt32(0)
 	if (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags != 0 {
-		tags = _default_malloc(tls, uint64(8)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags))
+		tags = Xmalloc(tls, uint64(8)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags))
 		if !(tags != 0) {
 			ret = int32(m_REG_ESPACE)
 			goto error_exit
 		}
 	}
 	if (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches != 0 {
-		pmatch = _default_malloc(tls, uint64(16)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches))
+		pmatch = Xmalloc(tls, uint64(16)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches))
 		if !(pmatch != 0) {
 			ret = int32(m_REG_ESPACE)
 			goto error_exit
 		}
 	}
 	if (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_states != 0 {
-		states_seen = _default_malloc(tls, uint64(4)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_states))
+		states_seen = Xmalloc(tls, uint64(4)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_states))
 		if !(states_seen != 0) {
 			ret = int32(m_REG_ESPACE)
 			goto error_exit
@@ -135755,9 +134281,6 @@ _4:
 	empty_br_match = 0
 	trans_i = state
 	if (*Ttre_tnfa_transition_t)(unsafe.Pointer(trans_i)).Fstate != 0 && (*Ttre_tnfa_transition_t)(unsafe.Pointer(trans_i)).Fassertions&int32(m_ASSERT_BACKREF) != 0 {
-		/* This is a back reference state.  All transitions leaving from
-		   this state have the same back reference "assertion".  Instead
-		   of reading the next character, we match the back reference. */
 		bt = *(*int32)(unsafe.Pointer(&(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans_i)).Fu))
 		/* Get the substring we need to match against.  Remember to
 		   turn off REG_NOSUB temporarily. */
@@ -136029,7 +134552,7 @@ func Xregexec(tls *TLS, preg uintptr, string1 uintptr, nmatch uint64, pmatch uin
 		nmatch = uint64(0)
 	}
 	if (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags > 0 && nmatch > uint64(0) {
-		tags = _default_malloc(tls, uint64(8)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags))
+		tags = Xmalloc(tls, uint64(8)*uint64((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_tags))
 		if tags == UintptrFromInt32(0) {
 			return int32(m_REG_ESPACE)
 		}
@@ -136105,8 +134628,6 @@ func x___tre_mem_alloc_impl(tls *TLS, mem uintptr, provided int32, provided_bloc
 		return UintptrFromInt32(0)
 	}
 	if (*Ttre_mem_struct)(unsafe.Pointer(mem)).Fn < size {
-		/* We need more memory than is available in the current block.
-		Allocate a new block. */
 		if provided != 0 {
 			if provided_block == UintptrFromInt32(0) {
 				(*Ttre_mem_struct)(unsafe.Pointer(mem)).Ffailed = int32(1)
@@ -136120,12 +134641,12 @@ func x___tre_mem_alloc_impl(tls *TLS, mem uintptr, provided int32, provided_bloc
 			} else {
 				block_size = int32(m_TRE_MEM_BLOCK_SIZE)
 			}
-			l = _default_malloc(tls, uint64(16))
+			l = Xmalloc(tls, uint64(16))
 			if l == UintptrFromInt32(0) {
 				(*Ttre_mem_struct)(unsafe.Pointer(mem)).Ffailed = int32(1)
 				return UintptrFromInt32(0)
 			}
-			(*Ttre_list_t)(unsafe.Pointer(l)).Fdata = _default_malloc(tls, uint64(block_size))
+			(*Ttre_list_t)(unsafe.Pointer(l)).Fdata = Xmalloc(tls, uint64(block_size))
 			if (*Ttre_list_t)(unsafe.Pointer(l)).Fdata == UintptrFromInt32(0) {
 				Xfree(tls, l)
 				(*Ttre_mem_struct)(unsafe.Pointer(mem)).Ffailed = int32(1)
@@ -136842,7 +135363,7 @@ func Xtsearch(tls *TLS, key uintptr, rootp uintptr, cmp uintptr) (r1 uintptr) {
 		a[v2] = n + 8 + BoolUintptr(c > 0)*8
 		n = *(*uintptr)(unsafe.Pointer(n + 8 + BoolUintptr(c > 0)*8))
 	}
-	r = _default_malloc(tls, uint64(32))
+	r = Xmalloc(tls, uint64(32))
 	if !(r != 0) {
 		return uintptr(0)
 	}
@@ -136986,9 +135507,12 @@ func Xselect(tls *TLS, n int32, rfds uintptr, wfds uintptr, efds uintptr, tv uin
 	return int32(x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_select), int64(n), int64(rfds), int64(wfds), int64(efds), int64(v3), 0))))
 }
 
+const m_SYS_rt_sigprocmask = 14
+
 var _all_mask = [1]uint64{
 	0: -Uint64FromUint64(1),
 }
+
 var _app_mask = [1]uint64{
 	0: uint64(0xfffffffc7fffffff),
 }
@@ -137154,6 +135678,16 @@ func Xsetitimer(tls *TLS, which int32, new1 uintptr, old uintptr) (r1 int32) {
 
 const m_SA_RESTORER = 67108864
 const m_SA_SIGINFO = 4
+const m_SIGABRT = 6
+const m_SIG_UNBLOCK = 1
+const m_SYS_rt_sigaction = 13
+
+type Tk_sigaction = struct {
+	Fhandler  uintptr
+	Fflags    uint64
+	Frestorer uintptr
+	Fmask     [2]uint32
+}
 
 var _unmask_done int32
 var _handler_set [1]uint64
@@ -138221,7 +136755,7 @@ func Xfdopen(tls *TLS, fd int32, mode uintptr) (r uintptr) {
 		return uintptr(0)
 	}
 	/* Allocate FILE+buffer or fail */
-	v1 = _default_malloc(tls, Uint64FromInt64(232)+Uint64FromInt32(m_UNGET)+Uint64FromInt32(m_BUFSIZ))
+	v1 = Xmalloc(tls, Uint64FromInt64(232)+Uint64FromInt32(m_UNGET)+Uint64FromInt32(m_BUFSIZ))
 	f = v1
 	if !(v1 != 0) {
 		return uintptr(0)
@@ -138393,7 +136927,7 @@ func x___overflow(tls *TLS, f uintptr, _c int32) (r int32) {
 	return int32(*(*uint8)(unsafe.Pointer(bp)))
 }
 
-func _dummy13(tls *TLS, fd int32) (r int32) {
+func _dummy12(tls *TLS, fd int32) (r int32) {
 	return fd
 }
 
@@ -138748,7 +137282,7 @@ func x___fseterr(tls *TLS, f uintptr) {
 	*(*uint32)(unsafe.Pointer(f)) |= uint32(m_F_ERR)
 }
 
-func _dummy14(tls *TLS, f uintptr) {
+func _dummy13(tls *TLS, f uintptr) {
 }
 
 func Xfclose(tls *TLS, f uintptr) (r1 int32) {
@@ -138837,7 +137371,7 @@ func Xferror(tls *TLS, f uintptr) (r int32) {
 // C documentation
 //
 //	/* stdout.c will override this if linked */
-var _dummy15 = uintptr(0)
+var _dummy14 = uintptr(0)
 
 func Xfflush(tls *TLS, f uintptr) (r1 int32) {
 	if __ccgo_strace {
@@ -139410,7 +137944,7 @@ func Xfmemopen(tls *TLS, buf uintptr, size uint64, mode uintptr) (r uintptr) {
 	} else {
 		v1 = size
 	}
-	f = _default_malloc(tls, uint64(1304)+v1)
+	f = Xmalloc(tls, uint64(1304)+v1)
 	if !(f != 0) {
 		return uintptr(0)
 	}
@@ -139618,7 +138152,7 @@ func Xfopencookie(tls *TLS, cookie uintptr, mode uintptr, iofuncs Tcookie_io_fun
 		return uintptr(0)
 	}
 	/* Allocate FILE+fcookie+buffer or fail */
-	v1 = _default_malloc(tls, uint64(1304))
+	v1 = Xmalloc(tls, uint64(1304))
 	f = v1
 	if !(v1 != 0) {
 		return uintptr(0)
@@ -140775,12 +139309,12 @@ func Xopen_memstream(tls *TLS, bufp uintptr, sizep uintptr) (r uintptr) {
 	}
 	var buf, f, v1, v2, v6 uintptr
 	var v3, v4, v5 uint64
-	v1 = _default_malloc(tls, uint64(1304))
+	v1 = Xmalloc(tls, uint64(1304))
 	f = v1
 	if !(v1 != 0) {
 		return uintptr(0)
 	}
-	v2 = _default_malloc(tls, uint64(1))
+	v2 = Xmalloc(tls, uint64(1))
 	buf = v2
 	if !(v2 != 0) {
 		Xfree(tls, f)
@@ -140915,12 +139449,12 @@ func Xopen_wmemstream(tls *TLS, bufp uintptr, sizep uintptr) (r uintptr) {
 	}
 	var buf, f, v1, v2, v6 uintptr
 	var v3, v4, v5 uint64
-	v1 = _default_malloc(tls, uint64(296))
+	v1 = Xmalloc(tls, uint64(296))
 	f = v1
 	if !(v1 != 0) {
 		return uintptr(0)
 	}
-	v2 = _default_malloc(tls, uint64(4))
+	v2 = Xmalloc(tls, uint64(4))
 	buf = v2
 	if !(v2 != 0) {
 		Xfree(tls, f)
@@ -141750,7 +140284,7 @@ func Xvasprintf(tls *TLS, s uintptr, fmt uintptr, ap uintptr) (r int32) {
 	l = Xvsnprintf(tls, uintptr(0), uint64(0), fmt, ap2)
 	_ = ap2
 	if v2 = l < 0; !v2 {
-		v1 = _default_malloc(tls, uint64(uint32(l)+uint32(1)))
+		v1 = Xmalloc(tls, uint64(uint32(l)+uint32(1)))
 		*(*uintptr)(unsafe.Pointer(s)) = v1
 	}
 	if v2 || !(v1 != 0) {
@@ -142052,7 +140586,6 @@ func _fmt_u(tls *TLS, x uint64, s uintptr) (r uintptr) {
 //	/* Do not override this check. The floating point printing code below
 //	 * depends on the float.h constants being right. If they are wrong, it
 //	 * may overflow the stack. */
-
 type Tcompiler_defines_long_double_incorrectly = [1]int8
 
 func _fmt_fp(tls *TLS, f uintptr, y float64, w int32, p int32, fl int32, t int32) (r1 int32) {
@@ -142068,7 +140601,6 @@ func _fmt_fp(tls *TLS, f uintptr, y float64, w int32, p int32, fl int32, t int32
 	var _ /* buf at bp+508 */ [22]int8
 	var _ /* e2 at bp+504 */ int32
 	var _ /* ebuf0 at bp+530 */ [12]int8
-	// exponent expansion
 	*(*int32)(unsafe.Pointer(bp + 504)) = 0
 	prefix = ts + 1886
 	ebuf = bp + 530 + uintptr(Uint64FromInt32(3)*Uint64FromInt64(4))
@@ -143503,7 +142035,7 @@ func Xvfscanf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
 		k = uint64(v59)
 		if size == int32(m_SIZE_l) {
 			if alloc != 0 {
-				wcs = _default_malloc(tls, k*uint64(4))
+				wcs = Xmalloc(tls, k*uint64(4))
 				if !(wcs != 0) {
 					goto alloc_fail
 				}
@@ -143551,7 +142083,7 @@ func Xvfscanf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
 			}
 		} else {
 			if alloc != 0 {
-				s = _default_malloc(tls, k)
+				s = Xmalloc(tls, k)
 				if !(s != 0) {
 					goto alloc_fail
 				}
@@ -144660,12 +143192,12 @@ func Xvfwscanf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
 				}
 				k = uint64(v33)
 				if size == int32(m_SIZE_l) {
-					wcs = _default_malloc(tls, k*uint64(4))
+					wcs = Xmalloc(tls, k*uint64(4))
 					if !(wcs != 0) {
 						goto alloc_fail
 					}
 				} else {
-					s = _default_malloc(tls, k)
+					s = Xmalloc(tls, k)
 					if !(s != 0) {
 						goto alloc_fail
 					}
@@ -146809,7 +145341,7 @@ func Xstrdup(tls *TLS, s uintptr) (r uintptr) {
 	var d uintptr
 	var l uint64
 	l = Xstrlen(tls, s)
-	d = _default_malloc(tls, l+uint64(1))
+	d = Xmalloc(tls, l+uint64(1))
 	if !(d != 0) {
 		return UintptrFromInt32(0)
 	}
@@ -147043,7 +145575,7 @@ func Xstrndup(tls *TLS, s uintptr, n uint64) (r uintptr) {
 	var d uintptr
 	var l uint64
 	l = Xstrnlen(tls, s, n)
-	d = _default_malloc(tls, l+uint64(1))
+	d = Xmalloc(tls, l+uint64(1))
 	if !(d != 0) {
 		return UintptrFromInt32(0)
 	}
@@ -147689,7 +146221,7 @@ func Xwcsdup(tls *TLS, s uintptr) (r uintptr) {
 	var d uintptr
 	var l uint64
 	l = Xwcslen(tls, s)
-	d = _default_malloc(tls, (l+uint64(1))*uint64(4))
+	d = Xmalloc(tls, (l+uint64(1))*uint64(4))
 	if !(d != 0) {
 		return UintptrFromInt32(0)
 	}
@@ -148614,7 +147146,7 @@ func ___futex4_cp(tls *TLS, addr uintptr, op int32, val int32, to uintptr) (r1 i
 	return int32(x___syscall_cp(tls, int64(m_SYS_futex), int64(addr), int64(op & ^Int32FromInt32(m_FUTEX_PRIVATE)), int64(val), int64(to), 0, 0))
 }
 
-var _dummy16 = int32(0)
+var _dummy15 = int32(0)
 
 func x___timedwait_cp(tls *TLS, addr uintptr, val int32, clk int32, at uintptr, priv int32) (r1 int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
@@ -148942,6 +147474,7 @@ type Tatfork_funcs = struct {
 }
 
 var _funcs1 uintptr
+
 var _lock7 [1]int32
 
 func x___fork_handler(tls *TLS, who int32) {
@@ -148978,7 +147511,7 @@ func x___fork_handler(tls *TLS, who int32) {
 
 func x_pthread_atfork(tls *TLS, prepare uintptr, parent uintptr, child uintptr) (r int32) {
 	var new1 uintptr
-	new1 = x___libc_malloc(tls, uint64(40))
+	new1 = Xmalloc(tls, uint64(40))
 	if !(new1 != 0) {
 		return int32(m_ENOMEM)
 	}
@@ -149560,7 +148093,7 @@ func x_pthread_cancel(tls *TLS, t uintptr) (r int32) {
 
 var _init1 int32
 
-func _dummy17(tls *TLS, cb uintptr) {
+func _dummy16(tls *TLS, cb uintptr) {
 }
 
 func x__pthread_cleanup_push(tls *TLS, cb uintptr, f uintptr, x uintptr) {
@@ -149984,6 +148517,7 @@ const m_CLONE_SYSVSEM = 262144
 const m_CLONE_THREAD = 65536
 const m_SYS_sched_setscheduler = 144
 const m_SYS_set_robust_list = 273
+const m_SYS_set_tid_address = 218
 
 func _dummy_02(tls *TLS) {
 }
@@ -150237,8 +148771,9 @@ func _start_c11(tls *TLS, p uintptr) (r int32) {
 // C documentation
 //
 //	/* pthread_key_create.c overrides this */
-var _dummy18 = uint64(0)
+var _dummy17 = uint64(0)
 var _dummy_tsd = [1]uintptr{}
+
 var _dummy_file1 = uintptr(0)
 
 func _init_file_lock(tls *TLS, f uintptr) {
@@ -150568,7 +149103,7 @@ func ___pthread_getspecific(tls *TLS, k uint32) (r uintptr) {
 	return *(*uintptr)(unsafe.Pointer((*t__pthread)(unsafe.Pointer(self)).Ftsd + uintptr(k)*8))
 }
 
-func _dummy19(tls *TLS, t uintptr) {
+func _dummy18(tls *TLS, t uintptr) {
 }
 
 func ___pthread_timedjoin_np(tls *TLS, t uintptr, res uintptr, at uintptr) (r1 int32) {
@@ -150622,7 +149157,9 @@ func ___pthread_tryjoin_np(tls *TLS, t uintptr, res uintptr) (r int32) {
 }
 
 var _keys [128]uintptr
+
 var _key_lock = Tpthread_rwlock_t{}
+
 var _next_key uint32
 
 func _nodtor(tls *TLS, dummy uintptr) {
@@ -151401,6 +149938,7 @@ func x_pthread_setattr_default_np(tls *TLS, attrp uintptr) (r int32) {
 	var _ /* zero at bp+56 */ Tpthread_attr_t
 	/* Reject anything in the attr object other than stack/guard size. */
 	*(*Tpthread_attr_t)(unsafe.Pointer(bp)) = Tpthread_attr_t{}
+	/* Reject anything in the attr object other than stack/guard size. */
 	*(*struct {
 		F__u struct {
 			F__vi [0][14]int32
@@ -151636,7 +150174,7 @@ func x_pthread_spin_unlock(tls *TLS, s uintptr) (r int32) {
 	return 0
 }
 
-func _dummy20(tls *TLS) {
+func _dummy19(tls *TLS) {
 }
 
 func x___pthread_testcancel(tls *TLS) {
@@ -151724,7 +150262,7 @@ func Xsem_open(tls *TLS, name uintptr, flags int32, va uintptr) (r uintptr) {
 	x___lock(tls, uintptr(unsafe.Pointer(&_lock9)))
 	/* Allocate table if we don't have one yet */
 	if v3 = !(_semtab != 0); v3 {
-		v2 = x___libc_calloc(tls, uint64(24), uint64(m_SEM_NSEMS_MAX))
+		v2 = Xcalloc(tls, uint64(24), uint64(m_SEM_NSEMS_MAX))
 		_semtab = v2
 	}
 	if v3 && !(v2 != 0) {
@@ -152068,123 +150606,6 @@ func Xsem_wait(tls *TLS, sem uintptr) (r int32) {
 	return Xsem_timedwait(tls, sem, uintptr(0))
 }
 
-func _dummy_04(tls *TLS) {
-}
-
-var _target_tid int32
-var _callback uintptr
-var _context uintptr
-var _target_sem Tsem_t
-var _caller_sem Tsem_t
-
-func _dummy21(tls *TLS, p uintptr) {
-}
-
-func _handler(tls *TLS, sig int32) {
-	var old_errno int32
-	if (*t__pthread)(unsafe.Pointer(___get_tp(tls))).Ftid != _target_tid {
-		return
-	}
-	old_errno = *(*int32)(unsafe.Pointer(X__errno_location(tls)))
-	/* Inform caller we have received signal and wait for
-	 * the caller to let us make the callback. */
-	Xsem_post(tls, uintptr(unsafe.Pointer(&_caller_sem)))
-	Xsem_wait(tls, uintptr(unsafe.Pointer(&_target_sem)))
-	(*(*func(*TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{_callback})))(tls, _context)
-	/* Inform caller we've complered the callback and wait
-	 * for the caller to release us to return. */
-	Xsem_post(tls, uintptr(unsafe.Pointer(&_caller_sem)))
-	Xsem_wait(tls, uintptr(unsafe.Pointer(&_target_sem)))
-	/* Inform caller we are returning and state is destroyable. */
-	Xsem_post(tls, uintptr(unsafe.Pointer(&_caller_sem)))
-	*(*int32)(unsafe.Pointer(X__errno_location(tls))) = old_errno
-}
-
-func x___synccall(tls *TLS, func1 uintptr, ctx uintptr) {
-	bp := tls.Alloc(288) /* tlsAllocs 288 maxVaListSize 0 */
-	defer tls.Free(288)
-	var count, i, r, v2 int32
-	var self, td, v3 uintptr
-	var _ /* cs at bp+128 */ int32
-	var _ /* oldmask at bp+0 */ Tsigset_t
-	var _ /* sa at bp+136 */ Tsigaction
-	*(*Tsigaction)(unsafe.Pointer(bp + 136)) = Tsigaction{}
-	*(*int32)(unsafe.Pointer(bp + 272)) = Int32FromInt32(m_SA_RESTART) | Int32FromInt32(m_SA_ONSTACK)
-	*(*uintptr)(unsafe.Pointer(bp + 136)) = __ccgo_fp(_handler)
-	self = ___get_tp(tls)
-	count = 0
-	/* Blocking signals in two steps, first only app-level signals
-	 * before taking the lock, then all signals after taking the lock,
-	 * is necessary to achieve AS-safety. Blocking them all first would
-	 * deadlock if multiple threads called __synccall. Waiting to block
-	 * any until after the lock would allow re-entry in the same thread
-	 * with the lock already held. */
-	x___block_app_sigs(tls, bp)
-	x___tl_lock(tls)
-	x___block_all_sigs(tls, uintptr(0))
-	x___pthread_setcancelstate(tls, int32(m_PTHREAD_CANCEL_DISABLE), bp+128)
-	Xsem_init(tls, uintptr(unsafe.Pointer(&_target_sem)), 0, uint32(0))
-	Xsem_init(tls, uintptr(unsafe.Pointer(&_caller_sem)), 0, uint32(0))
-	if !(x___libc.Fthreads_minus_1 != 0) || ___syscall0(tls, int64(m_SYS_gettid)) != int64((*t__pthread)(unsafe.Pointer(self)).Ftid) {
-		goto single_threaded
-	}
-	_callback = func1
-	_context = ctx
-	/* Block even implementation-internal signals, so that nothing
-	 * interrupts the SIGSYNCCALL handlers. The main possible source
-	 * of trouble is asynchronous cancellation. */
-	_memset(tls, bp+136+8, -int32(1), uint64(128))
-	x___libc_sigaction(tls, int32(m_SIGSYNCCALL), bp+136, uintptr(0))
-	for td = (*t__pthread)(unsafe.Pointer(self)).Fnext; td != self; {
-		_target_tid = (*t__pthread)(unsafe.Pointer(td)).Ftid
-		for {
-			v2 = int32(-___syscall2(tls, int64(m_SYS_tkill), int64((*t__pthread)(unsafe.Pointer(td)).Ftid), int64(Int32FromInt32(m_SIGSYNCCALL))))
-			r = v2
-			if !(v2 == int32(m_EAGAIN)) {
-				break
-			}
-		}
-		if r != 0 {
-			/* If we failed to signal any thread, nop out the
-			 * callback to abort the synccall and just release
-			 * any threads already caught. */
-			v3 = __ccgo_fp(_dummy21)
-			func1 = v3
-			_callback = v3
-			break
-		}
-		Xsem_wait(tls, uintptr(unsafe.Pointer(&_caller_sem)))
-		count++
-		goto _1
-	_1:
-		td = (*t__pthread)(unsafe.Pointer(td)).Fnext
-	}
-	_target_tid = 0
-	/* Serialize execution of callback in caught threads, or just
-	 * release them all if synccall is being aborted. */
-	for i = 0; i < count; i++ {
-		Xsem_post(tls, uintptr(unsafe.Pointer(&_target_sem)))
-		Xsem_wait(tls, uintptr(unsafe.Pointer(&_caller_sem)))
-	}
-	*(*uintptr)(unsafe.Pointer(bp + 136)) = UintptrFromInt32(1)
-	x___libc_sigaction(tls, int32(m_SIGSYNCCALL), bp+136, uintptr(0))
-single_threaded:
-	(*(*func(*TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{func1})))(tls, ctx)
-	/* Only release the caught threads once all threads, including the
-	 * caller, have returned from the callback function. */
-	for i = 0; i < count; i++ {
-		Xsem_post(tls, uintptr(unsafe.Pointer(&_target_sem)))
-	}
-	for i = 0; i < count; i++ {
-		Xsem_wait(tls, uintptr(unsafe.Pointer(&_caller_sem)))
-	}
-	Xsem_destroy(tls, uintptr(unsafe.Pointer(&_caller_sem)))
-	Xsem_destroy(tls, uintptr(unsafe.Pointer(&_target_sem)))
-	x___pthread_setcancelstate(tls, *(*int32)(unsafe.Pointer(bp + 128)), uintptr(0))
-	x___tl_unlock(tls)
-	x___restore_sigs(tls, bp)
-}
-
 func Xthrd_create(tls *TLS, thr uintptr, func1 uintptr, arg uintptr) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v thr=%v func1=%v arg=%v, (%v:)", tls, thr, func1, arg, origin(2))
@@ -152492,9 +150913,11 @@ func x___tm_to_secs(tls *TLS, tm uintptr) (r int64) {
 
 var _std_name [7]int8
 var _dst_name [7]int8
+
 var _dst_off int32
 var _r0 [5]int32
 var _r12 [5]int32
+
 var _zi uintptr
 var _trans uintptr
 var _index uintptr
@@ -152502,9 +150925,11 @@ var _types uintptr
 var _abbrevs uintptr
 var _abbrevs_end uintptr
 var _map_size uint64
+
 var _old_tz_buf [32]int8
 var _old_tz = uintptr(unsafe.Pointer(&_old_tz_buf))
 var _old_tz_size = uint64(32)
+
 var _lock10 [1]int32
 
 func _getint2(tls *TLS, p uintptr) (r int32) {
@@ -152663,7 +151088,7 @@ func _do_tzset(tls *TLS) {
 		if _old_tz_size > uint64(Int32FromInt32(m_PATH_MAX)+Int32FromInt32(2)) {
 			_old_tz_size = uint64(Int32FromInt32(m_PATH_MAX) + Int32FromInt32(2))
 		}
-		_old_tz = x___libc_malloc(tls, _old_tz_size)
+		_old_tz = Xmalloc(tls, _old_tz_size)
 	}
 	if _old_tz != 0 {
 		_memcpy(tls, _old_tz, *(*uintptr)(unsafe.Pointer(bp + 288)), i+uint64(1))
@@ -154292,7 +152717,7 @@ type Tstart_args1 = struct {
 	Fsev uintptr
 }
 
-func _dummy_05(tls *TLS) {
+func _dummy_04(tls *TLS) {
 }
 
 func _cleanup_fromsig(tls *TLS, p uintptr) {
@@ -154743,7 +153168,7 @@ func Xchown(tls *TLS, path uintptr, uid uint32, gid uint32) (r int32) {
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_chown), int64(path), int64(uid), int64(gid)))))
 }
 
-func _dummy22(tls *TLS, fd int32) (r int32) {
+func _dummy20(tls *TLS, fd int32) (r int32) {
 	return fd
 }
 
@@ -155572,7 +153997,8 @@ func x___setxid(tls *TLS, nr int32, id int32, eid int32, sid int32) (r int32) {
 		Fnr:  nr,
 		Fret: int32(1),
 	}
-	x___synccall(tls, __ccgo_fp(_do_setxid), bp)
+	// __synccall(do_setxid, &c);
+	_do_setxid(tls, bp)
 	return int32(x___syscall_ret(tls, uint64((*(*Tctx3)(unsafe.Pointer(bp))).Fret)))
 }
 
