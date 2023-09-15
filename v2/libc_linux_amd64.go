@@ -19,18 +19,19 @@ import (
 	"unsafe"
 
 	"modernc.org/mathutil"
-	"modernc.org/memory"
 )
 
 const (
 	ENOENT = m_ENOENT
+
+	heapAlign = 16
+	heapGuard = 16
 )
 
 var (
-	initLibcOnce sync.Once
+	_ error = (*MemAuditError)(nil)
 
-	allocator   memory.Allocator
-	allocatorMu sync.Mutex
+	initLibcOnce sync.Once
 
 	argc int32   // Value established in initLibc
 	argv uintptr // Value established in initLibc
@@ -48,18 +49,18 @@ func Start(main func(*TLS, int32, uintptr) int32) {
 func initLibc(tls *TLS) {
 	var args []uintptr
 	for _, v := range os.Args {
-		p := mustPrivateCalloc(len(v) + 1)
+		p := mustCalloc(Tsize_t(len(v) + 1))
 		copy(unsafe.Slice((*byte)(unsafe.Pointer(p)), len(v)), v)
 		args = append(args, p)
 	}
 	args = append(args, 0)
 	for _, v := range os.Environ() {
-		p := mustPrivateCalloc(len(v) + 1)
+		p := mustCalloc(Tsize_t(len(v) + 1))
 		copy(unsafe.Slice((*byte)(unsafe.Pointer(p)), len(v)), v)
 		args = append(args, p)
 	}
 	args = append(args, 0)
-	argv = mustPrivateCalloc(len(args) * int(unsafe.Sizeof(uintptr(0))))
+	argv = mustCalloc(Tsize_t(len(args) * int(unsafe.Sizeof(uintptr(0)))))
 	copy(unsafe.Slice((*uintptr)(unsafe.Pointer(argv)), len(args)), args)
 
 	// mov $main,%rdi  /* 1st arg: application entry ip */
@@ -71,6 +72,15 @@ func initLibc(tls *TLS) {
 
 	argc = int32(len(os.Args))
 	x___libc_start_main(tls, 0, argc, argv, 0, 0, 0)
+}
+
+type MemAuditError struct {
+	Caller  string
+	Message string
+}
+
+func (e *MemAuditError) Error() string {
+	return fmt.Sprintf("%s: %s", e.Caller, e.Message)
 }
 
 // CString returns a pointer to a zero-terminated version of s. The caller is
@@ -110,96 +120,25 @@ func GoString(s uintptr) string {
 	}
 }
 
-// Go libc private heap, outside of the C heap.
-func mustPrivateCalloc(sz int) uintptr {
-	if p, _ := privateCalloc(sz); p != 0 || sz == 0 {
-		return p
-	}
-
-	panic(todo("OOM"))
-}
-
-// Go libc private heap, outside of the C heap.
-func mustPrivateMalloc(sz int) uintptr {
-	if p, _ := privateMalloc(sz); p != 0 || sz == 0 {
-		return p
-	}
-
-	panic(todo("OOM"))
-}
-
-func mustPrivateResize(p uintptr, size int) (r uintptr) {
-	switch {
-	case p == 0:
-		r, _ := privateMalloc(size)
+func mustMalloc(sz Tsize_t) (r uintptr) {
+	if r = Xmalloc(nil, sz); r != 0 || sz == 0 {
 		return r
-	case size == 0 && p != 0:
-		privateFree(p)
-		return 0
-	}
-
-	us := Xmalloc_usable_size(nil, p)
-	if us >= uint64(size) {
-		return p
-	}
-
-	var err error
-	if r, err = privateMalloc(size); err != nil {
-		return 0
-	}
-
-	privateFree(p)
-	return r
-}
-
-// Go libc private heap, outside of the C heap.
-func mustPrivateRealloc(p uintptr, sz int) uintptr {
-	if p, _ := privateRealloc(p, sz); p != 0 || sz == 0 {
-		return p
 	}
 
 	panic(todo("OOM"))
 }
 
-// Go libc private heap, outside of the C heap.
-func privateCalloc(sz int) (uintptr, error) {
-	allocatorMu.Lock()
+func mustCalloc(sz Tsize_t) (r uintptr) {
+	if r := Xcalloc(nil, 1, sz); r != 0 || sz == 0 {
+		return r
+	}
 
-	defer allocatorMu.Unlock()
-
-	return allocator.UintptrCalloc(sz)
+	panic(todo("OOM"))
 }
 
-// Go libc private heap, outside of the C heap.
-func privateMalloc(sz int) (uintptr, error) {
-	allocatorMu.Lock()
-
-	defer allocatorMu.Unlock()
-
-	return allocator.UintptrMalloc(sz)
-}
-
-// Go libc private heap, outside of the C heap.
-func privateRealloc(p uintptr, sz int) (uintptr, error) {
-	allocatorMu.Lock()
-
-	defer allocatorMu.Unlock()
-
-	return allocator.UintptrRealloc(p, sz)
-}
-
-// Go libc private heap, outside of the C heap.
-func privateFree(p uintptr) {
-	allocatorMu.Lock()
-
-	defer allocatorMu.Unlock()
-
-	allocator.UintptrFree(p)
-}
-
-type tlsStack struct {
+type tlsStackSlot struct {
 	p  uintptr
-	sz int
+	sz Tsize_t
 }
 
 // TLS emulates thread local storage. TLS is not safe for concurrent use by
@@ -209,7 +148,7 @@ type TLS struct {
 	freeFS         uintptr
 	fs             uintptr // *T__pthread
 	sp             int
-	stack          []tlsStack
+	stack          []tlsStackSlot
 	threadFuncWait chan struct{}
 
 	ID int32
@@ -218,10 +157,9 @@ type TLS struct {
 // NewTLS returns a newly created TLS that must be eventually closed to prevent
 // resource leaks.
 func NewTLS() (r *TLS) {
-	//TODO keep count of TLSs, notify libc when more than one and when back to one.
 	r = &TLS{
 		ID: tid.Add(1),
-		fs: mustPrivateMalloc(int(unsafe.Sizeof(t__pthread{}))),
+		fs: mustMalloc(Tsize_t(unsafe.Sizeof(t__pthread{}))),
 	}
 	r.freeFS = r.fs
 	*(*t__pthread)(unsafe.Pointer(r.fs)) = t__pthread{
@@ -235,10 +173,26 @@ func (t *TLS) String() string {
 	return fmt.Sprintf("{%p: ID=%v fs=%#0x}", t, t.ID, t.fs)
 }
 
-// // var nallocs, nmallocs, nreallocs int //TODO-
-
-// Alloc allocates n bytes in t's local storage.
-func (t *TLS) Alloc(n int) (r uintptr) {
+// Alloc allocates n bytes in t's local storage. Calls to Alloc() must be
+// strictly paired with calls to TLS.Free on function exit. That also means any
+// memory from Alloc must not be used after a function returns.
+//
+// The order matters. This is ok:
+//
+//	p := t.Alloc(11)
+//		q := t.Alloc(22)
+//		t.Free(22)
+//		// q is no more usable here.
+//	t.Free(11)
+//	// p is no more usable here.
+//
+// This is not correct:
+//
+//	t.Alloc(11)
+//		t.Alloc(22)
+//		t.Free(11)
+//	t.Free(22)
+func (t *TLS) Alloc(n Tsize_t) (r uintptr) {
 	// shrink	stats									speedtest1
 	// -----------------------------------------------------------------------------------------------
 	//    0		total  2,544, nallocs 107,553,070, nmallocs 25, nreallocs 107,553,045	10.984s
@@ -256,65 +210,64 @@ func (t *TLS) Alloc(n int) (r uintptr) {
 	//  256		total  8,848, nallocs 107,553,070, nmallocs 25, nreallocs       1,049	 9.508s
 	//  512		total 33,336, nallocs 107,553,070, nmallocs 25, nreallocs          88	 8.667s
 	// none		total 33,336, nallocs 107,553,070, nmallocs 25, nreallocs          88	 8.408s
-
 	const shrinkSegment = 32
-	// nallocs++
-	sp := t.sp
-	if sp < len(t.stack) {
-		s := t.stack[sp]
-		if s.sz >= n && s.sz <= shrinkSegment*n {
+	if t.sp < len(t.stack) {
+		p := t.stack[t.sp].p
+		sz := t.stack[t.sp].sz
+		if sz >= n && sz <= shrinkSegment*n {
 			t.sp++
-			return s.p
+			return p
 		}
 
-		r = mustPrivateResize(s.p, n)
-		// nreallocs++
-		t.stack[sp].p = r
-		t.stack[sp].sz = n
+		Xfree(t, p)
+		r = mustMalloc(n)
+		t.stack[t.sp] = tlsStackSlot{p: r, sz: Xmalloc_usable_size(t, r)}
 		t.sp++
 		return r
 
 	}
 
-	r = mustPrivateMalloc(n)
-	// nmallocs++
-	t.stack = append(t.stack, tlsStack{p: r, sz: n})
+	r = mustMalloc(n)
+	t.stack = append(t.stack, tlsStackSlot{p: r, sz: Xmalloc_usable_size(t, r)})
 	t.sp++
 	return r
 }
 
-func (t *TLS) alloca(n uint64) (r uintptr) {
-	r = mustPrivateMalloc(int(n))
-	t.allocas = append(t.allocas, r)
-	return r
-}
-
+// Free manages memory of the preceding TLS.Alloc()
 func (t *TLS) Free(n int) {
 	//TODO shrink stacks
 	t.sp--
 }
 
-func (t *TLS) Close() {
-	// var sum int
-	// for i, v := range t.stack {
-	// 	sum += v.avail
-	// 	trc("%4d: %#0x, avail %v", i, v.p, v.avail)
-	// }
-	// trc("total %v, nallocs %v, nmallocs %v, nreallocs %v", sum, nallocs, nmallocs, nreallocs)
+func (t *TLS) alloca(n Tsize_t) (r uintptr) {
+	r = mustMalloc(n)
+	t.allocas = append(t.allocas, r)
+	return r
+}
 
+func (t *TLS) FreeAlloca() {
+	for _, v := range t.allocas {
+		Xfree(t, v)
+	}
+	t.allocas = t.allocas[:0]
+}
+
+func (t *TLS) Close() {
 	defer func() { *t = TLS{} }()
 
 	for _, v := range t.allocas {
-		privateFree(v)
+		Xfree(t, v)
 	}
 	for _, v := range t.stack[:t.sp] {
-		privateFree(v.p)
+		Xfree(t, v.p)
 	}
-	privateFree(t.freeFS)
+	Xfree(t, t.freeFS)
 }
 
 func (tls *TLS) setErrno(err int32) {
-	*(*int32)(unsafe.Pointer(X__errno_location(tls))) = err
+	if tls != nil {
+		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = err
+	}
 }
 
 // musl-1.2.4/src/env/__init_tls.c:81:extern weak hidden const Tsize_t _DYNAMIC[];
@@ -614,20 +567,6 @@ func X__builtin_snprintf(tls *TLS, str uintptr, size uint64, format, args uintpt
 		trc("tls=%v str=%v size=%v args=%v, (%v:)", tls, str, size, args, origin(2))
 	}
 	return Xsnprintf(tls, str, size, format, args)
-}
-
-func Xmalloc(tls *TLS, n uint64) (r uintptr) {
-	if __ccgo_strace {
-		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	if n <= math.MaxInt {
-		if r, err := privateMalloc(int(n)); err == nil {
-			return r
-		}
-	}
-
-	return 0
 }
 
 func X__builtin_malloc(tls *TLS, n uint64) (r uintptr) {
@@ -1292,45 +1231,4 @@ func Xabort(tls *TLS) {
 		trc("tls=%v, (%v:)", tls, origin(2))
 	}
 	panic("abort")
-}
-
-func Xcalloc(tls *TLS, m uint64, n uint64) (r uintptr) {
-	if __ccgo_strace {
-		trc("tls=%v m=%v n=%v, (%v:)", tls, m, n, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	panic(todo(""))
-}
-
-func Xmalloc_usable_size(tls *TLS, p uintptr) (r uint64) {
-	if __ccgo_strace {
-		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	allocatorMu.Lock()
-
-	defer allocatorMu.Unlock()
-
-	return uint64(memory.UintptrUsableSize(p))
-}
-
-func Xrealloc(tls *TLS, p uintptr, n uint64) (r uintptr) {
-	if __ccgo_strace {
-		trc("tls=%v p=%v n=%v, (%v:)", tls, p, n, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	if n <= math.MaxInt {
-		if r, err := privateRealloc(p, int(n)); err == nil {
-			return r
-		}
-	}
-
-	return 0
-}
-
-func Xfree(tls *TLS, p uintptr) {
-	if __ccgo_strace {
-		trc("tls=%v p=%v, (%v:)", tls, p, origin(2))
-	}
-	privateFree(p)
 }

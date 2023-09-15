@@ -299,25 +299,12 @@ func TestReallocArray(t *testing.T) {
 	}
 }
 
-func mustTestCString(s string) uintptr {
-	r, err := testCString(s)
-	if err != nil {
-		panic("testCString failed")
-	}
-
-	return r
-}
-
-func testCString(s string) (uintptr, error) {
+func mustCString(s string) (r uintptr) {
 	n := len(s)
-	p, err := privateMalloc(n + 1)
-	if err != nil {
-		return 0, err
-	}
-
-	copy(unsafe.Slice((*byte)(unsafe.Pointer(p)), n), s)
-	*(*byte)(unsafe.Pointer(p + uintptr(n))) = 0
-	return p, nil
+	r = mustMalloc(Tsize_t(n + 1))
+	copy(unsafe.Slice((*byte)(unsafe.Pointer(r)), n), s)
+	*(*byte)(unsafe.Pointer(r + uintptr(n))) = 0
+	return r
 }
 
 var testSnprintfBuf [3]byte
@@ -329,7 +316,7 @@ func TestSnprintf(t *testing.T) {
 
 	testSnprintfBuf = [3]byte{0xff, 0xff, 0xff}
 	p := uintptr(unsafe.Pointer(&testSnprintfBuf[0]))
-	s := mustTestCString("12")
+	s := mustCString("12")
 	if g, e := Xsnprintf(tls, p, 1, s, 0), int32(2); g != e {
 		t.Fatal(g, e)
 	}
@@ -379,7 +366,7 @@ func TestFdopen(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	p := Xfdopen(tls, int32(f.Fd()), mustTestCString("r"))
+	p := Xfdopen(tls, int32(f.Fd()), mustCString("r"))
 
 	bp := uintptr(unsafe.Pointer(&testFdopenBuf))
 	if g, e := Xfread(tls, bp, 1, uint64(len(testFdopenBuf)), p), uint64(len(s)); g != e {
@@ -416,5 +403,48 @@ func TestAtomicStore8(t *testing.T) {
 
 	if g, e := testAtomicStore8, uint32(0x1234569a); g != e {
 		t.Errorf("%#0x %#0x", g, e)
+	}
+}
+
+func TestMemAuditBrk(t *testing.T) {
+	if !isMemBrk {
+		t.Skip("requires -tags=libc.membrk")
+	}
+
+	a := allocator
+
+	defer func() { allocator = a }()
+
+	mallocP := mustMalloc(1)
+	t.Logf("mallocP %v %#0[1]x", mallocP)
+	t.Logf("\n%s", hex.Dump(unsafe.Slice((*byte)(unsafe.Pointer(mallocP-heapGuard)), 4*heapGuard)))
+	q := mallocP - heapGuard
+	c := 0
+	for ; q < mallocP; q++ {
+		*(*byte)(unsafe.Pointer(q)) ^= 0x55
+		c++
+	}
+
+	z := roundup(mallocP+1, heapAlign)
+	for p := mallocP + 1; p < z; p++ {
+		*(*byte)(unsafe.Pointer(p)) ^= 0x55
+		// c++
+	}
+	p := z
+	z += heapGuard
+	for ; p < z; p++ {
+		*(*byte)(unsafe.Pointer(p)) ^= 0x55
+		c++
+	}
+	p = mallocP + 2*heapGuard + 7
+	*(*byte)(unsafe.Pointer(p)) ^= 0x55
+	c++
+	t.Logf("c %v, \n%s", c, hex.Dump(unsafe.Slice((*byte)(unsafe.Pointer(mallocP-heapGuard)), 4*heapGuard)))
+	r := MemAudit()
+	for i, v := range r {
+		t.Log(i, v)
+	}
+	if g, e := len(r), c; g != e {
+		t.Fatalf("got %v errors, expected %v", g, e)
 	}
 }
