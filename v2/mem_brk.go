@@ -162,7 +162,6 @@ func Xrealloc(tls *TLS, p uintptr, n Tsize_t) (r uintptr) {
 	}
 
 	if usable >= n { // in place
-		heapUsable[p] = n
 		return p
 	}
 
