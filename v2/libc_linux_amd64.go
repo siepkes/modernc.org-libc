@@ -42,8 +42,25 @@ var (
 // Start executes C's main.
 func Start(main func(*TLS, int32, uintptr) int32) {
 	runtime.LockOSThread()
+
+	if isMemBrk {
+		defer func() {
+			trc("==== PANIC")
+			for _, v := range MemAudit() {
+				trc("", v.Error())
+			}
+		}()
+	}
+
 	tls := NewTLS()
-	Xexit(tls, main(tls, argc, argv))
+	rc := main(tls, argc, argv)
+	if isMemBrk {
+		trc("==== RC %v", rc)
+		for _, v := range MemAudit() {
+			trc("", v.Error())
+		}
+	}
+	Xexit(tls, rc)
 }
 
 func initLibc(tls *TLS) {

@@ -101,5 +101,6 @@ func Xmalloc_usable_size(tls *TLS, p uintptr) (r Tsize_t) {
 }
 
 func MemAudit() (r []*MemAuditError) {
+	panic(todo(""))
 	return nil
 }

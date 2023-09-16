@@ -110,7 +110,9 @@ func main() {
 	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(muslRoot, "COPYRIGHT"), nil)
 	result := "libc.a.go"
 	util.MustInDir(true, muslRoot, func() (err error) {
-		cflags := []string{}
+		cflags := []string{
+			"-UNDEBUG", //TODO-
+		}
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
 			cflags = append(cflags, s)
 		}
@@ -149,7 +151,6 @@ func main() {
 				"-absolute-paths",
 				"-keep-object-files",
 				"-positions",
-				// "-verify-types",
 			)
 		}
 		if err := ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.a"), os.Stdout, os.Stderr, nil).Exec(); err != nil {

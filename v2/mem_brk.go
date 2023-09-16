@@ -166,7 +166,6 @@ func Xrealloc(tls *TLS, p uintptr, n Tsize_t) (r uintptr) {
 	}
 
 	// malloc
-	delete(heapUsable, p)
 	r = malloc0(tls, pc, n, false)
 	copy(unsafe.Slice((*byte)(unsafe.Pointer(r)), usable), unsafe.Slice((*byte)(unsafe.Pointer(p)), usable))
 	return r
@@ -188,8 +187,6 @@ func Xfree(tls *TLS, p uintptr) {
 	if _, ok := heapUsable[p]; !ok {
 		panic(todo("free of unallocated memory: %#0x", p))
 	}
-
-	delete(heapUsable, p)
 }
 
 func Xmalloc_usable_size(tls *TLS, p uintptr) (r Tsize_t) {
@@ -209,14 +206,17 @@ func Xmalloc_usable_size(tls *TLS, p uintptr) (r Tsize_t) {
 }
 
 func MemAudit() (r []*MemAuditError) {
+	allocatorMu.Lock()
+
+	defer allocatorMu.Unlock()
+
 	a := heapRecords
-	heapRecords = nil
 	auditP := heap0
 	rng.Seek(0)
 	for _, v := range a {
 		heapP := v.p
 		mallocP := heapP + heapGuard
-		usable := Xmalloc_usable_size(nil, mallocP)
+		usable := heapUsable[mallocP]
 		for ; auditP < mallocP; auditP++ {
 			if g, e := *(*byte)(unsafe.Pointer(auditP)), byte(rng.Next()); g != e {
 				r = append(r, &MemAuditError{Caller: pc2origin(v.pc), Message: fmt.Sprintf("guard area before %#0x, %v is corrupted at %#0x, got %#02x, expected %#02x", mallocP, usable, auditP, g, e)})
