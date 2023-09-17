@@ -111,7 +111,7 @@ func main() {
 	result := "libc.a.go"
 	util.MustInDir(true, muslRoot, func() (err error) {
 		cflags := []string{
-			"-UNDEBUG", //TODO-
+			// "-UNDEBUG", //TODO-
 		}
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
 			cflags = append(cflags, s)
@@ -138,7 +138,7 @@ func main() {
 			"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS",
 			"-hide", "a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32",
 			"-hide", "fabs,fabsf,fabsl,sqrt,sqrtf,sqrtl",
-			"-hide", "abort,clone,_Fork,fork,system,__synccall",
+			"-hide", "clone,_Fork,fork,system,__synccall",
 			"-hide", "calloc,free,malloc,malloc_usable_size,realloc",
 			"-hide", "__libc_calloc,__libc_free,__libc_malloc,__libc_malloc_impl,__libc_realloc",
 			"-hide", "__malloc_allzerop,__malloc_atfork,__malloc_donate,__simple_malloc,",
@@ -160,6 +160,7 @@ func main() {
 		return ccgo.NewTask(goos, goarch, append(args, "-o", result, "-nostdlib", "-ignore-link-errors", "lib/libc.a"), os.Stdout, os.Stderr, nil).Main()
 	})
 
+	os.RemoveAll(filepath.Join("include", goos, goarch))
 	util.MustCopyDir(true, filepath.Join("include", goos, goarch), filepath.Join(tempDir, extractedArchivePath, "include"), nil)
 	util.MustCopyDir(true, filepath.Join("include", goos, goarch, "bits"), filepath.Join(tempDir, extractedArchivePath, "obj", "include", "bits"), nil)
 	util.MustCopyDir(true, filepath.Join("include", goos, goarch, "bits"), filepath.Join(tempDir, extractedArchivePath, "arch", "generic", "bits"), nil)

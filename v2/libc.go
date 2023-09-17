@@ -76,3 +76,5 @@
 // [Linux man-pages Copyleft]: https://spdx.org/licenses/Linux-man-pages-copyleft.html
 // [ccgo]: http://modernc.org/ccgo/v4
 package libc // import "modernc.org/libc/v2"
+
+//TODO fix abort(): ->tid

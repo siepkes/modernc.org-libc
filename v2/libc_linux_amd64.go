@@ -366,8 +366,10 @@ func a_store_16(addr uintptr, val uint16) {
 	*(*uint16)(unsafe.Pointer(addr)) = val
 }
 
+func a_crash()
+
 func _a_crash(tls *TLS) {
-	panic(todo(""))
+	a_crash()
 }
 
 func a_cas(p uintptr, t, s int32) int32
@@ -1241,11 +1243,4 @@ func Xclone(tls *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va
 
 func _abort(tls *TLS) {
 	Xabort(tls)
-}
-
-func Xabort(tls *TLS) {
-	if __ccgo_strace {
-		trc("tls=%v, (%v:)", tls, origin(2))
-	}
-	panic("abort")
 }

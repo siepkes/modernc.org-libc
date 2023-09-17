@@ -63,3 +63,10 @@ TEXT ·a_barrier(SB),NOSPLIT,$0-0
 	MFENCE
 	RET
 
+// #define a_crash a_crash
+// static inline void a_crash()
+// {
+// 	__asm__ __volatile__( "hlt" : : : "memory" );
+// }
+TEXT ·a_crash(SB),NOSPLIT,$0-0
+	HLT
