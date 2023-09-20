@@ -748,7 +748,7 @@ func TestLibc(t *testing.T) {
 	})
 
 	bin := filepath.Join(t.TempDir(), "main")
-	var file, skip, buildfail, buildok, fail, pass int
+	var file, skip, buildfail, buildok, cfail, fail, pass int
 	filepath.Walk(dir, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
 			t.Fatal(err)
@@ -764,6 +764,13 @@ func TestLibc(t *testing.T) {
 		}
 
 		file++
+		cbin := path[:len(path)-len(".go")]
+		if _, err := run(t, cbin); err != nil {
+			t.Errorf("%s: cbin fail=%s", path, err)
+			cfail++
+			return nil
+		}
+
 		os.Remove(bin)
 		if out, err := shell("go", "build", "-o", bin, path); err != nil {
 			t.Errorf("%s %s: BUILD FAIL=%s", out, path, err)
@@ -772,30 +779,25 @@ func TestLibc(t *testing.T) {
 		}
 
 		buildok++
-		switch run(t, path, bin) {
-		case true:
-			pass++
-		default:
+		switch out, err := run(t, bin); {
+		case err != nil:
 			fail++
+			t.Errorf("%s %s: EXEC FAIL=%s", out, path, err)
+		default:
+			pass++
+			t.Logf("%s: PASS", path)
 		}
 		return nil
 	})
-	t.Logf("files=%v skip=%v buildfail=%v buildok=%v fail=%v pass=%v", file, skip, buildfail, buildok, fail, pass)
+	t.Logf("files=%v skip=%v cfail=%v buildfail=%v buildok=%v fail=%v pass=%v", file, skip, cfail, buildfail, buildok, fail, pass)
 }
 
-func run(t *testing.T, test, bin string) bool {
+func run(t *testing.T, bin string) (out []byte, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
 	defer cancel()
 
 	cmd := exec.CommandContext(ctx, bin)
 	cmd.WaitDelay = 20 * time.Second
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		t.Errorf("%s %s: EXEC FAIL=%s", out, test, err)
-		return false
-	}
-
-	t.Logf("%s: PASS", test)
-	return true
+	return cmd.CombinedOutput()
 }

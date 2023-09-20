@@ -338,6 +338,14 @@ func X__builtin_longjmp(tls *TLS, env uintptr, val int32) int64 {
 	panic(todo(""))
 }
 
+func X__builtin_iswblank(tls *TLS, wc uint32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v wc=%v, (%v:)", tls, wc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
+	return Xiswblank(tls, wc)
+}
+
 // Byte stores are atomic on this CPU.
 func a_store_8(addr uintptr, val int32) {
 	*(*byte)(unsafe.Pointer(addr)) = byte(val)
