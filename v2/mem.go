@@ -31,6 +31,12 @@ func Xmalloc(tls *TLS, n Tsize_t) (r uintptr) {
 
 	defer allocatorMu.Unlock()
 
+	if n == 0 {
+		// malloc(0) should return unique pointers
+		// (often expected and gnulib replaces malloc if malloc(0) returns 0)
+		n = 1
+	}
+
 	var err error
 	if r, err = allocator.UintptrMalloc(int(n)); err != nil {
 		r = 0
@@ -47,6 +53,10 @@ func Xcalloc(tls *TLS, m Tsize_t, n Tsize_t) (r uintptr) {
 	allocatorMu.Lock()
 
 	defer allocatorMu.Unlock()
+
+	if n == 0 {
+		m, n = 1, 1
+	}
 
 	var err error
 	if r, err = allocator.UintptrCalloc(int(m * n)); err != nil {

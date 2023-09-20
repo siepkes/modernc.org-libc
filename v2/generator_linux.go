@@ -181,9 +181,13 @@ func main() {
 		{"_free", "Xfree"},
 		{"_malloc", "Xmalloc"},
 		{"_realloc", "Xrealloc"},
+		{"x___clock_gettime", "Xclock_gettime"},
+		{"x___ctype_get_mb_cur_max", "X__ctype_get_mb_cur_max"},
 		{"x___environ", "Xenviron"},
 		{"x___fdopen", "Xfdopen"},
+		{"x___fseeko", "Xfseeko"},
 		{"x___fstat", "Xfstat"},
+		{"x___ftello", "Xftello"},
 		{"x___gmtime_r", "Xgmtime_r"},
 		{"x___localtime_r", "Xlocaltime_r"},
 		{"x___lseek", "Xlseek"},
@@ -226,7 +230,7 @@ func main() {
 		}
 	}
 	if format {
-		util.MustShell(true, "gofmt", "-w", ".")
+		util.MustShell(true, "sh", "-c", "gofmt -w *.go")
 	}
 }
 

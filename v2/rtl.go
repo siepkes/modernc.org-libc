@@ -56,6 +56,9 @@ func VaList(p uintptr, args ...interface{}) (r uintptr) {
 	return r
 }
 
+// Bool returns v as a non-constant boolean value.
+func Bool(v bool) bool { return v }
+
 func Bool32(b bool) int32 {
 	if b {
 		return 1

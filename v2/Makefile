@@ -17,7 +17,8 @@ build_all_targets:
 	echo done
 
 clean:
-	rm -f log-* cpu.test mem.test *.out go.work*
+	rm -f log-* cpu.test mem.test *.out
+	make -C internal/nsz.repo.hu/libc-test/ cleanall
 	go clean
 
 check:
@@ -31,28 +32,30 @@ edit:
 	@if [ -f "Session.vim" ]; then novim -S & else novim -p Makefile *.go & fi
 
 editor:
-	gofmt -l -s -w . 2>&1 | tee log-editor
+	gofmt -l -s -w *.go 2>&1 | tee log-editor
 	go test -c -o /dev/null 2>&1 | tee -a log-editor
-	go install -v  ./... 2>&1 | tee -a log-editor
+	go install -v  2>&1 | tee -a log-editor
 	go build -o /dev/null generator*.go
 
 generate: download
+	find internal/nsz.repo.hu/ -name \*.go -delete
 	mkdir -p $(DIR) || true
 	rm -rf $(DIR)/*
 	echo -n > log-generate
 	echo -n > log-generate-errors
 	GO_GENERATE_DIR=$(DIR) go run generator*.go 2> log-generate-errors | tee log-generate
 	cat log-generate-errors
-	go build -v ./...
+	go build -v
 	# go install github.com/mdempsky/unconvert@latest
 	./unconvert.sh
-	go build -v ./...  | tee -a log-generate
+	go build -v | tee -a log-generate
 	go test -v -short -count=1 ./... 2>&1 | tee -a log-generate
 	git status
 	grep 'TRC\|TODO\|ERRORF\|FAIL' log-generate || true
 	grep 'TRC\|TODO\|ERRORF\|FAIL' log-generate-errors || true
 
 dev: download
+	find internal/nsz.repo.hu/ -name \*.go -delete
 	mkdir -p $(DIR) || true
 	rm -rf $(DIR)/*
 	echo -n > /tmp/ccgo.log
@@ -60,7 +63,7 @@ dev: download
 	echo -n > log-generate-errors
 	GO_GENERATE_DIR=$(DIR) GO_GENERATE_DEV=1 go run -tags=ccgo.dmesg,ccgo.assert generator*.go 2>&1 | tee log-generate
 	./unconvert.sh
-	go build -v ./...  | tee -a log-generate
+	go build -v | tee -a log-generate
 	go test -v -short -count=1 ./... 2>&1 | tee -a log-generate
 	git status
 	grep 'TRC\|TODO\|ERRORF\|FAIL' log-generate || true
@@ -69,7 +72,7 @@ dev: download
 
 test:
 	go test -v -timeout 24h -count=1 2>&1 | tee log-test
-	grep -a 'TOTAL\|PASS' log-test || true 2>&1 | tee -a log-test
+	grep -a 'TRC\|TODO\|ERRORF\|FAIL' log-test || true 2>&1 | tee -a log-test
 
 tidy:
 	./unconvert.sh

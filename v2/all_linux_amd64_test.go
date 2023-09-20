@@ -6,19 +6,39 @@ package libc // import "modernc.org/libc/v2"
 
 import (
 	"bytes"
+	"context"
 	"encoding/hex"
+	"fmt"
+	"io/fs"
 	"os"
+	"os/exec"
 	"path/filepath"
+	"runtime"
+	"strings"
 	"testing"
+	"time"
 	"unsafe"
+
+	util "modernc.org/ccgo/v3/lib"
+	ccgo "modernc.org/ccgo/v4/lib"
 )
 
 func TestMain(m *testing.M) {
+	if ccgo.IsExecEnv() {
+		if err := ccgo.NewTask(goos, goarch, os.Args, os.Stdout, os.Stderr, nil).Main(); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
+		return
+	}
+
 	rc := m.Run()
 	os.Exit(rc)
 }
 
 var (
+	goarch = runtime.GOARCH
+	goos   = runtime.GOOS
+
 	testAtomicCASInt32  int32
 	testAtomicCASUint64 uint64
 	testAtomicCASp      uintptr
@@ -428,7 +448,6 @@ func TestMemAuditBrk(t *testing.T) {
 	z := roundup(mallocP+1, heapAlign)
 	for p := mallocP + 1; p < z; p++ {
 		*(*byte)(unsafe.Pointer(p)) ^= 0x55
-		// c++
 	}
 	p := z
 	z += heapGuard
@@ -447,4 +466,336 @@ func TestMemAuditBrk(t *testing.T) {
 	if g, e := len(r), c; g != e {
 		t.Fatalf("got %v errors, expected %v", g, e)
 	}
+}
+
+func mustShell(t *testing.T, cmd string, args ...string) []byte {
+	r, err := shell(cmd, args...)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	return r
+}
+
+func shell(cmd string, args ...string) ([]byte, error) {
+	cmd, err := exec.LookPath(cmd)
+	if err != nil {
+		return nil, err
+	}
+
+	return exec.Command(cmd, args...).CombinedOutput()
+}
+
+var skipFiles = map[string]struct{}{
+	// n/a
+	"internal/nsz.repo.hu/libc-test/src/common/runtest.exe.go": {}, // src/common/runtest.c:37: usage: /tmp/TestLibc748082357/001/main [-t timeoutsec] [-w wrapcmd] cmd [args..]
+
+	// fork
+	"internal/nsz.repo.hu/libc-test/src/functional/ipc_msg.exe.go":        {}, // src/functional/ipc_msg.c:122: fork failed: Function not implemented
+	"internal/nsz.repo.hu/libc-test/src/functional/ipc_sem.exe.go":        {}, // src/functional/ipc_sem.c:115: fork failed: Function not implemented
+	"internal/nsz.repo.hu/libc-test/src/functional/ipc_shm.exe.go":        {}, // src/functional/ipc_shm.c:112: fork failed: Function not implemented
+	"internal/nsz.repo.hu/libc-test/src/regression/daemon-failure.exe.go": {}, // src/regression/daemon-failure.c:35: fork failed: Function not implemented
+
+	//TODO pthread
+	"internal/nsz.repo.hu/libc-test/src/functional/pthread_cancel-points.exe.go":            {},
+	"internal/nsz.repo.hu/libc-test/src/functional/pthread_cancel.exe.go":                   {},
+	"internal/nsz.repo.hu/libc-test/src/functional/pthread_cond.exe.go":                     {},
+	"internal/nsz.repo.hu/libc-test/src/functional/pthread_mutex.exe.go":                    {},
+	"internal/nsz.repo.hu/libc-test/src/functional/pthread_mutex_pi.exe.go":                 {},
+	"internal/nsz.repo.hu/libc-test/src/functional/pthread_robust.exe.go":                   {},
+	"internal/nsz.repo.hu/libc-test/src/functional/pthread_tsd.exe.go":                      {},
+	"internal/nsz.repo.hu/libc-test/src/functional/sem_init.exe.go":                         {},
+	"internal/nsz.repo.hu/libc-test/src/functional/tls_init.exe.go":                         {},
+	"internal/nsz.repo.hu/libc-test/src/functional/tls_local_exec.exe.go":                   {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread-robust-detach.exe.go":            {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_atfork-errno-clobber.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_cancel-sem_wait.exe.go":          {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_cond-smasher.exe.go":             {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_cond_wait-cancel_ignored.exe.go": {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_condattr_setclock.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_create-oom.exe.go":               {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_exit-cancel.exe.go":              {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_exit-dtor.exe.go":                {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_once-deadlock.exe.go":            {},
+	"internal/nsz.repo.hu/libc-test/src/regression/pthread_rwlock-ebusy.exe.go":             {},
+	"internal/nsz.repo.hu/libc-test/src/regression/raise-race.exe.go":                       {},
+	"internal/nsz.repo.hu/libc-test/src/regression/tls_get_new-dtv.exe.go":                  {},
+
+	//TODO fesetenv and friends
+	"internal/nsz.repo.hu/libc-test/src/math/acos.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/acosf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/acosh.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/acoshf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/acoshl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/acosl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/asin.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/asinf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/asinh.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/asinhf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/asinhl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/asinl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/atan.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/atan2.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/atan2f.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/atan2l.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/atanf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/atanh.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/atanhf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/atanhl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/atanl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/cbrt.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/cbrtf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/cbrtl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/ceil.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/ceilf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/ceill.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/copysign.exe.go":    {},
+	"internal/nsz.repo.hu/libc-test/src/math/copysignf.exe.go":   {},
+	"internal/nsz.repo.hu/libc-test/src/math/copysignl.exe.go":   {},
+	"internal/nsz.repo.hu/libc-test/src/math/cos.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/cosf.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/cosh.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/coshf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/coshl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/cosl.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/drem.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/dremf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/erf.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/erfc.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/erfcf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/erfcl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/erff.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/erfl.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/exp.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/exp10.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/exp10f.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/exp10l.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/exp2.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/exp2f.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/exp2l.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/expf.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/expl.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/expm1.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/expm1f.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/expm1l.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/fabs.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/fabsf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/fabsl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/fdim.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/fdimf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/fdiml.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/fenv.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/floor.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/floorf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/floorl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/fma.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/fmaf.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/fmal.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/fmax.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/fmaxf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/fmaxl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/fmin.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/fminf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/fminl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/fmod.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/fmodf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/fmodl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/frexp.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/frexpf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/frexpl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/hypot.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/hypotf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/hypotl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/ilogb.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/ilogbf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/ilogbl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/isless.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/j0.exe.go":          {},
+	"internal/nsz.repo.hu/libc-test/src/math/j0f.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/j1.exe.go":          {},
+	"internal/nsz.repo.hu/libc-test/src/math/j1f.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/jn.exe.go":          {},
+	"internal/nsz.repo.hu/libc-test/src/math/jnf.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/ldexp.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/ldexpf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/ldexpl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/lgamma.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/lgamma_r.exe.go":    {},
+	"internal/nsz.repo.hu/libc-test/src/math/lgammaf.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/lgammaf_r.exe.go":   {},
+	"internal/nsz.repo.hu/libc-test/src/math/lgammal.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/lgammal_r.exe.go":   {},
+	"internal/nsz.repo.hu/libc-test/src/math/llrint.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/llrintf.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/llrintl.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/llround.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/llroundf.exe.go":    {},
+	"internal/nsz.repo.hu/libc-test/src/math/llroundl.exe.go":    {},
+	"internal/nsz.repo.hu/libc-test/src/math/log.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/log10.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/log10f.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/log10l.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/log1p.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/log1pf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/log1pl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/log2.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/log2f.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/log2l.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/logb.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/logbf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/logbl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/logf.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/logl.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/lrint.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/lrintf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/lrintl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/lround.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/lroundf.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/lroundl.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/modf.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/modff.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/modfl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/nearbyint.exe.go":   {},
+	"internal/nsz.repo.hu/libc-test/src/math/nearbyintf.exe.go":  {},
+	"internal/nsz.repo.hu/libc-test/src/math/nearbyintl.exe.go":  {},
+	"internal/nsz.repo.hu/libc-test/src/math/nextafter.exe.go":   {},
+	"internal/nsz.repo.hu/libc-test/src/math/nextafterf.exe.go":  {},
+	"internal/nsz.repo.hu/libc-test/src/math/nextafterl.exe.go":  {},
+	"internal/nsz.repo.hu/libc-test/src/math/nexttoward.exe.go":  {},
+	"internal/nsz.repo.hu/libc-test/src/math/nexttowardf.exe.go": {},
+	"internal/nsz.repo.hu/libc-test/src/math/nexttowardl.exe.go": {},
+	"internal/nsz.repo.hu/libc-test/src/math/pow.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/powf.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/powl.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/remainder.exe.go":   {},
+	"internal/nsz.repo.hu/libc-test/src/math/remainderf.exe.go":  {},
+	"internal/nsz.repo.hu/libc-test/src/math/remainderl.exe.go":  {},
+	"internal/nsz.repo.hu/libc-test/src/math/remquo.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/remquof.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/remquol.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/rint.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/rintf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/rintl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/round.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/roundf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/roundl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/scalb.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/scalbf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/scalbln.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/scalblnf.exe.go":    {},
+	"internal/nsz.repo.hu/libc-test/src/math/scalblnl.exe.go":    {},
+	"internal/nsz.repo.hu/libc-test/src/math/scalbn.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/scalbnf.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/scalbnl.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/sin.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/sincos.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/sincosf.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/sincosl.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/sinf.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/sinh.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/sinhf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/sinhl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/sinl.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/sqrt.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/sqrtf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/sqrtl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/tan.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/tanf.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/tanh.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/tanhf.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/tanhl.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/tanl.exe.go":        {},
+	"internal/nsz.repo.hu/libc-test/src/math/tgamma.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/tgammaf.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/tgammal.exe.go":     {},
+	"internal/nsz.repo.hu/libc-test/src/math/trunc.exe.go":       {},
+	"internal/nsz.repo.hu/libc-test/src/math/truncf.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/truncl.exe.go":      {},
+	"internal/nsz.repo.hu/libc-test/src/math/y0.exe.go":          {},
+	"internal/nsz.repo.hu/libc-test/src/math/y0f.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/y1.exe.go":          {},
+	"internal/nsz.repo.hu/libc-test/src/math/y1f.exe.go":         {},
+	"internal/nsz.repo.hu/libc-test/src/math/yn.exe.go":          {},
+	"internal/nsz.repo.hu/libc-test/src/math/ynf.exe.go":         {},
+}
+
+func TestLibc(t *testing.T) {
+	return //TODO-
+	if testing.Short() {
+		t.Skip("-short")
+	}
+
+	dir := filepath.Join("internal", "nsz.repo.hu", "libc-test")
+
+	util.InDir(dir, func() error {
+		mustShell(t, "make", "cleanall")
+		if err := ccgo.NewTask(
+			goos, goarch,
+			[]string{
+				os.Args[0],
+				"-absolute-paths",
+				"-extended-errors",
+				"-positions",
+				"-exec", "make",
+			},
+			os.Stdout, os.Stderr,
+			nil,
+		).Exec(); err != nil {
+			t.Fatal(err)
+		}
+
+		return nil
+	})
+
+	bin := filepath.Join(t.TempDir(), "main")
+	var file, skip, buildfail, buildok, fail, pass int
+	filepath.Walk(dir, func(path string, info fs.FileInfo, err error) error {
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if info.IsDir() || !strings.HasSuffix(path, ".exe.go") {
+			return nil
+		}
+
+		if _, ok := skipFiles[filepath.ToSlash(path)]; ok {
+			skip++
+			return nil
+		}
+
+		file++
+		os.Remove(bin)
+		if out, err := shell("go", "build", "-o", bin, path); err != nil {
+			t.Errorf("%s %s: BUILD FAIL=%s", out, path, err)
+			buildfail++
+			return nil
+		}
+
+		buildok++
+		switch run(t, path, bin) {
+		case true:
+			pass++
+		default:
+			fail++
+		}
+		return nil
+	})
+	t.Logf("files=%v skip=%v buildfail=%v buildok=%v fail=%v pass=%v", file, skip, buildfail, buildok, fail, pass)
+}
+
+func run(t *testing.T, test, bin string) bool {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
+	defer cancel()
+
+	cmd := exec.CommandContext(ctx, bin)
+	cmd.WaitDelay = 20 * time.Second
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		t.Errorf("%s %s: EXEC FAIL=%s", out, test, err)
+		return false
+	}
+
+	t.Logf("%s: PASS", test)
+	return true
 }

@@ -112,7 +112,9 @@ func malloc0(tls *TLS, pc uintptr, n0 Tsize_t, zero bool) (r uintptr) {
 
 func Xmalloc(tls *TLS, n Tsize_t) (r uintptr) {
 	if n == 0 {
-		return 0
+		// malloc(0) should return unique pointers
+		// (often expected and gnulib replaces malloc if malloc(0) returns 0)
+		n = 1
 	}
 
 	allocatorMu.Lock()
@@ -125,7 +127,7 @@ func Xmalloc(tls *TLS, n Tsize_t) (r uintptr) {
 
 func Xcalloc(tls *TLS, m Tsize_t, n Tsize_t) (r uintptr) {
 	if m*n == 0 {
-		return 0
+		m, n = 1, 1
 	}
 
 	allocatorMu.Lock()
