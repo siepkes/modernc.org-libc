@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'generator_linux --package-name=libc --predef=float __builtin_inff(void); --predef=long __builtin_expect(long, long); --prefix-enumerator=_ --prefix-external=x_ --prefix-field=F --prefix-macro=m_ --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-enum=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --prefix-undefined=_ -extended-errors -hide __syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS -hide a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32 -hide fabs,fabsf,fabsl,sqrt,sqrtf,sqrtl -hide clone,_Fork,fork,system,__synccall -hide calloc,free,malloc,malloc_usable_size,realloc -hide __libc_calloc,__libc_free,__libc_malloc,__libc_malloc_impl,__libc_realloc -hide __malloc_allzerop,__malloc_atfork,__malloc_donate,__simple_malloc, -ignore-asm-errors -isystem  -o libc.a.go -nostdlib -ignore-link-errors lib/libc.a', DO NOT EDIT.
+// Code generated for linux/amd64 by 'generator_linux --package-name=libc --predef=float __builtin_inff(void); --predef=long __builtin_expect(long, long); --prefix-enumerator=_ --prefix-external=x_ --prefix-field=F --prefix-macro=m_ --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-enum=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --prefix-undefined=_ -extended-errors -hide __syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS -hide a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32 -hide fabs,fabsf,fabsl,sqrt,sqrtf,sqrtl -hide _Fork,fork,system,__synccall -hide calloc,free,malloc,malloc_usable_size,realloc -hide __libc_calloc,__libc_free,__libc_malloc,__libc_malloc_impl,__libc_realloc -hide __malloc_allzerop,__malloc_atfork,__malloc_donate,__simple_malloc, -ignore-asm-errors -isystem  -o libc.a.go -nostdlib -ignore-link-errors lib/libc.a', DO NOT EDIT.
 
 //go:build linux && amd64
 // +build linux,amd64
@@ -30198,7 +30198,10 @@ func Xstrerror(tls *TLS, e int32) (r uintptr) {
 const m_SYS_exit = 60
 const m_SYS_exit_group = 231
 
-func x__Exit(tls *TLS, ec int32) {
+func X_Exit(tls *TLS, ec int32) {
+	if __ccgo_strace {
+		trc("tls=%v ec=%v, (%v:)", tls, ec, origin(2))
+	}
 	___syscall1(tls, int64(m_SYS_exit_group), int64(ec))
 	for {
 		___syscall1(tls, int64(m_SYS_exit), int64(ec))
@@ -30245,7 +30248,7 @@ func Xabort(tls *TLS) {
 	/* Beyond this point should be unreachable. */
 	_a_crash(tls)
 	Xraise(tls, int32(m_SIGKILL))
-	x__Exit(tls, int32(127))
+	X_Exit(tls, int32(127))
 }
 
 func x___assert_fail(tls *TLS, expr uintptr, file uintptr, line int32, func1 uintptr) {
@@ -30399,7 +30402,7 @@ func Xexit(tls *TLS, code int32) {
 	x___funcs_on_exit(tls)
 	_libc_exit_fini(tls)
 	x___stdio_exit(tls)
-	x__Exit(tls, code)
+	X_Exit(tls, code)
 }
 
 func _dummy6(tls *TLS) {
@@ -30410,7 +30413,7 @@ func Xquick_exit(tls *TLS, code int32) {
 		trc("tls=%v code=%v, (%v:)", tls, code, origin(2))
 	}
 	x___funcs_on_quick_exit(tls)
-	x__Exit(tls, code)
+	X_Exit(tls, code)
 }
 
 const m_O_CREAT = 64
@@ -33917,6 +33920,200 @@ func Xclock_adjtime(tls *TLS, clock_id int32, utx uintptr) (r1 int32) {
 	return int32(x___syscall_ret(tls, uint64(___syscall2(tls, int64(m_SYS_clock_adjtime), int64(clock_id), int64(utx)))))
 }
 
+const m_CLONE_CHILD_CLEARTID = 2097152
+const m_CLONE_CHILD_SETTID = 16777216
+const m_CLONE_PARENT_SETTID = 1048576
+const m_CLONE_PIDFD = 4096
+const m_CLONE_SETTLS = 524288
+const m_CLONE_THREAD = 65536
+const m_CLONE_VM = 256
+
+type Tcpu_set_t = struct {
+	F__bits [16]uint64
+}
+
+type Ttm1 = struct {
+	Ftm_sec    int32
+	Ftm_min    int32
+	Ftm_hour   int32
+	Ftm_mday   int32
+	Ftm_mon    int32
+	Ftm_year   int32
+	Ftm_wday   int32
+	Ftm_yday   int32
+	Ftm_isdst  int32
+	Ftm_gmtoff int64
+	Ftm_zone   uintptr
+}
+
+type Tcpu_set_t1 = struct {
+	F__bits [16]uint64
+}
+
+const _REG_R8 = 0
+const _REG_R9 = 1
+const _REG_R10 = 2
+const _REG_R11 = 3
+const _REG_R12 = 4
+const _REG_R13 = 5
+const _REG_R14 = 6
+const _REG_R15 = 7
+const _REG_RDI = 8
+const _REG_RSI = 9
+const _REG_RBP = 10
+const _REG_RBX = 11
+const _REG_RDX = 12
+const _REG_RAX = 13
+const _REG_RCX = 14
+const _REG_RSP = 15
+const _REG_RIP = 16
+const _REG_EFL = 17
+const _REG_CSGSFS = 18
+const _REG_ERR = 19
+const _REG_TRAPNO = 20
+const _REG_OLDMASK = 21
+const _REG_CR2 = 22
+
+type Tgreg_t = int64
+
+type Tgregset_t = [23]int64
+
+type Tfpregset_t = uintptr
+
+type T_fpstate = struct {
+	Fcwd       uint16
+	Fswd       uint16
+	Fftw       uint16
+	Ffop       uint16
+	Frip       uint64
+	Frdp       uint64
+	Fmxcsr     uint32
+	Fmxcr_mask uint32
+	F_st       [8]struct {
+		Fsignificand [4]uint16
+		Fexponent    uint16
+		Fpadding     [3]uint16
+	}
+	F_xmm [16]struct {
+		Felement [4]uint32
+	}
+	Fpadding [24]uint32
+}
+
+type Tsigcontext = struct {
+	Fr8          uint64
+	Fr9          uint64
+	Fr10         uint64
+	Fr11         uint64
+	Fr12         uint64
+	Fr13         uint64
+	Fr14         uint64
+	Fr15         uint64
+	Frdi         uint64
+	Frsi         uint64
+	Frbp         uint64
+	Frbx         uint64
+	Frdx         uint64
+	Frax         uint64
+	Frcx         uint64
+	Frsp         uint64
+	Frip         uint64
+	Feflags      uint64
+	Fcs          uint16
+	Fgs          uint16
+	Ffs          uint16
+	F__pad0      uint16
+	Ferr         uint64
+	Ftrapno      uint64
+	Foldmask     uint64
+	Fcr2         uint64
+	Ffpstate     uintptr
+	F__reserved1 [8]uint64
+}
+
+type Tmcontext_t1 = struct {
+	Fgregs       Tgregset_t
+	Ffpregs      uintptr
+	F__reserved1 [8]uint64
+}
+
+type Tucontext_t1 = struct {
+	Fuc_flags     uint64
+	Fuc_link      uintptr
+	Fuc_stack     Tstack_t
+	Fuc_mcontext  Tmcontext_t1
+	Fuc_sigmask   Tsigset_t
+	F__fpregs_mem [64]uint64
+}
+
+type Tucontext = Tucontext_t1
+
+type Tsig_t = uintptr
+
+type Tsighandler_t = uintptr
+
+type Tclone_start_args = struct {
+	Ffunc1   uintptr
+	Farg     uintptr
+	Fsigmask Tsigset_t
+}
+
+func _clone_start(tls *TLS, arg uintptr) (r int32) {
+	var csa uintptr
+	_ = csa
+	csa = arg
+	x___post_Fork(tls, 0)
+	x___restore_sigs(tls, csa+16)
+	return (*(*func(*TLS, uintptr) int32)(unsafe.Pointer(&struct{ uintptr }{(*Tclone_start_args)(unsafe.Pointer(csa)).Ffunc1})))(tls, (*Tclone_start_args)(unsafe.Pointer(csa)).Farg)
+}
+
+func Xclone(tls1 *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("tls1=%v func1=%v stack=%v flags=%v arg=%v va=%v, (%v:)", tls1, func1, stack, flags, arg, va, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
+	bp := tls1.Alloc(176) /* tlsAllocs 144 maxVaListSize 24 */
+	defer tls1.Free(176)
+	var ap, ctid, ptid, tls uintptr
+	var badflags, ret int32
+	var _ /* csa at bp+0 */ Tclone_start_args
+	_, _, _, _, _, _ = ap, badflags, ctid, ptid, ret, tls
+	ptid = uintptr(0)
+	ctid = uintptr(0)
+	tls = uintptr(0)
+	/* Flags that produce an invalid thread/TLS state are disallowed. */
+	badflags = Int32FromInt32(m_CLONE_THREAD) | Int32FromInt32(m_CLONE_SETTLS) | Int32FromInt32(m_CLONE_CHILD_CLEARTID)
+	if flags&badflags != 0 || !(stack != 0) {
+		return int32(x___syscall_ret(tls1, uint64(-Int32FromInt32(m_EINVAL))))
+	}
+	ap = va
+	if flags&(Int32FromInt32(m_CLONE_PIDFD)|Int32FromInt32(m_CLONE_PARENT_SETTID)|Int32FromInt32(m_CLONE_CHILD_SETTID)) != 0 {
+		ptid = VaUintptr(&ap)
+	}
+	if flags&int32(m_CLONE_CHILD_SETTID) != 0 {
+		tls = VaUintptr(&ap)
+		ctid = VaUintptr(&ap)
+	}
+	_ = ap
+	/* If CLONE_VM is used, it's impossible to give the child a consistent
+	 * thread structure. In this case, the best we can do is assume the
+	 * caller is content with an extremely restrictive execution context
+	 * like the one vfork() would provide. */
+	if flags&int32(m_CLONE_VM) != 0 {
+		return int32(x___syscall_ret(tls1, uint64(___clone(tls1, func1, stack, flags, arg, VaList(bp+152, ptid, tls, ctid)))))
+	}
+	x___block_all_sigs(tls1, bp+16)
+	x___lock(tls1, uintptr(unsafe.Pointer(&x___abort_lock)))
+	/* Setup the a wrapper start function for the child process to do
+	 * mimic _Fork in producing a consistent execution state. */
+	(*(*Tclone_start_args)(unsafe.Pointer(bp))).Ffunc1 = func1
+	(*(*Tclone_start_args)(unsafe.Pointer(bp))).Farg = arg
+	ret = ___clone(tls1, __ccgo_fp(_clone_start), stack, flags, bp, VaList(bp+152, ptid, tls, ctid))
+	x___post_Fork(tls1, ret)
+	x___restore_sigs(tls1, bp+16)
+	return int32(x___syscall_ret(tls1, uint64(ret)))
+}
+
 const m_SYS_copy_file_range = 326
 
 func Xcopy_file_range(tls *TLS, fd_in int32, off_in uintptr, fd_out int32, off_out uintptr, len1 uint64, flags uint32) (r int64) {
@@ -33953,6 +34150,15 @@ type Tepoll_data = Tepoll_data_t
 type Tepoll_event = struct {
 	Fevents uint32
 	Fdata   Tepoll_data_t
+}
+
+type Tucontext_t2 = struct {
+	Fuc_flags     uint64
+	Fuc_link      uintptr
+	Fuc_stack     Tstack_t
+	Fuc_mcontext  Tmcontext_t
+	Fuc_sigmask   Tsigset_t
+	F__fpregs_mem [64]uint64
 }
 
 func Xepoll_create(tls *TLS, size int32) (r int32) {
@@ -34085,7 +34291,8 @@ type Tstatvfs = struct {
 	Ff_fsid     uint64
 	Ff_flag     uint64
 	Ff_namemax  uint64
-	F__reserved [6]int32
+	Ff_type     uint32
+	F__reserved [5]int32
 }
 
 type Tfsid_t = struct {
@@ -34182,116 +34389,7 @@ func Xgetrandom(tls *TLS, buf uintptr, buflen uint64, flags uint32) (r int64) {
 	return x___syscall_ret(tls, uint64(x___syscall_cp(tls, int64(m_SYS_getrandom), int64(buf), int64(buflen), int64(flags), 0, 0, 0)))
 }
 
-type Tcpu_set_t = struct {
-	F__bits [16]uint64
-}
-
-type Ttm1 = struct {
-	Ftm_sec    int32
-	Ftm_min    int32
-	Ftm_hour   int32
-	Ftm_mday   int32
-	Ftm_mon    int32
-	Ftm_year   int32
-	Ftm_wday   int32
-	Ftm_yday   int32
-	Ftm_isdst  int32
-	Ftm_gmtoff int64
-	Ftm_zone   uintptr
-}
-
-type Tcpu_set_t1 = struct {
-	F__bits [16]uint64
-}
-
-const _REG_R8 = 0
-const _REG_R9 = 1
-const _REG_R10 = 2
-const _REG_R11 = 3
-const _REG_R12 = 4
-const _REG_R13 = 5
-const _REG_R14 = 6
-const _REG_R15 = 7
-const _REG_RDI = 8
-const _REG_RSI = 9
-const _REG_RBP = 10
-const _REG_RBX = 11
-const _REG_RDX = 12
-const _REG_RAX = 13
-const _REG_RCX = 14
-const _REG_RSP = 15
-const _REG_RIP = 16
-const _REG_EFL = 17
-const _REG_CSGSFS = 18
-const _REG_ERR = 19
-const _REG_TRAPNO = 20
-const _REG_OLDMASK = 21
-const _REG_CR2 = 22
-
-type Tgreg_t = int64
-
-type Tgregset_t = [23]int64
-
-type Tfpregset_t = uintptr
-
-type T_fpstate = struct {
-	Fcwd       uint16
-	Fswd       uint16
-	Fftw       uint16
-	Ffop       uint16
-	Frip       uint64
-	Frdp       uint64
-	Fmxcsr     uint32
-	Fmxcr_mask uint32
-	F_st       [8]struct {
-		Fsignificand [4]uint16
-		Fexponent    uint16
-		Fpadding     [3]uint16
-	}
-	F_xmm [16]struct {
-		Felement [4]uint32
-	}
-	Fpadding [24]uint32
-}
-
-type Tsigcontext = struct {
-	Fr8          uint64
-	Fr9          uint64
-	Fr10         uint64
-	Fr11         uint64
-	Fr12         uint64
-	Fr13         uint64
-	Fr14         uint64
-	Fr15         uint64
-	Frdi         uint64
-	Frsi         uint64
-	Frbp         uint64
-	Frbx         uint64
-	Frdx         uint64
-	Frax         uint64
-	Frcx         uint64
-	Frsp         uint64
-	Frip         uint64
-	Feflags      uint64
-	Fcs          uint16
-	Fgs          uint16
-	Ffs          uint16
-	F__pad0      uint16
-	Ferr         uint64
-	Ftrapno      uint64
-	Foldmask     uint64
-	Fcr2         uint64
-	Ffpstate     uintptr
-	F__reserved1 [8]uint64
-}
-
-type Tmcontext_t1 = struct {
-	Fgregs       Tgregset_t
-	Ffpregs      uintptr
-	F__reserved1 [8]uint64
-}
-
-type Tucontext_t1 = struct {
+type Tucontext_t3 = struct {
 	Fuc_flags     uint64
 	Fuc_link      uintptr
 	Fuc_stack     Tstack_t
@@ -34299,12 +34397,6 @@ type Tucontext_t1 = struct {
 	Fuc_sigmask   Tsigset_t
 	F__fpregs_mem [64]uint64
 }
-
-type Tucontext = Tucontext_t1
-
-type Tsig_t = uintptr
-
-type Tsighandler_t = uintptr
 
 func Xgettid(tls *TLS) (r int32) {
 	if __ccgo_strace {
@@ -34400,15 +34492,6 @@ const m_SA_ONSTACK = 134217728
 const m_SA_RESTART = 268435456
 const m_SIGSYNCCALL = 34
 const m_SYS_membarrier = 324
-
-type Tucontext_t2 = struct {
-	Fuc_flags     uint64
-	Fuc_link      uintptr
-	Fuc_stack     Tstack_t
-	Fuc_mcontext  Tmcontext_t
-	Fuc_sigmask   Tsigset_t
-	F__fpregs_mem [64]uint64
-}
 
 func _dummy_0(tls *TLS) {
 }
@@ -34598,15 +34681,6 @@ func Xpivot_root(tls *TLS, new1 uintptr, old uintptr) (r int32) {
 }
 
 const m_SYS_ppoll = 271
-
-type Tucontext_t3 = struct {
-	Fuc_flags     uint64
-	Fuc_link      uintptr
-	Fuc_stack     Tstack_t
-	Fuc_mcontext  Tmcontext_t1
-	Fuc_sigmask   Tsigset_t
-	F__fpregs_mem [64]uint64
-}
 
 func Xppoll(tls *TLS, fds uintptr, n uint64, to uintptr, mask uintptr) (r int32) {
 	if __ccgo_strace {
@@ -104584,7 +104658,11 @@ func _do_newlocale(tls *TLS, mask int32, name uintptr, loc uintptr) (r uintptr) 
 	return loc
 }
 
-func x___newlocale(tls *TLS, mask int32, name uintptr, loc uintptr) (r uintptr) {
+func Xnewlocale(tls *TLS, mask int32, name uintptr, loc uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v mask=%v name=%v loc=%v, (%v:)", tls, mask, name, loc, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	x___lock(tls, uintptr(unsafe.Pointer(&x___locale_lock)))
 	loc = _do_newlocale(tls, mask, name, loc)
 	x___unlock(tls, uintptr(unsafe.Pointer(&x___locale_lock)))
@@ -105229,7 +105307,11 @@ func Xngettext(tls *TLS, msgid1 uintptr, msgid2 uintptr, n uint64) (r uintptr) {
 	return Xdngettext(tls, uintptr(0), msgid1, msgid2, n)
 }
 
-func x___uselocale(tls *TLS, new1 uintptr) (r uintptr) {
+func Xuselocale(tls *TLS, new1 uintptr) (r uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v new1=%v, (%v:)", tls, new1, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var global, old, self, v1, v2 uintptr
 	_, _, _, _, _ = global, old, self, v1, v2
 	self = ___get_tp(tls)
@@ -118133,13 +118215,7 @@ func Xfmodl(tls *TLS, x float64, y float64) (r float64) {
 		trc("tls=%v x=%v y=%v, (%v:)", tls, x, y, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
-	var fpsr uint16
-	_ = fpsr
-	for cond := true; cond; cond = int32(fpsr)&int32(0x400) != 0 {
-		// __asm__ ("fprem; fnstsw %%ax" : "+t"(x), "=a"(fpsr) : "u"(y));
-		x___assert_fail(tls, ts+677, ts+712, 6, ts+720)
-	}
-	return x
+	return Xfmod(tls, x, y)
 }
 
 func Xllrint(tls *TLS, x float64) (r1 int64) {
@@ -118150,7 +118226,7 @@ func Xllrint(tls *TLS, x float64) (r1 int64) {
 	var r int64
 	_ = r
 	// __asm__ ("cvtsd2si %1, %0" : "=r"(r) : "x"(x));
-	x___assert_fail(tls, ts+677, ts+726, 6, ts+735)
+	x___assert_fail(tls, ts+677, ts+712, 6, ts+721)
 	return r
 }
 
@@ -118162,7 +118238,7 @@ func Xllrintf(tls *TLS, x float32) (r1 int64) {
 	var r int64
 	_ = r
 	// __asm__ ("cvtss2si %1, %0" : "=r"(r) : "x"(x));
-	x___assert_fail(tls, ts+677, ts+742, 6, ts+752)
+	x___assert_fail(tls, ts+677, ts+728, 6, ts+738)
 	return r
 }
 
@@ -118174,7 +118250,7 @@ func Xllrintl(tls *TLS, x float64) (r1 int64) {
 	var r int64
 	_ = r
 	// __asm__ ("fistpll %0" : "=m"(r) : "t"(x) : "st");
-	x___assert_fail(tls, ts+677, ts+760, 6, ts+770)
+	x___assert_fail(tls, ts+677, ts+746, 6, ts+756)
 	return r
 }
 
@@ -118186,7 +118262,7 @@ func Xlrint(tls *TLS, x float64) (r1 int64) {
 	var r int64
 	_ = r
 	// __asm__ ("cvtsd2si %1, %0" : "=r"(r) : "x"(x));
-	x___assert_fail(tls, ts+677, ts+778, 6, ts+786)
+	x___assert_fail(tls, ts+677, ts+764, 6, ts+772)
 	return r
 }
 
@@ -118198,7 +118274,7 @@ func Xlrintf(tls *TLS, x float32) (r1 int64) {
 	var r int64
 	_ = r
 	// __asm__ ("cvtss2si %1, %0" : "=r"(r) : "x"(x));
-	x___assert_fail(tls, ts+677, ts+792, 6, ts+801)
+	x___assert_fail(tls, ts+677, ts+778, 6, ts+787)
 	return r
 }
 
@@ -118210,7 +118286,7 @@ func Xlrintl(tls *TLS, x float64) (r1 int64) {
 	var r int64
 	_ = r
 	// __asm__ ("fistpll %0" : "=m"(r) : "t"(x) : "st");
-	x___assert_fail(tls, ts+677, ts+808, 6, ts+817)
+	x___assert_fail(tls, ts+677, ts+794, 6, ts+803)
 	return r
 }
 
@@ -118223,7 +118299,7 @@ func Xremainderl(tls *TLS, x float64, y float64) (r float64) {
 	_ = fpsr
 	for cond := true; cond; cond = int32(fpsr)&int32(0x400) != 0 {
 		// __asm__ ("fprem1; fnstsw %%ax" : "+t"(x), "=a"(fpsr) : "u"(y));
-		x___assert_fail(tls, ts+677, ts+824, 6, ts+837)
+		x___assert_fail(tls, ts+677, ts+810, 6, ts+823)
 	}
 	return x
 }
@@ -118260,11 +118336,11 @@ func Xremquol(tls *TLS, _x float64, _y float64, quo uintptr) (r float64) {
 	//   - should manage to use incoming stack slots without spills. */
 	//
 	// __asm__ ("" :: "X"(cx), "X"(cy));
-	x___assert_fail(tls, ts+677, ts+848, 13, ts+858)
+	x___assert_fail(tls, ts+677, ts+834, 13, ts+844)
 	t = *(*float64)(unsafe.Pointer(bp))
 	for cond := true; cond; cond = fpsr&uint32(0x400) != 0 {
 		// __asm__ ("fprem1; fnstsw %%ax" : "+t"(t), "=a"(fpsr) : "u"(y));
-		x___assert_fail(tls, ts+677, ts+848, 17, ts+858)
+		x___assert_fail(tls, ts+677, ts+834, 17, ts+844)
 	}
 	/* C0, C1, C3 flags in x87 status word carry low bits of quotient:
 	 * 15 14 13 12 11 10  9  8
@@ -118291,7 +118367,7 @@ func Xrintl(tls *TLS, x float64) (r float64) {
 		defer func() { trc("-> %v", r) }()
 	}
 	// __asm__ ("frndint" : "+t"(x));
-	x___assert_fail(tls, ts+677, ts+866, 5, ts+874)
+	x___assert_fail(tls, ts+677, ts+852, 5, ts+860)
 	return x
 }
 
@@ -118530,33 +118606,33 @@ func Xfmtmsg(tls *TLS, classification int64, label uintptr, severity int32, text
 	ret = 0
 	verb = 0
 	errstring = uintptr(m_MM_NULLSEV)
-	cmsg = Xgetenv(tls, ts+880)
+	cmsg = Xgetenv(tls, ts+866)
 	msgs = [6]uintptr{
-		0: ts + 888,
-		1: ts + 894,
-		2: ts + 903,
-		3: ts + 908,
-		4: ts + 915,
+		0: ts + 874,
+		1: ts + 880,
+		2: ts + 889,
+		3: ts + 894,
+		4: ts + 901,
 		5: UintptrFromInt32(0),
 	}
 	x___pthread_setcancelstate(tls, int32(m_PTHREAD_CANCEL_DISABLE), bp)
 	if severity == int32(m_MM_HALT) {
-		errstring = ts + 919
+		errstring = ts + 905
 	} else {
 		if severity == int32(m_MM_ERROR) {
-			errstring = ts + 926
+			errstring = ts + 912
 		} else {
 			if severity == int32(m_MM_WARNING) {
-				errstring = ts + 934
+				errstring = ts + 920
 			} else {
 				if severity == int32(m_MM_INFO) {
-					errstring = ts + 944
+					errstring = ts + 930
 				}
 			}
 		}
 	}
 	if classification&int64(m_MM_CONSOLE) != 0 {
-		consolefd = Xopen(tls, ts+951, int32(m_O_WRONLY), 0)
+		consolefd = Xopen(tls, ts+937, int32(m_O_WRONLY), 0)
 		if consolefd < 0 {
 			ret = int32(m_MM_NOCON)
 		} else {
@@ -118581,7 +118657,7 @@ func Xfmtmsg(tls *TLS, classification int64, label uintptr, severity int32, text
 				v4 = ts
 			}
 			if action != 0 {
-				v5 = ts + 964
+				v5 = ts + 950
 			} else {
 				v5 = ts
 			}
@@ -118591,7 +118667,7 @@ func Xfmtmsg(tls *TLS, classification int64, label uintptr, severity int32, text
 				v6 = ts
 			}
 			if action != 0 {
-				v7 = ts + 974
+				v7 = ts + 960
 			} else {
 				v7 = ts
 			}
@@ -118600,7 +118676,7 @@ func Xfmtmsg(tls *TLS, classification int64, label uintptr, severity int32, text
 			} else {
 				v8 = ts
 			}
-			if Xdprintf(tls, consolefd, ts+976, VaList(bp+16, v1, v2, v3, v4, v5, v6, v7, v8)) < int32(1) {
+			if Xdprintf(tls, consolefd, ts+962, VaList(bp+16, v1, v2, v3, v4, v5, v6, v7, v8)) < int32(1) {
 				ret = int32(m_MM_NOCON)
 			}
 			Xclose(tls, consolefd)
@@ -118656,7 +118732,7 @@ func Xfmtmsg(tls *TLS, classification int64, label uintptr, severity int32, text
 			v13 = ts
 		}
 		if verb&int32(8) != 0 && action != 0 {
-			v14 = ts + 964
+			v14 = ts + 950
 		} else {
 			v14 = ts
 		}
@@ -118666,7 +118742,7 @@ func Xfmtmsg(tls *TLS, classification int64, label uintptr, severity int32, text
 			v15 = ts
 		}
 		if verb&int32(8) != 0 && action != 0 {
-			v16 = ts + 974
+			v16 = ts + 960
 		} else {
 			v16 = ts
 		}
@@ -118675,7 +118751,7 @@ func Xfmtmsg(tls *TLS, classification int64, label uintptr, severity int32, text
 		} else {
 			v17 = ts
 		}
-		if Xdprintf(tls, int32(2), ts+976, VaList(bp+16, v10, v11, v12, v13, v14, v15, v16, v17)) < int32(1) {
+		if Xdprintf(tls, int32(2), ts+962, VaList(bp+16, v10, v11, v12, v13, v14, v15, v16, v17)) < int32(1) {
 			ret |= int32(m_MM_NOMSG)
 		}
 	}
@@ -118767,7 +118843,7 @@ func Xget_current_dir_name(tls *TLS) (r uintptr) {
 	var _ /* a at bp+0 */ Tstat
 	var _ /* b at bp+144 */ Tstat
 	_ = res
-	res = Xgetenv(tls, ts+994)
+	res = Xgetenv(tls, ts+980)
 	if res != 0 && *(*int8)(unsafe.Pointer(res)) != 0 && !(Xstat(tls, res, bp) != 0) && !(Xstat(tls, ts+669, bp+144) != 0) && (*(*Tstat)(unsafe.Pointer(bp))).Fst_dev == (*(*Tstat)(unsafe.Pointer(bp + 144))).Fst_dev && (*(*Tstat)(unsafe.Pointer(bp))).Fst_ino == (*(*Tstat)(unsafe.Pointer(bp + 144))).Fst_ino {
 		return Xstrdup(tls, res)
 	}
@@ -118954,7 +119030,7 @@ func Xgetopt(tls *TLS, argc int32, argv uintptr, optstring uintptr) (r int32) {
 	if *(*int32)(unsafe.Pointer(bp + 4)) != *(*int32)(unsafe.Pointer(bp)) || *(*int32)(unsafe.Pointer(bp)) == int32(':') {
 		Xoptopt = *(*int32)(unsafe.Pointer(bp))
 		if int32(*(*int8)(unsafe.Pointer(optstring))) != int32(':') && Xopterr != 0 {
-			x___getopt_msg(tls, *(*uintptr)(unsafe.Pointer(argv)), ts+998, optchar, uint64(k))
+			x___getopt_msg(tls, *(*uintptr)(unsafe.Pointer(argv)), ts+984, optchar, uint64(k))
 		}
 		return int32('?')
 	}
@@ -118975,7 +119051,7 @@ func Xgetopt(tls *TLS, argc int32, argv uintptr, optstring uintptr) (r int32) {
 				return int32(':')
 			}
 			if Xopterr != 0 {
-				x___getopt_msg(tls, *(*uintptr)(unsafe.Pointer(argv)), ts+1022, optchar, uint64(k))
+				x___getopt_msg(tls, *(*uintptr)(unsafe.Pointer(argv)), ts+1008, optchar, uint64(k))
 			}
 			return int32('?')
 		}
@@ -119131,7 +119207,7 @@ func ___getopt_long_core(tls *TLS, argc int32, argv uintptr, optstring uintptr, 
 					if colon != 0 || !(Xopterr != 0) {
 						return int32('?')
 					}
-					x___getopt_msg(tls, *(*uintptr)(unsafe.Pointer(argv)), ts+1054, (*(*Toption)(unsafe.Pointer(longopts + uintptr(i)*32))).Fname, Xstrlen(tls, (*(*Toption)(unsafe.Pointer(longopts + uintptr(i)*32))).Fname))
+					x___getopt_msg(tls, *(*uintptr)(unsafe.Pointer(argv)), ts+1040, (*(*Toption)(unsafe.Pointer(longopts + uintptr(i)*32))).Fname, Xstrlen(tls, (*(*Toption)(unsafe.Pointer(longopts + uintptr(i)*32))).Fname))
 					return int32('?')
 				}
 				Xoptarg = opt + uintptr(1)
@@ -119147,7 +119223,7 @@ func ___getopt_long_core(tls *TLS, argc int32, argv uintptr, optstring uintptr, 
 						if !(Xopterr != 0) {
 							return int32('?')
 						}
-						x___getopt_msg(tls, *(*uintptr)(unsafe.Pointer(argv)), ts+1022, (*(*Toption)(unsafe.Pointer(longopts + uintptr(i)*32))).Fname, Xstrlen(tls, (*(*Toption)(unsafe.Pointer(longopts + uintptr(i)*32))).Fname))
+						x___getopt_msg(tls, *(*uintptr)(unsafe.Pointer(argv)), ts+1008, (*(*Toption)(unsafe.Pointer(longopts + uintptr(i)*32))).Fname, Xstrlen(tls, (*(*Toption)(unsafe.Pointer(longopts + uintptr(i)*32))).Fname))
 						return int32('?')
 					}
 					Xoptind++
@@ -119166,9 +119242,9 @@ func ___getopt_long_core(tls *TLS, argc int32, argv uintptr, optstring uintptr, 
 			Xoptopt = 0
 			if !(colon != 0) && Xopterr != 0 {
 				if cnt != 0 {
-					v6 = ts + 1091
+					v6 = ts + 1077
 				} else {
-					v6 = ts + 998
+					v6 = ts + 984
 				}
 				x___getopt_msg(tls, *(*uintptr)(unsafe.Pointer(argv)), v6, *(*uintptr)(unsafe.Pointer(argv + uintptr(Xoptind)*8))+uintptr(2), Xstrlen(tls, *(*uintptr)(unsafe.Pointer(argv + uintptr(Xoptind)*8))+uintptr(2)))
 			}
@@ -119921,7 +119997,7 @@ func Xgetmntent_r(tls *TLS, f uintptr, mnt uintptr, linebuf uintptr, buflen int3
 			return uintptr(0)
 		}
 		if !(Xstrchr(tls, linebuf, int32('\n')) != 0) {
-			Xfscanf(tls, f, ts+1115, 0)
+			Xfscanf(tls, f, ts+1101, 0)
 			*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ERANGE)
 			return uintptr(0)
 		}
@@ -119939,7 +120015,7 @@ func Xgetmntent_r(tls *TLS, f uintptr, mnt uintptr, linebuf uintptr, buflen int3
 		_1:
 			i++
 		}
-		Xsscanf(tls, linebuf, ts+1127, VaList(bp+40, bp, bp+uintptr(1)*4, bp+uintptr(2)*4, bp+uintptr(3)*4, bp+uintptr(4)*4, bp+uintptr(5)*4, bp+uintptr(6)*4, bp+uintptr(7)*4, mnt+32, mnt+36))
+		Xsscanf(tls, linebuf, ts+1113, VaList(bp+40, bp, bp+uintptr(1)*4, bp+uintptr(2)*4, bp+uintptr(3)*4, bp+uintptr(4)*4, bp+uintptr(5)*4, bp+uintptr(6)*4, bp+uintptr(7)*4, mnt+32, mnt+36))
 	}
 	*(*int8)(unsafe.Pointer(linebuf + uintptr((*(*[8]int32)(unsafe.Pointer(bp)))[int32(1)]))) = 0
 	*(*int8)(unsafe.Pointer(linebuf + uintptr((*(*[8]int32)(unsafe.Pointer(bp)))[int32(3)]))) = 0
@@ -119972,7 +120048,7 @@ func Xaddmntent(tls *TLS, f uintptr, mnt uintptr) (r int32) {
 	if Xfseek(tls, f, 0, int32(m_SEEK_END)) != 0 {
 		return int32(1)
 	}
-	return BoolInt32(Xfprintf(tls, f, ts+1166, VaList(bp+8, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_fsname, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_dir, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_type, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_opts, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_freq, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_passno)) < 0)
+	return BoolInt32(Xfprintf(tls, f, ts+1152, VaList(bp+8, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_fsname, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_dir, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_type, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_opts, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_freq, (*Tmntent)(unsafe.Pointer(mnt)).Fmnt_passno)) < 0)
 }
 
 func Xhasmntopt(tls *TLS, mnt uintptr, opt uintptr) (r uintptr) {
@@ -120215,7 +120291,7 @@ func Xopenpty(tls *TLS, pm uintptr, ps uintptr, name uintptr, tio uintptr, ws ui
 	var _ /* n at bp+0 */ int32
 	_, _, _ = m, s, v1
 	*(*int32)(unsafe.Pointer(bp)) = 0
-	m = Xopen(tls, ts+1185, Int32FromInt32(m_O_RDWR)|Int32FromInt32(m_O_NOCTTY), 0)
+	m = Xopen(tls, ts+1171, Int32FromInt32(m_O_RDWR)|Int32FromInt32(m_O_NOCTTY), 0)
 	if m < 0 {
 		return -int32(1)
 	}
@@ -120226,7 +120302,7 @@ func Xopenpty(tls *TLS, pm uintptr, ps uintptr, name uintptr, tio uintptr, ws ui
 	if !(name != 0) {
 		name = bp + 8
 	}
-	Xsnprintf(tls, name, uint64(20), ts+1195, VaList(bp+40, *(*int32)(unsafe.Pointer(bp))))
+	Xsnprintf(tls, name, uint64(20), ts+1181, VaList(bp+40, *(*int32)(unsafe.Pointer(bp))))
 	v1 = Xopen(tls, name, Int32FromInt32(m_O_RDWR)|Int32FromInt32(m_O_NOCTTY), 0)
 	s = v1
 	if v1 < 0 {
@@ -120272,7 +120348,7 @@ func Xposix_openpt(tls *TLS, flags int32) (r1 int32) {
 	}
 	var r int32
 	_ = r
-	r = Xopen(tls, ts+1185, flags, 0)
+	r = Xopen(tls, ts+1171, flags, 0)
 	if r < 0 && *(*int32)(unsafe.Pointer(X__errno_location(tls))) == int32(m_ENOSPC) {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EAGAIN)
 	}
@@ -120313,7 +120389,7 @@ func x___ptsname_r(tls *TLS, fd int32, buf uintptr, len1 uint64) (r int32) {
 	if v1 != 0 {
 		return -err
 	}
-	if uint64(Xsnprintf(tls, buf, len1, ts+1195, VaList(bp+16, *(*int32)(unsafe.Pointer(bp))))) >= len1 {
+	if uint64(Xsnprintf(tls, buf, len1, ts+1181, VaList(bp+16, *(*int32)(unsafe.Pointer(bp))))) >= len1 {
 		return int32(m_ERANGE)
 	}
 	return 0
@@ -120802,14 +120878,14 @@ func __vsyslog(tls *TLS, priority int32, message uintptr, ap uintptr) {
 	}
 	*(*int64)(unsafe.Pointer(bp + 16)) = Xtime(tls, UintptrFromInt32(0))
 	Xgmtime_r(tls, bp+16, bp+24)
-	Xstrftime(tls, bp, uint64(16), ts+1207, bp+24)
+	Xstrftime(tls, bp, uint64(16), ts+1193, bp+24)
 	if _log_opt&int32(m_LOG_PID) != 0 {
 		v1 = Xgetpid(tls)
 	} else {
 		v1 = 0
 	}
 	pid = v1
-	l = Xsnprintf(tls, bp+80, uint64(1024), ts+1216, VaList(bp+1120, priority, bp, bp+1104, uintptr(unsafe.Pointer(&_log_ident)), ts+1238+BoolUintptr(!(pid != 0)), pid, ts+1240+BoolUintptr(!(pid != 0))))
+	l = Xsnprintf(tls, bp+80, uint64(1024), ts+1202, VaList(bp+1120, priority, bp, bp+1104, uintptr(unsafe.Pointer(&_log_ident)), ts+1224+BoolUintptr(!(pid != 0)), pid, ts+1226+BoolUintptr(!(pid != 0))))
 	*(*int32)(unsafe.Pointer(X__errno_location(tls))) = errno_save
 	l2 = Xvsnprintf(tls, bp+80+uintptr(l), uint64(1024)-uint64(l), message, ap)
 	if l2 >= 0 {
@@ -120824,14 +120900,14 @@ func __vsyslog(tls *TLS, priority int32, message uintptr, ap uintptr) {
 			(*(*[1024]int8)(unsafe.Pointer(bp + 80)))[v2] = int8('\n')
 		}
 		if Xsend(tls, _log_fd, bp+80, uint64(l), 0) < 0 && (!(_is_lost_conn(tls, *(*int32)(unsafe.Pointer(X__errno_location(tls)))) != 0) || Xconnect(tls, _log_fd, uintptr(unsafe.Pointer(&_log_addr)), uint32(12)) < 0 || Xsend(tls, _log_fd, bp+80, uint64(l), 0) < 0) && _log_opt&int32(m_LOG_CONS) != 0 {
-			fd = Xopen(tls, ts+951, Int32FromInt32(m_O_WRONLY)|Int32FromInt32(m_O_NOCTTY)|Int32FromInt32(m_O_CLOEXEC), 0)
+			fd = Xopen(tls, ts+937, Int32FromInt32(m_O_WRONLY)|Int32FromInt32(m_O_NOCTTY)|Int32FromInt32(m_O_CLOEXEC), 0)
 			if fd >= 0 {
-				Xdprintf(tls, fd, ts+1242, VaList(bp+1120, l-*(*int32)(unsafe.Pointer(bp + 1104)), bp+80+uintptr(*(*int32)(unsafe.Pointer(bp + 1104)))))
+				Xdprintf(tls, fd, ts+1228, VaList(bp+1120, l-*(*int32)(unsafe.Pointer(bp + 1104)), bp+80+uintptr(*(*int32)(unsafe.Pointer(bp + 1104)))))
 				Xclose(tls, fd)
 			}
 		}
 		if _log_opt&int32(m_LOG_PERROR) != 0 {
-			Xdprintf(tls, int32(2), ts+1242, VaList(bp+1120, l-*(*int32)(unsafe.Pointer(bp + 1104)), bp+80+uintptr(*(*int32)(unsafe.Pointer(bp + 1104)))))
+			Xdprintf(tls, int32(2), ts+1228, VaList(bp+1120, l-*(*int32)(unsafe.Pointer(bp + 1104)), bp+80+uintptr(*(*int32)(unsafe.Pointer(bp + 1104)))))
 		}
 	}
 }
@@ -120945,7 +121021,7 @@ func _do_wordexp(tls *TLS, s uintptr, we uintptr, flags int32) (r int32) {
 	if flags&int32(m_WRDE_SHOWERR) != 0 {
 		v1 = ts
 	} else {
-		v1 = ts + 1247
+		v1 = ts + 1233
 	}
 	redir = v1
 	err = 0
@@ -121062,11 +121138,11 @@ func _do_wordexp(tls *TLS, s uintptr, we uintptr, flags int32) (r int32) {
 		} else {
 			Xdup2(tls, (*(*[2]int32)(unsafe.Pointer(bp)))[int32(1)], int32(1))
 		}
-		Xexecl(tls, ts+1259, ts+1267, VaList(bp+144, ts+1270, ts+1273, ts+1267, s, redir, UintptrFromInt32(0)))
+		Xexecl(tls, ts+1245, ts+1253, VaList(bp+144, ts+1256, ts+1259, ts+1253, s, redir, UintptrFromInt32(0)))
 		x__exit(tls, int32(1))
 	}
 	Xclose(tls, (*(*[2]int32)(unsafe.Pointer(bp)))[int32(1)])
-	f = Xfdopen(tls, (*(*[2]int32)(unsafe.Pointer(bp)))[0], ts+1303)
+	f = Xfdopen(tls, (*(*[2]int32)(unsafe.Pointer(bp)))[0], ts+1289)
 	if !(f != 0) {
 		Xclose(tls, (*(*[2]int32)(unsafe.Pointer(bp)))[0])
 		Xkill(tls, pid, int32(m_SIGKILL))
@@ -121357,7 +121433,7 @@ func x___shm_mapname(tls *TLS, name uintptr, buf uintptr) (r uintptr) {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENAMETOOLONG)
 		return uintptr(0)
 	}
-	_memcpy(tls, buf, ts+1305, uint64(9))
+	_memcpy(tls, buf, ts+1291, uint64(9))
 	_memcpy(tls, buf+uintptr(9), name, uint64(int64(p)-int64(name)+int64(1)))
 	return buf
 }
@@ -121822,13 +121898,14 @@ func Xmbrtowc(tls *TLS, wc uintptr, src uintptr, n uint64, st uintptr) (r uint64
 	}
 	bp := tls.Alloc(16) /* tlsAllocs 8 maxVaListSize 0 */
 	defer tls.Free(16)
-	var N, c uint32
+	var N uint64
+	var c uint32
 	var s, v3, v4 uintptr
 	var v1, v2 int32
 	var _ /* dummy at bp+0 */ int32
 	_, _, _, _, _, _, _ = N, c, s, v1, v2, v3, v4
 	s = src
-	N = uint32(n)
+	N = n
 	if !(st != 0) {
 		st = uintptr(unsafe.Pointer(&_internal_state3))
 	}
@@ -121881,7 +121958,7 @@ func Xmbrtowc(tls *TLS, wc uintptr, src uintptr, n uint64, st uintptr) (r uint64
 		if !(c&(Uint32FromUint32(1)<<Int32FromInt32(31)) != 0) {
 			*(*uint32)(unsafe.Pointer(st)) = uint32(0)
 			*(*int32)(unsafe.Pointer(wc)) = int32(c)
-			return uint64(N) - n
+			return N - n
 		}
 		if n != 0 {
 			if uint32(*(*uint8)(unsafe.Pointer(s)))-uint32(0x80) >= uint32(0x40) {
@@ -123263,7 +123340,11 @@ func Xdn_comp(tls *TLS, src uintptr, dst uintptr, space int32, dnptrs uintptr, l
 	return i
 }
 
-func x___dn_expand(tls *TLS, base uintptr, end uintptr, src uintptr, dest uintptr, space int32) (r int32) {
+func Xdn_expand(tls *TLS, base uintptr, end uintptr, src uintptr, dest uintptr, space int32) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v base=%v end=%v src=%v dest=%v space=%v, (%v:)", tls, base, end, src, dest, space, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	var dbegin, dend, p, v3, v4, v6, v7 uintptr
 	var i, j, len1, v1, v5 int32
 	_, _, _, _, _, _, _, _, _, _, _, _ = dbegin, dend, i, j, len1, p, v1, v3, v4, v5, v6, v7
@@ -123466,7 +123547,7 @@ func x___dns_parse(tls *TLS, r uintptr, rlen int32, callback uintptr, ctx uintpt
 		for int64(p)-int64(r) < int64(rlen) && uint32(*(*uint8)(unsafe.Pointer(p)))-uint32(1) < uint32(127) {
 			p++
 		}
-		if p > r+uintptr(rlen)-uintptr(6) || int32(*(*uint8)(unsafe.Pointer(p))) > int32(193) || int32(*(*uint8)(unsafe.Pointer(p))) == int32(193) && int32(*(*uint8)(unsafe.Pointer(p + 1))) > int32(254) {
+		if p > r+uintptr(rlen)-uintptr(6) {
 			return -int32(1)
 		}
 		p += uintptr(int32(5) + BoolInt32(!!(*(*uint8)(unsafe.Pointer(p)) != 0)))
@@ -123480,7 +123561,7 @@ func x___dns_parse(tls *TLS, r uintptr, rlen int32, callback uintptr, ctx uintpt
 		for int64(p)-int64(r) < int64(rlen) && uint32(*(*uint8)(unsafe.Pointer(p)))-uint32(1) < uint32(127) {
 			p++
 		}
-		if p > r+uintptr(rlen)-uintptr(12) || int32(*(*uint8)(unsafe.Pointer(p))) > int32(193) || int32(*(*uint8)(unsafe.Pointer(p))) == int32(193) && int32(*(*uint8)(unsafe.Pointer(p + 1))) > int32(254) {
+		if p > r+uintptr(rlen)-uintptr(12) {
 			return -int32(1)
 		}
 		p += uintptr(int32(1) + BoolInt32(!!(*(*uint8)(unsafe.Pointer(p)) != 0)))
@@ -123658,9 +123739,9 @@ func Xether_ntoa_r(tls *TLS, p_a uintptr, x uintptr) (r uintptr) {
 			break
 		}
 		if ii == 0 {
-			v2 = ts + 1315
+			v2 = ts + 1301
 		} else {
-			v2 = ts + 1320
+			v2 = ts + 1306
 		}
 		x += uintptr(Xsprintf(tls, x, v2, VaList(bp+8, int32(*(*uint8)(unsafe.Pointer(p_a + uintptr(ii)))))))
 		goto _1
@@ -124715,7 +124796,7 @@ func _itoa(tls *TLS, p uintptr, x uint32) (r uintptr) {
 func _mkptr4(tls *TLS, s uintptr, ip uintptr) {
 	bp := tls.Alloc(48) /* tlsAllocs 0 maxVaListSize 32 */
 	defer tls.Free(48)
-	Xsprintf(tls, s, ts+1326, VaList(bp+8, int32(*(*uint8)(unsafe.Pointer(ip + 3))), int32(*(*uint8)(unsafe.Pointer(ip + 2))), int32(*(*uint8)(unsafe.Pointer(ip + 1))), int32(*(*uint8)(unsafe.Pointer(ip)))))
+	Xsprintf(tls, s, ts+1312, VaList(bp+8, int32(*(*uint8)(unsafe.Pointer(ip + 3))), int32(*(*uint8)(unsafe.Pointer(ip + 2))), int32(*(*uint8)(unsafe.Pointer(ip + 1))), int32(*(*uint8)(unsafe.Pointer(ip)))))
 }
 
 func _mkptr6(tls *TLS, s uintptr, ip uintptr) {
@@ -124743,7 +124824,7 @@ func _mkptr6(tls *TLS, s uintptr, ip uintptr) {
 	_1:
 		i--
 	}
-	Xstrcpy(tls, s, ts+1351)
+	Xstrcpy(tls, s, ts+1337)
 }
 
 var _xdigits = [17]int8{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'}
@@ -124760,13 +124841,13 @@ func _reverse_hosts(tls *TLS, buf uintptr, a uintptr, scopeid uint32, family int
 	var _ /* iplit at bp+1560 */ Taddress
 	var _ /* line at bp+0 */ [512]int8
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = f, p, z, v1, v10, v11, v13, v15, v16, v18, v2, v4, v5, v7, v8
-	f = x___fopen_rb_ca(tls, ts+1360, bp+1592, bp+512, uint64(1032))
+	f = x___fopen_rb_ca(tls, ts+1346, bp+1592, bp+512, uint64(1032))
 	if !(f != 0) {
 		return
 	}
 	if family == int32(m_PF_INET) {
 		_memcpy(tls, bp+1544+uintptr(12), a, uint64(4))
-		_memcpy(tls, bp+1544, ts+1371, uint64(12))
+		_memcpy(tls, bp+1544, ts+1357, uint64(12))
 		a = bp + 1544
 	}
 	for Xfgets(tls, bp, int32(512), f) != 0 {
@@ -124804,7 +124885,7 @@ func _reverse_hosts(tls *TLS, buf uintptr, a uintptr, scopeid uint32, family int
 		}
 		if (*(*Taddress)(unsafe.Pointer(bp + 1560))).Ffamily == int32(m_PF_INET) {
 			_memcpy(tls, bp+1560+8+uintptr(12), bp+1560+8, uint64(4))
-			_memcpy(tls, bp+1560+8, ts+1371, uint64(12))
+			_memcpy(tls, bp+1560+8, ts+1357, uint64(12))
 			(*(*Taddress)(unsafe.Pointer(bp + 1560))).Fscopeid = uint32(0)
 		}
 		if Xmemcmp(tls, a, bp+1560+8, uint64(16)) != 0 || (*(*Taddress)(unsafe.Pointer(bp + 1560))).Fscopeid != scopeid {
@@ -124860,7 +124941,7 @@ func _reverse_services(tls *TLS, buf uintptr, port int32, dgram int32) {
 	var _ /* line at bp+0 */ [128]int8
 	var _ /* z at bp+128 */ uintptr
 	_, _, _, _, _, _, _, _, _ = f, p, svport, v1, v2, v4, v5, v7, v8
-	f = x___fopen_rb_ca(tls, ts+1384, bp+1168, bp+136, uint64(1032))
+	f = x___fopen_rb_ca(tls, ts+1370, bp+1168, bp+136, uint64(1032))
 	if !(f != 0) {
 		return
 	}
@@ -124898,10 +124979,10 @@ func _reverse_services(tls *TLS, buf uintptr, port int32, dgram int32) {
 		if svport != uint64(port) || *(*uintptr)(unsafe.Pointer(bp + 128)) == p {
 			continue
 		}
-		if dgram != 0 && Xstrncmp(tls, *(*uintptr)(unsafe.Pointer(bp + 128)), ts+1398, uint64(4)) != 0 {
+		if dgram != 0 && Xstrncmp(tls, *(*uintptr)(unsafe.Pointer(bp + 128)), ts+1384, uint64(4)) != 0 {
 			continue
 		}
-		if !(dgram != 0) && Xstrncmp(tls, *(*uintptr)(unsafe.Pointer(bp + 128)), ts+1403, uint64(4)) != 0 {
+		if !(dgram != 0) && Xstrncmp(tls, *(*uintptr)(unsafe.Pointer(bp + 128)), ts+1389, uint64(4)) != 0 {
 			continue
 		}
 		if int64(p)-int64(bp) > int64(32) {
@@ -124917,7 +124998,7 @@ func _dns_parse_callback(tls *TLS, c uintptr, rr int32, data uintptr, len1 int32
 	if rr != int32(m_RR_PTR) {
 		return 0
 	}
-	if x___dn_expand(tls, packet, packet+uintptr(plen), data, c, int32(256)) <= 0 {
+	if Xdn_expand(tls, packet, packet+uintptr(plen), data, c, int32(256)) <= 0 {
 		*(*int8)(unsafe.Pointer(c)) = 0
 	}
 	return 0
@@ -124954,7 +125035,7 @@ func Xgetnameinfo(tls *TLS, sa uintptr, sl uint32, node uintptr, nodelen uint32,
 		if uint64(sl) < uint64(28) {
 			return -int32(6)
 		}
-		if Xmemcmp(tls, a, ts+1371, uint64(12)) != 0 {
+		if Xmemcmp(tls, a, ts+1357, uint64(12)) != 0 {
 			_mkptr6(tls, bp, a)
 		} else {
 			_mkptr4(tls, bp, a+uintptr(12))
@@ -125101,10 +125182,10 @@ func Xgetservbyname_r(tls *TLS, name uintptr, prots uintptr, se uintptr, buf uin
 	if !(prots != 0) {
 		proto = 0
 	} else {
-		if !(Xstrcmp(tls, prots, ts+1408) != 0) {
+		if !(Xstrcmp(tls, prots, ts+1394) != 0) {
 			proto = int32(m_IPPROTO_TCP)
 		} else {
-			if !(Xstrcmp(tls, prots, ts+1412) != 0) {
+			if !(Xstrcmp(tls, prots, ts+1398) != 0) {
 				proto = int32(m_IPPROTO_UDP)
 			} else {
 				return int32(m_EINVAL)
@@ -125128,9 +125209,9 @@ func Xgetservbyname_r(tls *TLS, name uintptr, prots uintptr, se uintptr, buf uin
 	*(*uintptr)(unsafe.Pointer((*Tservent)(unsafe.Pointer(se)).Fs_aliases + 1*8)) = uintptr(0)
 	(*Tservent)(unsafe.Pointer(se)).Fs_port = int32(Xhtons(tls, (*(*[2]Tservice)(unsafe.Pointer(bp)))[0].Fport))
 	if int32((*(*[2]Tservice)(unsafe.Pointer(bp)))[0].Fproto) == int32(m_IPPROTO_TCP) {
-		v1 = ts + 1408
+		v1 = ts + 1394
 	} else {
-		v1 = ts + 1412
+		v1 = ts + 1398
 	}
 	(*Tservent)(unsafe.Pointer(se)).Fs_proto = v1
 	*(*uintptr)(unsafe.Pointer(res)) = se
@@ -125171,9 +125252,9 @@ func Xgetservbyport_r(tls *TLS, port int32, prots uintptr, se uintptr, buf uintp
 		Fsin_port:   uint16(port),
 	}
 	if !(prots != 0) {
-		r = Xgetservbyport_r(tls, port, ts+1408, se, buf, buflen, res)
+		r = Xgetservbyport_r(tls, port, ts+1394, se, buf, buflen, res)
 		if r != 0 {
-			r = Xgetservbyport_r(tls, port, ts+1412, se, buf, buflen, res)
+			r = Xgetservbyport_r(tls, port, ts+1398, se, buf, buflen, res)
 		}
 		return r
 	}
@@ -125188,7 +125269,7 @@ func Xgetservbyport_r(tls *TLS, port int32, prots uintptr, se uintptr, buf uintp
 	}
 	buf += uintptr(uint64(8) - uint64(i))
 	buflen -= uint64(8) - uint64(i)
-	if Xstrcmp(tls, prots, ts+1408) != 0 && Xstrcmp(tls, prots, ts+1412) != 0 {
+	if Xstrcmp(tls, prots, ts+1394) != 0 && Xstrcmp(tls, prots, ts+1398) != 0 {
 		return int32(m_EINVAL)
 	}
 	(*Tservent)(unsafe.Pointer(se)).Fs_port = port
@@ -125200,7 +125281,7 @@ func Xgetservbyport_r(tls *TLS, port int32, prots uintptr, se uintptr, buf uintp
 	v1 = buf
 	(*Tservent)(unsafe.Pointer(se)).Fs_name = v1
 	*(*uintptr)(unsafe.Pointer((*Tservent)(unsafe.Pointer(se)).Fs_aliases)) = v1
-	if Xstrcmp(tls, prots, ts+1412) != 0 {
+	if Xstrcmp(tls, prots, ts+1398) != 0 {
 		v2 = 0
 	} else {
 		v2 = int32(m_NI_DGRAM)
@@ -125419,7 +125500,7 @@ func Xherror(tls *TLS, msg uintptr) {
 	} else {
 		v2 = ts
 	}
-	Xfprintf(tls, uintptr(unsafe.Pointer(&x___stderr_FILE)), ts+1416, VaList(bp+8, v1, v2, Xhstrerror(tls, *(*int32)(unsafe.Pointer(x___h_errno_location(tls))))))
+	Xfprintf(tls, uintptr(unsafe.Pointer(&x___stderr_FILE)), ts+1402, VaList(bp+8, v1, v2, Xhstrerror(tls, *(*int32)(unsafe.Pointer(x___h_errno_location(tls))))))
 }
 
 type Tucontext_t5 = struct {
@@ -125871,7 +125952,7 @@ func Xinet_ntoa(tls *TLS, _in Tin_addr) (r uintptr) {
 	var a uintptr
 	_ = a
 	a = bp
-	Xsnprintf(tls, uintptr(unsafe.Pointer(&_buf5)), uint64(16), ts+1424, VaList(bp+16, int32(*(*uint8)(unsafe.Pointer(a))), int32(*(*uint8)(unsafe.Pointer(a + 1))), int32(*(*uint8)(unsafe.Pointer(a + 2))), int32(*(*uint8)(unsafe.Pointer(a + 3)))))
+	Xsnprintf(tls, uintptr(unsafe.Pointer(&_buf5)), uint64(16), ts+1410, VaList(bp+16, int32(*(*uint8)(unsafe.Pointer(a))), int32(*(*uint8)(unsafe.Pointer(a + 1))), int32(*(*uint8)(unsafe.Pointer(a + 2))), int32(*(*uint8)(unsafe.Pointer(a + 3)))))
 	return uintptr(unsafe.Pointer(&_buf5))
 }
 
@@ -125892,14 +125973,14 @@ func Xinet_ntop(tls *TLS, af int32, a0 uintptr, s uintptr, l uint32) (r uintptr)
 	a = a0
 	switch af {
 	case int32(m_PF_INET):
-		if uint32(Xsnprintf(tls, s, uint64(l), ts+1424, VaList(bp+112, int32(*(*uint8)(unsafe.Pointer(a))), int32(*(*uint8)(unsafe.Pointer(a + 1))), int32(*(*uint8)(unsafe.Pointer(a + 2))), int32(*(*uint8)(unsafe.Pointer(a + 3)))))) < l {
+		if uint32(Xsnprintf(tls, s, uint64(l), ts+1410, VaList(bp+112, int32(*(*uint8)(unsafe.Pointer(a))), int32(*(*uint8)(unsafe.Pointer(a + 1))), int32(*(*uint8)(unsafe.Pointer(a + 2))), int32(*(*uint8)(unsafe.Pointer(a + 3)))))) < l {
 			return s
 		}
 	case int32(m_PF_INET6):
-		if Xmemcmp(tls, a, ts+1371, uint64(12)) != 0 {
-			Xsnprintf(tls, bp, uint64(100), ts+1436, VaList(bp+112, int32(256)*int32(*(*uint8)(unsafe.Pointer(a)))+int32(*(*uint8)(unsafe.Pointer(a + 1))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 2)))+int32(*(*uint8)(unsafe.Pointer(a + 3))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 4)))+int32(*(*uint8)(unsafe.Pointer(a + 5))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 6)))+int32(*(*uint8)(unsafe.Pointer(a + 7))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 8)))+int32(*(*uint8)(unsafe.Pointer(a + 9))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 10)))+int32(*(*uint8)(unsafe.Pointer(a + 11))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 12)))+int32(*(*uint8)(unsafe.Pointer(a + 13))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 14)))+int32(*(*uint8)(unsafe.Pointer(a + 15)))))
+		if Xmemcmp(tls, a, ts+1357, uint64(12)) != 0 {
+			Xsnprintf(tls, bp, uint64(100), ts+1422, VaList(bp+112, int32(256)*int32(*(*uint8)(unsafe.Pointer(a)))+int32(*(*uint8)(unsafe.Pointer(a + 1))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 2)))+int32(*(*uint8)(unsafe.Pointer(a + 3))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 4)))+int32(*(*uint8)(unsafe.Pointer(a + 5))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 6)))+int32(*(*uint8)(unsafe.Pointer(a + 7))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 8)))+int32(*(*uint8)(unsafe.Pointer(a + 9))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 10)))+int32(*(*uint8)(unsafe.Pointer(a + 11))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 12)))+int32(*(*uint8)(unsafe.Pointer(a + 13))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 14)))+int32(*(*uint8)(unsafe.Pointer(a + 15)))))
 		} else {
-			Xsnprintf(tls, bp, uint64(100), ts+1460, VaList(bp+112, int32(256)*int32(*(*uint8)(unsafe.Pointer(a)))+int32(*(*uint8)(unsafe.Pointer(a + 1))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 2)))+int32(*(*uint8)(unsafe.Pointer(a + 3))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 4)))+int32(*(*uint8)(unsafe.Pointer(a + 5))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 6)))+int32(*(*uint8)(unsafe.Pointer(a + 7))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 8)))+int32(*(*uint8)(unsafe.Pointer(a + 9))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 10)))+int32(*(*uint8)(unsafe.Pointer(a + 11))), int32(*(*uint8)(unsafe.Pointer(a + 12))), int32(*(*uint8)(unsafe.Pointer(a + 13))), int32(*(*uint8)(unsafe.Pointer(a + 14))), int32(*(*uint8)(unsafe.Pointer(a + 15)))))
+			Xsnprintf(tls, bp, uint64(100), ts+1446, VaList(bp+112, int32(256)*int32(*(*uint8)(unsafe.Pointer(a)))+int32(*(*uint8)(unsafe.Pointer(a + 1))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 2)))+int32(*(*uint8)(unsafe.Pointer(a + 3))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 4)))+int32(*(*uint8)(unsafe.Pointer(a + 5))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 6)))+int32(*(*uint8)(unsafe.Pointer(a + 7))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 8)))+int32(*(*uint8)(unsafe.Pointer(a + 9))), int32(256)*int32(*(*uint8)(unsafe.Pointer(a + 10)))+int32(*(*uint8)(unsafe.Pointer(a + 11))), int32(*(*uint8)(unsafe.Pointer(a + 12))), int32(*(*uint8)(unsafe.Pointer(a + 13))), int32(*(*uint8)(unsafe.Pointer(a + 14))), int32(*(*uint8)(unsafe.Pointer(a + 15)))))
 		}
 		/* Replace longest /(^0|:)[:0]{2,}/ with "::" */
 		v2 = Int32FromInt32(0)
@@ -125913,7 +125994,7 @@ func Xinet_ntop(tls *TLS, af int32, a0 uintptr, s uintptr, l uint32) (r uintptr)
 			if i != 0 && int32((*(*[100]int8)(unsafe.Pointer(bp)))[i]) != int32(':') {
 				goto _1
 			}
-			j = int32(Xstrspn(tls, bp+uintptr(i), ts+1490))
+			j = int32(Xstrspn(tls, bp+uintptr(i), ts+1476))
 			if j > max {
 				best = i
 				max = j
@@ -126195,7 +126276,7 @@ func x___lookup_ipliteral(tls *TLS, buf uintptr, name uintptr, family int32) (r 
 	return int32(1)
 }
 
-const m_ABUF_SIZE = 768
+const m_ABUF_SIZE = 4800
 const m_DAS_MATCHINGLABEL = 268435456
 const m_DAS_MATCHINGSCOPE = 536870912
 const m_DAS_ORDER_SHIFT = 0
@@ -126294,7 +126375,7 @@ func _name_from_hosts(tls *TLS, buf uintptr, canon uintptr, name uintptr, family
 	cnt = 0
 	badfam = 0
 	have_canon = 0
-	f = x___fopen_rb_ca(tls, ts+1360, bp+1544, bp+512, uint64(1032))
+	f = x___fopen_rb_ca(tls, ts+1346, bp+1544, bp+512, uint64(1032))
 	if !(f != 0) {
 		switch *(*int32)(unsafe.Pointer(X__errno_location(tls))) {
 		case int32(m_ENOENT):
@@ -126434,7 +126515,7 @@ func _dns_parse_callback1(tls *TLS, c uintptr, rr int32, data uintptr, len1 int3
 	_, _, _, _ = ctx, family, v1, v2
 	ctx = c
 	if rr == int32(m_RR_CNAME) {
-		if x___dn_expand(tls, packet, packet+uintptr(plen), data, bp, int32(256)) > 0 && _is_valid_hostname(tls, bp) != 0 {
+		if Xdn_expand(tls, packet, packet+uintptr(plen), data, bp, int32(256)) > 0 && _is_valid_hostname(tls, bp) != 0 {
 			Xstrcpy(tls, (*Tdpc_ctx)(unsafe.Pointer(ctx)).Fcanon, bp)
 		}
 		return 0
@@ -126468,28 +126549,28 @@ func _dns_parse_callback1(tls *TLS, c uintptr, rr int32, data uintptr, len1 int3
 }
 
 func _name_from_dns(tls *TLS, buf uintptr, canon uintptr, name uintptr, family int32, conf uintptr) (r int32) {
-	bp := tls.Alloc(2176) /* tlsAllocs 2168 maxVaListSize 0 */
-	defer tls.Free(2176)
+	bp := tls.Alloc(10240) /* tlsAllocs 10232 maxVaListSize 0 */
+	defer tls.Free(10240)
 	var i, nq int32
 	var qtypes [2]int32
-	var _ /* abuf at bp+560 */ [2][768]uint8
-	var _ /* alens at bp+2136 */ [2]int32
-	var _ /* ap at bp+2112 */ [2]uintptr
-	var _ /* ctx at bp+2144 */ Tdpc_ctx
+	var _ /* abuf at bp+560 */ [2][4800]uint8
+	var _ /* alens at bp+10200 */ [2]int32
+	var _ /* ap at bp+10176 */ [2]uintptr
+	var _ /* ctx at bp+10208 */ Tdpc_ctx
 	var _ /* qbuf at bp+0 */ [2][280]uint8
-	var _ /* qlens at bp+2128 */ [2]int32
-	var _ /* qp at bp+2096 */ [2]uintptr
+	var _ /* qlens at bp+10192 */ [2]int32
+	var _ /* qp at bp+10160 */ [2]uintptr
 	_, _, _ = i, nq, qtypes
-	*(*[2]uintptr)(unsafe.Pointer(bp + 2096)) = [2]uintptr{
+	*(*[2]uintptr)(unsafe.Pointer(bp + 10160)) = [2]uintptr{
 		0: bp,
 		1: bp + 1*280,
 	}
-	*(*[2]uintptr)(unsafe.Pointer(bp + 2112)) = [2]uintptr{
+	*(*[2]uintptr)(unsafe.Pointer(bp + 10176)) = [2]uintptr{
 		0: bp + 560,
-		1: bp + 560 + 1*768,
+		1: bp + 560 + 1*4800,
 	}
 	nq = 0
-	*(*Tdpc_ctx)(unsafe.Pointer(bp + 2144)) = Tdpc_ctx{
+	*(*Tdpc_ctx)(unsafe.Pointer(bp + 10208)) = Tdpc_ctx{
 		Faddrs: buf,
 		Fcanon: canon,
 	}
@@ -126499,8 +126580,8 @@ func _name_from_dns(tls *TLS, buf uintptr, canon uintptr, name uintptr, family i
 			break
 		}
 		if family != _afrr[i].Faf {
-			(*(*[2]int32)(unsafe.Pointer(bp + 2128)))[nq] = x___res_mkquery(tls, 0, name, int32(1), _afrr[i].Frr, uintptr(0), 0, uintptr(0), bp+uintptr(nq)*280, int32(280))
-			if (*(*[2]int32)(unsafe.Pointer(bp + 2128)))[nq] == -int32(1) {
+			(*(*[2]int32)(unsafe.Pointer(bp + 10192)))[nq] = x___res_mkquery(tls, 0, name, int32(1), _afrr[i].Frr, uintptr(0), 0, uintptr(0), bp+uintptr(nq)*280, int32(280))
+			if (*(*[2]int32)(unsafe.Pointer(bp + 10192)))[nq] == -int32(1) {
 				return 0
 			}
 			qtypes[nq] = _afrr[i].Frr
@@ -126515,7 +126596,7 @@ func _name_from_dns(tls *TLS, buf uintptr, canon uintptr, name uintptr, family i
 	_1:
 		i++
 	}
-	if x___res_msend_rc(tls, nq, bp+2096, bp+2128, bp+2112, bp+2136, int32(768), conf) < 0 {
+	if x___res_msend_rc(tls, nq, bp+10160, bp+10192, bp+10176, bp+10200, int32(4800), conf) < 0 {
 		return -int32(11)
 	}
 	i = 0
@@ -126523,13 +126604,13 @@ func _name_from_dns(tls *TLS, buf uintptr, canon uintptr, name uintptr, family i
 		if !(i < nq) {
 			break
 		}
-		if (*(*[2]int32)(unsafe.Pointer(bp + 2136)))[i] < int32(4) || int32(*(*uint8)(unsafe.Pointer(bp + 560 + uintptr(i)*768 + 3)))&int32(15) == int32(2) {
+		if (*(*[2]int32)(unsafe.Pointer(bp + 10200)))[i] < int32(4) || int32(*(*uint8)(unsafe.Pointer(bp + 560 + uintptr(i)*4800 + 3)))&int32(15) == int32(2) {
 			return -int32(3)
 		}
-		if int32(*(*uint8)(unsafe.Pointer(bp + 560 + uintptr(i)*768 + 3)))&int32(15) == int32(3) {
+		if int32(*(*uint8)(unsafe.Pointer(bp + 560 + uintptr(i)*4800 + 3)))&int32(15) == int32(3) {
 			return 0
 		}
-		if int32(*(*uint8)(unsafe.Pointer(bp + 560 + uintptr(i)*768 + 3)))&int32(15) != 0 {
+		if int32(*(*uint8)(unsafe.Pointer(bp + 560 + uintptr(i)*4800 + 3)))&int32(15) != 0 {
 			return -int32(4)
 		}
 		goto _2
@@ -126541,17 +126622,17 @@ func _name_from_dns(tls *TLS, buf uintptr, canon uintptr, name uintptr, family i
 		if !(i >= 0) {
 			break
 		}
-		(*(*Tdpc_ctx)(unsafe.Pointer(bp + 2144))).Frrtype = qtypes[i]
-		if uint64((*(*[2]int32)(unsafe.Pointer(bp + 2136)))[i]) > uint64(768) {
-			(*(*[2]int32)(unsafe.Pointer(bp + 2136)))[i] = int32(768)
+		(*(*Tdpc_ctx)(unsafe.Pointer(bp + 10208))).Frrtype = qtypes[i]
+		if uint64((*(*[2]int32)(unsafe.Pointer(bp + 10200)))[i]) > uint64(4800) {
+			(*(*[2]int32)(unsafe.Pointer(bp + 10200)))[i] = int32(4800)
 		}
-		x___dns_parse(tls, bp+560+uintptr(i)*768, (*(*[2]int32)(unsafe.Pointer(bp + 2136)))[i], __ccgo_fp(_dns_parse_callback1), bp+2144)
+		x___dns_parse(tls, bp+560+uintptr(i)*4800, (*(*[2]int32)(unsafe.Pointer(bp + 10200)))[i], __ccgo_fp(_dns_parse_callback1), bp+10208)
 		goto _3
 	_3:
 		i--
 	}
-	if (*(*Tdpc_ctx)(unsafe.Pointer(bp + 2144))).Fcnt != 0 {
-		return (*(*Tdpc_ctx)(unsafe.Pointer(bp + 2144))).Fcnt
+	if (*(*Tdpc_ctx)(unsafe.Pointer(bp + 10208))).Fcnt != 0 {
+		return (*(*Tdpc_ctx)(unsafe.Pointer(bp + 10208))).Fcnt
 	}
 	return -int32(5)
 }
@@ -126881,7 +126962,7 @@ func x___lookup_name(tls *TLS, buf uintptr, canon uintptr, name uintptr, family 
 				goto _6
 			}
 			_memcpy(tls, buf+uintptr(i)*28+8+uintptr(12), buf+uintptr(i)*28+8, uint64(4))
-			_memcpy(tls, buf+uintptr(i)*28+8, ts+1371, uint64(12))
+			_memcpy(tls, buf+uintptr(i)*28+8, ts+1357, uint64(12))
 			(*(*Taddress)(unsafe.Pointer(buf + uintptr(i)*28))).Ffamily = int32(m_PF_INET6)
 			goto _6
 		_6:
@@ -126939,9 +127020,9 @@ func x___lookup_name(tls *TLS, buf uintptr, canon uintptr, name uintptr, family 
 			sa = bp + 4
 			*(*uint32)(unsafe.Pointer(bp + 92)) = uint32(28)
 		} else {
-			_memcpy(tls, bp+4+8, ts+1371, uint64(12))
+			_memcpy(tls, bp+4+8, ts+1357, uint64(12))
 			_memcpy(tls, bp+32+8+uintptr(12), buf+uintptr(i)*28+8, uint64(4))
-			_memcpy(tls, bp+32+8, ts+1371, uint64(12))
+			_memcpy(tls, bp+32+8, ts+1357, uint64(12))
 			_memcpy(tls, bp+32+8+uintptr(12), buf+uintptr(i)*28+8, uint64(4))
 			_memcpy(tls, bp+76+4, buf+uintptr(i)*28+8, uint64(4))
 			da = bp + 76
@@ -127064,7 +127145,7 @@ func x___lookup_serv(tls *TLS, buf uintptr, name uintptr, proto int32, socktype 
 		return -int32(2)
 	}
 	l = Xstrlen(tls, name)
-	f = x___fopen_rb_ca(tls, ts+1384, bp+1168, bp+136, uint64(1032))
+	f = x___fopen_rb_ca(tls, ts+1370, bp+1168, bp+136, uint64(1032))
 	if !(f != 0) {
 		switch *(*int32)(unsafe.Pointer(X__errno_location(tls))) {
 		case int32(m_ENOENT):
@@ -127140,7 +127221,7 @@ func x___lookup_serv(tls *TLS, buf uintptr, name uintptr, proto int32, socktype 
 		if port > uint64(65535) || *(*uintptr)(unsafe.Pointer(bp + 128)) == p {
 			continue
 		}
-		if !(Xstrncmp(tls, *(*uintptr)(unsafe.Pointer(bp + 128)), ts+1398, uint64(4)) != 0) {
+		if !(Xstrncmp(tls, *(*uintptr)(unsafe.Pointer(bp + 128)), ts+1384, uint64(4)) != 0) {
 			if proto == int32(m_IPPROTO_TCP) {
 				continue
 			}
@@ -127150,7 +127231,7 @@ func x___lookup_serv(tls *TLS, buf uintptr, name uintptr, proto int32, socktype 
 			cnt++
 			(*(*Tservice)(unsafe.Pointer(buf + uintptr(v20)*4))).Fproto = uint8(m_IPPROTO_UDP)
 		}
-		if !(Xstrncmp(tls, *(*uintptr)(unsafe.Pointer(bp + 128)), ts+1403, uint64(4)) != 0) {
+		if !(Xstrncmp(tls, *(*uintptr)(unsafe.Pointer(bp + 128)), ts+1389, uint64(4)) != 0) {
 			if proto == int32(m_IPPROTO_UDP) {
 				continue
 			}
@@ -127571,7 +127652,7 @@ func Xns_name_uncompress(tls *TLS, msg uintptr, eom uintptr, src uintptr, dst ui
 	}
 	var r int32
 	_ = r
-	r = x___dn_expand(tls, msg, eom, src, dst, int32(dstsiz))
+	r = Xdn_expand(tls, msg, eom, src, dst, int32(dstsiz))
 	if r < 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EMSGSIZE)
 	}
@@ -128238,7 +128319,7 @@ func x___res_msend_rc(tls *TLS, nqueries int32, queries uintptr, qlens uintptr, 
 				goto _8
 			}
 			_memcpy(tls, bp+116+uintptr(i)*28+8+uintptr(12), bp+116+uintptr(i)*28+4, uint64(4))
-			_memcpy(tls, bp+116+uintptr(i)*28+8, ts+1371, uint64(12))
+			_memcpy(tls, bp+116+uintptr(i)*28+8, ts+1357, uint64(12))
 			(*(*Tsockaddr_in6)(unsafe.Pointer(bp + 116 + uintptr(i)*28))).Fsin6_family = uint16(m_PF_INET6)
 			(*(*Tsockaddr_in6)(unsafe.Pointer(bp + 116 + uintptr(i)*28))).Fsin6_flowinfo = uint32(0)
 			(*(*Tsockaddr_in6)(unsafe.Pointer(bp + 116 + uintptr(i)*28))).Fsin6_scope_id = uint32(0)
@@ -128665,7 +128746,7 @@ func x___get_resolv_conf(tls *TLS, conf uintptr, search uintptr, search_sz uint6
 	if search != 0 {
 		*(*int8)(unsafe.Pointer(search)) = 0
 	}
-	f = x___fopen_rb_ca(tls, ts+1493, bp+512, bp+256, uint64(256))
+	f = x___fopen_rb_ca(tls, ts+1479, bp+512, bp+256, uint64(256))
 	if !(f != 0) {
 		switch *(*int32)(unsafe.Pointer(X__errno_location(tls))) {
 		case int32(m_ENOENT):
@@ -128685,14 +128766,14 @@ func x___get_resolv_conf(tls *TLS, conf uintptr, search uintptr, search_sz uint6
 			}
 			continue
 		}
-		if v4 = !(Xstrncmp(tls, bp, ts+1510, uint64(7)) != 0); v4 {
+		if v4 = !(Xstrncmp(tls, bp, ts+1496, uint64(7)) != 0); v4 {
 			v1 = int32((*(*[256]int8)(unsafe.Pointer(bp)))[int32(7)])
 			v2 = BoolInt32(v1 == int32(' ') || uint32(v1)-uint32('\t') < uint32(5))
 			goto _3
 		_3:
 		}
 		if v4 && v2 != 0 {
-			p = Xstrstr(tls, bp, ts+1518)
+			p = Xstrstr(tls, bp, ts+1504)
 			if p != 0 && BoolInt32(uint32(*(*int8)(unsafe.Pointer(p + 6)))-uint32('0') < uint32(10)) != 0 {
 				p += uintptr(6)
 				x = Xstrtoul(tls, p, bp+744, int32(10))
@@ -128705,7 +128786,7 @@ func x___get_resolv_conf(tls *TLS, conf uintptr, search uintptr, search_sz uint6
 					(*Tresolvconf)(unsafe.Pointer(conf)).Fndots = uint32(v5)
 				}
 			}
-			p = Xstrstr(tls, bp, ts+1525)
+			p = Xstrstr(tls, bp, ts+1511)
 			if p != 0 && BoolInt32(uint32(*(*int8)(unsafe.Pointer(p + 9)))-uint32('0') < uint32(10)) != 0 {
 				p += uintptr(9)
 				x1 = Xstrtoul(tls, p, bp+744, int32(10))
@@ -128718,7 +128799,7 @@ func x___get_resolv_conf(tls *TLS, conf uintptr, search uintptr, search_sz uint6
 					(*Tresolvconf)(unsafe.Pointer(conf)).Fattempts = uint32(v6)
 				}
 			}
-			p = Xstrstr(tls, bp, ts+1535)
+			p = Xstrstr(tls, bp, ts+1521)
 			if p != 0 && (BoolInt32(uint32(*(*int8)(unsafe.Pointer(p + 8)))-uint32('0') < uint32(10)) != 0 || int32(*(*int8)(unsafe.Pointer(p + 8))) == int32('.')) {
 				p += uintptr(8)
 				x2 = Xstrtoul(tls, p, bp+744, int32(10))
@@ -128733,7 +128814,7 @@ func x___get_resolv_conf(tls *TLS, conf uintptr, search uintptr, search_sz uint6
 			}
 			continue
 		}
-		if v11 = !(Xstrncmp(tls, bp, ts+1544, uint64(10)) != 0); v11 {
+		if v11 = !(Xstrncmp(tls, bp, ts+1530, uint64(10)) != 0); v11 {
 			v8 = int32((*(*[256]int8)(unsafe.Pointer(bp)))[int32(10)])
 			v9 = BoolInt32(v8 == int32(' ') || uint32(v8)-uint32('\t') < uint32(5))
 			goto _10
@@ -128780,7 +128861,7 @@ func x___get_resolv_conf(tls *TLS, conf uintptr, search uintptr, search_sz uint6
 		if !(search != 0) {
 			continue
 		}
-		if v24 = Xstrncmp(tls, bp, ts+1555, uint64(6)) != 0 && Xstrncmp(tls, bp, ts+1562, uint64(6)) != 0; !v24 {
+		if v24 = Xstrncmp(tls, bp, ts+1541, uint64(6)) != 0 && Xstrncmp(tls, bp, ts+1548, uint64(6)) != 0; !v24 {
 			v21 = int32((*(*[256]int8)(unsafe.Pointer(bp)))[int32(6)])
 			v22 = BoolInt32(v21 == int32(' ') || uint32(v21)-uint32('\t') < uint32(5))
 			goto _23
@@ -128812,7 +128893,7 @@ func x___get_resolv_conf(tls *TLS, conf uintptr, search uintptr, search_sz uint6
 	x___fclose_ca(tls, f)
 no_resolv_conf:
 	if !(nns != 0) {
-		x___lookup_ipliteral(tls, conf, ts+1569, m_PF_UNSPEC)
+		x___lookup_ipliteral(tls, conf, ts+1555, m_PF_UNSPEC)
 		nns = int32(1)
 	}
 	(*Tresolvconf)(unsafe.Pointer(conf)).Fnns = uint32(nns)
@@ -129434,7 +129515,7 @@ func x___getgr_a(tls *TLS, name uintptr, gid uint32, gr uintptr, buf uintptr, si
 	rv = 0
 	*(*uintptr)(unsafe.Pointer(res)) = uintptr(0)
 	x___pthread_setcancelstate(tls, int32(m_PTHREAD_CANCEL_DISABLE), bp)
-	f = Xfopen(tls, ts+1579, ts+501)
+	f = Xfopen(tls, ts+1565, ts+501)
 	if !(f != 0) {
 		rv = *(*int32)(unsafe.Pointer(X__errno_location(tls)))
 		goto done
@@ -129695,7 +129776,7 @@ func Xgetgrent(tls *TLS) (r uintptr) {
 	*(*uint64)(unsafe.Pointer(bp + 8)) = uint64(0)
 	*(*uint64)(unsafe.Pointer(bp + 16)) = uint64(0)
 	if !(_f1 != 0) {
-		_f1 = Xfopen(tls, ts+1579, ts+501)
+		_f1 = Xfopen(tls, ts+1565, ts+501)
 	}
 	if !(_f1 != 0) {
 		return uintptr(0)
@@ -129943,7 +130024,7 @@ func Xgetgrouplist(tls *TLS, user uintptr, gid uint32, groups uintptr, ngroups u
 		}
 	}
 	Xfclose(tls, f)
-	f = Xfopen(tls, ts+1579, ts+501)
+	f = Xfopen(tls, ts+1565, ts+501)
 	if !(f != 0) && *(*int32)(unsafe.Pointer(X__errno_location(tls))) != int32(m_ENOENT) && *(*int32)(unsafe.Pointer(X__errno_location(tls))) != int32(m_ENOTDIR) {
 		goto cleanup
 	}
@@ -130072,7 +130153,7 @@ func x___getpw_a(tls *TLS, name uintptr, uid uint32, pw uintptr, buf uintptr, si
 	rv = 0
 	*(*uintptr)(unsafe.Pointer(res)) = uintptr(0)
 	x___pthread_setcancelstate(tls, int32(m_PTHREAD_CANCEL_DISABLE), bp+4)
-	f = Xfopen(tls, ts+1590, ts+501)
+	f = Xfopen(tls, ts+1576, ts+501)
 	if !(f != 0) {
 		rv = *(*int32)(unsafe.Pointer(X__errno_location(tls)))
 		goto done
@@ -130258,7 +130339,7 @@ func Xgetpwent(tls *TLS) (r uintptr) {
 	defer tls.Free(16)
 	var _ /* res at bp+0 */ uintptr
 	if !(_f2 != 0) {
-		_f2 = Xfopen(tls, ts+1590, ts+501)
+		_f2 = Xfopen(tls, ts+1576, ts+501)
 	}
 	if !(_f2 != 0) {
 		return uintptr(0)
@@ -130580,7 +130661,7 @@ func Xgetspnam_r(tls *TLS, name uintptr, sp uintptr, buf uintptr, size uint64, r
 		return v2
 	}
 	/* Protect against truncation */
-	if uint64(Xsnprintf(tls, bp, uint64(275), ts+1602, VaList(bp+456, name))) >= uint64(275) {
+	if uint64(Xsnprintf(tls, bp, uint64(275), ts+1588, VaList(bp+456, name))) >= uint64(275) {
 		v3 = Int32FromInt32(m_EINVAL)
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = v3
 		return v3
@@ -130603,7 +130684,7 @@ func Xgetspnam_r(tls *TLS, name uintptr, sp uintptr, buf uintptr, size uint64, r
 		if *(*int32)(unsafe.Pointer(X__errno_location(tls))) != int32(m_ENOENT) && *(*int32)(unsafe.Pointer(X__errno_location(tls))) != int32(m_ENOTDIR) {
 			return *(*int32)(unsafe.Pointer(X__errno_location(tls)))
 		}
-		f = Xfopen(tls, ts+1621, ts+501)
+		f = Xfopen(tls, ts+1607, ts+501)
 		if !(f != 0) {
 			if *(*int32)(unsafe.Pointer(X__errno_location(tls))) != int32(m_ENOENT) && *(*int32)(unsafe.Pointer(X__errno_location(tls))) != int32(m_ENOTDIR) {
 				return *(*int32)(unsafe.Pointer(X__errno_location(tls)))
@@ -130711,7 +130792,7 @@ retry:
 	fd = Xsocket(tls, int32(m_PF_LOCAL), Int32FromInt32(m_SOCK_STREAM)|Int32FromInt32(m_SOCK_CLOEXEC), 0)
 	if fd < 0 {
 		if *(*int32)(unsafe.Pointer(X__errno_location(tls))) == int32(m_EAFNOSUPPORT) {
-			f = Xfopen(tls, ts+212, ts+1633)
+			f = Xfopen(tls, ts+212, ts+1619)
 			if f != 0 {
 				*(*int32)(unsafe.Pointer(X__errno_location(tls))) = errno_save
 			}
@@ -130719,7 +130800,7 @@ retry:
 		}
 		return uintptr(0)
 	}
-	v1 = Xfdopen(tls, fd, ts+1303)
+	v1 = Xfdopen(tls, fd, ts+1289)
 	f = v1
 	if !(v1 != 0) {
 		Xclose(tls, fd)
@@ -130816,7 +130897,7 @@ func Xputgrent(tls *TLS, gr uintptr, f uintptr) (r1 int32) {
 	var v4 uintptr
 	_, _, _, _, _, _ = i, r, v1, v3, v4, v5
 	Xflockfile(tls, f)
-	v1 = Xfprintf(tls, f, ts+1636, VaList(bp+8, (*Tgroup1)(unsafe.Pointer(gr)).Fgr_name, (*Tgroup1)(unsafe.Pointer(gr)).Fgr_passwd, (*Tgroup1)(unsafe.Pointer(gr)).Fgr_gid))
+	v1 = Xfprintf(tls, f, ts+1622, VaList(bp+8, (*Tgroup1)(unsafe.Pointer(gr)).Fgr_name, (*Tgroup1)(unsafe.Pointer(gr)).Fgr_passwd, (*Tgroup1)(unsafe.Pointer(gr)).Fgr_gid))
 	r = v1
 	if v1 < 0 {
 		goto done
@@ -130828,11 +130909,11 @@ func Xputgrent(tls *TLS, gr uintptr, f uintptr) (r1 int32) {
 				break
 			}
 			if i != 0 {
-				v4 = ts + 1646
+				v4 = ts + 1632
 			} else {
 				v4 = ts
 			}
-			v3 = Xfprintf(tls, f, ts+1648, VaList(bp+8, v4, *(*uintptr)(unsafe.Pointer((*Tgroup1)(unsafe.Pointer(gr)).Fgr_mem + uintptr(i)*8))))
+			v3 = Xfprintf(tls, f, ts+1634, VaList(bp+8, v4, *(*uintptr)(unsafe.Pointer((*Tgroup1)(unsafe.Pointer(gr)).Fgr_mem + uintptr(i)*8))))
 			r = v3
 			if v3 < 0 {
 				goto done
@@ -130862,7 +130943,7 @@ func Xputpwent(tls *TLS, pw uintptr, f uintptr) (r int32) {
 	defer tls.Free(64)
 	var v1 int32
 	_ = v1
-	if Xfprintf(tls, f, ts+1653, VaList(bp+8, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_name, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_passwd, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_uid, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_gid, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_gecos, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_dir, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_shell)) < 0 {
+	if Xfprintf(tls, f, ts+1639, VaList(bp+8, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_name, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_passwd, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_uid, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_gid, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_gecos, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_dir, (*Tpasswd)(unsafe.Pointer(pw)).Fpw_shell)) < 0 {
 		v1 = -int32(1)
 	} else {
 		v1 = 0
@@ -130962,7 +131043,7 @@ func Xputspent(tls *TLS, sp uintptr, f uintptr) (r int32) {
 	} else {
 		v17 = (*Tspwd)(unsafe.Pointer(sp)).Fsp_flag
 	}
-	if Xfprintf(tls, f, ts+1675, VaList(bp+8, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17)) < 0 {
+	if Xfprintf(tls, f, ts+1661, VaList(bp+8, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17)) < 0 {
 		v1 = -int32(1)
 	} else {
 		v1 = 0
@@ -131305,6 +131386,35 @@ func Xsrand48(tls *TLS, seed int64) {
 	Xseed48(tls, bp)
 }
 
+const m_SYS_fork = 57
+const m_SYS_set_tid_address = 218
+
+func _dummy11(tls *TLS, x int32) {
+}
+
+func x___post_Fork(tls *TLS, ret int32) {
+	var self, v1 uintptr
+	_, _ = self, v1
+	if !(ret != 0) {
+		self = ___get_tp(tls)
+		(*t__pthread)(unsafe.Pointer(self)).Ftid = int32(___syscall1(tls, int64(m_SYS_set_tid_address), int64(uintptr(unsafe.Pointer(&x___thread_list_lock)))))
+		(*t__pthread)(unsafe.Pointer(self)).Frobust_list.Foff = 0
+		(*t__pthread)(unsafe.Pointer(self)).Frobust_list.Fpending = uintptr(0)
+		v1 = self
+		(*t__pthread)(unsafe.Pointer(self)).Fprev = v1
+		(*t__pthread)(unsafe.Pointer(self)).Fnext = v1
+		AtomicStorePInt32(uintptr(unsafe.Pointer(&x___thread_list_lock)), 0)
+		x___libc.Fthreads_minus_1 = 0
+		if AtomicLoadPInt8(uintptr(unsafe.Pointer(&x___libc))+3) != 0 {
+			AtomicStorePInt8(uintptr(unsafe.Pointer(&x___libc))+3, int8(-int32(1)))
+		}
+	}
+	x___unlock(tls, uintptr(unsafe.Pointer(&x___abort_lock)))
+	if !(ret != 0) {
+		x___aio_atfork(tls, int32(1))
+	}
+}
+
 func Xexecl(tls *TLS, path uintptr, argv0 uintptr, va uintptr) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v path=%v argv0=%v va=%v, (%v:)", tls, path, argv0, va, origin(2))
@@ -131453,7 +131563,7 @@ func x___execvpe(tls *TLS, file uintptr, argv uintptr, envp uintptr) (r int32) {
 	var seen_eacces int32
 	_, _, _, _, _, _, _, _, _, _ = b, k, l, p, path, seen_eacces, z, v2, v3, v4
 	defer func() { Xrealloc(tls, b, 0) }()
-	path = Xgetenv(tls, ts+1724)
+	path = Xgetenv(tls, ts+1710)
 	seen_eacces = 0
 	*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_ENOENT)
 	if !(*(*int8)(unsafe.Pointer(file)) != 0) {
@@ -131463,7 +131573,7 @@ func x___execvpe(tls *TLS, file uintptr, argv uintptr, envp uintptr) (r int32) {
 		return Xexecve(tls, file, argv, envp)
 	}
 	if !(path != 0) {
-		path = ts + 1729
+		path = ts + 1715
 	}
 	k = Xstrnlen(tls, file, uint64(Int32FromInt32(m_NAME_MAX)+Int32FromInt32(1)))
 	if k > uint64(m_NAME_MAX) {
@@ -131561,14 +131671,13 @@ var _atfork_locks = [10]uintptr{
 	9: uintptr(unsafe.Pointer(&x___bump_lockptr)),
 }
 
-func _dummy11(tls *TLS, x int32) {
+func _dummy12(tls *TLS, x int32) {
 }
 
 func _dummy_01(tls *TLS) {
 }
 
 const m_CLONE_VFORK = 16384
-const m_CLONE_VM = 256
 const m_FDOP_CHDIR = 4
 const m_FDOP_CLOSE = 1
 const m_FDOP_DUP2 = 2
@@ -133028,7 +133137,7 @@ func _expand_tilde(tls *TLS, pat uintptr, buf uintptr, pos uintptr) (r int32) {
 	if *(*int8)(unsafe.Pointer(p)) != 0 {
 		v3 = UintptrFromInt32(0)
 	} else {
-		v3 = Xgetenv(tls, ts+1758)
+		v3 = Xgetenv(tls, ts+1744)
 	}
 	home = v3
 	if !(home != 0) {
@@ -133153,7 +133262,9 @@ func Xglob(tls *TLS, pat uintptr, flags int32, errfunc uintptr, g uintptr) (r in
 			}
 			cnt++
 		} else {
-			return int32(m_GLOB_NOMATCH)
+			if !(error1 != 0) {
+				return int32(m_GLOB_NOMATCH)
+			}
 		}
 	}
 	if flags&int32(m_GLOB_APPEND) != 0 {
@@ -133596,7 +133707,7 @@ func _tre_stack_push(tls *TLS, s uintptr, value Ttre_stack_item) (r int32) {
 				return int32(m_REG_ESPACE)
 			}
 			if v1 = new_size > (*Ttre_stack_t)(unsafe.Pointer(s)).Fsize; !v1 {
-				x___assert_fail(tls, ts+1763, ts+1782, int32(362), uintptr(unsafe.Pointer(&___func__)))
+				x___assert_fail(tls, ts+1749, ts+1768, int32(362), uintptr(unsafe.Pointer(&___func__)))
 			}
 			_ = v1 || Bool(Int32FromInt32(0) != 0)
 			(*Ttre_stack_t)(unsafe.Pointer(s)).Fsize = new_size
@@ -133672,7 +133783,7 @@ var _tre_macros = [13]struct {
 }{
 	0: {
 		Fc:         int8('t'),
-		Fexpansion: ts + 1802,
+		Fexpansion: ts + 1788,
 	},
 	1: {
 		Fc:         int8('n'),
@@ -133680,43 +133791,43 @@ var _tre_macros = [13]struct {
 	},
 	2: {
 		Fc:         int8('r'),
-		Fexpansion: ts + 1804,
+		Fexpansion: ts + 1790,
 	},
 	3: {
 		Fc:         int8('f'),
-		Fexpansion: ts + 1806,
+		Fexpansion: ts + 1792,
 	},
 	4: {
 		Fc:         int8('a'),
-		Fexpansion: ts + 1808,
+		Fexpansion: ts + 1794,
 	},
 	5: {
 		Fc:         int8('e'),
-		Fexpansion: ts + 1810,
+		Fexpansion: ts + 1796,
 	},
 	6: {
 		Fc:         int8('w'),
-		Fexpansion: ts + 1812,
+		Fexpansion: ts + 1798,
 	},
 	7: {
 		Fc:         int8('W'),
-		Fexpansion: ts + 1825,
+		Fexpansion: ts + 1811,
 	},
 	8: {
 		Fc:         int8('s'),
-		Fexpansion: ts + 1839,
+		Fexpansion: ts + 1825,
 	},
 	9: {
 		Fc:         int8('S'),
-		Fexpansion: ts + 1851,
+		Fexpansion: ts + 1837,
 	},
 	10: {
 		Fc:         int8('d'),
-		Fexpansion: ts + 1864,
+		Fexpansion: ts + 1850,
 	},
 	11: {
 		Fc:         int8('D'),
-		Fexpansion: ts + 1876,
+		Fexpansion: ts + 1862,
 	},
 	12: {},
 }
@@ -134843,7 +134954,7 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 						goto _10
 					}
 					if v15 = (*(*Ttre_submatch_data_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fsubmatch_data + uintptr(id1)*16))).Fparents == UintptrFromInt32(0); !v15 {
-						x___assert_fail(tls, ts+1889, ts+1782, int32(1311), uintptr(unsafe.Pointer(&___func__1)))
+						x___assert_fail(tls, ts+1875, ts+1768, int32(1311), uintptr(unsafe.Pointer(&___func__1)))
 					}
 					_ = v15 || Bool(Int32FromInt32(0) != 0)
 					(*(*Ttre_submatch_data_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fsubmatch_data + uintptr(id1)*16))).Fparents = p
@@ -134908,7 +135019,7 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 				}
 			} else {
 				if v18 = !((*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_min == int64(-Int32FromInt32(3))); !v18 {
-					x___assert_fail(tls, ts+1929, ts+1782, int32(1366), uintptr(unsafe.Pointer(&___func__1)))
+					x___assert_fail(tls, ts+1915, ts+1768, int32(1366), uintptr(unsafe.Pointer(&___func__1)))
 				}
 				_ = v18 || Bool(Int32FromInt32(0) != 0)
 			}
@@ -135233,7 +135344,7 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 		goto _10
 	_9:
 		if v25 = Bool(0 != 0); !v25 {
-			x___assert_fail(tls, ts+1942, ts+1782, int32(1641), uintptr(unsafe.Pointer(&___func__1)))
+			x___assert_fail(tls, ts+1928, ts+1768, int32(1641), uintptr(unsafe.Pointer(&___func__1)))
 		}
 		_ = v25 || Bool(Int32FromInt32(0) != 0)
 		goto _10
@@ -135259,7 +135370,7 @@ func _tre_add_tags(tls *TLS, mem uintptr, stack uintptr, tree uintptr, tnfa uint
 		num_minimals++
 	}
 	if v27 = (*Ttre_ast_node_t)(unsafe.Pointer(tree)).Fnum_tags == num_tags; !v27 {
-		x___assert_fail(tls, ts+1944, ts+1782, int32(1661), uintptr(unsafe.Pointer(&___func__1)))
+		x___assert_fail(tls, ts+1930, ts+1768, int32(1661), uintptr(unsafe.Pointer(&___func__1)))
 	}
 	_ = v27 || Bool(Int32FromInt32(0) != 0)
 	(*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fend_tag = num_tags
@@ -135431,7 +135542,7 @@ func _tre_copy_ast(tls *TLS, mem uintptr, stack uintptr, ast uintptr, flags int3
 				result = iter
 			default:
 				if v2 = Bool(0 != 0); !v2 {
-					x___assert_fail(tls, ts+1942, ts+1782, int32(1817), uintptr(unsafe.Pointer(&___func__2)))
+					x___assert_fail(tls, ts+1928, ts+1768, int32(1817), uintptr(unsafe.Pointer(&___func__2)))
 				}
 				_ = v2 || Bool(Int32FromInt32(0) != 0)
 				break
@@ -135564,7 +135675,7 @@ func _tre_expand_ast(tls *TLS, mem uintptr, stack uintptr, ast uintptr, position
 				iter_depth++
 			default:
 				if v1 = Bool(0 != 0); !v1 {
-					x___assert_fail(tls, ts+1942, ts+1782, int32(1908), uintptr(unsafe.Pointer(&___func__3)))
+					x___assert_fail(tls, ts+1928, ts+1768, int32(1908), uintptr(unsafe.Pointer(&___func__3)))
 				}
 				_ = v1 || Bool(Int32FromInt32(0) != 0)
 				break
@@ -135671,7 +135782,7 @@ func _tre_expand_ast(tls *TLS, mem uintptr, stack uintptr, ast uintptr, position
 			}
 		default:
 			if v5 = Bool(0 != 0); !v5 {
-				x___assert_fail(tls, ts+1942, ts+1782, int32(2002), uintptr(unsafe.Pointer(&___func__3)))
+				x___assert_fail(tls, ts+1928, ts+1768, int32(2002), uintptr(unsafe.Pointer(&___func__3)))
 			}
 			_ = v5 || Bool(Int32FromInt32(0) != 0)
 			break
@@ -135913,7 +136024,7 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 				}
 			case int64(-int32(2)):
 				if v2 = (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_max >= int64(1) || (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_max <= int64(m_ASSERT_LAST); !v2 {
-					x___assert_fail(tls, ts+1971, ts+1782, int32(2180), uintptr(unsafe.Pointer(&___func__4)))
+					x___assert_fail(tls, ts+1957, ts+1768, int32(2180), uintptr(unsafe.Pointer(&___func__4)))
 				}
 				_ = v2 || Bool(Int32FromInt32(0) != 0)
 				if assertions != UintptrFromInt32(0) {
@@ -135923,7 +136034,7 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 			case int64(-int32(1)):
 			default:
 				if v4 = Bool(0 != 0); !v4 {
-					x___assert_fail(tls, ts+1942, ts+1782, int32(2188), uintptr(unsafe.Pointer(&___func__4)))
+					x___assert_fail(tls, ts+1928, ts+1768, int32(2188), uintptr(unsafe.Pointer(&___func__4)))
 				}
 				_ = v4 || Bool(Int32FromInt32(0) != 0)
 				break
@@ -135946,7 +136057,7 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 					}
 				} else {
 					if v5 = Bool(0 != 0); !v5 {
-						x___assert_fail(tls, ts+1942, ts+1782, int32(2203), uintptr(unsafe.Pointer(&___func__4)))
+						x___assert_fail(tls, ts+1928, ts+1768, int32(2203), uintptr(unsafe.Pointer(&___func__4)))
 					}
 					_ = v5 || Bool(Int32FromInt32(0) != 0)
 				}
@@ -135955,11 +136066,11 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 			/* The path must go through both children. */
 			cat = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			if v6 = (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_catenation_t)(unsafe.Pointer(cat)).Fleft)).Fnullable != 0; !v6 {
-				x___assert_fail(tls, ts+2022, ts+1782, int32(2209), uintptr(unsafe.Pointer(&___func__4)))
+				x___assert_fail(tls, ts+2008, ts+1768, int32(2209), uintptr(unsafe.Pointer(&___func__4)))
 			}
 			_ = v6 || Bool(Int32FromInt32(0) != 0)
 			if v7 = (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_catenation_t)(unsafe.Pointer(cat)).Fright)).Fnullable != 0; !v7 {
-				x___assert_fail(tls, ts+2042, ts+1782, int32(2210), uintptr(unsafe.Pointer(&___func__4)))
+				x___assert_fail(tls, ts+2028, ts+1768, int32(2210), uintptr(unsafe.Pointer(&___func__4)))
 			}
 			_ = v7 || Bool(Int32FromInt32(0) != 0)
 			status = _tre_stack_push_voidptr(tls, stack, (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fleft)
@@ -135982,7 +136093,7 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 			}
 		default:
 			if v8 = Bool(0 != 0); !v8 {
-				x___assert_fail(tls, ts+1942, ts+1782, int32(2224), uintptr(unsafe.Pointer(&___func__4)))
+				x___assert_fail(tls, ts+1928, ts+1768, int32(2224), uintptr(unsafe.Pointer(&___func__4)))
 			}
 			_ = v8 || Bool(Int32FromInt32(0) != 0)
 			break
@@ -136231,7 +136342,7 @@ func _tre_compute_nfl(tls *TLS, mem uintptr, stack uintptr, tree uintptr) (r int
 			}
 		default:
 			if v1 = Bool(0 != 0); !v1 {
-				x___assert_fail(tls, ts+1942, ts+1782, int32(2459), uintptr(unsafe.Pointer(&___func__5)))
+				x___assert_fail(tls, ts+1928, ts+1768, int32(2459), uintptr(unsafe.Pointer(&___func__5)))
 			}
 			_ = v1 || Bool(Int32FromInt32(0) != 0)
 			break
@@ -136290,11 +136401,11 @@ func _tre_make_trans(tls *TLS, p1 uintptr, p2 uintptr, transitions uintptr, coun
 				(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fassertions = (*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fassertions | (*Ttre_pos_and_tags_t)(unsafe.Pointer(p2)).Fassertions | v1 | v2
 				if (*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fbackref >= 0 {
 					if v3 = (*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fassertions&int32(m_ASSERT_CHAR_CLASS) == 0; !v3 {
-						x___assert_fail(tls, ts+2063, ts+1782, int32(2530), uintptr(unsafe.Pointer(&___func__6)))
+						x___assert_fail(tls, ts+2049, ts+1768, int32(2530), uintptr(unsafe.Pointer(&___func__6)))
 					}
 					_ = v3 || Bool(Int32FromInt32(0) != 0)
 					if v4 = (*Ttre_pos_and_tags_t)(unsafe.Pointer(p2)).Fbackref < 0; !v4 {
-						x___assert_fail(tls, ts+2108, ts+1782, int32(2531), uintptr(unsafe.Pointer(&___func__6)))
+						x___assert_fail(tls, ts+2094, ts+1768, int32(2531), uintptr(unsafe.Pointer(&___func__6)))
 					}
 					_ = v4 || Bool(Int32FromInt32(0) != 0)
 					*(*int32)(unsafe.Pointer(&(*Ttre_tnfa_transition_t)(unsafe.Pointer(trans)).Fu)) = (*Ttre_pos_and_tags_t)(unsafe.Pointer(p1)).Fbackref
@@ -136449,12 +136560,12 @@ func _tre_ast_to_tnfa(tls *TLS, node uintptr, transitions uintptr, counts uintpt
 	case int32(_ITERATION):
 		iter = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 		if v1 = (*Ttre_iteration_t)(unsafe.Pointer(iter)).Fmax == -int32(1) || (*Ttre_iteration_t)(unsafe.Pointer(iter)).Fmax == int32(1); !v1 {
-			x___assert_fail(tls, ts+2124, ts+1782, int32(2661), uintptr(unsafe.Pointer(&___func__7)))
+			x___assert_fail(tls, ts+2110, ts+1768, int32(2661), uintptr(unsafe.Pointer(&___func__7)))
 		}
 		_ = v1 || Bool(Int32FromInt32(0) != 0)
 		if (*Ttre_iteration_t)(unsafe.Pointer(iter)).Fmax == -int32(1) {
 			if v2 = (*Ttre_iteration_t)(unsafe.Pointer(iter)).Fmin == 0 || (*Ttre_iteration_t)(unsafe.Pointer(iter)).Fmin == int32(1); !v2 {
-				x___assert_fail(tls, ts+2158, ts+1782, int32(2665), uintptr(unsafe.Pointer(&___func__7)))
+				x___assert_fail(tls, ts+2144, ts+1768, int32(2665), uintptr(unsafe.Pointer(&___func__7)))
 			}
 			_ = v2 || Bool(Int32FromInt32(0) != 0)
 			/* Add a transition from each last position in the iterated
@@ -137254,7 +137365,7 @@ func _tre_tnfa_run_parallel(tls *TLS, tnfa uintptr, string1 uintptr, match_tags 
 						reach_next_i += 16
 					} else {
 						if v17 = (*(*Ttre_reach_pos_t)(unsafe.Pointer(reach_pos + uintptr((*Ttre_tnfa_transition_t)(unsafe.Pointer(trans_i)).Fstate_id)*16))).Fpos == pos; !v17 {
-							x___assert_fail(tls, ts+2191, ts+2231, int32(429), uintptr(unsafe.Pointer(&___func__8)))
+							x___assert_fail(tls, ts+2177, ts+2217, int32(429), uintptr(unsafe.Pointer(&___func__8)))
 						}
 						_ = v17 || Bool(Int32FromInt32(0) != 0)
 						/* Another path has also reached this state.  We choose
@@ -137737,7 +137848,7 @@ backtrack:
 			*(*int32)(unsafe.Pointer(states_seen + uintptr((*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fitem.Fstate_id)*4)) = 0
 		}
 		if v19 = (*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fprev != 0; !v19 {
-			x___assert_fail(tls, ts+2251, ts+2231, int32(882), uintptr(unsafe.Pointer(&___func__9)))
+			x___assert_fail(tls, ts+2237, ts+2217, int32(882), uintptr(unsafe.Pointer(&___func__9)))
 		}
 		_ = v19 || Bool(Int32FromInt32(0) != 0)
 		pos = (*Ttre_backtrack_struct)(unsafe.Pointer(stack)).Fitem.Fpos
@@ -137839,12 +137950,12 @@ func _tre_fill_pmatch(tls *TLS, nmatch uint64, pmatch uintptr, cflags int32, tnf
 		for i < (*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fnum_submatches && uint64(i) < nmatch {
 			if (*(*Tregmatch_t)(unsafe.Pointer(pmatch + uintptr(i)*16))).Frm_eo == int64(-int32(1)) {
 				if v2 = (*(*Tregmatch_t)(unsafe.Pointer(pmatch + uintptr(i)*16))).Frm_so == int64(-int32(1)); !v2 {
-					x___assert_fail(tls, ts+2263, ts+2231, int32(967), uintptr(unsafe.Pointer(&___func__10)))
+					x___assert_fail(tls, ts+2249, ts+2217, int32(967), uintptr(unsafe.Pointer(&___func__10)))
 				}
 				_ = v2 || Bool(Int32FromInt32(0) != 0)
 			}
 			if v3 = (*(*Tregmatch_t)(unsafe.Pointer(pmatch + uintptr(i)*16))).Frm_so <= (*(*Tregmatch_t)(unsafe.Pointer(pmatch + uintptr(i)*16))).Frm_eo; !v3 {
-				x___assert_fail(tls, ts+2285, ts+2231, int32(968), uintptr(unsafe.Pointer(&___func__10)))
+				x___assert_fail(tls, ts+2271, ts+2217, int32(968), uintptr(unsafe.Pointer(&___func__10)))
 			}
 			_ = v3 || Bool(Int32FromInt32(0) != 0)
 			parents = (*(*Ttre_submatch_data_t)(unsafe.Pointer(submatch_data + uintptr(i)*16))).Fparents
@@ -138128,7 +138239,7 @@ func _getcpu_init(tls *TLS, cpu uintptr, node uintptr, unused uintptr) (r int64)
 	var f, p uintptr
 	var v1 int64
 	_, _, _ = f, p, v1
-	p = x___vdsosym(tls, ts+2320, ts+2330)
+	p = x___vdsosym(tls, ts+2306, ts+2316)
 	f = p
 	_a_cas_p(tls, uintptr(unsafe.Pointer(&_vdso_func)), __ccgo_fp(_getcpu_init), p)
 	if f != 0 {
@@ -138500,7 +138611,7 @@ func Xlsearch(tls *TLS, key uintptr, base uintptr, nelp uintptr, width uint64, c
 	var i, n, v1 uint64
 	var p uintptr
 	_, _, _, _ = i, n, p, v1
-	defer func() { Xrealloc(tls, p, 0) }()
+	defer func() {}()
 	v1 = width
 	p = base
 	n = *(*uint64)(unsafe.Pointer(nelp))
@@ -138528,7 +138639,7 @@ func Xlfind(tls *TLS, key uintptr, base uintptr, nelp uintptr, width uint64, com
 	var i, n, v1 uint64
 	var p uintptr
 	_, _, _, _ = i, n, p, v1
-	defer func() { Xrealloc(tls, p, 0) }()
+	defer func() {}()
 	v1 = width
 	p = base
 	n = *(*uint64)(unsafe.Pointer(nelp))
@@ -139027,7 +139138,7 @@ func Xpsignal(tls *TLS, sig int32, msg uintptr) {
 	} else {
 		v3 = ts
 	}
-	if Xfprintf(tls, f, ts+1416, VaList(bp+8, v2, v3, s)) >= 0 {
+	if Xfprintf(tls, f, ts+1402, VaList(bp+8, v2, v3, s)) >= 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = old_errno
 	}
 	(*TFILE)(unsafe.Pointer(f)).Fmode = old_mode
@@ -139532,11 +139643,19 @@ func Xsigrelse(tls *TLS, sig int32) (r int32) {
 	return Xsigprocmask(tls, int32(m_SIG_UNBLOCK), bp, uintptr(0))
 }
 
-func x___libc_current_sigrtmax(tls *TLS) (r int32) {
+func X__libc_current_sigrtmax(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return Int32FromInt32(m__NSIG) - Int32FromInt32(1)
 }
 
-func x___libc_current_sigrtmin(tls *TLS) (r int32) {
+func X__libc_current_sigrtmin(tls *TLS) (r int32) {
+	if __ccgo_strace {
+		trc("tls=%v, (%v:)", tls, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
 	return int32(35)
 }
 
@@ -140092,6 +140211,7 @@ func _fixup(tls *TLS, out uintptr, in uintptr) {
 	(*Tstatvfs)(unsafe.Pointer(out)).Ff_fsid = uint64(*(*int32)(unsafe.Pointer(in + 56)))
 	(*Tstatvfs)(unsafe.Pointer(out)).Ff_flag = (*Tstatfs)(unsafe.Pointer(in)).Ff_flags
 	(*Tstatvfs)(unsafe.Pointer(out)).Ff_namemax = (*Tstatfs)(unsafe.Pointer(in)).Ff_namelen
+	(*Tstatvfs)(unsafe.Pointer(out)).Ff_type = uint32((*Tstatfs)(unsafe.Pointer(in)).Ff_type)
 }
 
 func Xstatvfs(tls *TLS, path uintptr, buf uintptr) (r int32) {
@@ -140210,7 +140330,7 @@ func Xfdopen(tls *TLS, fd int32, mode uintptr) (r uintptr) {
 	var _ /* wsz at bp+0 */ Twinsize
 	_, _, _, _ = f, flags, v1, v2
 	/* Check for valid initial mode character */
-	if !(Xstrchr(tls, ts+2344, int32(*(*int8)(unsafe.Pointer(mode)))) != 0) {
+	if !(Xstrchr(tls, ts+2330, int32(*(*int8)(unsafe.Pointer(mode)))) != 0) {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return uintptr(0)
 	}
@@ -140391,7 +140511,7 @@ func x___overflow(tls *TLS, f uintptr, _c int32) (r int32) {
 	return int32(*(*uint8)(unsafe.Pointer(bp)))
 }
 
-func _dummy12(tls *TLS, fd int32) (r int32) {
+func _dummy13(tls *TLS, fd int32) (r int32) {
 	return fd
 }
 
@@ -140763,7 +140883,7 @@ func x___fseterr(tls *TLS, f uintptr) {
 	*(*uint32)(unsafe.Pointer(f)) |= uint32(m_F_ERR)
 }
 
-func _dummy13(tls *TLS, f uintptr) {
+func _dummy14(tls *TLS, f uintptr) {
 }
 
 func Xfclose(tls *TLS, f uintptr) (r1 int32) {
@@ -140855,7 +140975,7 @@ func Xferror(tls *TLS, f uintptr) (r int32) {
 // C documentation
 //
 //	/* stdout.c will override this if linked */
-var _dummy14 = uintptr(0)
+var _dummy15 = uintptr(0)
 
 func Xfflush(tls *TLS, f uintptr) (r1 int32) {
 	if __ccgo_strace {
@@ -141442,7 +141562,7 @@ func Xfmemopen(tls *TLS, buf uintptr, size uint64, mode uintptr) (r uintptr) {
 	var v1, v3 uint64
 	_, _, _, _, _ = f, plus, v1, v2, v3
 	plus = BoolInt32(!!(Xstrchr(tls, mode, int32('+')) != 0))
-	if !(Xstrchr(tls, ts+2344, int32(*(*int8)(unsafe.Pointer(mode)))) != 0) {
+	if !(Xstrchr(tls, ts+2330, int32(*(*int8)(unsafe.Pointer(mode)))) != 0) {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return uintptr(0)
 	}
@@ -141512,7 +141632,7 @@ func Xfopen(tls *TLS, filename uintptr, mode uintptr) (r uintptr) {
 	var fd, flags int32
 	_, _, _ = f, fd, flags
 	/* Check for valid initial mode character */
-	if !(Xstrchr(tls, ts+2344, int32(*(*int8)(unsafe.Pointer(mode)))) != 0) {
+	if !(Xstrchr(tls, ts+2330, int32(*(*int8)(unsafe.Pointer(mode)))) != 0) {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return uintptr(0)
 	}
@@ -141666,7 +141786,7 @@ func Xfopencookie(tls *TLS, cookie uintptr, mode uintptr, iofuncs Tcookie_io_fun
 	var v2 int32
 	_, _, _ = f, v1, v2
 	/* Check for valid initial mode character */
-	if !(Xstrchr(tls, ts+2344, int32(*(*int8)(unsafe.Pointer(mode)))) != 0) {
+	if !(Xstrchr(tls, ts+2330, int32(*(*int8)(unsafe.Pointer(mode)))) != 0) {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return uintptr(0)
 	}
@@ -143182,12 +143302,12 @@ func Xpopen(tls *TLS, cmd uintptr, mode uintptr) (r uintptr) {
 		}
 		if !(Xposix_spawn_file_actions_adddup2(tls, bp+48, (*(*[2]int32)(unsafe.Pointer(bp + 32)))[int32(1)-op], int32(1)-op) != 0) {
 			*(*[4]uintptr)(unsafe.Pointer(bp)) = [4]uintptr{
-				0: ts + 1267,
-				1: ts + 1270,
+				0: ts + 1253,
+				1: ts + 1256,
 				2: cmd,
 				3: uintptr(0),
 			}
-			v2 = Xposix_spawn(tls, bp+40, ts+1259, bp+48, uintptr(0), bp, Xenviron)
+			v2 = Xposix_spawn(tls, bp+40, ts+1245, bp+48, uintptr(0), bp, Xenviron)
 			e = v2
 			if !(v2 != 0) {
 				Xposix_spawn_file_actions_destroy(tls, bp+48)
@@ -143706,10 +143826,10 @@ func Xtempnam(tls *TLS, dir uintptr, pfx uintptr) (r1 uintptr) {
 	var _ /* s at bp+1 */ [4096]int8
 	_, _, _, _, _ = dl, l, pl, r, try
 	if !(dir != 0) {
-		dir = ts + 2348
+		dir = ts + 2334
 	}
 	if !(pfx != 0) {
-		pfx = ts + 2353
+		pfx = ts + 2339
 	}
 	dl = Xstrlen(tls, dir)
 	pl = Xstrlen(tls, pfx)
@@ -143762,7 +143882,7 @@ func Xtmpfile(tls *TLS) (r uintptr) {
 		fd = int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_open), int64(bp), int64(Int32FromInt32(m_O_RDWR)|Int32FromInt32(m_O_CREAT)|Int32FromInt32(m_O_EXCL)|Int32FromInt32(m_O_LARGEFILE)), int64(Int32FromInt32(0600))))))
 		if fd >= 0 {
 			___syscall1(tls, int64(m_SYS_unlink), int64(bp))
-			f = Xfdopen(tls, fd, ts+2358)
+			f = Xfdopen(tls, fd, ts+2344)
 			if !(f != 0) {
 				___syscall1(tls, int64(m_SYS_close), int64(fd))
 			}
@@ -143984,7 +144104,7 @@ const _MAXSTATE = 28
 var _states = [8][58]uint8{
 	0: {
 		0:  uint8(_DBL),
-		2:  uint8(_INT),
+		2:  uint8(_UINT),
 		4:  uint8(_DBL),
 		5:  uint8(_DBL),
 		6:  uint8(_DBL),
@@ -143992,7 +144112,7 @@ var _states = [8][58]uint8{
 		18: uint8(_PTR),
 		23: uint8(_UINT),
 		32: uint8(_DBL),
-		34: uint8(_CHAR),
+		34: uint8(_INT),
 		35: uint8(_INT),
 		36: uint8(_DBL),
 		37: uint8(_DBL),
@@ -144018,7 +144138,7 @@ var _states = [8][58]uint8{
 		6:  uint8(_DBL),
 		23: uint8(_ULONG),
 		32: uint8(_DBL),
-		34: uint8(_INT),
+		34: uint8(_UINT),
 		35: uint8(_LONG),
 		36: uint8(_DBL),
 		37: uint8(_DBL),
@@ -144259,7 +144379,7 @@ func _fmt_fp(tls *TLS, f uintptr, y float64, w int32, p int32, fl int32, t int32
 	var _ /* ebuf0 at bp+530 */ [12]int8
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = a, b, carry, carry1, d, e, ebuf, estr, i, j, l, need, pl, prefix, r, re, rm, round, round1, s, s1, s2, s3, s4, sh, sh1, small, x, x1, x2, z, v1, v10, v11, v12, v13, v14, v15, v16, v17, v18, v2, v20, v21, v23, v24, v27, v28, v3, v32, v33, v34, v35, v36, v37, v38, v39, v4, v40, v41, v42, v44, v45, v47, v48, v5, v50, v51, v52, v53, v54, v6, v7, v8, v9
 	*(*int32)(unsafe.Pointer(bp + 504)) = 0
-	prefix = ts + 2361
+	prefix = ts + 2347
 	ebuf = bp + 530 + uintptr(Uint64FromInt32(3)*Uint64FromInt64(4))
 	pl = int32(1)
 	if int32(___DOUBLE_BITS(tls, y)>>Int32FromInt32(63)) != 0 {
@@ -144278,16 +144398,16 @@ func _fmt_fp(tls *TLS, f uintptr, y float64, w int32, p int32, fl int32, t int32
 	}
 	if !(BoolInt32(___DOUBLE_BITS(tls, y)&(-Uint64FromUint64(1)>>Int32FromInt32(1)) < Uint64FromUint64(0x7ff)<<Int32FromInt32(52)) != 0) {
 		if t&int32(32) != 0 {
-			v1 = ts + 2380
+			v1 = ts + 2366
 		} else {
-			v1 = ts + 2384
+			v1 = ts + 2370
 		}
 		s1 = v1
 		if y != y {
 			if t&int32(32) != 0 {
 				v2 = ts + 266
 			} else {
-				v2 = ts + 2388
+				v2 = ts + 2374
 			}
 			s1 = v2
 		}
@@ -144820,8 +144940,8 @@ func _getint(tls *TLS, s uintptr) (r int32) {
 }
 
 func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, nl_type uintptr) (r int32) {
-	bp := tls.Alloc(80) /* tlsAllocs 72 maxVaListSize 0 */
-	defer tls.Free(80)
+	bp := tls.Alloc(64) /* tlsAllocs 56 maxVaListSize 0 */
+	defer tls.Free(64)
 	var a, prefix, ws, z, v35, v39, v44, v48, v8 uintptr
 	var argpos, cnt, l, p, pl, t, w, xp, v36, v40, v42, v43, v47, v5, v50, v6, v7 int32
 	var fl, l10n, ps, st uint32
@@ -144829,10 +144949,10 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 	var v34 int64
 	var v45, v49 bool
 	var _ /* arg at bp+8 */ Targ
-	var _ /* buf at bp+16 */ [40]int8
-	var _ /* mb at bp+64 */ [4]int8
+	var _ /* buf at bp+16 */ [24]int8
+	var _ /* mb at bp+48 */ [4]int8
 	var _ /* s at bp+0 */ uintptr
-	var _ /* wc at bp+56 */ [2]int32
+	var _ /* wc at bp+40 */ [2]int32
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = a, argpos, cnt, fl, i, l, l10n, p, pl, prefix, ps, st, t, w, ws, xp, z, v31, v34, v35, v36, v39, v40, v42, v43, v44, v45, v47, v48, v49, v5, v50, v6, v7, v8
 	*(*uintptr)(unsafe.Pointer(bp)) = fmt
 	l10n = uint32(0)
@@ -145009,8 +145129,8 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 		if (*TFILE)(unsafe.Pointer(f)).Fflags&uint32(m_F_ERR) != 0 {
 			return -int32(1)
 		}
-		z = bp + 16 + uintptr(40)
-		prefix = ts + 2392
+		z = bp + 16 + uintptr(24)
+		prefix = ts + 2378
 		pl = 0
 		t = int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + uintptr(-Int32FromInt32(1)))))
 		/* Transform ls,lc -> S,C */
@@ -145168,7 +145288,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 		if *(*uintptr)(unsafe.Pointer(bp + 8)) != 0 {
 			v39 = *(*uintptr)(unsafe.Pointer(bp + 8))
 		} else {
-			v39 = ts + 2402
+			v39 = ts + 2388
 		}
 		a = v39
 	_38:
@@ -145185,9 +145305,9 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 		fl &= ^(Uint32FromUint32(1) << (Int32FromUint8('0') - Int32FromUint8(' ')))
 		goto _30
 	_20:
-		(*(*[2]int32)(unsafe.Pointer(bp + 56)))[0] = int32(*(*uint64)(unsafe.Pointer(bp + 8)))
-		(*(*[2]int32)(unsafe.Pointer(bp + 56)))[int32(1)] = 0
-		*(*uintptr)(unsafe.Pointer(bp + 8)) = bp + 56
+		(*(*[2]int32)(unsafe.Pointer(bp + 40)))[0] = int32(*(*uint64)(unsafe.Pointer(bp + 8)))
+		(*(*[2]int32)(unsafe.Pointer(bp + 40)))[int32(1)] = 0
+		*(*uintptr)(unsafe.Pointer(bp + 8)) = bp + 40
 		p = -int32(1)
 	_21:
 		ws = *(*uintptr)(unsafe.Pointer(bp + 8))
@@ -145198,7 +145318,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 			if v45 = i < uint64(p) && *(*int32)(unsafe.Pointer(ws)) != 0; v45 {
 				v44 = ws
 				ws += 4
-				v43 = Xwctomb(tls, bp+64, *(*int32)(unsafe.Pointer(v44)))
+				v43 = Xwctomb(tls, bp+48, *(*int32)(unsafe.Pointer(v44)))
 				l = v43
 			}
 			if !(v45 && v43 >= 0 && uint64(l) <= uint64(p)-i) {
@@ -145222,13 +145342,13 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 			if v49 = i < uint64(0+uint32(p)) && *(*int32)(unsafe.Pointer(ws)) != 0; v49 {
 				v48 = ws
 				ws += 4
-				v47 = Xwctomb(tls, bp+64, *(*int32)(unsafe.Pointer(v48)))
+				v47 = Xwctomb(tls, bp+48, *(*int32)(unsafe.Pointer(v48)))
 				l = v47
 			}
 			if !(v49 && i+uint64(v47) <= uint64(p)) {
 				break
 			}
-			_out(tls, f, bp+64, uint64(l))
+			_out(tls, f, bp+48, uint64(l))
 			goto _46
 		_46:
 			i += uint64(l)
@@ -146047,7 +146167,7 @@ _85:
 var _states1 = [8][58]uint8{
 	0: {
 		0:  uint8(_DBL),
-		2:  uint8(_INT),
+		2:  uint8(_UINT),
 		4:  uint8(_DBL),
 		5:  uint8(_DBL),
 		6:  uint8(_DBL),
@@ -146055,7 +146175,7 @@ var _states1 = [8][58]uint8{
 		18: uint8(_PTR),
 		23: uint8(_UINT),
 		32: uint8(_DBL),
-		34: uint8(_CHAR),
+		34: uint8(_INT),
 		35: uint8(_INT),
 		36: uint8(_DBL),
 		37: uint8(_DBL),
@@ -146081,7 +146201,7 @@ var _states1 = [8][58]uint8{
 		6:  uint8(_DBL),
 		23: uint8(_ULONG),
 		32: uint8(_DBL),
-		34: uint8(_INT),
+		34: uint8(_UINT),
 		35: uint8(_LONG),
 		36: uint8(_DBL),
 		37: uint8(_DBL),
@@ -146216,7 +146336,7 @@ func _pad4(tls *TLS, f uintptr, n int32, fl int32) {
 	if uint32(fl)&(Uint32FromUint32(1)<<(Int32FromUint8('-')-Int32FromUint8(' '))) != 0 || !(n != 0) || (*TFILE)(unsafe.Pointer(f)).Fflags&uint32(m_F_ERR) != 0 {
 		return
 	}
-	Xfprintf(tls, f, ts+2409, VaList(bp+8, n, ts))
+	Xfprintf(tls, f, ts+2395, VaList(bp+8, n, ts))
 }
 
 func _getint1(tls *TLS, s uintptr) (r int32) {
@@ -146495,7 +146615,7 @@ func _wprintf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr,
 			fallthrough
 		case int32('s'):
 			if !(*(*uintptr)(unsafe.Pointer(bp + 16)) != 0) {
-				*(*uintptr)(unsafe.Pointer(bp + 16)) = ts + 2402
+				*(*uintptr)(unsafe.Pointer(bp + 16)) = ts + 2388
 			}
 			bs = *(*uintptr)(unsafe.Pointer(bp + 16))
 			v12 = Int32FromInt32(0)
@@ -146548,7 +146668,7 @@ func _wprintf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr,
 		if xp != 0 && p < 0 {
 			goto overflow
 		}
-		Xsnprintf(tls, bp+24, uint64(16), ts+2413, VaList(bp+56, ts+2433+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('#')-Int32FromUint8(' '))) != 0)), ts+2435+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('+')-Int32FromUint8(' '))) != 0)), ts+2437+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('-')-Int32FromUint8(' '))) != 0)), ts+974+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8(' ')-Int32FromUint8(' '))) != 0)), ts+1942+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('0')-Int32FromUint8(' '))) != 0)), int32(_sizeprefix[t|int32(32)-int32('a')]), t))
+		Xsnprintf(tls, bp+24, uint64(16), ts+2399, VaList(bp+56, ts+2419+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('#')-Int32FromUint8(' '))) != 0)), ts+2421+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('+')-Int32FromUint8(' '))) != 0)), ts+2423+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('-')-Int32FromUint8(' '))) != 0)), ts+960+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8(' ')-Int32FromUint8(' '))) != 0)), ts+1928+BoolUintptr(!(fl&(Uint32FromUint32(1)<<(Int32FromUint8('0')-Int32FromUint8(' '))) != 0)), int32(_sizeprefix[t|int32(32)-int32('a')]), t))
 		switch t | Int32FromInt32(32) {
 		case int32('a'):
 			fallthrough
@@ -147009,7 +147129,7 @@ func Xvfwscanf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
 					width = int32(1)
 				}
 				invert = int32(1)
-				set = ts + 2439
+				set = ts + 2425
 			} else {
 				if t == int32('s') {
 					invert = int32(1)
@@ -147186,7 +147306,7 @@ func Xvfwscanf(tls *TLS, f uintptr, fmt uintptr, ap uintptr) (r int32) {
 			if width < int32(1) {
 				width = 0
 			}
-			Xsnprintf(tls, bp+8, uint64(22), ts+2443, VaList(bp+40, int32(1)+BoolInt32(!(dest != 0)), ts+2461, width, uintptr(unsafe.Pointer(&_size_pfx))+uintptr(size+int32(2))*3, t))
+			Xsnprintf(tls, bp+8, uint64(22), ts+2429, VaList(bp+40, int32(1)+BoolInt32(!(dest != 0)), ts+2447, width, uintptr(unsafe.Pointer(&_size_pfx))+uintptr(size+int32(2))*3, t))
 			*(*int64)(unsafe.Pointer(bp)) = 0
 			if dest != 0 {
 				v45 = dest
@@ -147802,7 +147922,7 @@ func Xecvt(tls *TLS, x float64, n int32, dp uintptr, sign uintptr) (r uintptr) {
 	if uint32(n)-uint32(1) > uint32(15) {
 		n = int32(15)
 	}
-	Xsprintf(tls, bp, ts+2464, VaList(bp+40, n-int32(1), x))
+	Xsprintf(tls, bp, ts+2450, VaList(bp+40, n-int32(1), x))
 	v1 = BoolInt32(int32((*(*[32]int8)(unsafe.Pointer(bp)))[0]) == Int32FromUint8('-'))
 	*(*int32)(unsafe.Pointer(sign)) = v1
 	i = v1
@@ -147838,10 +147958,10 @@ func Xfcvt(tls *TLS, x float64, n int32, dp uintptr, sign uintptr) (r uintptr) {
 	if uint32(n) > uint32(1400) {
 		n = int32(1400)
 	}
-	Xsprintf(tls, bp, ts+2469, VaList(bp+1512, n, x))
+	Xsprintf(tls, bp, ts+2455, VaList(bp+1512, n, x))
 	i = BoolInt32(int32((*(*[1500]int8)(unsafe.Pointer(bp)))[0]) == int32('-'))
 	if int32((*(*[1500]int8)(unsafe.Pointer(bp)))[i]) == int32('0') {
-		lz = int32(Xstrspn(tls, bp+uintptr(i)+uintptr(2), ts+1942))
+		lz = int32(Xstrspn(tls, bp+uintptr(i)+uintptr(2), ts+1928))
 	} else {
 		lz = -int32(Xstrcspn(tls, bp+uintptr(i), ts+669))
 	}
@@ -147851,7 +147971,7 @@ func Xfcvt(tls *TLS, x float64, n int32, dp uintptr, sign uintptr) (r uintptr) {
 		if uint32(n) > uint32(14) {
 			n = int32(14)
 		}
-		return ts + 2474 + UintptrFromInt32(14) - uintptr(n)
+		return ts + 2460 + UintptrFromInt32(14) - uintptr(n)
 	}
 	return Xecvt(tls, x, n-lz, dp, sign)
 }
@@ -147863,7 +147983,7 @@ func Xgcvt(tls *TLS, x float64, n int32, b uintptr) (r uintptr) {
 	}
 	bp := tls.Alloc(32) /* tlsAllocs 0 maxVaListSize 16 */
 	defer tls.Free(32)
-	Xsprintf(tls, b, ts+2490, VaList(bp+8, n, x))
+	Xsprintf(tls, b, ts+2476, VaList(bp+8, n, x))
 	return b
 }
 
@@ -148318,7 +148438,7 @@ func _do_read(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 	_, _, _, _, _ = i, wcs, v2, v3, v4
 	wcs = (*TFILE)(unsafe.Pointer(f)).Fcookie
 	if !(*(*int32)(unsafe.Pointer(wcs)) != 0) {
-		wcs = ts + 2495
+		wcs = ts + 2481
 	}
 	i = uint64(0)
 	for {
@@ -148421,7 +148541,7 @@ func _do_read1(tls *TLS, f uintptr, buf uintptr, len1 uint64) (r uint64) {
 	_, _, _, _, _ = i, wcs, v2, v3, v4
 	wcs = (*TFILE)(unsafe.Pointer(f)).Fcookie
 	if !(*(*int32)(unsafe.Pointer(wcs)) != 0) {
-		wcs = ts + 2495
+		wcs = ts + 2481
 	}
 	i = uint64(0)
 	for {
@@ -148564,7 +148684,7 @@ func Xexplicit_bzero(tls *TLS, d uintptr, n uint64) {
 	}
 	d = _memset(tls, d, 0, n)
 	// __asm__ __volatile__ ("" : : "r"(d) : "memory");
-	x___assert_fail(tls, ts+677, ts+2503, 7, ts+2520)
+	x___assert_fail(tls, ts+677, ts+2489, 7, ts+2506)
 }
 
 func Xindex(tls *TLS, s uintptr, c int32) (r uintptr) {
@@ -151014,7 +151134,7 @@ func Xmkdtemp(tls *TLS, template uintptr) (r uintptr) {
 	_, _, _ = l, retries, v1
 	l = Xstrlen(tls, template)
 	retries = int32(100)
-	if l < uint64(6) || Xmemcmp(tls, template+uintptr(l)-uintptr(6), ts+2535, uint64(6)) != 0 {
+	if l < uint64(6) || Xmemcmp(tls, template+uintptr(l)-uintptr(6), ts+2521, uint64(6)) != 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return uintptr(0)
 	}
@@ -151031,7 +151151,7 @@ func Xmkdtemp(tls *TLS, template uintptr) (r uintptr) {
 			break
 		}
 	}
-	_memcpy(tls, template+uintptr(l)-uintptr(6), ts+2535, uint64(6))
+	_memcpy(tls, template+uintptr(l)-uintptr(6), ts+2521, uint64(6))
 	return uintptr(0)
 }
 
@@ -151050,7 +151170,7 @@ func x___mkostemps(tls *TLS, template uintptr, len1 int32, flags int32) (r int32
 	var l uint64
 	_, _, _, _, _ = fd, l, retries, v1, v3
 	l = Xstrlen(tls, template)
-	if l < uint64(6) || uint64(len1) > l-uint64(6) || Xmemcmp(tls, template+uintptr(l)-uintptr(len1)-uintptr(6), ts+2535, uint64(6)) != 0 {
+	if l < uint64(6) || uint64(len1) > l-uint64(6) || Xmemcmp(tls, template+uintptr(l)-uintptr(len1)-uintptr(6), ts+2521, uint64(6)) != 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		return -int32(1)
 	}
@@ -151071,7 +151191,7 @@ func x___mkostemps(tls *TLS, template uintptr, len1 int32, flags int32) (r int32
 			break
 		}
 	}
-	_memcpy(tls, template+uintptr(l)-uintptr(len1)-uintptr(6), ts+2535, uint64(6))
+	_memcpy(tls, template+uintptr(l)-uintptr(len1)-uintptr(6), ts+2521, uint64(6))
 	return -int32(1)
 }
 
@@ -151104,7 +151224,7 @@ func Xmktemp(tls *TLS, template uintptr) (r uintptr) {
 	_, _, _ = l, retries, v1
 	l = Xstrlen(tls, template)
 	retries = int32(100)
-	if l < uint64(6) || Xmemcmp(tls, template+uintptr(l)-uintptr(6), ts+2535, uint64(6)) != 0 {
+	if l < uint64(6) || Xmemcmp(tls, template+uintptr(l)-uintptr(6), ts+2521, uint64(6)) != 0 {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(m_EINVAL)
 		*(*int8)(unsafe.Pointer(template)) = 0
 		return template
@@ -151432,7 +151552,7 @@ func ___futex4_cp(tls *TLS, addr uintptr, op int32, val int32, to uintptr) (r1 i
 	return int32(x___syscall_cp(tls, int64(m_SYS_futex), int64(addr), int64(op & ^Int32FromInt32(m_FUTEX_PRIVATE)), int64(val), int64(to), 0, 0))
 }
 
-var _dummy15 = int32(0)
+var _dummy16 = int32(0)
 
 func x___timedwait_cp(tls *TLS, addr uintptr, val int32, clk int32, at uintptr, priv int32) (r1 int32) {
 	bp := tls.Alloc(16) /* tlsAllocs 16 maxVaListSize 0 */
@@ -152406,7 +152526,7 @@ func x_pthread_cancel(tls *TLS, t uintptr) (r int32) {
 
 var _init1 int32
 
-func _dummy16(tls *TLS, cb uintptr) {
+func _dummy17(tls *TLS, cb uintptr) {
 }
 
 func x__pthread_cleanup_push(tls *TLS, cb uintptr, f uintptr, x uintptr) {
@@ -152836,18 +152956,13 @@ func x_pthread_condattr_setpshared(tls *TLS, a uintptr, pshared int32) (r int32)
 	return 0
 }
 
-const m_CLONE_CHILD_CLEARTID = 2097152
 const m_CLONE_DETACHED = 4194304
 const m_CLONE_FILES = 1024
 const m_CLONE_FS = 512
-const m_CLONE_PARENT_SETTID = 1048576
-const m_CLONE_SETTLS = 524288
 const m_CLONE_SIGHAND = 2048
 const m_CLONE_SYSVSEM = 262144
-const m_CLONE_THREAD = 65536
 const m_SYS_sched_setscheduler = 144
 const m_SYS_set_robust_list = 273
-const m_SYS_set_tid_address = 218
 
 func _dummy_02(tls *TLS) {
 }
@@ -153112,7 +153227,7 @@ func _start_c11(tls *TLS, p uintptr) (r int32) {
 // C documentation
 //
 //	/* pthread_key_create.c overrides this */
-var _dummy17 = uint64(0)
+var _dummy18 = uint64(0)
 var _dummy_tsd = [1]uintptr{}
 
 var _dummy_file1 = uintptr(0)
@@ -153403,7 +153518,7 @@ func x_pthread_getname_np(tls *TLS, thread uintptr, name uintptr, len1 uint64) (
 		}
 		return v1
 	}
-	Xsnprintf(tls, bp+4, uint64(34), ts+2542, VaList(bp+48, (*t__pthread)(unsafe.Pointer(thread)).Ftid))
+	Xsnprintf(tls, bp+4, uint64(34), ts+2528, VaList(bp+48, (*t__pthread)(unsafe.Pointer(thread)).Ftid))
 	x___pthread_setcancelstate(tls, int32(m_PTHREAD_CANCEL_DISABLE), bp)
 	v2 = Xopen(tls, bp+4, Int32FromInt32(m_O_RDONLY)|Int32FromInt32(m_O_CLOEXEC), 0)
 	fd = v2
@@ -153454,7 +153569,7 @@ func ___pthread_getspecific(tls *TLS, k uint32) (r uintptr) {
 	return *(*uintptr)(unsafe.Pointer((*t__pthread)(unsafe.Pointer(self)).Ftsd + uintptr(k)*8))
 }
 
-func _dummy18(tls *TLS, t uintptr) {
+func _dummy19(tls *TLS, t uintptr) {
 }
 
 func ___pthread_timedjoin_np(tls *TLS, t uintptr, res uintptr, at uintptr) (r1 int32) {
@@ -154371,7 +154486,7 @@ func x_pthread_setattr_default_np(tls *TLS, attrp uintptr) (r int32) {
 
 func x_pthread_getattr_default_np(tls *TLS, attrp uintptr) (r int32) {
 	x___acquire_ptc(tls)
-	panic(ts + 2566)
+	panic(ts + 2552)
 	*(*Tpthread_attr_t)(unsafe.Pointer(attrp)) = Tpthread_attr_t{
 		F__u: *(*struct {
 			F__vi [0][14]int32
@@ -154452,7 +154567,7 @@ func x_pthread_setname_np(tls *TLS, thread uintptr, name uintptr) (r int32) {
 		}
 		return v2
 	}
-	Xsnprintf(tls, bp+4, uint64(34), ts+2542, VaList(bp+48, (*t__pthread)(unsafe.Pointer(thread)).Ftid))
+	Xsnprintf(tls, bp+4, uint64(34), ts+2528, VaList(bp+48, (*t__pthread)(unsafe.Pointer(thread)).Ftid))
 	x___pthread_setcancelstate(tls, int32(m_PTHREAD_CANCEL_DISABLE), bp)
 	v3 = Xopen(tls, bp+4, Int32FromInt32(m_O_WRONLY)|Int32FromInt32(m_O_CLOEXEC), 0)
 	fd = v3
@@ -154569,7 +154684,7 @@ func x_pthread_spin_unlock(tls *TLS, s uintptr) (r int32) {
 	return 0
 }
 
-func _dummy19(tls *TLS) {
+func _dummy20(tls *TLS) {
 }
 
 func x___pthread_testcancel(tls *TLS) {
@@ -154757,7 +154872,7 @@ func Xsem_open(tls *TLS, name uintptr, flags int32, va uintptr) (r uintptr) {
 		/* Create a temp file with the new semaphore contents
 		 * and attempt to atomically link it as the new name */
 		Xclock_gettime(tls, m_CLOCK_REALTIME, bp+104)
-		Xsnprintf(tls, bp+36, uint64(64), ts+2642, VaList(bp+544, int32((*(*Ttimespec)(unsafe.Pointer(bp + 104))).Ftv_nsec)))
+		Xsnprintf(tls, bp+36, uint64(64), ts+2628, VaList(bp+544, int32((*(*Ttimespec)(unsafe.Pointer(bp + 104))).Ftv_nsec)))
 		fd = Xopen(tls, bp+36, Int32FromInt32(m_O_CREAT)|Int32FromInt32(m_O_EXCL)|(Int32FromInt32(m_O_RDWR)|Int32FromInt32(m_O_NOFOLLOW)|Int32FromInt32(m_O_CLOEXEC)|Int32FromInt32(m_O_NONBLOCK)), VaList(bp+544, mode))
 		if fd < 0 {
 			if *(*int32)(unsafe.Pointer(X__errno_location(tls))) == int32(m_EEXIST) {
@@ -155528,9 +155643,9 @@ func _do_tzset(tls *TLS) {
 	_, _, _, _, _, _, _, _, _, _, _, _, _ = i, l, map1, p1, pathname, posix_form, scale, skip, try, v2, v5, v6, v7
 	pathname = bp + 6 + uintptr(24)
 	map1 = uintptr(0)
-	*(*uintptr)(unsafe.Pointer(bp + 288)) = Xgetenv(tls, ts+2658)
+	*(*uintptr)(unsafe.Pointer(bp + 288)) = Xgetenv(tls, ts+2644)
 	if !(*(*uintptr)(unsafe.Pointer(bp + 288)) != 0) {
-		*(*uintptr)(unsafe.Pointer(bp + 288)) = ts + 2661
+		*(*uintptr)(unsafe.Pointer(bp + 288)) = ts + 2647
 	}
 	if !(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 288)))) != 0) {
 		*(*uintptr)(unsafe.Pointer(bp + 288)) = uintptr(unsafe.Pointer(&x___utc))
@@ -155578,7 +155693,7 @@ func _do_tzset(tls *TLS) {
 	if int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 288))))) != int32(':') {
 		*(*uintptr)(unsafe.Pointer(bp + 296)) = *(*uintptr)(unsafe.Pointer(bp + 288))
 		_getname(tls, bp+304, bp+296)
-		if *(*uintptr)(unsafe.Pointer(bp + 296)) != *(*uintptr)(unsafe.Pointer(bp + 288)) && (int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 296))))) == int32('+') || int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 296))))) == int32('-') || BoolInt32(uint32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 296)))))-uint32('0') < uint32(10)) != 0 || !(Xstrcmp(tls, bp+304, ts+2676) != 0) || !(Xstrcmp(tls, bp+304, ts+2680) != 0)) {
+		if *(*uintptr)(unsafe.Pointer(bp + 296)) != *(*uintptr)(unsafe.Pointer(bp + 288)) && (int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 296))))) == int32('+') || int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 296))))) == int32('-') || BoolInt32(uint32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 296)))))-uint32('0') < uint32(10)) != 0 || !(Xstrcmp(tls, bp+304, ts+2662) != 0) || !(Xstrcmp(tls, bp+304, ts+2666) != 0)) {
 			posix_form = int32(1)
 		}
 	}
@@ -155590,7 +155705,7 @@ func _do_tzset(tls *TLS) {
 			*(*uintptr)(unsafe.Pointer(bp + 288))++
 		}
 		if int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 288))))) == int32('/') || int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 288))))) == int32('.') {
-			if !(x___libc.Fsecure != 0) || !(Xstrcmp(tls, *(*uintptr)(unsafe.Pointer(bp + 288)), ts+2661) != 0) {
+			if !(x___libc.Fsecure != 0) || !(Xstrcmp(tls, *(*uintptr)(unsafe.Pointer(bp + 288)), ts+2647) != 0) {
 				map1 = x___map_file(tls, *(*uintptr)(unsafe.Pointer(bp + 288)), uintptr(unsafe.Pointer(&_map_size)))
 			}
 		} else {
@@ -155616,7 +155731,7 @@ func _do_tzset(tls *TLS) {
 			*(*uintptr)(unsafe.Pointer(bp + 288)) = uintptr(unsafe.Pointer(&x___utc))
 		}
 	}
-	if map1 != 0 && (_map_size < uint64(44) || Xmemcmp(tls, map1, ts+2684, uint64(4)) != 0) {
+	if map1 != 0 && (_map_size < uint64(44) || Xmemcmp(tls, map1, ts+2670, uint64(4)) != 0) {
 		Xmunmap(tls, map1, _map_size)
 		map1 = uintptr(0)
 		*(*uintptr)(unsafe.Pointer(bp + 288)) = uintptr(unsafe.Pointer(&x___utc))
@@ -156035,7 +156150,7 @@ const m_ABMON_1 = 131086
 func x___asctime_r(tls *TLS, tm uintptr, buf uintptr) (r uintptr) {
 	bp := tls.Alloc(64) /* tlsAllocs 0 maxVaListSize 56 */
 	defer tls.Free(64)
-	if Xsnprintf(tls, buf, uint64(26), ts+2689, VaList(bp+8, x___nl_langinfo_l(tls, int32(m_ABDAY_1)+(*Ttm)(unsafe.Pointer(tm)).Ftm_wday, uintptr(unsafe.Pointer(&x___c_locale))), x___nl_langinfo_l(tls, int32(m_ABMON_1)+(*Ttm)(unsafe.Pointer(tm)).Ftm_mon, uintptr(unsafe.Pointer(&x___c_locale))), (*Ttm)(unsafe.Pointer(tm)).Ftm_mday, (*Ttm)(unsafe.Pointer(tm)).Ftm_hour, (*Ttm)(unsafe.Pointer(tm)).Ftm_min, (*Ttm)(unsafe.Pointer(tm)).Ftm_sec, int32(1900)+(*Ttm)(unsafe.Pointer(tm)).Ftm_year)) >= int32(26) {
+	if Xsnprintf(tls, buf, uint64(26), ts+2675, VaList(bp+8, x___nl_langinfo_l(tls, int32(m_ABDAY_1)+(*Ttm)(unsafe.Pointer(tm)).Ftm_wday, uintptr(unsafe.Pointer(&x___c_locale))), x___nl_langinfo_l(tls, int32(m_ABMON_1)+(*Ttm)(unsafe.Pointer(tm)).Ftm_mon, uintptr(unsafe.Pointer(&x___c_locale))), (*Ttm)(unsafe.Pointer(tm)).Ftm_mday, (*Ttm)(unsafe.Pointer(tm)).Ftm_hour, (*Ttm)(unsafe.Pointer(tm)).Ftm_min, (*Ttm)(unsafe.Pointer(tm)).Ftm_sec, int32(1900)+(*Ttm)(unsafe.Pointer(tm)).Ftm_year)) >= int32(26) {
 		/* ISO C requires us to use the above format string,
 		 * even if it will not fit in the buffer. Thus asctime_r
 		 * is _supposed_ to crash if the fields in tm are too large.
@@ -156119,7 +156234,7 @@ func _cgt_init(tls *TLS, clk int32, ts uintptr) (r int32) {
 	var f, p uintptr
 	var v1 int32
 	_, _, _ = f, p, v1
-	p = x___vdsosym(tls, ts+2320, ts+2721)
+	p = x___vdsosym(tls, ts+2306, ts+2707)
 	f = p
 	_a_cas_p(tls, uintptr(unsafe.Pointer(&_vdso_func1)), __ccgo_fp(_cgt_init), p)
 	if f != 0 {
@@ -156278,7 +156393,7 @@ func Xgetdate(tls *TLS, s uintptr) (r uintptr) {
 	var _ /* fmt at bp+0 */ [100]int8
 	_, _, _, _ = datemsk, f, p, ret
 	ret = uintptr(0)
-	datemsk = Xgetenv(tls, ts+2742)
+	datemsk = Xgetenv(tls, ts+2728)
 	f = uintptr(0)
 	x___pthread_setcancelstate(tls, m_PTHREAD_CANCEL_DEFERRED, bp+100)
 	if !(datemsk != 0) {
@@ -156492,7 +156607,7 @@ func x___strftime_fmt_1(tls *TLS, s uintptr, l uintptr, f int32, tm uintptr, loc
 	var fmt uintptr
 	var val int64
 	_, _, _, _, _, _, _, _ = def_pad, fmt, item, val, width, v1, v2, v3
-	fmt = ts + 2437
+	fmt = ts + 2423
 	width = int32(2)
 	def_pad = int32('0')
 	switch f {
@@ -156535,10 +156650,10 @@ func x___strftime_fmt_1(tls *TLS, s uintptr, l uintptr, f int32, tm uintptr, loc
 		val = int64((*Ttm)(unsafe.Pointer(tm)).Ftm_mday)
 		goto number
 	case int32('D'):
-		fmt = ts + 2750
+		fmt = ts + 2736
 		goto recu_strftime
 	case int32('F'):
-		fmt = ts + 2759
+		fmt = ts + 2745
 		goto recu_strftime
 	case int32('g'):
 		fallthrough
@@ -156595,7 +156710,7 @@ func x___strftime_fmt_1(tls *TLS, s uintptr, l uintptr, f int32, tm uintptr, loc
 		item = int32(m_T_FMT_AMPM)
 		goto nl_strftime
 	case int32('R'):
-		fmt = ts + 2768
+		fmt = ts + 2754
 		goto recu_strftime
 	case int32('s'):
 		val = x___tm_to_secs(tls, tm) - (*Ttm)(unsafe.Pointer(tm)).F__tm_gmtoff
@@ -156606,9 +156721,9 @@ func x___strftime_fmt_1(tls *TLS, s uintptr, l uintptr, f int32, tm uintptr, loc
 		goto number
 	case int32('t'):
 		*(*uint64)(unsafe.Pointer(l)) = uint64(1)
-		return ts + 1802
+		return ts + 1788
 	case int32('T'):
-		fmt = ts + 2774
+		fmt = ts + 2760
 		goto recu_strftime
 	case int32('u'):
 		if (*Ttm)(unsafe.Pointer(tm)).Ftm_wday != 0 {
@@ -156647,7 +156762,7 @@ func x___strftime_fmt_1(tls *TLS, s uintptr, l uintptr, f int32, tm uintptr, loc
 	case int32('Y'):
 		val = int64((*Ttm)(unsafe.Pointer(tm)).Ftm_year) + int64(1900)
 		if val >= int64(10000) {
-			*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2783, VaList(bp+8, val)))
+			*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2769, VaList(bp+8, val)))
 			return s
 		}
 		width = int32(4)
@@ -156657,7 +156772,7 @@ func x___strftime_fmt_1(tls *TLS, s uintptr, l uintptr, f int32, tm uintptr, loc
 			*(*uint64)(unsafe.Pointer(l)) = uint64(0)
 			return ts
 		}
-		*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2789, VaList(bp+8, (*Ttm)(unsafe.Pointer(tm)).F__tm_gmtoff/int64(3600)*int64(100)+(*Ttm)(unsafe.Pointer(tm)).F__tm_gmtoff%int64(3600)/int64(60))))
+		*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2775, VaList(bp+8, (*Ttm)(unsafe.Pointer(tm)).F__tm_gmtoff/int64(3600)*int64(100)+(*Ttm)(unsafe.Pointer(tm)).F__tm_gmtoff%int64(3600)/int64(60))))
 		return s
 	case int32('Z'):
 		if (*Ttm)(unsafe.Pointer(tm)).Ftm_isdst < 0 {
@@ -156680,13 +156795,13 @@ number:
 	}
 	switch v3 {
 	case int32('-'):
-		*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2796, VaList(bp+8, val)))
+		*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2782, VaList(bp+8, val)))
 	case int32('_'):
-		*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2801, VaList(bp+8, width, val)))
+		*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2787, VaList(bp+8, width, val)))
 	case int32('0'):
 		fallthrough
 	default:
-		*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2807, VaList(bp+8, width, val)))
+		*(*uint64)(unsafe.Pointer(l)) = uint64(Xsnprintf(tls, s, uint64(100), ts+2793, VaList(bp+8, width, val)))
 		break
 	}
 	return s
@@ -157007,7 +157122,7 @@ func Xstrptime(tls *TLS, s uintptr, f uintptr, tm uintptr) (r uintptr) {
 		range1 = int32(31)
 		goto numeric_range
 	_19:
-		s = Xstrptime(tls, s, ts+2750, tm)
+		s = Xstrptime(tls, s, ts+2736, tm)
 		if !(s != 0) {
 			return uintptr(0)
 		}
@@ -157082,7 +157197,7 @@ func Xstrptime(tls *TLS, s uintptr, f uintptr, tm uintptr) (r uintptr) {
 		}
 		goto _41
 	_29:
-		s = Xstrptime(tls, s, ts+2768, tm)
+		s = Xstrptime(tls, s, ts+2754, tm)
 		if !(s != 0) {
 			return uintptr(0)
 		}
@@ -157093,7 +157208,7 @@ func Xstrptime(tls *TLS, s uintptr, f uintptr, tm uintptr) (r uintptr) {
 		range1 = int32(61)
 		goto numeric_range
 	_31:
-		s = Xstrptime(tls, s, ts+2774, tm)
+		s = Xstrptime(tls, s, ts+2760, tm)
 		if !(s != 0) {
 			return uintptr(0)
 		}
@@ -157712,7 +157827,7 @@ func Xwcsftime(tls *TLS, wcs uintptr, n uint64, f uintptr, tm uintptr) (r uint64
 }
 
 func x__exit(tls *TLS, status int32) {
-	x__Exit(tls, status)
+	X_Exit(tls, status)
 }
 
 const m_SYS_access = 21
@@ -157774,7 +157889,7 @@ func Xchown(tls *TLS, path uintptr, uid uint32, gid uint32) (r int32) {
 	return int32(x___syscall_ret(tls, uint64(___syscall3(tls, int64(m_SYS_chown), int64(path), int64(uid), int64(gid)))))
 }
 
-func _dummy20(tls *TLS, fd int32) (r int32) {
+func _dummy21(tls *TLS, fd int32) (r int32) {
 	return fd
 }
 
@@ -158146,7 +158261,7 @@ func Xgetlogin(tls *TLS) (r uintptr) {
 		trc("tls=%v, (%v:)", tls, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
-	return Xgetenv(tls, ts+2814)
+	return Xgetenv(tls, ts+2800)
 }
 
 func Xgetlogin_r(tls *TLS, name uintptr, size uint64) (r int32) {
@@ -162288,4 +162403,4 @@ var Xstdout = uintptr(unsafe.Pointer(&x___stdout_FILE))
 
 var ts = (*reflect.StringHeader)(unsafe.Pointer(&ts1)).Data
 
-var ts1 = "\x00/bin:/usr/bin\x00%s\x008b \xd0\xc1\xd2\xcf\xcc\xd8\x00$2a$00$abcdefghijklmnopqrstuu\x00\xff\xa334\xff\xff\xff\xa3345\x00*\x00\x80\xff\x80\x01 \x7f\x81\x80\x80\r\n\xff\x7f \x81 test\x00_0.../9Zz\x00_0.../9ZzX7iSJNd21sU\x00\x80x\x00\x80x22/wK52ZKGA\x00x\x00$1$\x00$5$\x00rounds=\x00rounds=%u$\x00$5$%s%.*s$\x00$6$\x00$6$%s%.*s$\x00toupper\x00tolower\x00/dev/null\x00Assertion failed: %s (%s: %s: %d)\n\x00infinity\x00nan\x00\x00\x01\x02\x04\a\x03\x06\x05\x00/proc/self/fd/\x00Symbol not found: %s\x00/proc/self/exe\x00Dynamic linker failed to allocate memory for error message\x00Invalid library handle %p\x00Unsupported request %d\x00Dynamic loading not supported\x00/\x00%s: \x00: \x00/dev/tty\x00\n\x00/etc/shells\x00rbe\x00rb\x00UTF-8\x00NLSPATH\x00LANG\x00_.@\x00.@\x00%\x00messages\x00%s/%.*s%.*s/%s/%s.mo\x00\x00n!=1;\x00Plural-Forms:\x00nplurals=\x00plural=\x00Ê̄Ê̌ê̄ê̌\x00utf8\x00ASCII\x00C\x00LC_ALL\x00C.UTF-8\x00POSIX\x00MUSL_LOCPATH\x00.\x00%*.*f\x00assembler statements not supported\x00fmodl.c\x00fmodl\x00llrint.c\x00llrint\x00llrintf.c\x00llrintf\x00llrintl.c\x00llrintl\x00lrint.c\x00lrint\x00lrintf.c\x00lrintf\x00lrintl.c\x00lrintl\x00remainderl.c\x00remainderl\x00remquol.c\x00remquol\x00rintl.c\x00rintl\x00MSGVERB\x00label\x00severity\x00text\x00action\x00tag\x00HALT: \x00ERROR: \x00WARNING: \x00INFO: \x00/dev/console\x00\nTO FIX: \x00 \x00%s%s%s%s%s%s%s%s\n\x00PWD\x00: unrecognized option: \x00: option requires an argument: \x00: option does not take an argument: \x00: option is ambiguous: \x00%*[^\n]%*[\n]\x00 %n%*s%n %n%*s%n %n%*s%n %n%*s%n %d %d\x00%s\t%s\t%s\t%s\t%d\t%d\n\x00/dev/ptmx\x00/dev/pts/%d\x00%b %e %T\x00<%d>%s %n%s%s%.0d%s: \x00[\x00]\x00%.*s\x002>/dev/null\x00/bin/sh\x00sh\x00-c\x00eval \"printf %s\\\\\\\\0 x $1 $2\"\x00r\x00/dev/shm/\x00%.2X\x00:%.2X\x00%d.%d.%d.%d.in-addr.arpa\x00ip6.arpa\x00/etc/hosts\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xff\xff\x00/etc/services\x00/udp\x00/tcp\x00tcp\x00udp\x00%s%s%s\n\x00%d.%d.%d.%d\x00%x:%x:%x:%x:%x:%x:%x:%x\x00%x:%x:%x:%x:%x:%x:%d.%d.%d.%d\x00:0\x00/etc/resolv.conf\x00options\x00ndots:\x00attempts:\x00timeout:\x00nameserver\x00domain\x00search\x00127.0.0.1\x00/etc/group\x00/etc/passwd\x00/etc/tcb/%s/shadow\x00/etc/shadow\x00re\x00%s:%s:%u:\x00,\x00%s%s\x00%s:%s:%u:%u:%s:%s:%s\n\x00%s:%s:%.*ld:%.*ld:%.*ld:%.*ld:%.*ld:%.*ld:%.*lu\n\x00PATH\x00/usr/local/bin:/bin:/usr/bin\x00HOME\x00new_size > s->size\x00src/regex/regcomp.c\x00\t\x00\r\x00\f\x00\a\x00\x1b\x00[[:alnum:]_]\x00[^[:alnum:]_]\x00[[:space:]]\x00[^[:space:]]\x00[[:digit:]]\x00[^[:digit:]]\x00tnfa->submatch_data[id].parents == NULL\x00!IS_TAG(lit)\x000\x00tree->num_tags == num_tags\x00lit->code_max >= 1 || lit->code_max <= ASSERT_LAST\x00cat->left->nullable\x00cat->right->nullable\x00(trans->assertions & ASSERT_CHAR_CLASS) == 0\x00p2->backref < 0\x00iter->max == -1 || iter->max == 1\x00iter->min == 0 || iter->min == 1\x00reach_pos[trans_i->state_id].pos == pos\x00src/regex/regexec.c\x00stack->prev\x00pmatch[i].rm_so == -1\x00pmatch[i].rm_so <= pmatch[i].rm_eo\x00LINUX_2.6\x00__vdso_getcpu\x00rwa\x00/tmp\x00temp\x00w+\x00-0X+0X 0X-0x+0x 0x\x00inf\x00INF\x00NAN\x00-+   0X0x\x00(null)\x00%*s\x00%%%s%s%s%s%s*.*%c%c\x00#\x00+\x00-\x00\x00\x00\x00\x00%.*s%.0d%s%c%%lln\x00%*\x00%.*e\x00%.*f\x00000000000000000\x00%.*g\x00@\x00\x00\x00\x00\x00\x00\x00explicit_bzero.c\x00explicit_bzero\x00XXXXXX\x00/proc/self/task/%d/comm\x00TODO pthread_setattr_default_np.c:31:11: (init.go:488:initializerUnionMany:)/dev/shm/tmp-%d\x00TZ\x00/etc/localtime\x00UTC\x00GMT\x00TZif\x00%.3s %.3s%3d %.2d:%.2d:%.2d %d\n\x00__vdso_clock_gettime\x00DATEMSK\x00%m/%d/%y\x00%Y-%m-%d\x00%H:%M\x00%H:%M:%S\x00+%lld\x00%+.4ld\x00%lld\x00%*lld\x00%0*lld\x00LOGNAME\x00"
+var ts1 = "\x00/bin:/usr/bin\x00%s\x008b \xd0\xc1\xd2\xcf\xcc\xd8\x00$2a$00$abcdefghijklmnopqrstuu\x00\xff\xa334\xff\xff\xff\xa3345\x00*\x00\x80\xff\x80\x01 \x7f\x81\x80\x80\r\n\xff\x7f \x81 test\x00_0.../9Zz\x00_0.../9ZzX7iSJNd21sU\x00\x80x\x00\x80x22/wK52ZKGA\x00x\x00$1$\x00$5$\x00rounds=\x00rounds=%u$\x00$5$%s%.*s$\x00$6$\x00$6$%s%.*s$\x00toupper\x00tolower\x00/dev/null\x00Assertion failed: %s (%s: %s: %d)\n\x00infinity\x00nan\x00\x00\x01\x02\x04\a\x03\x06\x05\x00/proc/self/fd/\x00Symbol not found: %s\x00/proc/self/exe\x00Dynamic linker failed to allocate memory for error message\x00Invalid library handle %p\x00Unsupported request %d\x00Dynamic loading not supported\x00/\x00%s: \x00: \x00/dev/tty\x00\n\x00/etc/shells\x00rbe\x00rb\x00UTF-8\x00NLSPATH\x00LANG\x00_.@\x00.@\x00%\x00messages\x00%s/%.*s%.*s/%s/%s.mo\x00\x00n!=1;\x00Plural-Forms:\x00nplurals=\x00plural=\x00Ê̄Ê̌ê̄ê̌\x00utf8\x00ASCII\x00C\x00LC_ALL\x00C.UTF-8\x00POSIX\x00MUSL_LOCPATH\x00.\x00%*.*f\x00assembler statements not supported\x00llrint.c\x00llrint\x00llrintf.c\x00llrintf\x00llrintl.c\x00llrintl\x00lrint.c\x00lrint\x00lrintf.c\x00lrintf\x00lrintl.c\x00lrintl\x00remainderl.c\x00remainderl\x00remquol.c\x00remquol\x00rintl.c\x00rintl\x00MSGVERB\x00label\x00severity\x00text\x00action\x00tag\x00HALT: \x00ERROR: \x00WARNING: \x00INFO: \x00/dev/console\x00\nTO FIX: \x00 \x00%s%s%s%s%s%s%s%s\n\x00PWD\x00: unrecognized option: \x00: option requires an argument: \x00: option does not take an argument: \x00: option is ambiguous: \x00%*[^\n]%*[\n]\x00 %n%*s%n %n%*s%n %n%*s%n %n%*s%n %d %d\x00%s\t%s\t%s\t%s\t%d\t%d\n\x00/dev/ptmx\x00/dev/pts/%d\x00%b %e %T\x00<%d>%s %n%s%s%.0d%s: \x00[\x00]\x00%.*s\x002>/dev/null\x00/bin/sh\x00sh\x00-c\x00eval \"printf %s\\\\\\\\0 x $1 $2\"\x00r\x00/dev/shm/\x00%.2X\x00:%.2X\x00%d.%d.%d.%d.in-addr.arpa\x00ip6.arpa\x00/etc/hosts\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xff\xff\x00/etc/services\x00/udp\x00/tcp\x00tcp\x00udp\x00%s%s%s\n\x00%d.%d.%d.%d\x00%x:%x:%x:%x:%x:%x:%x:%x\x00%x:%x:%x:%x:%x:%x:%d.%d.%d.%d\x00:0\x00/etc/resolv.conf\x00options\x00ndots:\x00attempts:\x00timeout:\x00nameserver\x00domain\x00search\x00127.0.0.1\x00/etc/group\x00/etc/passwd\x00/etc/tcb/%s/shadow\x00/etc/shadow\x00re\x00%s:%s:%u:\x00,\x00%s%s\x00%s:%s:%u:%u:%s:%s:%s\n\x00%s:%s:%.*ld:%.*ld:%.*ld:%.*ld:%.*ld:%.*ld:%.*lu\n\x00PATH\x00/usr/local/bin:/bin:/usr/bin\x00HOME\x00new_size > s->size\x00src/regex/regcomp.c\x00\t\x00\r\x00\f\x00\a\x00\x1b\x00[[:alnum:]_]\x00[^[:alnum:]_]\x00[[:space:]]\x00[^[:space:]]\x00[[:digit:]]\x00[^[:digit:]]\x00tnfa->submatch_data[id].parents == NULL\x00!IS_TAG(lit)\x000\x00tree->num_tags == num_tags\x00lit->code_max >= 1 || lit->code_max <= ASSERT_LAST\x00cat->left->nullable\x00cat->right->nullable\x00(trans->assertions & ASSERT_CHAR_CLASS) == 0\x00p2->backref < 0\x00iter->max == -1 || iter->max == 1\x00iter->min == 0 || iter->min == 1\x00reach_pos[trans_i->state_id].pos == pos\x00src/regex/regexec.c\x00stack->prev\x00pmatch[i].rm_so == -1\x00pmatch[i].rm_so <= pmatch[i].rm_eo\x00LINUX_2.6\x00__vdso_getcpu\x00rwa\x00/tmp\x00temp\x00w+\x00-0X+0X 0X-0x+0x 0x\x00inf\x00INF\x00NAN\x00-+   0X0x\x00(null)\x00%*s\x00%%%s%s%s%s%s*.*%c%c\x00#\x00+\x00-\x00\x00\x00\x00\x00%.*s%.0d%s%c%%lln\x00%*\x00%.*e\x00%.*f\x00000000000000000\x00%.*g\x00@\x00\x00\x00\x00\x00\x00\x00explicit_bzero.c\x00explicit_bzero\x00XXXXXX\x00/proc/self/task/%d/comm\x00TODO pthread_setattr_default_np.c:31:11: (init.go:488:initializerUnionMany:)/dev/shm/tmp-%d\x00TZ\x00/etc/localtime\x00UTC\x00GMT\x00TZif\x00%.3s %.3s%3d %.2d:%.2d:%.2d %d\n\x00__vdso_clock_gettime\x00DATEMSK\x00%m/%d/%y\x00%Y-%m-%d\x00%H:%M\x00%H:%M:%S\x00+%lld\x00%+.4ld\x00%lld\x00%*lld\x00%0*lld\x00LOGNAME\x00"

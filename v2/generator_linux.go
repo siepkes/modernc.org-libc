@@ -13,38 +13,29 @@ package main
 
 import (
 	"fmt"
-	"io/fs"
 	"os"
 	"path/filepath"
 	"runtime"
-	"runtime/debug"
 	"strings"
 
 	"modernc.org/cc/v4"
 	util "modernc.org/ccgo/v3/lib"
 	ccgo "modernc.org/ccgo/v4/lib"
-	"modernc.org/ccorpus2"
 )
 
 const (
-	defaultArchivePath = "assets/musl.libc.org/releases/musl-1.2.4.tar.gz"
+	archivePath = "master.zip"
 )
 
 var (
-	archivePath          = defaultArchivePath
 	extractedArchivePath string
 	goarch               = runtime.GOARCH
 	goos                 = runtime.GOOS
 	muslArch             string
-
-	dev bool
 )
 
 func fail(rc int, msg string, args ...any) {
 	fmt.Fprintln(os.Stderr, strings.TrimSpace(fmt.Sprintf(msg, args...)))
-	if dev {
-		fmt.Fprintf(os.Stderr, "%s\n", debug.Stack())
-	}
 	os.Exit(rc)
 }
 
@@ -56,31 +47,23 @@ func main() {
 		return
 	}
 
-	var f fs.File
-	var err error
-
-	switch s := os.Getenv("GO_GENERATE_ARCHIVE"); {
-	case s != "":
-		archivePath = s
-		if f, err = os.Open(archivePath); err != nil {
-			fail(1, "cannot open tar file: %v\n", err)
-		}
-	default:
-		if f, err = ccorpus2.FS.Open(archivePath); err != nil {
-			fail(1, "cannot open tar file: %v\n", err)
-		}
-
+	f, err := os.Open(archivePath)
+	if err != nil {
+		fail(1, "cannot open zip file: %v\n", err)
 	}
+
+	f.Close()
+
 	switch goarch {
 	case "amd64":
 		muslArch = "x86_64"
 	default:
 		fail(1, "unsupported goarch: %s", goarch)
 	}
-	_, extractedArchivePath = filepath.Split(archivePath)
-	extractedArchivePath = extractedArchivePath[:len(extractedArchivePath)-len(".tar.gz")]
+
+	extractedArchivePath = "musl-master"
 	tempDir := os.Getenv("GO_GENERATE_DIR")
-	dev = os.Getenv("GO_GENERATE_DEV") != ""
+	dev := os.Getenv("GO_GENERATE_DEV") != ""
 	switch {
 	case tempDir != "":
 		util.MustShell(true, "sh", "-c", fmt.Sprintf("rm -rf %s", filepath.Join(tempDir, extractedArchivePath)))
@@ -99,17 +82,20 @@ func main() {
 			}
 		}()
 	}
+	libRoot := filepath.Join(tempDir, extractedArchivePath)
+	makeRoot := libRoot
 	fmt.Fprintf(os.Stderr, "archivePath %s\n", archivePath)
 	fmt.Fprintf(os.Stderr, "extractedArchivePath %s\n", extractedArchivePath)
 	fmt.Fprintf(os.Stderr, "tempDir %s\n", tempDir)
+	fmt.Fprintf(os.Stderr, "libRoot %s\n", libRoot)
+	fmt.Fprintf(os.Stderr, "makeRoot %s\n", makeRoot)
 
-	util.MustUntar(true, tempDir, f, nil)
-	muslRoot := filepath.Join(tempDir, extractedArchivePath)
-	util.MustCopyDir(true, filepath.Join(tempDir, extractedArchivePath), filepath.Join("overlay", extractedArchivePath, "all"), nil)
-	util.MustCopyDir(true, filepath.Join(tempDir, extractedArchivePath), filepath.Join("overlay", extractedArchivePath, goarch), nil)
-	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(muslRoot, "COPYRIGHT"), nil)
+	util.MustShell(true, "unzip", archivePath, "-d", tempDir)
+	util.MustCopyDir(true, libRoot, filepath.Join("overlay", extractedArchivePath, "all"), nil)
+	util.MustCopyDir(true, libRoot, filepath.Join("overlay", extractedArchivePath, goarch), nil)
+	util.MustCopyFile(true, "COPYRIGHT-MUSL", filepath.Join(makeRoot, "COPYRIGHT"), nil)
 	result := "libc.a.go"
-	util.MustInDir(true, muslRoot, func() (err error) {
+	util.MustInDir(true, makeRoot, func() (err error) {
 		cflags := []string{
 			// "-UNDEBUG", //TODO-
 		}
@@ -138,7 +124,7 @@ func main() {
 			"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS",
 			"-hide", "a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32",
 			"-hide", "fabs,fabsf,fabsl,sqrt,sqrtf,sqrtl",
-			"-hide", "clone,_Fork,fork,system,__synccall",
+			"-hide", "_Fork,fork,system,__synccall",
 			"-hide", "calloc,free,malloc,malloc_usable_size,realloc",
 			"-hide", "__libc_calloc,__libc_free,__libc_malloc,__libc_malloc_impl,__libc_realloc",
 			"-hide", "__malloc_allzerop,__malloc_atfork,__malloc_donate,__simple_malloc,",
@@ -167,7 +153,7 @@ func main() {
 	util.MustCopyDir(true, filepath.Join("include", goos, goarch, "bits"), filepath.Join(tempDir, extractedArchivePath, "arch", muslArch, "bits"), nil)
 
 	fn := fmt.Sprintf("ccgo_%s_%s.go", goos, goarch)
-	util.MustShell(true, "cp", filepath.Join(muslRoot, result), fn)
+	util.MustShell(true, "cp", filepath.Join(makeRoot, result), fn)
 	util.MustShell(true, "sed", "-i", `s/\<T__\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/t__\1/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<x_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/X\1/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<Xpthread_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/x_pthread_\1/g`, fn)
@@ -181,21 +167,27 @@ func main() {
 		{"_free", "Xfree"},
 		{"_malloc", "Xmalloc"},
 		{"_realloc", "Xrealloc"},
+		{"x__Exit", "X_Exit"},
 		{"x___clock_gettime", "Xclock_gettime"},
 		{"x___ctype_get_mb_cur_max", "X__ctype_get_mb_cur_max"},
+		{"x___dn_expand", "Xdn_expand"},
 		{"x___environ", "Xenviron"},
 		{"x___fdopen", "Xfdopen"},
 		{"x___fseeko", "Xfseeko"},
 		{"x___fstat", "Xfstat"},
 		{"x___ftello", "Xftello"},
 		{"x___gmtime_r", "Xgmtime_r"},
+		{"x___libc_current_sigrtmax", "X__libc_current_sigrtmax"},
+		{"x___libc_current_sigrtmin", "X__libc_current_sigrtmin"},
 		{"x___localtime_r", "Xlocaltime_r"},
 		{"x___lseek", "Xlseek"},
 		{"x___mmap", "Xmmap"},
 		{"x___mremap", "Xmremap"},
 		{"x___munmap", "Xmunmap"},
+		{"x___newlocale", "Xnewlocale"},
 		{"x___nl_langinfo", "Xnl_langinfo"},
 		{"x___sigaction", "Xsigaction"},
+		{"x___uselocale", "Xuselocale"},
 	} {
 		util.MustShell(true, "sed", "-i", fmt.Sprintf(`s/\<%s\>/%s/g`, v.old, v.new), fn)
 	}

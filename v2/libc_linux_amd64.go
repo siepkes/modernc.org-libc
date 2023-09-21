@@ -1240,15 +1240,6 @@ func _fork(tls *TLS) int32 {
 	return -1
 }
 
-func Xclone(tls *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va uintptr) (r int32) {
-	if __ccgo_strace {
-		trc("tls=%v func1=%v stack=%v flags=%v arg=%v va=%v, (%v:)", tls, func1, stack, flags, arg, va, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	tls.setErrno(m_ENOMEM)
-	return -1
-}
-
 func _abort(tls *TLS) {
 	Xabort(tls)
 }

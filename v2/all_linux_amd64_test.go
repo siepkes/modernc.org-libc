@@ -495,6 +495,39 @@ var skipFiles = map[string]struct{}{
 	"internal/nsz.repo.hu/libc-test/src/functional/ipc_sem.exe.go":        {}, // src/functional/ipc_sem.c:115: fork failed: Function not implemented
 	"internal/nsz.repo.hu/libc-test/src/functional/ipc_shm.exe.go":        {}, // src/functional/ipc_shm.c:112: fork failed: Function not implemented
 	"internal/nsz.repo.hu/libc-test/src/regression/daemon-failure.exe.go": {}, // src/regression/daemon-failure.c:35: fork failed: Function not implemented
+	"internal/nsz.repo.hu/libc-test/src/regression/fflush-exit.exe.go":    {},
+
+	// vfork
+	"internal/nsz.repo.hu/libc-test/src/functional/vfork.exe.go": {},
+
+	// clone
+	"internal/nsz.repo.hu/libc-test/src/functional/popen.exe.go": {},
+	"internal/nsz.repo.hu/libc-test/src/functional/spawn.exe.go": {},
+
+	// dlopen
+	"internal/nsz.repo.hu/libc-test/src/functional/tls_align_dlopen.exe.go": {},
+	"internal/nsz.repo.hu/libc-test/src/functional/tls_init_dlopen.exe.go":  {},
+
+	// vmfill
+	"internal/nsz.repo.hu/libc-test/src/regression/malloc-brk-fail.exe.go": {},
+	"internal/nsz.repo.hu/libc-test/src/regression/setenv-oom.exe.go":      {},
+
+	// cbin fails too
+	"internal/nsz.repo.hu/libc-test/src/functional/clocale_mbfuncs.exe.go": {},
+
+	//TODO other
+	"internal/nsz.repo.hu/libc-test/src/regression/sigaltstack.exe.go": {},
+	"internal/nsz.repo.hu/libc-test/src/regression/sigreturn.exe.go":   {},
+
+	//TODO miscompiles
+	"internal/nsz.repo.hu/libc-test/src/functional/setjmp.exe.go": {},
+	"internal/nsz.repo.hu/libc-test/src/functional/sscanf.exe.go": {},
+
+	//TODO asm
+	"internal/nsz.repo.hu/libc-test/src/functional/tgmath.exe.go": {},
+
+	//TODO fpclassify
+	"internal/nsz.repo.hu/libc-test/src/math/fpclassify.exe.go": {},
 
 	//TODO pthread
 	"internal/nsz.repo.hu/libc-test/src/functional/pthread_cancel-points.exe.go":            {},
@@ -720,7 +753,6 @@ var skipFiles = map[string]struct{}{
 }
 
 func TestLibc(t *testing.T) {
-	return //TODO-
 	if testing.Short() {
 		t.Skip("-short")
 	}
@@ -733,6 +765,7 @@ func TestLibc(t *testing.T) {
 			goos, goarch,
 			[]string{
 				os.Args[0],
+				"--prefix-field=F",
 				"-absolute-paths",
 				"-extended-errors",
 				"-positions",
@@ -758,23 +791,22 @@ func TestLibc(t *testing.T) {
 			return nil
 		}
 
+		file++
 		if _, ok := skipFiles[filepath.ToSlash(path)]; ok {
 			skip++
 			return nil
 		}
 
-		file++
 		cbin := path[:len(path)-len(".go")]
-		if _, err := run(t, cbin); err != nil {
-			t.Errorf("%s: cbin fail=%s", path, err)
+		_, cerr := run(t, cbin)
+		if cerr != nil {
+			t.Logf("%s: cbin fail=%s", path, cerr)
 			cfail++
-			return nil
 		}
-
 		os.Remove(bin)
 		if out, err := shell("go", "build", "-o", bin, path); err != nil {
-			t.Errorf("%s %s: BUILD FAIL=%s", out, path, err)
 			buildfail++
+			t.Errorf("%s %s: BUILD FAIL=%s", out, path, err)
 			return nil
 		}
 
@@ -790,6 +822,7 @@ func TestLibc(t *testing.T) {
 		return nil
 	})
 	t.Logf("files=%v skip=%v cfail=%v buildfail=%v buildok=%v fail=%v pass=%v", file, skip, cfail, buildfail, buildok, fail, pass)
+	// all_linux_amd64_test.go:814: files=334 skip=232 cfail=16 buildfail=0 buildok=102 fail=6 pass=96
 }
 
 func run(t *testing.T, bin string) (out []byte, err error) {

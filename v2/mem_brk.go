@@ -111,6 +111,11 @@ func malloc0(tls *TLS, pc uintptr, n0 Tsize_t, zero bool) (r uintptr) {
 }
 
 func Xmalloc(tls *TLS, n Tsize_t) (r uintptr) {
+	if n > math.MaxInt {
+		tls.setErrno(m_ENOMEM)
+		return 0
+	}
+
 	if n == 0 {
 		// malloc(0) should return unique pointers
 		// (often expected and gnulib replaces malloc if malloc(0) returns 0)
@@ -126,8 +131,14 @@ func Xmalloc(tls *TLS, n Tsize_t) (r uintptr) {
 }
 
 func Xcalloc(tls *TLS, m Tsize_t, n Tsize_t) (r uintptr) {
-	if m*n == 0 {
-		m, n = 1, 1
+	hi, rq := bits.Mul(uint(m), uint(n))
+	if hi != 0 || rq > math.MaxInt {
+		tls.setErrno(m_ENOMEM)
+		return 0
+	}
+
+	if rq == 0 {
+		rq = 1
 	}
 
 	allocatorMu.Lock()
@@ -135,7 +146,7 @@ func Xcalloc(tls *TLS, m Tsize_t, n Tsize_t) (r uintptr) {
 	defer allocatorMu.Unlock()
 
 	pc, _, _, _ := runtime.Caller(1)
-	return malloc0(tls, pc, m*n, true)
+	return malloc0(tls, pc, rq, true)
 }
 
 func Xrealloc(tls *TLS, p uintptr, n Tsize_t) (r uintptr) {

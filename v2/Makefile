@@ -5,8 +5,8 @@
 .PHONY:	all build_all_targets check clean download edit editor generate dev test tidy work
 
 DIR = /tmp/libc
-TAR = musl-1.2.4.tar.gz
-URL = https://musl.libc.org/releases/$(TAR)
+ZIP = master.zip
+URL = https://github.com/bminor/musl/archive/refs/heads/$(ZIP)
 
 all: editor
 	golint 2>&1
@@ -25,7 +25,7 @@ check:
 	staticcheck 2>&1 | grep -v U1000
 
 download:
-	@if [ ! -f $(TAR) ]; then wget $(URL) ; fi
+	@if [ ! -f $(ZIP) ]; then wget $(URL) ; fi
 
 edit:
 	@touch log
@@ -71,6 +71,8 @@ dev: download
 	grep 'TRC\|TODO\|ERRORF\|FAIL' /tmp/ccgo.log || true
 
 test:
+	touch log-test
+	cp log-test log-test0
 	go test -v -timeout 24h -count=1 2>&1 | tee log-test
 	grep -a 'TRC\|TODO\|ERRORF\|FAIL' log-test || true 2>&1 | tee -a log-test
 

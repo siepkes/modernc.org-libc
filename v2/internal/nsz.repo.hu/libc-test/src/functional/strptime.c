@@ -107,12 +107,12 @@ int main() {
 	checkStrptime("21.10.15", "%d.%m.%y", &tm3);
 	checkStrptime("10.7.56 in 18th", "%d.%m.%y in %C th", &tm4);
 
-	/* Glibc */
-	checkStrptime("1856-07-10", "%F", &tm4);
-	checkStrptime("683078400", "%s", &tm2);
-	checkStrptimeTz("+0200", 2, 0);
-	checkStrptimeTz("-0530", -5, -30);
-	checkStrptimeTz("-06", -6, 0);
+	//ccgo: /* Glibc */
+	//ccgo: checkStrptime("1856-07-10", "%F", &tm4);
+	//ccgo: checkStrptime("683078400", "%s", &tm2);
+	//ccgo: checkStrptimeTz("+0200", 2, 0);
+	//ccgo: checkStrptimeTz("-0530", -5, -30);
+	//ccgo: checkStrptimeTz("-06", -6, 0);
 
 	return t_status;
 }

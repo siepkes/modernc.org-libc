@@ -8,6 +8,8 @@
 package libc // import "modernc.org/libc/v2"
 
 import (
+	"math"
+	"math/bits"
 	"sync"
 
 	"modernc.org/memory"
@@ -27,6 +29,11 @@ func Xmalloc(tls *TLS, n Tsize_t) (r uintptr) {
 		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
+	if n > math.MaxInt {
+		tls.setErrno(m_ENOMEM)
+		return 0
+	}
+
 	allocatorMu.Lock()
 
 	defer allocatorMu.Unlock()
@@ -36,7 +43,6 @@ func Xmalloc(tls *TLS, n Tsize_t) (r uintptr) {
 		// (often expected and gnulib replaces malloc if malloc(0) returns 0)
 		n = 1
 	}
-
 	var err error
 	if r, err = allocator.UintptrMalloc(int(n)); err != nil {
 		r = 0
@@ -50,16 +56,22 @@ func Xcalloc(tls *TLS, m Tsize_t, n Tsize_t) (r uintptr) {
 		trc("tls=%v m=%v n=%v, (%v:)", tls, m, n, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
+	hi, rq := bits.Mul(uint(m), uint(n))
+	if hi != 0 || rq > math.MaxInt {
+		tls.setErrno(m_ENOMEM)
+		return 0
+	}
+
 	allocatorMu.Lock()
 
 	defer allocatorMu.Unlock()
 
-	if n == 0 {
-		m, n = 1, 1
+	if rq == 0 {
+		rq = 1
 	}
 
 	var err error
-	if r, err = allocator.UintptrCalloc(int(m * n)); err != nil {
+	if r, err = allocator.UintptrCalloc(int(rq)); err != nil {
 		r = 0
 		tls.setErrno(m_ENOMEM)
 	}
