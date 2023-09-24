@@ -192,6 +192,7 @@ func main() {
 		util.MustShell(true, "sed", "-i", fmt.Sprintf(`s/\<%s\>/%s/g`, v.old, v.new), fn)
 	}
 
+	util.Shell("sh", "-c", "./unconvert.sh")
 	m, err := filepath.Glob(fmt.Sprintf("*_%s_%s.go", runtime.GOOS, runtime.GOARCH))
 	if err != nil {
 		fail(1, "%s\n", err)

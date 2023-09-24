@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-.PHONY:	all build_all_targets check clean download edit editor generate dev test tidy work
+.PHONY:	all build_all_targets check clean download edit editor generate dev test work
 
 DIR = /tmp/libc
 ZIP = master.zip
@@ -47,7 +47,6 @@ generate: download
 	cat log-generate-errors
 	go build -v
 	# go install github.com/mdempsky/unconvert@latest
-	./unconvert.sh
 	go build -v | tee -a log-generate
 	go test -v -short -count=1 ./... 2>&1 | tee -a log-generate
 	git status
@@ -62,7 +61,6 @@ dev: download
 	echo -n > log-generate
 	echo -n > log-generate-errors
 	GO_GENERATE_DIR=$(DIR) GO_GENERATE_DEV=1 go run -tags=ccgo.dmesg,ccgo.assert generator*.go 2>&1 | tee log-generate
-	./unconvert.sh
 	go build -v | tee -a log-generate
 	go test -v -short -count=1 ./... 2>&1 | tee -a log-generate
 	git status
@@ -75,9 +73,6 @@ test:
 	cp log-test log-test0
 	go test -v -timeout 24h -count=1 2>&1 | tee log-test
 	grep -a 'TRC\|TODO\|ERRORF\|FAIL' log-test || true 2>&1 | tee -a log-test
-
-tidy:
-	./unconvert.sh
 
 work:
 	rm -f go.work*
