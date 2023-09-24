@@ -2,8 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//TODO audit volatile
-//TODO look at http://nsz.repo.hu/git/?p=libc-test
+//go:generate go run generator.go
 
 //TODO
 // # POSIX pthreads
