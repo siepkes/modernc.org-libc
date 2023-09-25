@@ -62,6 +62,7 @@ func main() {
 		return
 	}
 
+	util.Shell("find", filepath.Join("internal", "nsz.repo.hu"), "-name", "*.go", "-delete")
 	f, err := os.Open(archivePath)
 	if err != nil {
 		fail(1, "cannot open zip file: %v\n", err)
@@ -215,7 +216,6 @@ func main() {
 		util.MustShell(true, "sed", "-i", fmt.Sprintf(`s/\<%s\>/%s/g`, v.old, v.new), fn)
 	}
 
-	util.Shell("sh", "-c", "./unconvert.sh")
 	m, err := filepath.Glob(fmt.Sprintf("*_%s_%s.go", runtime.GOOS, runtime.GOARCH))
 	if err != nil {
 		fail(1, "%s\n", err)
@@ -248,6 +248,9 @@ func main() {
 	if format {
 		util.MustShell(true, "sh", "-c", "gofmt -w *.go")
 	}
+	util.Shell("sh", "-c", "./unconvert.sh")
+	util.MustShell(true, "go", "test", "-run", "@")
+	util.Shell("git", "status")
 }
 
 // func Xaio_fsync(tls *TLS, op int32, cb uintptr) (r int32) {
