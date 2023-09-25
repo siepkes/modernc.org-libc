@@ -269,7 +269,7 @@ func TestMemset(t *testing.T) {
 				testMemsetBuf[x] = byte(v)
 			}
 			e := testMemsetBuf
-			Xmemset(nil, uintptr(unsafe.Pointer(&testMemsetBuf[start])), int32(v), uint64(n))
+			Xmemset(nil, uintptr(unsafe.Pointer(&testMemsetBuf[start])), int32(v), Tsize_t(n))
 			if testMemsetBuf != e {
 				t.Fatalf("start %v, v %#x n %v, exp\n%s\ngot\n%s", start, byte(v), n, hex.Dump(e[:]), hex.Dump(testMemsetBuf[:]))
 			}
@@ -389,7 +389,7 @@ func TestFdopen(t *testing.T) {
 	p := Xfdopen(tls, int32(f.Fd()), mustCString("r"))
 
 	bp := uintptr(unsafe.Pointer(&testFdopenBuf))
-	if g, e := Xfread(tls, bp, 1, uint64(len(testFdopenBuf)), p), uint64(len(s)); g != e {
+	if g, e := Xfread(tls, bp, 1, Tsize_t(len(testFdopenBuf)), p), Tsize_t(len(s)); g != e {
 		t.Fatal(g, e)
 	}
 
@@ -822,7 +822,7 @@ func TestLibc(t *testing.T) {
 		return nil
 	})
 	t.Logf("files=%v skip=%v cfail=%v buildfail=%v buildok=%v fail=%v pass=%v", file, skip, cfail, buildfail, buildok, fail, pass)
-	// all_linux_amd64_test.go:814: files=334 skip=232 cfail=16 buildfail=0 buildok=102 fail=6 pass=96
+	// all_linux_amd64_test.go:824: files=334 skip=238 cfail=14 buildfail=0 buildok=96 fail=0 pass=96
 }
 
 func run(t *testing.T, bin string) (out []byte, err error) {

@@ -28,15 +28,15 @@ const (
 	heapGuard = 16
 )
 
+type long = int64
+
 var (
 	_ error = (*MemAuditError)(nil)
 
+	argc         int32   // Value established in initLibc
+	argv         uintptr // Value established in initLibc
 	initLibcOnce sync.Once
-
-	argc int32   // Value established in initLibc
-	argv uintptr // Value established in initLibc
-
-	tid atomic.Int32 // TLS Go ID
+	tid          atomic.Int32 // TLS Go ID
 )
 
 // Start executes C's main.
@@ -104,7 +104,7 @@ func (e *MemAuditError) Error() string {
 // responsible for freeing the allocated memory using Xfree.
 func CString(tls *TLS, s string) (uintptr, error) {
 	n := len(s)
-	p := Xmalloc(tls, uint64(n)+1)
+	p := Xmalloc(tls, Tsize_t(n)+1)
 	if p == 0 {
 		return 0, fmt.Errorf("CString: cannot allocate %d bytes", n+1)
 	}
@@ -467,7 +467,7 @@ func _a_barrier(tls *TLS) {
 	a_barrier()
 }
 
-func ___syscall0(tls *TLS, n int64) int64 {
+func ___syscall0(tls *TLS, n long) long {
 	switch n {
 	case m_SYS_sched_yield:
 		runtime.Gosched()
@@ -475,72 +475,72 @@ func ___syscall0(tls *TLS, n int64) int64 {
 	default:
 		r1, _, err := syscall.Syscall(uintptr(n), 0, 0, 0)
 		if err != 0 {
-			return int64(-err)
+			return long(-err)
 		}
 
-		return int64(r1)
+		return long(r1)
 	}
 }
 
-func ___syscall1(tls *TLS, n, a1 int64) int64 {
+func ___syscall1(tls *TLS, n, a1 long) long {
 	r1, _, err := syscall.Syscall(uintptr(n), uintptr(a1), 0, 0)
 	if err != 0 {
-		return int64(-err)
+		return long(-err)
 	}
 
-	return int64(r1)
+	return long(r1)
 }
 
-func ___syscall2(tls *TLS, n, a1, a2 int64) int64 {
+func ___syscall2(tls *TLS, n, a1, a2 long) long {
 	r1, _, err := syscall.Syscall(uintptr(n), uintptr(a1), uintptr(a2), 0)
 	if err != 0 {
-		return int64(-err)
+		return long(-err)
 	}
 
-	return int64(r1)
+	return long(r1)
 }
 
-func ___syscall3(tls *TLS, n, a1, a2, a3 int64) int64 {
+func ___syscall3(tls *TLS, n, a1, a2, a3 long) long {
 	r1, _, err := syscall.Syscall(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3))
 	if err != 0 {
-		return int64(-err)
+		return long(-err)
 	}
 
-	return int64(r1)
+	return long(r1)
 }
 
-func ___syscall4(tls *TLS, n, a1, a2, a3, a4 int64) int64 {
+func ___syscall4(tls *TLS, n, a1, a2, a3, a4 long) long {
 	r1, _, err := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), 0, 0)
 	if err != 0 {
-		return int64(-err)
+		return long(-err)
 	}
 
-	return int64(r1)
+	return long(r1)
 }
 
-func ___syscall5(tls *TLS, n, a1, a2, a3, a4, a5 int64) int64 {
+func ___syscall5(tls *TLS, n, a1, a2, a3, a4, a5 long) long {
 	r1, _, err := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), uintptr(a5), 0)
 	if err != 0 {
-		return int64(-err)
+		return long(-err)
 	}
 
-	return int64(r1)
+	return long(r1)
 }
 
-func ___syscall6(tls *TLS, n, a1, a2, a3, a4, a5, a6 int64) int64 {
+func ___syscall6(tls *TLS, n, a1, a2, a3, a4, a5, a6 long) long {
 	r1, _, err := syscall.Syscall6(uintptr(n), uintptr(a1), uintptr(a2), uintptr(a3), uintptr(a4), uintptr(a5), uintptr(a6))
 	if err != 0 {
-		return int64(-err)
+		return long(-err)
 	}
 
-	return int64(r1)
+	return long(r1)
 }
 
-func ___unmapself(tls *TLS, base uintptr, size uint64) {
+func ___unmapself(tls *TLS, base uintptr, size Tsize_t) {
 	panic(todo(""))
 }
 
-func X__builtin_vsnprintf(tls *TLS, str uintptr, n uint64, format uintptr, ap uintptr) (r int32) {
+func X__builtin_vsnprintf(tls *TLS, str uintptr, n Tsize_t, format uintptr, ap uintptr) (r int32) {
 	if __ccgo_strace {
 		trc("tls=%v str=%v n=%v format=%v ap=%v, (%v:)", tls, str, n, format, ap, origin(2))
 		defer func() { trc("-> %v", r) }()
@@ -564,39 +564,21 @@ func X__builtin_rintf(tls *TLS, x float32) (r float32) {
 	return Xrintf(tls, x)
 }
 
-func Xmemset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
-	if __ccgo_strace {
-		trc("tls=%v s=%v c=%v n=%v, (%v:)", tls, s, c, n, origin(2))
-	}
-	return _memset(tls, s, c, n)
-}
-
-func X__builtin_memset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
+func X__builtin_memset(tls *TLS, s uintptr, c int32, n Tsize_t) uintptr {
 	if __ccgo_strace {
 		trc("tls=%v s=%v c=%v n=%v, (%v:)", tls, s, c, n, origin(2))
 	}
 	return Xmemset(tls, s, c, n)
 }
 
-func _memset(tls *TLS, s uintptr, c int32, n uint64) uintptr {
-	if n != 0 {
-		c := byte(c & 0xff)
-		b := unsafe.Slice((*byte)(unsafe.Pointer(s)), n)
-		for i := range b {
-			b[i] = c
-		}
-	}
-	return s
-}
-
-func X__builtin_snprintf(tls *TLS, str uintptr, size uint64, format, args uintptr) int32 {
+func X__builtin_snprintf(tls *TLS, str uintptr, size Tsize_t, format, args uintptr) int32 {
 	if __ccgo_strace {
 		trc("tls=%v str=%v size=%v args=%v, (%v:)", tls, str, size, args, origin(2))
 	}
 	return Xsnprintf(tls, str, size, format, args)
 }
 
-func X__builtin_malloc(tls *TLS, n uint64) (r uintptr) {
+func X__builtin_malloc(tls *TLS, n Tsize_t) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v n=%v, (%v:)", tls, n, origin(2))
 		defer func() { trc("-> %v", r) }()
@@ -635,7 +617,7 @@ func X__builtin_strcpy(tls *TLS, dest uintptr, src uintptr) (r uintptr) {
 	return Xstrcpy(tls, dest, src)
 }
 
-func X__builtin_strncpy(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
+func X__builtin_strncpy(tls *TLS, dest uintptr, src uintptr, n Tsize_t) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v dest=%v src=%v n=%v, (%v:)", tls, dest, src, n, origin(2))
 		defer func() { trc("-> %v", r) }()
@@ -651,7 +633,7 @@ func X__builtin_strcmp(tls *TLS, s1 uintptr, s2 uintptr) (r int32) {
 	return Xstrcmp(tls, s1, s2)
 }
 
-func X__builtin_strlen(tls *TLS, s uintptr) (r uint64) {
+func X__builtin_strlen(tls *TLS, s uintptr) (r Tsize_t) {
 	if __ccgo_strace {
 		trc("tls=%v s=%v, (%v:)", tls, s, origin(2))
 		defer func() { trc("-> %v", r) }()
@@ -659,15 +641,7 @@ func X__builtin_strlen(tls *TLS, s uintptr) (r uint64) {
 	return Xstrlen(tls, s)
 }
 
-func Xmemcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
-	if __ccgo_strace {
-		trc("tls=%v src=%v n=%v, (%v:)", tls, src, n, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	return _memcpy(tls, dest, src, n)
-}
-
-func X__builtin_memcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
+func X__builtin_memcpy(tls *TLS, dest, src uintptr, n Tsize_t) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v src=%v n=%v, (%v:)", tls, src, n, origin(2))
 		defer func() { trc("-> %v", r) }()
@@ -675,11 +649,7 @@ func X__builtin_memcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
 	return Xmemcpy(tls, dest, src, n)
 }
 
-func _memcpy(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
-	return _memmove(tls, dest, src, n)
-}
-
-func X__builtin_memcmp(tls *TLS, s1 uintptr, s2 uintptr, n uint64) (r1 int32) {
+func X__builtin_memcmp(tls *TLS, s1 uintptr, s2 uintptr, n Tsize_t) (r1 int32) {
 	if __ccgo_strace {
 		trc("tls=%v s1=%v s2=%v n=%v, (%v:)", tls, s1, s2, n, origin(2))
 		defer func() { trc("-> %v", r1) }()
@@ -755,15 +725,7 @@ func Xsqrtf(tls *TLS, x float32) float32 {
 	return _sqrtf(tls, x)
 }
 
-func Xmemmove(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
-	if __ccgo_strace {
-		trc("tls=%v dest=%v src=%v n=%v, (%v:)", tls, dest, src, n, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	return _memmove(tls, dest, src, n)
-}
-
-func X__builtin_memmove(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintptr) {
+func X__builtin_memmove(tls *TLS, dest uintptr, src uintptr, n Tsize_t) (r uintptr) {
 	if __ccgo_strace {
 		trc("tls=%v dest=%v src=%v n=%v, (%v:)", tls, dest, src, n, origin(2))
 		defer func() { trc("-> %v", r) }()
@@ -771,14 +733,7 @@ func X__builtin_memmove(tls *TLS, dest uintptr, src uintptr, n uint64) (r uintpt
 	return Xmemmove(tls, dest, src, n)
 }
 
-func _memmove(tls *TLS, dest, src uintptr, n uint64) (r uintptr) {
-	if n != 0 {
-		copy(unsafe.Slice((*byte)(unsafe.Pointer(dest)), n), unsafe.Slice((*byte)(unsafe.Pointer(src)), n))
-	}
-	return dest
-}
-
-func Xpread64(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64) {
+func Xpread64(tls *TLS, fd int32, buf uintptr, size Tsize_t, ofs int64) (r Tssize_t) {
 	if __ccgo_strace {
 		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
 		defer func() { trc("-> %v", r) }()
@@ -786,7 +741,7 @@ func Xpread64(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64)
 	return Xpread(tls, fd, buf, size, ofs)
 }
 
-func Xpwrite64(tls *TLS, fd int32, buf uintptr, size uint64, ofs int64) (r int64) {
+func Xpwrite64(tls *TLS, fd int32, buf uintptr, size Tsize_t, ofs int64) (r Tssize_t) {
 	if __ccgo_strace {
 		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
 		defer func() { trc("-> %v", r) }()
@@ -861,14 +816,14 @@ func X__builtin_bswap64(tls *TLS, x uint64) uint64 {
 		x>>56
 }
 
-func Xalloca(tls *TLS, size uint64) uintptr {
+func Xalloca(tls *TLS, size Tsize_t) uintptr {
 	if __ccgo_strace {
 		trc("tls=%v size=%v, (%v:)", tls, size, origin(2))
 	}
 	return tls.alloca(size)
 }
 
-func X__builtin_alloca(tls *TLS, size uint64) uintptr {
+func X__builtin_alloca(tls *TLS, size Tsize_t) uintptr {
 	if __ccgo_strace {
 		trc("tls=%v size=%v, (%v:)", tls, size, origin(2))
 	}
@@ -905,7 +860,7 @@ func X__builtin_expect(t *TLS, exp, c int64) int64 {
 	return exp
 }
 
-func ___builtin_expect(t *TLS, exp, c int64) int64 {
+func ___builtin_expect(t *TLS, exp, c long) long {
 	return exp
 }
 
