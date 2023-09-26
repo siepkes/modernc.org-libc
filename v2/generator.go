@@ -77,6 +77,8 @@ func main() {
 		muslArch = "x86_64"
 	case "arm":
 		muslArch = "arm"
+	case "arm64":
+		muslArch = "aarch64"
 	default:
 		fail(1, "unsupported goarch: %s", goarch)
 	}
