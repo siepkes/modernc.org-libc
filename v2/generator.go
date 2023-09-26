@@ -71,10 +71,12 @@ func main() {
 	f.Close()
 
 	switch goarch {
-	case "amd64":
-		muslArch = "x86_64"
 	case "386":
 		muslArch = "i386"
+	case "amd64":
+		muslArch = "x86_64"
+	case "arm":
+		muslArch = "arm"
 	default:
 		fail(1, "unsupported goarch: %s", goarch)
 	}
