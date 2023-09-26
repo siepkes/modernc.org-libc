@@ -1198,3 +1198,31 @@ func _fork(tls *TLS) int32 {
 func _abort(tls *TLS) {
 	Xabort(tls)
 }
+
+func Xobstack_base(tls *TLS, obstack_ptr uintptr) uintptr {
+	panic(todo(""))
+}
+
+func Xobstack_object_size(tls *TLS, obstack_ptr uintptr) Tsize_t {
+	panic(todo(""))
+}
+
+func Xobstack_blank(tls *TLS, obstack_ptr uintptr, size Tsize_t) {
+	panic(todo(""))
+}
+
+func Xobstack_grow(tls *TLS, obstack_ptr uintptr, address uintptr, size Tsize_t) {
+	panic(todo(""))
+}
+
+func Xobstack_next_free(tls *TLS, obstack_ptr uintptr) uintptr {
+	panic(todo(""))
+}
+
+func Xobstack_printf(tls *TLS, obstack_ptr uintptr, format uintptr, va uintptr) {
+	panic(todo(""))
+}
+
+func Xobstack_vprintf(tls *TLS, obstack_ptr uintptr, format uintptr, va uintptr) int32 {
+	panic(todo(""))
+}
