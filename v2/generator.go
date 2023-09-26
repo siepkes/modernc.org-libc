@@ -79,6 +79,8 @@ func main() {
 		muslArch = "arm"
 	case "arm64":
 		muslArch = "aarch64"
+	case "loong64":
+		muslArch = "mips"
 	case "ppc64le":
 		muslArch = "powerpc64"
 	case "riscv64":
