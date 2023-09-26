@@ -79,6 +79,8 @@ func main() {
 		muslArch = "arm"
 	case "arm64":
 		muslArch = "aarch64"
+	case "ppc64le":
+		muslArch = "powerpc64"
 	default:
 		fail(1, "unsupported goarch: %s", goarch)
 	}
