@@ -109,8 +109,8 @@ func main() {
 	fmt.Fprintf(os.Stderr, "makeRoot %s\n", makeRoot)
 
 	util.MustShell(true, "unzip", archivePath, "-d", tempDir)
-	mustCopyDir(libRoot, filepath.Join("overlay", extractedArchivePath, "all"), nil)
-	mustCopyDir(libRoot, filepath.Join("overlay", extractedArchivePath, goarch), nil)
+	mustCopyDir(libRoot, filepath.Join("overlay", extractedArchivePath, "all"), nil, true)
+	mustCopyDir(libRoot, filepath.Join("overlay", extractedArchivePath, goarch), nil, true)
 	mustCopyFile("COPYRIGHT-MUSL", filepath.Join(makeRoot, "COPYRIGHT"), nil)
 	result := "libc.a.go"
 	util.MustInDir(true, makeRoot, func() (err error) {
@@ -288,8 +288,8 @@ func traceLine(s string) string {
 	return b.String()
 }
 
-func mustCopyDir(dst, src string, canOverwrite func(fn string, fi os.FileInfo) bool) (files int, bytes int64) {
-	file, bytes, err := copyDir(dst, src, canOverwrite)
+func mustCopyDir(dst, src string, canOverwrite func(fn string, fi os.FileInfo) bool, srcNotExistsOk bool) (files int, bytes int64) {
+	file, bytes, err := copyDir(dst, src, canOverwrite, srcNotExistsOk)
 	if err != nil {
 		fail(1, "%s\n", err)
 	}
@@ -297,11 +297,14 @@ func mustCopyDir(dst, src string, canOverwrite func(fn string, fi os.FileInfo) b
 	return file, bytes
 }
 
-func copyDir(dst, src string, canOverwrite func(fn string, fi os.FileInfo) bool) (files int, bytes int64, rerr error) {
+func copyDir(dst, src string, canOverwrite func(fn string, fi os.FileInfo) bool, srcNotExistsOk bool) (files int, bytes int64, rerr error) {
 	dst = filepath.FromSlash(dst)
 	src = filepath.FromSlash(src)
 	si, err := os.Stat(src)
 	if err != nil {
+		if os.IsNotExist(err) && srcNotExistsOk {
+			err = nil
+		}
 		return 0, 0, err
 	}
 
@@ -335,7 +338,7 @@ func copyDir(dst, src string, canOverwrite func(fn string, fi os.FileInfo) bool)
 					return err
 				}
 
-				f, b, err := copyDir(dst2, target, canOverwrite)
+				f, b, err := copyDir(dst2, target, canOverwrite, srcNotExistsOk)
 				files += f
 				bytes += b
 				return err
