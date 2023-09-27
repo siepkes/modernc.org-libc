@@ -23,6 +23,7 @@ import (
 	ccgo "modernc.org/ccgo/v4/lib"
 )
 
+
 func TestMain(m *testing.M) {
 	if ccgo.IsExecEnv() {
 		if err := ccgo.NewTask(goos, goarch, os.Args, os.Stdout, os.Stderr, nil).Main(); err != nil {
