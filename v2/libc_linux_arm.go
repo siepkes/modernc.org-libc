@@ -300,8 +300,8 @@ func ___set_thread_area(tls *TLS, p uintptr) int32 {
 	return 0
 }
 
-func ___get_tp(tls *TLS) uintptr {
-	return tls.fs
+func ___get_tp(tls *TLS) Tuintptr_t {
+	return Tuintptr_t(tls.fs)
 }
 
 func _a_inc(tls *TLS, p uintptr) {

@@ -160,7 +160,7 @@ func main() {
 			"-hide", "__syscall0,__syscall1,__syscall2,__syscall3,__syscall4,__syscall5,__syscall6,__get_tp,__DOUBLE_BITS,__FLOAT_BITS",
 			"-hide", "a_and,a_and_64,a_barrier,a_cas,a_cas_p,a_clz_64,a_crash,a_ctz_64,a_dec,a_fetch_add,a_inc,a_or,a_or_64,a_spin,a_store,a_swap,a_ctz_32",
 			"-hide", "fabs,fabsf,fabsl,sqrt,sqrtf,sqrtl",
-			"-hide", "_Fork,fork,system,__synccall",
+			"-hide", "_Fork,fork,system,__synccall,__set_thread_area",
 			"-hide", "calloc,free,malloc,malloc_usable_size,realloc",
 			"-hide", "__libc_calloc,__libc_free,__libc_malloc,__libc_malloc_impl,__libc_realloc",
 			"-hide", "__malloc_allzerop,__malloc_atfork,__malloc_donate,__simple_malloc,",
