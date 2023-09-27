@@ -1173,3 +1173,60 @@ func X__builtin_mul_overflowInt64(t *TLS, a, b int64, res uintptr) int32 {
 	*(*int64)(unsafe.Pointer(res)) = r
 	return Bool32(ovf)
 }
+
+func Xobstack_base(tls *TLS, obstack_ptr uintptr) uintptr {
+	if __ccgo_strace {
+		trc("tls=%v obstack_ptr=%v, (%v:)", tls, obstack_ptr, origin(2))
+	}
+	panic(todo(""))
+}
+
+func Xobstack_object_size(tls *TLS, obstack_ptr uintptr) Tsize_t {
+	if __ccgo_strace {
+		trc("tls=%v obstack_ptr=%v, (%v:)", tls, obstack_ptr, origin(2))
+	}
+	panic(todo(""))
+}
+
+func Xobstack_blank(tls *TLS, obstack_ptr uintptr, size Tsize_t) {
+	if __ccgo_strace {
+		trc("tls=%v obstack_ptr=%v size=%v, (%v:)", tls, obstack_ptr, size, origin(2))
+	}
+	panic(todo(""))
+}
+
+func Xobstack_grow(tls *TLS, obstack_ptr uintptr, address uintptr, size Tsize_t) {
+	if __ccgo_strace {
+		trc("tls=%v obstack_ptr=%v address=%v size=%v, (%v:)", tls, obstack_ptr, address, size, origin(2))
+	}
+	panic(todo(""))
+}
+
+func Xobstack_next_free(tls *TLS, obstack_ptr uintptr) uintptr {
+	if __ccgo_strace {
+		trc("tls=%v obstack_ptr=%v, (%v:)", tls, obstack_ptr, origin(2))
+	}
+	panic(todo(""))
+}
+
+func Xobstack_printf(tls *TLS, obstack_ptr uintptr, format uintptr, va uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v obstack_ptr=%v format=%v va=%v, (%v:)", tls, obstack_ptr, format, va, origin(2))
+	}
+	panic(todo(""))
+}
+
+func Xobstack_vprintf(tls *TLS, obstack_ptr uintptr, format uintptr, va uintptr) int32 {
+	if __ccgo_strace {
+		trc("tls=%v obstack_ptr=%v format=%v va=%v, (%v:)", tls, obstack_ptr, format, va, origin(2))
+	}
+	panic(todo(""))
+}
+
+func Xobstack_init(tls *TLS, obstack_ptr uintptr) int32 {
+	panic(todo(""))
+}
+
+func Xobstack_free(tls *TLS, obstack_ptr uintptr, object uintptr) {
+	panic(todo(""))
+}

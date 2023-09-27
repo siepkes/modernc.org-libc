@@ -161,6 +161,7 @@ type tlsStackSlot struct {
 // TLS emulates thread local storage. TLS is not safe for concurrent use by
 // multiple goroutines.
 type TLS struct {
+	allocaStack    [][]uintptr
 	allocas        []uintptr
 	freeFS         uintptr
 	fs             uintptr // *T__pthread
@@ -262,11 +263,17 @@ func (t *TLS) alloca(n Tsize_t) (r uintptr) {
 	return r
 }
 
-func (t *TLS) FreeAlloca() {
-	for _, v := range t.allocas {
-		Xfree(t, v)
+func (t *TLS) FreeAlloca() func() {
+	t.allocaStack = append(t.allocaStack, t.allocas)
+	t.allocas = nil
+	return func() {
+		for _, v := range t.allocas {
+			Xfree(t, v)
+		}
+		n := len(t.allocaStack)
+		t.allocas = t.allocaStack[n-1]
+		t.allocaStack = t.allocaStack[:n-1]
 	}
-	t.allocas = t.allocas[:0]
 }
 
 func (t *TLS) Close() {
@@ -1245,5 +1252,13 @@ func Xobstack_vprintf(tls *TLS, obstack_ptr uintptr, format uintptr, va uintptr)
 	if __ccgo_strace {
 		trc("tls=%v obstack_ptr=%v format=%v va=%v, (%v:)", tls, obstack_ptr, format, va, origin(2))
 	}
+	panic(todo(""))
+}
+
+func Xobstack_init(tls *TLS, obstack_ptr uintptr) int32 {
+	panic(todo(""))
+}
+
+func Xobstack_free(tls *TLS, obstack_ptr uintptr, object uintptr) {
 	panic(todo(""))
 }
