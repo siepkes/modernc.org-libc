@@ -18,6 +18,7 @@ package libc // import "modernc.org/libc/v2"
 import (
 	"fmt"
 	"math"
+	"math/bits"
 	"runtime"
 	"strings"
 	"sync"
@@ -146,7 +147,7 @@ func Xcalloc(tls *TLS, m Tsize_t, n Tsize_t) (r uintptr) {
 	defer allocatorMu.Unlock()
 
 	pc, _, _, _ := runtime.Caller(1)
-	return malloc0(tls, pc, rq, true)
+	return malloc0(tls, pc, Tsize_t(rq), true)
 }
 
 func Xrealloc(tls *TLS, p uintptr, n Tsize_t) (r uintptr) {
