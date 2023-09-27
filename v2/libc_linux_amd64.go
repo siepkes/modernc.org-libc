@@ -1175,8 +1175,8 @@ func X__builtin_setjmp(tls *TLS, jmp_buf uintptr) int32 {
 	return _setjmp(tls, jmp_buf)
 }
 
-func ___get_tp(tls *TLS) uintptr {
-	return tls.fs
+func ___get_tp(tls *TLS) Tuintptr_t {
+	return Tuintptr_t(tls.fs)
 }
 
 // This is not the set_thread_area syscall, but arch_prctl syscall with
@@ -1256,9 +1256,15 @@ func Xobstack_vprintf(tls *TLS, obstack_ptr uintptr, format uintptr, va uintptr)
 }
 
 func Xobstack_init(tls *TLS, obstack_ptr uintptr) int32 {
+	if __ccgo_strace {
+		trc("tls=%v obstack_ptr=%v, (%v:)", tls, obstack_ptr, origin(2))
+	}
 	panic(todo(""))
 }
 
 func Xobstack_free(tls *TLS, obstack_ptr uintptr, object uintptr) {
+	if __ccgo_strace {
+		trc("tls=%v obstack_ptr=%v object=%v, (%v:)", tls, obstack_ptr, object, origin(2))
+	}
 	panic(todo(""))
 }
