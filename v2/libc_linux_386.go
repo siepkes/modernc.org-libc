@@ -218,7 +218,7 @@ func (t *TLS) alloca(n Tsize_t) (r uintptr) {
 	return r
 }
 
-func (t *TLS) FreeAlloca() {
+func (t *TLS) FreeAlloca() func() {
 	t.allocaStack = append(t.allocaStack, t.allocas)
 	t.allocas = nil
 	return func() {

@@ -45,8 +45,8 @@ var (
 	heap0       uintptr
 	heapRecords []heapRecord
 	heapUsable  = map[uintptr]Tsize_t{}
-
-	rng *mathutil.FC32
+	heapFree    = map[uintptr]struct{}{}
+	rng         *mathutil.FC32
 )
 
 type heapRecord struct {
@@ -182,6 +182,7 @@ func Xrealloc(tls *TLS, p uintptr, n Tsize_t) (r uintptr) {
 	// malloc
 	r = malloc0(tls, pc, n, false)
 	copy(unsafe.Slice((*byte)(unsafe.Pointer(r)), usable), unsafe.Slice((*byte)(unsafe.Pointer(p)), usable))
+	Xfree(tls, p)
 	return r
 }
 
@@ -201,6 +202,12 @@ func Xfree(tls *TLS, p uintptr) {
 	if _, ok := heapUsable[p]; !ok {
 		panic(todo("free of unallocated memory: %#0x", p))
 	}
+
+	if _, ok := heapFree[p]; !ok {
+		panic(todo("double free: %#0x", p))
+	}
+
+	heapFree[p] = struct{}{}
 }
 
 func Xmalloc_usable_size(tls *TLS, p uintptr) (r Tsize_t) {
