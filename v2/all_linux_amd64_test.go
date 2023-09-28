@@ -38,6 +38,7 @@ func TestMain(m *testing.M) {
 var (
 	goarch = runtime.GOARCH
 	goos   = runtime.GOOS
+	j      = fmt.Sprint(runtime.GOMAXPROCS(-1))
 
 	testAtomicCASInt32  int32
 	testAtomicCASUint64 uint64
@@ -769,7 +770,7 @@ func TestLibc(t *testing.T) {
 				"-absolute-paths",
 				"-extended-errors",
 				"-positions",
-				"-exec", "make",
+				"-exec", "make", "-j", j,
 			},
 			os.Stdout, os.Stderr,
 			nil,
@@ -782,6 +783,7 @@ func TestLibc(t *testing.T) {
 
 	bin := filepath.Join(t.TempDir(), "main")
 	var file, skip, buildfail, buildok, cfail, fail, pass int
+	//TODO parallel exec
 	filepath.Walk(dir, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
 			t.Fatal(err)
