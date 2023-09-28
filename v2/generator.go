@@ -33,6 +33,7 @@ var (
 	extractedArchivePath string
 	goarch               = or(os.Getenv("GO_GENERATE_GOARCH"), runtime.GOARCH)
 	goos                 = runtime.GOOS
+	j                    = fmt.Sprint(runtime.GOMAXPROCS(-1))
 	muslArch             string
 )
 
@@ -175,7 +176,7 @@ func main() {
 				"-positions",
 			)
 		}
-		if err := ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "lib/libc.a"), os.Stdout, os.Stderr, nil).Exec(); err != nil {
+		if err := ccgo.NewTask(goos, goarch, append(args, "-exec", "make", "-j", j, "lib/libc.a"), os.Stdout, os.Stderr, nil).Exec(); err != nil {
 			return err
 		}
 
