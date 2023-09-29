@@ -783,7 +783,6 @@ func TestLibc(t *testing.T) {
 
 	bin := filepath.Join(t.TempDir(), "main")
 	var file, skip, buildfail, buildok, cfail, fail, pass int
-	//TODO parallel exec
 	filepath.Walk(dir, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
 			t.Fatal(err)
