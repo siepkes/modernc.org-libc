@@ -232,7 +232,10 @@ func (t *TLS) Alloc(n Tsize_t) (r uintptr) {
 	if t.sp < len(t.stack) {
 		p := t.stack[t.sp].p
 		sz := t.stack[t.sp].sz
-		if sz >= n && sz <= shrinkSegment*n {
+		if sz >= n /* && sz <= shrinkSegment*n */ {
+			// Segment shrinking is nice to have but Tcl does some dirty hacks in coroutine
+			// handling that require stability of stack addresses, out of the C execution
+			// model. Disabled.
 			t.sp++
 			return p
 		}
