@@ -860,7 +860,7 @@ func X__builtin_copysignl(t *TLS, x, y float64) float64 {
 	return Xcopysign(t, x, y)
 }
 
-func X__builtin_expect(t *TLS, exp, c int64) int64 {
+func X__builtin_expect(t *TLS, exp, c long) long {
 	if __ccgo_strace {
 		trc("t=%v c=%v, (%v:)", t, c, origin(2))
 	}
