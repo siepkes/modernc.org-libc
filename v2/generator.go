@@ -128,7 +128,7 @@ func main() {
 	result := "libc.a.go"
 	util.MustInDir(true, makeRoot, func() (err error) {
 		cflags := []string{
-			// "-UNDEBUG", //TODO-
+			"-DNDEBUG",
 		}
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
 			cflags = append(cflags, s)

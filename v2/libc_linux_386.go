@@ -88,6 +88,7 @@ func initLibc(tls *TLS) {
 }
 
 type long = int32
+type ulong = uint32
 
 var ___sysinfo Tsize_t
 
@@ -612,6 +613,13 @@ func X__builtin_iswblank(tls *TLS, wc uint32) (r int32) {
 }
 
 func X__builtin_ctz(tls *TLS, x uint32) int32 {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+	}
+	return int32(bits.TrailingZeros32(x))
+}
+
+func X__builtin_ctzl(tls *TLS, x ulong) int32 {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
 	}

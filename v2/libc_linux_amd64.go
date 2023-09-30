@@ -29,6 +29,7 @@ const (
 )
 
 type long = int64
+type ulong = uint64
 
 var (
 	_ error = (*MemAuditError)(nil)
@@ -449,6 +450,13 @@ func X__builtin_ctz(tls *TLS, x uint32) int32 {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
 	}
 	return int32(bits.TrailingZeros32(x))
+}
+
+func X__builtin_ctzl(tls *TLS, x ulong) int32 {
+	if __ccgo_strace {
+		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
+	}
+	return int32(bits.TrailingZeros64(x))
 }
 
 func _a_clz_64(tls *TLS, x uint64) int32 {
