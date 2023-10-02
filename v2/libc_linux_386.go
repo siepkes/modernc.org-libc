@@ -509,10 +509,6 @@ func _fabsl(tls *TLS, x float64) float64 {
 	return math.Abs(x)
 }
 
-func ___builtin_inff(t *TLS) float32 {
-	return float32(math.Inf(1))
-}
-
 func _sqrt(tls *TLS, x float64) float64 {
 	return math.Sqrt(x)
 }
@@ -549,10 +545,6 @@ func _fesetenv(tls *TLS, _ uintptr) int32 {
 	panic(todo(""))
 }
 
-func ___builtin_nanf(t *TLS, s uintptr) float32 {
-	return float32(math.NaN())
-}
-
 func _fork(tls *TLS) int32 {
 	tls.setErrno(m_ENOSYS)
 	return -1
@@ -560,10 +552,6 @@ func _fork(tls *TLS) int32 {
 
 func ___clone(tls *TLS, func1 uintptr, stack uintptr, flags int32, arg uintptr, va uintptr) (r int32) {
 	panic(todo(""))
-}
-
-func ___builtin_expect(t *TLS, exp, c long) long {
-	return exp
 }
 
 func _sqrtl(tls *TLS, x float64) float64 {
@@ -971,7 +959,7 @@ func X__builtin_inff(t *TLS) float32 {
 	if __ccgo_strace {
 		trc("t=%v, (%v:)", t, origin(2))
 	}
-	return ___builtin_inff(t)
+	return float32(math.Inf(1))
 }
 
 func X__builtin_isinfl(t *TLS, x float64) int32 {
@@ -1020,7 +1008,7 @@ func X__builtin_nanf(t *TLS, s uintptr) float32 {
 	if __ccgo_strace {
 		trc("t=%v s=%v, (%v:)", t, s, origin(2))
 	}
-	return ___builtin_nanf(t, s)
+	return float32(math.NaN())
 }
 
 func X__builtin_setjmp(tls *TLS, jmp_buf uintptr) int32 {

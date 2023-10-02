@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-.PHONY:	all build_all_targets check clean download edit editor generate dev test work
+.PHONY:	all build_all_targets check clean download edit editor generate dev test work xtest
 
 DIR = /tmp/libc
 ZIP = master.zip
@@ -18,6 +18,7 @@ build_all_targets:
 
 clean:
 	rm -f log-* cpu.test mem.test *.out
+	find internal/nsz.repo.hu/ -name \*.go -delete
 	make -C internal/nsz.repo.hu/libc-test/ cleanall
 	go clean
 
@@ -69,9 +70,17 @@ dev: download
 	grep 'TRC\|TODO\|ERRORF\|FAIL' /tmp/ccgo.log || true
 
 test:
+	echo -n > /tmp/ccgo.log
 	touch log-test
 	cp log-test log-test0
 	go test -v -timeout 24h -count=1 2>&1 | tee log-test
+	grep -a 'TRC\|TODO\|ERRORF\|FAIL' log-test || true 2>&1 | tee -a log-test
+
+xtest:
+	echo -n > /tmp/ccgo.log
+	touch log-test
+	cp log-test log-test0
+	go test -v -timeout 24h -count=1 -tags=ccgo.dmesg,ccgo.assert 2>&1 | tee log-test
 	grep -a 'TRC\|TODO\|ERRORF\|FAIL' log-test || true 2>&1 | tee -a log-test
 
 work:

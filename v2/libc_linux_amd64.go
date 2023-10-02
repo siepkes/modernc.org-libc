@@ -878,10 +878,6 @@ func X__builtin_expect(t *TLS, exp, c long) long {
 	return exp
 }
 
-func ___builtin_expect(t *TLS, exp, c long) long {
-	return exp
-}
-
 func X__builtin_huge_val(t *TLS) float64 {
 	if __ccgo_strace {
 		trc("t=%v, (%v:)", t, origin(2))
@@ -907,7 +903,7 @@ func X__builtin_inff(t *TLS) float32 {
 	if __ccgo_strace {
 		trc("t=%v, (%v:)", t, origin(2))
 	}
-	return ___builtin_inff(t)
+	return float32(math.Inf(1))
 }
 
 func X__builtin_isinfl(t *TLS, x float64) int32 {
@@ -929,10 +925,6 @@ func X__builtin_isinf(t *TLS, x float64) int32 {
 		trc("t=%v x=%v, (%v:)", t, x, origin(2))
 	}
 	return Bool32(math.IsInf(x, 0))
-}
-
-func ___builtin_inff(t *TLS) float32 {
-	return float32(math.Inf(1))
 }
 
 func X__builtin_infl(t *TLS) float64 {
@@ -960,10 +952,6 @@ func X__builtin_nanf(t *TLS, s uintptr) float32 {
 	if __ccgo_strace {
 		trc("t=%v s=%v, (%v:)", t, s, origin(2))
 	}
-	return ___builtin_nanf(t, s)
-}
-
-func ___builtin_nanf(t *TLS, s uintptr) float32 {
 	return float32(math.NaN())
 }
 

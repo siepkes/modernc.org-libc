@@ -144,8 +144,6 @@ func main() {
 			os.Args[0],
 
 			"--package-name=libc",
-			"--predef=float __builtin_inff(void);",
-			"--predef=long __builtin_expect(long, long);",
 			"--prefix-enumerator=_",
 			"--prefix-external=x_",
 			"--prefix-field=F",
@@ -193,6 +191,7 @@ func main() {
 	util.MustShell(true, "cp", filepath.Join(makeRoot, result), fn)
 	util.MustShell(true, "sed", "-i", `s/\<T__\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/t__\1/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<x_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/X\1/g`, fn)
+	util.MustShell(true, "sed", "-i", `s/\<x___builtin_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/X__builtin_\1/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<Xpthread_\([a-zA-Z0-9][a-zA-Z0-9_]\+\)/x_pthread_\1/g`, fn)
 	util.MustShell(true, "sed", "-i", `s/\<x___errno_location\>/X__errno_location/g`, fn)
 	for _, v := range []struct{ old, new string }{
