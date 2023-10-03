@@ -1180,8 +1180,6 @@ func _io_thread_func(tls *TLS, ctx uintptr) (r uintptr) {
 		(*Taio_queue)(unsafe.Pointer(q)).Fappend1 = BoolInt32(!(seekable != 0) || Xfcntl(tls, fd, int32(m_F_GETFL), 0)&int32(m_O_APPEND) != 0)
 		(*Taio_queue)(unsafe.Pointer(q)).Finit1 = int32(1)
 	}
-	goto _3
-_3:
 	x__pthread_cleanup_push(tls, bp+64, __ccgo_fp(_cleanup), bp)
 	/* Wait for sequenced operations. */
 	if op != m_LIO_READ && (op != int32(m_LIO_WRITE) || (*Taio_queue)(unsafe.Pointer(q)).Fappend1 != 0) {
@@ -1233,6 +1231,8 @@ _3:
 	}
 	(*(*Taio_thread)(unsafe.Pointer(bp))).Ferr = v8
 	x__pthread_cleanup_pop(tls, bp+64, int32(1))
+	goto _3
+_3:
 	goto _2
 _2: /**/
 	; //
@@ -154736,10 +154736,10 @@ func _undo(tls *TLS, control uintptr) {
 func x___pthread_once_full(tls *TLS, control uintptr, init1 uintptr) (r int32) {
 	bp := tls.Alloc(32)
 	defer tls.Free(32)
-	var v10, v11 int32
-	var v9 uintptr
+	var v10 uintptr
+	var v11, v12 int32
 	var _ /* __cb at bp+0 */ t__ptcb
-	_, _, _ = v10, v11, v9
+	_, _, _ = v10, v11, v12
 	/* Try to enter initializing state. Four possibilities:
 	 *  0 - we're the first or the other cancelled; run init
 	 *  1 - another thread is running init; wait
@@ -154758,26 +154758,28 @@ func x___pthread_once_full(tls *TLS, control uintptr, init1 uintptr) (r int32) {
 		}
 		goto _6
 	_2:
-	_8:
+	_9:
 		x__pthread_cleanup_push(tls, bp, __ccgo_fp(_undo), control)
 		(*(*func(*TLS))(unsafe.Pointer(&struct{ uintptr }{init1})))(tls)
 		x__pthread_cleanup_pop(tls, bp, 0)
+		goto _8
+	_8:
 		if 0 != 0 {
-			goto _8
+			goto _9
 		}
 		goto _7
 	_7:
 		if _a_swap(tls, control, int32(2)) == int32(3) {
-			v9 = control
-			v10 = -int32(1)
-			v11 = int32(1)
-			if v11 != 0 {
-				v11 = int32(m_FUTEX_PRIVATE)
+			v10 = control
+			v11 = -int32(1)
+			v12 = int32(1)
+			if v12 != 0 {
+				v12 = int32(m_FUTEX_PRIVATE)
 			}
-			if v10 < Int32FromInt32(0) {
-				v10 = int32(m_INT_MAX)
+			if v11 < Int32FromInt32(0) {
+				v11 = int32(m_INT_MAX)
 			}
-			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v9), int64(Int32FromInt32(m_FUTEX_WAKE)|v11), int64(v10)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v9), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v10)) != 0
+			_ = ___syscall3(tls, int64(m_SYS_futex), int64(v10), int64(Int32FromInt32(m_FUTEX_WAKE)|v12), int64(v11)) != int64(-int32(m_ENOSYS)) || ___syscall3(tls, int64(m_SYS_futex), int64(v10), int64(Int32FromInt32(m_FUTEX_WAKE)), int64(v11)) != 0
 		}
 		return 0
 	_3:
