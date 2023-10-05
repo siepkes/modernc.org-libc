@@ -566,30 +566,44 @@ func ___restore(tls *TLS) {
 	panic(todo(""))
 }
 
-func _longjmp(tls *TLS, env uintptr, val int32) int64 {
-	panic(todo(""))
-}
-
 func ___unmapself(tls *TLS, base uintptr, size Tsize_t) {
 	panic(todo(""))
 }
 
 func _setjmp(tls *TLS, jmp_buf uintptr) int32 {
+	return 0 // Postpone the unimplemented panic to longjmp.
+}
+
+func Xsetjmp(tls *TLS, jmp_buf uintptr) int32 {
+	if __ccgo_strace {
+		trc("tls=%v jmp_buf=%v, (%v:)", tls, jmp_buf, origin(2))
+	}
+	return _setjmp(tls, jmp_buf)
+}
+
+func X__builtin_setjmp(tls *TLS, jmp_buf uintptr) int32 {
+	if __ccgo_strace {
+		trc("tls=%v jmp_buf=%v, (%v:)", tls, jmp_buf, origin(2))
+	}
+	return _setjmp(tls, jmp_buf)
+}
+
+func _longjmp(tls *TLS, env uintptr, val int32) {
 	panic(todo(""))
 }
 
-func Xlongjmp(tls *TLS, env uintptr, val int32) int64 {
+func Xlongjmp(tls *TLS, env uintptr, val int32) {
 	if __ccgo_strace {
 		trc("tls=%v env=%v val=%v, (%v:)", tls, env, val, origin(2))
 	}
-	panic(todo(""))
+	_longjmp(tls, env, val)
 }
 
-func X__builtin_longjmp(tls *TLS, env uintptr, val int32) int64 {
+func X__builtin_longjmp(tls *TLS, env uintptr, val int32) {
 	if __ccgo_strace {
 		trc("tls=%v env=%v val=%v, (%v:)", tls, env, val, origin(2))
 	}
-	panic(todo(""))
+	_longjmp(tls, env, val)
 }
 
 func X__builtin_iswblank(tls *TLS, wc uint32) (r int32) {
@@ -1011,12 +1025,6 @@ func X__builtin_nanf(t *TLS, s uintptr) float32 {
 	return float32(math.NaN())
 }
 
-func X__builtin_setjmp(tls *TLS, jmp_buf uintptr) int32 {
-	if __ccgo_strace {
-		trc("tls=%v jmp_buf=%v, (%v:)", tls, jmp_buf, origin(2))
-	}
-	return _setjmp(tls, jmp_buf)
-}
 func X__builtin_nanl(t *TLS, s uintptr) float64 {
 	if __ccgo_strace {
 		trc("t=%v s=%v, (%v:)", t, s, origin(2))
