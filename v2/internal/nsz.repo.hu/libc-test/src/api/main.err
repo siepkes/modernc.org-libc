@@ -1,0 +1,2 @@
+src/common/runtest.c:29: src/api/main.exe exec failed: No such file or directory
+FAIL src/api/main.exe [status 1]

@@ -1,0 +1,9 @@
+src/functional/crypt.c:21: crypt("", "$2a$00$0123456789012345678901") failed: got "*0" want "*"
+src/functional/crypt.c:23: crypt("", "$2a$08$01234567890123456789") failed: got "*0" want "*"
+src/functional/crypt.c:43: crypt("a", "$5$rounds=1$") failed: got "*0" want "$5$rounds=1000$$ZIwsx59lFMWVo3Yt6IxpZVn0IhpY8Yg4gxC21zUDBI4"
+src/functional/crypt.c:44: crypt("a", "$5$rounds=00001234$") failed: got "*0" want "$5$rounds=1234$$i.IiuqtWmTzupHAZtfV/PB33Usz.MwGHq9BKFAEj.B3"
+src/functional/crypt.c:61: crypt("the minimum number is still observed", "$5$rounds=10$roundstoolow") failed: got "*0" want "$5$rounds=1000$roundstoolow$yfvwcWrQ8l/K0DAWyuPMDNHpIVlTQebY9l/gL972bIC"
+src/functional/crypt.c:77: crypt("a", "$6$rounds=1$") failed: got "*0" want "$6$rounds=1000$$hETGMQQ5sXu1md3PrmRCM4AxTgbNpYQaIhk4xQzvCiNfeogfCR9PZGSRXghUOxMAPFU2wuz/ZLafIHrHopO.60"
+src/functional/crypt.c:79: crypt("a", "$6$rounds=00001234$") failed: got "*0" want "$6$rounds=1234$$.9spjeVb1fINMikxgAZEpur.ZQ/Gte./HuKWm2sAZ37eK3e1.ZdfRuatKdR/H..lKQfb2AB.RtHh7xKm.FE2J."
+src/functional/crypt.c:97: crypt("the minimum number is still observed", "$6$rounds=10$roundstoolow") failed: got "*0" want "$6$rounds=1000$roundstoolow$kUMsbe306n21p9R.FRkW3IGn.S9NPN0x50YhH1xhLsPuWGsUSklZt58jaTfF4ZEQpyUNGc0dqbpBYYBaHHrsX."
+FAIL src/functional/crypt.exe [status 1]

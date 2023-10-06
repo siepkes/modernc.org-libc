@@ -1,0 +1,4 @@
+src/math/lgamma.o.go:2747:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgamma.o.go:2751:10: undefined: "signgam" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgamma.o.go:2753:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lgamma.o.go:2751:10: undefined: "gngam" staticInternal (link.go:1491:print0: link.go:1486:print0: link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)

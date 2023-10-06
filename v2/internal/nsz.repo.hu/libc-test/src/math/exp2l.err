@@ -1,0 +1,5 @@
+src/math/special/exp2l.h:17: bad fp exception: RN exp2l(-0xf.ffcp+10)=0x4p-16385, want 0 got INEXACT|UNDERFLOW
+src/math/special/exp2l.h:19: bad fp exception: RN exp2l(-0x8p+11)=0x2p-16385, want 0 got INEXACT|UNDERFLOW
+src/math/special/exp2l.h:21: bad fp exception: RN exp2l(-0x8.002p+11)=0x1p-16385, want 0 got INEXACT|UNDERFLOW
+src/math/special/exp2l.h:22: bad fp exception: RN exp2l(-0x8.07ap+11)=0x0.000000000000001p-16385, want 0 got INEXACT|UNDERFLOW
+FAIL src/math/exp2l.exe [status 1]

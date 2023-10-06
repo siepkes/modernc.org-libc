@@ -1,0 +1,2 @@
+/usr/bin/ld: src/regression/sem_close-unmap.o: in function `main':
+/home/jnml/src/modernc.org/builder/.exclude/modernc.org/libc/v2/internal/nsz.repo.hu/libc-test/src/regression/sem_close-unmap.c:10: warning: the use of `mktemp' is dangerous, better use `mkstemp' or `mkdtemp'

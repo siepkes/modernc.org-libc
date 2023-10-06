@@ -1,0 +1,7 @@
+src/regression/pthread_rwlock-ebusy.o.go:472:8: undefined: "pthread_rwlock_tryrdlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:493:8: undefined: "pthread_rwlock_trywrlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:522:9: undefined: "pthread_rwlock_rdlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:529:9: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:536:9: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:543:9: undefined: "pthread_rwlock_unlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:550:9: undefined: "pthread_rwlock_wrlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)

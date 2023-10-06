@@ -1,0 +1,11 @@
+src/functional/fwscanf.c:71: fwscanf(f, L"%lf%n %d", &u, &x, &y) failed (2 != 0)
+src/functional/fwscanf.c:72: u failed (1 != -1)
+src/functional/fwscanf.c:73: x failed (4 != -1)
+src/functional/fwscanf.c:74: y failed (12 != -1)
+src/functional/fwscanf.c:75: ftell(f) failed (7 != 4)
+src/functional/fwscanf.c:76: feof(f) failed (1 != 0)
+src/functional/fwscanf.c:77: fgetwc(f) failed (-1 != 32)
+src/functional/fwscanf.c:107: fwscanf(f, L"%x%n", &x, &y) failed (1 != 0)
+src/functional/fwscanf.c:108: x failed (0 != -1)
+src/functional/fwscanf.c:109: y failed (2 != -1)
+FAIL src/functional/fwscanf.exe [status 1]

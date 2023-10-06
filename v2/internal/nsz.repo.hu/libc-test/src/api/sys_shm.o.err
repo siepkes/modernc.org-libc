@@ -1,0 +1,8 @@
+src/api/sys_shm.c: In function ‘f’:
+src/api/sys_shm.c:4:24: error: case label does not reduce to an integer constant
+    4 | #define C(n) switch(n){case n:;}
+      |                        ^~~~
+src/api/sys_shm.c:13:1: note: in expansion of macro ‘C’
+   13 | C(SHMLBA)
+      | ^
+exit status 1

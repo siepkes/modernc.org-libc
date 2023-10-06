@@ -1,0 +1,2 @@
+src/math/special/fmaxf.h:24: RN fmaxf(-0x0p+0,0x0p+0) want 0x0p+0 got -0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/fmaxf.exe [status 1]

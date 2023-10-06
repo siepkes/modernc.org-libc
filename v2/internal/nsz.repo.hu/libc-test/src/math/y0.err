@@ -1,0 +1,6 @@
+X src/math/special/y0.h:8: RN y0(0x1.c982eb8d417eap-1) want -0x1.af74bfa0f1304p-56 got -0x1.efap-56 ulperr -1128872158429184.000 = -0x1.00ad020000001p+50 + 0x1.11721cp-2
+X src/math/special/y0.h:9: RN y0(0x1.c982eb8d417ebp-1) want 0x1.5666419c0f3c9p-54 got 0x1.4bap-54 ulperr -189545932914688.000 = -0x1.58c834000000fp+47 + 0x1.dc02a8p-2
+X src/math/special/y0.h:10: RN y0(0x1.fa9534d98569bp+1) want 0x1.384a000f3fcecp-53 got 0x1.357fe8f504d9bp-53 ulperr -49071909765120.000 = -0x1.650b8e0000003p+45 + 0x1.58e17p-6
+X src/math/special/y0.h:11: RN y0(0x1.fa9534d98569cp+1) want -0x1.8fa8956b4b481p-55 got -0x1.90bbfedb2bc3dp-55 ulperr -18926159265792.000 = -0x1.1369700000055p+44 + 0x1.54cfbep-2
+X src/math/special/y0.h:12: RN y0(0x1.c581dc4e72102p+2) want -0x1.14bb186dc408dp-52 got -0x1.14ec1082c719ap-52 ulperr -3365128896512.000 = -0x1.87c0a7ffffdd4p+41 + -0x1.163cfp-2
+X src/math/special/y0.h:13: RN y0(0x1.c581dc4e72103p+2) want 0x1.e91b198d39ce2p-56 got 0x1.e4bce0cb88c19p-56 ulperr -76843608702976.000 = -0x1.178e2ffffffe1p+46 + -0x1.ee1b6ep-2

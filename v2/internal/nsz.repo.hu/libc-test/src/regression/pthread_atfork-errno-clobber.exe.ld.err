@@ -1,0 +1,1 @@
+src/regression/pthread_atfork-errno-clobber.o.go:1050:2: undefined: "pthread_atfork" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)

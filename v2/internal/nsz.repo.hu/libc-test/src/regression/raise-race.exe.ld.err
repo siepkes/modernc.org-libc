@@ -1,0 +1,3 @@
+src/regression/raise-race.o.go:977:8: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/raise-race.o.go:990:9: undefined: "pthread_kill" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/raise-race.o.go:1002:8: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)

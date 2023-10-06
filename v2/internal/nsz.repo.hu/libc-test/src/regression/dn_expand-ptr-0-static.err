@@ -1,0 +1,3 @@
+src/regression/dn_expand-ptr-0.c:26: dn_expand("\xc0\2", name, 1) returned -1, wanted 2
+src/regression/dn_expand-ptr-0.c:28: dn_expand("\xc0\2", name, 1) failed: got ".XXX" name, wanted ""
+FAIL src/regression/dn_expand-ptr-0-static.exe [status 1]

@@ -1,0 +1,26 @@
+src/api/fcntl.c: In function ‘f’:
+src/api/fcntl.c:30:3: error: ‘O_TTY_INIT’ undeclared (first use in this function)
+   30 | C(O_TTY_INIT)
+      |   ^~~~~~~~~~
+src/api/fcntl.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/fcntl.c:30:3: note: each undeclared identifier is reported only once for each function it appears in
+   30 | C(O_TTY_INIT)
+      |   ^~~~~~~~~~
+src/api/fcntl.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/fcntl.c:39:3: error: ‘O_EXEC’ undeclared (first use in this function); did you mean ‘O_EXCL’?
+   39 | C(O_EXEC)
+      |   ^~~~~~
+src/api/fcntl.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/fcntl.c:42:3: error: ‘O_SEARCH’ undeclared (first use in this function)
+   42 | C(O_SEARCH)
+      |   ^~~~~~~~
+src/api/fcntl.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+exit status 1

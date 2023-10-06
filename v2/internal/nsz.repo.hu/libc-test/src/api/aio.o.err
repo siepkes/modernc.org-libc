@@ -1,0 +1,5 @@
+src/api/aio.c: In function ‘f’:
+src/api/aio.c:40:84: error: initialization of ‘int (*)(int,  struct aiocb * const restrict* restrict,  int,  struct sigevent * restrict)’ from incompatible pointer type ‘int (*)(int,  struct aiocb * const* restrict,  int,  struct sigevent * restrict)’ [-Wincompatible-pointer-types]
+   40 | {int(*p)(int,struct aiocb*restrict const[restrict],int,struct sigevent*restrict) = lio_listio;}
+      |                                                                                    ^~~~~~~~~~
+exit status 1

@@ -1,0 +1,1 @@
+FAIL src/regression/raise-race.exe [signal Real-time signal 1]

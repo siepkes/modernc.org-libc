@@ -1,0 +1,15 @@
+src/functional/string.c: In function ‘main’:
+src/functional/string.c:83:10: error: implicit declaration of function ‘strlcpy’; did you mean ‘strncpy’? [-Werror=implicit-function-declaration]
+   83 |  TEST(i, strlcpy(b, "abc", sizeof b - 1), 3, "length %d != %d");
+      |          ^~~~~~~
+src/functional/string.c:14:10: note: in definition of macro ‘TEST’
+   14 |  ((r) = (f)) == (x) || \
+      |          ^
+src/functional/string.c:99:10: error: implicit declaration of function ‘strlcat’; did you mean ‘strncat’? [-Werror=implicit-function-declaration]
+   99 |  TEST(i, strlcat(b, "123", sizeof b), 6, "length %d != %d");
+      |          ^~~~~~~
+src/functional/string.c:14:10: note: in definition of macro ‘TEST’
+   14 |  ((r) = (f)) == (x) || \
+      |          ^
+cc1: some warnings being treated as errors
+exit status 1

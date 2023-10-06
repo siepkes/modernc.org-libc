@@ -1,0 +1,4 @@
+src/functional/pthread_cancel-points.o.go:654:9: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/functional/pthread_cancel-points.o.go:687:10: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/functional/pthread_cancel-points.o.go:893:2: undefined: "pthread_setcancelstate" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/functional/pthread_cancel-points.o.go:996:10: undefined: "pthread_cancel" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)

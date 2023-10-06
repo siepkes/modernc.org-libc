@@ -1,0 +1,5 @@
+/usr/bin/ld: i386:x86-64 architecture of input file `src/functional/tls_align_dso.lo' is incompatible with i386 output
+/usr/bin/ld: src/functional/tls_align_dso.lo: file class ELFCLASS64 incompatible with ELFCLASS32
+/usr/bin/ld: final link failed: file in wrong format
+collect2: error: ld returned 1 exit status
+exit status 1

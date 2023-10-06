@@ -1,0 +1,2 @@
+src/functional/strtol.c:130: strtol(s="123", &c, 37) failed (wrong final position -4633558 != 0)
+FAIL src/functional/strtol.exe [status 1]

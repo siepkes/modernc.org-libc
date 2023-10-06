@@ -1,0 +1,7 @@
+src/math/pow10l.c: In function ‘main’:
+src/math/pow10l.c:33:7: error: implicit declaration of function ‘pow10l’; did you mean ‘powl’? [-Werror=implicit-function-declaration]
+   33 |   y = pow10l(p->x);
+      |       ^~~~~~
+      |       powl
+cc1: some warnings being treated as errors
+exit status 1

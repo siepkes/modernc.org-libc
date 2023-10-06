@@ -1,0 +1,2 @@
+src/functional/wcstol.c:86: wcstol(s=L"123", &c, 37) failed (wrong final position -33738451 != 0)
+FAIL src/functional/wcstol-static.exe [status 1]

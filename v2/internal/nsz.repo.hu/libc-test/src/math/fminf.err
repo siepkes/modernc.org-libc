@@ -1,0 +1,2 @@
+src/math/special/fminf.h:20: RN fminf(0x0p+0,-0x0p+0) want -0x0p+0 got 0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/fminf.exe [status 1]

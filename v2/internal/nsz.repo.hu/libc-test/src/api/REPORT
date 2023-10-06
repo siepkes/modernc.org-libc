@@ -1,0 +1,224 @@
+src/api/aio.c: In function ‘f’:
+src/api/aio.c:40:84: error: initialization of ‘int (*)(int,  struct aiocb * const restrict* restrict,  int,  struct sigevent * restrict)’ from incompatible pointer type ‘int (*)(int,  struct aiocb * const* restrict,  int,  struct sigevent * restrict)’ [-Wincompatible-pointer-types]
+   40 | {int(*p)(int,struct aiocb*restrict const[restrict],int,struct sigevent*restrict) = lio_listio;}
+      |                                                                                    ^~~~~~~~~~
+exit status 1
+TODO cc.Complex64Value (expr.go:1171:binopArgs: expr.go:1176:checkVolatileExpr: expr.go:79:expr: expr.go:502:expr0: expr.go:3769:primaryExpression: expr.go:4217:primaryExpressionFloatConst:)
+TODO cc.Complex64Value (expr.go:1171:binopArgs: expr.go:1176:checkVolatileExpr: expr.go:79:expr: expr.go:502:expr0: expr.go:3769:primaryExpression: expr.go:4217:primaryExpressionFloatConst:)
+TODO cc.Complex64Value (expr.go:1171:binopArgs: expr.go:1176:checkVolatileExpr: expr.go:79:expr: expr.go:502:expr0: expr.go:3769:primaryExpression: expr.go:4217:primaryExpressionFloatConst:)
+TODO cc.Complex64Value (expr.go:1171:binopArgs: expr.go:1176:checkVolatileExpr: expr.go:79:expr: expr.go:502:expr0: expr.go:3769:primaryExpression: expr.go:4217:primaryExpressionFloatConst:)
+src/api/dirent.c: In function ‘f’:
+src/api/dirent.c:25:53: error: ‘readdir_r’ is deprecated [-Werror=deprecated-declarations]
+   25 | {int(*p)(DIR*restrict,struct dirent*restrict,struct dirent**restrict) = readdir_r;}
+      |                                                     ^~~~~~
+In file included from /usr/include/features.h:461,
+                 from /usr/include/dirent.h:25,
+                 from src/api/dirent.c:1:
+/usr/include/dirent.h:189:12: note: declared here
+  189 | extern int __REDIRECT (readdir_r,
+      |            ^~~~~~~~~~
+cc1: all warnings being treated as errors
+exit status 1
+src/api/fcntl.c: In function ‘f’:
+src/api/fcntl.c:30:3: error: ‘O_TTY_INIT’ undeclared (first use in this function)
+   30 | C(O_TTY_INIT)
+      |   ^~~~~~~~~~
+src/api/fcntl.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/fcntl.c:30:3: note: each undeclared identifier is reported only once for each function it appears in
+   30 | C(O_TTY_INIT)
+      |   ^~~~~~~~~~
+src/api/fcntl.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/fcntl.c:39:3: error: ‘O_EXEC’ undeclared (first use in this function); did you mean ‘O_EXCL’?
+   39 | C(O_EXEC)
+      |   ^~~~~~
+src/api/fcntl.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/fcntl.c:42:3: error: ‘O_SEARCH’ undeclared (first use in this function)
+   42 | C(O_SEARCH)
+      |   ^~~~~~~~
+src/api/fcntl.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+exit status 1
+src/api/limits.c: In function ‘f’:
+src/api/limits.c:63:3: error: ‘_POSIX_UIO_MAXIOV’ undeclared (first use in this function)
+   63 | C(_XOPEN_IOV_MAX)
+      |   ^~~~~~~~~~~~~~
+src/api/limits.c:3:21: note: in definition of macro ‘C’
+    3 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/limits.c:63:3: note: each undeclared identifier is reported only once for each function it appears in
+   63 | C(_XOPEN_IOV_MAX)
+      |   ^~~~~~~~~~~~~~
+src/api/limits.c:3:21: note: in definition of macro ‘C’
+    3 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/limits.c:64:3: error: ‘_XOPEN_NAME_MAX’ undeclared (first use in this function); did you mean ‘LOGIN_NAME_MAX’?
+   64 | C(_XOPEN_NAME_MAX)
+      |   ^~~~~~~~~~~~~~~
+src/api/limits.c:3:21: note: in definition of macro ‘C’
+    3 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/limits.c:65:3: error: ‘_XOPEN_PATH_MAX’ undeclared (first use in this function)
+   65 | C(_XOPEN_PATH_MAX)
+      |   ^~~~~~~~~~~~~~~
+src/api/limits.c:3:21: note: in definition of macro ‘C’
+    3 | #define C(n) switch(n){case n:;}
+      |                     ^
+exit status 1
+src/common/runtest.c:29: src/api/main.exe exec failed: No such file or directory
+FAIL src/api/main.exe [status 1]
+cc: error: src/api/aio.o: Adresář nebo soubor neexistuje
+cc: error: src/api/dirent.o: Adresář nebo soubor neexistuje
+cc: error: src/api/fcntl.o: Adresář nebo soubor neexistuje
+cc: error: src/api/limits.o: Adresář nebo soubor neexistuje
+cc: error: src/api/netdb.o: Adresář nebo soubor neexistuje
+cc: error: src/api/stdio.o: Adresář nebo soubor neexistuje
+cc: error: src/api/stdlib.o: Adresář nebo soubor neexistuje
+cc: error: src/api/sys_sem.o: Adresář nebo soubor neexistuje
+cc: error: src/api/sys_shm.o: Adresář nebo soubor neexistuje
+cc: error: src/api/sys_socket.o: Adresář nebo soubor neexistuje
+cc: error: src/api/unistd.o: Adresář nebo soubor neexistuje
+cc: error: src/api/wchar.o: Adresář nebo soubor neexistuje
+exit status 1
+src/api/netdb.c: In function ‘f’:
+src/api/netdb.c:60:3: error: ‘NI_NUMERICSCOPE’ undeclared (first use in this function); did you mean ‘NI_NUMERICHOST’?
+   60 | C(NI_NUMERICSCOPE)
+      |   ^~~~~~~~~~~~~~~
+src/api/netdb.c:4:21: note: in definition of macro ‘C’
+    4 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/netdb.c:60:3: note: each undeclared identifier is reported only once for each function it appears in
+   60 | C(NI_NUMERICSCOPE)
+      |   ^~~~~~~~~~~~~~~
+src/api/netdb.c:4:21: note: in definition of macro ‘C’
+    4 | #define C(n) switch(n){case n:;}
+      |                     ^
+exit status 1
+src/api/regex.c:39:79: unexpected ']', expected direct abstract declarator
+src/api/spawn.c:21:131: unexpected ']', expected direct abstract declarator
+src/api/stdio.c: In function ‘f’:
+src/api/stdio.c:68:1: error: ‘gets’ is deprecated [-Werror=deprecated-declarations]
+   68 | {char*(*p)(char*) = gets;}
+      | ^
+In file included from src/api/stdio.c:1:
+/usr/include/stdio.h:577:14: note: declared here
+  577 | extern char *gets (char *__s) __wur __attribute_deprecated__;
+      |              ^~~~
+cc1: all warnings being treated as errors
+exit status 1
+src/api/stdlib.c: In function ‘f’:
+src/api/stdlib.c:89:26: error: ‘setkey’ undeclared (first use in this function)
+   89 | {void(*p)(const char*) = setkey;}
+      |                          ^~~~~~
+src/api/stdlib.c:89:26: note: each undeclared identifier is reported only once for each function it appears in
+exit status 1
+src/api/sys_sem.c: In function ‘f’:
+src/api/sys_sem.c:3:24: error: initialization of ‘short unsigned int *’ from incompatible pointer type ‘__syscall_ulong_t *’ {aka ‘long unsigned int *’} [-Wincompatible-pointer-types]
+    3 | #define F(t,n) {t *y = &x.n;}
+      |                        ^
+src/api/sys_sem.c:21:1: note: in expansion of macro ‘F’
+   21 | F(unsigned short, sem_nsems)
+      | ^
+exit status 1
+src/api/sys_shm.c: In function ‘f’:
+src/api/sys_shm.c:4:24: error: case label does not reduce to an integer constant
+    4 | #define C(n) switch(n){case n:;}
+      |                        ^~~~
+src/api/sys_shm.c:13:1: note: in expansion of macro ‘C’
+   13 | C(SHMLBA)
+      | ^
+exit status 1
+src/api/sys_socket.c: In function ‘f’:
+src/api/sys_socket.c:3:24: error: pointer targets in initialization of ‘int *’ from ‘size_t *’ {aka ‘unsigned int *’} differ in signedness [-Wpointer-sign]
+    3 | #define F(t,n) {t *y = &x.n;}
+      |                        ^
+src/api/sys_socket.c:25:1: note: in expansion of macro ‘F’
+   25 | F(int,msg_iovlen)
+      | ^
+exit status 1
+src/api/unistd.c: In function ‘f’:
+src/api/unistd.c:87:3: error: ‘_CS_POSIX_V7_THREADS_CFLAGS’ undeclared (first use in this function); did you mean ‘_CS_POSIX_V7_LP64_OFF64_CFLAGS’?
+   87 | C(_CS_POSIX_V7_THREADS_CFLAGS)
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/api/unistd.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/unistd.c:87:3: note: each undeclared identifier is reported only once for each function it appears in
+   87 | C(_CS_POSIX_V7_THREADS_CFLAGS)
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/api/unistd.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/unistd.c:88:3: error: ‘_CS_POSIX_V7_THREADS_LDFLAGS’ undeclared (first use in this function); did you mean ‘_CS_POSIX_V7_LP64_OFF64_LDFLAGS’?
+   88 | C(_CS_POSIX_V7_THREADS_LDFLAGS)
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/api/unistd.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/unistd.c:117:3: error: ‘_PC_TIMESTAMP_RESOLUTION’ undeclared (first use in this function)
+  117 | C(_PC_TIMESTAMP_RESOLUTION)
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~
+src/api/unistd.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/unistd.c:238:3: error: ‘_SC_XOPEN_UUCP’ undeclared (first use in this function); did you mean ‘_SC_XOPEN_UNIX’?
+  238 | C(_SC_XOPEN_UUCP)
+      |   ^~~~~~~~~~~~~~
+src/api/unistd.c:5:21: note: in definition of macro ‘C’
+    5 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/unistd.c:331:39: error: ‘crypt’ undeclared (first use in this function)
+  331 | {char*(*p)(const char*,const char*) = crypt;}
+      |                                       ^~~~~
+src/api/unistd.c:332:25: error: ‘encrypt’ undeclared (first use in this function)
+  332 | {void(*p)(char[],int) = encrypt;}
+      |                         ^~~~~~~
+exit status 1
+src/api/wchar.c: In function ‘f’:
+src/api/wchar.c:10:3: error: ‘va_list’ undeclared (first use in this function)
+   10 | T(va_list)
+      |   ^~~~~~~
+src/api/wchar.c:2:15: note: in definition of macro ‘T’
+    2 | #define T(t) (t*)0;
+      |               ^
+src/api/wchar.c:2:1: note: ‘va_list’ is defined in header ‘<stdarg.h>’; did you forget to ‘#include <stdarg.h>’?
+    1 | #include <wchar.h>
+  +++ |+#include <stdarg.h>
+    2 | #define T(t) (t*)0;
+src/api/wchar.c:10:3: note: each undeclared identifier is reported only once for each function it appears in
+   10 | T(va_list)
+      |   ^~~~~~~
+src/api/wchar.c:2:15: note: in definition of macro ‘T’
+    2 | #define T(t) (t*)0;
+      |               ^
+src/api/wchar.c:2:17: error: expected expression before ‘)’ token
+    2 | #define T(t) (t*)0;
+      |                 ^
+src/api/wchar.c:10:1: note: in expansion of macro ‘T’
+   10 | T(va_list)
+      | ^
+src/api/wchar.c:40:47: error: expected declaration specifiers or ‘...’ before ‘va_list’
+   40 | {int(*p)(FILE*restrict,const wchar_t*restrict,va_list) = vfwprintf;}
+      |                                               ^~~~~~~
+src/api/wchar.c:41:47: error: expected declaration specifiers or ‘...’ before ‘va_list’
+   41 | {int(*p)(FILE*restrict,const wchar_t*restrict,va_list) = vfwscanf;}
+      |                                               ^~~~~~~
+src/api/wchar.c:42:57: error: expected declaration specifiers or ‘...’ before ‘va_list’
+   42 | {int(*p)(wchar_t*restrict,size_t,const wchar_t*restrict,va_list) = vswprintf;}
+      |                                                         ^~~~~~~
+src/api/wchar.c:43:56: error: expected declaration specifiers or ‘...’ before ‘va_list’
+   43 | {int(*p)(const wchar_t*restrict,const wchar_t*restrict,va_list) = vswscanf;}
+      |                                                        ^~~~~~~
+src/api/wchar.c:44:33: error: expected declaration specifiers or ‘...’ before ‘va_list’
+   44 | {int(*p)(const wchar_t*restrict,va_list) = vwprintf;}
+      |                                 ^~~~~~~
+src/api/wchar.c:45:33: error: expected declaration specifiers or ‘...’ before ‘va_list’
+   45 | {int(*p)(const wchar_t*restrict,va_list) = vwscanf;}
+      |                                 ^~~~~~~
+exit status 1

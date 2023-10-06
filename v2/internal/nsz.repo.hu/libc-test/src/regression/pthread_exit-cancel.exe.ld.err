@@ -1,0 +1,6 @@
+src/regression/pthread_exit-cancel.o.go:478:2: undefined: "_pthread_cleanup_push" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-cancel.o.go:482:2: undefined: "pthread_exit" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-cancel.o.go:484:2: undefined: "_pthread_cleanup_pop" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-cancel.o.go:505:9: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-cancel.o.go:512:9: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/regression/pthread_exit-cancel.o.go:484:2: undefined: "pthread_cleanup_pop" meta (link.go:1486:print0: link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)

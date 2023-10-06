@@ -1,0 +1,2 @@
+src/functional/swprintf.c:128: [123xxxxx] != [123] (incorrect output)
+FAIL src/functional/swprintf-static.exe [status 1]

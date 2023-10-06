@@ -1,0 +1,12 @@
+src/api/dirent.c: In function ‘f’:
+src/api/dirent.c:25:53: error: ‘readdir_r’ is deprecated [-Werror=deprecated-declarations]
+   25 | {int(*p)(DIR*restrict,struct dirent*restrict,struct dirent**restrict) = readdir_r;}
+      |                                                     ^~~~~~
+In file included from /usr/include/features.h:461,
+                 from /usr/include/dirent.h:25,
+                 from src/api/dirent.c:1:
+/usr/include/dirent.h:189:12: note: declared here
+  189 | extern int __REDIRECT (readdir_r,
+      |            ^~~~~~~~~~
+cc1: all warnings being treated as errors
+exit status 1

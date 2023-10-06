@@ -1,0 +1,2 @@
+src/regression/malloc-brk-fail.c:41: malloc(10000) failed (eventhough 64k is available to mmap): Cannot allocate memory
+FAIL src/regression/malloc-brk-fail.exe [status 1]

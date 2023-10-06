@@ -1,0 +1,574 @@
+src/math/acos.o.go:4721:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/acos.o.go:4725:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/acosf.o.go:1975:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/acosf.o.go:1979:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/acosh.o.go:1058:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/acosh.o.go:1062:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/acoshf.o.go:913:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/acoshf.o.go:917:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/acoshl.o.go:1058:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/acoshl.o.go:1062:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/acosl.o.go:4721:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/acosl.o.go:4725:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/asin.o.go:26366:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/asin.o.go:26370:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/asinf.o.go:3028:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/asinf.o.go:3032:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/asinh.o.go:1049:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/asinh.o.go:1053:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/asinhf.o.go:886:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/asinhf.o.go:890:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/asinhl.o.go:1049:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/asinhl.o.go:1053:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/asinl.o.go:26366:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/asinl.o.go:26370:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/atan.o.go:64013:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/atan.o.go:64017:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/atan2.o.go:2901:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/atan2.o.go:2905:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/atan2f.o.go:2460:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/atan2f.o.go:2464:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/atan2l.o.go:2901:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/atan2l.o.go:2905:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/atanf.o.go:2587:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/atanf.o.go:2591:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/atanh.o.go:968:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/atanh.o.go:972:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/atanhf.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/atanhf.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/atanhl.o.go:968:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/atanhl.o.go:972:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/atanl.o.go:64013:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/atanl.o.go:64017:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/cbrt.o.go:932:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/cbrt.o.go:936:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/cbrtf.o.go:931:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/cbrtf.o.go:935:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/cbrtl.o.go:932:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/cbrtl.o.go:936:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ceil.o.go:4280:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ceil.o.go:4284:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ceilf.o.go:4495:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ceilf.o.go:4499:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ceill.o.go:4280:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ceill.o.go:4284:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/copysign.o.go:982:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/copysign.o.go:986:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/copysignf.o.go:981:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/copysignf.o.go:985:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/copysignl.o.go:982:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/copysignl.o.go:986:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/cos.o.go:110372:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/cos.o.go:110376:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/cosf.o.go:2317:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/cosf.o.go:2321:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/crlibm/cosh.h:54: RU cosh(0x1.633ce8fb9f87dp+9) want 0x1.ffffffffffd3bp+1023 got 0x1.ffffffffffd3fp+1023 ulperr 4.104 = 0x1.0000007p+2 + 0x1.a6b164p-4
+src/math/crlibm/cosh.h:56: RU cosh(-0x1.633ce8fb9f87dp+9) want 0x1.ffffffffffd3bp+1023 got 0x1.ffffffffffd3fp+1023 ulperr 4.104 = 0x1.0000007p+2 + 0x1.a6b164p-4
+src/math/ucb/cosh.h:40: RU cosh(0x1.633ce8fb9f87dp+9) want 0x1.ffffffffffd3bp+1023 got 0x1.ffffffffffd3fp+1023 ulperr 4.104 = 0x1.0000007p+2 + 0x1.a6b164p-4
+FAIL src/math/cosh.exe [status 1]
+src/math/cosh.o.go:21542:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/cosh.o.go:21546:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/coshf.o.go:2740:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/coshf.o.go:2744:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/coshl.o.go:21542:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/coshl.o.go:21546:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/cosl.o.go:110372:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/cosl.o.go:110376:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/drem.o.go:1522:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/drem.o.go:1524:9: undefined: "drem" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/drem.o.go:1526:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/dremf.o.go:1521:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/dremf.o.go:1523:9: undefined: "dremf" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/dremf.o.go:1525:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/erf.o.go:887:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/erf.o.go:891:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/erfc.o.go:896:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/erfc.o.go:900:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/erfcf.o.go:886:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/erfcf.o.go:890:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/erfcl.o.go:896:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/erfcl.o.go:900:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/erff.o.go:886:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/erff.o.go:890:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/erfl.o.go:887:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/erfl.o.go:891:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/exp.o.go:58910:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/exp.o.go:58914:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/exp10.o.go:905:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/exp10.o.go:909:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/exp10f.o.go:904:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/exp10f.o.go:908:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/exp10l.o.go:905:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/exp10l.o.go:909:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+X src/math/special/exp2.h:12: bad fp exception: RN exp2(-0x1.ff8p+9)=0x0.8p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/special/exp2.h:18: bad fp exception: RN exp2(-0x1.ff8p+9)=0x0.8p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/special/exp2.h:20: bad fp exception: RN exp2(-0x1p+10)=0x0.4p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/special/exp2.h:21: bad fp exception: RN exp2(-0x1.004p+10)=0x0.2p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/special/exp2.h:22: bad fp exception: RN exp2(-0x1.0c8p+10)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+src/math/exp2.o.go:1067:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/exp2.o.go:1071:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/exp2f.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/exp2f.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/exp2l.h:17: bad fp exception: RN exp2l(-0xf.ffcp+10)=0x4p-16385, want 0 got INEXACT|UNDERFLOW
+src/math/special/exp2l.h:19: bad fp exception: RN exp2l(-0x8p+11)=0x2p-16385, want 0 got INEXACT|UNDERFLOW
+src/math/special/exp2l.h:21: bad fp exception: RN exp2l(-0x8.002p+11)=0x1p-16385, want 0 got INEXACT|UNDERFLOW
+src/math/special/exp2l.h:22: bad fp exception: RN exp2l(-0x8.07ap+11)=0x0.000000000000001p-16385, want 0 got INEXACT|UNDERFLOW
+FAIL src/math/exp2l.exe [status 1]
+src/math/exp2l.o.go:1067:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/exp2l.o.go:1071:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/expf.o.go:3604:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/expf.o.go:3608:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/expl.o.go:58910:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/expl.o.go:58914:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/expm1.o.go:7520:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/expm1.o.go:7524:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/expm1f.o.go:904:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/expm1f.o.go:908:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/expm1l.o.go:7520:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/expm1l.o.go:7524:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fabs.o.go:1526:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fabs.o.go:1530:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fabsf.o.go:1507:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fabsf.o.go:1511:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fabsl.o.go:1526:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fabsl.o.go:1528:9: undefined: "fabsl" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fabsl.o.go:1530:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fdim.o.go:1432:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fdim.o.go:1436:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fdimf.o.go:1431:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fdimf.o.go:1435:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fdiml.o.go:1432:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fdiml.o.go:1436:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fenv.o.go:799:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fenv.o.go:801:9: undefined: "feraiseexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fenv.o.go:808:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fenv.o.go:837:8: undefined: "fegetenv" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fenv.o.go:851:8: undefined: "fesetenv" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fenv.o.go:965:9: undefined: "fegetround" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/floor.o.go:4370:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/floor.o.go:4374:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/floorf.o.go:4513:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/floorf.o.go:4517:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/floorl.o.go:4370:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/floorl.o.go:4374:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/fma.h:34: bad fp exception: RN fma(inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fma.h:35: bad fp exception: RN fma(0x0p+0,inf,nan)=nan, want INVALID got 0
+src/math/special/fma.h:36: bad fp exception: RN fma(-inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fma.h:37: bad fp exception: RN fma(0x0p+0,-inf,nan)=nan, want INVALID got 0
+src/math/special/fma.h:242: bad fp exception: RZ fma(inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fma.h:243: bad fp exception: RZ fma(0x0p+0,inf,nan)=nan, want INVALID got 0
+src/math/special/fma.h:244: bad fp exception: RZ fma(-inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fma.h:245: bad fp exception: RZ fma(0x0p+0,-inf,nan)=nan, want INVALID got 0
+src/math/special/fma.h:450: bad fp exception: RD fma(inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fma.h:451: bad fp exception: RD fma(0x0p+0,inf,nan)=nan, want INVALID got 0
+src/math/special/fma.h:452: bad fp exception: RD fma(-inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fma.h:453: bad fp exception: RD fma(0x0p+0,-inf,nan)=nan, want INVALID got 0
+src/math/special/fma.h:658: bad fp exception: RU fma(inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fma.h:659: bad fp exception: RU fma(0x0p+0,inf,nan)=nan, want INVALID got 0
+src/math/special/fma.h:660: bad fp exception: RU fma(-inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fma.h:661: bad fp exception: RU fma(0x0p+0,-inf,nan)=nan, want INVALID got 0
+FAIL src/math/fma.exe [status 1]
+src/math/fma.o.go:10078:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fma.o.go:10082:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/fmaf.h:34: bad fp exception: RN fmaf(inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fmaf.h:35: bad fp exception: RN fmaf(0x0p+0,inf,nan)=nan, want INVALID got 0
+src/math/special/fmaf.h:36: bad fp exception: RN fmaf(-inf,0x0p+0,nan)=nan, want INVALID got 0
+src/math/special/fmaf.h:37: bad fp exception: RN fmaf(0x0p+0,-inf,nan)=nan, want INVALID got 0
+FAIL src/math/fmaf.exe [status 1]
+src/math/fmaf.o.go:1541:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fmaf.o.go:1545:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fmal.o.go:10078:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fmal.o.go:10082:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/fmax.h:24: RN fmax(-0x0p+0,0x0p+0) want 0x0p+0 got -0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/fmax.exe [status 1]
+src/math/fmax.o.go:1432:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fmax.o.go:1436:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/fmaxf.h:24: RN fmaxf(-0x0p+0,0x0p+0) want 0x0p+0 got -0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/fmaxf.exe [status 1]
+src/math/fmaxf.o.go:1431:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fmaxf.o.go:1435:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/fmaxl.h:20: RN fmaxl(0x0p+0,-0x0p+0) want 0x0p+0 got -0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/fmaxl.exe [status 1]
+src/math/fmaxl.o.go:1432:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fmaxl.o.go:1436:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/fmin.h:20: RN fmin(0x0p+0,-0x0p+0) want -0x0p+0 got 0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/fmin.exe [status 1]
+src/math/fmin.o.go:1432:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fmin.o.go:1436:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/fminf.h:20: RN fminf(0x0p+0,-0x0p+0) want -0x0p+0 got 0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/fminf.exe [status 1]
+src/math/fminf.o.go:1431:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fminf.o.go:1435:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/fminl.h:20: RN fminl(0x0p+0,-0x0p+0) want -0x0p+0 got 0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/fminl.exe [status 1]
+src/math/fminl.o.go:1432:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fminl.o.go:1436:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fmod.o.go:11271:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fmod.o.go:11275:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fmodf.o.go:11140:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fmodf.o.go:11144:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fmodl.o.go:11271:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fmodl.o.go:11275:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fpclassify.o.go:393:6: undefined: "__fpclassifyf" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/fpclassify.o.go:491:6: undefined: "__fpclassify" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/fpclassify.o.go:491:6: undefined: "_fpclassify" meta (link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)
+src/math/frexp.o.go:972:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/frexp.o.go:976:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/frexpf.o.go:972:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/frexpf.o.go:976:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/frexpl.o.go:972:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/frexpl.o.go:976:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ucb/hypot.h:99: bad fp exception: RN hypot(0x0p+0,0x0.0000000000001p-1022)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+src/math/ucb/hypot.h:100: bad fp exception: RN hypot(0x0.0000000000001p-1022,0x0p+0)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+src/math/ucb/hypot.h:156: bad fp exception: RN hypot(0x0p+0,0x0.fffffffffffffp-1022)=0x0.fffffffffffffp-1022, want 0 got INEXACT|UNDERFLOW
+src/math/ucb/hypot.h:161: bad fp exception: RN hypot(0x0p+0,-0x0.0000000000001p-1022)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+src/math/ucb/hypot.h:162: bad fp exception: RN hypot(0x0p+0,-0x0.fffffffffffffp-1022)=0x0.fffffffffffffp-1022, want 0 got INEXACT|UNDERFLOW
+src/math/ucb/hypot.h:167: bad fp exception: RN hypot(0x0.fffffffffffffp-1022,0x0p+0)=0x0.fffffffffffffp-1022, want 0 got INEXACT|UNDERFLOW
+src/math/ucb/hypot.h:177: bad fp exception: RN hypot(-0x0.0000000000001p-1022,0x0p+0)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+src/math/ucb/hypot.h:178: bad fp exception: RN hypot(-0x0.fffffffffffffp-1022,0x0p+0)=0x0.fffffffffffffp-1022, want 0 got INEXACT|UNDERFLOW
+src/math/ucb/hypot.h:204: bad fp exception: RU hypot(0x0p+0,0x1.fffffffffffffp+1023)=0x1.fffffffffffffp+1023, want 0 got INEXACT|OVERFLOW
+src/math/ucb/hypot.h:211: bad fp exception: RU hypot(0x0p+0,-0x1.fffffffffffffp+1023)=0x1.fffffffffffffp+1023, want 0 got INEXACT|OVERFLOW
+src/math/ucb/hypot.h:218: bad fp exception: RU hypot(0x1.fffffffffffffp+1023,0x0p+0)=0x1.fffffffffffffp+1023, want 0 got INEXACT|OVERFLOW
+src/math/ucb/hypot.h:231: bad fp exception: RU hypot(-0x1.fffffffffffffp+1023,0x0p+0)=0x1.fffffffffffffp+1023, want 0 got INEXACT|OVERFLOW
+src/math/special/hypot.h:8: bad fp exception: RN hypot(0x0.0000000000001p-1022,0x0p+0)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+src/math/special/hypot.h:9: bad fp exception: RN hypot(0x0.0000000000001p-1022,-0x0p+0)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+FAIL src/math/hypot.exe [status 1]
+src/math/hypot.o.go:3571:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/hypot.o.go:3575:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/hypotf.o.go:3570:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/hypotf.o.go:3574:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/hypotl.o.go:3571:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/hypotl.o.go:3575:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ilogb.o.go:903:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ilogb.o.go:907:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ilogbf.o.go:903:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ilogbf.o.go:907:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ilogbl.o.go:903:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ilogbl.o.go:907:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/isless.o.go:743:2: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/isless.o.go:763:30: undefined: "__fpclassifyl" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/isless.o.go:781:8: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/isless.o.go:763:30: undefined: "_fpclassifyl" meta (link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)
+X src/math/special/j0.h:7: RN j0(-0x1.33d132fd04a92p+1) want 0x1.092b2a541a68ep-19 got 0x1.092b2a5419311p-19 ulperr -4989.295 = -0x1.37cfff094p+12 + -0x1.2ebdbp-2
+X src/math/special/j0.h:8: RN j0(-0x1.33d15297be06fp+1) want 0x1.5352913be3275p-26 got 0x1.5352913d8eac6p-26 ulperr 1751121.000 = 0x1.ab850fc7afc3cp+20 + 0x1.c281e2p-7
+X src/math/special/j0.h:9: RN j0(0x1.33d152e971b4p+1) want -0x1.19b7921f03c8ep-54 got -0x1.0d3c72c942e74p-54 ulperr 219567133556736.000 = 0x1.8f63e9ffffffep+47 + 0x1.ece5dp-5
+X src/math/special/j0.h:10: RN j0(0x1.6148f5b2c2e45p+2) want -0x1.fbb40985f6e34p-56 got -0x1.fcbccb5d9fb59p-56 ulperr -18193976393728.000 = -0x1.08c1d7fffffb9p+44 + -0x1.1ac8a8p-2
+X src/math/special/j0.h:11: RN j0(0x1.14eb56cccdecap+3) want -0x1.6e8eeb22e5818p-54 got -0x1.6c229b3c9f94ap-54 ulperr 42627525246976.000 = 0x1.3627f4000002cp+45 + -0x1.63ab44p-2
+X src/math/special/j0.h:12: RN j0(0x1.c071b22fbbafap+1023) want -0x1.a348b1f34dd1ap-526 got -0x1.a348b1f34e688p-526 ulperr -2413.981 = -0x1.2dc000a9e1p+11 + 0x1.3153c2p-6
+src/math/j0.o.go:968:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/j0.o.go:972:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/j0f.o.go:886:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/j0f.o.go:890:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/j1.h:4: RN j1(-inf) want 0x0p+0 got -0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/j1.exe [status 1]
+src/math/j1.o.go:887:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/j1.o.go:891:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/j1f.h:4: RN j1f(-inf) want 0x0p+0 got -0x0p+0 ulperr inf = inf + 0x0p+0
+FAIL src/math/j1f.exe [status 1]
+src/math/j1f.o.go:886:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/j1f.o.go:890:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/jn.h:9: RN jn(1, -inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
+src/math/special/jn.h:13: RN jn(-1, inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
+FAIL src/math/jn.exe [status 1]
+src/math/jn.o.go:1052:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/jn.o.go:1056:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+X src/math/sanity/jnf.h:1: RN jnf(-2, -0x1.0223ap+3) want -0x1.863726p-4 got -0x1.86372ap-4, ulperr -2.009 = -0x1.ffffff6p+0 + -0x1.28885p-7
+src/math/special/jnf.h:9: RN jnf(1, -inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
+src/math/special/jnf.h:13: RN jnf(-1, inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
+FAIL src/math/jnf.exe [status 1]
+src/math/jnf.o.go:1052:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/jnf.o.go:1056:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ldexp.o.go:992:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ldexp.o.go:996:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ldexpf.o.go:991:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ldexpf.o.go:995:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/ldexpl.o.go:992:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ldexpl.o.go:996:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lgamma.o.go:2747:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgamma.o.go:2751:10: undefined: "signgam" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgamma.o.go:2753:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lgamma.o.go:2751:10: undefined: "gngam" staticInternal (link.go:1491:print0: link.go:1486:print0: link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)
+src/math/lgamma_r.o.go:948:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgamma_r.o.go:950:9: undefined: "lgamma_r" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgamma_r.o.go:952:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lgammaf.o.go:947:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgammaf.o.go:951:10: undefined: "signgam" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgammaf.o.go:953:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lgammaf.o.go:951:10: undefined: "gngam" staticInternal (link.go:1491:print0: link.go:1486:print0: link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)
+src/math/lgammaf_r.o.go:948:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgammaf_r.o.go:950:19: undefined: "lgammaf_r" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgammaf_r.o.go:952:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lgammal.o.go:2748:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgammal.o.go:2752:10: undefined: "signgam" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgammal.o.go:2754:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lgammal.o.go:2752:10: undefined: "gngam" staticInternal (link.go:1491:print0: link.go:1486:print0: link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)
+src/math/lgammal_r.o.go:949:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgammal_r.o.go:951:9: undefined: "lgammal_r" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lgammal_r.o.go:953:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/llrint.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/llrint.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/llrintf.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/llrintf.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/llrintl.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/llrintl.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/llround.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/llround.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/llroundf.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/llroundf.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/llroundl.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/llroundl.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log.o.go:14342:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log.o.go:14346:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log10.o.go:4343:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log10.o.go:4347:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log10f.o.go:2902:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log10f.o.go:2906:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log10l.o.go:4343:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log10l.o.go:4347:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log1p.o.go:6197:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log1p.o.go:6201:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log1pf.o.go:922:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log1pf.o.go:926:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log1pl.o.go:6197:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log1pl.o.go:6201:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log2.o.go:4802:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log2.o.go:4806:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log2f.o.go:913:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log2f.o.go:917:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/log2l.o.go:4802:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/log2l.o.go:4806:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/logb.o.go:914:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/logb.o.go:918:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/logbf.o.go:913:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/logbf.o.go:917:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/logbl.o.go:914:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/logbl.o.go:918:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/logf.o.go:3316:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/logf.o.go:3320:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/logl.o.go:14342:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/logl.o.go:14346:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lrint.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lrint.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lrintf.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lrintf.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lrintl.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lrintl.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lround.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lround.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lroundf.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lroundf.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/lroundl.o.go:967:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/lroundl.o.go:971:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/modf.o.go:1006:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/modf.o.go:1010:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/modff.o.go:1005:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/modff.o.go:1009:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/modfl.o.go:1006:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/modfl.o.go:1010:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/nearbyint.o.go:1253:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/nearbyint.o.go:1257:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/nearbyintf.o.go:1252:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/nearbyintf.o.go:1256:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/nearbyintl.o.go:1253:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/nearbyintl.o.go:1257:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/nextafter.o.go:1182:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/nextafter.o.go:1186:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/nextafterf.o.go:1181:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/nextafterf.o.go:1185:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/nextafterl.o.go:1182:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/nextafterl.o.go:1186:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/nexttoward.o.go:1165:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/nexttoward.o.go:1169:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/nexttowardf.o.go:1204:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/nexttowardf.o.go:1208:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/nexttowardl.o.go:1162:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/nexttowardl.o.go:1166:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+X src/math/crlibm/pow.h:13: bad fp exception: RN pow(0x1p+1,-0x1.0c8p+10)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:72: bad fp exception: RN pow(0x0.0000000000001p-1022,0x1p+0)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:73: bad fp exception: RN pow(0x0.00001p-1022,0x1p+0)=0x0.00001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:75: bad fp exception: RN pow(-0x0.0000000000001p-1022,0x1p+0)=-0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:76: bad fp exception: RN pow(-0x0.00001p-1022,0x1p+0)=-0x0.00001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:284: bad fp exception: RN pow(0x0.0000000000002p-1022,0x1p+0)=0x0.0000000000002p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:300: bad fp exception: RN pow(0x0.4p-1022,0x1p+0)=0x0.4p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:304: bad fp exception: RN pow(0x0.8p-1022,0x1p+0)=0x0.8p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:310: bad fp exception: RN pow(0x0.ffffffffffffep-1022,0x1p+0)=0x0.ffffffffffffep-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:313: bad fp exception: RN pow(0x0.fffffffffffffp-1022,0x1p+0)=0x0.fffffffffffffp-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:338: bad fp exception: RN pow(0x1p-537,0x1p+1)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:437: bad fp exception: RN pow(0x1p+1,-0x1.0c8p+10)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:498: bad fp exception: RN pow(0x1p+350,-0x1.8p+1)=0x0.0000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:499: bad fp exception: RN pow(0x1p+700,-0x1.8p+0)=0x0.0000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:516: bad fp exception: RN pow(0x1p+1023,-0x1p+0)=0x0.8p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:544: bad fp exception: RN pow(-0x0.0000000000002p-1022,0x1p+0)=-0x0.0000000000002p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:548: bad fp exception: RN pow(-0x0.4p-1022,0x1p+0)=-0x0.4p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:551: bad fp exception: RN pow(-0x0.8p-1022,0x1p+0)=-0x0.8p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:557: bad fp exception: RN pow(-0x0.ffffffffffffep-1022,0x1p+0)=-0x0.ffffffffffffep-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:560: bad fp exception: RN pow(-0x0.fffffffffffffp-1022,0x1p+0)=-0x0.fffffffffffffp-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:581: bad fp exception: RN pow(-0x1p-537,0x1p+1)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:655: bad fp exception: RN pow(-0x1p+1,-0x1.0c8p+10)=0x0.0000000000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:695: bad fp exception: RN pow(-0x1p+350,-0x1.8p+1)=-0x0.0000001p-1022, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/pow.h:708: bad fp exception: RN pow(-0x1p+1023,-0x1p+0)=-0x0.8p-1022, want 0 got INEXACT|UNDERFLOW
+src/math/pow.o.go:117011:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/pow.o.go:117015:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/common/runtest.c:29: src/math/pow10.exe exec failed: No such file or directory
+FAIL src/math/pow10.exe [status 1]
+cc: error: src/math/pow10.o: Adresář nebo soubor neexistuje
+exit status 1
+src/math/pow10.c: In function ‘main’:
+src/math/pow10.c:27:7: error: implicit declaration of function ‘pow10’ [-Werror=implicit-function-declaration]
+   27 |   y = pow10(p->x);
+      |       ^~~~~
+cc1: some warnings being treated as errors
+exit status 1
+src/common/runtest.c:29: src/math/pow10f.exe exec failed: No such file or directory
+FAIL src/math/pow10f.exe [status 1]
+cc: error: src/math/pow10f.o: Adresář nebo soubor neexistuje
+exit status 1
+src/math/pow10f.c: In function ‘main’:
+src/math/pow10f.c:27:7: error: implicit declaration of function ‘pow10f’; did you mean ‘powf’? [-Werror=implicit-function-declaration]
+   27 |   y = pow10f(p->x);
+      |       ^~~~~~
+      |       powf
+cc1: some warnings being treated as errors
+exit status 1
+src/common/runtest.c:29: src/math/pow10l.exe exec failed: No such file or directory
+FAIL src/math/pow10l.exe [status 1]
+cc: error: src/math/pow10l.o: Adresář nebo soubor neexistuje
+exit status 1
+src/math/pow10l.c: In function ‘main’:
+src/math/pow10l.c:33:7: error: implicit declaration of function ‘pow10l’; did you mean ‘powl’? [-Werror=implicit-function-declaration]
+   33 |   y = pow10l(p->x);
+      |       ^~~~~~
+      |       powl
+cc1: some warnings being treated as errors
+exit status 1
+src/math/ucb/powf.h:103: bad fp exception: RU powf(0x1.fffffep+127,0x1p+0)=0x1.fffffep+127, want 0 got INEXACT|OVERFLOW
+X src/math/ucb/powf.h:530: bad fp exception: RN powf(0x1.fffff8p-127,0x1p+0)=0x1.fffff8p-127, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/powf.h:533: bad fp exception: RN powf(0x1.fffffcp-127,0x1p+0)=0x1.fffffcp-127, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/powf.h:719: bad fp exception: RN powf(-0x1.fffff8p-127,0x1p+0)=-0x1.fffff8p-127, want 0 got INEXACT|UNDERFLOW
+X src/math/ucb/powf.h:722: bad fp exception: RN powf(-0x1.fffffcp-127,0x1p+0)=-0x1.fffffcp-127, want 0 got INEXACT|UNDERFLOW
+FAIL src/math/powf.exe [status 1]
+src/math/powf.o.go:19210:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/powf.o.go:19214:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/powl.o.go:117011:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/powl.o.go:117015:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/remainder.o.go:1522:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/remainder.o.go:1526:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/remainderf.o.go:1521:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/remainderf.o.go:1525:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/remainderl.o.go:1522:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/remainderl.o.go:1526:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/remquo.o.go:1595:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/remquo.o.go:1599:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/remquof.o.go:1594:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/remquof.o.go:1598:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/remquol.o.go:1595:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/remquol.o.go:1599:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/rint.o.go:1271:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/rint.o.go:1275:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/rintf.o.go:1270:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/rintf.o.go:1274:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/rintl.o.go:1271:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/rintl.o.go:1275:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/round.o.go:1253:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/round.o.go:1257:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/roundf.o.go:1252:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/roundf.o.go:1256:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/roundl.o.go:1253:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/roundl.o.go:1257:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/scalb.o.go:1192:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/scalb.o.go:1196:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/scalbf.o.go:1191:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/scalbf.o.go:1195:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/scalbln.o.go:1022:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/scalbln.o.go:1026:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/scalblnf.o.go:1022:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/scalblnf.o.go:1026:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/scalblnl.o.go:1022:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/scalblnl.o.go:1026:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/scalbn.o.go:1042:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/scalbn.o.go:1046:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/scalbnf.o.go:1042:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/scalbnf.o.go:1046:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/scalbnl.o.go:1042:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/scalbnl.o.go:1046:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sin.o.go:101327:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sin.o.go:101331:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sincos.o.go:918:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sincos.o.go:922:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sincosf.o.go:918:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sincosf.o.go:922:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sincosl.o.go:918:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sincosl.o.go:922:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sinf.o.go:2317:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sinf.o.go:2321:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+X src/math/ucb/sinh.h:42: RU sinh(0x1.633ce8fb9f87dp+9) want 0x1.ffffffffffd3bp+1023 got 0x1.ffffffffffd3fp+1023 ulperr 4.104 = 0x1.0000007p+2 + 0x1.a6b164p-4
+X src/math/ucb/sinh.h:43: RU sinh(-0x1.633ce8fb9f87dp+9) want -0x1.ffffffffffd3ap+1023 got -0x1.ffffffffffd3ep+1023 ulperr -3.103 = -0x1.ffffffp+1 + 0x1.cb29d4p-1
+src/math/sinh.o.go:16691:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sinh.o.go:16695:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sinhf.o.go:2947:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sinhf.o.go:2951:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+X src/math/sanity/sinhl.h:7: RN sinhl(-0xd.02e63aa240e85e8p-5) want -0xd.5f71307ae0998b5p-5 got -0xd.5f71307ae0998b7p-5 ulperr -1.655 = -0x1p+1 + 0x1.617728p-2
+src/math/sinhl.o.go:16691:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sinhl.o.go:16695:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sinl.o.go:101327:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sinl.o.go:101331:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sqrt.o.go:6863:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sqrt.o.go:6867:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sqrtf.o.go:3910:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sqrtf.o.go:3914:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/sqrtl.o.go:6863:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sqrtl.o.go:6865:9: undefined: "sqrtl" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/sqrtl.o.go:6867:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/tan.o.go:64274:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/tan.o.go:64278:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/tanf.o.go:2299:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/tanf.o.go:2303:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/tanh.o.go:3092:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/tanh.o.go:3096:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/tanhf.o.go:2947:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/tanhf.o.go:2951:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/tanhl.o.go:3092:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/tanhl.o.go:3096:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/tanl.o.go:64274:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/tanl.o.go:64278:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+X src/math/special/tgamma.h:80: RN tgamma(-0x1.59ffffffffffdp+7) want -0x1.b397f8b0241a4p-999 got -0x1.b397f8b0241a2p-999 ulperr 1.597 = 0x1.0000008p+1 + -0x1.9c2ff4p-2
+X src/math/special/tgamma.h:89: RN tgamma(-0x1.6000000000001p+7) want -0x1.ff5df5f53357ep-1020 got -0x1.ff5df5f53358p-1020 ulperr -1.980 = -0x1.0000008p+1 + 0x1.492c4p-6
+X src/math/special/tgamma.h:125: RN tgamma(-0x1.ep+2) want 0x1.d572317e6f443p-13 got 0x1.d572317e6f445p-13 ulperr 1.533 = 0x1.ffffffp+0 + -0x1.de1f7cp-2
+X src/math/special/tgamma.h:141: RN tgamma(-0x1.55p+7) want -0x1.7d2374dfcda7ap-1022 got -0x1.7d2374dfcda78p-1022 ulperr 1.778 = 0x1.0000004p+1 + -0x1.c68fa4p-3
+X src/math/special/tgamma.h:152: RN tgamma(-0x1.facae9c9e7105p+5) want 0x1.a98422d742f9fp-291 got 0x1.a98422d742f9dp-291 ulperr -1.535 = -0x1.ffffff8p+0 + 0x1.dc5df6p-2
+src/math/tgamma.o.go:2264:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/tgamma.o.go:2268:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/tgammaf.o.go:922:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/tgammaf.o.go:926:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/tgammal.o.go:2264:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/tgammal.o.go:2268:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/trunc.o.go:1253:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/trunc.o.go:1257:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/truncf.o.go:1252:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/truncf.o.go:1256:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/truncl.o.go:1253:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/truncl.o.go:1257:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+X src/math/special/y0.h:8: RN y0(0x1.c982eb8d417eap-1) want -0x1.af74bfa0f1304p-56 got -0x1.efap-56 ulperr -1128872158429184.000 = -0x1.00ad020000001p+50 + 0x1.11721cp-2
+X src/math/special/y0.h:9: RN y0(0x1.c982eb8d417ebp-1) want 0x1.5666419c0f3c9p-54 got 0x1.4bap-54 ulperr -189545932914688.000 = -0x1.58c834000000fp+47 + 0x1.dc02a8p-2
+X src/math/special/y0.h:10: RN y0(0x1.fa9534d98569bp+1) want 0x1.384a000f3fcecp-53 got 0x1.357fe8f504d9bp-53 ulperr -49071909765120.000 = -0x1.650b8e0000003p+45 + 0x1.58e17p-6
+X src/math/special/y0.h:11: RN y0(0x1.fa9534d98569cp+1) want -0x1.8fa8956b4b481p-55 got -0x1.90bbfedb2bc3dp-55 ulperr -18926159265792.000 = -0x1.1369700000055p+44 + 0x1.54cfbep-2
+X src/math/special/y0.h:12: RN y0(0x1.c581dc4e72102p+2) want -0x1.14bb186dc408dp-52 got -0x1.14ec1082c719ap-52 ulperr -3365128896512.000 = -0x1.87c0a7ffffdd4p+41 + -0x1.163cfp-2
+X src/math/special/y0.h:13: RN y0(0x1.c581dc4e72103p+2) want 0x1.e91b198d39ce2p-56 got 0x1.e4bce0cb88c19p-56 ulperr -76843608702976.000 = -0x1.178e2ffffffe1p+46 + -0x1.ee1b6ep-2
+src/math/y0.o.go:956:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/y0.o.go:960:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+X src/math/special/y0f.h:8: RN y0f(0x1.8ae5d4p-1) want -0x1.d88a5ap-4 got -0x1.d88a56p-4 ulperr 1.919 = 0x1.ffffffap+0 + -0x1.4d601ap-4
+X src/math/special/y0f.h:9: RN y0f(0x1.fa9536p+1) want -0x1.da2946p-25 got -0x1.cec7ccp-25 ulperr 372924.625 = 0x1.6c2f408a2bcp+18 + -0x1.88a2bcp-2
+src/math/y0f.o.go:928:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/y0f.o.go:932:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/y1.o.go:902:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/y1.o.go:906:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/y1f.o.go:901:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/y1f.o.go:905:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/yn.h:16: RN yn(-1, inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
+FAIL src/math/yn.exe [status 1]
+src/math/yn.o.go:1098:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/yn.o.go:1102:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/math/special/ynf.h:16: RN ynf(-1, inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
+FAIL src/math/ynf.exe [status 1]
+src/math/ynf.o.go:1098:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/math/ynf.o.go:1102:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)

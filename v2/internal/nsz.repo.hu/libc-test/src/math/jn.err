@@ -1,0 +1,3 @@
+src/math/special/jn.h:9: RN jn(1, -inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
+src/math/special/jn.h:13: RN jn(-1, inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
+FAIL src/math/jn.exe [status 1]

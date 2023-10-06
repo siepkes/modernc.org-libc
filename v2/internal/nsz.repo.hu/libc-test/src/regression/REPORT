@@ -1,0 +1,204 @@
+src/regression/daemon-failure.c:52: daemon should have failed with 24 [EMFILE] got 9 [Bad file descriptor]
+src/regression/daemon-failure.c:54: daemon forked despite failure: ppid is 32336, pid is 32337, old pid is 32336
+src/regression/daemon-failure.c:73: child failed
+FAIL src/regression/daemon-failure-static.exe [status 1]
+unexpected/unsupported option: -static
+src/regression/daemon-failure.c:52: daemon should have failed with 24 [EMFILE] got 9 [Bad file descriptor]
+src/regression/daemon-failure.c:54: daemon forked despite failure: ppid is 32321, pid is 32322, old pid is 32321
+src/regression/daemon-failure.c:73: child failed
+FAIL src/regression/daemon-failure.exe [status 1]
+src/regression/dn_expand-empty.c:16: dn_expand("", name, 1) returned -1, wanted 1
+src/regression/dn_expand-empty.c:18: dn_expand("", name, 1) failed: got ".X" name, wanted ""
+FAIL src/regression/dn_expand-empty-static.exe [status 1]
+unexpected/unsupported option: -static
+src/regression/dn_expand-empty.c:16: dn_expand("", name, 1) returned -1, wanted 1
+src/regression/dn_expand-empty.c:18: dn_expand("", name, 1) failed: got ".X" name, wanted ""
+FAIL src/regression/dn_expand-empty.exe [status 1]
+src/regression/dn_expand-ptr-0.c:26: dn_expand("\xc0\2", name, 1) returned -1, wanted 2
+src/regression/dn_expand-ptr-0.c:28: dn_expand("\xc0\2", name, 1) failed: got ".XXX" name, wanted ""
+FAIL src/regression/dn_expand-ptr-0-static.exe [status 1]
+unexpected/unsupported option: -static
+src/regression/dn_expand-ptr-0.c:26: dn_expand("\xc0\2", name, 1) returned -1, wanted 2
+src/regression/dn_expand-ptr-0.c:28: dn_expand("\xc0\2", name, 1) failed: got ".XXX" name, wanted ""
+FAIL src/regression/dn_expand-ptr-0.exe [status 1]
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+src/regression/fpclassify-invalid-ld80.c:51: snprintf("%La", zero with msb set) failed: got "0x8p-16385" want "0x1p-16382"
+src/regression/fpclassify-invalid-ld80.c:53: snprintf("%La", subnormal with msb set) failed: got "0x8.000000000000001p-16385" want "0x1.0000000000000002p-16382"
+FAIL src/regression/fpclassify-invalid-ld80-static.exe [status 1]
+unexpected/unsupported option: -static
+src/regression/fpclassify-invalid-ld80.c:51: snprintf("%La", zero with msb set) failed: got "0x8p-16385" want "0x1p-16382"
+src/regression/fpclassify-invalid-ld80.c:53: snprintf("%La", subnormal with msb set) failed: got "0x8.000000000000001p-16385" want "0x1.0000000000000002p-16382"
+FAIL src/regression/fpclassify-invalid-ld80.exe [status 1]
+unexpected/unsupported option: -static
+/usr/bin/ld: src/regression/getpwnam_r-crash.o: in function `main':
+/home/jnml/src/modernc.org/builder/.exclude/modernc.org/libc/v2/internal/nsz.repo.hu/libc-test/src/regression/getpwnam_r-crash.c:11: warning: Using 'getpwnam_r' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+unexpected/unsupported option: -static
+/usr/bin/ld: src/regression/getpwnam_r-errno.o: in function `main':
+/home/jnml/src/modernc.org/builder/.exclude/modernc.org/libc/v2/internal/nsz.repo.hu/libc-test/src/regression/getpwnam_r-errno.c:14: warning: Using 'getpwnam_r' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+src/regression/malloc-brk-fail.c:31: malloc(10000) succeeded after memory is filled
+FAIL src/regression/malloc-brk-fail-static.exe [status 1]
+unexpected/unsupported option: -static
+src/regression/malloc-brk-fail.c:41: malloc(10000) failed (eventhough 64k is available to mmap): Cannot allocate memory
+FAIL src/regression/malloc-brk-fail.exe [status 1]
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+src/regression/pthread-robust-detach.o.go:488:2: undefined: "pthread_mutex_lock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:490:2: undefined: "pthread_barrier_wait" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:510:9: undefined: "pthread_barrier_init" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:517:9: undefined: "pthread_mutexattr_init" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:524:9: undefined: "pthread_mutexattr_setrobust" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:533:10: undefined: "pthread_mutexattr_setpshared" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:541:9: undefined: "pthread_mutex_init" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:548:10: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:555:10: undefined: "pthread_detach" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:564:2: undefined: "pthread_barrier_destroy" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread-robust-detach.o.go:581:10: undefined: "pthread_mutex_timedlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/regression/pthread_atfork-errno-clobber.c:27: errno != 0 failed: fork failed but errno was clobbered
+FAIL src/regression/pthread_atfork-errno-clobber-static.exe [status 1]
+unexpected/unsupported option: -static
+src/regression/pthread_atfork-errno-clobber.c:27: errno != 0 failed: fork failed but errno was clobbered
+FAIL src/regression/pthread_atfork-errno-clobber.exe [status 1]
+src/regression/pthread_atfork-errno-clobber.o.go:1050:2: undefined: "pthread_atfork" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+src/regression/pthread_cancel-sem_wait.o.go:526:2: undefined: "pthread_setcancelstate" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cancel-sem_wait.o.go:604:9: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cancel-sem_wait.o.go:611:9: undefined: "pthread_cancel" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cancel-sem_wait.o.go:620:9: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+src/regression/pthread_cond-smasher.o.go:700:3: undefined: "pthread_mutex_lock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:714:12: undefined: "pthread_cond_signal" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:741:13: undefined: "pthread_cond_timedwait" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:759:12: undefined: "pthread_mutex_unlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:799:2: undefined: "pthread_cond_init" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:811:3: undefined: "pthread_mutex_init" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:830:3: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:879:12: undefined: "pthread_cond_broadcast" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:934:12: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:964:3: undefined: "pthread_mutex_destroy" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond-smasher.o.go:971:2: undefined: "pthread_cond_destroy" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+src/regression/pthread_cond_wait-cancel_ignored.o.go:487:2: undefined: "pthread_cond_signal" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:489:2: undefined: "pthread_mutex_unlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:501:2: undefined: "pthread_mutex_lock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:509:2: undefined: "_pthread_cleanup_push" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:515:3: undefined: "pthread_cond_wait" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:518:2: undefined: "_pthread_cleanup_pop" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:538:2: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:545:2: undefined: "pthread_cancel" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:560:26: undefined: "pthread_cond_timedwait" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:570:2: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:509:2: undefined: "pthread_cleanup_push" meta (link.go:1486:print0: link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)
+src/regression/pthread_cond_wait-cancel_ignored.o.go:518:2: undefined: "pthread_cleanup_pop" meta (link.go:1486:print0: link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)
+unexpected/unsupported option: -static
+src/regression/pthread_condattr_setclock.o.go:489:9: undefined: "pthread_condattr_init" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:496:8: undefined: "pthread_condattr_setclock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:510:9: undefined: "pthread_condattr_getclock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:522:9: undefined: "pthread_cond_init" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:529:9: undefined: "pthread_mutex_init" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:536:9: undefined: "pthread_mutex_lock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:563:8: undefined: "pthread_cond_timedwait" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:570:9: undefined: "pthread_mutex_unlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:577:9: undefined: "pthread_mutex_destroy" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:584:9: undefined: "pthread_cond_destroy" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_condattr_setclock.o.go:591:9: undefined: "pthread_condattr_destroy" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+src/regression/pthread_create-oom.o.go:487:8: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+src/regression/pthread_exit-cancel.o.go:478:2: undefined: "_pthread_cleanup_push" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-cancel.o.go:482:2: undefined: "pthread_exit" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-cancel.o.go:484:2: undefined: "_pthread_cleanup_pop" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-cancel.o.go:505:9: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-cancel.o.go:512:9: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+src/regression/pthread_exit-cancel.o.go:484:2: undefined: "pthread_cleanup_pop" meta (link.go:1486:print0: link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)
+unexpected/unsupported option: -static
+src/regression/pthread_exit-dtor.o.go:891:5: undefined: "pthread_setspecific" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-dtor.o.go:962:3: undefined: "pthread_exit" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-dtor.o.go:1001:9: undefined: "pthread_key_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-dtor.o.go:1015:9: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-dtor.o.go:1022:9: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_exit-dtor.o.go:1048:13: undefined: "pthread_getspecific" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+src/regression/pthread_once-deadlock.o.go:542:9: undefined: "pthread_once" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_once-deadlock.o.go:662:9: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_once-deadlock.o.go:685:10: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+src/regression/pthread_rwlock-ebusy.o.go:472:8: undefined: "pthread_rwlock_tryrdlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:493:8: undefined: "pthread_rwlock_trywrlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:522:9: undefined: "pthread_rwlock_rdlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:529:9: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:536:9: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:543:9: undefined: "pthread_rwlock_unlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/pthread_rwlock-ebusy.o.go:550:9: undefined: "pthread_rwlock_wrlock" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+FAIL src/regression/raise-race-static.exe [signal Real-time signal 1]
+unexpected/unsupported option: -static
+FAIL src/regression/raise-race.exe [signal Real-time signal 1]
+src/regression/raise-race.o.go:977:8: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/raise-race.o.go:990:9: undefined: "pthread_kill" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/raise-race.o.go:1002:8: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+src/regression/regex-ere-backref.c:22: regexec(/(a)\1/ ~ "aa") returned 0 (Success), wanted REG_NOMATCH
+src/regression/regex-ere-backref.c:29: regexec(/(a)\1/ ~ "a1") returned 1 (No match), wanted 0
+FAIL src/regression/regex-ere-backref-static.exe [status 1]
+unexpected/unsupported option: -static
+src/regression/regex-ere-backref.c:22: regexec(/(a)\1/ ~ "aa") returned 0 (Success), wanted REG_NOMATCH
+src/regression/regex-ere-backref.c:29: regexec(/(a)\1/ ~ "a1") returned 1 (No match), wanted 0
+FAIL src/regression/regex-ere-backref.exe [status 1]
+src/regression/regex-escaped-high-byte.c:19: regcomp(\\\xfc) returned 0 (Success) wanted REG_BADPAT
+FAIL src/regression/regex-escaped-high-byte-static.exe [status 1]
+unexpected/unsupported option: -static
+src/regression/regex-escaped-high-byte.c:19: regcomp(\\\xfc) returned 0 (Success) wanted REG_BADPAT
+FAIL src/regression/regex-escaped-high-byte.exe [status 1]
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+FAIL src/regression/sem_close-unmap-static.exe [signal Segmentation fault]
+/usr/bin/ld: src/regression/sem_close-unmap.o: in function `main':
+/home/jnml/src/modernc.org/builder/.exclude/modernc.org/libc/v2/internal/nsz.repo.hu/libc-test/src/regression/sem_close-unmap.c:10: warning: the use of `mktemp' is dangerous, better use `mkstemp' or `mkdtemp'
+unexpected/unsupported option: -static
+/usr/bin/ld: src/regression/sem_close-unmap.o: in function `main':
+/home/jnml/src/modernc.org/builder/.exclude/modernc.org/libc/v2/internal/nsz.repo.hu/libc-test/src/regression/sem_close-unmap.c:10: warning: the use of `mktemp' is dangerous, better use `mkstemp' or `mkdtemp'
+unexpected/unsupported option: -static
+FAIL src/regression/setvbuf-unget-static.exe [timed out]
+unexpected/unsupported option: -static
+FAIL src/regression/setvbuf-unget.exe [timed out]
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+src/regression/tls_get_new-dtv.o.go:496:2: undefined: "pthread_barrier_wait" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/tls_get_new-dtv.o.go:523:2: undefined: "pthread_barrier_init" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/tls_get_new-dtv.o.go:532:15: undefined: "pthread_create" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
+src/regression/tls_get_new-dtv.o.go:557:15: undefined: "pthread_join" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static
+unexpected/unsupported option: -static

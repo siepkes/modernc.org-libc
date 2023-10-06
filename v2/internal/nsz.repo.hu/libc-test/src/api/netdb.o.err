@@ -1,0 +1,14 @@
+src/api/netdb.c: In function ‘f’:
+src/api/netdb.c:60:3: error: ‘NI_NUMERICSCOPE’ undeclared (first use in this function); did you mean ‘NI_NUMERICHOST’?
+   60 | C(NI_NUMERICSCOPE)
+      |   ^~~~~~~~~~~~~~~
+src/api/netdb.c:4:21: note: in definition of macro ‘C’
+    4 | #define C(n) switch(n){case n:;}
+      |                     ^
+src/api/netdb.c:60:3: note: each undeclared identifier is reported only once for each function it appears in
+   60 | C(NI_NUMERICSCOPE)
+      |   ^~~~~~~~~~~~~~~
+src/api/netdb.c:4:21: note: in definition of macro ‘C’
+    4 | #define C(n) switch(n){case n:;}
+      |                     ^
+exit status 1

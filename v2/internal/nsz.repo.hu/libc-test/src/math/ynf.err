@@ -1,0 +1,2 @@
+src/math/special/ynf.h:16: RN ynf(-1, inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
+FAIL src/math/ynf.exe [status 1]

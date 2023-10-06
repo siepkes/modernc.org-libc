@@ -1,0 +1,7 @@
+src/math/pow10f.c: In function ‘main’:
+src/math/pow10f.c:27:7: error: implicit declaration of function ‘pow10f’; did you mean ‘powf’? [-Werror=implicit-function-declaration]
+   27 |   y = pow10f(p->x);
+      |       ^~~~~~
+      |       powf
+cc1: some warnings being treated as errors
+exit status 1

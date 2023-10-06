@@ -1,0 +1,2 @@
+src/functional/pthread_cancel-points.c:141: res == PTHREAD_CANCELED failed (non-blocking pthread_join, canceled thread exit status)
+FAIL src/functional/pthread_cancel-points.exe [status 1]

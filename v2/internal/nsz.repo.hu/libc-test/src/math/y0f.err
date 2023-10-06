@@ -1,0 +1,2 @@
+X src/math/special/y0f.h:8: RN y0f(0x1.8ae5d4p-1) want -0x1.d88a5ap-4 got -0x1.d88a56p-4 ulperr 1.919 = 0x1.ffffffap+0 + -0x1.4d601ap-4
+X src/math/special/y0f.h:9: RN y0f(0x1.fa9536p+1) want -0x1.da2946p-25 got -0x1.cec7ccp-25 ulperr 372924.625 = 0x1.6c2f408a2bcp+18 + -0x1.88a2bcp-2

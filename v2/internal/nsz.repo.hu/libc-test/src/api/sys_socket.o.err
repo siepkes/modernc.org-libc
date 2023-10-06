@@ -1,0 +1,8 @@
+src/api/sys_socket.c: In function ‘f’:
+src/api/sys_socket.c:3:24: error: pointer targets in initialization of ‘int *’ from ‘size_t *’ {aka ‘unsigned int *’} differ in signedness [-Wpointer-sign]
+    3 | #define F(t,n) {t *y = &x.n;}
+      |                        ^
+src/api/sys_socket.c:25:1: note: in expansion of macro ‘F’
+   25 | F(int,msg_iovlen)
+      | ^
+exit status 1
