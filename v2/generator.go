@@ -63,7 +63,6 @@ func main() {
 		return
 	}
 
-	util.Shell("find", filepath.Join("internal", "nsz.repo.hu"), "-name", "*.go", "-delete")
 	f, err := os.Open(archivePath)
 	if err != nil {
 		fail(1, "cannot open zip file: %v\n", err)
