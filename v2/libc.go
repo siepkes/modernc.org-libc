@@ -76,4 +76,10 @@
 // [ccgo]: http://modernc.org/ccgo/v4
 package libc // import "modernc.org/libc/v2"
 
+import (
+	"modernc.org/ccgo/v4/lib"
+)
+
+var _ ccgo.Task
+
 //TODO fix abort(): ->tid
