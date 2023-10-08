@@ -1,2 +1,0 @@
-src/common/runtest.c:29: src/functional/string.exe exec failed: No such file or directory
-FAIL src/functional/string.exe [status 1]

@@ -1,2 +1,0 @@
-src/functional/tgmath.c:16: sqrt(2.0f) want 0x1.6a09e6p+0 got 0x1.6a09e667f3bcdp+0
-FAIL src/functional/tgmath.exe [status 1]

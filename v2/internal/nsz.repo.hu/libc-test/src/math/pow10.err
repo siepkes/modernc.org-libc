@@ -1,2 +1,0 @@
-src/common/runtest.c:29: src/math/pow10.exe exec failed: No such file or directory
-FAIL src/math/pow10.exe [status 1]

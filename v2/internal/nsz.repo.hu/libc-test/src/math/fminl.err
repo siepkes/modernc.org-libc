@@ -1,2 +1,0 @@
-src/math/special/fminl.h:20: RN fminl(0x0p+0,-0x0p+0) want -0x0p+0 got 0x0p+0 ulperr inf = inf + 0x0p+0
-FAIL src/math/fminl.exe [status 1]

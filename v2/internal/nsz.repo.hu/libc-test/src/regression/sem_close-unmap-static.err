@@ -1,1 +1,0 @@
-FAIL src/regression/sem_close-unmap-static.exe [signal Segmentation fault]

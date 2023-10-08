@@ -1,4 +1,0 @@
-tls_local_exec.c:7:58: unsupported alignment 64 of char (expr.go:502:expr0: expr.go:3767:primaryExpression: expr.go:4166:primaryExpressionIntConst: type.go:60:verifyTyp: type.go:65:typ0: type.go:441:isValidType1:)
-tls_local_exec.c:8:62: unsupported alignment 4096 of char (expr.go:502:expr0: expr.go:3767:primaryExpression: expr.go:4166:primaryExpressionIntConst: type.go:60:verifyTyp: type.go:65:typ0: type.go:441:isValidType1:)
-tls_local_exec.c:10:58: unsupported alignment 64 of char (expr.go:502:expr0: expr.go:3767:primaryExpression: expr.go:4166:primaryExpressionIntConst: type.go:60:verifyTyp: type.go:65:typ0: type.go:441:isValidType1:)
-tls_local_exec.c:11:62: unsupported alignment 4096 of char (expr.go:502:expr0: expr.go:3767:primaryExpression: expr.go:4166:primaryExpressionIntConst: type.go:60:verifyTyp: type.go:65:typ0: type.go:441:isValidType1:)

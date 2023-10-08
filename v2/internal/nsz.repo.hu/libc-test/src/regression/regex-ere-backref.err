@@ -1,3 +1,0 @@
-src/regression/regex-ere-backref.c:22: regexec(/(a)\1/ ~ "aa") returned 0 (Success), wanted REG_NOMATCH
-src/regression/regex-ere-backref.c:29: regexec(/(a)\1/ ~ "a1") returned 1 (No match), wanted 0
-FAIL src/regression/regex-ere-backref.exe [status 1]

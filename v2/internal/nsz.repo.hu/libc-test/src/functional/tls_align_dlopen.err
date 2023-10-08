@@ -1,3 +1,0 @@
-src/functional/tls_align_dlopen.c:17: dlopen failed
-src/functional/tls_align_dlopen.c:20: dlsym failed
-FAIL src/functional/tls_align_dlopen.exe [status 1]

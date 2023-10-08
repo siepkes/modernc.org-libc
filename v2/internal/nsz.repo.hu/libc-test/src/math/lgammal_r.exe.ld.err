@@ -1,3 +1,0 @@
-src/math/lgammal_r.o.go:949:3: undefined: "feclearexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
-src/math/lgammal_r.o.go:951:9: undefined: "lgammal_r" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
-src/math/lgammal_r.o.go:953:9: undefined: "fetestexcept" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)

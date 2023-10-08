@@ -1,6 +1,0 @@
-src/api/stdlib.c: In function ‘f’:
-src/api/stdlib.c:89:26: error: ‘setkey’ undeclared (first use in this function)
-   89 | {void(*p)(const char*) = setkey;}
-      |                          ^~~~~~
-src/api/stdlib.c:89:26: note: each undeclared identifier is reported only once for each function it appears in
-exit status 1

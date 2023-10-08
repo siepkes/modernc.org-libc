@@ -1,8 +1,0 @@
-src/api/sys_sem.c: In function ‘f’:
-src/api/sys_sem.c:3:24: error: initialization of ‘short unsigned int *’ from incompatible pointer type ‘__syscall_ulong_t *’ {aka ‘long unsigned int *’} [-Wincompatible-pointer-types]
-    3 | #define F(t,n) {t *y = &x.n;}
-      |                        ^
-src/api/sys_sem.c:21:1: note: in expansion of macro ‘F’
-   21 | F(unsigned short, sem_nsems)
-      | ^
-exit status 1

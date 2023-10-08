@@ -1,5 +1,0 @@
-X src/math/special/tgamma.h:80: RN tgamma(-0x1.59ffffffffffdp+7) want -0x1.b397f8b0241a4p-999 got -0x1.b397f8b0241a2p-999 ulperr 1.597 = 0x1.0000008p+1 + -0x1.9c2ff4p-2
-X src/math/special/tgamma.h:89: RN tgamma(-0x1.6000000000001p+7) want -0x1.ff5df5f53357ep-1020 got -0x1.ff5df5f53358p-1020 ulperr -1.980 = -0x1.0000008p+1 + 0x1.492c4p-6
-X src/math/special/tgamma.h:125: RN tgamma(-0x1.ep+2) want 0x1.d572317e6f443p-13 got 0x1.d572317e6f445p-13 ulperr 1.533 = 0x1.ffffffp+0 + -0x1.de1f7cp-2
-X src/math/special/tgamma.h:141: RN tgamma(-0x1.55p+7) want -0x1.7d2374dfcda7ap-1022 got -0x1.7d2374dfcda78p-1022 ulperr 1.778 = 0x1.0000004p+1 + -0x1.c68fa4p-3
-X src/math/special/tgamma.h:152: RN tgamma(-0x1.facae9c9e7105p+5) want 0x1.a98422d742f9fp-291 got 0x1.a98422d742f9dp-291 ulperr -1.535 = -0x1.ffffff8p+0 + 0x1.dc5df6p-2

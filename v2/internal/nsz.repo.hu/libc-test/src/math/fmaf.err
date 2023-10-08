@@ -1,5 +1,0 @@
-src/math/special/fmaf.h:34: bad fp exception: RN fmaf(inf,0x0p+0,nan)=nan, want INVALID got 0
-src/math/special/fmaf.h:35: bad fp exception: RN fmaf(0x0p+0,inf,nan)=nan, want INVALID got 0
-src/math/special/fmaf.h:36: bad fp exception: RN fmaf(-inf,0x0p+0,nan)=nan, want INVALID got 0
-src/math/special/fmaf.h:37: bad fp exception: RN fmaf(0x0p+0,-inf,nan)=nan, want INVALID got 0
-FAIL src/math/fmaf.exe [status 1]

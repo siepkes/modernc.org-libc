@@ -1,3 +1,0 @@
-src/functional/dlopen.c:18: dlopen src/functional/dlopen_dso.so failed: src/functional/dlopen_dso.so: cannot open shared object file: No such file or directory
-src/functional/dlopen.c:21: dlsym i failed: src/functional/dlopen.exe: undefined symbol: i
-FAIL src/functional/dlopen.exe [signal Segmentation fault]

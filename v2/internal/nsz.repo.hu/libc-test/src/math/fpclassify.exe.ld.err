@@ -1,3 +1,0 @@
-src/math/fpclassify.o.go:393:6: undefined: "__fpclassifyf" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:)
-src/math/fpclassify.o.go:491:6: undefined: "__fpclassify" external (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:789:link:) (ccgo.go:180:Main: exec.go:144:execed: exec.go:404:cc: ccgo.go:560:main: link.go:302:link: link.go:792:link:)
-src/math/fpclassify.o.go:491:6: undefined: "_fpclassify" meta (link.go:1491:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1486:print0: link.go:1434:print0:)

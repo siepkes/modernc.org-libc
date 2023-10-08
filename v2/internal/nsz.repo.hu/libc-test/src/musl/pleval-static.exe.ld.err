@@ -1,4 +1,0 @@
-/usr/bin/ld: src/musl/pleval.o: in function `t':
-/home/jnml/src/modernc.org/builder/.exclude/modernc.org/libc/v2/internal/nsz.repo.hu/libc-test/src/musl/pleval.c:9: undefined reference to `__pleval'
-collect2: error: ld returned 1 exit status
-exit status 1

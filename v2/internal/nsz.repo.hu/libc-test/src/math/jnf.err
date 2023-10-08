@@ -1,4 +1,0 @@
-X src/math/sanity/jnf.h:1: RN jnf(-2, -0x1.0223ap+3) want -0x1.863726p-4 got -0x1.86372ap-4, ulperr -2.009 = -0x1.ffffff6p+0 + -0x1.28885p-7
-src/math/special/jnf.h:9: RN jnf(1, -inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
-src/math/special/jnf.h:13: RN jnf(-1, inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
-FAIL src/math/jnf.exe [status 1]

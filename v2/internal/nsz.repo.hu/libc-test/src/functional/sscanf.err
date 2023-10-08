@@ -1,4 +1,0 @@
-src/functional/sscanf.c:39: sscanf("hello, world\n", "%8c%8c", a, b) failed (2 fields, expected 1)
-src/functional/sscanf.c:66: sscanf(" 0x12 0x34", "%5i%2i", &x, &y) failed (got 2 fields, expected 1)
-src/functional/sscanf.c:83: sscanf("10e", "%lf", &d) failed (got 1 fields, expected no match (0))
-FAIL src/functional/sscanf.exe [status 1]

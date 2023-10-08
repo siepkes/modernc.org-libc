@@ -1,2 +1,0 @@
-src/math/special/j1.h:4: RN j1(-inf) want 0x0p+0 got -0x0p+0 ulperr inf = inf + 0x0p+0
-FAIL src/math/j1.exe [status 1]

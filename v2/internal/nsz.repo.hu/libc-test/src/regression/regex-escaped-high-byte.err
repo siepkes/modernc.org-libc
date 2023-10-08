@@ -1,2 +1,0 @@
-src/regression/regex-escaped-high-byte.c:19: regcomp(\\\xfc) returned 0 (Success) wanted REG_BADPAT
-FAIL src/regression/regex-escaped-high-byte.exe [status 1]

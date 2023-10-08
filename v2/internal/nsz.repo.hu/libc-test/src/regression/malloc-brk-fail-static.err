@@ -1,2 +1,0 @@
-src/regression/malloc-brk-fail.c:31: malloc(10000) succeeded after memory is filled
-FAIL src/regression/malloc-brk-fail-static.exe [status 1]

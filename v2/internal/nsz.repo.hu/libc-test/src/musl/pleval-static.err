@@ -1,2 +1,0 @@
-src/common/runtest.c:29: src/musl/pleval-static.exe exec failed: No such file or directory
-FAIL src/musl/pleval-static.exe [status 1]

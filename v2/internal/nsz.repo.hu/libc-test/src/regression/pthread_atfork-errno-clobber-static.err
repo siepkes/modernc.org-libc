@@ -1,2 +1,0 @@
-src/regression/pthread_atfork-errno-clobber.c:27: errno != 0 failed: fork failed but errno was clobbered
-FAIL src/regression/pthread_atfork-errno-clobber-static.exe [status 1]

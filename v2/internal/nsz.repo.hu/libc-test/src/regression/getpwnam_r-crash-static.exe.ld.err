@@ -1,3 +1,0 @@
-/usr/bin/ld: src/regression/getpwnam_r-crash.o: in function `main':
-/home/jnml/src/modernc.org/builder/.exclude/modernc.org/libc/v2/internal/nsz.repo.hu/libc-test/src/regression/getpwnam_r-crash.c:11: warning: Using 'getpwnam_r' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
-unexpected/unsupported option: -static

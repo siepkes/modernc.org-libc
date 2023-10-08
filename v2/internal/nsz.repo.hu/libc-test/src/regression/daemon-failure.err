@@ -1,4 +1,0 @@
-src/regression/daemon-failure.c:52: daemon should have failed with 24 [EMFILE] got 9 [Bad file descriptor]
-src/regression/daemon-failure.c:54: daemon forked despite failure: ppid is 32321, pid is 32322, old pid is 32321
-src/regression/daemon-failure.c:73: child failed
-FAIL src/regression/daemon-failure.exe [status 1]

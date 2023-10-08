@@ -1,2 +1,0 @@
-src/math/special/yn.h:16: RN yn(-1, inf) want 0x0p+0 got -0x0p+0, ulperr inf = inf + 0x0p+0
-FAIL src/math/yn.exe [status 1]
