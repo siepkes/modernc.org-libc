@@ -13,6 +13,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io"
 	"os"
@@ -177,6 +178,7 @@ func main() {
 			return err
 		}
 
+		patchAllTypes(libRoot)
 		return ccgo.NewTask(goos, goarch, append(args, "-o", result, "-nostdlib", "-ignore-link-errors", "lib/libc.a"), os.Stdout, os.Stderr, nil).Main()
 	})
 
@@ -262,6 +264,36 @@ func main() {
 	util.Shell("sh", "-c", "./unconvert.sh")
 	util.MustShell(true, "go", "test", "-run", "@")
 	util.Shell("git", "status")
+}
+
+func patchAllTypes(libRoot string) {
+	const (
+		tagA = "\nstruct _IO_FILE {\n"
+		tagZ = "\n};\n"
+	)
+	b, err := os.ReadFile(filepath.Join(libRoot, "src", "internal", "stdio_impl.h"))
+	if err != nil {
+		fail(1, "%s\n", err)
+	}
+
+	s := string(b)
+	s = s[strings.Index(s, tagA):]
+	s = s[:strings.Index(s, tagZ)+len(tagZ)]
+	s = strings.ReplaceAll(s, "FILE *", "void *")
+
+	alltypes := filepath.Join(libRoot, "obj", "include", "bits", "alltypes.h")
+	if b, err = os.ReadFile(alltypes); err != nil {
+		fail(1, "%s\n", err)
+	}
+
+	const tag = "struct _IO_FILE { char __x; };"
+	x := bytes.Index(b, []byte(tag))
+	r := b[:x:x]
+	r = append(r, s...)
+	r = append(r, b[x+len(tag):]...)
+	if err := os.WriteFile(alltypes, r, 0660); err != nil {
+		fail(1, "%s\n", err)
+	}
 }
 
 // func Xaio_fsync(tls *TLS, op int32, cb uintptr) (r int32) {
@@ -470,4 +502,58 @@ func copyFile(dst, src string, canOverwrite func(fn string, fi os.FileInfo) bool
 	}()
 
 	return io.Copy(w, r)
+}
+
+// origin returns caller's short position, skipping skip frames.
+func origin(skip int) string {
+	pc, fn, fl, _ := runtime.Caller(skip)
+	f := runtime.FuncForPC(pc)
+	var fns string
+	if f != nil {
+		fns = f.Name()
+		if x := strings.LastIndex(fns, "."); x > 0 {
+			fns = fns[x+1:]
+		}
+		if strings.HasPrefix(fns, "func") {
+			num := true
+			for _, c := range fns[len("func"):] {
+				if c < '0' || c > '9' {
+					num = false
+					break
+				}
+			}
+			if num {
+				return origin(skip + 2)
+			}
+		}
+	}
+	return fmt.Sprintf("%s:%d:%s", filepath.Base(fn), fl, fns)
+}
+
+// todo prints and return caller's position and an optional message tagged with TODO. Output goes to stderr.
+func todo(s string, args ...interface{}) string {
+	switch {
+	case s == "":
+		s = fmt.Sprintf(strings.Repeat("%v ", len(args)), args...)
+	default:
+		s = fmt.Sprintf(s, args...)
+	}
+	r := fmt.Sprintf("%s\n\tTODO %s", origin(2), s)
+	// fmt.Fprintf(os.Stderr, "%s\n", r)
+	// os.Stdout.Sync()
+	return r
+}
+
+// trc prints and return caller's position and an optional message tagged with TRC. Output goes to stderr.
+func trc(s string, args ...interface{}) string {
+	switch {
+	case s == "":
+		s = fmt.Sprintf(strings.Repeat("%v ", len(args)), args...)
+	default:
+		s = fmt.Sprintf(s, args...)
+	}
+	r := fmt.Sprintf("%s: TRC %s", origin(2), s)
+	fmt.Fprintf(os.Stderr, "%s\n", r)
+	os.Stderr.Sync()
+	return r
 }

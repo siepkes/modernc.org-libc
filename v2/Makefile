@@ -18,8 +18,8 @@ build_all_targets:
 
 clean:
 	rm -f log-* cpu.test mem.test *.out
-	find internal/nsz.repo.hu/ -name \*.go -delete
-	make -C internal/nsz.repo.hu/libc-test/ cleanall
+	find testdata/nsz.repo.hu/ -name \*.go -delete
+	make -C testdata/nsz.repo.hu/libc-test/ cleanall
 	go clean
 
 check:
@@ -39,7 +39,7 @@ editor:
 	go build -o /dev/null generator*.go
 
 generate: download
-	find internal/nsz.repo.hu/ -name \*.go -delete
+	find testdata/nsz.repo.hu/ -name \*.go -delete
 	mkdir -p $(DIR) || true
 	rm -rf $(DIR)/*
 	echo -n > log-generate
@@ -55,7 +55,7 @@ generate: download
 	grep 'TRC\|TODO\|ERRORF\|FAIL' log-generate-errors || true
 
 dev: download
-	find internal/nsz.repo.hu/ -name \*.go -delete
+	find testdata/nsz.repo.hu/ -name \*.go -delete
 	mkdir -p $(DIR) || true
 	rm -rf $(DIR)/*
 	echo -n > /tmp/ccgo.log
