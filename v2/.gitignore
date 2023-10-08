@@ -1,4 +1,3 @@
 *.gz
 *.zip
 go.work
-*.o.go
