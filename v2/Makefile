@@ -18,6 +18,7 @@ build_all_targets:
 
 clean:
 	rm -f log-* cpu.test mem.test *.out
+	git clean -fd
 	find testdata/nsz.repo.hu/ -name \*.go -delete
 	make -C testdata/nsz.repo.hu/libc-test/ cleanall
 	go clean
