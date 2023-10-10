@@ -335,36 +335,7 @@ typedef struct { unsigned __attr[2]; } pthread_rwlockattr_t;
 
 
 #if defined(__NEED_struct__IO_FILE) && !defined(__DEFINED_struct__IO_FILE)
-
-struct _IO_FILE {
-	unsigned flags;
-	unsigned char *rpos, *rend;
-	int (*close)(void *);
-	unsigned char *wend, *wpos;
-	unsigned char *mustbezero_1;
-	unsigned char *wbase;
-	size_t (*read)(void *, unsigned char *, size_t);
-	size_t (*write)(void *, const unsigned char *, size_t);
-	off_t (*seek)(void *, off_t, int);
-	unsigned char *buf;
-	size_t buf_size;
-	void *prev, *next;
-	int fd;
-	int pipe_pid;
-	long lockcount;
-	int mode;
-	volatile int lock;
-	int lbf;
-	void *cookie;
-	off_t off;
-	char *getln_buf;
-	void *mustbezero_2;
-	unsigned char *shend;
-	off_t shlim, shcnt;
-	void *prev_locked, *next_locked;
-	struct __locale_struct *locale;
-};
-
+struct _IO_FILE { char __x; };
 #define __DEFINED_struct__IO_FILE
 #endif
 
