@@ -492,68 +492,106 @@ var skipFiles = map[string]struct{}{
 	"testdata/nsz.repo.hu/libc-test/src/common/runtest.exe.go": {}, // src/common/runtest.c:37: usage: /tmp/TestLibc748082357/001/main [-t timeoutsec] [-w wrapcmd] cmd [args..]
 
 	// fork
-	"testdata/nsz.repo.hu/libc-test/src/functional/ipc_msg.exe.go":        {}, // src/functional/ipc_msg.c:122: fork failed: Function not implemented
-	"testdata/nsz.repo.hu/libc-test/src/functional/ipc_sem.exe.go":        {}, // src/functional/ipc_sem.c:115: fork failed: Function not implemented
-	"testdata/nsz.repo.hu/libc-test/src/functional/ipc_shm.exe.go":        {}, // src/functional/ipc_shm.c:112: fork failed: Function not implemented
-	"testdata/nsz.repo.hu/libc-test/src/regression/daemon-failure.exe.go": {}, // src/regression/daemon-failure.c:35: fork failed: Function not implemented
-	"testdata/nsz.repo.hu/libc-test/src/regression/fflush-exit.exe.go":    {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/ipc_msg-static.exe.go":        {}, // src/functional/ipc_msg.c:122: fork failed: Function not implemented
+	"testdata/nsz.repo.hu/libc-test/src/functional/ipc_msg.exe.go":               {}, // src/functional/ipc_msg.c:122: fork failed: Function not implemented
+	"testdata/nsz.repo.hu/libc-test/src/functional/ipc_sem-static.exe.go":        {}, // src/functional/ipc_sem.c:115: fork failed: Function not implemented
+	"testdata/nsz.repo.hu/libc-test/src/functional/ipc_sem.exe.go":               {}, // src/functional/ipc_sem.c:115: fork failed: Function not implemented
+	"testdata/nsz.repo.hu/libc-test/src/functional/ipc_shm-static.exe.go":        {}, // src/functional/ipc_shm.c:112: fork failed: Function not implemented
+	"testdata/nsz.repo.hu/libc-test/src/functional/ipc_shm.exe.go":               {}, // src/functional/ipc_shm.c:112: fork failed: Function not implemented
+	"testdata/nsz.repo.hu/libc-test/src/regression/daemon-failure-static.exe.go": {}, // src/regression/daemon-failure.c:35: fork failed: Function not implemented
+	"testdata/nsz.repo.hu/libc-test/src/regression/daemon-failure.exe.go":        {}, // src/regression/daemon-failure.c:35: fork failed: Function not implemented
+	"testdata/nsz.repo.hu/libc-test/src/regression/fflush-exit-static.exe.go":    {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/fflush-exit.exe.go":           {},
 
 	// vfork
-	"testdata/nsz.repo.hu/libc-test/src/functional/vfork.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/vfork.exe.go":        {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/vfork-static.exe.go": {},
 
 	// clone
-	"testdata/nsz.repo.hu/libc-test/src/functional/popen.exe.go": {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/spawn.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/popen-static.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/popen.exe.go":        {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/spawn-static.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/spawn.exe.go":        {},
 
 	// dlopen
 	"testdata/nsz.repo.hu/libc-test/src/functional/tls_align_dlopen.exe.go": {},
 	"testdata/nsz.repo.hu/libc-test/src/functional/tls_init_dlopen.exe.go":  {},
 
 	// vmfill
-	"testdata/nsz.repo.hu/libc-test/src/regression/malloc-brk-fail.exe.go": {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/setenv-oom.exe.go":      {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/malloc-brk-fail-static.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/malloc-brk-fail.exe.go":        {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/setenv-oom-static.exe.go":      {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/setenv-oom.exe.go":             {},
 
 	// cbin fails too
 	"testdata/nsz.repo.hu/libc-test/src/functional/clocale_mbfuncs.exe.go": {},
 
 	//TODO other
-	"testdata/nsz.repo.hu/libc-test/src/regression/sigaltstack.exe.go": {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/sigreturn.exe.go":   {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/sigaltstack-static.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/sigaltstack.exe.go":        {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/sigreturn-static.exe.go":   {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/sigreturn.exe.go":          {},
 
 	//TODO miscompiles
-	"testdata/nsz.repo.hu/libc-test/src/functional/setjmp.exe.go": {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/sscanf.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/setjmp-static.exe.go":    {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/setjmp.exe.go":           {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/sscanf-static.exe.go":    {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/sscanf.exe.go":           {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/tls_align-static.exe.go": {},
 
 	//TODO asm
-	"testdata/nsz.repo.hu/libc-test/src/functional/tgmath.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/tgmath-static.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/tgmath.exe.go":        {},
 
 	//TODO fpclassify
 	"testdata/nsz.repo.hu/libc-test/src/math/fpclassify.exe.go": {},
 
 	//TODO pthread
-	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_cancel-points.exe.go":            {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_cancel.exe.go":                   {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_cond.exe.go":                     {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_mutex.exe.go":                    {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_mutex_pi.exe.go":                 {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_robust.exe.go":                   {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_tsd.exe.go":                      {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/sem_init.exe.go":                         {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/tls_init.exe.go":                         {},
-	"testdata/nsz.repo.hu/libc-test/src/functional/tls_local_exec.exe.go":                   {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread-robust-detach.exe.go":            {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_atfork-errno-clobber.exe.go":     {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_cancel-sem_wait.exe.go":          {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_cond-smasher.exe.go":             {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_cond_wait-cancel_ignored.exe.go": {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_condattr_setclock.exe.go":        {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_create-oom.exe.go":               {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_exit-cancel.exe.go":              {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_exit-dtor.exe.go":                {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_once-deadlock.exe.go":            {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_rwlock-ebusy.exe.go":             {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/raise-race.exe.go":                       {},
-	"testdata/nsz.repo.hu/libc-test/src/regression/tls_get_new-dtv.exe.go":                  {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_cancel-points-static.exe.go":            {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_cancel-points.exe.go":                   {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_cancel-static.exe.go":                   {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_cancel.exe.go":                          {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_cond-static.exe.go":                     {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_cond.exe.go":                            {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_mutex-static.exe.go":                    {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_mutex.exe.go":                           {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_mutex_pi-static.exe.go":                 {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_mutex_pi.exe.go":                        {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_robust-static.exe.go":                   {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_robust.exe.go":                          {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_tsd-static.exe.go":                      {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/pthread_tsd.exe.go":                             {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/sem_init-static.exe.go":                         {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/sem_init.exe.go":                                {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/tls_init-static.exe.go":                         {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/tls_init.exe.go":                                {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/tls_local_exec-static.exe.go":                   {},
+	"testdata/nsz.repo.hu/libc-test/src/functional/tls_local_exec.exe.go":                          {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread-robust-detach-static.exe.go":            {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread-robust-detach.exe.go":                   {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_atfork-errno-clobber-static.exe.go":     {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_atfork-errno-clobber.exe.go":            {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_cancel-sem_wait-static.exe.go":          {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_cancel-sem_wait.exe.go":                 {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_cond-smasher-static.exe.go":             {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_cond-smasher.exe.go":                    {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_cond_wait-cancel_ignored-static.exe.go": {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_cond_wait-cancel_ignored.exe.go":        {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_condattr_setclock-static.exe.go":        {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_condattr_setclock.exe.go":               {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_create-oom-static.exe.go":               {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_create-oom.exe.go":                      {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_exit-cancel-static.exe.go":              {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_exit-cancel.exe.go":                     {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_exit-dtor-static.exe.go":                {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_exit-dtor.exe.go":                       {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_once-deadlock-static.exe.go":            {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_once-deadlock.exe.go":                   {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_rwlock-ebusy-static.exe.go":             {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/pthread_rwlock-ebusy.exe.go":                    {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/raise-race-static.exe.go":                       {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/raise-race.exe.go":                              {},
+	"testdata/nsz.repo.hu/libc-test/src/regression/tls_get_new-dtv.exe.go":                         {},
 
 	//TODO fesetenv and friends
 	"testdata/nsz.repo.hu/libc-test/src/math/acos.exe.go":        {},
@@ -823,7 +861,8 @@ func TestLibc(t *testing.T) {
 		return nil
 	})
 	t.Logf("files=%v skip=%v cfail=%v buildfail=%v buildok=%v fail=%v pass=%v", file, skip, cfail, buildfail, buildok, fail, pass)
-	// all_linux_amd64_test.go:824: files=334 skip=238 cfail=14 buildfail=0 buildok=96 fail=0 pass=96
+	// all_linux_amd64_test.go:863: files=469 skip=276 cfail=31 buildfail=0 buildok=193 fail=0 pass=193
+
 }
 
 func run(t *testing.T, bin string) (out []byte, err error) {
