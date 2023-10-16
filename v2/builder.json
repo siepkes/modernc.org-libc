@@ -1,0 +1,5 @@
+{
+	"download": [
+		{"re": "linux", "files": ["https://github.com/bminor/musl/archive/refs/heads/master.zip"]}
+	]
+}
