@@ -613,6 +613,7 @@ func Xlog(t *TLS, x float64) float64              { return math.Log(x) }
 func Xlog10(t *TLS, x float64) float64            { return math.Log10(x) }
 func Xlog2(t *TLS, x float64) float64             { return math.Log2(x) }
 func Xround(t *TLS, x float64) float64            { return math.Round(x) }
+func X__builtin_round(t *TLS, x float64) float64  { return math.Round(x) }
 func Xsin(t *TLS, x float64) float64              { return math.Sin(x) }
 func Xsinf(t *TLS, x float32) float32             { return float32(math.Sin(float64(x))) }
 func Xsinh(t *TLS, x float64) float64             { return math.Sinh(x) }
@@ -918,6 +919,7 @@ func Xputc(t *TLS, c int32, fp uintptr) int32 {
 
 // int atoi(const char *nptr);
 func Xatoi(t *TLS, nptr uintptr) int32 {
+
 	_, neg, _, n, _ := strToUint64(t, nptr, 10)
 	switch {
 	case neg:
