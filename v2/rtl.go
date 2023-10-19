@@ -1038,15 +1038,19 @@ func PreIncAtomicUintptr(p *uintptr, d uintptr) uintptr { return atomic.AddUintp
 func PreIncAtomicInt32P(p uintptr, d int32) int32 {
 	return atomic.AddInt32((*int32)(unsafe.Pointer(p)), d)
 }
+
 func PreIncAtomicInt64P(p uintptr, d int64) int64 {
 	return atomic.AddInt64((*int64)(unsafe.Pointer(p)), d)
 }
+
 func PreIncAtomicUint32P(p uintptr, d uint32) uint32 {
 	return atomic.AddUint32((*uint32)(unsafe.Pointer(p)), d)
 }
+
 func PreIncAtomicUint64P(p uintptr, d uint64) uint64 {
 	return atomic.AddUint64((*uint64)(unsafe.Pointer(p)), d)
 }
+
 func PreInrAtomicUintptrP(p uintptr, d uintptr) uintptr {
 	return atomic.AddUintptr((*uintptr)(unsafe.Pointer(p)), d)
 }
