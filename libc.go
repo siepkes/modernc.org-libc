@@ -409,13 +409,6 @@ func X__builtin_object_size(t *TLS, p uintptr, typ int32) types.Size_t {
 
 var atomicLoadStore16 sync.Mutex
 
-func AtomicLoadNUint16(ptr uintptr, memorder int32) uint16 {
-	atomicLoadStore16.Lock()
-	r := *(*uint16)(unsafe.Pointer(ptr))
-	atomicLoadStore16.Unlock()
-	return r
-}
-
 func AtomicStoreNUint16(ptr uintptr, val uint16, memorder int32) {
 	atomicLoadStore16.Lock()
 	*(*uint16)(unsafe.Pointer(ptr)) = val
@@ -470,6 +463,10 @@ func Xvsprintf(t *TLS, str, format, va uintptr) int32 {
 // int vsnprintf(char *str, size_t size, const char *format, va_list ap);
 func Xvsnprintf(t *TLS, str uintptr, size types.Size_t, format, va uintptr) int32 {
 	return Xsnprintf(t, str, size, format, va)
+}
+
+func X__builtin_vsnprintf(t *TLS, str uintptr, size types.Size_t, format, va uintptr) int32 {
+	return Xvsnprintf(t, str, size, format, va)
 }
 
 // int obstack_vprintf (struct obstack *obstack, const char *template, va_list ap)
@@ -1460,6 +1457,14 @@ func AtomicLoadPUint8(addr uintptr) byte {
 
 func AtomicLoadPUint16(addr uintptr) uint16 {
 	return uint16(a_load_16(addr))
+}
+
+func AtomicLoadNUint8(ptr uintptr, memorder int32) uint8 {
+	return byte(a_load_8(ptr))
+}
+
+func AtomicLoadNUint16(ptr uintptr, memorder int32) uint16 {
+	return uint16(a_load_16(ptr))
 }
 
 func PreIncAtomicInt32P(p uintptr, d int32) int32 {
