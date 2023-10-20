@@ -31,7 +31,7 @@ download:
 
 edit:
 	@touch log
-	@if [ -f "Session.vim" ]; then novim -S & else novim -p Makefile *.go & fi
+	@if [ -f "Session.vim" ]; then novim -S & else novim -p Makefile libc.go & fi
 
 editor:
 	gofmt -l -s -w *.go 2>&1 | tee log-editor

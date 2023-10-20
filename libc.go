@@ -40,6 +40,10 @@ import (
 	"modernc.org/mathutil"
 )
 
+const (
+	ENOENT = errno.ENOENT
+)
+
 type (
 	// RawMem64 represents the biggest uint64 array the runtime can handle.
 	RawMem64 [unsafe.Sizeof(RawMem{}) / unsafe.Sizeof(uint64(0))]uint64
@@ -1441,60 +1445,4 @@ func Xisascii(t *TLS, c int32) int32 {
 
 func X__builtin_isunordered(t *TLS, a, b float64) int32 {
 	return Bool32(math.IsNaN(a) || math.IsNaN(b))
-}
-
-func AtomicLoadPInt8(addr uintptr) (val int8) {
-	return int8(a_load_8(addr))
-}
-
-func AtomicLoadPInt16(addr uintptr) (val int16) {
-	return int16(a_load_16(addr))
-}
-
-func AtomicLoadPUint8(addr uintptr) byte {
-	return byte(a_load_8(addr))
-}
-
-func AtomicLoadPUint16(addr uintptr) uint16 {
-	return uint16(a_load_16(addr))
-}
-
-func AtomicLoadNUint8(ptr uintptr, memorder int32) uint8 {
-	return byte(a_load_8(ptr))
-}
-
-func AtomicLoadNUint16(ptr uintptr, memorder int32) uint16 {
-	return uint16(a_load_16(ptr))
-}
-
-func PreIncAtomicInt32P(p uintptr, d int32) int32 {
-	return atomic.AddInt32((*int32)(unsafe.Pointer(p)), d)
-}
-
-func PreIncAtomicInt64P(p uintptr, d int64) int64 {
-	return atomic.AddInt64((*int64)(unsafe.Pointer(p)), d)
-}
-
-func PreIncAtomicUint32P(p uintptr, d uint32) uint32 {
-	return atomic.AddUint32((*uint32)(unsafe.Pointer(p)), d)
-}
-
-func PreIncAtomicUint64P(p uintptr, d uint64) uint64 {
-	return atomic.AddUint64((*uint64)(unsafe.Pointer(p)), d)
-}
-
-func PreInrAtomicUintptrP(p uintptr, d uintptr) uintptr {
-	return atomic.AddUintptr((*uintptr)(unsafe.Pointer(p)), d)
-}
-
-func X__builtin_ffs(tls *TLS, i int32) (r int32) {
-	return Xffs(tls, i)
-}
-
-func Xffs(tls *TLS, i int32) (r int32) {
-	if i == 0 {
-		return 0
-	}
-
-	return int32(mbits.TrailingZeros32(uint32(i))) + 1
 }
