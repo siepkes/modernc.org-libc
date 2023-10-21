@@ -5,10 +5,8 @@
 package libc // import "modernc.org/libc"
 
 import (
-	mbits "math/bits"
 	"os"
 	"strings"
-	"sync/atomic"
 	"unicode"
 	"unsafe"
 
@@ -497,42 +495,6 @@ func AtomicLoadPUint16(addr uintptr) uint16 {
 
 func AtomicLoadNUint8(ptr uintptr, memorder int32) uint8 {
 	return byte(a_load_8(ptr))
-}
-
-func AtomicLoadNUint16(ptr uintptr, memorder int32) uint16 {
-	return uint16(a_load_16(ptr))
-}
-
-func PreIncAtomicInt32P(p uintptr, d int32) int32 {
-	return atomic.AddInt32((*int32)(unsafe.Pointer(p)), d)
-}
-
-func PreIncAtomicInt64P(p uintptr, d int64) int64 {
-	return atomic.AddInt64((*int64)(unsafe.Pointer(p)), d)
-}
-
-func PreIncAtomicUint32P(p uintptr, d uint32) uint32 {
-	return atomic.AddUint32((*uint32)(unsafe.Pointer(p)), d)
-}
-
-func PreIncAtomicUint64P(p uintptr, d uint64) uint64 {
-	return atomic.AddUint64((*uint64)(unsafe.Pointer(p)), d)
-}
-
-func PreInrAtomicUintptrP(p uintptr, d uintptr) uintptr {
-	return atomic.AddUintptr((*uintptr)(unsafe.Pointer(p)), d)
-}
-
-func X__builtin_ffs(tls *TLS, i int32) (r int32) {
-	return Xffs(tls, i)
-}
-
-func Xffs(tls *TLS, i int32) (r int32) {
-	if i == 0 {
-		return 0
-	}
-
-	return int32(mbits.TrailingZeros32(uint32(i))) + 1
 }
 
 var _table1 = [384]int32{
