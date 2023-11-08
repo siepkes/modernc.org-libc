@@ -5,13 +5,13 @@
 package libc // import "modernc.org/libc"
 
 import (
-	"encoding/hex"
+	// "encoding/hex"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"runtime/debug"
+	// "runtime/debug"
 	"syscall"
 	"time"
 	"unsafe"
@@ -1098,9 +1098,9 @@ func Xstrerror(t *TLS, errnum int32) uintptr {
 	if __ccgo_strace {
 		trc("t=%v errnum=%v, (%v:)", t, errnum, origin(2))
 	}
-	if dmesgs {
-		dmesg("%v: %v\n%s", origin(1), errnum, debug.Stack())
-	}
+	// 	if dmesgs {
+	// 		dmesg("%v: %v\n%s", origin(1), errnum, debug.Stack())
+	// 	}
 	copy(strerrorBuf[:], fmt.Sprintf("strerror(%d)\x00", errnum))
 	return uintptr(unsafe.Pointer(&strerrorBuf[0]))
 }
@@ -1694,21 +1694,21 @@ func Xpwrite(t *TLS, fd int32, buf uintptr, count types.Size_t, offset types.Off
 		n, err = unix.Pwrite(int(fd), nil, int64(offset))
 	default:
 		n, err = unix.Pwrite(int(fd), (*RawMem)(unsafe.Pointer(buf))[:count:count], int64(offset))
-		if dmesgs {
-			dmesg("%v: fd %v, off %#x, count %#x\n%s", origin(1), fd, offset, count, hex.Dump((*RawMem)(unsafe.Pointer(buf))[:count:count]))
-		}
+		// 		if dmesgs {
+		// 			dmesg("%v: fd %v, off %#x, count %#x\n%s", origin(1), fd, offset, count, hex.Dump((*RawMem)(unsafe.Pointer(buf))[:count:count]))
+		// 		}
 	}
 	if err != nil {
-		if dmesgs {
-			dmesg("%v: %v FAIL", origin(1), err)
-		}
+		// 		if dmesgs {
+		// 			dmesg("%v: %v FAIL", origin(1), err)
+		// 		}
 		t.setErrno(err)
 		return -1
 	}
 
-	if dmesgs {
-		dmesg("%v: ok", origin(1))
-	}
+	// 	if dmesgs {
+	// 		dmesg("%v: ok", origin(1))
+	// 	}
 	return types.Ssize_t(n)
 }
 
