@@ -1,6 +1,7 @@
 {
 	"autogen": "$libs",
 	"autoupdate": "$libs",
+	"autotag": "<none>",
 	"download": [
 		{"re": "linux", "files": ["https://github.com/bminor/musl/archive/refs/heads/master.zip"]}
 	],
