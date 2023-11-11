@@ -1446,7 +1446,7 @@ func Xfscanf(t *TLS, stream, format, va uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v va=%v, (%v:)", t, va, origin(2))
 	}
-	panic(todo(""))
+	return Xvfscanf(t, stream, format, va)
 }
 
 // int fputs(const char *s, FILE *stream);

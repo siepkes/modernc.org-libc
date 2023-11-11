@@ -5,7 +5,7 @@
 package libc // import "modernc.org/libc"
 
 import (
-	"strings"
+	"io"
 	"unsafe"
 )
 
@@ -15,7 +15,7 @@ import (
 // be either of the following: input failure, meaning that input characters
 // were unavailable, or matching failure, meaning that the input was
 // inappropriate.
-func scanf(r *strings.Reader, format, args uintptr) (nvalues int32) {
+func scanf(r io.ByteScanner, format, args uintptr) (nvalues int32) {
 	// var src []byte //TODO-
 	var ok bool
 out:
@@ -75,7 +75,7 @@ out:
 	return -1 // stdio.EOF but not defined for windows
 }
 
-func scanfConversion(r *strings.Reader, format uintptr, args *uintptr) (_ uintptr, nvalues int, match bool) {
+func scanfConversion(r io.ByteScanner, format uintptr, args *uintptr) (_ uintptr, nvalues int, match bool) {
 	format++ // '%'
 
 	// Each conversion specification in format begins with either the character '%'
@@ -414,7 +414,7 @@ flags:
 	return format, nvalues, match
 }
 
-func skipReaderWhiteSpace(r *strings.Reader) error {
+func skipReaderWhiteSpace(r io.ByteScanner) error {
 	for {
 		c, err := r.ReadByte()
 		if err != nil {
