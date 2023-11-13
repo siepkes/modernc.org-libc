@@ -5803,7 +5803,7 @@ func arg_n(tls *TLS, ap va_list, n uint32) uintptr { /* vfscanf.c:44:13: */
 	return p
 }
 
-func Xvfscanf(tls *TLS, f uintptr, fmt uintptr, ap va_list) int32 { /* vfscanf.c:56:5: */
+func _Xvfscanf(tls *TLS, f uintptr, fmt uintptr, ap va_list) int32 { /* vfscanf.c:56:5: */
 	if __ccgo_strace {
 		trc("tls=%v f=%v fmt=%v ap=%v, (%v:)", tls, f, fmt, ap, origin(2))
 	}

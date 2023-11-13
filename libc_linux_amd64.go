@@ -5,6 +5,7 @@
 package libc // import "modernc.org/libc"
 
 import (
+	"io"
 	"os"
 	"strings"
 	gotime "time"
@@ -762,4 +763,30 @@ func Xclock(t *TLS) time.Clock_t {
 		trc("t=%v, (%v:)", t, origin(2))
 	}
 	return time.Clock_t(gotime.Since(startTime) * gotime.Duration(time.CLOCKS_PER_SEC) / gotime.Second)
+}
+
+type byteScanner struct {
+	t      *TLS
+	stream uintptr
+
+	last byte
+}
+
+func (s *byteScanner) ReadByte() (byte, error) {
+	c := Xfgetc(s.t, s.stream)
+	if c < 0 {
+		return 0, io.EOF
+	}
+
+	s.last = byte(c)
+	return byte(c), nil
+}
+
+func (s *byteScanner) UnreadByte() error {
+	Xungetc(s.t, int32(s.last), s.stream)
+	return nil
+}
+
+func Xvfscanf(tls *TLS, stream uintptr, format uintptr, va uintptr) int32 { /* vfscanf.c:56:5: */
+	return scanf(&byteScanner{t: tls, stream: stream}, format, va)
 }
