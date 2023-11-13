@@ -158,7 +158,7 @@ flags:
 					break dec
 				}
 
-				panic(todo("", err))
+				return 0, 0, false
 			}
 
 			if allowSign {
@@ -322,6 +322,9 @@ flags:
 		}
 
 		arg := VaUintptr(args)
+		if neg {
+			n = -n
+		}
 		switch mod {
 		case modNone:
 			*(*float32)(unsafe.Pointer(arg)) = float32(n)
