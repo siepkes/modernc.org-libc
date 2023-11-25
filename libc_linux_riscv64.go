@@ -702,7 +702,7 @@ func Xclock(t *TLS) time.Clock_t {
 
 const __NFDBITS = 64
 
-func X__fdelt_chl(tls *TLS, d int64) (r int64) {
+func X__fdelt_chk(tls *TLS, d int64) (r int64) {
 	if __ccgo_strace {
 		trc("tls=%v d=%v, (%v:)", tls, d, origin(2))
 		defer func() { trc("-> %v", r) }()

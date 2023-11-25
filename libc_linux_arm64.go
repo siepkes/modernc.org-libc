@@ -712,3 +712,14 @@ func Xclock(t *TLS) time.Clock_t {
 	}
 	return time.Clock_t(gotime.Since(startTime) * gotime.Duration(time.CLOCKS_PER_SEC) / gotime.Second)
 }
+
+const __NFDBITS = 64
+
+func X__fdelt_chk(tls *TLS, d int64) (r int64) {
+	if __ccgo_strace {
+		trc("tls=%v d=%v, (%v:)", tls, d, origin(2))
+		defer func() { trc("-> %v", r) }()
+	}
+
+	return d/__NFDBITS
+}
