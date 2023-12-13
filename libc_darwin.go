@@ -1294,12 +1294,18 @@ func Xtzset(t *TLS) {
 	//TODO
 }
 
+var strerrorBuf [100]byte
+
 // char *strerror(int errnum);
 func Xstrerror(t *TLS, errnum int32) uintptr {
 	if __ccgo_strace {
 		trc("t=%v errnum=%v, (%v:)", t, errnum, origin(2))
 	}
-	panic(todo(""))
+	// 	if dmesgs {
+	// 		dmesg("%v: %v\n%s", origin(1), errnum, debug.Stack())
+	// 	}
+	copy(strerrorBuf[:], fmt.Sprintf("strerror(%d)\x00", errnum))
+	return uintptr(unsafe.Pointer(&strerrorBuf[0]))
 }
 
 // void *dlopen(const char *filename, int flags);
