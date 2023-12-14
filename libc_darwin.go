@@ -2480,3 +2480,29 @@ func Xopen64(t *TLS, pathname uintptr, flags int32, args uintptr) int32 {
 	// }
 	return int32(n)
 }
+
+// int getrlimit(int resource, struct rlimit *rlim);
+func Xgetrlimit(t *TLS, resource int32, rlim uintptr) int32 {
+	if __ccgo_strace {
+		trc("t=%v resource=%v rlim=%v, (%v:)", t, resource, rlim, origin(2))
+	}
+	if _, _, err := unix.Syscall(unix.SYS_GETRLIMIT, uintptr(resource), uintptr(rlim), 0); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
+
+	return 0
+}
+
+// int setrlimit(int resource, const struct rlimit *rlim);
+func Xsetrlimit(t *TLS, resource int32, rlim uintptr) int32 {
+	if __ccgo_strace {
+		trc("t=%v resource=%v rlim=%v, (%v:)", t, resource, rlim, origin(2))
+	}
+	if _, _, err := unix.Syscall(unix.SYS_SETRLIMIT, uintptr(resource), uintptr(rlim), 0); err != 0 {
+		t.setErrno(err)
+		return -1
+	}
+
+	return 0
+}
