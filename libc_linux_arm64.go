@@ -515,6 +515,10 @@ func Xutime(t *TLS, filename, times uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v times=%v, (%v:)", t, times, origin(2))
 	}
+	if times == 0 {
+		return Xutimes(t, filename, 0)
+	}
+
 	if err := unix.Utime(GoString(filename), (*unix.Utimbuf)(unsafe.Pointer(times))); err != nil {
 		t.setErrno(err)
 		return -1
