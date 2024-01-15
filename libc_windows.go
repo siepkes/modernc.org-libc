@@ -5906,7 +5906,7 @@ func X__mingw_vsnprintf(t *TLS, str uintptr, size types.Size_t, format, ap uintp
 	if __ccgo_strace {
 		trc("t=%v str=%v size=%v ap=%v, (%v:)", t, str, size, ap, origin(2))
 	}
-	panic(todo(""))
+	return Xvsnprintf(t, str, size, format, ap)
 }
 
 // int putchar(int char)
