@@ -211,6 +211,9 @@ var (
 
 	userenvapi                = syscall.NewLazyDLL("userenv.dll")
 	procGetProfilesDirectoryW = userenvapi.NewProc("GetProfilesDirectoryW")
+
+	modcrt = syscall.NewLazyDLL("msvcrt.dll")
+	procAccess = modcrt.NewProc("_access")
 )
 
 var (
@@ -7368,4 +7371,25 @@ func Xisupper(tls *TLS, c int32) int32 { /* isupper.c:4:5: */
 		trc("tls=%v c=%v, (%v:)", tls, c, origin(2))
 	}
 	return Bool32(uint32(c)-uint32('A') < uint32(26))
+}
+
+// int access(const char *pathname, int mode);
+func Xaccess(t *TLS, pathname uintptr, mode int32) int32 {
+	if __ccgo_strace {
+		trc("t=%v pathname=%v mode=%v, (%v:)", t, pathname, mode, origin(2))
+	}
+	r0, _, err := syscall.SyscallN(procAccess.Addr(), uintptr(pathname), uintptr(mode))
+	if err != 0 {
+		t.setErrno(err)
+	}
+	return int32(r0)
+}
+
+// int _vscprintf(const char *format, va_list argptr);
+func X_vscprintf(t *TLS, format uintptr, argptr uintptr) int32 {
+	if __ccgo_strace {
+		trc("t=%v format=%v argptr=%v, (%v:)", t, format, argptr, origin(2))
+	}
+
+	return int32(len(printf(format, argptr)))
 }
