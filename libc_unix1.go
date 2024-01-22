@@ -8,7 +8,7 @@ package libc // import "modernc.org/libc"
 
 import (
 	"golang.org/x/sys/unix"
-	
+
 	"modernc.org/libc/sys/types"
 )
 

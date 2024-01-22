@@ -6,11 +6,11 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"path/filepath"
-	"os"
-	"strings"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 	"runtime"
+	"strings"
 
 	"modernc.org/cc/v3"
 	ccgo "modernc.org/ccgo/v3/lib"
@@ -45,7 +45,6 @@ func (w *echoWriter) Write(b []byte) (int, error) {
 	os.Stdout.Write(b)
 	return w.w.Write(b)
 }
-
 
 func runcc(args ...string) ([]byte, error) {
 	args = append([]string{"ccgo"}, args...)
@@ -130,7 +129,6 @@ func libcHeaders(paths []string) error {
 		return nil
 	})
 }
-
 
 func origin(skip int) string {
 	pc, fn, fl, _ := runtime.Caller(skip)

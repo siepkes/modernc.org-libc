@@ -55,33 +55,33 @@ type (
 
 type file uintptr
 
-func (f file) fd() int32        {
+func (f file) fd() int32 {
 	panic(todo(""))
-	// return (*stdio.FILE)(unsafe.Pointer(f)).F_fileno 
+	// return (*stdio.FILE)(unsafe.Pointer(f)).F_fileno
 }
-func (f file) setFd(fd int32)   { 
+func (f file) setFd(fd int32) {
 	panic(todo(""))
-	// (*stdio.FILE)(unsafe.Pointer(f)).F_fileno = fd 
+	// (*stdio.FILE)(unsafe.Pointer(f)).F_fileno = fd
 }
-func (f file) err() bool        { 
+func (f file) err() bool {
 	panic(todo(""))
-	// return (*stdio.FILE)(unsafe.Pointer(f)).F_flags2&stdio.X_IO_ERR_SEEN != 0 
+	// return (*stdio.FILE)(unsafe.Pointer(f)).F_flags2&stdio.X_IO_ERR_SEEN != 0
 }
-func (f file) setErr()          {
+func (f file) setErr() {
 	panic(todo(""))
-	// (*stdio.FILE)(unsafe.Pointer(f)).F_flags2 |= stdio.X_IO_ERR_SEEN 
+	// (*stdio.FILE)(unsafe.Pointer(f)).F_flags2 |= stdio.X_IO_ERR_SEEN
 }
-func (f file) flags() int32     {
+func (f file) flags() int32 {
 	panic(todo(""))
-//		return (*stdio.FILE)(unsafe.Pointer(f)).F_flags 
+	// return (*stdio.FILE)(unsafe.Pointer(f)).F_flags
 }
-func (f file) orFlags(n int32)  {
+func (f file) orFlags(n int32) {
 	panic(todo(""))
-//		(*stdio.FILE)(unsafe.Pointer(f)).F_flags |= n 
+	// (*stdio.FILE)(unsafe.Pointer(f)).F_flags |= n
 }
-func (f file) xorFlags(n int32) { 
+func (f file) xorFlags(n int32) {
 	panic(todo(""))
-//		(*stdio.FILE)(unsafe.Pointer(f)).F_flags ^= n 
+	// (*stdio.FILE)(unsafe.Pointer(f)).F_flags ^= n
 }
 
 func (f file) close(t *TLS) int32 {
@@ -120,8 +120,8 @@ func Xfprintf(t *TLS, stream, format, args uintptr) int32 {
 		trc("t=%v args=%v, (%v:)", t, args, origin(2))
 	}
 	panic(todo(""))
-//		n, _ := fwrite((*stdio.FILE)(unsafe.Pointer(stream)).F_fileno, printf(format, args))
-//		return int32(n)
+	// n, _ := fwrite((*stdio.FILE)(unsafe.Pointer(stream)).F_fileno, printf(format, args))
+	// return int32(n)
 }
 
 // int usleep(useconds_t usec);
@@ -280,16 +280,23 @@ func Xlseek(t *TLS, fd int32, offset types.Off_t, whence int32) types.Off_t {
 
 func whenceStr(whence int32) string {
 	panic(todo(""))
-//		switch whence {
-//		case fcntl.SEEK_CUR:
-//			return "SEEK_CUR"
-//		case fcntl.SEEK_END:
-//			return "SEEK_END"
-//		case fcntl.SEEK_SET:
-//			return "SEEK_SET"
-//		default:
-//			return fmt.Sprintf("whence(%d)", whence)
-//		}
+	// switch whence {
+	// case fcntl.SEEK_CUR:
+	//
+	//	return "SEEK_CUR"
+	//
+	// case fcntl.SEEK_END:
+	//
+	//	return "SEEK_END"
+	//
+	// case fcntl.SEEK_SET:
+	//
+	//	return "SEEK_SET"
+	//
+	// default:
+	//
+	//		return fmt.Sprintf("whence(%d)", whence)
+	//	}
 }
 
 var fsyncStatbuf stat.Stat
@@ -917,42 +924,42 @@ func Xfileno(t *TLS, stream uintptr) int32 {
 		trc("t=%v stream=%v, (%v:)", t, stream, origin(2))
 	}
 	panic(todo(""))
-//		if stream == 0 {
-//			t.setErrno(errno.EBADF)
-//			return -1
-//		}
-//	
-//		if fd := (*stdio.FILE)(unsafe.Pointer(stream)).F_fileno; fd >= 0 {
-//			return fd
-//		}
-//	
-//		t.setErrno(errno.EBADF)
-//		return -1
+	//	if stream == 0 {
+	//		t.setErrno(errno.EBADF)
+	//		return -1
+	//	}
+	//
+	//	if fd := (*stdio.FILE)(unsafe.Pointer(stream)).F_fileno; fd >= 0 {
+	//		return fd
+	//	}
+	//
+	//	t.setErrno(errno.EBADF)
+	//	return -1
 }
 
 func newFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Errno) (r *fts.FTSENT) {
 	panic(todo(""))
-//		var statp uintptr
-//		if stat != nil {
-//			statp = Xmalloc(t, types.Size_t(unsafe.Sizeof(unix.Stat_t{})))
-//			if statp == 0 {
-//				panic("OOM")
-//			}
-//	
-//			*(*unix.Stat_t)(unsafe.Pointer(statp)) = *stat
-//		}
-//		csp, errx := CString(path)
-//		if errx != nil {
-//			panic("OOM")
-//		}
-//	
-//		return &fts.FTSENT{
-//			Ffts_info:    uint16(info),
-//			Ffts_path:    csp,
-//			Ffts_pathlen: uint16(len(path)),
-//			Ffts_statp:   statp,
-//			Ffts_errno:   int32(err),
-//		}
+	//	var statp uintptr
+	//	if stat != nil {
+	//		statp = Xmalloc(t, types.Size_t(unsafe.Sizeof(unix.Stat_t{})))
+	//		if statp == 0 {
+	//			panic("OOM")
+	//		}
+	//
+	//		*(*unix.Stat_t)(unsafe.Pointer(statp)) = *stat
+	//	}
+	//	csp, errx := CString(path)
+	//	if errx != nil {
+	//		panic("OOM")
+	//	}
+	//
+	//	return &fts.FTSENT{
+	//		Ffts_info:    uint16(info),
+	//		Ffts_path:    csp,
+	//		Ffts_pathlen: uint16(len(path)),
+	//		Ffts_statp:   statp,
+	//		Ffts_errno:   int32(err),
+	//	}
 }
 
 func newCFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Errno) uintptr {
@@ -1358,21 +1365,21 @@ func Xabort(t *TLS) {
 		trc("t=%v, (%v:)", t, origin(2))
 	}
 	panic(todo(""))
-//		// if dmesgs {
-//		// 	dmesg("%v:\n%s", origin(1), debug.Stack())
-//		// }
-//		p := Xmalloc(t, types.Size_t(unsafe.Sizeof(signal.Sigaction{})))
-//		if p == 0 {
-//			panic("OOM")
-//		}
-//	
-//		*(*signal.Sigaction)(unsafe.Pointer(p)) = signal.Sigaction{
-//			F__sigaction_handler: struct{ Fsa_handler signal.X__sighandler_t }{Fsa_handler: signal.SIG_DFL},
-//		}
-//		Xsigaction(t, signal.SIGABRT, p, 0)
-//		Xfree(t, p)
-//		unix.Kill(unix.Getpid(), syscall.Signal(signal.SIGABRT))
-//		panic(todo("unrechable"))
+	//	// if dmesgs {
+	//	// 	dmesg("%v:\n%s", origin(1), debug.Stack())
+	//	// }
+	//	p := Xmalloc(t, types.Size_t(unsafe.Sizeof(signal.Sigaction{})))
+	//	if p == 0 {
+	//		panic("OOM")
+	//	}
+	//
+	//	*(*signal.Sigaction)(unsafe.Pointer(p)) = signal.Sigaction{
+	//		F__sigaction_handler: struct{ Fsa_handler signal.X__sighandler_t }{Fsa_handler: signal.SIG_DFL},
+	//	}
+	//	Xsigaction(t, signal.SIGABRT, p, 0)
+	//	Xfree(t, p)
+	//	unix.Kill(unix.Getpid(), syscall.Signal(signal.SIGABRT))
+	//	panic(todo("unrechable"))
 }
 
 // int fflush(FILE *stream);
@@ -1831,22 +1838,22 @@ func Xfgetc(t *TLS, stream uintptr) int32 {
 		trc("t=%v stream=%v, (%v:)", t, stream, origin(2))
 	}
 	panic(todo(""))
-//		ungetcMu.Lock()
-//		c, ok := ungetc[stream]
-//		delete(ungetc, stream)
-//		ungetcMu.Unlock()
-//		if ok {
-//			return int32(c)
-//		}
-//	
-//		fd := int((*stdio.FILE)(unsafe.Pointer(stream)).F_fileno)
-//		var buf [1]byte
-//		if n, _ := unix.Read(fd, buf[:]); n != 0 {
-//			return int32(buf[0])
-//		}
-//	
-//		file(stream).orFlags(m_F_EOF)
-//		return stdio.EOF
+	//	ungetcMu.Lock()
+	//	c, ok := ungetc[stream]
+	//	delete(ungetc, stream)
+	//	ungetcMu.Unlock()
+	//	if ok {
+	//		return int32(c)
+	//	}
+	//
+	//	fd := int((*stdio.FILE)(unsafe.Pointer(stream)).F_fileno)
+	//	var buf [1]byte
+	//	if n, _ := unix.Read(fd, buf[:]); n != 0 {
+	//		return int32(buf[0])
+	//	}
+	//
+	//	file(stream).orFlags(m_F_EOF)
+	//	return stdio.EOF
 }
 
 // void uuid_copy(uuid_t dst, uuid_t src);
@@ -2068,10 +2075,10 @@ func Xfeof(t *TLS, f uintptr) (r int32) {
 		defer func() { trc("-> %v", r) }()
 	}
 	panic(todo(""))
-//		X__lockfile(t, f)
-//		r = BoolInt32(!!((*stdio.FILE)(unsafe.Pointer(f)).F_flags&Int32FromInt32(m_F_EOF) != 0))
-//		X__unlockfile(t, f)
-//		return r
+	// X__lockfile(t, f)
+	// r = BoolInt32(!!((*stdio.FILE)(unsafe.Pointer(f)).F_flags&Int32FromInt32(m_F_EOF) != 0))
+	// X__unlockfile(t, f)
+	// return r
 }
 
 type byteScanner struct {

@@ -16,11 +16,11 @@ func Xrecvmsg(t *TLS, sockfd int32, msg uintptr, flags int32) types.Ssize_t {
 		trc("t=%v sockfd=%v msg=%v flags=%v, (%v:)", t, sockfd, msg, flags, origin(2))
 	}
 	panic(todo(""))
-//		n, _, err := unix.Syscall(unix.SYS_RECVMSG, uintptr(sockfd), msg, uintptr(flags))
-//		if err != 0 {
-//			t.setErrno(err)
-//			return -1
-//		}
-//	
-//	return types.Ssize_t(n)
+	//	n, _, err := unix.Syscall(unix.SYS_RECVMSG, uintptr(sockfd), msg, uintptr(flags))
+	//	if err != 0 {
+	//		t.setErrno(err)
+	//		return -1
+	//	}
+	//
+	// return types.Ssize_t(n)
 }

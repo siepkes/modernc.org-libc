@@ -630,18 +630,18 @@ func Xopendir(tls *TLS, name uintptr) uintptr { /* opendir.c:8:5: */
 		trc("tls=%v name=%v, (%v:)", tls, name, origin(2))
 	}
 	panic(todo(""))
-//		var fd int32
-//		var dir uintptr
-//	
-//		if AssignInt32(&fd, Xopen(tls, name, 00|0200000|02000000, 0)) < 0 {
-//			return uintptr(0)
-//		}
-//		if !(int32(AssignUintptr(&dir, Xcalloc(tls, uint64(1), uint64(unsafe.Sizeof(DIR{}))))) != 0) {
-//			X__syscall1(tls, int64(3), int64(fd))
-//			return uintptr(0)
-//		}
-//		(*DIR)(unsafe.Pointer(dir)).fd = fd
-//		return dir
+	//	var fd int32
+	//	var dir uintptr
+	//
+	//	if AssignInt32(&fd, Xopen(tls, name, 00|0200000|02000000, 0)) < 0 {
+	//		return uintptr(0)
+	//	}
+	//	if !(int32(AssignUintptr(&dir, Xcalloc(tls, uint64(1), uint64(unsafe.Sizeof(DIR{}))))) != 0) {
+	//		X__syscall1(tls, int64(3), int64(fd))
+	//		return uintptr(0)
+	//	}
+	//	(*DIR)(unsafe.Pointer(dir)).fd = fd
+	//	return dir
 }
 
 type max_align_t = struct {
@@ -656,23 +656,23 @@ func Xreaddir(tls *TLS, dir uintptr) uintptr { /* readdir.c:10:15: */
 		trc("tls=%v dir=%v, (%v:)", tls, dir, origin(2))
 	}
 	panic(todo(""))
-//		var de uintptr
-//	
-//		if (*DIR)(unsafe.Pointer(dir)).buf_pos >= (*DIR)(unsafe.Pointer(dir)).buf_end {
-//			var len int32 = int32(X__syscall3(tls, int64(217), int64((*DIR)(unsafe.Pointer(dir)).fd), int64(dir+24), int64(unsafe.Sizeof([2048]int8{}))))
-//			if len <= 0 {
-//				if len < 0 && len != -2 {
-//					*(*int32)(unsafe.Pointer(X___errno_location(tls))) = -len
-//				}
-//				return uintptr(0)
-//			}
-//			(*DIR)(unsafe.Pointer(dir)).buf_end = len
-//			(*DIR)(unsafe.Pointer(dir)).buf_pos = 0
-//		}
-//		de = dir + 24 + uintptr((*DIR)(unsafe.Pointer(dir)).buf_pos)
-//		*(*int32)(unsafe.Pointer(dir + 12)) += int32((*dirent)(unsafe.Pointer(de)).d_reclen)
-//		(*DIR)(unsafe.Pointer(dir)).tell = (*dirent)(unsafe.Pointer(de)).d_off
-//		return de
+	//	var de uintptr
+	//
+	//	if (*DIR)(unsafe.Pointer(dir)).buf_pos >= (*DIR)(unsafe.Pointer(dir)).buf_end {
+	//		var len int32 = int32(X__syscall3(tls, int64(217), int64((*DIR)(unsafe.Pointer(dir)).fd), int64(dir+24), int64(unsafe.Sizeof([2048]int8{}))))
+	//		if len <= 0 {
+	//			if len < 0 && len != -2 {
+	//				*(*int32)(unsafe.Pointer(X___errno_location(tls))) = -len
+	//			}
+	//			return uintptr(0)
+	//		}
+	//		(*DIR)(unsafe.Pointer(dir)).buf_end = len
+	//		(*DIR)(unsafe.Pointer(dir)).buf_pos = 0
+	//	}
+	//	de = dir + 24 + uintptr((*DIR)(unsafe.Pointer(dir)).buf_pos)
+	//	*(*int32)(unsafe.Pointer(dir + 12)) += int32((*dirent)(unsafe.Pointer(de)).d_reclen)
+	//	(*DIR)(unsafe.Pointer(dir)).tell = (*dirent)(unsafe.Pointer(de)).d_off
+	//	return de
 }
 
 type uintptr_t = uint64 /* alltypes.h:55:24 */
@@ -2476,22 +2476,25 @@ func __pthread_self(tls *TLS) uintptr { /* pthread_arch.h:1:30: */
 }
 
 func __wake(tls *TLS, addr uintptr, cnt int32, priv int32) { /* pthread_impl.h:155:20: */
-panic(todo(""))
-//		if priv != 0 {
-//			priv = 128
-//		}
-//		if cnt < 0 {
-//			cnt = 0x7fffffff
-//		}
-//		_ = Bool32(X__syscall3(tls, int64(202), int64(addr), int64(1|priv), int64(cnt)) != int64(-38) || X__syscall3(tls, int64(202), int64(addr), int64(1), int64(cnt)) != 0)
+	panic(todo(""))
+	//	if priv != 0 {
+	//		priv = 128
+	//	}
+	//
+	//	if cnt < 0 {
+	//		cnt = 0x7fffffff
+	//	}
+	//
+	// _ = Bool32(X__syscall3(tls, int64(202), int64(addr), int64(1|priv), int64(cnt)) != int64(-38) || X__syscall3(tls, int64(202), int64(addr), int64(1), int64(cnt)) != 0)
 }
 
 func __futexwait(tls *TLS, addr uintptr, val int32, priv int32) { /* pthread_impl.h:162:20: */
-panic(todo(""))
-//		if priv != 0 {
-//			priv = 128
-//		}
-//		_ = Bool32(X__syscall4(tls, int64(202), int64(addr), int64(0|priv), int64(val), int64(0)) != int64(-38) || X__syscall4(tls, int64(202), int64(addr), int64(0), int64(val), int64(0)) != 0)
+	panic(todo(""))
+	//	if priv != 0 {
+	//		priv = 128
+	//	}
+	//
+	// _ = Bool32(X__syscall4(tls, int64(202), int64(addr), int64(0|priv), int64(val), int64(0)) != int64(-38) || X__syscall4(tls, int64(202), int64(addr), int64(0), int64(val), int64(0)) != 0)
 }
 
 var X__fsmu8 = [51]uint32_t{
