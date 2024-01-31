@@ -2382,26 +2382,26 @@ func Xrintf(tls *TLS, x float32) (r float32) {
 	return y
 }
 
-func X__builtin_lrintf(tls *TLS, x float32) (r int64) {
+func X__builtin_lrintf(tls *TLS, x float32) (r long) {
 	return Xlrintf(tls, x)
 }
 
-func Xlrintf(tls *TLS, x float32) (r int64) {
+func Xlrintf(tls *TLS, x float32) (r long) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
-	return int64(Xrintf(tls, x))
+	return long(Xrintf(tls, x))
 }
 
-func X__builtin_lrint(tls *TLS, x float64) (r int64) {
+func X__builtin_lrint(tls *TLS, x float64) (r long) {
 	return Xlrint(tls, x)
 }
 
-func Xlrint(tls *TLS, x float64) (r int64) {
+func Xlrint(tls *TLS, x float64) (r long) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
-	return int64(Xrint(tls, x))
+	return long(Xrint(tls, x))
 }
