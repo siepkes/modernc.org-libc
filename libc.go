@@ -2386,7 +2386,6 @@ func X__builtin_lrintf(tls *TLS, x float32) (r int64) {
 	return Xlrintf(tls, x)
 }
 
-
 func Xlrintf(tls *TLS, x float32) (r int64) {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
