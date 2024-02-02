@@ -10,7 +10,10 @@ import (
 	"path/filepath"
 	"runtime"
 	"testing"
+	"time"
 	"unsafe"
+
+	ctime "modernc.org/libc/time"
 )
 
 func TestXfmod(t *testing.T) {
@@ -340,4 +343,14 @@ func TestProbes(t *testing.T) {
 		}
 	}
 	t.Logf("====\n%s\n----", c)
+}
+
+var _time ctime.Time_t
+
+func TestGmtime(t *testing.T) {
+	tls := NewTLS()
+	_time = ctime.Time_t(time.Now().Unix())
+	p := Xgmtime(tls, uintptr(unsafe.Pointer(&_time)))
+	t.Logf("%v %+v", _time, (*ctime.Tm)(unsafe.Pointer(p)))
+	tls.Close()
 }
