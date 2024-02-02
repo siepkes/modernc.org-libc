@@ -7423,3 +7423,7 @@ func X_stat64i32(t *TLS, path uintptr, buffer uintptr) int32 {
 	}
 	return int32(r0)
 }
+
+func AtomicLoadNUint8(ptr uintptr, memorder int32) uint8 {
+	return byte(a_load_8(ptr))
+}
