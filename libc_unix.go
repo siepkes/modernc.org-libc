@@ -24,8 +24,8 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/ncruces/go-strftime"
 	guuid "github.com/google/uuid"
+	"github.com/ncruces/go-strftime"
 	"golang.org/x/sys/unix"
 	"modernc.org/libc/errno"
 	"modernc.org/libc/grp"
@@ -1254,7 +1254,6 @@ func Xgmtime(tls *TLS, t uintptr) (r uintptr) { // /tmp/libc/musl-master/src/tim
 	}
 	return Xgmtime_r(tls, t, uintptr(unsafe.Pointer(&_tm)))
 }
-
 
 var _days_in_month = [12]int8{
 	0:  int8(31),

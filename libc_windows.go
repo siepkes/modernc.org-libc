@@ -216,6 +216,9 @@ var (
 	modcrt        = syscall.NewLazyDLL("msvcrt.dll")
 	procAccess    = modcrt.NewProc("_access")
 	procStat64i32 = modcrt.NewProc("_stat64i32")
+	procGmtime    = modcrt.NewProc("gmtime")
+	procStrftime  = modcrt.NewProc("strftime")
+	procStrtod  = modcrt.NewProc("strtod")
 )
 
 var (
@@ -5702,10 +5705,6 @@ func X_ftime(t *TLS, timeptr uintptr) {
 	tPtr.Ftimezone = int16(offset)
 }
 
-func Xgmtime(t *TLS, _ ...interface{}) uintptr {
-	panic(todo(""))
-}
-
 func XDdeInitializeW(t *TLS, _ ...interface{}) uint32 {
 	panic(todo(""))
 }
@@ -7064,13 +7063,6 @@ func Xsscanf(t *TLS, str, format, va uintptr) int32 {
 	return r
 }
 
-func Xstrtod(tls *TLS, s uintptr, p uintptr) float64 { /* strtod.c:22:8: */
-	if __ccgo_strace {
-		trc("tls=%v s=%v p=%v, (%v:)", tls, s, p, origin(2))
-	}
-	panic(todo(""))
-}
-
 func Xrint(tls *TLS, x float64) float64 {
 	if __ccgo_strace {
 		trc("tls=%v x=%v, (%v:)", tls, x, origin(2))
@@ -7426,4 +7418,48 @@ func X_stat64i32(t *TLS, path uintptr, buffer uintptr) int32 {
 
 func AtomicLoadNUint8(ptr uintptr, memorder int32) uint8 {
 	return byte(a_load_8(ptr))
+}
+
+// struct tm *gmtime( const time_t *sourceTime );
+func Xgmtime(t *TLS, sourceTime uintptr) uintptr {
+	if __ccgo_strace {
+		trc("t=%v sourceTime=%v buffer=%v, (%v:)", t, sourceTime, origin(2))
+	}
+	r0, _, err := syscall.SyscallN(procGmtime.Addr(), uintptr(sourceTime))
+	if err != 0 {
+		t.setErrno(err)
+	}
+	return uintptr(r0)
+}
+
+// size_t strftime(
+//    char *strDest,
+//    size_t maxsize,
+//    const char *format,
+//    const struct tm *timeptr
+// );
+func Xstrftime(t *TLS, strDest uintptr, maxsize size_t, format uintptr, timeptr uintptr) size_t {
+	if __ccgo_strace {
+		trc("t=%v strDest=%v, maxsize=%v, format=%v timeptr=%v, (%v:)", t, strDest, maxsize, format, timeptr, origin(2))
+	}
+	r0, _, err := syscall.SyscallN(procStrftime.Addr(), uintptr(strDest), uintptr(maxsize), uintptr(format), uintptr(timeptr))
+	if err != 0 {
+		t.setErrno(err)
+	}
+	return size_t(r0)
+}
+
+func X__mingw_strtod(t *TLS, s uintptr, p uintptr) float64 {
+	return Xstrtod(t, s, p)
+}
+
+func Xstrtod(t *TLS, s uintptr, p uintptr) float64 {
+	if __ccgo_strace {
+		trc("tls=%v s=%v p=%v, (%v:)", t, s, p, origin(2))
+	}
+	r0, _, err := syscall.SyscallN(procStrtod.Addr(), uintptr(s), uintptr(p))
+	if err != 0 {
+		t.setErrno(err)
+	}
+	return math.Float64frombits(uint64(r0))
 }
