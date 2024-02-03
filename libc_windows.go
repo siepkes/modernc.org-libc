@@ -21,6 +21,7 @@ import (
 	"unicode/utf16"
 	"unsafe"
 
+	"github.com/ncruces/go-strftime"
 	"modernc.org/libc/errno"
 	"modernc.org/libc/fcntl"
 	"modernc.org/libc/limits"
@@ -7445,15 +7446,35 @@ func Xgmtime(t *TLS, sourceTime uintptr) uintptr {
 //	const struct tm *timeptr
 //
 // );
-func Xstrftime(t *TLS, strDest uintptr, maxsize size_t, format uintptr, timeptr uintptr) size_t {
+func Xstrftime(tls *TLS, s uintptr, n size_t, f uintptr, tm uintptr) (r size_t) {
 	if __ccgo_strace {
-		trc("t=%v strDest=%v, maxsize=%v, format=%v timeptr=%v, (%v:)", t, strDest, maxsize, format, timeptr, origin(2))
+		trc("tls=%v s=%v n=%v f=%v tm=%v, (%v:)", tls, s, n, f, tm, origin(2))
+		defer func() { trc("-> %v", r) }()
 	}
-	r0, _, err := syscall.SyscallN(procStrftime.Addr(), uintptr(strDest), uintptr(maxsize), uintptr(format), uintptr(timeptr))
-	if err != 0 {
-		t.setErrno(err)
+	tt := gotime.Date(
+		int((*time.Tm)(unsafe.Pointer(tm)).Ftm_year+1900),
+		gotime.Month((*time.Tm)(unsafe.Pointer(tm)).Ftm_mon+1),
+		int((*time.Tm)(unsafe.Pointer(tm)).Ftm_mday),
+		int((*time.Tm)(unsafe.Pointer(tm)).Ftm_hour),
+		int((*time.Tm)(unsafe.Pointer(tm)).Ftm_min),
+		int((*time.Tm)(unsafe.Pointer(tm)).Ftm_sec),
+		0,
+		gotime.UTC,
+	)
+	fmt := GoString(f)
+	var result string
+	if fmt != "" {
+		result = strftime.Format(fmt, tt)
 	}
-	return size_t(r0)
+	switch r = size_t(len(result)); {
+	case r > n:
+		r = 0
+	default:
+		copy((*RawMem)(unsafe.Pointer(s))[:r:r], result)
+		*(*byte)(unsafe.Pointer(s + uintptr(r))) = 0
+	}
+	return r
+
 }
 
 func X__mingw_strtod(t *TLS, s uintptr, p uintptr) float64 {
