@@ -218,7 +218,7 @@ var (
 	procStat64i32 = modcrt.NewProc("_stat64i32")
 	procGmtime    = modcrt.NewProc("gmtime")
 	procStrftime  = modcrt.NewProc("strftime")
-	procStrtod  = modcrt.NewProc("strtod")
+	procStrtod    = modcrt.NewProc("strtod")
 )
 
 var (
@@ -7433,10 +7433,12 @@ func Xgmtime(t *TLS, sourceTime uintptr) uintptr {
 }
 
 // size_t strftime(
-//    char *strDest,
-//    size_t maxsize,
-//    const char *format,
-//    const struct tm *timeptr
+//
+//	char *strDest,
+//	size_t maxsize,
+//	const char *format,
+//	const struct tm *timeptr
+//
 // );
 func Xstrftime(t *TLS, strDest uintptr, maxsize size_t, format uintptr, timeptr uintptr) size_t {
 	if __ccgo_strace {
