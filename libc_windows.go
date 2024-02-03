@@ -215,8 +215,9 @@ var (
 
 	modcrt        = syscall.NewLazyDLL("msvcrt.dll")
 	procAccess    = modcrt.NewProc("_access")
-	procStat64i32 = modcrt.NewProc("_stat64i32")
 	procGmtime    = modcrt.NewProc("gmtime")
+	procGmtime64  = modcrt.NewProc("gmtime64")
+	procStat64i32 = modcrt.NewProc("_stat64i32")
 	procStrftime  = modcrt.NewProc("strftime")
 	procStrtod    = modcrt.NewProc("strtod")
 )
@@ -7094,7 +7095,11 @@ func X_gmtime64(t *TLS, sourceTime uintptr) uintptr {
 	if __ccgo_strace {
 		trc("t=%v sourceTime=%v, (%v:)", t, sourceTime, origin(2))
 	}
-	panic(todo(""))
+	r0, _, err := syscall.SyscallN(procGmtime64.Addr(), uintptr(sourceTime))
+	if err != 0 {
+		t.setErrno(err)
+	}
+	return uintptr(r0)
 }
 
 // __time64_t _mktime64(struct tm *timeptr);
@@ -7423,7 +7428,7 @@ func AtomicLoadNUint8(ptr uintptr, memorder int32) uint8 {
 // struct tm *gmtime( const time_t *sourceTime );
 func Xgmtime(t *TLS, sourceTime uintptr) uintptr {
 	if __ccgo_strace {
-		trc("t=%v sourceTime=%v buffer=%v, (%v:)", t, sourceTime, origin(2))
+		trc("t=%v sourceTime=%v, (%v:)", t, sourceTime, origin(2))
 	}
 	r0, _, err := syscall.SyscallN(procGmtime.Addr(), uintptr(sourceTime))
 	if err != 0 {
