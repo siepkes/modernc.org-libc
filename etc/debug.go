@@ -80,6 +80,7 @@ var (
 )
 
 func main() {
+	fmt.Printf("sizeof time_t=%v\n", C.sizeof_time_t)
 	tls := libc.NewTLS()
 
 	defer tls.Close()
