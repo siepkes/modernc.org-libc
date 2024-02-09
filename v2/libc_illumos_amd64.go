@@ -22,8 +22,6 @@ import (
 )
 
 const (
-	ENOENT = m_ENOENT
-
 	heapAlign = 16
 	heapGuard = 16
 )

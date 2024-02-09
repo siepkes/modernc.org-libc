@@ -22,8 +22,6 @@ import (
 )
 
 const (
-	ENOENT = m_ENOENT
-
 	heapAlign = 16
 	heapGuard = 16
 )
@@ -469,7 +467,7 @@ func _a_barrier(tls *TLS) {
 
 func ___syscall0(tls *TLS, n long) long {
 	switch n {
-	case m_SYS_sched_yield:
+	case SYS_sched_yield:
 		runtime.Gosched()
 		return 0
 	default:
@@ -1191,7 +1189,7 @@ func ___set_thread_area(tls *TLS, p uintptr) int32 {
 }
 
 func _fork(tls *TLS) int32 {
-	tls.setErrno(m_ENOSYS)
+	tls.setErrno(ENOSYS)
 	return -1
 }
 

@@ -30,7 +30,7 @@ func Xmalloc(tls *TLS, n Tsize_t) (r uintptr) {
 		defer func() { trc("-> %v", r) }()
 	}
 	if n > math.MaxInt {
-		tls.setErrno(m_ENOMEM)
+		tls.setErrno(ENOMEM)
 		return 0
 	}
 
@@ -46,7 +46,7 @@ func Xmalloc(tls *TLS, n Tsize_t) (r uintptr) {
 	var err error
 	if r, err = allocator.UintptrMalloc(int(n)); err != nil {
 		r = 0
-		tls.setErrno(m_ENOMEM)
+		tls.setErrno(ENOMEM)
 	}
 	return r
 }
@@ -58,7 +58,7 @@ func Xcalloc(tls *TLS, m Tsize_t, n Tsize_t) (r uintptr) {
 	}
 	hi, rq := bits.Mul(uint(m), uint(n))
 	if hi != 0 || rq > math.MaxInt {
-		tls.setErrno(m_ENOMEM)
+		tls.setErrno(ENOMEM)
 		return 0
 	}
 
@@ -73,7 +73,7 @@ func Xcalloc(tls *TLS, m Tsize_t, n Tsize_t) (r uintptr) {
 	var err error
 	if r, err = allocator.UintptrCalloc(int(rq)); err != nil {
 		r = 0
-		tls.setErrno(m_ENOMEM)
+		tls.setErrno(ENOMEM)
 	}
 	return r
 }
@@ -90,7 +90,7 @@ func Xrealloc(tls *TLS, p uintptr, n Tsize_t) (r uintptr) {
 	var err error
 	if r, err = allocator.UintptrRealloc(p, int(n)); err != nil {
 		r = 0
-		tls.setErrno(m_ENOMEM)
+		tls.setErrno(ENOMEM)
 	}
 	return r
 }

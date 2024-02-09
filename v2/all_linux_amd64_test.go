@@ -804,6 +804,7 @@ func TestLibc(t *testing.T) {
 			goos, goarch,
 			[]string{
 				os.Args[0],
+				"--libc", "modernc.org/libc/v2",
 				"--prefix-field=F",
 				"-absolute-paths",
 				"-extended-errors",
