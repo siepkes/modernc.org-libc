@@ -558,6 +558,11 @@ typedef struct {
 
 
 
+typedef Elf32_Word Elf32_Relr;
+typedef Elf64_Xword Elf64_Relr;
+
+
+
 #define ELF32_R_SYM(val)		((val) >> 8)
 #define ELF32_R_TYPE(val)		((val) & 0xff)
 #define ELF32_R_INFO(sym, type)		(((sym) << 8) + ((type) & 0xff))
@@ -698,6 +703,8 @@ typedef struct {
 #define NT_MIPS_DSP	0x800
 #define NT_MIPS_FP_MODE	0x801
 #define NT_MIPS_MSA	0x802
+#define NT_RISCV_CSR	0x900
+#define NT_RISCV_VECTOR	0x901
 #define NT_VERSION	1
 
 
@@ -3249,6 +3256,7 @@ enum
 #define R_RISCV_TLS_DTPREL64    9
 #define R_RISCV_TLS_TPREL32     10
 #define R_RISCV_TLS_TPREL64     11
+#define R_RISCV_TLSDESC         12
 
 #define R_RISCV_BRANCH          16
 #define R_RISCV_JAL             17
@@ -3275,16 +3283,11 @@ enum
 #define R_RISCV_SUB16           38
 #define R_RISCV_SUB32           39
 #define R_RISCV_SUB64           40
-#define R_RISCV_GNU_VTINHERIT   41
-#define R_RISCV_GNU_VTENTRY     42
+#define R_RISCV_GOT32_PCREL     41
 #define R_RISCV_ALIGN           43
 #define R_RISCV_RVC_BRANCH      44
 #define R_RISCV_RVC_JUMP        45
 #define R_RISCV_RVC_LUI         46
-#define R_RISCV_GPREL_I         47
-#define R_RISCV_GPREL_S         48
-#define R_RISCV_TPREL_I         49
-#define R_RISCV_TPREL_S         50
 #define R_RISCV_RELAX           51
 #define R_RISCV_SUB6            52
 #define R_RISCV_SET6            53
@@ -3292,6 +3295,14 @@ enum
 #define R_RISCV_SET16           55
 #define R_RISCV_SET32           56
 #define R_RISCV_32_PCREL        57
+#define R_RISCV_IRELATIVE       58
+#define R_RISCV_PLT32           59
+#define R_RISCV_SET_ULEB128     60
+#define R_RISCV_SUB_ULEB128     61
+#define R_RISCV_TLSDESC_HI20    62
+#define R_RISCV_TLSDESC_LOAD_LO12 63
+#define R_RISCV_TLSDESC_ADD_LO12  64
+#define R_RISCV_TLSDESC_CALL    65
 
 #ifdef __cplusplus
 }
