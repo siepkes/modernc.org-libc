@@ -413,3 +413,7 @@ func X__builtin_alloca(tls *TLS, size Tsize_t) uintptr {
 func X__builtin_isprint(tls *TLS, c int32) (r int32) {
 	return Xisprint(tls, c)
 }
+
+func X__builtin_isblank(tls *TLS, c int32) (r int32) {
+	return Xisblank(tls, c)
+}
