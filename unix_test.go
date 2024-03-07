@@ -31,7 +31,7 @@ func TestIssue29(t *testing.T) {
 
 	defer f.Close()
 
-	d := Xmmap(nil, 0, 4096, unix.PROT_READ|unix.PROT_WRITE, unix.MAP_SHARED, int32(uintptr(f.Fd())), 0)
+	d := Xmmap(nil, 0, 4096, unix.PROT_READ|unix.PROT_WRITE, unix.MAP_SHARED, int32(f.Fd()), 0)
 	if d == 0 {
 		t.Fatal("mmap failed")
 	}
