@@ -2,6 +2,8 @@ module modernc.org/libc
 
 go 1.20
 
+retract v1.43.0
+
 require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/google/uuid v1.3.0

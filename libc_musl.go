@@ -304,7 +304,7 @@ func (tls *TLS) String() string {
 //		tls.Alloc(22)
 //		tls.Free(11)
 //	tls.Free(22)
-func (tls *TLS) Alloc(n Tsize_t) (r uintptr) {
+func (tls *TLS) Alloc(n0 int) (r uintptr) {
 	// shrink	stats									speedtest1
 	// -----------------------------------------------------------------------------------------------
 	//    0		total  2,544, nallocs 107,553,070, nmallocs 25, nreallocs 107,553,045	10.984s
@@ -323,6 +323,7 @@ func (tls *TLS) Alloc(n Tsize_t) (r uintptr) {
 	//  512		total 33,336, nallocs 107,553,070, nmallocs 25, nreallocs          88	 8.667s
 	// none		total 33,336, nallocs 107,553,070, nmallocs 25, nreallocs          88	 8.408s
 	const shrinkSegment = 32
+	n := Tsize_t(n0)
 	if tls.sp < len(tls.stack) {
 		p := tls.stack[tls.sp].p
 		sz := tls.stack[tls.sp].sz
