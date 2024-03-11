@@ -147,13 +147,13 @@ enum {
 #define DTP_OFFSET 0
 #endif
 
-#ifdef TLS_ABOVE_TP
-#define TP_ADJ(p) ((char *)(p) + sizeof(struct pthread) + TP_OFFSET)
-#define __pthread_self() ((pthread_t)(__get_tp() - sizeof(struct __pthread) - TP_OFFSET))
-#else
+// #ifdef TLS_ABOVE_TP
+// #define TP_ADJ(p) ((char *)(p) + sizeof(struct pthread) + TP_OFFSET)
+// #define __pthread_self() ((pthread_t)(__get_tp() - sizeof(struct __pthread) - TP_OFFSET))
+// #else
 #define TP_ADJ(p) (p)
 #define __pthread_self() ((pthread_t)__get_tp())
-#endif
+// #endif
 
 #ifndef tls_mod_off_t
 #define tls_mod_off_t size_t
