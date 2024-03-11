@@ -202,7 +202,7 @@ func main() {
 		return nil
 	})
 	util.MustCopyDir(true, libRoot, filepath.Join("internal", "overlay", "musl"), nil)
-	util.MustCopyDir(true, libRoot, filepath.Join("internal", "overlay", goos, goarch, "musl"), nil)
+	util.CopyDir(libRoot, filepath.Join("internal", "overlay", goos, goarch, "musl"), nil)
 	util.MustInDir(true, makeRoot, func() (err error) {
 		args := []string{
 			os.Args[0],
