@@ -169,7 +169,6 @@ func main() {
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "signal", "siglongjmp.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "signal", "signal.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "signal", "sigpause.c"))
-	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "signal", "sigprocmask.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "signal", "sigrelse.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "signal", "sigset.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "stdio", "__lockfile.c"))
@@ -260,6 +259,7 @@ func main() {
 	util.MustShell(true, nil, "sed", "-i", `s/\<_free\>/Xfree/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<_malloc\>/Xmalloc/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<_pthread_setcancelstate\>/Xpthread_setcancelstate/g`, fn)
+	util.MustShell(true, nil, "sed", "-i", `s/\<_pthread_sigmask\>/Xpthread_sigmask/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<_realloc\>/Xrealloc/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<x_\([a-zA-Z0-9_][a-zA-Z0-9_]\+\)/X\1/g`, fn)
 

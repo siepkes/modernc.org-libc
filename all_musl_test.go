@@ -297,14 +297,6 @@ func TestReallocArray(t *testing.T) {
 	}
 }
 
-func mustCString(s string) (r uintptr) {
-	n := len(s)
-	r = mustMalloc(Tsize_t(n + 1))
-	copy(unsafe.Slice((*byte)(unsafe.Pointer(r)), n), s)
-	*(*byte)(unsafe.Pointer(r + uintptr(n))) = 0
-	return r
-}
-
 var testSnprintfBuf [3]byte
 
 func TestSnprintf(t *testing.T) {

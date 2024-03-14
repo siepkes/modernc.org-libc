@@ -191,3 +191,11 @@ func Xvfscanf(tls *TLS, f uintptr, fmt uintptr, ap Tva_list) (r int32) {
 func Xvsscanf(tls *TLS, s uintptr, fmt uintptr, ap Tva_list) (r int32) {
 	return X__isoc99_sscanf(tls, s, fmt, ap)
 }
+
+func Xgetopt(tls *TLS, argc int32, argv uintptr, optstring uintptr) (r int32) {
+	return X__posix_getopt(tls, argc, argv, optstring)
+}
+
+func X__fpurge(tls *TLS, f uintptr) (r int32) {
+	return Xfpurge(tls, f)
+}

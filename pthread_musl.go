@@ -489,6 +489,12 @@ func Xpthread_equal(tls *TLS, t, u uintptr) int32 {
 	return Bool32(t == u)
 }
 
+// int pthread_sigmask(int how, const sigset_t *restrict set, sigset_t *restrict old)
+func Xpthread_sigmask(tls *TLS, now int32, set, old uintptr) int32 {
+	// ignored
+	return 0
+}
+
 // 202402251838      all_test.go:589: files=36 buildFails=30 execFails=2 pass=4
 // 202402262246      all_test.go:589: files=36 buildFails=26 execFails=2 pass=8
 // 202403041858 all_musl_test.go:640: files=36 buildFails=22 execFails=4 pass=10

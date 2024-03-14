@@ -117,6 +117,16 @@ var (
 	coverPCs [1]uintptr //TODO not concurrent safe
 )
 
+func init() {
+	nm, err := os.Executable()
+	if err != nil {
+		return
+	}
+
+	Xprogram_invocation_name = mustCString(nm)
+	Xprogram_invocation_short_name = mustCString(filepath.Base(nm))
+}
+
 // RawMem64 represents the biggest uint64 array the runtime can handle.
 type RawMem64 [unsafe.Sizeof(RawMem{}) / unsafe.Sizeof(uint64(0))]uint64
 
@@ -162,6 +172,14 @@ func mustAllocStrings(a []string) (r uintptr) {
 		pBytes += uintptr(len(v)) + 1
 	}
 	return pPtrs
+}
+
+func mustCString(s string) (r uintptr) {
+	n := len(s)
+	r = mustMalloc(Tsize_t(n + 1))
+	copy(unsafe.Slice((*byte)(unsafe.Pointer(r)), n), s)
+	*(*byte)(unsafe.Pointer(r + uintptr(n))) = 0
+	return r
 }
 
 // CString returns a pointer to a zero-terminated version of s. The caller is
@@ -957,3 +975,8 @@ func Xuuid_unparse(t *TLS, uu, out uintptr) {
 }
 
 var Xzero_struct_address Taddress
+
+// int getpagesize(void);
+func Xgetpagesize(t *TLS) int32 {
+	return int32(unix.Getpagesize())
+}
