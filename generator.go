@@ -217,6 +217,7 @@ func main() {
 			"--prefix-tagged-union=T",
 			"--prefix-typename=T",
 			"--prefix-undefined=_",
+			"-emit-func-aliases",
 			"-eval-all-macros",
 			"-extended-errors",
 			"-ignore-asm-errors",
@@ -252,16 +253,21 @@ func main() {
 	util.MustShell(true, nil, "sed", "-i", `s/\<___libc_free\>/Xfree/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<___libc_malloc\>/Xmalloc/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<___syscall\([0-6]\)\>/X__syscall\1/g`, fn)
-	util.MustShell(true, nil, "sed", "-i", `s/\<__pthread_cleanup_pop\>/X_pthread_cleanup_pop/g`, fn)
-	util.MustShell(true, nil, "sed", "-i", `s/\<__pthread_cleanup_push\>/X_pthread_cleanup_push/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<_abort\>/Xabort/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<_calloc\>/Xcalloc/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<_free\>/Xfree/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<_malloc\>/Xmalloc/g`, fn)
-	util.MustShell(true, nil, "sed", "-i", `s/\<_pthread_setcancelstate\>/Xpthread_setcancelstate/g`, fn)
-	util.MustShell(true, nil, "sed", "-i", `s/\<_pthread_sigmask\>/Xpthread_sigmask/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<_realloc\>/Xrealloc/g`, fn)
 	util.MustShell(true, nil, "sed", "-i", `s/\<x_\([a-zA-Z0-9_][a-zA-Z0-9_]\+\)/X\1/g`, fn)
+
+	util.MustShell(true, nil, "sed", "-i", `s/\<X__daylight\>/Xdaylight/g`, fn)
+	util.MustShell(true, nil, "sed", "-i", `s/\<X__environ\>/Xenviron/g`, fn)
+	util.MustShell(true, nil, "sed", "-i", `s/\<X__optreset\>/Xoptreset/g`, fn)
+	util.MustShell(true, nil, "sed", "-i", `s/\<X__progname\>/Xprogram_invocation_short_name/g`, fn)
+	util.MustShell(true, nil, "sed", "-i", `s/\<X__progname_full\>/Xprogram_invocation_name/g`, fn)
+	util.MustShell(true, nil, "sed", "-i", `s/\<X__signgam\>/Xsigngam/g`, fn)
+	util.MustShell(true, nil, "sed", "-i", `s/\<X__timezone\>/Xtimezone/g`, fn)
+	util.MustShell(true, nil, "sed", "-i", `s/\<X__tzname\>/Xtzname/g`, fn)
 
 	m, err := filepath.Glob(fmt.Sprintf("*_%s_%s.go", runtime.GOOS, runtime.GOARCH))
 	if err != nil {

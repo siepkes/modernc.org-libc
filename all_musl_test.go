@@ -1214,14 +1214,16 @@ func TestLibc(t *testing.T) {
 		"files=%v buildFails=%v skip=%v execFails=%v pass=%v",
 		p.files.Load(), p.buildFails.Load(), p.skip.Load(), p.execFails.Load(), p.pass.Load(),
 	)
-	//                   all_test.go:554: files=476 fails=339                             ok=137
-	//                   all_test.go:588: files=476 buildFails=283         execFails=33 pass=160
-	// 202402251734      all_test.go:589: files=476 buildFails=281         execFails=27 pass=168
-	// 202204251952      all_test.go:589: files=476 buildFails=279         execFails=29 pass=168
-	// 202402261543      all_test.go:589: files=476 buildFails=273         execFails=31 pass=172
-	// 202402261622      all_test.go:589: files=476 buildFails=269         execFails=35 pass=172
-	// 202402271156      all_test.go:589: files=476 buildFails=269         execFails=31 pass=176
-	// 202403041850 all_musl_test.go:640: files=476 buildFails=256         execFails=34 pass=186
-	// 202403042209 all_musl_test.go:640: files=476 buildFails=244         execFails=35 pass=197
-	// 202403051424 all_musl_test.go:650: files=476 buildFails=244 skip=16 execFails=19 pass=197
+	//                   all_test.go:554:  files=476 fails=339                             ok=137
+	//                   all_test.go:588:  files=476 buildFails=283          execFails=33 pass=160
+	// 202402251734      all_test.go:589:  files=476 buildFails=281          execFails=27 pass=168
+	// 202204251952      all_test.go:589:  files=476 buildFails=279          execFails=29 pass=168
+	// 202402261543      all_test.go:589:  files=476 buildFails=273          execFails=31 pass=172
+	// 202402261622      all_test.go:589:  files=476 buildFails=269          execFails=35 pass=172
+	// 202402271156      all_test.go:589:  files=476 buildFails=269          execFails=31 pass=176
+	// 202403041850 all_musl_test.go:640:  files=476 buildFails=256          execFails=34 pass=186
+	// 202403042209 all_musl_test.go:640:  files=476 buildFails=244          execFails=35 pass=197
+	// 202403051424 all_musl_test.go:650:  files=476 buildFails=244 skip=16  execFails=19 pass=197
+	// 202403151750 all_musl_test.go:1213: files=476 buildFails=  0 skip=273 execFails= 0 pass=203
+
 }

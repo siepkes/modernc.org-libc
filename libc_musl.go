@@ -434,7 +434,7 @@ func (tls *TLS) Longjmp(jb uintptr, val int32) {
 
 func Xexit(tls *TLS, code int32) {
 	//TODO atexit finalizers
-	X__stdio_exit_needed(tls)
+	X__stdio_exit(tls)
 	for _, v := range atExit {
 		v()
 	}
@@ -444,7 +444,7 @@ func Xexit(tls *TLS, code int32) {
 var abort Tsigaction
 
 func Xabort(tls *TLS) {
-	Xsigaction(tls, SIGABRT, uintptr(unsafe.Pointer(&abort)), 0)
+	X__libc_sigaction(tls, SIGABRT, uintptr(unsafe.Pointer(&abort)), 0)
 	unix.Kill(unix.Getpid(), syscall.Signal(SIGABRT))
 	panic(todo("unrechable"))
 }
@@ -551,7 +551,7 @@ func ___randname(tls *TLS, template uintptr) (r1 uintptr) {
 	var i int32
 	var r uint64
 	var _ /* ts at bp+0 */ Ttimespec
-	Xclock_gettime(tls, CLOCK_REALTIME, bp)
+	X__clock_gettime(tls, CLOCK_REALTIME, bp)
 	goto _2
 _2:
 	r = uint64((*(*Ttimespec)(unsafe.Pointer(bp))).Ftv_sec+(*(*Ttimespec)(unsafe.Pointer(bp))).Ftv_nsec) + uint64(tls.ID)*uint64(65537)
@@ -928,11 +928,6 @@ func Xfts_read(t *TLS, ftsp uintptr) uintptr {
 
 // FILE *popen(const char *command, const char *type);
 func Xpopen(t *TLS, command, type1 uintptr) uintptr {
-	panic(todo(""))
-}
-
-// int strerror_r(int errnum, char *buf, size_t buflen);
-func Xstrerror_r(t *TLS, errnum int32, buf uintptr, buflen Tsize_t) int32 {
 	panic(todo(""))
 }
 
