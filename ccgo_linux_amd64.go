@@ -134967,6 +134967,9 @@ func X__fpurge(tls *TLS, f uintptr) (r int32) {
 	}
 	var v1, v2, v3 uintptr
 	_, _, _ = v1, v2, v3
+	if !(f != 0) { // libbsd fpurge test fails w/o this.
+		return int32(1)
+	}
 	v2 = UintptrFromInt32(0)
 	(*TFILE)(unsafe.Pointer(f)).Fwend = v2
 	v1 = v2
