@@ -177,13 +177,10 @@ func main() {
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "time", "timer_create.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "unistd", "setegid.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "unistd", "seteuid.c"))
-	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "unistd", "setgid.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "unistd", "setregid.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "unistd", "setresgid.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "unistd", "setresuid.c"))
 	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "unistd", "setreuid.c"))
-	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "unistd", "setuid.c"))
-	util.Shell(nil, "rm", filepath.Join(libRoot, "src", "unistd", "setxid.c"))
 
 	util.Shell(nil, "mkdir", filepath.Join(libRoot, "src", "malloc", "mallocng"))
 
