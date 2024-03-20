@@ -122273,7 +122273,7 @@ func Xns_initparse(tls *TLS, msg uintptr, msglen int32, handle uintptr) (r1 int3
 	(*Tns_msg)(unsafe.Pointer(handle)).F_flags = uint16(Xns_get16(tls, msg-uintptr(2)))
 	i = 0
 	for {
-		if !(i < _ns_s_max) {
+		if !(i < int32(_ns_s_max)) {
 			break
 		}
 		msg += uintptr(2)
@@ -122284,7 +122284,7 @@ func Xns_initparse(tls *TLS, msg uintptr, msglen int32, handle uintptr) (r1 int3
 	}
 	i = 0
 	for {
-		if !(i < _ns_s_max) {
+		if !(i < int32(_ns_s_max)) {
 			break
 		}
 		if *(*Tuint16_t)(unsafe.Pointer(handle + 20 + uintptr(i)*2)) != 0 {
@@ -122304,7 +122304,7 @@ func Xns_initparse(tls *TLS, msg uintptr, msglen int32, handle uintptr) (r1 int3
 	if msg != (*Tns_msg)(unsafe.Pointer(handle)).F_eom {
 		goto bad
 	}
-	(*Tns_msg)(unsafe.Pointer(handle)).F_sect = _ns_s_max
+	(*Tns_msg)(unsafe.Pointer(handle)).F_sect = int32(_ns_s_max)
 	(*Tns_msg)(unsafe.Pointer(handle)).F_rrnum = -int32(1)
 	(*Tns_msg)(unsafe.Pointer(handle)).F_msg_ptr = UintptrFromInt32(0)
 	return 0
@@ -122336,7 +122336,7 @@ func Xns_skiprr(tls *TLS, ptr uintptr, eom uintptr, section Tns_sect, count int3
 			goto bad
 		}
 		p += uintptr(r + Int32FromInt32(2)*Int32FromInt32(NS_INT16SZ))
-		if section != _ns_s_qd {
+		if section != int32(_ns_s_qd) {
 			if int64(Int32FromInt32(NS_INT32SZ)+Int32FromInt32(NS_INT16SZ)) > int64(eom)-int64(p) {
 				goto bad
 			}
@@ -122363,7 +122363,7 @@ func Xns_parserr(tls *TLS, handle uintptr, section Tns_sect, rrnum int32, rr uin
 	var r int32
 	var p1, p2, p3, p4 uintptr
 	_, _, _, _, _ = r, p1, p2, p3, p4
-	if section < 0 || section >= _ns_s_max {
+	if section < 0 || section >= int32(_ns_s_max) {
 		goto bad
 	}
 	if section != (*Tns_msg)(unsafe.Pointer(handle)).F_sect {
@@ -122403,7 +122403,7 @@ func Xns_parserr(tls *TLS, handle uintptr, section Tns_sect, rrnum int32, rr uin
 	p2 = handle + 72
 	*(*uintptr)(unsafe.Pointer(p2)) += uintptr(2)
 	(*Tns_rr)(unsafe.Pointer(rr)).Frr_class = uint16(Xns_get16(tls, *(*uintptr)(unsafe.Pointer(p2))-uintptr(2)))
-	if section != _ns_s_qd {
+	if section != int32(_ns_s_qd) {
 		if int64(Int32FromInt32(NS_INT32SZ)+Int32FromInt32(NS_INT16SZ)) > int64((*Tns_msg)(unsafe.Pointer(handle)).F_eom)-int64((*Tns_msg)(unsafe.Pointer(handle)).F_msg_ptr) {
 			goto size
 		}
@@ -122426,7 +122426,7 @@ func Xns_parserr(tls *TLS, handle uintptr, section Tns_sect, rrnum int32, rr uin
 	(*Tns_msg)(unsafe.Pointer(handle)).F_rrnum++
 	if (*Tns_msg)(unsafe.Pointer(handle)).F_rrnum > int32(*(*Tuint16_t)(unsafe.Pointer(handle + 20 + uintptr(section)*2))) {
 		(*Tns_msg)(unsafe.Pointer(handle)).F_sect = section + int32(1)
-		if (*Tns_msg)(unsafe.Pointer(handle)).F_sect == _ns_s_max {
+		if (*Tns_msg)(unsafe.Pointer(handle)).F_sect == int32(_ns_s_max) {
 			(*Tns_msg)(unsafe.Pointer(handle)).F_rrnum = -int32(1)
 			(*Tns_msg)(unsafe.Pointer(handle)).F_msg_ptr = UintptrFromInt32(0)
 		} else {
@@ -127934,7 +127934,7 @@ func _tre_ast_new_literal(tls *TLS, mem Ttre_mem_t, code_min int32, code_max int
 	var lit, node uintptr
 	_, _ = lit, node
 	lit = X__tre_mem_alloc_impl(tls, mem, 0, UintptrFromInt32(0), int32(1), uint64(40))
-	node = _tre_ast_new_node(tls, mem, _LITERAL, lit)
+	node = _tre_ast_new_node(tls, mem, int32(_LITERAL), lit)
 	if !(node != 0) {
 		return uintptr(0)
 	}
@@ -127948,7 +127948,7 @@ func _tre_ast_new_iter(tls *TLS, mem Ttre_mem_t, arg uintptr, min int32, max int
 	var iter, node uintptr
 	_, _ = iter, node
 	iter = X__tre_mem_alloc_impl(tls, mem, 0, UintptrFromInt32(0), int32(1), uint64(24))
-	node = _tre_ast_new_node(tls, mem, _ITERATION, iter)
+	node = _tre_ast_new_node(tls, mem, int32(_ITERATION), iter)
 	if !(node != 0) {
 		return uintptr(0)
 	}
@@ -127967,7 +127967,7 @@ func _tre_ast_new_union(tls *TLS, mem Ttre_mem_t, left uintptr, right uintptr) (
 		return right
 	}
 	un = X__tre_mem_alloc_impl(tls, mem, 0, UintptrFromInt32(0), int32(1), uint64(16))
-	node = _tre_ast_new_node(tls, mem, _UNION, un)
+	node = _tre_ast_new_node(tls, mem, int32(_UNION), un)
 	if !(node != 0) || !(right != 0) {
 		return uintptr(0)
 	}
@@ -127984,7 +127984,7 @@ func _tre_ast_new_catenation(tls *TLS, mem Ttre_mem_t, left uintptr, right uintp
 		return right
 	}
 	cat = X__tre_mem_alloc_impl(tls, mem, 0, UintptrFromInt32(0), int32(1), uint64(16))
-	node = _tre_ast_new_node(tls, mem, _CATENATION, cat)
+	node = _tre_ast_new_node(tls, mem, int32(_CATENATION), cat)
 	if !(node != 0) {
 		return uintptr(0)
 	}
@@ -128541,7 +128541,7 @@ func _parse_bracket(tls *TLS, ctx uintptr, s uintptr) (r Treg_errcode_t) {
 		}
 		(*Ttre_literal_t)(unsafe.Pointer(lit)).Fposition = (*Ttre_parse_ctx_t)(unsafe.Pointer(ctx)).Fposition
 		(*Ttre_literal_t)(unsafe.Pointer(lit)).Fneg_classes = nc
-		n = _tre_ast_new_node(tls, (*Ttre_parse_ctx_t)(unsafe.Pointer(ctx)).Fmem, _LITERAL, lit)
+		n = _tre_ast_new_node(tls, (*Ttre_parse_ctx_t)(unsafe.Pointer(ctx)).Fmem, int32(_LITERAL), lit)
 		node = _tre_ast_new_union(tls, (*Ttre_parse_ctx_t)(unsafe.Pointer(ctx)).Fmem, node, n)
 		if !(node != 0) {
 			err = int32(REG_ESPACE)
@@ -129091,7 +129091,7 @@ func _tre_add_tag_left(tls *TLS, mem Ttre_mem_t, node uintptr, tag_id int32) (r 
 	(*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_catenation_t)(unsafe.Pointer(c)).Fright)).Fnum_tags = 0
 	(*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_catenation_t)(unsafe.Pointer(c)).Fright)).Fnum_submatches = 0
 	(*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj = c
-	(*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 = _CATENATION
+	(*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 = int32(_CATENATION)
 	return REG_OK
 }
 
@@ -129124,7 +129124,7 @@ func _tre_add_tag_right(tls *TLS, mem Ttre_mem_t, node uintptr, tag_id int32) (r
 	(*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_catenation_t)(unsafe.Pointer(c)).Fleft)).Fnum_tags = 0
 	(*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_catenation_t)(unsafe.Pointer(c)).Fleft)).Fnum_submatches = 0
 	(*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj = c
-	(*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 = _CATENATION
+	(*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 = int32(_CATENATION)
 	return REG_OK
 }
 
@@ -129192,7 +129192,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 	next_tag = int32(1) /* Stack of submatches the current submatch is
 	   contained in. */
 	minimal_tag = -int32(1)
-	direction = _TRE_TAG_MINIMIZE
+	direction = int32(_TRE_TAG_MINIMIZE)
 	if !(first_pass != 0) {
 		(*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fend_tag = 0
 		*(*int32)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Fminimal_tags)) = -int32(1)
@@ -129227,26 +129227,26 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 		}
 	}
 	status = _tre_stack_push_voidptr(tls, stack, node)
-	status = _tre_stack_push_int(tls, stack, _ADDTAGS_RECURSE)
+	status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_RECURSE))
 	for _tre_stack_num_objects(tls, stack) > bottom {
 		if status != REG_OK {
 			break
 		}
 		symbol = _tre_stack_pop_int(tls, stack)
 		switch symbol {
-		case _ADDTAGS_SET_SUBMATCH_END:
+		case int32(_ADDTAGS_SET_SUBMATCH_END):
 			goto _2
-		case _ADDTAGS_RECURSE:
+		case int32(_ADDTAGS_RECURSE):
 			goto _3
-		case _ADDTAGS_AFTER_ITERATION:
+		case int32(_ADDTAGS_AFTER_ITERATION):
 			goto _4
-		case _ADDTAGS_AFTER_CAT_LEFT:
+		case int32(_ADDTAGS_AFTER_CAT_LEFT):
 			goto _5
-		case _ADDTAGS_AFTER_CAT_RIGHT:
+		case int32(_ADDTAGS_AFTER_CAT_RIGHT):
 			goto _6
-		case _ADDTAGS_AFTER_UNION_LEFT:
+		case int32(_ADDTAGS_AFTER_UNION_LEFT):
 			goto _7
-		case _ADDTAGS_AFTER_UNION_RIGHT:
+		case int32(_ADDTAGS_AFTER_UNION_RIGHT):
 			goto _8
 		default:
 			goto _9
@@ -129331,13 +129331,13 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				goto _10
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_SET_SUBMATCH_END)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_SET_SUBMATCH_END))
 			if status != REG_OK {
 				goto _10
 			}
 		}
 		switch (*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 {
-		case _LITERAL:
+		case int32(_LITERAL):
 			lit = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			if !((*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_min < Int64FromInt32(0)) || (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_min == int64(-int32(4)) {
 				if *(*int32)(unsafe.Pointer(regset)) >= 0 {
@@ -129373,7 +129373,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 				}
 			} else {
 			}
-		case _CATENATION:
+		case int32(_CATENATION):
 			cat = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			left = (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fleft
 			right = (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fright
@@ -129383,7 +129383,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				break
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_AFTER_CAT_RIGHT)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_AFTER_CAT_RIGHT))
 			if status != REG_OK {
 				break
 			}
@@ -129392,7 +129392,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				break
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_RECURSE)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_RECURSE))
 			if status != REG_OK {
 				break
 			}
@@ -129410,7 +129410,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				break
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_AFTER_CAT_LEFT)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_AFTER_CAT_LEFT))
 			if status != REG_OK {
 				break
 			}
@@ -129419,11 +129419,11 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				break
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_RECURSE)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_RECURSE))
 			if status != REG_OK {
 				break
 			}
-		case _ITERATION:
+		case int32(_ITERATION):
 			iter = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			if first_pass != 0 {
 				status = _tre_stack_push_int(tls, stack, BoolInt32(*(*int32)(unsafe.Pointer(regset)) >= 0 || int32(uint32(*(*uint8)(unsafe.Pointer(iter + 16))&0x1>>0)) != 0))
@@ -129444,7 +129444,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				break
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_AFTER_ITERATION)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_AFTER_ITERATION))
 			if status != REG_OK {
 				break
 			}
@@ -129452,7 +129452,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				break
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_RECURSE)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_RECURSE))
 			if status != REG_OK {
 				break
 			}
@@ -129461,7 +129461,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 				if !(first_pass != 0) {
 					status = _tre_add_tag_left(tls, mem, node, tag)
 					if int32(uint32(*(*uint8)(unsafe.Pointer(iter + 16))&0x1>>0)) != 0 {
-						*(*Ttre_tag_direction_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Ftag_directions + uintptr(tag)*4)) = _TRE_TAG_MAXIMIZE
+						*(*Ttre_tag_direction_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Ftag_directions + uintptr(tag)*4)) = int32(_TRE_TAG_MAXIMIZE)
 					} else {
 						*(*Ttre_tag_direction_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Ftag_directions + uintptr(tag)*4)) = direction
 					}
@@ -129488,8 +129488,8 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 				num_tags++
 				next_tag++
 			}
-			direction = _TRE_TAG_MINIMIZE
-		case _UNION:
+			direction = int32(_TRE_TAG_MINIMIZE)
+		case int32(_UNION):
 			uni = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			left1 = (*Ttre_union_t)(unsafe.Pointer(uni)).Fleft
 			right1 = (*Ttre_union_t)(unsafe.Pointer(uni)).Fright
@@ -129529,7 +129529,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				break
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_AFTER_UNION_RIGHT)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_AFTER_UNION_RIGHT))
 			if status != REG_OK {
 				break
 			}
@@ -129538,12 +129538,12 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				break
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_RECURSE)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_RECURSE))
 			if status != REG_OK {
 				break
 			}
 			/* After processing left child. */
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_AFTER_UNION_LEFT)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_AFTER_UNION_LEFT))
 			if status != REG_OK {
 				break
 			}
@@ -129552,7 +129552,7 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 			if status != REG_OK {
 				break
 			}
-			status = _tre_stack_push_int(tls, stack, _ADDTAGS_RECURSE)
+			status = _tre_stack_push_int(tls, stack, int32(_ADDTAGS_RECURSE))
 			if status != REG_OK {
 				break
 			}
@@ -129622,9 +129622,9 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 		}
 		if !(first_pass != 0) {
 			if minimal != 0 {
-				direction = _TRE_TAG_MINIMIZE
+				direction = int32(_TRE_TAG_MINIMIZE)
 			} else {
-				direction = _TRE_TAG_MAXIMIZE
+				direction = int32(_TRE_TAG_MAXIMIZE)
 			}
 		}
 		goto _10
@@ -129682,15 +129682,15 @@ func _tre_add_tags(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr, tnfa u
 		if (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fnum_submatches > 0 {
 			if !(first_pass != 0) {
 				status = _tre_add_tag_right(tls, mem, left2, tag_left)
-				*(*Ttre_tag_direction_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Ftag_directions + uintptr(tag_left)*4)) = _TRE_TAG_MAXIMIZE
+				*(*Ttre_tag_direction_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Ftag_directions + uintptr(tag_left)*4)) = int32(_TRE_TAG_MAXIMIZE)
 				if status == REG_OK {
 					status = _tre_add_tag_right(tls, mem, right2, tag_right)
 				}
-				*(*Ttre_tag_direction_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Ftag_directions + uintptr(tag_right)*4)) = _TRE_TAG_MAXIMIZE
+				*(*Ttre_tag_direction_t)(unsafe.Pointer((*Ttre_tnfa_t)(unsafe.Pointer(tnfa)).Ftag_directions + uintptr(tag_right)*4)) = int32(_TRE_TAG_MAXIMIZE)
 			}
 			num_tags += int32(2)
 		}
-		direction = _TRE_TAG_MAXIMIZE
+		direction = int32(_TRE_TAG_MAXIMIZE)
 		goto _10
 	_9:
 		goto _10
@@ -129747,19 +129747,19 @@ func _tre_copy_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, flags i
 	first_tag = int32(1)
 	result = copy1
 	status = _tre_stack_push_voidptr(tls, stack, ast)
-	status = _tre_stack_push_int(tls, stack, _COPY_RECURSE)
+	status = _tre_stack_push_int(tls, stack, int32(_COPY_RECURSE))
 	for status == REG_OK && _tre_stack_num_objects(tls, stack) > bottom {
 		if status != REG_OK {
 			break
 		}
 		symbol = _tre_stack_pop_int(tls, stack)
 		switch symbol {
-		case _COPY_SET_RESULT_PTR:
+		case int32(_COPY_SET_RESULT_PTR):
 			result = _tre_stack_pop_voidptr(tls, stack)
-		case _COPY_RECURSE:
+		case int32(_COPY_RECURSE):
 			node = _tre_stack_pop_voidptr(tls, stack)
 			switch (*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 {
-			case _LITERAL:
+			case int32(_LITERAL):
 				lit = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 				pos = (*Ttre_literal_t)(unsafe.Pointer(lit)).Fposition
 				min = int32((*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_min)
@@ -129780,7 +129780,7 @@ func _tre_copy_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, flags i
 					} else {
 						if (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_min == int64(-int32(3)) && flags&int32(COPY_MAXIMIZE_FIRST_TAG) != 0 && first_tag != 0 {
 							/* Maximize the first tag. */
-							*(*Ttre_tag_direction_t)(unsafe.Pointer(tag_directions + uintptr(max)*4)) = _TRE_TAG_MAXIMIZE
+							*(*Ttre_tag_direction_t)(unsafe.Pointer(tag_directions + uintptr(max)*4)) = int32(_TRE_TAG_MAXIMIZE)
 							first_tag = 0
 						}
 					}
@@ -129796,7 +129796,7 @@ func _tre_copy_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, flags i
 				if pos > *(*int32)(unsafe.Pointer(max_pos)) {
 					*(*int32)(unsafe.Pointer(max_pos)) = pos
 				}
-			case _UNION:
+			case int32(_UNION):
 				uni = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 				*(*uintptr)(unsafe.Pointer(result)) = _tre_ast_new_union(tls, mem, (*Ttre_union_t)(unsafe.Pointer(uni)).Fleft, (*Ttre_union_t)(unsafe.Pointer(uni)).Fright)
 				if *(*uintptr)(unsafe.Pointer(result)) == UintptrFromInt32(0) {
@@ -129809,7 +129809,7 @@ func _tre_copy_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, flags i
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _COPY_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_COPY_RECURSE))
 				if status != REG_OK {
 					break
 				}
@@ -129817,7 +129817,7 @@ func _tre_copy_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, flags i
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _COPY_SET_RESULT_PTR)
+				status = _tre_stack_push_int(tls, stack, int32(_COPY_SET_RESULT_PTR))
 				if status != REG_OK {
 					break
 				}
@@ -129825,11 +129825,11 @@ func _tre_copy_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, flags i
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _COPY_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_COPY_RECURSE))
 				if status != REG_OK {
 					break
 				}
-			case _CATENATION:
+			case int32(_CATENATION):
 				cat = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 				*(*uintptr)(unsafe.Pointer(result)) = _tre_ast_new_catenation(tls, mem, (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fleft, (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fright)
 				if *(*uintptr)(unsafe.Pointer(result)) == UintptrFromInt32(0) {
@@ -129844,7 +129844,7 @@ func _tre_copy_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, flags i
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _COPY_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_COPY_RECURSE))
 				if status != REG_OK {
 					break
 				}
@@ -129852,7 +129852,7 @@ func _tre_copy_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, flags i
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _COPY_SET_RESULT_PTR)
+				status = _tre_stack_push_int(tls, stack, int32(_COPY_SET_RESULT_PTR))
 				if status != REG_OK {
 					break
 				}
@@ -129860,17 +129860,17 @@ func _tre_copy_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, flags i
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _COPY_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_COPY_RECURSE))
 				if status != REG_OK {
 					break
 				}
-			case _ITERATION:
+			case int32(_ITERATION):
 				iter = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 				status = _tre_stack_push_voidptr(tls, stack, (*Ttre_iteration_t)(unsafe.Pointer(iter)).Farg)
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _COPY_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_COPY_RECURSE))
 				if status != REG_OK {
 					break
 				}
@@ -129923,7 +129923,7 @@ func _tre_expand_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, posit
 	if _status != REG_OK {
 		return _status
 	}
-	_status1 = _tre_stack_push_int(tls, stack, _EXPAND_RECURSE)
+	_status1 = _tre_stack_push_int(tls, stack, int32(_EXPAND_RECURSE))
 	if _status1 != REG_OK {
 		return _status1
 	}
@@ -129934,9 +129934,9 @@ func _tre_expand_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, posit
 		symbol = _tre_stack_pop_int(tls, stack)
 		node = _tre_stack_pop_voidptr(tls, stack)
 		switch symbol {
-		case _EXPAND_RECURSE:
+		case int32(_EXPAND_RECURSE):
 			switch (*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 {
-			case _LITERAL:
+			case int32(_LITERAL):
 				lit = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 				if !((*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_min < Int64FromInt32(0)) || (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_min == int64(-int32(4)) {
 					*(*int32)(unsafe.Pointer(lit + 16)) += *(*int32)(unsafe.Pointer(bp))
@@ -129944,13 +129944,13 @@ func _tre_expand_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, posit
 						*(*int32)(unsafe.Pointer(bp + 4)) = (*Ttre_literal_t)(unsafe.Pointer(lit)).Fposition
 					}
 				}
-			case _UNION:
+			case int32(_UNION):
 				uni = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 				status = _tre_stack_push_voidptr(tls, stack, (*Ttre_union_t)(unsafe.Pointer(uni)).Fright)
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _EXPAND_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_EXPAND_RECURSE))
 				if status != REG_OK {
 					break
 				}
@@ -129958,17 +129958,17 @@ func _tre_expand_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, posit
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _EXPAND_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_EXPAND_RECURSE))
 				if status != REG_OK {
 					break
 				}
-			case _CATENATION:
+			case int32(_CATENATION):
 				cat = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 				status = _tre_stack_push_voidptr(tls, stack, (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fright)
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _EXPAND_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_EXPAND_RECURSE))
 				if status != REG_OK {
 					break
 				}
@@ -129976,11 +129976,11 @@ func _tre_expand_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, posit
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _EXPAND_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_EXPAND_RECURSE))
 				if status != REG_OK {
 					break
 				}
-			case _ITERATION:
+			case int32(_ITERATION):
 				iter = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 				status = _tre_stack_push_int(tls, stack, *(*int32)(unsafe.Pointer(bp)))
 				if status != REG_OK {
@@ -129990,7 +129990,7 @@ func _tre_expand_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, posit
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _EXPAND_AFTER_ITER)
+				status = _tre_stack_push_int(tls, stack, int32(_EXPAND_AFTER_ITER))
 				if status != REG_OK {
 					break
 				}
@@ -129998,7 +129998,7 @@ func _tre_expand_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, posit
 				if status != REG_OK {
 					break
 				}
-				status = _tre_stack_push_int(tls, stack, _EXPAND_RECURSE)
+				status = _tre_stack_push_int(tls, stack, int32(_EXPAND_RECURSE))
 				if status != REG_OK {
 					break
 				}
@@ -130012,7 +130012,7 @@ func _tre_expand_ast(tls *TLS, mem Ttre_mem_t, stack uintptr, ast uintptr, posit
 			default:
 				break
 			}
-		case _EXPAND_AFTER_ITER:
+		case int32(_EXPAND_AFTER_ITER):
 			iter1 = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			*(*int32)(unsafe.Pointer(bp)) = _tre_stack_pop_int(tls, stack)
 			pos_add_last = *(*int32)(unsafe.Pointer(bp))
@@ -130320,7 +130320,7 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 	for status == REG_OK && _tre_stack_num_objects(tls, stack) > bottom {
 		node = _tre_stack_pop_voidptr(tls, stack)
 		switch (*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 {
-		case _LITERAL:
+		case int32(_LITERAL):
 			lit = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			switch (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_min {
 			case int64(-int32(3)):
@@ -130357,7 +130357,7 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 			default:
 				break
 			}
-		case _UNION:
+		case int32(_UNION):
 			/* Subexpressions starting earlier take priority over ones
 			   starting later, so we prefer the left subexpression over the
 			   right subexpression. */
@@ -130376,7 +130376,7 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 				} else {
 				}
 			}
-		case _CATENATION:
+		case int32(_CATENATION):
 			/* The path must go through both children. */
 			cat = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			status = _tre_stack_push_voidptr(tls, stack, (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fleft)
@@ -130387,7 +130387,7 @@ func _tre_match_empty(tls *TLS, stack uintptr, node uintptr, tags uintptr, asser
 			if status != REG_OK {
 				break
 			}
-		case _ITERATION:
+		case int32(_ITERATION):
 			/* A match with an empty string is preferred over no match at
 			   all, so we go through the argument if possible. */
 			iter = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
@@ -130430,7 +130430,7 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 	if _status != REG_OK {
 		return _status
 	}
-	_status1 = _tre_stack_push_int(tls, stack, _NFL_RECURSE)
+	_status1 = _tre_stack_push_int(tls, stack, int32(_NFL_RECURSE))
 	if _status1 != REG_OK {
 		return _status1
 	}
@@ -130438,9 +130438,9 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 		symbol = _tre_stack_pop_int(tls, stack)
 		node = _tre_stack_pop_voidptr(tls, stack)
 		switch symbol {
-		case _NFL_RECURSE:
+		case int32(_NFL_RECURSE):
 			switch (*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 {
-			case _LITERAL:
+			case int32(_LITERAL):
 				lit = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 				if (*Ttre_literal_t)(unsafe.Pointer(lit)).Fcode_min == int64(-int32(4)) {
 					/* Back references: nullable = false, firstpos = {i},
@@ -130481,14 +130481,14 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 						}
 					}
 				}
-			case _UNION:
+			case int32(_UNION):
 				/* Compute the attributes for the two subtrees, and after that
 				for this node. */
 				_status2 = _tre_stack_push_voidptr(tls, stack, node)
 				if _status2 != REG_OK {
 					return _status2
 				}
-				_status3 = _tre_stack_push_int(tls, stack, _NFL_POST_UNION)
+				_status3 = _tre_stack_push_int(tls, stack, int32(_NFL_POST_UNION))
 				if _status3 != REG_OK {
 					return _status3
 				}
@@ -130496,7 +130496,7 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 				if _status4 != REG_OK {
 					return _status4
 				}
-				_status5 = _tre_stack_push_int(tls, stack, _NFL_RECURSE)
+				_status5 = _tre_stack_push_int(tls, stack, int32(_NFL_RECURSE))
 				if _status5 != REG_OK {
 					return _status5
 				}
@@ -130504,18 +130504,18 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 				if _status6 != REG_OK {
 					return _status6
 				}
-				_status7 = _tre_stack_push_int(tls, stack, _NFL_RECURSE)
+				_status7 = _tre_stack_push_int(tls, stack, int32(_NFL_RECURSE))
 				if _status7 != REG_OK {
 					return _status7
 				}
-			case _CATENATION:
+			case int32(_CATENATION):
 				/* Compute the attributes for the two subtrees, and after that
 				for this node. */
 				_status8 = _tre_stack_push_voidptr(tls, stack, node)
 				if _status8 != REG_OK {
 					return _status8
 				}
-				_status9 = _tre_stack_push_int(tls, stack, _NFL_POST_CATENATION)
+				_status9 = _tre_stack_push_int(tls, stack, int32(_NFL_POST_CATENATION))
 				if _status9 != REG_OK {
 					return _status9
 				}
@@ -130523,7 +130523,7 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 				if _status10 != REG_OK {
 					return _status10
 				}
-				_status11 = _tre_stack_push_int(tls, stack, _NFL_RECURSE)
+				_status11 = _tre_stack_push_int(tls, stack, int32(_NFL_RECURSE))
 				if _status11 != REG_OK {
 					return _status11
 				}
@@ -130531,18 +130531,18 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 				if _status12 != REG_OK {
 					return _status12
 				}
-				_status13 = _tre_stack_push_int(tls, stack, _NFL_RECURSE)
+				_status13 = _tre_stack_push_int(tls, stack, int32(_NFL_RECURSE))
 				if _status13 != REG_OK {
 					return _status13
 				}
-			case _ITERATION:
+			case int32(_ITERATION):
 				/* Compute the attributes for the subtree, and after that for
 				this node. */
 				_status14 = _tre_stack_push_voidptr(tls, stack, node)
 				if _status14 != REG_OK {
 					return _status14
 				}
-				_status15 = _tre_stack_push_int(tls, stack, _NFL_POST_ITERATION)
+				_status15 = _tre_stack_push_int(tls, stack, int32(_NFL_POST_ITERATION))
 				if _status15 != REG_OK {
 					return _status15
 				}
@@ -130550,13 +130550,13 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 				if _status16 != REG_OK {
 					return _status16
 				}
-				_status17 = _tre_stack_push_int(tls, stack, _NFL_RECURSE)
+				_status17 = _tre_stack_push_int(tls, stack, int32(_NFL_RECURSE))
 				if _status17 != REG_OK {
 					return _status17
 				}
 				break
 			}
-		case _NFL_POST_UNION:
+		case int32(_NFL_POST_UNION):
 			uni = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			(*Ttre_ast_node_t)(unsafe.Pointer(node)).Fnullable = BoolInt32((*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_union_t)(unsafe.Pointer(uni)).Fleft)).Fnullable != 0 || (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_union_t)(unsafe.Pointer(uni)).Fright)).Fnullable != 0)
 			(*Ttre_ast_node_t)(unsafe.Pointer(node)).Ffirstpos = _tre_set_union(tls, mem, (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_union_t)(unsafe.Pointer(uni)).Fleft)).Ffirstpos, (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_union_t)(unsafe.Pointer(uni)).Fright)).Ffirstpos, UintptrFromInt32(0), 0)
@@ -130567,7 +130567,7 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 			if !((*Ttre_ast_node_t)(unsafe.Pointer(node)).Flastpos != 0) {
 				return int32(REG_ESPACE)
 			}
-		case _NFL_POST_ITERATION:
+		case int32(_NFL_POST_ITERATION):
 			iter = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			if (*Ttre_iteration_t)(unsafe.Pointer(iter)).Fmin == 0 || (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_iteration_t)(unsafe.Pointer(iter)).Farg)).Fnullable != 0 {
 				(*Ttre_ast_node_t)(unsafe.Pointer(node)).Fnullable = int32(1)
@@ -130576,7 +130576,7 @@ func _tre_compute_nfl(tls *TLS, mem Ttre_mem_t, stack uintptr, tree uintptr) (r 
 			}
 			(*Ttre_ast_node_t)(unsafe.Pointer(node)).Ffirstpos = (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_iteration_t)(unsafe.Pointer(iter)).Farg)).Ffirstpos
 			(*Ttre_ast_node_t)(unsafe.Pointer(node)).Flastpos = (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_iteration_t)(unsafe.Pointer(iter)).Farg)).Flastpos
-		case _NFL_POST_CATENATION:
+		case int32(_NFL_POST_CATENATION):
 			cat = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 			(*Ttre_ast_node_t)(unsafe.Pointer(node)).Fnullable = BoolInt32((*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_catenation_t)(unsafe.Pointer(cat)).Fleft)).Fnullable != 0 && (*Ttre_ast_node_t)(unsafe.Pointer((*Ttre_catenation_t)(unsafe.Pointer(cat)).Fright)).Fnullable != 0)
 			/* Compute firstpos. */
@@ -130819,15 +130819,15 @@ func _tre_ast_to_tnfa(tls *TLS, node uintptr, transitions uintptr, counts uintpt
 	errcode = REG_OK
 	/* XXX - recurse using a stack!. */
 	switch (*Ttre_ast_node_t)(unsafe.Pointer(node)).Ftype1 {
-	case _LITERAL:
-	case _UNION:
+	case int32(_LITERAL):
+	case int32(_UNION):
 		uni = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 		errcode = _tre_ast_to_tnfa(tls, (*Ttre_union_t)(unsafe.Pointer(uni)).Fleft, transitions, counts, offs)
 		if errcode != REG_OK {
 			return errcode
 		}
 		errcode = _tre_ast_to_tnfa(tls, (*Ttre_union_t)(unsafe.Pointer(uni)).Fright, transitions, counts, offs)
-	case _CATENATION:
+	case int32(_CATENATION):
 		cat = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 		/* Add a transition from each position in cat->left->lastpos
 		to each position in cat->right->firstpos. */
@@ -130840,7 +130840,7 @@ func _tre_ast_to_tnfa(tls *TLS, node uintptr, transitions uintptr, counts uintpt
 			return errcode
 		}
 		errcode = _tre_ast_to_tnfa(tls, (*Ttre_catenation_t)(unsafe.Pointer(cat)).Fright, transitions, counts, offs)
-	case _ITERATION:
+	case int32(_ITERATION):
 		iter = (*Ttre_ast_node_t)(unsafe.Pointer(node)).Fobj
 		if (*Ttre_iteration_t)(unsafe.Pointer(iter)).Fmax == -int32(1) {
 			/* Add a transition from each last position in the iterated
@@ -131261,7 +131261,7 @@ func _tre_tag_order(tls *TLS, num_tags int32, tag_directions uintptr, t1 uintptr
 		if !(i < num_tags) {
 			break
 		}
-		if *(*Ttre_tag_direction_t)(unsafe.Pointer(tag_directions + uintptr(i)*4)) == _TRE_TAG_MINIMIZE {
+		if *(*Ttre_tag_direction_t)(unsafe.Pointer(tag_directions + uintptr(i)*4)) == int32(_TRE_TAG_MINIMIZE) {
 			if *(*Tregoff_t)(unsafe.Pointer(t1 + uintptr(i)*8)) < *(*Tregoff_t)(unsafe.Pointer(t2 + uintptr(i)*8)) {
 				return int32(1)
 			}
@@ -132607,7 +132607,7 @@ func ___hsearch_r(tls *TLS, item TENTRY, action TACTION, retval uintptr, htab ui
 		*(*uintptr)(unsafe.Pointer(retval)) = e
 		return int32(1)
 	}
-	if action == _FIND {
+	if action == int32(_FIND) {
 		*(*uintptr)(unsafe.Pointer(retval)) = uintptr(0)
 		return 0
 	}
@@ -132991,13 +132991,13 @@ func _walk(tls *TLS, r uintptr, action uintptr, d int32) {
 		return
 	}
 	if (*Tnode1)(unsafe.Pointer(r)).Fh == int32(1) {
-		(*(*func(*TLS, uintptr, TVISIT, int32))(unsafe.Pointer(&struct{ uintptr }{action})))(tls, r, _leaf, d)
+		(*(*func(*TLS, uintptr, TVISIT, int32))(unsafe.Pointer(&struct{ uintptr }{action})))(tls, r, int32(_leaf), d)
 	} else {
-		(*(*func(*TLS, uintptr, TVISIT, int32))(unsafe.Pointer(&struct{ uintptr }{action})))(tls, r, _preorder, d)
+		(*(*func(*TLS, uintptr, TVISIT, int32))(unsafe.Pointer(&struct{ uintptr }{action})))(tls, r, int32(_preorder), d)
 		_walk(tls, *(*uintptr)(unsafe.Pointer(r + 8)), action, d+int32(1))
-		(*(*func(*TLS, uintptr, TVISIT, int32))(unsafe.Pointer(&struct{ uintptr }{action})))(tls, r, _postorder, d)
+		(*(*func(*TLS, uintptr, TVISIT, int32))(unsafe.Pointer(&struct{ uintptr }{action})))(tls, r, int32(_postorder), d)
 		_walk(tls, *(*uintptr)(unsafe.Pointer(r + 8 + 1*8)), action, d+int32(1))
-		(*(*func(*TLS, uintptr, TVISIT, int32))(unsafe.Pointer(&struct{ uintptr }{action})))(tls, r, _endorder, d)
+		(*(*func(*TLS, uintptr, TVISIT, int32))(unsafe.Pointer(&struct{ uintptr }{action})))(tls, r, int32(_endorder), d)
 	}
 }
 
@@ -138590,110 +138590,110 @@ const _MAXSTATE = 28
 
 var _states = [8][58]uint8{
 	0: {
-		0:  _DBL,
-		2:  _UINT,
-		4:  _DBL,
-		5:  _DBL,
-		6:  _DBL,
-		11: _BIGLPRE,
-		18: _PTR,
-		23: _UINT,
-		32: _DBL,
-		34: _INT,
-		35: _INT,
-		36: _DBL,
-		37: _DBL,
-		38: _DBL,
-		39: _HPRE,
-		40: _INT,
-		41: _JPRE,
-		43: _LPRE,
-		44: _NOARG,
-		45: _PTR,
-		46: _UINT,
-		47: _UIPTR,
-		50: _PTR,
-		51: _ZTPRE,
-		52: _UINT,
-		55: _UINT,
-		57: _ZTPRE,
+		0:  uint8(_DBL),
+		2:  uint8(_UINT),
+		4:  uint8(_DBL),
+		5:  uint8(_DBL),
+		6:  uint8(_DBL),
+		11: uint8(_BIGLPRE),
+		18: uint8(_PTR),
+		23: uint8(_UINT),
+		32: uint8(_DBL),
+		34: uint8(_INT),
+		35: uint8(_INT),
+		36: uint8(_DBL),
+		37: uint8(_DBL),
+		38: uint8(_DBL),
+		39: uint8(_HPRE),
+		40: uint8(_INT),
+		41: uint8(_JPRE),
+		43: uint8(_LPRE),
+		44: uint8(_NOARG),
+		45: uint8(_PTR),
+		46: uint8(_UINT),
+		47: uint8(_UIPTR),
+		50: uint8(_PTR),
+		51: uint8(_ZTPRE),
+		52: uint8(_UINT),
+		55: uint8(_UINT),
+		57: uint8(_ZTPRE),
 	},
 	1: {
-		0:  _DBL,
-		4:  _DBL,
-		5:  _DBL,
-		6:  _DBL,
-		23: _ULONG,
-		32: _DBL,
-		34: _UINT,
-		35: _LONG,
-		36: _DBL,
-		37: _DBL,
-		38: _DBL,
-		40: _LONG,
-		43: _LLPRE,
-		45: _PTR,
-		46: _ULONG,
-		50: _PTR,
-		52: _ULONG,
-		55: _ULONG,
+		0:  uint8(_DBL),
+		4:  uint8(_DBL),
+		5:  uint8(_DBL),
+		6:  uint8(_DBL),
+		23: uint8(_ULONG),
+		32: uint8(_DBL),
+		34: uint8(_UINT),
+		35: uint8(_LONG),
+		36: uint8(_DBL),
+		37: uint8(_DBL),
+		38: uint8(_DBL),
+		40: uint8(_LONG),
+		43: uint8(_LLPRE),
+		45: uint8(_PTR),
+		46: uint8(_ULONG),
+		50: uint8(_PTR),
+		52: uint8(_ULONG),
+		55: uint8(_ULONG),
 	},
 	2: {
-		23: _ULLONG,
-		35: _LLONG,
-		40: _LLONG,
-		45: _PTR,
-		46: _ULLONG,
-		52: _ULLONG,
-		55: _ULLONG,
+		23: uint8(_ULLONG),
+		35: uint8(_LLONG),
+		40: uint8(_LLONG),
+		45: uint8(_PTR),
+		46: uint8(_ULLONG),
+		52: uint8(_ULLONG),
+		55: uint8(_ULLONG),
 	},
 	3: {
-		23: _USHORT,
-		35: _SHORT,
-		39: _HHPRE,
-		40: _SHORT,
-		45: _PTR,
-		46: _USHORT,
-		52: _USHORT,
-		55: _USHORT,
+		23: uint8(_USHORT),
+		35: uint8(_SHORT),
+		39: uint8(_HHPRE),
+		40: uint8(_SHORT),
+		45: uint8(_PTR),
+		46: uint8(_USHORT),
+		52: uint8(_USHORT),
+		55: uint8(_USHORT),
 	},
 	4: {
-		23: _UCHAR,
-		35: _CHAR,
-		40: _CHAR,
-		45: _PTR,
-		46: _UCHAR,
-		52: _UCHAR,
-		55: _UCHAR,
+		23: uint8(_UCHAR),
+		35: uint8(_CHAR),
+		40: uint8(_CHAR),
+		45: uint8(_PTR),
+		46: uint8(_UCHAR),
+		52: uint8(_UCHAR),
+		55: uint8(_UCHAR),
 	},
 	5: {
-		0:  _LDBL,
-		4:  _LDBL,
-		5:  _LDBL,
-		6:  _LDBL,
-		32: _LDBL,
-		36: _LDBL,
-		37: _LDBL,
-		38: _LDBL,
-		45: _PTR,
+		0:  uint8(_LDBL),
+		4:  uint8(_LDBL),
+		5:  uint8(_LDBL),
+		6:  uint8(_LDBL),
+		32: uint8(_LDBL),
+		36: uint8(_LDBL),
+		37: uint8(_LDBL),
+		38: uint8(_LDBL),
+		45: uint8(_PTR),
 	},
 	6: {
-		23: _SIZET,
-		35: _PDIFF,
-		40: _PDIFF,
-		45: _PTR,
-		46: _SIZET,
-		52: _SIZET,
-		55: _SIZET,
+		23: uint8(_SIZET),
+		35: uint8(_PDIFF),
+		40: uint8(_PDIFF),
+		45: uint8(_PTR),
+		46: uint8(_SIZET),
+		52: uint8(_SIZET),
+		55: uint8(_SIZET),
 	},
 	7: {
-		23: _UMAX,
-		35: _IMAX,
-		40: _IMAX,
-		45: _PTR,
-		46: _UMAX,
-		52: _UMAX,
-		55: _UMAX,
+		23: uint8(_UMAX),
+		35: uint8(_IMAX),
+		40: uint8(_IMAX),
+		45: uint8(_PTR),
+		46: uint8(_UMAX),
+		52: uint8(_UMAX),
+		55: uint8(_UMAX),
 	},
 }
 
@@ -138705,41 +138705,41 @@ type Targ = struct {
 
 func _pop_arg(tls *TLS, arg uintptr, type1 int32, ap uintptr) {
 	switch type1 {
-	case _PTR:
+	case int32(_PTR):
 		*(*uintptr)(unsafe.Pointer(arg)) = VaUintptr(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _INT:
+	case int32(_INT):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _UINT:
+	case int32(_UINT):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaUint32(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _LONG:
+	case int32(_LONG):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt64(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _ULONG:
+	case int32(_ULONG):
 		(*Targ)(unsafe.Pointer(arg)).Fi = VaUint64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _ULLONG:
+	case int32(_ULLONG):
 		(*Targ)(unsafe.Pointer(arg)).Fi = VaUint64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _SHORT:
+	case int32(_SHORT):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(int16(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap)))))
-	case _USHORT:
+	case int32(_USHORT):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(uint16(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap)))))
-	case _CHAR:
+	case int32(_CHAR):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(int8(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap)))))
-	case _UCHAR:
+	case int32(_UCHAR):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(uint8(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap)))))
-	case _LLONG:
+	case int32(_LLONG):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt64(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _SIZET:
+	case int32(_SIZET):
 		(*Targ)(unsafe.Pointer(arg)).Fi = VaUint64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _IMAX:
+	case int32(_IMAX):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt64(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _UMAX:
+	case int32(_UMAX):
 		(*Targ)(unsafe.Pointer(arg)).Fi = VaUint64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _PDIFF:
+	case int32(_PDIFF):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt64(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _UIPTR:
+	case int32(_UIPTR):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaUintptr(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _DBL:
+	case int32(_DBL):
 		*(*float64)(unsafe.Pointer(arg)) = VaFloat64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _LDBL:
+	case int32(_LDBL):
 		*(*float64)(unsafe.Pointer(arg)) = VaFloat64(&*(*Tva_list)(unsafe.Pointer(ap)))
 	}
 }
@@ -139525,7 +139525,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 			if BoolInt32(uint32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 1)))-uint32('0') < uint32(10)) != 0 && int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 2))) == int32('$') {
 				l10n = uint32(1)
 				if !(f != 0) {
-					*(*int32)(unsafe.Pointer(nl_type + uintptr(int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 1)))-int32('0'))*4)) = _INT
+					*(*int32)(unsafe.Pointer(nl_type + uintptr(int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 1)))-int32('0'))*4)) = int32(_INT)
 					w = Int32FromInt32(0)
 				} else {
 					w = int32(*(*Tuintmax_t)(unsafe.Pointer(nl_arg + uintptr(int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 1)))-int32('0'))*8)))
@@ -139559,7 +139559,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 		if int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp))))) == int32('.') && int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 1))) == int32('*') {
 			if BoolInt32(uint32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 2)))-uint32('0') < uint32(10)) != 0 && int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 3))) == int32('$') {
 				if !(f != 0) {
-					*(*int32)(unsafe.Pointer(nl_type + uintptr(int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 2)))-int32('0'))*4)) = _INT
+					*(*int32)(unsafe.Pointer(nl_type + uintptr(int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 2)))-int32('0'))*4)) = int32(_INT)
 					p = Int32FromInt32(0)
 				} else {
 					p = int32(*(*Tuintmax_t)(unsafe.Pointer(nl_arg + uintptr(int32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 2)))-int32('0'))*8)))
@@ -139591,7 +139591,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 		}
 		/* Format specifier state machine */
 		st = uint32(0)
-		for cond := true; cond; cond = st-uint32(1) < _STOP {
+		for cond := true; cond; cond = st-uint32(1) < uint32(_STOP) {
 			if uint32(*(*int8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))))-uint32('A') > uint32(Int32FromUint8('z')-Int32FromUint8('A')) {
 				goto inval
 			}
@@ -139604,7 +139604,7 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 			goto inval
 		}
 		/* Check validity of argument type (nl/normal) */
-		if st == _NOARG {
+		if st == uint32(_NOARG) {
 			if argpos >= 0 {
 				goto inval
 			}
@@ -139689,19 +139689,19 @@ func _printf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr, 
 		goto _30
 	_9:
 		switch ps {
-		case _BARE:
+		case uint32(_BARE):
 			*(*int32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))) = cnt
-		case _LPRE:
+		case uint32(_LPRE):
 			*(*int64)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))) = int64(cnt)
-		case _LLPRE:
+		case uint32(_LLPRE):
 			*(*int64)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))) = int64(cnt)
-		case _HPRE:
+		case uint32(_HPRE):
 			*(*uint16)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))) = uint16(cnt)
-		case _HHPRE:
+		case uint32(_HHPRE):
 			*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))) = uint8(cnt)
-		case _ZTPRE:
+		case uint32(_ZTPRE):
 			*(*Tsize_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))) = uint64(cnt)
-		case _JPRE:
+		case uint32(_JPRE):
 			*(*Tuintmax_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))) = uint64(cnt)
 			break
 		}
@@ -140683,150 +140683,150 @@ func X__isoc99_vfscanf(tls *TLS, f uintptr, fmt uintptr, ap Tva_list) (r int32) 
 
 var _states1 = [8][58]uint8{
 	0: {
-		0:  _DBL,
-		2:  _UINT,
-		4:  _DBL,
-		5:  _DBL,
-		6:  _DBL,
-		11: _BIGLPRE,
-		18: _PTR,
-		23: _UINT,
-		32: _DBL,
-		34: _INT,
-		35: _INT,
-		36: _DBL,
-		37: _DBL,
-		38: _DBL,
-		39: _HPRE,
-		40: _INT,
-		41: _JPRE,
-		43: _LPRE,
-		44: _NOARG,
-		45: _PTR,
-		46: _UINT,
-		47: _UIPTR,
-		50: _PTR,
-		51: _ZTPRE,
-		52: _UINT,
-		55: _UINT,
-		57: _ZTPRE,
+		0:  uint8(_DBL),
+		2:  uint8(_UINT),
+		4:  uint8(_DBL),
+		5:  uint8(_DBL),
+		6:  uint8(_DBL),
+		11: uint8(_BIGLPRE),
+		18: uint8(_PTR),
+		23: uint8(_UINT),
+		32: uint8(_DBL),
+		34: uint8(_INT),
+		35: uint8(_INT),
+		36: uint8(_DBL),
+		37: uint8(_DBL),
+		38: uint8(_DBL),
+		39: uint8(_HPRE),
+		40: uint8(_INT),
+		41: uint8(_JPRE),
+		43: uint8(_LPRE),
+		44: uint8(_NOARG),
+		45: uint8(_PTR),
+		46: uint8(_UINT),
+		47: uint8(_UIPTR),
+		50: uint8(_PTR),
+		51: uint8(_ZTPRE),
+		52: uint8(_UINT),
+		55: uint8(_UINT),
+		57: uint8(_ZTPRE),
 	},
 	1: {
-		0:  _DBL,
-		4:  _DBL,
-		5:  _DBL,
-		6:  _DBL,
-		23: _ULONG,
-		32: _DBL,
-		34: _UINT,
-		35: _LONG,
-		36: _DBL,
-		37: _DBL,
-		38: _DBL,
-		40: _LONG,
-		43: _LLPRE,
-		45: _PTR,
-		46: _ULONG,
-		50: _PTR,
-		52: _ULONG,
-		55: _ULONG,
+		0:  uint8(_DBL),
+		4:  uint8(_DBL),
+		5:  uint8(_DBL),
+		6:  uint8(_DBL),
+		23: uint8(_ULONG),
+		32: uint8(_DBL),
+		34: uint8(_UINT),
+		35: uint8(_LONG),
+		36: uint8(_DBL),
+		37: uint8(_DBL),
+		38: uint8(_DBL),
+		40: uint8(_LONG),
+		43: uint8(_LLPRE),
+		45: uint8(_PTR),
+		46: uint8(_ULONG),
+		50: uint8(_PTR),
+		52: uint8(_ULONG),
+		55: uint8(_ULONG),
 	},
 	2: {
-		23: _ULLONG,
-		35: _LLONG,
-		40: _LLONG,
-		45: _PTR,
-		46: _ULLONG,
-		52: _ULLONG,
-		55: _ULLONG,
+		23: uint8(_ULLONG),
+		35: uint8(_LLONG),
+		40: uint8(_LLONG),
+		45: uint8(_PTR),
+		46: uint8(_ULLONG),
+		52: uint8(_ULLONG),
+		55: uint8(_ULLONG),
 	},
 	3: {
-		23: _USHORT,
-		35: _SHORT,
-		39: _HHPRE,
-		40: _SHORT,
-		45: _PTR,
-		46: _USHORT,
-		52: _USHORT,
-		55: _USHORT,
+		23: uint8(_USHORT),
+		35: uint8(_SHORT),
+		39: uint8(_HHPRE),
+		40: uint8(_SHORT),
+		45: uint8(_PTR),
+		46: uint8(_USHORT),
+		52: uint8(_USHORT),
+		55: uint8(_USHORT),
 	},
 	4: {
-		23: _UCHAR,
-		35: _CHAR,
-		40: _CHAR,
-		45: _PTR,
-		46: _UCHAR,
-		52: _UCHAR,
-		55: _UCHAR,
+		23: uint8(_UCHAR),
+		35: uint8(_CHAR),
+		40: uint8(_CHAR),
+		45: uint8(_PTR),
+		46: uint8(_UCHAR),
+		52: uint8(_UCHAR),
+		55: uint8(_UCHAR),
 	},
 	5: {
-		0:  _LDBL,
-		4:  _LDBL,
-		5:  _LDBL,
-		6:  _LDBL,
-		32: _LDBL,
-		36: _LDBL,
-		37: _LDBL,
-		38: _LDBL,
-		45: _PTR,
+		0:  uint8(_LDBL),
+		4:  uint8(_LDBL),
+		5:  uint8(_LDBL),
+		6:  uint8(_LDBL),
+		32: uint8(_LDBL),
+		36: uint8(_LDBL),
+		37: uint8(_LDBL),
+		38: uint8(_LDBL),
+		45: uint8(_PTR),
 	},
 	6: {
-		23: _SIZET,
-		35: _PDIFF,
-		40: _PDIFF,
-		45: _PTR,
-		46: _SIZET,
-		52: _SIZET,
-		55: _SIZET,
+		23: uint8(_SIZET),
+		35: uint8(_PDIFF),
+		40: uint8(_PDIFF),
+		45: uint8(_PTR),
+		46: uint8(_SIZET),
+		52: uint8(_SIZET),
+		55: uint8(_SIZET),
 	},
 	7: {
-		23: _UMAX,
-		35: _IMAX,
-		40: _IMAX,
-		45: _PTR,
-		46: _UMAX,
-		52: _UMAX,
-		55: _UMAX,
+		23: uint8(_UMAX),
+		35: uint8(_IMAX),
+		40: uint8(_IMAX),
+		45: uint8(_PTR),
+		46: uint8(_UMAX),
+		52: uint8(_UMAX),
+		55: uint8(_UMAX),
 	},
 }
 
 func _pop_arg1(tls *TLS, arg uintptr, type1 int32, ap uintptr) {
 	switch type1 {
-	case _PTR:
+	case int32(_PTR):
 		*(*uintptr)(unsafe.Pointer(arg)) = VaUintptr(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _INT:
+	case int32(_INT):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _UINT:
+	case int32(_UINT):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaUint32(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _LONG:
+	case int32(_LONG):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt64(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _ULONG:
+	case int32(_ULONG):
 		(*Targ)(unsafe.Pointer(arg)).Fi = VaUint64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _ULLONG:
+	case int32(_ULLONG):
 		(*Targ)(unsafe.Pointer(arg)).Fi = VaUint64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _SHORT:
+	case int32(_SHORT):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(int16(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap)))))
-	case _USHORT:
+	case int32(_USHORT):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(uint16(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap)))))
-	case _CHAR:
+	case int32(_CHAR):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(int8(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap)))))
-	case _UCHAR:
+	case int32(_UCHAR):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(uint8(VaInt32(&*(*Tva_list)(unsafe.Pointer(ap)))))
-	case _LLONG:
+	case int32(_LLONG):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt64(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _SIZET:
+	case int32(_SIZET):
 		(*Targ)(unsafe.Pointer(arg)).Fi = VaUint64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _IMAX:
+	case int32(_IMAX):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt64(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _UMAX:
+	case int32(_UMAX):
 		(*Targ)(unsafe.Pointer(arg)).Fi = VaUint64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _PDIFF:
+	case int32(_PDIFF):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaInt64(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _UIPTR:
+	case int32(_UIPTR):
 		(*Targ)(unsafe.Pointer(arg)).Fi = uint64(VaUintptr(&*(*Tva_list)(unsafe.Pointer(ap))))
-	case _DBL:
+	case int32(_DBL):
 		*(*float64)(unsafe.Pointer(arg)) = VaFloat64(&*(*Tva_list)(unsafe.Pointer(ap)))
-	case _LDBL:
+	case int32(_LDBL):
 		*(*float64)(unsafe.Pointer(arg)) = VaFloat64(&*(*Tva_list)(unsafe.Pointer(ap)))
 	}
 }
@@ -140971,7 +140971,7 @@ func _wprintf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr,
 		if *(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))) == int32('*') {
 			if BoolInt32(uint32(*(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 1*4)))-uint32('0') < uint32(10)) != 0 && *(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 2*4)) == int32('$') {
 				l10n = uint32(1)
-				*(*int32)(unsafe.Pointer(nl_type + uintptr(*(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 1*4))-int32('0'))*4)) = _INT
+				*(*int32)(unsafe.Pointer(nl_type + uintptr(*(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 1*4))-int32('0'))*4)) = int32(_INT)
 				w = int32(*(*Tuintmax_t)(unsafe.Pointer(nl_arg + uintptr(*(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 1*4))-int32('0'))*8)))
 				*(*uintptr)(unsafe.Pointer(bp + 8)) += uintptr(3) * 4
 			} else {
@@ -141001,7 +141001,7 @@ func _wprintf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr,
 		/* Read precision */
 		if *(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))) == int32('.') && *(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 1*4)) == int32('*') {
 			if BoolInt32(uint32(*(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 2*4)))-uint32('0') < uint32(10)) != 0 && *(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 3*4)) == int32('$') {
-				*(*int32)(unsafe.Pointer(nl_type + uintptr(*(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 2*4))-int32('0'))*4)) = _INT
+				*(*int32)(unsafe.Pointer(nl_type + uintptr(*(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 2*4))-int32('0'))*4)) = int32(_INT)
 				p = int32(*(*Tuintmax_t)(unsafe.Pointer(nl_arg + uintptr(*(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 2*4))-int32('0'))*8)))
 				*(*uintptr)(unsafe.Pointer(bp + 8)) += uintptr(4) * 4
 			} else {
@@ -141030,7 +141030,7 @@ func _wprintf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr,
 		}
 		/* Format specifier state machine */
 		st = uint32(0)
-		for cond := true; cond; cond = st-uint32(1) < _STOP {
+		for cond := true; cond; cond = st-uint32(1) < uint32(_STOP) {
 			if uint32(*(*Twchar_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)))))-uint32('A') > uint32(Int32FromUint8('z')-Int32FromUint8('A')) {
 				goto inval
 			}
@@ -141043,7 +141043,7 @@ func _wprintf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr,
 			goto inval
 		}
 		/* Check validity of argument type (nl/normal) */
-		if st == _NOARG {
+		if st == uint32(_NOARG) {
 			if argpos >= 0 {
 				goto inval
 			}
@@ -141073,19 +141073,19 @@ func _wprintf_core(tls *TLS, f uintptr, fmt uintptr, ap uintptr, nl_arg uintptr,
 		switch t {
 		case int32('n'):
 			switch ps {
-			case _BARE:
+			case uint32(_BARE):
 				*(*int32)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 16)))) = cnt
-			case _LPRE:
+			case uint32(_LPRE):
 				*(*int64)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 16)))) = int64(cnt)
-			case _LLPRE:
+			case uint32(_LLPRE):
 				*(*int64)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 16)))) = int64(cnt)
-			case _HPRE:
+			case uint32(_HPRE):
 				*(*uint16)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 16)))) = uint16(cnt)
-			case _HHPRE:
+			case uint32(_HHPRE):
 				*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 16)))) = uint8(cnt)
-			case _ZTPRE:
+			case uint32(_ZTPRE):
 				*(*Tsize_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 16)))) = uint64(cnt)
-			case _JPRE:
+			case uint32(_JPRE):
 				*(*Tuintmax_t)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 16)))) = uint64(cnt)
 				break
 			}
