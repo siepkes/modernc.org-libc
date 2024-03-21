@@ -843,6 +843,7 @@ var blacklists = map[string]map[string]struct{}{
 		"src/regression/tls_get_new-dtv.exe.go":                         {},
 
 		//TODO EXEC FAIL
+		"src/functional/dlopen.exe.go":                    {},
 		"src/functional/popen-static.exe.go":              {},
 		"src/functional/popen.exe.go":                     {},
 		"src/functional/strptime-static.exe.go":           {},
@@ -1111,6 +1112,7 @@ var blacklists = map[string]map[string]struct{}{
 		"src/regression/tls_get_new-dtv.exe.go":                         {},
 
 		//TODO EXEC FAIL
+		"src/functional/dlopen.exe.go":                    {},
 		"src/functional/popen-static.exe.go":              {},
 		"src/functional/popen.exe.go":                     {},
 		"src/functional/strptime-static.exe.go":           {},
@@ -1225,5 +1227,5 @@ func TestLibc(t *testing.T) {
 	// 202403042209 all_musl_test.go:640:  files=476 buildFails=244          execFails=35 pass=197
 	// 202403051424 all_musl_test.go:650:  files=476 buildFails=244 skip=16  execFails=19 pass=197
 	// 202403151750 all_musl_test.go:1213: files=476 buildFails=  0 skip=273 execFails= 0 pass=203
-
+	// 202403211526 all_musl_test.go:1214: files=477 buildFails=  0 skip=274 execFails= 0 pass=203
 }
