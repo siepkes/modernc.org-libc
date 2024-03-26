@@ -441,6 +441,10 @@ func Xexit(tls *TLS, code int32) {
 	os.Exit(int(code))
 }
 
+func _exit(tls *TLS, code int32) {
+	Xexit(tls, code)
+}
+
 var abort Tsigaction
 
 func Xabort(tls *TLS) {
@@ -992,8 +996,3 @@ func Xuuid_unparse(t *TLS, uu, out uintptr) {
 }
 
 var Xzero_struct_address Taddress
-
-// int getpagesize(void);
-func Xgetpagesize(t *TLS) int32 {
-	return int32(unix.Getpagesize())
-}
