@@ -46,10 +46,22 @@ var X__stderrp = Xstdout
 var X__stdinp = Xstdin
 var X__stdoutp = Xstdout
 var X__sF [3]stdio.FILE
-var X_tolower_tab_ = Xmalloc(nil, 2*65537)
-var X_toupper_tab_ = Xmalloc(nil, 2*65537)
+var X_tolower_tab_ uintptr
+var X_toupper_tab_ uintptr
 
 func init() {
+	// fake a TLS since this comes before NewTLS() or Start()
+	t := &TLS{errnop: uintptr(unsafe.Pointer(&errno0))}
+	X_tolower_tab_ = Xmalloc(t, 2*65537)
+	if X_tolower_tab_ == 0 {
+		panic("unable to allocate tolower table")
+	}
+
+	X_toupper_tab_ = Xmalloc(t, 2*65537)
+	if X_tolower_tab_ == 0 {
+		panic("unable to allocate toupper table")
+	}
+
 	for c := rune(0); c < 0xffff; c++ {
 		y := c
 		s := strings.ToLower(string(c))
