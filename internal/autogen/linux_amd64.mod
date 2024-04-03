@@ -13,7 +13,7 @@ require (
 	modernc.org/ccgo/v4 v4.15.0
 	modernc.org/fileutil v1.3.0
 	modernc.org/mathutil v1.6.0
-	modernc.org/memory v1.7.2
+	modernc.org/memory v1.8.0
 )
 
 require (
