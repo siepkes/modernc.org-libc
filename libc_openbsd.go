@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build openbsd
+
 package libc // import "modernc.org/libc"
 
 import (
@@ -186,11 +188,12 @@ func Xgetrusage(t *TLS, who int32, usage uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v who=%v usage=%v, (%v:)", t, who, usage, origin(2))
 	}
-	if _, _, err := unix.Syscall(unix.SYS_GETRUSAGE, uintptr(who), usage, 0); err != 0 {
+	ru := unix.Rusage{}
+	if err := unix.Getrusage(int(who), &ru); err != nil {
 		t.setErrno(err)
 		return -1
 	}
-
+	*(*unix.Rusage)(unsafe.Pointer(usage)) = ru
 	return 0
 }
 
@@ -229,7 +232,7 @@ func Xchdir(t *TLS, path uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v path=%v, (%v:)", t, path, origin(2))
 	}
-	if _, _, err := unix.Syscall(unix.SYS_CHDIR, path, 0, 0); err != 0 {
+	if err := unix.Chdir(*(*string)(unsafe.Pointer(path))); err != nil {
 		t.setErrno(err)
 		return -1
 	}
@@ -294,19 +297,19 @@ func Xopen64(t *TLS, pathname uintptr, flags int32, args uintptr) int32 {
 		mode = (types.Mode_t)(VaUint32(&args))
 	}
 	fdcwd := fcntl.AT_FDCWD
-	n, _, err := unix.Syscall6(unix.SYS_OPENAT, uintptr(fdcwd), pathname, uintptr(flags), uintptr(mode), 0, 0)
-	if err != 0 {
-		// if dmesgs {
-		// 	dmesg("%v: %q %#x: %v", origin(1), GoString(pathname), flags, err)
-		// }
+	fd, err := unix.Openat(fdcwd, *(*string)(unsafe.Pointer(pathname)), int(flags), mode)
+	if err != nil {
+		if dmesgs {
+			dmesg("%v: %q %#x: %v", origin(1), GoString(pathname), flags, err)
+		}
 		t.setErrno(err)
 		return -1
 	}
 
-	// if dmesgs {
-	// 	dmesg("%v: %q flags %#x mode %#o: fd %v", origin(1), GoString(pathname), flags, mode, n)
-	// }
-	return int32(n)
+	if dmesgs {
+		dmesg("%v: %q flags %#x mode %#o: fd %v", origin(1), GoString(pathname), flags, mode, fd)
+	}
+	return int32(fd)
 }
 
 // off_t lseek(int fd, off_t offset, int whence);
@@ -1835,11 +1838,11 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 	const unix_SYS_MMAP = 49
 
 	// Cannot avoid the syscall here, addr sometimes matter.
-	data, _, err := unix.Syscall6(unix_SYS_MMAP, addr, uintptr(length), uintptr(prot), uintptr(flags), uintptr(fd), uintptr(offset))
+	data, _, err := unix.RawSyscall6(unix_SYS_MMAP, addr, uintptr(length), uintptr(prot), uintptr(flags), uintptr(fd), uintptr(offset))
 	if err != 0 {
-		if dmesgs {
-			dmesg("%v: %v FAIL", origin(1), err)
-		}
+		//if dmesgs {
+		dmesg("%v: %v FAIL", origin(1), err)
+		//}
 		t.setErrno(err)
 		return ^uintptr(0) // (void*)-1
 	}
