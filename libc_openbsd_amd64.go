@@ -87,7 +87,7 @@ func Xfopen64(t *TLS, pathname, mode uintptr) uintptr {
 // int lstat(const char *pathname, struct stat *statbuf);
 func Xlstat64(t *TLS, pathname, statbuf uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v statbuf=%v, (%v:)", t, statbuf, origin(2))
+		trc("t=%v pathname=%s statbuf=%v, (%v:)", t, GoString(pathname), statbuf, origin(2))
 	}
 	if err := unix.Lstat(GoString(pathname), (*unix.Stat_t)(unsafe.Pointer(statbuf))); err != nil {
 		if dmesgs {
@@ -106,7 +106,7 @@ func Xlstat64(t *TLS, pathname, statbuf uintptr) int32 {
 // int stat(const char *pathname, struct stat *statbuf);
 func Xstat64(t *TLS, pathname, statbuf uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v statbuf=%v, (%v:)", t, statbuf, origin(2))
+		trc("t=%v pathname=%s statbuf=%v, (%v:)", t, GoString(pathname), statbuf, origin(2))
 	}
 	if err := unix.Stat(GoString(pathname), (*unix.Stat_t)(unsafe.Pointer(statbuf))); err != nil {
 		if dmesgs {
@@ -325,12 +325,14 @@ func Xfcntl64(t *TLS, fd, cmd int32, args uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, args, origin(2))
 	}
-	var arg uintptr
-	if args != 0 {
-		arg = *(*uintptr)(unsafe.Pointer(args))
-	}
-	n, _, err := unix.Syscall(unix.SYS_FCNTL, uintptr(fd), uintptr(cmd), arg)
-	if err != 0 {
+	arg := 0
+	// TODO XXX
+	//if args != 0 {
+		// arg = *(*uintptr)(unsafe.Pointer(args))
+	// }
+	// FD should not be an int, but a pointer to the fd
+	n, err := unix.FcntlInt(uintptr(fd), int(cmd), arg)
+	if err != nil {
 		if dmesgs {
 			dmesg("%v: fd %v cmd %v", origin(1), fcntlCmdStr(fd), cmd)
 		}
