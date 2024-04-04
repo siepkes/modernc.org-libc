@@ -323,27 +323,31 @@ func Xlseek64(t *TLS, fd int32, offset types.Off_t, whence int32) types.Off_t {
 
 func Xfcntl64(t *TLS, fd, cmd int32, args uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, args, origin(2))
-	}
-	arg := 0
-	// TODO XXX
-	//if args != 0 {
-		// arg = *(*uintptr)(unsafe.Pointer(args))
-	// }
-	// FD should not be an int, but a pointer to the fd
-	n, err := unix.FcntlInt(uintptr(fd), int(cmd), arg)
-	if err != nil {
-		if dmesgs {
-			dmesg("%v: fd %v cmd %v", origin(1), fcntlCmdStr(fd), cmd)
-		}
-		t.setErrno(err)
-		return -1
+		trc("t=%v fd=%v cmd=%v args=%v, deref=%v (%v:)", t, fd, cmd, *(*int)(unsafe.Pointer(args)), *(*va_list)(unsafe.Pointer(args)), origin(2))
 	}
 
-	if dmesgs {
-		dmesg("%v: %d %s %#x: %d", origin(1), fd, fcntlCmdStr(cmd), arg, n)
+	switch cmd {
+	case fcntl.F_GETLK, fcntl.F_SETLK, fcntl.F_SETLKW:
+		trc("%+v:", *(*unix.Flock_t)(unsafe.Pointer(args)))
+		err := unix.FcntlFlock(uintptr(fd), int(cmd), (*unix.Flock_t)(unsafe.Pointer(args)))
+		if err != nil {
+			trc("%s", err.Error())
+			t.setErrno(err)
+			return -1
+		}
+	default:
+		n, err := unix.FcntlInt(uintptr(fd), int(cmd), *(*int)(unsafe.Pointer(args)))
+		if err != nil {
+			trc("%s", err.Error())
+			if dmesgs {
+				dmesg("%v: fd %v cmd %v", origin(1), fcntlCmdStr(fd), cmd)
+			}
+			t.setErrno(err)
+			return -1
+		}
+		return int32(n)
 	}
-	return int32(n)
+	return 0
 }
 
 // int rename(const char *oldpath, const char *newpath);
