@@ -35,11 +35,10 @@ func Xsigaction(t *TLS, signum int32, act, oldact uintptr) int32 {
 	}
 	panic(todo(""))
 	// if _, _, err := unix.Syscall(unix.SYS_SIGACTION, uintptr(signum), act, oldact); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
+	//      t.setErrno(err)
+	//      return -1
 	// }
-
-	// return 0
+	return 0
 }
 
 // FILE *fopen64(const char *pathname, const char *mode);
@@ -125,7 +124,7 @@ func Xstat64(t *TLS, pathname, statbuf uintptr) int32 {
 // int mkdir(const char *path, mode_t mode);
 func Xmkdir(t *TLS, path uintptr, mode types.Mode_t) int32 {
 	if __ccgo_strace {
-		trc("t=%v path=%v mode=%v, (%v:)", t, path, mode, origin(2))
+		trc("t=%v path=%v mode=%v, (%v:)", t, GoString(path), mode, origin(2))
 	}
 	if err := unix.Mkdir(GoString(path), uint32(mode)); err != nil {
 		if dmesgs {
@@ -144,7 +143,7 @@ func Xmkdir(t *TLS, path uintptr, mode types.Mode_t) int32 {
 // int access(const char *pathname, int mode);
 func Xaccess(t *TLS, pathname uintptr, mode int32) int32 {
 	if __ccgo_strace {
-		trc("t=%v pathname=%v mode=%v, (%v:)", t, pathname, mode, origin(2))
+		trc("t=%v pathname=%v mode=%v, (%v:)", t, GoString(pathname), mode, origin(2))
 	}
 	if err := unix.Access(GoString(pathname), uint32(mode)); err != nil {
 		if dmesgs {
@@ -163,7 +162,7 @@ func Xaccess(t *TLS, pathname uintptr, mode int32) int32 {
 // int unlink(const char *pathname);
 func Xunlink(t *TLS, pathname uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v pathname=%v, (%v:)", t, pathname, origin(2))
+		trc("t=%v pathname=%v, (%v:)", t, GoString(pathname), origin(2))
 	}
 	if err := unix.Unlink(GoString(pathname)); err != nil {
 		if dmesgs {
@@ -209,7 +208,7 @@ func Xreadlink(t *TLS, path, buf uintptr, bufsize types.Size_t) types.Ssize_t {
 // int symlink(const char *target, const char *linkpath);
 func Xsymlink(t *TLS, target, linkpath uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v linkpath=%v, (%v:)", t, linkpath, origin(2))
+		trc("t=%v linkpath=%v, (%v:)", t, GoString(linkpath), origin(2))
 	}
 	if err := unix.Symlink(GoString(target), GoString(linkpath)); err != nil {
 		if dmesgs {
@@ -228,7 +227,7 @@ func Xsymlink(t *TLS, target, linkpath uintptr) int32 {
 // int chmod(const char *pathname, mode_t mode)
 func Xchmod(t *TLS, pathname uintptr, mode types.Mode_t) int32 {
 	if __ccgo_strace {
-		trc("t=%v pathname=%v mode=%v, (%v:)", t, pathname, mode, origin(2))
+		trc("t=%v pathname=%v mode=%v, (%v:)", t, GoString(pathname), mode, origin(2))
 	}
 	if err := unix.Chmod(GoString(pathname), uint32(mode)); err != nil {
 		if dmesgs {
@@ -260,7 +259,7 @@ func Xtime(t *TLS, tloc uintptr) time.Time_t {
 // int utimes(const char *filename, const struct timeval times[2]);
 func Xutimes(t *TLS, filename, times uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v times=%v, (%v:)", t, times, origin(2))
+		trc("t=%v filename=%v, times=%v, (%v:)", t, GoString(filename), times, origin(2))
 	}
 	var a []unix.Timeval
 	if times != 0 {
@@ -299,7 +298,7 @@ func Xfstat64(t *TLS, fd int32, statbuf uintptr) int32 {
 		dmesg("%v: fd %d: ok", origin(1), fd)
 	}
 	if __ccgo_strace {
-		trc("statbuf=%v", *(*unix.Stat_t)(unsafe.Pointer(statbuf)))
+		//	trc("statbuf=%v", *(*unix.Stat_t)(unsafe.Pointer(statbuf)))
 	}
 	return 0
 }
@@ -324,35 +323,40 @@ func Xlseek64(t *TLS, fd int32, offset types.Off_t, whence int32) types.Off_t {
 	return types.Off_t(n)
 }
 
-func Xfcntl64(t *TLS, fd, cmd int32, args uintptr) int32 {
+// int fcntl(int fd, int cmd, ... /* arg */ );
+func Xfcntl64(t *TLS, fd, cmd int32, args uintptr) (r int32) {
 	if __ccgo_strace {
-		trc("t=%v fd=%v cmd=%v args=%+v (%v:)", t, fd, cmd, *(*int)(unsafe.Pointer(args)), origin(2))
+		// trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, args, origin(2))
+		// defer func() { trc("-> %v", r) }()
+	}
+	var err error
+	var p uintptr
+	var i int
+	switch cmd {
+	case fcntl.F_GETLK, fcntl.F_SETLK:
+		p = *(*uintptr)(unsafe.Pointer(args))
+		err = unix.FcntlFlock(uintptr(fd), int(cmd), (*unix.Flock_t)(unsafe.Pointer(p)))
+	case fcntl.F_GETFL:
+		i, err = unix.FcntlInt(uintptr(fd), int(cmd), 0)
+		r = int32(i)
+	case fcntl.F_SETFD, fcntl.F_SETFL:
+		arg := *(*int32)(unsafe.Pointer(args))
+		_, err = unix.FcntlInt(uintptr(fd), int(cmd), int(arg))
+	default:
+		panic(todo("%v: %v %v", origin(1), fd, cmd))
+	}
+	if err != nil {
+		if dmesgs {
+			dmesg("%v: fd %v cmd %v p %#x: %v FAIL", origin(1), fcntlCmdStr(fd), cmd, p, err)
+		}
+		t.setErrno(err)
+		return -1
 	}
 
-	switch cmd {
-	// ideally(?) we'd use FcntlFlock for lock calls... but it's just a wrapper for FnctlInt anyways....
-	// case fcntl.F_GETLK, fcntl.F_SETLK, fcntl.F_SETLKW:
-	case 65534: // unreachable
-		trc("%+v:", *(**unix.Flock_t)(unsafe.Pointer(args)))
-		err := unix.FcntlFlock(uintptr(fd), int(cmd), (*unix.Flock_t)(unsafe.Pointer(args)))
-		if err != nil {
-			trc("%s", err.Error())
-			t.setErrno(err)
-			return -1
-		}
-	default:
-		n, err := unix.FcntlInt(uintptr(fd), int(cmd), *(*int)(unsafe.Pointer(args)))
-		if err != nil {
-			trc("%s", err.Error())
-			if dmesgs {
-				dmesg("%v: fd %v cmd %v", origin(1), fcntlCmdStr(fd), cmd)
-			}
-			t.setErrno(err)
-			return -1
-		}
-		return int32(n)
+	if dmesgs {
+		dmesg("%v: %d %s %#x: ok", origin(1), fd, fcntlCmdStr(cmd), p)
 	}
-	return 0
+	return r
 }
 
 // int rename(const char *oldpath, const char *newpath);
@@ -418,7 +422,7 @@ func Xchown(t *TLS, pathname uintptr, owner types.Uid_t, group types.Gid_t) int3
 	if __ccgo_strace {
 		trc("t=%v pathname=%v owner=%v group=%v, (%v:)", t, pathname, owner, group, origin(2))
 	}
-	if _, _, err := unix.Syscall(unix.SYS_CHOWN, pathname, uintptr(owner), uintptr(group)); err != 0 {
+	if err := unix.Chown(GoString(pathname), int(owner), int(group)); err != nil {
 		t.setErrno(err)
 		return -1
 	}
@@ -666,7 +670,7 @@ func Xgetrlimit64(t *TLS, resource int32, rlim uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v resource=%v rlim=%v, (%v:)", t, resource, rlim, origin(2))
 	}
-	if _, _, err := unix.Syscall(unix.SYS_GETRLIMIT, uintptr(resource), uintptr(rlim), 0); err != 0 {
+	if err := unix.Getrlimit(int(resource), (*unix.Rlimit)(unsafe.Pointer(rlim))); err != nil {
 		t.setErrno(err)
 		return -1
 	}
