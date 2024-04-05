@@ -232,7 +232,7 @@ func Xchdir(t *TLS, path uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v path=%v, (%v:)", t, path, origin(2))
 	}
-	if err := unix.Chdir(*(*string)(unsafe.Pointer(path))); err != nil {
+	if err := unix.Chdir(GoString(path)); err != nil {
 		t.setErrno(err)
 		return -1
 	}
@@ -308,6 +308,9 @@ func Xopen64(t *TLS, pathname uintptr, flags int32, args uintptr) int32 {
 
 	if dmesgs {
 		dmesg("%v: %q flags %#x mode %#o: fd %v", origin(1), GoString(pathname), flags, mode, fd)
+	}
+	if __ccgo_strace {
+		trc("%s fd=%d", GoString(pathname), fd)
 	}
 	return int32(fd)
 }
@@ -431,7 +434,7 @@ func Xftruncate(t *TLS, fd int32, length types.Off_t) int32 {
 // int fcntl(int fd, int cmd, ... /* arg */ );
 func Xfcntl(t *TLS, fd, cmd int32, args uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, args, origin(2))
+		trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, (*va_list)(unsafe.Pointer(args)), origin(2))
 	}
 	return Xfcntl64(t, fd, cmd, args)
 }
@@ -441,7 +444,8 @@ func Xread(t *TLS, fd int32, buf uintptr, count types.Size_t) types.Ssize_t {
 	if __ccgo_strace {
 		trc("t=%v fd=%v buf=%v count=%v, (%v:)", t, fd, buf, count, origin(2))
 	}
-	n, err := unix.Read(int(fd), *(*[]byte)(unsafe.Pointer(buf))) // , uintptr(count))
+	bbuf := (*RawMem)(unsafe.Pointer(buf))[:count:count]
+	n, err := unix.Read(int(fd), bbuf)
 	if err != nil {
 		t.setErrno(err)
 		return -1
@@ -462,7 +466,8 @@ func Xwrite(t *TLS, fd int32, buf uintptr, count types.Size_t) types.Ssize_t {
 	const retry = 5
 	var err syscall.Errno
 	for i := 0; i < retry; i++ {
-		switch n, err := unix.Write(int(fd), *(*[]byte)(unsafe.Pointer(buf))); err {
+		bbuf := (*RawMem)(unsafe.Pointer(buf))[:count:count]
+		switch n, err := unix.Write(int(fd), bbuf); err {
 		case nil:
 			if dmesgs {
 				// dmesg("%v: %d %#x: %#x\n%s", origin(1), fd, count, n, hex.Dump(GoBytes(buf, int(n))))
@@ -470,7 +475,7 @@ func Xwrite(t *TLS, fd int32, buf uintptr, count types.Size_t) types.Ssize_t {
 			}
 			return types.Ssize_t(n)
 		default:
-		//case error.EAGAIN:
+			//case error.EAGAIN:
 			// nop
 		}
 	}
@@ -1352,16 +1357,17 @@ func Xfflush(t *TLS, stream uintptr) int32 {
 // size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
 func Xfread(t *TLS, ptr uintptr, size, nmemb types.Size_t, stream uintptr) types.Size_t {
 	if __ccgo_strace {
-		trc("t=%v ptr=%v nmemb=%v stream=%v, (%v:)", t, ptr, nmemb, stream, origin(2))
+		trc("t=%v ptr=%+v nmemb=%d stream=%v, (%v:)", t, unsafe.Slice((*byte)(unsafe.Pointer(ptr)), nmemb), nmemb, *(*int32)(unsafe.Pointer(stream)), origin(2))
 	}
-	m, err := unix.Read(int(file(stream).fd()), *(*[]byte)(unsafe.Pointer(ptr))) // , uintptr(size*nmemb))
+	buf := unsafe.Slice((*byte)(unsafe.Pointer(ptr)), nmemb)
+	m, err := unix.Read(int(file(stream).fd()), buf)
 	if err != nil {
 		file(stream).setErr()
 		return 0
 	}
 
 	if dmesgs {
-	// 	// dmesg("%v: %d %#x x %#x: %#x\n%s", origin(1), file(stream).fd(), size, nmemb, types.Size_t(m)/size, hex.Dump(GoBytes(ptr, int(m))))
+		// 	// dmesg("%v: %d %#x x %#x: %#x\n%s", origin(1), file(stream).fd(), size, nmemb, types.Size_t(m)/size, hex.Dump(GoBytes(ptr, int(m))))
 		dmesg("%v: %d %#x x %#x: %#x", origin(1), file(stream).fd(), size, nmemb, types.Size_t(m)/size)
 	}
 	return types.Size_t(m) / size
@@ -1830,13 +1836,16 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 		trc("t=%v addr=%v length=%v fd=%v offset=%v, (%v:)", t, addr, length, fd, offset, origin(2))
 	}
 
-	if addr != 0 {
+	if addr == 0 {
 		data, err := unix.Mmap(int(fd), int64(offset), int(length), int(prot), int(flags))
 		if err != nil {
 			t.setErrno(err)
 			return ^uintptr(0)
 		}
-		return uintptr(unsafe.Pointer(&data[0]))
+		if __ccgo_strace {
+			trc("Xmmap returning %v", uintptr(unsafe.Pointer(&data)))
+		}
+		return uintptr(unsafe.Pointer(&data)) //[0]
 	}
 
 	// On 2021-12-23, a new syscall for mmap was introduced:
@@ -1844,6 +1853,9 @@ func Xmmap(t *TLS, addr uintptr, length types.Size_t, prot, flags, fd int32, off
 	// 	49	STD NOLOCK	{ void *sys_mmap(void *addr, size_t len, int prot, \
 	// 			    int flags, int fd, off_t pos); }
 	//  src: https://github.com/golang/go/issues/59661
+	if __ccgo_strace {
+		trc("Xmmap with addr %d (%v:)", addr, origin(2))
+	}
 
 	const unix_SYS_MMAP = 49
 

@@ -285,7 +285,7 @@ func Xutimes(t *TLS, filename, times uintptr) int32 {
 // int fstat(int fd, struct stat *statbuf);
 func Xfstat64(t *TLS, fd int32, statbuf uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v fd=%v statbuf=%v, (%v:)", t, fd, statbuf, origin(2))
+		trc("t=%v fd=%v statbuf=%v, (%v:)", t, fd, *(*unix.Stat_t)(unsafe.Pointer(statbuf)), origin(2))
 	}
 	if err := unix.Fstat(int(fd), (*unix.Stat_t)(unsafe.Pointer(statbuf))); err != nil {
 		if dmesgs {
@@ -297,6 +297,9 @@ func Xfstat64(t *TLS, fd int32, statbuf uintptr) int32 {
 
 	if dmesgs {
 		dmesg("%v: fd %d: ok", origin(1), fd)
+	}
+	if __ccgo_strace {
+		trc("statbuf=%v", *(*unix.Stat_t)(unsafe.Pointer(statbuf)))
 	}
 	return 0
 }
@@ -323,12 +326,14 @@ func Xlseek64(t *TLS, fd int32, offset types.Off_t, whence int32) types.Off_t {
 
 func Xfcntl64(t *TLS, fd, cmd int32, args uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v fd=%v cmd=%v args=%v, deref=%v (%v:)", t, fd, cmd, *(*int)(unsafe.Pointer(args)), *(*va_list)(unsafe.Pointer(args)), origin(2))
+		trc("t=%v fd=%v cmd=%v args=%+v (%v:)", t, fd, cmd, *(*int)(unsafe.Pointer(args)), origin(2))
 	}
 
 	switch cmd {
-	case fcntl.F_GETLK, fcntl.F_SETLK, fcntl.F_SETLKW:
-		trc("%+v:", *(*unix.Flock_t)(unsafe.Pointer(args)))
+	// ideally(?) we'd use FcntlFlock for lock calls... but it's just a wrapper for FnctlInt anyways....
+	// case fcntl.F_GETLK, fcntl.F_SETLK, fcntl.F_SETLKW:
+	case 65534: // unreachable
+		trc("%+v:", *(**unix.Flock_t)(unsafe.Pointer(args)))
 		err := unix.FcntlFlock(uintptr(fd), int(cmd), (*unix.Flock_t)(unsafe.Pointer(args)))
 		if err != nil {
 			trc("%s", err.Error())
