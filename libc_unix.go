@@ -318,7 +318,7 @@ func Xtmpfile(t *TLS) uintptr {
 // FILE *fdopen(int fd, const char *mode);
 func Xfdopen(t *TLS, fd int32, mode uintptr) uintptr {
 	if __ccgo_strace {
-		trc("t=%v fd=%v mode=%v, (%v:)", t, fd, mode, origin(2))
+		trc("t=%v fd=%v mode=%v, (%v:)", t, fd, GoString(mode), origin(2))
 	}
 	m := strings.ReplaceAll(GoString(mode), "b", "")
 	switch m {
@@ -330,16 +330,18 @@ func Xfdopen(t *TLS, fd int32, mode uintptr) uintptr {
 		"w",
 		"w+":
 	default:
+		trc("t=%v fd=%v mode=%v m=%v (%v:)", t, fd, GoString(mode), m, origin(2))
 		t.setErrno(errno.EINVAL)
 		return 0
 	}
 
-	if p := newFile(t, fd); p != 0 {
-		return p
+	p := newFile(t, fd)
+	if p == 0 {
+		trc("t=%v fd=%v mode=%v p=%v (%v:)", t, fd, GoString(mode), p, origin(2))
+		t.setErrno(errno.EINVAL)
+		return 0
 	}
-
-	t.setErrno(errno.EINVAL)
-	return 0
+	return p
 }
 
 // struct passwd *getpwnam(const char *name);
