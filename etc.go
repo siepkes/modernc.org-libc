@@ -172,6 +172,10 @@ func removeObject(t uintptr) {
 }
 
 func (t *TLS) setErrno(err interface{}) {
+	if t == nil {
+		return
+	}
+
 	if memgrind {
 		if atomic.SwapInt32(&t.reentryGuard, 1) != 0 {
 			panic(todo("concurrent use of TLS instance %p", t))
