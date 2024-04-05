@@ -558,7 +558,8 @@ func Xmunmap(t *TLS, addr uintptr, length types.Size_t) int32 {
 	if __ccgo_strace {
 		trc("t=%v addr=%v length=%v, (%v:)", t, addr, length, origin(2))
 	}
-	if err := unix.Munmap(*((*[]byte)(unsafe.Pointer(addr)))); err != nil {
+	b := unsafe.Slice((*byte)(unsafe.Pointer(addr)), length)
+	if err := unix.Munmap(b); err != nil {
 		t.setErrno(err)
 		return -1
 	}
