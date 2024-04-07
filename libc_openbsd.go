@@ -300,7 +300,7 @@ func Xopen64(t *TLS, pathname uintptr, flags int32, args uintptr) int32 {
 	fd, err := unix.Open(GoString(pathname), int(flags), mode)
 	if err != nil {
 		if __ccgo_strace {
-			trc("%s", err.Error())
+			trc("%s: %s", err.Error(), GoString(pathname))
 		}
 		if dmesgs {
 			dmesg("%v: %q %#x: %v", origin(1), GoString(pathname), flags, err)
