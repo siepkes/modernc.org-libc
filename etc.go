@@ -173,7 +173,7 @@ func removeObject(t uintptr) {
 
 func (t *TLS) setErrno(err interface{}) {
 	if t == nil {
-		return
+		panic("nil TLS")
 	}
 
 	if memgrind {
@@ -572,7 +572,7 @@ func VaUintptr(app *uintptr) uintptr {
 	return v
 }
 
-func GetVaList(va uintptr) []string {
+func getVaList(va uintptr) []string {
 	r := []string{}
 
 	// each arg comes in pairs, the pointer to the string and a pointer to the size in bytes

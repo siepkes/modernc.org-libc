@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//go:build openbsd
-
 package libc // import "modernc.org/libc"
 
 import (
@@ -301,7 +299,9 @@ func Xopen64(t *TLS, pathname uintptr, flags int32, args uintptr) int32 {
 	}
 	fd, err := unix.Open(GoString(pathname), int(flags), mode)
 	if err != nil {
-		trc("%s", err.Error())
+		if __ccgo_strace {
+			trc("%s", err.Error())
+		}
 		if dmesgs {
 			dmesg("%v: %q %#x: %v", origin(1), GoString(pathname), flags, err)
 		}
@@ -433,7 +433,7 @@ func Xftruncate(t *TLS, fd int32, length types.Off_t) int32 {
 // int fcntl(int fd, int cmd, ... /* arg */ );
 func Xfcntl(t *TLS, fd, cmd int32, args uintptr) int32 {
 	if __ccgo_strace {
-		trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, (*va_list)(unsafe.Pointer(args)), origin(2))
+		trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, args, origin(2))
 	}
 	return Xfcntl64(t, fd, cmd, args)
 }
@@ -676,7 +676,7 @@ func Xexecvp(t *TLS, file, argv uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v argv=%v, (%v:)", t, argv, origin(2))
 	}
-	if  err := unix.Exec(GoString(file), GetVaList(argv), GetEnviron()); err != nil {
+	if  err := unix.Exec(GoString(file), getVaList(argv), GetEnviron()); err != nil {
 		t.setErrno(err)
 		return -1
 	}

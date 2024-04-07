@@ -117,11 +117,6 @@ func Xgethostname(t *TLS, name uintptr, slen types.Size_t) int32 {
 	if __ccgo_strace {
 		trc("t=%v name=%v slen=%v, (%v:)", t, name, slen, origin(2))
 	}
-	// is Size_t unsigned on all platforms?
-	if slen < 0 {
-		t.setErrno(errno.EINVAL)
-		return -1
-	}
 
 	if slen == 0 {
 		return 0
@@ -330,14 +325,12 @@ func Xfdopen(t *TLS, fd int32, mode uintptr) uintptr {
 		"w",
 		"w+":
 	default:
-		trc("t=%v fd=%v mode=%v m=%v (%v:)", t, fd, GoString(mode), m, origin(2))
 		t.setErrno(errno.EINVAL)
 		return 0
 	}
 
 	p := newFile(t, fd)
 	if p == 0 {
-		trc("t=%v fd=%v mode=%v p=%v (%v:)", t, fd, GoString(mode), p, origin(2))
 		t.setErrno(errno.EINVAL)
 		return 0
 	}
