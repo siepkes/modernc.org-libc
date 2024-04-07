@@ -41,7 +41,7 @@ import (
 )
 
 var (
-	startTime = gotime.Now() // For clock(3)
+	startTime    = gotime.Now() // For clock(3)
 	in6_addr_any in.In6_addr
 )
 
@@ -688,8 +688,7 @@ func Xumask(t *TLS, mask types.Mode_t) types.Mode_t {
 	if __ccgo_strace {
 		trc("t=%v mask=%v, (%v:)", t, mask, origin(2))
 	}
-	n, _, _ := unix.Syscall(unix.SYS_UMASK, uintptr(mask), 0, 0)
-	return types.Mode_t(n)
+	return types.Mode_t(unix.Umask(int(mask)))
 }
 
 // int execvp(const char *file, char *const argv[]);
@@ -697,6 +696,7 @@ func Xexecvp(t *TLS, file, argv uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v argv=%v, (%v:)", t, argv, origin(2))
 	}
+	panic(todo(""))
 	if _, _, err := unix.Syscall(unix.SYS_EXECVE, file, argv, Environ()); err != 0 {
 		t.setErrno(err)
 		return -1
@@ -710,12 +710,18 @@ func Xwaitpid(t *TLS, pid types.Pid_t, wstatus uintptr, optname int32) types.Pid
 	if __ccgo_strace {
 		trc("t=%v pid=%v wstatus=%v optname=%v, (%v:)", t, pid, wstatus, optname, origin(2))
 	}
-	n, _, err := unix.Syscall6(unix.SYS_WAIT4, uintptr(pid), wstatus, uintptr(optname), 0, 0, 0)
-	if err != 0 {
+	n, err := unix.Wait4(int(pid), (*unix.WaitStatus)(unsafe.Pointer(wstatus)), int(optname), nil)
+	if err != nil {
+		if dmesgs {
+			dmesg("%v: %v FAIL", origin(1), err)
+		}
 		t.setErrno(err)
 		return -1
 	}
 
+	if dmesgs {
+		dmesg("%v: ok", origin(1))
+	}
 	return types.Pid_t(n)
 }
 
@@ -2128,7 +2134,6 @@ func Xpwrite(t *TLS, fd int32, buf uintptr, count types.Size_t, offset types.Off
 	// 	}
 	return types.Ssize_t(n)
 }
-
 
 // int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 func Xsigaction(t *TLS, signum int32, act, oldact uintptr) int32 {
