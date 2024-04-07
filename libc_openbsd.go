@@ -7,6 +7,7 @@
 package libc // import "modernc.org/libc"
 
 import (
+	"encoding/hex"
 	"fmt"
 	"io"
 	"os"
@@ -216,7 +217,7 @@ func Xfgetc(t *TLS, stream uintptr) int32 {
 // int lstat(const char *pathname, struct stat *statbuf);
 func Xlstat(t *TLS, pathname, statbuf uintptr) int32 {
 	if __ccgo_strace {
-		// trc("t=%v statbuf=%v, (%v:)", t, statbuf, origin(2))
+		trc("t=%v statbuf=%v, (%v:)", t, statbuf, origin(2))
 	}
 	return Xlstat64(t, pathname, statbuf)
 }
@@ -224,7 +225,7 @@ func Xlstat(t *TLS, pathname, statbuf uintptr) int32 {
 // int stat(const char *pathname, struct stat *statbuf);
 func Xstat(t *TLS, pathname, statbuf uintptr) int32 {
 	if __ccgo_strace {
-		// trc("t=%v statbuf=%v, (%v:)", t, statbuf, origin(2))
+		trc("t=%v statbuf=%v, (%v:)", t, statbuf, origin(2))
 	}
 	return Xstat64(t, pathname, statbuf)
 }
@@ -239,9 +240,9 @@ func Xchdir(t *TLS, path uintptr) int32 {
 		return -1
 	}
 
-	// if dmesgs {
-	// 	dmesg("%v: %q: ok", origin(1), GoString(path))
-	// }
+	if dmesgs {
+		dmesg("%v: %q: ok", origin(1), GoString(path))
+	}
 	return 0
 }
 
@@ -323,10 +324,6 @@ func Xlseek(t *TLS, fd int32, offset types.Off_t, whence int32) types.Off_t {
 		trc("t=%v fd=%v offset=%v whence=%v, (%v:)", t, fd, offset, whence, origin(2))
 	}
 	return types.Off_t(Xlseek64(t, fd, offset, whence))
-}
-
-func whenceStr(whence int32) string {
-	panic(todo(""))
 }
 
 var fsyncStatbuf stat.Stat
@@ -436,7 +433,7 @@ func Xftruncate(t *TLS, fd int32, length types.Off_t) int32 {
 // int fcntl(int fd, int cmd, ... /* arg */ );
 func Xfcntl(t *TLS, fd, cmd int32, args uintptr) int32 {
 	if __ccgo_strace {
-		// trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, (*va_list)(unsafe.Pointer(args)), origin(2))
+		trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, (*va_list)(unsafe.Pointer(args)), origin(2))
 	}
 	return Xfcntl64(t, fd, cmd, args)
 }
@@ -454,7 +451,7 @@ func Xread(t *TLS, fd int32, buf uintptr, count types.Size_t) types.Ssize_t {
 	default:
 		n, err = unix.Read(int(fd), (*RawMem)(unsafe.Pointer(buf))[:count:count])
 		if dmesgs && err == nil {
-			// dmesg("%v: fd %v, count %#x, n %#x\n%s", origin(1), fd, count, n, hex.Dump((*RawMem)(unsafe.Pointer(buf))[:n:n]))
+			dmesg("%v: fd %v, count %#x, n %#x\n%s", origin(1), fd, count, n, hex.Dump((*RawMem)(unsafe.Pointer(buf))[:n:n]))
 		}
 	}
 	if err != nil {
@@ -468,23 +465,6 @@ func Xread(t *TLS, fd int32, buf uintptr, count types.Size_t) types.Ssize_t {
 		dmesg("%v: ok", origin(1))
 	}
 	return types.Ssize_t(n)
-
-	/*
-	   bbuf := (*RawMem)(unsafe.Pointer(buf))[:count:count]
-	   n, err := unix.Read(int(fd), bbuf)
-
-	   	if err != nil {
-	   		t.setErrno(err)
-	   		return -1
-	   	}
-
-	   	if dmesgs {
-	   		// dmesg("%v: %d %#x: %#x\n%s", origin(1), fd, count, n, hex.Dump(GoBytes(buf, int(n))))
-	   		dmesg("%v: fd %d, buf %#0x, count %#x: n %#x", origin(1), fd, count, n)
-	   	}
-
-	   return types.Ssize_t(n)
-	*/
 }
 
 // ssize_t write(int fd, const void *buf, size_t count);
@@ -696,8 +676,7 @@ func Xexecvp(t *TLS, file, argv uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v argv=%v, (%v:)", t, argv, origin(2))
 	}
-	panic(todo(""))
-	if _, _, err := unix.Syscall(unix.SYS_EXECVE, file, argv, Environ()); err != 0 {
+	if  err := unix.Exec(GoString(file), GetVaList(argv), GetEnviron()); err != nil {
 		t.setErrno(err)
 		return -1
 	}
