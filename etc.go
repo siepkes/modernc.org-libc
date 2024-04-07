@@ -575,16 +575,12 @@ func VaUintptr(app *uintptr) uintptr {
 func getVaList(va uintptr) []string {
 	r := []string{}
 
-	// each arg comes in pairs, the pointer to the string and a pointer to the size in bytes
-	// the strings are not null terminated, both are needed
 	for p := va; ; p += 8 {
 		st := *(*uintptr)(unsafe.Pointer(p))
 		if st == 0 {
 			return r
 		}
-		p += 8
-		siz := *(*int)(unsafe.Pointer(p))
-		r = append(r, GoString(st)[0:siz])
+		r = append(r, GoString(st))
 	}
 	return r
 }
