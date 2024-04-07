@@ -676,7 +676,7 @@ func Xexecvp(t *TLS, file, argv uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v argv=%v, (%v:)", t, argv, origin(2))
 	}
-	if  err := unix.Exec(GoString(file), getVaList(argv), GetEnviron()); err != nil {
+	if err := unix.Exec(GoString(file), getVaList(argv), GetEnviron()); err != nil {
 		t.setErrno(err)
 		return -1
 	}
@@ -2830,4 +2830,22 @@ func Xclock(t *TLS) time.Clock_t {
 		trc("t=%v, (%v:)", t, origin(2))
 	}
 	return time.Clock_t(gotime.Since(startTime) * gotime.Duration(time.CLOCKS_PER_SEC) / gotime.Second)
+}
+
+// ssize_t recvmsg(int sockfd, struct msghdr *msg, int flags);
+func Xrecvmsg(t *TLS, sockfd int32, msg uintptr, flags int32) types.Ssize_t {
+	if __ccgo_strace {
+		trc("t=%v sockfd=%v msg=%v flags=%v, (%v:)", t, sockfd, msg, flags, origin(2))
+	}
+	oob := []byte{}
+	buf := []byte{}
+
+	n, _, _, _, err := unix.Recvmsg(int(sockfd), buf, oob, int(flags))
+	if err != nil {
+		t.setErrno(err)
+		return -1
+	}
+	copy((*RawMem)(unsafe.Pointer(msg))[:n:n], buf[:])
+
+	return types.Ssize_t(n)
 }
