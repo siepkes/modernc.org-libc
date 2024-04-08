@@ -2790,7 +2790,7 @@ func newFtsent(t *TLS, info int, path string, stat *unix.Stat_t, err syscall.Err
 	return &fts.FTSENT{
 		Ffts_info:    uint16(info),
 		Ffts_path:    csp,
-		Ffts_pathlen: uint64(len(path)),
+		Ffts_pathlen: types.Size_t(len(path)),
 		Ffts_statp:   statp,
 		Ffts_errno:   int32(err),
 	}
@@ -2801,7 +2801,7 @@ func Xopendir(t *TLS, name uintptr) uintptr {
 	if __ccgo_strace {
 		trc("t=%v name=%v, (%v:)", t, name, origin(2))
 	}
-	p := Xmalloc(t, uint64(unsafe.Sizeof(darwinDir{})))
+	p := Xmalloc(t, types.Size_t(unsafe.Sizeof(darwinDir{})))
 	if p == 0 {
 		panic("OOM")
 	}
