@@ -480,7 +480,7 @@ func Xwrite(t *TLS, fd int32, buf uintptr, count types.Size_t) types.Ssize_t {
 	default:
 		n, err = unix.Write(int(fd), (*RawMem)(unsafe.Pointer(buf))[:count:count])
 		if dmesgs {
-			// dmesg("%v: fd %v, count %#x\n%s", origin(1), fd, count, hex.Dump((*RawMem)(unsafe.Pointer(buf))[:count:count]))
+			dmesg("%v: fd %v, count %#x\n%s", origin(1), fd, count, hex.Dump((*RawMem)(unsafe.Pointer(buf))[:count:count]))
 		}
 	}
 	if err != nil {
@@ -575,6 +575,7 @@ func Xgetsockopt(t *TLS, sockfd, level, optname int32, optval, optlen uintptr) i
 		trc("t=%v optname=%v optlen=%v, (%v:)", t, optname, optlen, origin(2))
 	}
 	if _, _, err := unix.Syscall6(unix.SYS_GETSOCKOPT, uintptr(sockfd), uintptr(level), uintptr(optname), optval, optlen, 0); err != 0 {
+		panic(todo("", "will fail on OpenBSD 7.5"))
 		t.setErrno(err)
 		return -1
 	}
@@ -589,6 +590,7 @@ func Xsetsockopt(t *TLS, sockfd, level, optname int32, optval uintptr, optlen so
 	}
 	if _, _, err := unix.Syscall6(unix.SYS_SETSOCKOPT, uintptr(sockfd), uintptr(level), uintptr(optname), optval, uintptr(optlen), 0); err != 0 {
 		t.setErrno(err)
+		panic(todo("", "will fail on OpenBSD 7.5"))
 		return -1
 	}
 
@@ -600,6 +602,7 @@ func Xioctl(t *TLS, fd int32, request ulong, va uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v fd=%v request=%v va=%v, (%v:)", t, fd, request, va, origin(2))
 	}
+
 	var argp uintptr
 	if va != 0 {
 		argp = VaUintptr(&va)
@@ -607,6 +610,7 @@ func Xioctl(t *TLS, fd int32, request ulong, va uintptr) int32 {
 	n, _, err := unix.Syscall(unix.SYS_IOCTL, uintptr(fd), uintptr(request), argp)
 	if err != 0 {
 		t.setErrno(err)
+		panic(todo("", "will fail on OpenBSD 7.5"))
 		return -1
 	}
 
@@ -620,9 +624,9 @@ func Xgetsockname(t *TLS, sockfd int32, addr, addrlen uintptr) int32 {
 	}
 	sn, err := unix.Getsockname(int(sockfd))
 	if err != nil {
-		// if dmesgs {
-		// 	dmesg("%v: fd %v: %v", origin(1), sockfd, err)
-		// }
+		if dmesgs {
+			dmesg("%v: fd %v: %v", origin(1), sockfd, err)
+		}
 		t.setErrno(err)
 		return -1
 	}
@@ -728,12 +732,13 @@ func Xrecv(t *TLS, sockfd int32, buf uintptr, len types.Size_t, flags int32) typ
 	if __ccgo_strace {
 		trc("t=%v sockfd=%v buf=%v len=%v flags=%v, (%v:)", t, sockfd, buf, len, flags, origin(2))
 	}
-	n, _, err := unix.Syscall6(unix.SYS_RECVFROM, uintptr(sockfd), buf, uintptr(len), uintptr(flags), 0, 0)
-	if err != 0 {
+	p := make([]byte, len)
+	n, _, err := unix.Recvfrom(int(sockfd), p, int(flags))
+	if err != nil {
 		t.setErrno(err)
 		return -1
 	}
-
+	copy((*RawMem)(unsafe.Pointer(buf))[:n:n], p[:])
 	return types.Ssize_t(n)
 }
 
@@ -742,13 +747,14 @@ func Xsend(t *TLS, sockfd int32, buf uintptr, len types.Size_t, flags int32) typ
 	if __ccgo_strace {
 		trc("t=%v sockfd=%v buf=%v len=%v flags=%v, (%v:)", t, sockfd, buf, len, flags, origin(2))
 	}
-	n, _, err := unix.Syscall6(unix.SYS_SENDTO, uintptr(sockfd), buf, uintptr(len), uintptr(flags), 0, 0)
-	if err != 0 {
+
+	p := unsafe.Slice((*byte)(unsafe.Pointer(buf)), len)
+	if err := unix.Send(int(sockfd), p, int(flags)); err != nil {
 		t.setErrno(err)
 		return -1
 	}
 
-	return types.Ssize_t(n)
+	return types.Ssize_t(len)
 }
 
 // int shutdown(int sockfd, int how);
@@ -756,7 +762,7 @@ func Xshutdown(t *TLS, sockfd, how int32) int32 {
 	if __ccgo_strace {
 		trc("t=%v how=%v, (%v:)", t, how, origin(2))
 	}
-	if _, _, err := unix.Syscall(unix.SYS_SHUTDOWN, uintptr(sockfd), uintptr(how), 0); err != 0 {
+	if err := unix.Shutdown(int(sockfd), int(how)); err != nil {
 		t.setErrno(err)
 		return -1
 	}
@@ -769,10 +775,18 @@ func Xgetpeername(t *TLS, sockfd int32, addr uintptr, addrlen uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v sockfd=%v addr=%v addrlen=%v, (%v:)", t, sockfd, addr, addrlen, origin(2))
 	}
-	if _, _, err := unix.Syscall(unix.SYS_GETPEERNAME, uintptr(sockfd), addr, uintptr(addrlen)); err != 0 {
+	sa, err := unix.Getpeername(int(sockfd))
+	if err != nil {
 		t.setErrno(err)
 		return -1
 	}
+	if __ccgo_strace {
+		trc("sa=%v", sa)
+	}
+
+	panic(todo(""))
+	// populate addr & addrlen from sa
+	// , addr, uintptr(addrlen))
 
 	return 0
 }
@@ -782,13 +796,13 @@ func Xsocket(t *TLS, domain, type1, protocol int32) int32 {
 	if __ccgo_strace {
 		trc("t=%v protocol=%v, (%v:)", t, protocol, origin(2))
 	}
-	n, _, err := unix.Syscall(unix.SYS_SOCKET, uintptr(domain), uintptr(type1), uintptr(protocol))
-	if err != 0 {
+	fd, err := unix.Socket(int(domain), int(type1), int(protocol))
+	if err != nil {
 		t.setErrno(err)
 		return -1
 	}
 
-	return int32(n)
+	return int32(fd)
 }
 
 // int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
@@ -796,13 +810,12 @@ func Xbind(t *TLS, sockfd int32, addr uintptr, addrlen uint32) int32 {
 	if __ccgo_strace {
 		trc("t=%v sockfd=%v addr=%v addrlen=%v, (%v:)", t, sockfd, addr, addrlen, origin(2))
 	}
-	n, _, err := unix.Syscall(unix.SYS_BIND, uintptr(sockfd), addr, uintptr(addrlen))
-	if err != 0 {
+	if err := unix.Bind(int(sockfd), *(*unix.Sockaddr)(unsafe.Pointer(addr))); err != nil {
 		t.setErrno(err)
 		return -1
 	}
 
-	return int32(n)
+	return 0
 }
 
 // int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
@@ -810,7 +823,7 @@ func Xconnect(t *TLS, sockfd int32, addr uintptr, addrlen uint32) int32 {
 	if __ccgo_strace {
 		trc("t=%v sockfd=%v addr=%v addrlen=%v, (%v:)", t, sockfd, addr, addrlen, origin(2))
 	}
-	if _, _, err := unix.Syscall(unix.SYS_CONNECT, uintptr(sockfd), addr, uintptr(addrlen)); err != 0 {
+	if err := unix.Connect(int(sockfd), *(*unix.Sockaddr)(unsafe.Pointer(addr))); err != nil {
 		t.setErrno(err)
 		return -1
 	}
@@ -823,7 +836,7 @@ func Xlisten(t *TLS, sockfd, backlog int32) int32 {
 	if __ccgo_strace {
 		trc("t=%v backlog=%v, (%v:)", t, backlog, origin(2))
 	}
-	if _, _, err := unix.Syscall(unix.SYS_LISTEN, uintptr(sockfd), uintptr(backlog), 0); err != 0 {
+	if err := unix.Listen(int(sockfd), int(backlog)); err != nil {
 		t.setErrno(err)
 		return -1
 	}
@@ -836,14 +849,19 @@ func Xaccept(t *TLS, sockfd int32, addr uintptr, addrlen uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v sockfd=%v addr=%v addrlen=%v, (%v:)", t, sockfd, addr, addrlen, origin(2))
 	}
-	panic(todo(""))
-	// n, _, err := unix.Syscall6(unix.SYS_ACCEPT4, uintptr(sockfd), addr, uintptr(addrlen), 0, 0, 0)
-	// if err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
 
-	// return int32(n)
+	nfd, sa, err := unix.Accept(int(sockfd))
+	if err != nil {
+		t.setErrno(err)
+		return -1
+	}
+	if __ccgo_strace {
+		trc("sa=%v", sa)
+	}
+
+	panic(todo(""))
+	// populate addr, addrlen from sa
+	return int32(nfd)
 }
 
 // int getrlimit(int resource, struct rlimit *rlim);
@@ -867,7 +885,7 @@ func Xsetrlimit64(t *TLS, resource int32, rlim uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v resource=%v rlim=%v, (%v:)", t, resource, rlim, origin(2))
 	}
-	if _, _, err := unix.Syscall(unix.SYS_SETRLIMIT, uintptr(resource), uintptr(rlim), 0); err != 0 {
+	if err := unix.Setrlimit(int(resource), (*unix.Rlimit)(unsafe.Pointer(rlim))); err != nil {
 		t.setErrno(err)
 		return -1
 	}
@@ -2119,12 +2137,7 @@ func Xsigaction(t *TLS, signum int32, act, oldact uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v signum=%v oldact=%v, (%v:)", t, signum, oldact, origin(2))
 	}
-	panic(todo(""))
-	// if _, _, err := unix.Syscall(unix.SYS_SIGACTION, uintptr(signum), act, oldact); err != 0 {
-	//      t.setErrno(err)
-	//      return -1
-	// }
-	return 0
+	panic(todo("SYS_SIGACTION not supported"))
 }
 
 // FILE *fopen64(const char *pathname, const char *mode);
@@ -2383,9 +2396,6 @@ func Xfstat64(t *TLS, fd int32, statbuf uintptr) int32 {
 	if dmesgs {
 		dmesg("%v: fd %d: ok", origin(1), fd)
 	}
-	if __ccgo_strace {
-		//	trc("statbuf=%v", *(*unix.Stat_t)(unsafe.Pointer(statbuf)))
-	}
 	return 0
 }
 
@@ -2412,8 +2422,8 @@ func Xlseek64(t *TLS, fd int32, offset types.Off_t, whence int32) types.Off_t {
 // int fcntl(int fd, int cmd, ... /* arg */ );
 func Xfcntl64(t *TLS, fd, cmd int32, args uintptr) (r int32) {
 	if __ccgo_strace {
-		// trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, args, origin(2))
-		// defer func() { trc("-> %v", r) }()
+		trc("t=%v cmd=%v args=%v, (%v:)", t, cmd, args, origin(2))
+		defer func() { trc("-> %v", r) }()
 	}
 	var err error
 	var p uintptr
@@ -2469,13 +2479,12 @@ func Xmknod(t *TLS, pathname uintptr, mode types.Mode_t, dev types.Dev_t) int32 
 	if __ccgo_strace {
 		trc("t=%v pathname=%v mode=%v dev=%v, (%v:)", t, pathname, mode, dev, origin(2))
 	}
-	panic(todo(""))
-	// if _, _, err := unix.Syscall(unix.SYS_MKNOD, pathname, uintptr(mode), uintptr(dev)); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if err := unix.Mknod(GoString(pathname), uint32(mode), int(dev)); err != nil {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return 0
+	return 0
 }
 
 // int utime(const char *filename, const struct utimbuf *times);
@@ -2521,13 +2530,11 @@ func Xlink(t *TLS, oldpath, newpath uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v newpath=%v, (%v:)", t, newpath, origin(2))
 	}
-	panic(todo(""))
-	// if _, _, err := unix.Syscall(unix.SYS_LINK, oldpath, newpath, 0); err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
-
-	// return 0
+	if err := unix.Link(GoString(oldpath), GoString(newpath)); err != nil {
+		t.setErrno(err)
+		return -1
+	}
+	return 0
 }
 
 // int dup2(int oldfd, int newfd);
@@ -2535,14 +2542,12 @@ func Xdup2(t *TLS, oldfd, newfd int32) int32 {
 	if __ccgo_strace {
 		trc("t=%v newfd=%v, (%v:)", t, newfd, origin(2))
 	}
-	panic(todo(""))
-	// n, _, err := unix.Syscall(unix.SYS_DUP2, uintptr(oldfd), uintptr(newfd), 0)
-	// if err != 0 {
-	// 	t.setErrno(err)
-	// 	return -1
-	// }
+	if err := unix.Dup2(int(oldfd), int(newfd)); err != nil {
+		t.setErrno(err)
+		return -1
+	}
 
-	// return int32(n)
+	return 0
 }
 
 // unsigned int alarm(unsigned int seconds);
@@ -2550,13 +2555,16 @@ func Xalarm(t *TLS, seconds uint32) uint32 {
 	if __ccgo_strace {
 		trc("t=%v seconds=%v, (%v:)", t, seconds, origin(2))
 	}
-	panic(todo(""))
-	// n, _, err := unix.Syscall(unix.SYS_ALARM, uintptr(seconds), 0, 0)
-	// if err != 0 {
-	// 	panic(todo(""))
-	// }
+	panic("SYS_ALARM not supported")
 
-	// return uint32(n)
+	/* n, err := unix.Alarm(uint(seconds))
+	if err != nil {
+		t.setErrno(err)
+		return 0
+	}
+
+	return uint32(n)
+	*/
 }
 
 // int getnameinfo(const struct sockaddr * restrict sa, socklen_t salen, char * restrict host, socklen_t hostlen, char * restrict serv,  socklen_t servlen, int flags);
