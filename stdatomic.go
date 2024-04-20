@@ -618,7 +618,7 @@ func X__atomic_loadInt8(t *TLS, ptr, ret uintptr, memorder int32) {
 }
 
 func X__atomic_loadUint8(t *TLS, ptr, ret uintptr, memorder int32) {
-	X__atomic_loadUint8(t, ptr, ret, memorder)
+	X__atomic_loadInt8(t, ptr, ret, memorder)
 }
 
 func X__atomic_loadInt16(t *TLS, ptr, ret uintptr, memorder int32) {
@@ -630,7 +630,7 @@ func X__atomic_loadInt16(t *TLS, ptr, ret uintptr, memorder int32) {
 }
 
 func X__atomic_loadUint16(t *TLS, ptr, ret uintptr, memorder int32) {
-	X__atomic_loadUint16(t, ptr, ret, memorder)
+	X__atomic_loadInt16(t, ptr, ret, memorder)
 }
 
 func X__atomic_loadInt32(t *TLS, ptr, ret uintptr, memorder int32) {
@@ -642,7 +642,7 @@ func X__atomic_loadInt32(t *TLS, ptr, ret uintptr, memorder int32) {
 }
 
 func X__atomic_loadUint32(t *TLS, ptr, ret uintptr, memorder int32) {
-	X__atomic_loadUint32(t, ptr, ret, memorder)
+	X__atomic_loadInt32(t, ptr, ret, memorder)
 }
 
 func X__atomic_loadInt64(t *TLS, ptr, ret uintptr, memorder int32) {
@@ -654,7 +654,7 @@ func X__atomic_loadInt64(t *TLS, ptr, ret uintptr, memorder int32) {
 }
 
 func X__atomic_loadUint64(t *TLS, ptr, ret uintptr, memorder int32) {
-	X__atomic_loadUint64(t, ptr, ret, memorder)
+	X__atomic_loadInt64(t, ptr, ret, memorder)
 }
 
 // ----
@@ -670,7 +670,7 @@ func X__atomic_storeInt8(t *TLS, ptr, val uintptr, memorder int32) {
 }
 
 func X__atomic_storeUint8(t *TLS, ptr, val uintptr, memorder int32) {
-	X__atomic_storeUint8(t, ptr, val, memorder)
+	X__atomic_storeInt8(t, ptr, val, memorder)
 }
 
 func X__atomic_storeInt16(t *TLS, ptr, val uintptr, memorder int32) {
@@ -682,7 +682,7 @@ func X__atomic_storeInt16(t *TLS, ptr, val uintptr, memorder int32) {
 }
 
 func X__atomic_storeUint16(t *TLS, ptr, val uintptr, memorder int32) {
-	X__atomic_storeUint16(t, ptr, val, memorder)
+	X__atomic_storeInt16(t, ptr, val, memorder)
 }
 
 func X__atomic_storeInt32(t *TLS, ptr, val uintptr, memorder int32) {
@@ -694,7 +694,7 @@ func X__atomic_storeInt32(t *TLS, ptr, val uintptr, memorder int32) {
 }
 
 func X__atomic_storeUint32(t *TLS, ptr, val uintptr, memorder int32) {
-	X__atomic_storeUint32(t, ptr, val, memorder)
+	X__atomic_storeInt32(t, ptr, val, memorder)
 }
 
 func X__atomic_storeInt64(t *TLS, ptr, val uintptr, memorder int32) {
@@ -706,5 +706,5 @@ func X__atomic_storeInt64(t *TLS, ptr, val uintptr, memorder int32) {
 }
 
 func X__atomic_storeUint64(t *TLS, ptr, val uintptr, memorder int32) {
-	X__atomic_storeUint64(t, ptr, val, memorder)
+	X__atomic_storeInt64(t, ptr, val, memorder)
 }
