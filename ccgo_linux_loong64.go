@@ -142810,7 +142810,7 @@ func Xvfwscanf(tls *TLS, f uintptr, fmt uintptr, ap Tva_list) (r int32) {
 				v9 = f + 8
 				*(*uintptr)(unsafe.Pointer(v9))--
 				v8 = *(*uintptr)(unsafe.Pointer(v9))
-				_ = uint32(*(*uint8)(unsafe.Pointer(v8)))
+				_ = *(*uint8)(unsafe.Pointer(v8))
 			} else {
 				Xungetwc(tls, uint32(c), f)
 			}
@@ -142851,7 +142851,7 @@ func Xvfwscanf(tls *TLS, f uintptr, fmt uintptr, ap Tva_list) (r int32) {
 					v19 = f + 8
 					*(*uintptr)(unsafe.Pointer(v19))--
 					v18 = *(*uintptr)(unsafe.Pointer(v19))
-					_ = uint32(*(*uint8)(unsafe.Pointer(v18)))
+					_ = *(*uint8)(unsafe.Pointer(v18))
 				} else {
 					Xungetwc(tls, uint32(c), f)
 				}
@@ -143007,7 +143007,7 @@ func Xvfwscanf(tls *TLS, f uintptr, fmt uintptr, ap Tva_list) (r int32) {
 				v31 = f + 8
 				*(*uintptr)(unsafe.Pointer(v31))--
 				v30 = *(*uintptr)(unsafe.Pointer(v31))
-				_ = uint32(*(*uint8)(unsafe.Pointer(v30)))
+				_ = *(*uint8)(unsafe.Pointer(v30))
 			} else {
 				Xungetwc(tls, uint32(c), f)
 			}
@@ -143149,7 +143149,7 @@ func Xvfwscanf(tls *TLS, f uintptr, fmt uintptr, ap Tva_list) (r int32) {
 					v44 = f + 8
 					*(*uintptr)(unsafe.Pointer(v44))--
 					v43 = *(*uintptr)(unsafe.Pointer(v44))
-					_ = uint32(*(*uint8)(unsafe.Pointer(v43)))
+					_ = *(*uint8)(unsafe.Pointer(v43))
 				} else {
 					Xungetwc(tls, uint32(c), f)
 				}
