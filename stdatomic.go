@@ -638,7 +638,7 @@ func X__atomic_loadInt32(t *TLS, ptr, ret uintptr, memorder int32) {
 
 	defer int32Mu.Unlock()
 
-	*(*int32)(unsafe.Pointer(ptr)) = *(*int32)(unsafe.Pointer(ret))
+	*(*int32)(unsafe.Pointer(ret)) = *(*int32)(unsafe.Pointer(ptr))
 }
 
 func X__atomic_loadUint32(t *TLS, ptr, ret uintptr, memorder int32) {
@@ -650,7 +650,7 @@ func X__atomic_loadInt64(t *TLS, ptr, ret uintptr, memorder int32) {
 
 	defer int64Mu.Unlock()
 
-	*(*int64)(unsafe.Pointer(ptr)) = *(*int64)(unsafe.Pointer(ret))
+	*(*int64)(unsafe.Pointer(ret)) = *(*int64)(unsafe.Pointer(ptr))
 }
 
 func X__atomic_loadUint64(t *TLS, ptr, ret uintptr, memorder int32) {
