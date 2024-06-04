@@ -29,7 +29,6 @@ import (
 
 	ccgo "modernc.org/ccgo/v4/lib"
 	util "modernc.org/fileutil/ccgo"
-	"modernc.org/libc/internal/archive"
 	"modernc.org/memory"
 )
 
@@ -1406,12 +1405,9 @@ func TestLibc(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	tempdir = "/tmp/dbg" //TODO-
-	t.Logf("tempdir=%v", tempdir)
 	mustShell(t, time.Minute, "sh", "-c", fmt.Sprintf("rm -rf %s", filepath.Join(tempdir, "*")))
 	libcTest := filepath.Join(tempdir, "libc-test")
 	mustCopyDir(t, libcTest, filepath.Join("testdata", "nsz.repo.hu", "libc-test"), nil)
-	mustShell(t, time.Hour, "tar", "-C", tempdir, "-xzf", archive.File)
 	cwd := util.MustAbsCwd(true)
 	mustInDir(t, libcTest, func() error {
 		mustShell(t, time.Minute, "go", "mod", "init", "example.com/libc_test")
