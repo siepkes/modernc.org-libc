@@ -1132,7 +1132,6 @@ func X__builtin_hypot(t *TLS, x float64, y float64) (r float64) {
 	return Xhypot(t, x, y)
 }
 
-
 func Xhypot(t *TLS, x, y float64) float64 {
 	if __ccgo_strace {
 		trc("t=%v y=%v, (%v:)", t, y, origin(2))
