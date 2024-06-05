@@ -246,7 +246,7 @@ flags:
 		for ; width != 0; width-- {
 			c, err := r.ReadByte()
 			if err != nil {
-				if match {
+				if match || err == io.EOF {
 					break hex
 				}
 
@@ -342,8 +342,38 @@ flags:
 		// hold the input sequence and the terminating null byte ('\0'), which is added
 		// automatically.  The input string stops at white space or at the maximum
 		// field width, whichever occurs first.
-		format++
-		panic(todo(""))
+		var c byte
+		var err error
+		arg := VaUintptr(args)
+		scans:
+		for ; width != 0; width-- {
+			if c, err = r.ReadByte(); err != nil {
+				if err != io.EOF {
+					nvalues = -1
+				}
+				break scans
+			}
+
+			switch c {
+			case ' ', '\t', '\n', '\r', '\v', '\f':
+				break scans
+			}
+
+			nvalues = 1
+			match = true
+			*(*byte)(unsafe.Pointer(arg)) = c
+			arg++
+		}
+		if match {
+			switch {
+			case width == 0:
+				r.UnreadByte()
+				arg--
+				fallthrough
+			default:
+				*(*byte)(unsafe.Pointer(arg)) = 0
+			}
+		}
 	case 'c':
 		// Matches a sequence of characters whose length is specified by the maximum
 		// field width (default 1); the next pointer must be a pointer to char, and
