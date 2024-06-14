@@ -1942,6 +1942,10 @@ func X__ms_vsnprintf(t *TLS, str uintptr, size types.Size_t, format, ap uintptr)
 	return Xvsnprintf(t, str, size, format, ap)
 }
 
+func X_vsnprintf(t *TLS, str uintptr, size types.Size_t, format, ap uintptr) int32 {
+	return Xvsnprintf(t, str, size, format, ap)
+}
+
 // int vfwscanf(FILE *stream, const wchar_t *format, va_list argptr;);
 func X__ms_vfwscanf(t *TLS, stream uintptr, format, ap uintptr) int32 {
 	panic(todo(""))

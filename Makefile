@@ -55,30 +55,69 @@ msvcrt:
 		--prefix-tagged-struct=T \
 		--prefix-tagged-union=T \
 		--prefix-typename=T \
+		--winapi=stdlib.h \
 		--winapi=string.h \
+		--winapi=time.h \
 		--winapi=wchar.h \
 		-build-lines=" " \
 		-eval-all-macros \
 		-hide __acrt_iob_func \
+		-hide __mingw_strtod \
 		-hide __mingw_vfwprintf \
 		-hide __mingw_vfwscanf \
 		-hide __mingw_vsnwprintf \
 		-hide __mingw_vswscanf \
+		-hide _byteswap_uint64 \
+		-hide _byteswap_ulong \
+		-hide _errno \
+		-hide _exit \
+		-hide _gmtime64 \
+		-hide _localtime64 \
+		-hide _mktime64 \
+		-hide _set_abort_behavior \
+		-hide _snwprintf \
 		-hide _strdup \
 		-hide _stricmp \
 		-hide _strnicmp \
+		-hide _time64 \
 		-hide _vsnwprintf \
 		-hide _wcsicmp \
 		-hide _wcsnicmp \
 		-hide _wgetenv \
+		-hide _wopen \
 		-hide _wputenv \
 		-hide _wtoi \
 		-hide _wunlink \
+		-hide abort \
+		-hide abs \
+		-hide atexit \
+		-hide atof \
+		-hide atoi \
+		-hide atol \
+		-hide bsearch \
+		-hide calloc \
+		-hide div \
+		-hide exit \
+		-hide free \
+		-hide getenv \
+		-hide labs \
+		-hide ldiv \
+		-hide llabs \
+		-hide lldiv \
+		-hide malloc \
+		-hide mblen \
+		-hide mbstowcs \
+		-hide mbtowc \
 		-hide memchr \
 		-hide memcmp \
 		-hide memcpy \
 		-hide memmove \
 		-hide memset \
+		-hide perror \
+		-hide putenv \
+		-hide qsort \
+		-hide rand \
+		-hide realloc \
 		-hide strcasecmp \
 		-hide strcat \
 		-hide strchr \
@@ -87,6 +126,7 @@ msvcrt:
 		-hide strcspn \
 		-hide strdup \
 		-hide strerror \
+		-hide strftime \
 		-hide strlen \
 		-hide strncmp \
 		-hide strncpy \
@@ -94,6 +134,11 @@ msvcrt:
 		-hide strrchr \
 		-hide strspn \
 		-hide strstr \
+		-hide strtol \
+		-hide strtoul \
+		-hide strtoull \
+		-hide system \
+		-hide tzset \
 		-hide wcrtomb \
 		-hide wcschr \
 		-hide wcscmp \
@@ -102,8 +147,11 @@ msvcrt:
 		-hide wcslen \
 		-hide wcsncmp \
 		-hide wcsrtombs \
+		-hide wcstombs \
+		-hide wctomb \
 		-import syscall \
 		-o $(MSVCRT) \
+		--prefix-macro m \
 		libmsvcrt.c \
 		2>&1 | tee -a log-generate
 	sed -i '/"modernc.org\/libc"/d' $(MSVCRT)
