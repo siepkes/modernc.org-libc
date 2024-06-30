@@ -1,10 +1,11 @@
-// Code generated for windows/amd64 by 'ccgo --cpp=/usr/bin/x86_64-w64-mingw32-gcc --goos=windows --goarch=amd64 --package-name libc --prefix-external=X --prefix-field=F --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --winapi-test dump --winapi=ctype.h --winapi=float.h --winapi=io.h --winapi=libucrt.c --winapi=locale.h --winapi=malloc.h --winapi=math.h --winapi=process.h --winapi=types.h --winapi=stat.h --winapi=stdio.h --winapi=stdlib.h --winapi=string.h --winapi=time.h --winapi=timeb.h --winapi=wchar.h --winapi=winbase.h -build-lines=  -eval-all-macros -hide __acrt_iob_func -hide _errno -hide _wgetenv -hide _wputenv -hide exit -hide lldiv -hide qsort -hide __sep__ -hide __create_locale -hide __free_locale -hide __get_current_locale -hide __iob_func -hide __lock_fhandle -hide __updatetlocinfo -hide __updatetmbcinfo -hide _beginthread -hide _beginthreadex -hide _endthreadex -hide _filbuf -hide _flsbuf -hide _get_amblksiz -hide _get_osplatform -hide _get_osver -hide _get_output_format -hide _get_sbh_threshold -hide _get_winmajor -hide _get_winminor -hide _get_winver -hide _heapadd -hide _heapset -hide _heapused -hide _matherr -hide _onexit -hide _set_amblksiz -hide _set_malloc_crt_max_wait -hide _set_output_format -hide _set_sbh_threshold -hide _strcmpi -hide _strnset_l -hide _strset_l -hide _unlock_fhandle -hide _wcsncpy_l -hide _wctime -hide _wctime_s -hide _wgetdcwd_nolock -hide access -hide at_quick_exit -hide atexit -hide chdir -hide chmod -hide chsize -hide close -hide creat -hide cwait -hide dup -hide dup2 -hide eof -hide execv -hide execve -hide execvp -hide execvpe -hide fcloseall -hide fdopen -hide fgetchar -hide fgetpos64 -hide filelength -hide fileno -hide flushall -hide fopen64 -hide fpreset -hide fputchar -hide fsetpos64 -hide ftime -hide fwide -hide getcwd -hide getpid -hide getw -hide isatty -hide itoa -hide lltoa -hide lltow -hide locking -hide lseek -hide lseek64 -hide ltoa -hide memccpy -hide memicmp -hide mempcpy -hide mkdir -hide mkstemp -hide mktemp -hide onexit -hide putenv -hide putw -hide read -hide rmdir -hide rmtmp -hide setmode -hide spawnv -hide spawnve -hide spawnvp -hide spawnvpe -hide strcasecmp -hide strcmpi -hide strdup -hide stricmp -hide strlwr -hide strlwr_l -hide strncasecmp -hide strnicmp -hide strnset -hide strrev -hide strset -hide strtok_r -hide strupr -hide swab -hide tell -hide tempnam -hide tzset -hide ulltoa -hide ulltow -hide ultoa -hide umask -hide unlink -hide wcsdup -hide wcsicmp -hide wcsicoll -hide wcslwr -hide wcsnicmp -hide wcsnset -hide wcsrev -hide wcsset -hide wcsupr -hide wmemchr -hide wmemcmp -hide wmemcpy -hide wmemmove -hide wmempcpy -hide wmemset -hide write -hide wtoll -ignore-link-errors -import syscall -keep-strings -o libc_windows_arm64.go libucrt.c', DO NOT EDIT.
+// Code generated for windows/amd64 by 'ccgo --cpp=/usr/bin/x86_64-w64-mingw32-gcc --goos=windows --goarch=amd64 --package-name libc --prefix-external=X --prefix-field=F --prefix-static-internal=_ --prefix-static-none=_ --prefix-tagged-struct=T --prefix-tagged-union=T --prefix-typename=T --winapi-test panic --winapi=ctype.h --winapi=float.h --winapi=io.h --winapi=libucrt.c --winapi=locale.h --winapi=malloc.h --winapi=math.h --winapi=process.h --winapi=types.h --winapi=stat.h --winapi=stdio.h --winapi=stdlib.h --winapi=string.h --winapi=time.h --winapi=timeb.h --winapi=wchar.h --winapi=winbase.h -build-lines=  -eval-all-macros -hide __acrt_iob_func -hide _errno -hide _wgetenv -hide _wputenv -hide exit -hide lldiv -hide qsort -hide __sep__ -hide __create_locale -hide __free_locale -hide __get_current_locale -hide __iob_func -hide __lock_fhandle -hide __updatetlocinfo -hide __updatetmbcinfo -hide _beginthread -hide _beginthreadex -hide _endthreadex -hide _filbuf -hide _flsbuf -hide _get_amblksiz -hide _get_osplatform -hide _get_osver -hide _get_output_format -hide _get_sbh_threshold -hide _get_winmajor -hide _get_winminor -hide _get_winver -hide _heapadd -hide _heapset -hide _heapused -hide _matherr -hide _onexit -hide _set_amblksiz -hide _set_malloc_crt_max_wait -hide _set_output_format -hide _set_sbh_threshold -hide _strcmpi -hide _strnset_l -hide _strset_l -hide _unlock_fhandle -hide _wcsncpy_l -hide _wctime -hide _wctime_s -hide _wgetdcwd_nolock -hide access -hide at_quick_exit -hide atexit -hide chdir -hide chmod -hide chsize -hide close -hide creat -hide cwait -hide dup -hide dup2 -hide eof -hide execv -hide execve -hide execvp -hide execvpe -hide fcloseall -hide fdopen -hide fgetchar -hide fgetpos64 -hide filelength -hide fileno -hide flushall -hide fopen64 -hide fpreset -hide fputchar -hide fsetpos64 -hide ftime -hide fwide -hide getcwd -hide getpid -hide getw -hide isatty -hide itoa -hide lltoa -hide lltow -hide locking -hide lseek -hide lseek64 -hide ltoa -hide memccpy -hide memicmp -hide mempcpy -hide mkdir -hide mkstemp -hide mktemp -hide onexit -hide putenv -hide putw -hide read -hide rmdir -hide rmtmp -hide setmode -hide spawnv -hide spawnve -hide spawnvp -hide spawnvpe -hide strcasecmp -hide strcmpi -hide strdup -hide stricmp -hide strlwr -hide strlwr_l -hide strncasecmp -hide strnicmp -hide strnset -hide strrev -hide strset -hide strtok_r -hide strupr -hide swab -hide tell -hide tempnam -hide tzset -hide ulltoa -hide ulltow -hide ultoa -hide umask -hide unlink -hide wcsdup -hide wcsicmp -hide wcsicoll -hide wcslwr -hide wcsnicmp -hide wcsnset -hide wcsrev -hide wcsset -hide wcsupr -hide wmemchr -hide wmemcmp -hide wmemcpy -hide wmemmove -hide wmempcpy -hide wmemset -hide write -hide wtoll -ignore-link-errors -import syscall -keep-strings -o libc_windows_arm64.go libucrt.c', DO NOT EDIT.
 
 package libc
 
 import (
 	"reflect"
 	"unsafe"
+
 
 	"syscall"
 )
@@ -862,6 +863,7 @@ type Tthreadlocinfo = struct {
 }
 
 var proc__pctype_func = dll.NewProc("__pctype_func")
+var _ = proc__pctype_func.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned short* __pctype_func(void);
 func X__pctype_func(tls *TLS) (r uintptr) {
@@ -880,6 +882,7 @@ func X__pctype_func(tls *TLS) (r uintptr) {
 }
 
 var proc_isctype = dll.NewProc("_isctype")
+var _ = proc_isctype.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isctype(int _C,int _Type);
 func X_isctype(tls *TLS, __C int32, __Type int32) (r int32) {
@@ -898,6 +901,7 @@ func X_isctype(tls *TLS, __C int32, __Type int32) (r int32) {
 }
 
 var proc_isctype_l = dll.NewProc("_isctype_l")
+var _ = proc_isctype_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isctype_l(int _C,int _Type,_locale_t _Locale);
 func X_isctype_l(tls *TLS, __C int32, __Type int32, __Locale T_locale_t) (r int32) {
@@ -916,6 +920,7 @@ func X_isctype_l(tls *TLS, __C int32, __Type int32, __Locale T_locale_t) (r int3
 }
 
 var procisalpha = dll.NewProc("isalpha")
+var _ = procisalpha.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isalpha(int _C);
 func Xisalpha(tls *TLS, __C int32) (r int32) {
@@ -934,6 +939,7 @@ func Xisalpha(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_isalpha_l = dll.NewProc("_isalpha_l")
+var _ = proc_isalpha_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isalpha_l(int _C,_locale_t _Locale);
 func X_isalpha_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -952,6 +958,7 @@ func X_isalpha_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var procisupper = dll.NewProc("isupper")
+var _ = procisupper.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isupper(int _C);
 func Xisupper(tls *TLS, __C int32) (r int32) {
@@ -970,6 +977,7 @@ func Xisupper(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_isupper_l = dll.NewProc("_isupper_l")
+var _ = proc_isupper_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isupper_l(int _C,_locale_t _Locale);
 func X_isupper_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -988,6 +996,7 @@ func X_isupper_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var procislower = dll.NewProc("islower")
+var _ = procislower.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) islower(int _C);
 func Xislower(tls *TLS, __C int32) (r int32) {
@@ -1006,6 +1015,7 @@ func Xislower(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_islower_l = dll.NewProc("_islower_l")
+var _ = proc_islower_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _islower_l(int _C,_locale_t _Locale);
 func X_islower_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1024,6 +1034,7 @@ func X_islower_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var procisdigit = dll.NewProc("isdigit")
+var _ = procisdigit.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isdigit(int _C);
 func Xisdigit(tls *TLS, __C int32) (r int32) {
@@ -1042,6 +1053,7 @@ func Xisdigit(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_isdigit_l = dll.NewProc("_isdigit_l")
+var _ = proc_isdigit_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isdigit_l(int _C,_locale_t _Locale);
 func X_isdigit_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1060,6 +1072,7 @@ func X_isdigit_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var procisxdigit = dll.NewProc("isxdigit")
+var _ = procisxdigit.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isxdigit(int _C);
 func Xisxdigit(tls *TLS, __C int32) (r int32) {
@@ -1078,6 +1091,7 @@ func Xisxdigit(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_isxdigit_l = dll.NewProc("_isxdigit_l")
+var _ = proc_isxdigit_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isxdigit_l(int _C,_locale_t _Locale);
 func X_isxdigit_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1096,6 +1110,7 @@ func X_isxdigit_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var procisspace = dll.NewProc("isspace")
+var _ = procisspace.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isspace(int _C);
 func Xisspace(tls *TLS, __C int32) (r int32) {
@@ -1114,6 +1129,7 @@ func Xisspace(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_isspace_l = dll.NewProc("_isspace_l")
+var _ = proc_isspace_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isspace_l(int _C,_locale_t _Locale);
 func X_isspace_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1132,6 +1148,7 @@ func X_isspace_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var procispunct = dll.NewProc("ispunct")
+var _ = procispunct.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) ispunct(int _C);
 func Xispunct(tls *TLS, __C int32) (r int32) {
@@ -1150,6 +1167,7 @@ func Xispunct(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_ispunct_l = dll.NewProc("_ispunct_l")
+var _ = proc_ispunct_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _ispunct_l(int _C,_locale_t _Locale);
 func X_ispunct_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1168,6 +1186,7 @@ func X_ispunct_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var procisalnum = dll.NewProc("isalnum")
+var _ = procisalnum.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isalnum(int _C);
 func Xisalnum(tls *TLS, __C int32) (r int32) {
@@ -1186,6 +1205,7 @@ func Xisalnum(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_isalnum_l = dll.NewProc("_isalnum_l")
+var _ = proc_isalnum_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isalnum_l(int _C,_locale_t _Locale);
 func X_isalnum_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1204,6 +1224,7 @@ func X_isalnum_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var procisprint = dll.NewProc("isprint")
+var _ = procisprint.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isprint(int _C);
 func Xisprint(tls *TLS, __C int32) (r int32) {
@@ -1222,6 +1243,7 @@ func Xisprint(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_isprint_l = dll.NewProc("_isprint_l")
+var _ = proc_isprint_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isprint_l(int _C,_locale_t _Locale);
 func X_isprint_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1240,6 +1262,7 @@ func X_isprint_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var procisgraph = dll.NewProc("isgraph")
+var _ = procisgraph.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isgraph(int _C);
 func Xisgraph(tls *TLS, __C int32) (r int32) {
@@ -1258,6 +1281,7 @@ func Xisgraph(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_isgraph_l = dll.NewProc("_isgraph_l")
+var _ = proc_isgraph_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isgraph_l(int _C,_locale_t _Locale);
 func X_isgraph_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1276,6 +1300,7 @@ func X_isgraph_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var prociscntrl = dll.NewProc("iscntrl")
+var _ = prociscntrl.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) iscntrl(int _C);
 func Xiscntrl(tls *TLS, __C int32) (r int32) {
@@ -1294,6 +1319,7 @@ func Xiscntrl(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_iscntrl_l = dll.NewProc("_iscntrl_l")
+var _ = proc_iscntrl_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iscntrl_l(int _C,_locale_t _Locale);
 func X_iscntrl_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1312,6 +1338,7 @@ func X_iscntrl_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var proctoupper = dll.NewProc("toupper")
+var _ = proctoupper.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) toupper(int _C);
 func Xtoupper(tls *TLS, __C int32) (r int32) {
@@ -1330,6 +1357,7 @@ func Xtoupper(tls *TLS, __C int32) (r int32) {
 }
 
 var proctolower = dll.NewProc("tolower")
+var _ = proctolower.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) tolower(int _C);
 func Xtolower(tls *TLS, __C int32) (r int32) {
@@ -1348,6 +1376,7 @@ func Xtolower(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_tolower = dll.NewProc("_tolower")
+var _ = proc_tolower.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _tolower(int _C);
 func X_tolower(tls *TLS, __C int32) (r int32) {
@@ -1366,6 +1395,7 @@ func X_tolower(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_tolower_l = dll.NewProc("_tolower_l")
+var _ = proc_tolower_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _tolower_l(int _C,_locale_t _Locale);
 func X_tolower_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1384,6 +1414,7 @@ func X_tolower_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var proc_toupper = dll.NewProc("_toupper")
+var _ = proc_toupper.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _toupper(int _C);
 func X_toupper(tls *TLS, __C int32) (r int32) {
@@ -1402,6 +1433,7 @@ func X_toupper(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_toupper_l = dll.NewProc("_toupper_l")
+var _ = proc_toupper_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _toupper_l(int _C,_locale_t _Locale);
 func X_toupper_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1420,6 +1452,7 @@ func X_toupper_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var proc__isascii = dll.NewProc("__isascii")
+var _ = proc__isascii.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __isascii(int _C);
 func X__isascii(tls *TLS, __C int32) (r int32) {
@@ -1438,6 +1471,7 @@ func X__isascii(tls *TLS, __C int32) (r int32) {
 }
 
 var proc__toascii = dll.NewProc("__toascii")
+var _ = proc__toascii.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __toascii(int _C);
 func X__toascii(tls *TLS, __C int32) (r int32) {
@@ -1456,6 +1490,7 @@ func X__toascii(tls *TLS, __C int32) (r int32) {
 }
 
 var proc__iscsymf = dll.NewProc("__iscsymf")
+var _ = proc__iscsymf.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iscsymf(int _C);
 func X__iscsymf(tls *TLS, __C int32) (r int32) {
@@ -1474,6 +1509,7 @@ func X__iscsymf(tls *TLS, __C int32) (r int32) {
 }
 
 var proc__iscsym = dll.NewProc("__iscsym")
+var _ = proc__iscsym.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iscsym(int _C);
 func X__iscsym(tls *TLS, __C int32) (r int32) {
@@ -1492,6 +1528,7 @@ func X__iscsym(tls *TLS, __C int32) (r int32) {
 }
 
 var procisblank = dll.NewProc("isblank")
+var _ = procisblank.Addr()
 
 // int __attribute__((__cdecl__)) isblank(int _C);
 func Xisblank(tls *TLS, __C int32) (r int32) {
@@ -1510,6 +1547,7 @@ func Xisblank(tls *TLS, __C int32) (r int32) {
 }
 
 var prociswalpha = dll.NewProc("iswalpha")
+var _ = prociswalpha.Addr()
 
 // int __attribute__((__cdecl__)) iswalpha(wint_t _C);
 func Xiswalpha(tls *TLS, __C Twint_t) (r int32) {
@@ -1528,6 +1566,7 @@ func Xiswalpha(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswalpha_l = dll.NewProc("_iswalpha_l")
+var _ = proc_iswalpha_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswalpha_l(wint_t _C,_locale_t _Locale);
 func X_iswalpha_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1546,6 +1585,7 @@ func X_iswalpha_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswupper = dll.NewProc("iswupper")
+var _ = prociswupper.Addr()
 
 // int __attribute__((__cdecl__)) iswupper(wint_t _C);
 func Xiswupper(tls *TLS, __C Twint_t) (r int32) {
@@ -1564,6 +1604,7 @@ func Xiswupper(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswupper_l = dll.NewProc("_iswupper_l")
+var _ = proc_iswupper_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswupper_l(wint_t _C,_locale_t _Locale);
 func X_iswupper_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1582,6 +1623,7 @@ func X_iswupper_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswlower = dll.NewProc("iswlower")
+var _ = prociswlower.Addr()
 
 // int __attribute__((__cdecl__)) iswlower(wint_t _C);
 func Xiswlower(tls *TLS, __C Twint_t) (r int32) {
@@ -1600,6 +1642,7 @@ func Xiswlower(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswlower_l = dll.NewProc("_iswlower_l")
+var _ = proc_iswlower_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswlower_l(wint_t _C,_locale_t _Locale);
 func X_iswlower_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1618,6 +1661,7 @@ func X_iswlower_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswdigit = dll.NewProc("iswdigit")
+var _ = prociswdigit.Addr()
 
 // int __attribute__((__cdecl__)) iswdigit(wint_t _C);
 func Xiswdigit(tls *TLS, __C Twint_t) (r int32) {
@@ -1636,6 +1680,7 @@ func Xiswdigit(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswdigit_l = dll.NewProc("_iswdigit_l")
+var _ = proc_iswdigit_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswdigit_l(wint_t _C,_locale_t _Locale);
 func X_iswdigit_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1654,6 +1699,7 @@ func X_iswdigit_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswxdigit = dll.NewProc("iswxdigit")
+var _ = prociswxdigit.Addr()
 
 // int __attribute__((__cdecl__)) iswxdigit(wint_t _C);
 func Xiswxdigit(tls *TLS, __C Twint_t) (r int32) {
@@ -1672,6 +1718,7 @@ func Xiswxdigit(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswxdigit_l = dll.NewProc("_iswxdigit_l")
+var _ = proc_iswxdigit_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswxdigit_l(wint_t _C,_locale_t _Locale);
 func X_iswxdigit_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1690,6 +1737,7 @@ func X_iswxdigit_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswspace = dll.NewProc("iswspace")
+var _ = prociswspace.Addr()
 
 // int __attribute__((__cdecl__)) iswspace(wint_t _C);
 func Xiswspace(tls *TLS, __C Twint_t) (r int32) {
@@ -1708,6 +1756,7 @@ func Xiswspace(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswspace_l = dll.NewProc("_iswspace_l")
+var _ = proc_iswspace_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswspace_l(wint_t _C,_locale_t _Locale);
 func X_iswspace_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1726,6 +1775,7 @@ func X_iswspace_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswpunct = dll.NewProc("iswpunct")
+var _ = prociswpunct.Addr()
 
 // int __attribute__((__cdecl__)) iswpunct(wint_t _C);
 func Xiswpunct(tls *TLS, __C Twint_t) (r int32) {
@@ -1744,6 +1794,7 @@ func Xiswpunct(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswpunct_l = dll.NewProc("_iswpunct_l")
+var _ = proc_iswpunct_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswpunct_l(wint_t _C,_locale_t _Locale);
 func X_iswpunct_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1762,6 +1813,7 @@ func X_iswpunct_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswalnum = dll.NewProc("iswalnum")
+var _ = prociswalnum.Addr()
 
 // int __attribute__((__cdecl__)) iswalnum(wint_t _C);
 func Xiswalnum(tls *TLS, __C Twint_t) (r int32) {
@@ -1780,6 +1832,7 @@ func Xiswalnum(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswalnum_l = dll.NewProc("_iswalnum_l")
+var _ = proc_iswalnum_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswalnum_l(wint_t _C,_locale_t _Locale);
 func X_iswalnum_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1798,6 +1851,7 @@ func X_iswalnum_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswprint = dll.NewProc("iswprint")
+var _ = prociswprint.Addr()
 
 // int __attribute__((__cdecl__)) iswprint(wint_t _C);
 func Xiswprint(tls *TLS, __C Twint_t) (r int32) {
@@ -1816,6 +1870,7 @@ func Xiswprint(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswprint_l = dll.NewProc("_iswprint_l")
+var _ = proc_iswprint_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswprint_l(wint_t _C,_locale_t _Locale);
 func X_iswprint_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1834,6 +1889,7 @@ func X_iswprint_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswgraph = dll.NewProc("iswgraph")
+var _ = prociswgraph.Addr()
 
 // int __attribute__((__cdecl__)) iswgraph(wint_t _C);
 func Xiswgraph(tls *TLS, __C Twint_t) (r int32) {
@@ -1852,6 +1908,7 @@ func Xiswgraph(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswgraph_l = dll.NewProc("_iswgraph_l")
+var _ = proc_iswgraph_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswgraph_l(wint_t _C,_locale_t _Locale);
 func X_iswgraph_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1870,6 +1927,7 @@ func X_iswgraph_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswcntrl = dll.NewProc("iswcntrl")
+var _ = prociswcntrl.Addr()
 
 // int __attribute__((__cdecl__)) iswcntrl(wint_t _C);
 func Xiswcntrl(tls *TLS, __C Twint_t) (r int32) {
@@ -1888,6 +1946,7 @@ func Xiswcntrl(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswcntrl_l = dll.NewProc("_iswcntrl_l")
+var _ = proc_iswcntrl_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcntrl_l(wint_t _C,_locale_t _Locale);
 func X_iswcntrl_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -1906,6 +1965,7 @@ func X_iswcntrl_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var prociswascii = dll.NewProc("iswascii")
+var _ = prociswascii.Addr()
 
 // int __attribute__((__cdecl__)) iswascii(wint_t _C);
 func Xiswascii(tls *TLS, __C Twint_t) (r int32) {
@@ -1924,6 +1984,7 @@ func Xiswascii(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var procisleadbyte = dll.NewProc("isleadbyte")
+var _ = procisleadbyte.Addr()
 
 // int __attribute__((__cdecl__)) isleadbyte(int _C);
 func Xisleadbyte(tls *TLS, __C int32) (r int32) {
@@ -1942,6 +2003,7 @@ func Xisleadbyte(tls *TLS, __C int32) (r int32) {
 }
 
 var proc_isleadbyte_l = dll.NewProc("_isleadbyte_l")
+var _ = proc_isleadbyte_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isleadbyte_l(int _C,_locale_t _Locale);
 func X_isleadbyte_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
@@ -1960,6 +2022,7 @@ func X_isleadbyte_l(tls *TLS, __C int32, __Locale T_locale_t) (r int32) {
 }
 
 var proctowupper = dll.NewProc("towupper")
+var _ = proctowupper.Addr()
 
 // wint_t __attribute__((__cdecl__)) towupper(wint_t _C);
 func Xtowupper(tls *TLS, __C Twint_t) (r Twint_t) {
@@ -1978,6 +2041,7 @@ func Xtowupper(tls *TLS, __C Twint_t) (r Twint_t) {
 }
 
 var proc_towupper_l = dll.NewProc("_towupper_l")
+var _ = proc_towupper_l.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _towupper_l(wint_t _C,_locale_t _Locale);
 func X_towupper_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r Twint_t) {
@@ -1996,6 +2060,7 @@ func X_towupper_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r Twint_t) {
 }
 
 var proctowlower = dll.NewProc("towlower")
+var _ = proctowlower.Addr()
 
 // wint_t __attribute__((__cdecl__)) towlower(wint_t _C);
 func Xtowlower(tls *TLS, __C Twint_t) (r Twint_t) {
@@ -2014,6 +2079,7 @@ func Xtowlower(tls *TLS, __C Twint_t) (r Twint_t) {
 }
 
 var proc_towlower_l = dll.NewProc("_towlower_l")
+var _ = proc_towlower_l.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _towlower_l(wint_t _C,_locale_t _Locale);
 func X_towlower_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r Twint_t) {
@@ -2032,6 +2098,7 @@ func X_towlower_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r Twint_t) {
 }
 
 var prociswctype = dll.NewProc("iswctype")
+var _ = prociswctype.Addr()
 
 // int __attribute__((__cdecl__)) iswctype(wint_t _C,wctype_t _Type);
 func Xiswctype(tls *TLS, __C Twint_t, __Type Twctype_t) (r int32) {
@@ -2050,6 +2117,7 @@ func Xiswctype(tls *TLS, __C Twint_t, __Type Twctype_t) (r int32) {
 }
 
 var proc_iswctype_l = dll.NewProc("_iswctype_l")
+var _ = proc_iswctype_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswctype_l(wint_t _C,wctype_t _Type,_locale_t _Locale);
 func X_iswctype_l(tls *TLS, __C Twint_t, __Type Twctype_t, __Locale T_locale_t) (r int32) {
@@ -2068,6 +2136,7 @@ func X_iswctype_l(tls *TLS, __C Twint_t, __Type Twctype_t, __Locale T_locale_t) 
 }
 
 var proc__iswcsymf = dll.NewProc("__iswcsymf")
+var _ = proc__iswcsymf.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iswcsymf(wint_t _C);
 func X__iswcsymf(tls *TLS, __C Twint_t) (r int32) {
@@ -2086,6 +2155,7 @@ func X__iswcsymf(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswcsymf_l = dll.NewProc("_iswcsymf_l")
+var _ = proc_iswcsymf_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcsymf_l(wint_t _C,_locale_t _Locale);
 func X_iswcsymf_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -2104,6 +2174,7 @@ func X_iswcsymf_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var proc__iswcsym = dll.NewProc("__iswcsym")
+var _ = proc__iswcsym.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iswcsym(wint_t _C);
 func X__iswcsym(tls *TLS, __C Twint_t) (r int32) {
@@ -2122,6 +2193,7 @@ func X__iswcsym(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc_iswcsym_l = dll.NewProc("_iswcsym_l")
+var _ = proc_iswcsym_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcsym_l(wint_t _C,_locale_t _Locale);
 func X_iswcsym_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
@@ -2140,6 +2212,7 @@ func X_iswcsym_l(tls *TLS, __C Twint_t, __Locale T_locale_t) (r int32) {
 }
 
 var procis_wctype = dll.NewProc("is_wctype")
+var _ = procis_wctype.Addr()
 
 // int __attribute__((__cdecl__)) is_wctype(wint_t _C,wctype_t _Type);
 func Xis_wctype(tls *TLS, __C Twint_t, __Type Twctype_t) (r int32) {
@@ -2158,6 +2231,7 @@ func Xis_wctype(tls *TLS, __C Twint_t, __Type Twctype_t) (r int32) {
 }
 
 var prociswblank = dll.NewProc("iswblank")
+var _ = prociswblank.Addr()
 
 // int __attribute__((__cdecl__)) iswblank(wint_t _C);
 func Xiswblank(tls *TLS, __C Twint_t) (r int32) {
@@ -2176,6 +2250,7 @@ func Xiswblank(tls *TLS, __C Twint_t) (r int32) {
 }
 
 var proc___mb_cur_max_func = dll.NewProc("___mb_cur_max_func")
+var _ = proc___mb_cur_max_func.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) ___mb_cur_max_func(void);
 func X___mb_cur_max_func(tls *TLS) (r int32) {
@@ -2227,6 +2302,7 @@ type T__mingw_ldbl_type_t = struct {
 }
 
 var proc__setusermatherr = dll.NewProc("__setusermatherr")
+var _ = proc__setusermatherr.Addr()
 
 // __attribute__ ((__dllimport__)) void __setusermatherr(int ( *)(struct _exception *));
 func X__setusermatherr(tls *TLS, _0 uintptr) {
@@ -2235,6 +2311,7 @@ func X__setusermatherr(tls *TLS, _0 uintptr) {
 }
 
 var procabs = dll.NewProc("abs")
+var _ = procabs.Addr()
 
 // int __attribute__((__cdecl__)) abs(int _X);
 func Xabs(tls *TLS, __X int32) (r int32) {
@@ -2253,6 +2330,7 @@ func Xabs(tls *TLS, __X int32) (r int32) {
 }
 
 var proclabs = dll.NewProc("labs")
+var _ = proclabs.Addr()
 
 // long __attribute__((__cdecl__)) labs(long _X);
 func Xlabs(tls *TLS, __X int32) (r int32) {
@@ -2300,6 +2378,7 @@ type Toff_t = int32
 type Tfpos_t = int64
 
 var proc_fsopen = dll.NewProc("_fsopen")
+var _ = proc_fsopen.Addr()
 
 // __attribute__ ((__dllimport__)) FILE * __attribute__((__cdecl__)) _fsopen(const char *_Filename,const char *_Mode,int _ShFlag);
 func X_fsopen(tls *TLS, __Filename uintptr, __Mode uintptr, __ShFlag int32) (r uintptr) {
@@ -2318,6 +2397,7 @@ func X_fsopen(tls *TLS, __Filename uintptr, __Mode uintptr, __ShFlag int32) (r u
 }
 
 var procclearerr = dll.NewProc("clearerr")
+var _ = procclearerr.Addr()
 
 // void __attribute__((__cdecl__)) clearerr(FILE *_File);
 func Xclearerr(tls *TLS, __File uintptr) {
@@ -2334,6 +2414,7 @@ func Xclearerr(tls *TLS, __File uintptr) {
 }
 
 var procfclose = dll.NewProc("fclose")
+var _ = procfclose.Addr()
 
 // int __attribute__((__cdecl__)) fclose(FILE *_File);
 func Xfclose(tls *TLS, __File uintptr) (r int32) {
@@ -2352,6 +2433,7 @@ func Xfclose(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_fcloseall = dll.NewProc("_fcloseall")
+var _ = proc_fcloseall.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fcloseall(void);
 func X_fcloseall(tls *TLS) (r int32) {
@@ -2370,6 +2452,7 @@ func X_fcloseall(tls *TLS) (r int32) {
 }
 
 var proc_fdopen = dll.NewProc("_fdopen")
+var _ = proc_fdopen.Addr()
 
 // __attribute__ ((__dllimport__)) FILE * __attribute__((__cdecl__)) _fdopen(int _FileHandle,const char *_Mode);
 func X_fdopen(tls *TLS, __FileHandle int32, __Mode uintptr) (r uintptr) {
@@ -2388,6 +2471,7 @@ func X_fdopen(tls *TLS, __FileHandle int32, __Mode uintptr) (r uintptr) {
 }
 
 var procfeof = dll.NewProc("feof")
+var _ = procfeof.Addr()
 
 // int __attribute__((__cdecl__)) feof(FILE *_File);
 func Xfeof(tls *TLS, __File uintptr) (r int32) {
@@ -2406,6 +2490,7 @@ func Xfeof(tls *TLS, __File uintptr) (r int32) {
 }
 
 var procferror = dll.NewProc("ferror")
+var _ = procferror.Addr()
 
 // int __attribute__((__cdecl__)) ferror(FILE *_File);
 func Xferror(tls *TLS, __File uintptr) (r int32) {
@@ -2424,6 +2509,7 @@ func Xferror(tls *TLS, __File uintptr) (r int32) {
 }
 
 var procfflush = dll.NewProc("fflush")
+var _ = procfflush.Addr()
 
 // int __attribute__((__cdecl__)) fflush(FILE *_File);
 func Xfflush(tls *TLS, __File uintptr) (r int32) {
@@ -2442,6 +2528,7 @@ func Xfflush(tls *TLS, __File uintptr) (r int32) {
 }
 
 var procfgetc = dll.NewProc("fgetc")
+var _ = procfgetc.Addr()
 
 // int __attribute__((__cdecl__)) fgetc(FILE *_File);
 func Xfgetc(tls *TLS, __File uintptr) (r int32) {
@@ -2460,6 +2547,7 @@ func Xfgetc(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_fgetchar = dll.NewProc("_fgetchar")
+var _ = proc_fgetchar.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fgetchar(void);
 func X_fgetchar(tls *TLS) (r int32) {
@@ -2478,6 +2566,7 @@ func X_fgetchar(tls *TLS) (r int32) {
 }
 
 var procfgetpos = dll.NewProc("fgetpos")
+var _ = procfgetpos.Addr()
 
 // int __attribute__((__cdecl__)) fgetpos(FILE * __restrict__ _File ,fpos_t * __restrict__ _Pos);
 func Xfgetpos(tls *TLS, __File uintptr, __Pos uintptr) (r int32) {
@@ -2496,6 +2585,7 @@ func Xfgetpos(tls *TLS, __File uintptr, __Pos uintptr) (r int32) {
 }
 
 var procfgets = dll.NewProc("fgets")
+var _ = procfgets.Addr()
 
 // char * __attribute__((__cdecl__)) fgets(char * __restrict__ _Buf,int _MaxCount,FILE * __restrict__ _File);
 func Xfgets(tls *TLS, __Buf uintptr, __MaxCount int32, __File uintptr) (r uintptr) {
@@ -2514,6 +2604,7 @@ func Xfgets(tls *TLS, __Buf uintptr, __MaxCount int32, __File uintptr) (r uintpt
 }
 
 var proc_fileno = dll.NewProc("_fileno")
+var _ = proc_fileno.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fileno(FILE *_File);
 func X_fileno(tls *TLS, __File uintptr) (r int32) {
@@ -2532,6 +2623,7 @@ func X_fileno(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_tempnam = dll.NewProc("_tempnam")
+var _ = proc_tempnam.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _tempnam(const char *_DirName,const char *_FilePrefix);
 func X_tempnam(tls *TLS, __DirName uintptr, __FilePrefix uintptr) (r uintptr) {
@@ -2550,6 +2642,7 @@ func X_tempnam(tls *TLS, __DirName uintptr, __FilePrefix uintptr) (r uintptr) {
 }
 
 var proc_flushall = dll.NewProc("_flushall")
+var _ = proc_flushall.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _flushall(void);
 func X_flushall(tls *TLS) (r int32) {
@@ -2568,6 +2661,7 @@ func X_flushall(tls *TLS) (r int32) {
 }
 
 var procfopen = dll.NewProc("fopen")
+var _ = procfopen.Addr()
 
 // FILE * __attribute__((__cdecl__)) fopen(const char * __restrict__ _Filename,const char * __restrict__ _Mode);
 func Xfopen(tls *TLS, __Filename uintptr, __Mode uintptr) (r uintptr) {
@@ -2586,6 +2680,7 @@ func Xfopen(tls *TLS, __Filename uintptr, __Mode uintptr) (r uintptr) {
 }
 
 var procfputc = dll.NewProc("fputc")
+var _ = procfputc.Addr()
 
 // int __attribute__((__cdecl__)) fputc(int _Ch,FILE *_File);
 func Xfputc(tls *TLS, __Ch int32, __File uintptr) (r int32) {
@@ -2604,6 +2699,7 @@ func Xfputc(tls *TLS, __Ch int32, __File uintptr) (r int32) {
 }
 
 var proc_fputchar = dll.NewProc("_fputchar")
+var _ = proc_fputchar.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fputchar(int _Ch);
 func X_fputchar(tls *TLS, __Ch int32) (r int32) {
@@ -2622,6 +2718,7 @@ func X_fputchar(tls *TLS, __Ch int32) (r int32) {
 }
 
 var procfputs = dll.NewProc("fputs")
+var _ = procfputs.Addr()
 
 // int __attribute__((__cdecl__)) fputs(const char * __restrict__ _Str,FILE * __restrict__ _File);
 func Xfputs(tls *TLS, __Str uintptr, __File uintptr) (r int32) {
@@ -2640,6 +2737,7 @@ func Xfputs(tls *TLS, __Str uintptr, __File uintptr) (r int32) {
 }
 
 var procfread = dll.NewProc("fread")
+var _ = procfread.Addr()
 
 // size_t __attribute__((__cdecl__)) fread(void * __restrict__ _DstBuf,size_t _ElementSize,size_t _Count,FILE * __restrict__ _File);
 func Xfread(tls *TLS, __DstBuf uintptr, __ElementSize Tsize_t, __Count Tsize_t, __File uintptr) (r Tsize_t) {
@@ -2658,6 +2756,7 @@ func Xfread(tls *TLS, __DstBuf uintptr, __ElementSize Tsize_t, __Count Tsize_t, 
 }
 
 var procfreopen = dll.NewProc("freopen")
+var _ = procfreopen.Addr()
 
 // FILE * __attribute__((__cdecl__)) freopen(const char * __restrict__ _Filename,const char * __restrict__ _Mode,FILE * __restrict__ _File);
 func Xfreopen(tls *TLS, __Filename uintptr, __Mode uintptr, __File uintptr) (r uintptr) {
@@ -2676,6 +2775,7 @@ func Xfreopen(tls *TLS, __Filename uintptr, __Mode uintptr, __File uintptr) (r u
 }
 
 var procfsetpos = dll.NewProc("fsetpos")
+var _ = procfsetpos.Addr()
 
 // int __attribute__((__cdecl__)) fsetpos(FILE *_File,const fpos_t *_Pos);
 func Xfsetpos(tls *TLS, __File uintptr, __Pos uintptr) (r int32) {
@@ -2694,6 +2794,7 @@ func Xfsetpos(tls *TLS, __File uintptr, __Pos uintptr) (r int32) {
 }
 
 var procfseek = dll.NewProc("fseek")
+var _ = procfseek.Addr()
 
 // int __attribute__((__cdecl__)) fseek(FILE *_File,long _Offset,int _Origin);
 func Xfseek(tls *TLS, __File uintptr, __Offset int32, __Origin int32) (r int32) {
@@ -2712,6 +2813,7 @@ func Xfseek(tls *TLS, __File uintptr, __Offset int32, __Origin int32) (r int32) 
 }
 
 var procftell = dll.NewProc("ftell")
+var _ = procftell.Addr()
 
 // long __attribute__((__cdecl__)) ftell(FILE *_File);
 func Xftell(tls *TLS, __File uintptr) (r int32) {
@@ -2730,6 +2832,7 @@ func Xftell(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_fseeki64 = dll.NewProc("_fseeki64")
+var _ = proc_fseeki64.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fseeki64(FILE *_File, long long _Offset,int _Origin);
 func X_fseeki64(tls *TLS, __File uintptr, __Offset int64, __Origin int32) (r int32) {
@@ -2748,6 +2851,7 @@ func X_fseeki64(tls *TLS, __File uintptr, __Offset int64, __Origin int32) (r int
 }
 
 var proc_ftelli64 = dll.NewProc("_ftelli64")
+var _ = proc_ftelli64.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _ftelli64(FILE *_File);
 func X_ftelli64(tls *TLS, __File uintptr) (r int64) {
@@ -2766,6 +2870,7 @@ func X_ftelli64(tls *TLS, __File uintptr) (r int64) {
 }
 
 var procfwrite = dll.NewProc("fwrite")
+var _ = procfwrite.Addr()
 
 // size_t __attribute__((__cdecl__)) fwrite(const void * __restrict__ _Str,size_t _Size,size_t _Count,FILE * __restrict__ _File);
 func Xfwrite(tls *TLS, __Str uintptr, __Size Tsize_t, __Count Tsize_t, __File uintptr) (r Tsize_t) {
@@ -2784,6 +2889,7 @@ func Xfwrite(tls *TLS, __Str uintptr, __Size Tsize_t, __Count Tsize_t, __File ui
 }
 
 var procgetc = dll.NewProc("getc")
+var _ = procgetc.Addr()
 
 // int __attribute__((__cdecl__)) getc(FILE *_File);
 func Xgetc(tls *TLS, __File uintptr) (r int32) {
@@ -2802,6 +2908,7 @@ func Xgetc(tls *TLS, __File uintptr) (r int32) {
 }
 
 var procgetchar = dll.NewProc("getchar")
+var _ = procgetchar.Addr()
 
 // int __attribute__((__cdecl__)) getchar(void);
 func Xgetchar(tls *TLS) (r int32) {
@@ -2820,6 +2927,7 @@ func Xgetchar(tls *TLS) (r int32) {
 }
 
 var proc_getmaxstdio = dll.NewProc("_getmaxstdio")
+var _ = proc_getmaxstdio.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _getmaxstdio(void);
 func X_getmaxstdio(tls *TLS) (r int32) {
@@ -2838,6 +2946,7 @@ func X_getmaxstdio(tls *TLS) (r int32) {
 }
 
 var procgets = dll.NewProc("gets")
+var _ = procgets.Addr()
 
 // char * __attribute__((__cdecl__)) gets(char *_Buffer);
 func Xgets(tls *TLS, __Buffer uintptr) (r uintptr) {
@@ -2856,6 +2965,7 @@ func Xgets(tls *TLS, __Buffer uintptr) (r uintptr) {
 }
 
 var proc_getw = dll.NewProc("_getw")
+var _ = proc_getw.Addr()
 
 // int __attribute__((__cdecl__)) _getw(FILE *_File);
 func X_getw(tls *TLS, __File uintptr) (r int32) {
@@ -2874,6 +2984,7 @@ func X_getw(tls *TLS, __File uintptr) (r int32) {
 }
 
 var procperror = dll.NewProc("perror")
+var _ = procperror.Addr()
 
 // void __attribute__((__cdecl__)) perror(const char *_ErrMsg);
 func Xperror(tls *TLS, __ErrMsg uintptr) {
@@ -2890,6 +3001,7 @@ func Xperror(tls *TLS, __ErrMsg uintptr) {
 }
 
 var proc_pclose = dll.NewProc("_pclose")
+var _ = proc_pclose.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _pclose(FILE *_File);
 func X_pclose(tls *TLS, __File uintptr) (r int32) {
@@ -2908,6 +3020,7 @@ func X_pclose(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_popen = dll.NewProc("_popen")
+var _ = proc_popen.Addr()
 
 // __attribute__ ((__dllimport__)) FILE * __attribute__((__cdecl__)) _popen(const char *_Command,const char *_Mode);
 func X_popen(tls *TLS, __Command uintptr, __Mode uintptr) (r uintptr) {
@@ -2926,6 +3039,7 @@ func X_popen(tls *TLS, __Command uintptr, __Mode uintptr) (r uintptr) {
 }
 
 var procputc = dll.NewProc("putc")
+var _ = procputc.Addr()
 
 // int __attribute__((__cdecl__)) putc(int _Ch,FILE *_File);
 func Xputc(tls *TLS, __Ch int32, __File uintptr) (r int32) {
@@ -2944,6 +3058,7 @@ func Xputc(tls *TLS, __Ch int32, __File uintptr) (r int32) {
 }
 
 var procputchar = dll.NewProc("putchar")
+var _ = procputchar.Addr()
 
 // int __attribute__((__cdecl__)) putchar(int _Ch);
 func Xputchar(tls *TLS, __Ch int32) (r int32) {
@@ -2962,6 +3077,7 @@ func Xputchar(tls *TLS, __Ch int32) (r int32) {
 }
 
 var procputs = dll.NewProc("puts")
+var _ = procputs.Addr()
 
 // int __attribute__((__cdecl__)) puts(const char *_Str);
 func Xputs(tls *TLS, __Str uintptr) (r int32) {
@@ -2980,6 +3096,7 @@ func Xputs(tls *TLS, __Str uintptr) (r int32) {
 }
 
 var proc_putw = dll.NewProc("_putw")
+var _ = proc_putw.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putw(int _Word,FILE *_File);
 func X_putw(tls *TLS, __Word int32, __File uintptr) (r int32) {
@@ -2998,6 +3115,7 @@ func X_putw(tls *TLS, __Word int32, __File uintptr) (r int32) {
 }
 
 var procremove = dll.NewProc("remove")
+var _ = procremove.Addr()
 
 // int __attribute__((__cdecl__)) remove(const char *_Filename);
 func Xremove(tls *TLS, __Filename uintptr) (r int32) {
@@ -3016,6 +3134,7 @@ func Xremove(tls *TLS, __Filename uintptr) (r int32) {
 }
 
 var procrename = dll.NewProc("rename")
+var _ = procrename.Addr()
 
 // int __attribute__((__cdecl__)) rename(const char *_OldFilename,const char *_NewFilename);
 func Xrename(tls *TLS, __OldFilename uintptr, __NewFilename uintptr) (r int32) {
@@ -3034,6 +3153,7 @@ func Xrename(tls *TLS, __OldFilename uintptr, __NewFilename uintptr) (r int32) {
 }
 
 var proc_unlink = dll.NewProc("_unlink")
+var _ = proc_unlink.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _unlink(const char *_Filename);
 func X_unlink(tls *TLS, __Filename uintptr) (r int32) {
@@ -3052,6 +3172,7 @@ func X_unlink(tls *TLS, __Filename uintptr) (r int32) {
 }
 
 var procrewind = dll.NewProc("rewind")
+var _ = procrewind.Addr()
 
 // void __attribute__((__cdecl__)) rewind(FILE *_File);
 func Xrewind(tls *TLS, __File uintptr) {
@@ -3068,6 +3189,7 @@ func Xrewind(tls *TLS, __File uintptr) {
 }
 
 var proc_rmtmp = dll.NewProc("_rmtmp")
+var _ = proc_rmtmp.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _rmtmp(void);
 func X_rmtmp(tls *TLS) (r int32) {
@@ -3086,6 +3208,7 @@ func X_rmtmp(tls *TLS) (r int32) {
 }
 
 var procsetbuf = dll.NewProc("setbuf")
+var _ = procsetbuf.Addr()
 
 // void __attribute__((__cdecl__)) setbuf(FILE * __restrict__ _File,char * __restrict__ _Buffer);
 func Xsetbuf(tls *TLS, __File uintptr, __Buffer uintptr) {
@@ -3102,6 +3225,7 @@ func Xsetbuf(tls *TLS, __File uintptr, __Buffer uintptr) {
 }
 
 var proc_setmaxstdio = dll.NewProc("_setmaxstdio")
+var _ = proc_setmaxstdio.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _setmaxstdio(int _Max);
 func X_setmaxstdio(tls *TLS, __Max int32) (r int32) {
@@ -3120,6 +3244,7 @@ func X_setmaxstdio(tls *TLS, __Max int32) (r int32) {
 }
 
 var procsetvbuf = dll.NewProc("setvbuf")
+var _ = procsetvbuf.Addr()
 
 // int __attribute__((__cdecl__)) setvbuf(FILE * __restrict__ _File,char * __restrict__ _Buf,int _Mode,size_t _Size);
 func Xsetvbuf(tls *TLS, __File uintptr, __Buf uintptr, __Mode int32, __Size Tsize_t) (r int32) {
@@ -3138,6 +3263,7 @@ func Xsetvbuf(tls *TLS, __File uintptr, __Buf uintptr, __Mode int32, __Size Tsiz
 }
 
 var proctmpfile = dll.NewProc("tmpfile")
+var _ = proctmpfile.Addr()
 
 // FILE * __attribute__((__cdecl__)) tmpfile(void);
 func Xtmpfile(tls *TLS) (r uintptr) {
@@ -3156,6 +3282,7 @@ func Xtmpfile(tls *TLS) (r uintptr) {
 }
 
 var proctmpnam = dll.NewProc("tmpnam")
+var _ = proctmpnam.Addr()
 
 // char * __attribute__((__cdecl__)) tmpnam(char *_Buffer);
 func Xtmpnam(tls *TLS, __Buffer uintptr) (r uintptr) {
@@ -3174,6 +3301,7 @@ func Xtmpnam(tls *TLS, __Buffer uintptr) (r uintptr) {
 }
 
 var procungetc = dll.NewProc("ungetc")
+var _ = procungetc.Addr()
 
 // int __attribute__((__cdecl__)) ungetc(int _Ch,FILE *_File);
 func Xungetc(tls *TLS, __Ch int32, __File uintptr) (r int32) {
@@ -3192,6 +3320,7 @@ func Xungetc(tls *TLS, __Ch int32, __File uintptr) (r int32) {
 }
 
 var proc_set_printf_count_output = dll.NewProc("_set_printf_count_output")
+var _ = proc_set_printf_count_output.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_printf_count_output(int _Value);
 func X_set_printf_count_output(tls *TLS, __Value int32) (r int32) {
@@ -3210,6 +3339,7 @@ func X_set_printf_count_output(tls *TLS, __Value int32) (r int32) {
 }
 
 var proc_get_printf_count_output = dll.NewProc("_get_printf_count_output")
+var _ = proc_get_printf_count_output.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _get_printf_count_output(void);
 func X_get_printf_count_output(tls *TLS) (r int32) {
@@ -3228,6 +3358,7 @@ func X_get_printf_count_output(tls *TLS) (r int32) {
 }
 
 var proc_wfsopen = dll.NewProc("_wfsopen")
+var _ = proc_wfsopen.Addr()
 
 // __attribute__ ((__dllimport__)) FILE * __attribute__((__cdecl__)) _wfsopen(const wchar_t *_Filename,const wchar_t *_Mode,int _ShFlag);
 func X_wfsopen(tls *TLS, __Filename uintptr, __Mode uintptr, __ShFlag int32) (r uintptr) {
@@ -3246,6 +3377,7 @@ func X_wfsopen(tls *TLS, __Filename uintptr, __Mode uintptr, __ShFlag int32) (r 
 }
 
 var procfgetwc = dll.NewProc("fgetwc")
+var _ = procfgetwc.Addr()
 
 // wint_t __attribute__((__cdecl__)) fgetwc(FILE *_File);
 func Xfgetwc(tls *TLS, __File uintptr) (r Twint_t) {
@@ -3264,6 +3396,7 @@ func Xfgetwc(tls *TLS, __File uintptr) (r Twint_t) {
 }
 
 var proc_fgetwchar = dll.NewProc("_fgetwchar")
+var _ = proc_fgetwchar.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fgetwchar(void);
 func X_fgetwchar(tls *TLS) (r Twint_t) {
@@ -3282,6 +3415,7 @@ func X_fgetwchar(tls *TLS) (r Twint_t) {
 }
 
 var procfputwc = dll.NewProc("fputwc")
+var _ = procfputwc.Addr()
 
 // wint_t __attribute__((__cdecl__)) fputwc(wchar_t _Ch,FILE *_File);
 func Xfputwc(tls *TLS, __Ch Twchar_t, __File uintptr) (r Twint_t) {
@@ -3300,6 +3434,7 @@ func Xfputwc(tls *TLS, __Ch Twchar_t, __File uintptr) (r Twint_t) {
 }
 
 var proc_fputwchar = dll.NewProc("_fputwchar")
+var _ = proc_fputwchar.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fputwchar(wchar_t _Ch);
 func X_fputwchar(tls *TLS, __Ch Twchar_t) (r Twint_t) {
@@ -3318,6 +3453,7 @@ func X_fputwchar(tls *TLS, __Ch Twchar_t) (r Twint_t) {
 }
 
 var procgetwc = dll.NewProc("getwc")
+var _ = procgetwc.Addr()
 
 // wint_t __attribute__((__cdecl__)) getwc(FILE *_File);
 func Xgetwc(tls *TLS, __File uintptr) (r Twint_t) {
@@ -3336,6 +3472,7 @@ func Xgetwc(tls *TLS, __File uintptr) (r Twint_t) {
 }
 
 var procgetwchar = dll.NewProc("getwchar")
+var _ = procgetwchar.Addr()
 
 // wint_t __attribute__((__cdecl__)) getwchar(void);
 func Xgetwchar(tls *TLS) (r Twint_t) {
@@ -3354,6 +3491,7 @@ func Xgetwchar(tls *TLS) (r Twint_t) {
 }
 
 var procputwc = dll.NewProc("putwc")
+var _ = procputwc.Addr()
 
 // wint_t __attribute__((__cdecl__)) putwc(wchar_t _Ch,FILE *_File);
 func Xputwc(tls *TLS, __Ch Twchar_t, __File uintptr) (r Twint_t) {
@@ -3372,6 +3510,7 @@ func Xputwc(tls *TLS, __Ch Twchar_t, __File uintptr) (r Twint_t) {
 }
 
 var procputwchar = dll.NewProc("putwchar")
+var _ = procputwchar.Addr()
 
 // wint_t __attribute__((__cdecl__)) putwchar(wchar_t _Ch);
 func Xputwchar(tls *TLS, __Ch Twchar_t) (r Twint_t) {
@@ -3390,6 +3529,7 @@ func Xputwchar(tls *TLS, __Ch Twchar_t) (r Twint_t) {
 }
 
 var procungetwc = dll.NewProc("ungetwc")
+var _ = procungetwc.Addr()
 
 // wint_t __attribute__((__cdecl__)) ungetwc(wint_t _Ch,FILE *_File);
 func Xungetwc(tls *TLS, __Ch Twint_t, __File uintptr) (r Twint_t) {
@@ -3408,6 +3548,7 @@ func Xungetwc(tls *TLS, __Ch Twint_t, __File uintptr) (r Twint_t) {
 }
 
 var procfgetws = dll.NewProc("fgetws")
+var _ = procfgetws.Addr()
 
 // wchar_t * __attribute__((__cdecl__)) fgetws(wchar_t * __restrict__ _Dst,int _SizeInWords,FILE * __restrict__ _File);
 func Xfgetws(tls *TLS, __Dst uintptr, __SizeInWords int32, __File uintptr) (r uintptr) {
@@ -3426,6 +3567,7 @@ func Xfgetws(tls *TLS, __Dst uintptr, __SizeInWords int32, __File uintptr) (r ui
 }
 
 var procfputws = dll.NewProc("fputws")
+var _ = procfputws.Addr()
 
 // int __attribute__((__cdecl__)) fputws(const wchar_t * __restrict__ _Str,FILE * __restrict__ _File);
 func Xfputws(tls *TLS, __Str uintptr, __File uintptr) (r int32) {
@@ -3444,6 +3586,7 @@ func Xfputws(tls *TLS, __Str uintptr, __File uintptr) (r int32) {
 }
 
 var proc_getws = dll.NewProc("_getws")
+var _ = proc_getws.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _getws(wchar_t *_String);
 func X_getws(tls *TLS, __String uintptr) (r uintptr) {
@@ -3462,6 +3605,7 @@ func X_getws(tls *TLS, __String uintptr) (r uintptr) {
 }
 
 var proc_putws = dll.NewProc("_putws")
+var _ = proc_putws.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putws(const wchar_t *_Str);
 func X_putws(tls *TLS, __Str uintptr) (r int32) {
@@ -3480,6 +3624,7 @@ func X_putws(tls *TLS, __Str uintptr) (r int32) {
 }
 
 var proc_wtempnam = dll.NewProc("_wtempnam")
+var _ = proc_wtempnam.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wtempnam(const wchar_t *_Directory,const wchar_t *_FilePrefix);
 func X_wtempnam(tls *TLS, __Directory uintptr, __FilePrefix uintptr) (r uintptr) {
@@ -3498,6 +3643,7 @@ func X_wtempnam(tls *TLS, __Directory uintptr, __FilePrefix uintptr) (r uintptr)
 }
 
 var proc_wfdopen = dll.NewProc("_wfdopen")
+var _ = proc_wfdopen.Addr()
 
 // __attribute__ ((__dllimport__)) FILE * __attribute__((__cdecl__)) _wfdopen(int _FileHandle ,const wchar_t *_Mode);
 func X_wfdopen(tls *TLS, __FileHandle int32, __Mode uintptr) (r uintptr) {
@@ -3516,6 +3662,7 @@ func X_wfdopen(tls *TLS, __FileHandle int32, __Mode uintptr) (r uintptr) {
 }
 
 var proc_wfopen = dll.NewProc("_wfopen")
+var _ = proc_wfopen.Addr()
 
 // __attribute__ ((__dllimport__)) FILE * __attribute__((__cdecl__)) _wfopen(const wchar_t * __restrict__ _Filename,const wchar_t *__restrict__ _Mode);
 func X_wfopen(tls *TLS, __Filename uintptr, __Mode uintptr) (r uintptr) {
@@ -3534,6 +3681,7 @@ func X_wfopen(tls *TLS, __Filename uintptr, __Mode uintptr) (r uintptr) {
 }
 
 var proc_wfreopen = dll.NewProc("_wfreopen")
+var _ = proc_wfreopen.Addr()
 
 // __attribute__ ((__dllimport__)) FILE * __attribute__((__cdecl__)) _wfreopen(const wchar_t * __restrict__ _Filename,const wchar_t * __restrict__ _Mode,FILE * __restrict__ _OldFile);
 func X_wfreopen(tls *TLS, __Filename uintptr, __Mode uintptr, __OldFile uintptr) (r uintptr) {
@@ -3552,6 +3700,7 @@ func X_wfreopen(tls *TLS, __Filename uintptr, __Mode uintptr, __OldFile uintptr)
 }
 
 var proc_wperror = dll.NewProc("_wperror")
+var _ = proc_wperror.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wperror(const wchar_t *_ErrMsg);
 func X_wperror(tls *TLS, __ErrMsg uintptr) {
@@ -3568,6 +3717,7 @@ func X_wperror(tls *TLS, __ErrMsg uintptr) {
 }
 
 var proc_wpopen = dll.NewProc("_wpopen")
+var _ = proc_wpopen.Addr()
 
 // __attribute__ ((__dllimport__)) FILE * __attribute__((__cdecl__)) _wpopen(const wchar_t *_Command,const wchar_t *_Mode);
 func X_wpopen(tls *TLS, __Command uintptr, __Mode uintptr) (r uintptr) {
@@ -3586,6 +3736,7 @@ func X_wpopen(tls *TLS, __Command uintptr, __Mode uintptr) (r uintptr) {
 }
 
 var proc_wremove = dll.NewProc("_wremove")
+var _ = proc_wremove.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wremove(const wchar_t *_Filename);
 func X_wremove(tls *TLS, __Filename uintptr) (r int32) {
@@ -3604,6 +3755,7 @@ func X_wremove(tls *TLS, __Filename uintptr) (r int32) {
 }
 
 var proc_wtmpnam = dll.NewProc("_wtmpnam")
+var _ = proc_wtmpnam.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wtmpnam(wchar_t *_Buffer);
 func X_wtmpnam(tls *TLS, __Buffer uintptr) (r uintptr) {
@@ -3622,6 +3774,7 @@ func X_wtmpnam(tls *TLS, __Buffer uintptr) (r uintptr) {
 }
 
 var proc_fgetwc_nolock = dll.NewProc("_fgetwc_nolock")
+var _ = proc_fgetwc_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fgetwc_nolock(FILE *_File);
 func X_fgetwc_nolock(tls *TLS, __File uintptr) (r Twint_t) {
@@ -3640,6 +3793,7 @@ func X_fgetwc_nolock(tls *TLS, __File uintptr) (r Twint_t) {
 }
 
 var proc_fputwc_nolock = dll.NewProc("_fputwc_nolock")
+var _ = proc_fputwc_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fputwc_nolock(wchar_t _Ch,FILE *_File);
 func X_fputwc_nolock(tls *TLS, __Ch Twchar_t, __File uintptr) (r Twint_t) {
@@ -3658,6 +3812,7 @@ func X_fputwc_nolock(tls *TLS, __Ch Twchar_t, __File uintptr) (r Twint_t) {
 }
 
 var proc_ungetwc_nolock = dll.NewProc("_ungetwc_nolock")
+var _ = proc_ungetwc_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _ungetwc_nolock(wint_t _Ch,FILE *_File);
 func X_ungetwc_nolock(tls *TLS, __Ch Twint_t, __File uintptr) (r Twint_t) {
@@ -3676,6 +3831,7 @@ func X_ungetwc_nolock(tls *TLS, __Ch Twint_t, __File uintptr) (r Twint_t) {
 }
 
 var proc_fgetc_nolock = dll.NewProc("_fgetc_nolock")
+var _ = proc_fgetc_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fgetc_nolock(FILE *_File);
 func X_fgetc_nolock(tls *TLS, __File uintptr) (r int32) {
@@ -3694,6 +3850,7 @@ func X_fgetc_nolock(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_fputc_nolock = dll.NewProc("_fputc_nolock")
+var _ = proc_fputc_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fputc_nolock(int _Char, FILE *_File);
 func X_fputc_nolock(tls *TLS, __Char int32, __File uintptr) (r int32) {
@@ -3712,6 +3869,7 @@ func X_fputc_nolock(tls *TLS, __Char int32, __File uintptr) (r int32) {
 }
 
 var proc_getc_nolock = dll.NewProc("_getc_nolock")
+var _ = proc_getc_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _getc_nolock(FILE *_File);
 func X_getc_nolock(tls *TLS, __File uintptr) (r int32) {
@@ -3730,6 +3888,7 @@ func X_getc_nolock(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_putc_nolock = dll.NewProc("_putc_nolock")
+var _ = proc_putc_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putc_nolock(int _Char, FILE *_File);
 func X_putc_nolock(tls *TLS, __Char int32, __File uintptr) (r int32) {
@@ -3748,6 +3907,7 @@ func X_putc_nolock(tls *TLS, __Char int32, __File uintptr) (r int32) {
 }
 
 var proc_lock_file = dll.NewProc("_lock_file")
+var _ = proc_lock_file.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _lock_file(FILE *_File);
 func X_lock_file(tls *TLS, __File uintptr) {
@@ -3764,6 +3924,7 @@ func X_lock_file(tls *TLS, __File uintptr) {
 }
 
 var proc_unlock_file = dll.NewProc("_unlock_file")
+var _ = proc_unlock_file.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _unlock_file(FILE *_File);
 func X_unlock_file(tls *TLS, __File uintptr) {
@@ -3780,6 +3941,7 @@ func X_unlock_file(tls *TLS, __File uintptr) {
 }
 
 var proc_fclose_nolock = dll.NewProc("_fclose_nolock")
+var _ = proc_fclose_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fclose_nolock(FILE *_File);
 func X_fclose_nolock(tls *TLS, __File uintptr) (r int32) {
@@ -3798,6 +3960,7 @@ func X_fclose_nolock(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_fflush_nolock = dll.NewProc("_fflush_nolock")
+var _ = proc_fflush_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fflush_nolock(FILE *_File);
 func X_fflush_nolock(tls *TLS, __File uintptr) (r int32) {
@@ -3816,6 +3979,7 @@ func X_fflush_nolock(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_fread_nolock = dll.NewProc("_fread_nolock")
+var _ = proc_fread_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _fread_nolock(void * __restrict__ _DstBuf,size_t _ElementSize,size_t _Count,FILE * __restrict__ _File);
 func X_fread_nolock(tls *TLS, __DstBuf uintptr, __ElementSize Tsize_t, __Count Tsize_t, __File uintptr) (r Tsize_t) {
@@ -3834,6 +3998,7 @@ func X_fread_nolock(tls *TLS, __DstBuf uintptr, __ElementSize Tsize_t, __Count T
 }
 
 var proc_fseek_nolock = dll.NewProc("_fseek_nolock")
+var _ = proc_fseek_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fseek_nolock(FILE *_File,long _Offset,int _Origin);
 func X_fseek_nolock(tls *TLS, __File uintptr, __Offset int32, __Origin int32) (r int32) {
@@ -3852,6 +4017,7 @@ func X_fseek_nolock(tls *TLS, __File uintptr, __Offset int32, __Origin int32) (r
 }
 
 var proc_ftell_nolock = dll.NewProc("_ftell_nolock")
+var _ = proc_ftell_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _ftell_nolock(FILE *_File);
 func X_ftell_nolock(tls *TLS, __File uintptr) (r int32) {
@@ -3870,6 +4036,7 @@ func X_ftell_nolock(tls *TLS, __File uintptr) (r int32) {
 }
 
 var proc_fseeki64_nolock = dll.NewProc("_fseeki64_nolock")
+var _ = proc_fseeki64_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fseeki64_nolock(FILE *_File, long long _Offset,int _Origin);
 func X_fseeki64_nolock(tls *TLS, __File uintptr, __Offset int64, __Origin int32) (r int32) {
@@ -3888,6 +4055,7 @@ func X_fseeki64_nolock(tls *TLS, __File uintptr, __Offset int64, __Origin int32)
 }
 
 var proc_ftelli64_nolock = dll.NewProc("_ftelli64_nolock")
+var _ = proc_ftelli64_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _ftelli64_nolock(FILE *_File);
 func X_ftelli64_nolock(tls *TLS, __File uintptr) (r int64) {
@@ -3906,6 +4074,7 @@ func X_ftelli64_nolock(tls *TLS, __File uintptr) (r int64) {
 }
 
 var proc_fwrite_nolock = dll.NewProc("_fwrite_nolock")
+var _ = proc_fwrite_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _fwrite_nolock(const void * __restrict__ _DstBuf,size_t _Size,size_t _Count,FILE * __restrict__ _File);
 func X_fwrite_nolock(tls *TLS, __DstBuf uintptr, __Size Tsize_t, __Count Tsize_t, __File uintptr) (r Tsize_t) {
@@ -3924,6 +4093,7 @@ func X_fwrite_nolock(tls *TLS, __DstBuf uintptr, __Size Tsize_t, __Count Tsize_t
 }
 
 var proc_ungetc_nolock = dll.NewProc("_ungetc_nolock")
+var _ = proc_ungetc_nolock.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _ungetc_nolock(int _Ch,FILE *_File);
 func X_ungetc_nolock(tls *TLS, __Ch int32, __File uintptr) (r int32) {
@@ -3942,6 +4112,7 @@ func X_ungetc_nolock(tls *TLS, __Ch int32, __File uintptr) (r int32) {
 }
 
 var proc_wspawnv = dll.NewProc("_wspawnv")
+var _ = proc_wspawnv.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnv(int _Mode,const wchar_t *_Filename,const wchar_t *const *_ArgList);
 func X_wspawnv(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
@@ -3960,6 +4131,7 @@ func X_wspawnv(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr) (r
 }
 
 var proc_wspawnve = dll.NewProc("_wspawnve")
+var _ = proc_wspawnve.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnve(int _Mode,const wchar_t *_Filename,const wchar_t *const *_ArgList,const wchar_t *const *_Env);
 func X_wspawnve(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr, __Env uintptr) (r Tintptr_t) {
@@ -3978,6 +4150,7 @@ func X_wspawnve(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr, _
 }
 
 var proc_wspawnvp = dll.NewProc("_wspawnvp")
+var _ = proc_wspawnvp.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnvp(int _Mode,const wchar_t *_Filename,const wchar_t *const *_ArgList);
 func X_wspawnvp(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
@@ -3996,6 +4169,7 @@ func X_wspawnvp(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr) (
 }
 
 var proc_wspawnvpe = dll.NewProc("_wspawnvpe")
+var _ = proc_wspawnvpe.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnvpe(int _Mode,const wchar_t *_Filename,const wchar_t *const *_ArgList,const wchar_t *const *_Env);
 func X_wspawnvpe(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr, __Env uintptr) (r Tintptr_t) {
@@ -4014,6 +4188,7 @@ func X_wspawnvpe(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr, 
 }
 
 var proc_spawnv = dll.NewProc("_spawnv")
+var _ = proc_spawnv.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _spawnv(int _Mode,const char *_Filename,const char *const *_ArgList);
 func X_spawnv(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
@@ -4032,6 +4207,7 @@ func X_spawnv(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr) (r 
 }
 
 var proc_spawnve = dll.NewProc("_spawnve")
+var _ = proc_spawnve.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _spawnve(int _Mode,const char *_Filename,const char *const *_ArgList,const char *const *_Env);
 func X_spawnve(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr, __Env uintptr) (r Tintptr_t) {
@@ -4050,6 +4226,7 @@ func X_spawnve(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr, __
 }
 
 var proc_spawnvp = dll.NewProc("_spawnvp")
+var _ = proc_spawnvp.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _spawnvp(int _Mode,const char *_Filename,const char *const *_ArgList);
 func X_spawnvp(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
@@ -4068,6 +4245,7 @@ func X_spawnvp(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr) (r
 }
 
 var proc_spawnvpe = dll.NewProc("_spawnvpe")
+var _ = proc_spawnvpe.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _spawnvpe(int _Mode,const char *_Filename,const char *const *_ArgList,const char *const *_Env);
 func X_spawnvpe(tls *TLS, __Mode int32, __Filename uintptr, __ArgList uintptr, __Env uintptr) (r Tintptr_t) {
@@ -4124,6 +4302,7 @@ type T_LDBL12 = struct {
 type T_purecall_handler = uintptr
 
 var proc_set_purecall_handler = dll.NewProc("_set_purecall_handler")
+var _ = proc_set_purecall_handler.Addr()
 
 // __attribute__ ((__dllimport__)) _purecall_handler __attribute__((__cdecl__)) _set_purecall_handler(_purecall_handler _Handler);
 func X_set_purecall_handler(tls *TLS, __Handler T_purecall_handler) (r T_purecall_handler) {
@@ -4132,6 +4311,7 @@ func X_set_purecall_handler(tls *TLS, __Handler T_purecall_handler) (r T_purecal
 }
 
 var proc_get_purecall_handler = dll.NewProc("_get_purecall_handler")
+var _ = proc_get_purecall_handler.Addr()
 
 // __attribute__ ((__dllimport__)) _purecall_handler __attribute__((__cdecl__)) _get_purecall_handler(void);
 func X_get_purecall_handler(tls *TLS) (r T_purecall_handler) {
@@ -4152,6 +4332,7 @@ func X_get_purecall_handler(tls *TLS) (r T_purecall_handler) {
 type T_invalid_parameter_handler = uintptr
 
 var proc_set_invalid_parameter_handler = dll.NewProc("_set_invalid_parameter_handler")
+var _ = proc_set_invalid_parameter_handler.Addr()
 
 // __attribute__ ((__dllimport__)) _invalid_parameter_handler __attribute__((__cdecl__)) _set_invalid_parameter_handler(_invalid_parameter_handler _Handler);
 func X_set_invalid_parameter_handler(tls *TLS, __Handler T_invalid_parameter_handler) (r T_invalid_parameter_handler) {
@@ -4160,6 +4341,7 @@ func X_set_invalid_parameter_handler(tls *TLS, __Handler T_invalid_parameter_han
 }
 
 var proc_get_invalid_parameter_handler = dll.NewProc("_get_invalid_parameter_handler")
+var _ = proc_get_invalid_parameter_handler.Addr()
 
 // __attribute__ ((__dllimport__)) _invalid_parameter_handler __attribute__((__cdecl__)) _get_invalid_parameter_handler(void);
 func X_get_invalid_parameter_handler(tls *TLS) (r T_invalid_parameter_handler) {
@@ -4178,6 +4360,7 @@ func X_get_invalid_parameter_handler(tls *TLS) (r T_invalid_parameter_handler) {
 }
 
 var proc_set_errno = dll.NewProc("_set_errno")
+var _ = proc_set_errno.Addr()
 
 // errno_t __attribute__((__cdecl__)) _set_errno(int _Value);
 func X_set_errno(tls *TLS, __Value int32) (r Terrno_t) {
@@ -4196,6 +4379,7 @@ func X_set_errno(tls *TLS, __Value int32) (r Terrno_t) {
 }
 
 var proc_get_errno = dll.NewProc("_get_errno")
+var _ = proc_get_errno.Addr()
 
 // errno_t __attribute__((__cdecl__)) _get_errno(int *_Value);
 func X_get_errno(tls *TLS, __Value uintptr) (r Terrno_t) {
@@ -4214,6 +4398,7 @@ func X_get_errno(tls *TLS, __Value uintptr) (r Terrno_t) {
 }
 
 var proc__doserrno = dll.NewProc("__doserrno")
+var _ = proc__doserrno.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned long * __attribute__((__cdecl__)) __doserrno(void);
 func X__doserrno(tls *TLS) (r uintptr) {
@@ -4232,6 +4417,7 @@ func X__doserrno(tls *TLS) (r uintptr) {
 }
 
 var proc_set_doserrno = dll.NewProc("_set_doserrno")
+var _ = proc_set_doserrno.Addr()
 
 // errno_t __attribute__((__cdecl__)) _set_doserrno(unsigned long _Value);
 func X_set_doserrno(tls *TLS, __Value uint32) (r Terrno_t) {
@@ -4250,6 +4436,7 @@ func X_set_doserrno(tls *TLS, __Value uint32) (r Terrno_t) {
 }
 
 var proc_get_doserrno = dll.NewProc("_get_doserrno")
+var _ = proc_get_doserrno.Addr()
 
 // errno_t __attribute__((__cdecl__)) _get_doserrno(unsigned long *_Value);
 func X_get_doserrno(tls *TLS, __Value uintptr) (r Terrno_t) {
@@ -4268,6 +4455,7 @@ func X_get_doserrno(tls *TLS, __Value uintptr) (r Terrno_t) {
 }
 
 var proc__sys_errlist = dll.NewProc("__sys_errlist")
+var _ = proc__sys_errlist.Addr()
 
 // __attribute__ ((__dllimport__)) char ** __attribute__((__cdecl__)) __sys_errlist(void);
 func X__sys_errlist(tls *TLS) (r uintptr) {
@@ -4286,6 +4474,7 @@ func X__sys_errlist(tls *TLS) (r uintptr) {
 }
 
 var proc__sys_nerr = dll.NewProc("__sys_nerr")
+var _ = proc__sys_nerr.Addr()
 
 // __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __sys_nerr(void);
 func X__sys_nerr(tls *TLS) (r uintptr) {
@@ -4304,6 +4493,7 @@ func X__sys_nerr(tls *TLS) (r uintptr) {
 }
 
 var proc__p___argv = dll.NewProc("__p___argv")
+var _ = proc__p___argv.Addr()
 
 // __attribute__ ((__dllimport__)) char *** __attribute__((__cdecl__)) __p___argv(void);
 func X__p___argv(tls *TLS) (r uintptr) {
@@ -4322,6 +4512,7 @@ func X__p___argv(tls *TLS) (r uintptr) {
 }
 
 var proc__p__fmode = dll.NewProc("__p__fmode")
+var _ = proc__p__fmode.Addr()
 
 // __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __p__fmode(void);
 func X__p__fmode(tls *TLS) (r uintptr) {
@@ -4340,6 +4531,7 @@ func X__p__fmode(tls *TLS) (r uintptr) {
 }
 
 var proc__p___argc = dll.NewProc("__p___argc")
+var _ = proc__p___argc.Addr()
 
 // __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __p___argc(void);
 func X__p___argc(tls *TLS) (r uintptr) {
@@ -4358,6 +4550,7 @@ func X__p___argc(tls *TLS) (r uintptr) {
 }
 
 var proc__p___wargv = dll.NewProc("__p___wargv")
+var _ = proc__p___wargv.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t *** __attribute__((__cdecl__)) __p___wargv(void);
 func X__p___wargv(tls *TLS) (r uintptr) {
@@ -4376,6 +4569,7 @@ func X__p___wargv(tls *TLS) (r uintptr) {
 }
 
 var proc__p__environ = dll.NewProc("__p__environ")
+var _ = proc__p__environ.Addr()
 
 // __attribute__ ((__dllimport__)) char *** __attribute__((__cdecl__)) __p__environ(void);
 func X__p__environ(tls *TLS) (r uintptr) {
@@ -4394,6 +4588,7 @@ func X__p__environ(tls *TLS) (r uintptr) {
 }
 
 var proc__p__wenviron = dll.NewProc("__p__wenviron")
+var _ = proc__p__wenviron.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t *** __attribute__((__cdecl__)) __p__wenviron(void);
 func X__p__wenviron(tls *TLS) (r uintptr) {
@@ -4412,6 +4607,7 @@ func X__p__wenviron(tls *TLS) (r uintptr) {
 }
 
 var proc__p__pgmptr = dll.NewProc("__p__pgmptr")
+var _ = proc__p__pgmptr.Addr()
 
 // __attribute__ ((__dllimport__)) char ** __attribute__((__cdecl__)) __p__pgmptr(void);
 func X__p__pgmptr(tls *TLS) (r uintptr) {
@@ -4430,6 +4626,7 @@ func X__p__pgmptr(tls *TLS) (r uintptr) {
 }
 
 var proc__p__wpgmptr = dll.NewProc("__p__wpgmptr")
+var _ = proc__p__wpgmptr.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t ** __attribute__((__cdecl__)) __p__wpgmptr(void);
 func X__p__wpgmptr(tls *TLS) (r uintptr) {
@@ -4448,6 +4645,7 @@ func X__p__wpgmptr(tls *TLS) (r uintptr) {
 }
 
 var proc_get_pgmptr = dll.NewProc("_get_pgmptr")
+var _ = proc_get_pgmptr.Addr()
 
 // errno_t __attribute__((__cdecl__)) _get_pgmptr(char **_Value);
 func X_get_pgmptr(tls *TLS, __Value uintptr) (r Terrno_t) {
@@ -4466,6 +4664,7 @@ func X_get_pgmptr(tls *TLS, __Value uintptr) (r Terrno_t) {
 }
 
 var proc_get_wpgmptr = dll.NewProc("_get_wpgmptr")
+var _ = proc_get_wpgmptr.Addr()
 
 // errno_t __attribute__((__cdecl__)) _get_wpgmptr(wchar_t **_Value);
 func X_get_wpgmptr(tls *TLS, __Value uintptr) (r Terrno_t) {
@@ -4484,6 +4683,7 @@ func X_get_wpgmptr(tls *TLS, __Value uintptr) (r Terrno_t) {
 }
 
 var proc_set_fmode = dll.NewProc("_set_fmode")
+var _ = proc_set_fmode.Addr()
 
 // __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _set_fmode(int _Mode);
 func X_set_fmode(tls *TLS, __Mode int32) (r Terrno_t) {
@@ -4502,6 +4702,7 @@ func X_set_fmode(tls *TLS, __Mode int32) (r Terrno_t) {
 }
 
 var proc_get_fmode = dll.NewProc("_get_fmode")
+var _ = proc_get_fmode.Addr()
 
 // __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_fmode(int *_PMode);
 func X_get_fmode(tls *TLS, __PMode uintptr) (r Terrno_t) {
@@ -4520,6 +4721,7 @@ func X_get_fmode(tls *TLS, __PMode uintptr) (r Terrno_t) {
 }
 
 var proc_exit = dll.NewProc("_exit")
+var _ = proc_exit.Addr()
 
 // void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _exit(int _Code) __attribute__ ((__noreturn__));
 func X_exit(tls *TLS, __Code int32) {
@@ -4536,6 +4738,7 @@ func X_exit(tls *TLS, __Code int32) {
 }
 
 var procquick_exit = dll.NewProc("quick_exit")
+var _ = procquick_exit.Addr()
 
 // void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) quick_exit(int _Code) __attribute__ ((__noreturn__));
 func Xquick_exit(tls *TLS, __Code int32) {
@@ -4552,6 +4755,7 @@ func Xquick_exit(tls *TLS, __Code int32) {
 }
 
 var proc_Exit = dll.NewProc("_Exit")
+var _ = proc_Exit.Addr()
 
 // void __attribute__((__cdecl__)) _Exit(int) __attribute__ ((__noreturn__));
 func X_Exit(tls *TLS, _0 int32) {
@@ -4568,6 +4772,7 @@ func X_Exit(tls *TLS, _0 int32) {
 }
 
 var procabort = dll.NewProc("abort")
+var _ = procabort.Addr()
 
 // void __attribute__((__cdecl__)) __attribute__ ((__noreturn__)) abort(void);
 func Xabort(tls *TLS) {
@@ -4584,6 +4789,7 @@ func Xabort(tls *TLS) {
 }
 
 var proc_set_abort_behavior = dll.NewProc("_set_abort_behavior")
+var _ = proc_set_abort_behavior.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) _set_abort_behavior(unsigned int _Flags,unsigned int _Mask);
 func X_set_abort_behavior(tls *TLS, __Flags uint32, __Mask uint32) (r uint32) {
@@ -4602,6 +4808,7 @@ func X_set_abort_behavior(tls *TLS, __Flags uint32, __Mask uint32) (r uint32) {
 }
 
 var proc_abs64 = dll.NewProc("_abs64")
+var _ = proc_abs64.Addr()
 
 // long long __attribute__((__cdecl__)) _abs64( long long);
 func X_abs64(tls *TLS, _x int64) (r int64) {
@@ -4620,6 +4827,7 @@ func X_abs64(tls *TLS, _x int64) (r int64) {
 }
 
 var procatoi = dll.NewProc("atoi")
+var _ = procatoi.Addr()
 
 // int __attribute__((__cdecl__)) atoi(const char *_Str);
 func Xatoi(tls *TLS, __Str uintptr) (r int32) {
@@ -4638,6 +4846,7 @@ func Xatoi(tls *TLS, __Str uintptr) (r int32) {
 }
 
 var proc_atoi_l = dll.NewProc("_atoi_l")
+var _ = proc_atoi_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoi_l(const char *_Str,_locale_t _Locale);
 func X_atoi_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int32) {
@@ -4656,6 +4865,7 @@ func X_atoi_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int32) {
 }
 
 var procatol = dll.NewProc("atol")
+var _ = procatol.Addr()
 
 // long __attribute__((__cdecl__)) atol(const char *_Str);
 func Xatol(tls *TLS, __Str uintptr) (r int32) {
@@ -4674,6 +4884,7 @@ func Xatol(tls *TLS, __Str uintptr) (r int32) {
 }
 
 var proc_atol_l = dll.NewProc("_atol_l")
+var _ = proc_atol_l.Addr()
 
 // __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _atol_l(const char *_Str,_locale_t _Locale);
 func X_atol_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int32) {
@@ -4692,6 +4903,7 @@ func X_atol_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int32) {
 }
 
 var procbsearch = dll.NewProc("bsearch")
+var _ = procbsearch.Addr()
 
 // void * __attribute__((__cdecl__)) bsearch(const void *_Key,const void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int ( *_PtFuncCompare)(const void *,const void *));
 func Xbsearch(tls *TLS, __Key uintptr, __Base uintptr, __NumOfElements Tsize_t, __SizeOfElements Tsize_t, __PtFuncCompare uintptr) (r uintptr) {
@@ -4700,6 +4912,7 @@ func Xbsearch(tls *TLS, __Key uintptr, __Base uintptr, __NumOfElements Tsize_t, 
 }
 
 var proc_byteswap_ushort = dll.NewProc("_byteswap_ushort")
+var _ = proc_byteswap_ushort.Addr()
 
 // unsigned short __attribute__((__cdecl__)) _byteswap_ushort(unsigned short _Short);
 func X_byteswap_ushort(tls *TLS, __Short uint16) (r uint16) {
@@ -4718,6 +4931,7 @@ func X_byteswap_ushort(tls *TLS, __Short uint16) (r uint16) {
 }
 
 var proc_byteswap_ulong = dll.NewProc("_byteswap_ulong")
+var _ = proc_byteswap_ulong.Addr()
 
 // unsigned long __attribute__((__cdecl__)) _byteswap_ulong (unsigned long _Long);
 func X_byteswap_ulong(tls *TLS, __Long uint32) (r uint32) {
@@ -4736,6 +4950,7 @@ func X_byteswap_ulong(tls *TLS, __Long uint32) (r uint32) {
 }
 
 var proc_byteswap_uint64 = dll.NewProc("_byteswap_uint64")
+var _ = proc_byteswap_uint64.Addr()
 
 // unsigned long long __attribute__((__cdecl__)) _byteswap_uint64(unsigned long long _Int64);
 func X_byteswap_uint64(tls *TLS, __Int64 uint64) (r uint64) {
@@ -4754,6 +4969,7 @@ func X_byteswap_uint64(tls *TLS, __Int64 uint64) (r uint64) {
 }
 
 var procdiv = dll.NewProc("div")
+var _ = procdiv.Addr()
 
 // div_t __attribute__((__cdecl__)) div(int _Numerator,int _Denominator);
 func Xdiv(tls *TLS, __Numerator int32, __Denominator int32) (r Tdiv_t) {
@@ -4772,6 +4988,7 @@ func Xdiv(tls *TLS, __Numerator int32, __Denominator int32) (r Tdiv_t) {
 }
 
 var procgetenv = dll.NewProc("getenv")
+var _ = procgetenv.Addr()
 
 // char * __attribute__((__cdecl__)) getenv(const char *_VarName);
 func Xgetenv(tls *TLS, __VarName uintptr) (r uintptr) {
@@ -4790,6 +5007,7 @@ func Xgetenv(tls *TLS, __VarName uintptr) (r uintptr) {
 }
 
 var proc_itoa = dll.NewProc("_itoa")
+var _ = proc_itoa.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _itoa(int _Value,char *_Dest,int _Radix);
 func X_itoa(tls *TLS, __Value int32, __Dest uintptr, __Radix int32) (r uintptr) {
@@ -4808,6 +5026,7 @@ func X_itoa(tls *TLS, __Value int32, __Dest uintptr, __Radix int32) (r uintptr) 
 }
 
 var proc_i64toa = dll.NewProc("_i64toa")
+var _ = proc_i64toa.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _i64toa( long long _Val,char *_DstBuf,int _Radix);
 func X_i64toa(tls *TLS, __Val int64, __DstBuf uintptr, __Radix int32) (r uintptr) {
@@ -4826,6 +5045,7 @@ func X_i64toa(tls *TLS, __Val int64, __DstBuf uintptr, __Radix int32) (r uintptr
 }
 
 var proc_ui64toa = dll.NewProc("_ui64toa")
+var _ = proc_ui64toa.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _ui64toa(unsigned long long _Val,char *_DstBuf,int _Radix);
 func X_ui64toa(tls *TLS, __Val uint64, __DstBuf uintptr, __Radix int32) (r uintptr) {
@@ -4844,6 +5064,7 @@ func X_ui64toa(tls *TLS, __Val uint64, __DstBuf uintptr, __Radix int32) (r uintp
 }
 
 var proc_atoi64 = dll.NewProc("_atoi64")
+var _ = proc_atoi64.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _atoi64(const char *_String);
 func X_atoi64(tls *TLS, __String uintptr) (r int64) {
@@ -4862,6 +5083,7 @@ func X_atoi64(tls *TLS, __String uintptr) (r int64) {
 }
 
 var proc_atoi64_l = dll.NewProc("_atoi64_l")
+var _ = proc_atoi64_l.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _atoi64_l(const char *_String,_locale_t _Locale);
 func X_atoi64_l(tls *TLS, __String uintptr, __Locale T_locale_t) (r int64) {
@@ -4880,6 +5102,7 @@ func X_atoi64_l(tls *TLS, __String uintptr, __Locale T_locale_t) (r int64) {
 }
 
 var proc_strtoi64 = dll.NewProc("_strtoi64")
+var _ = proc_strtoi64.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _strtoi64(const char *_String,char **_EndPtr,int _Radix);
 func X_strtoi64(tls *TLS, __String uintptr, __EndPtr uintptr, __Radix int32) (r int64) {
@@ -4898,6 +5121,7 @@ func X_strtoi64(tls *TLS, __String uintptr, __EndPtr uintptr, __Radix int32) (r 
 }
 
 var proc_strtoi64_l = dll.NewProc("_strtoi64_l")
+var _ = proc_strtoi64_l.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _strtoi64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
 func X_strtoi64_l(tls *TLS, __String uintptr, __EndPtr uintptr, __Radix int32, __Locale T_locale_t) (r int64) {
@@ -4916,6 +5140,7 @@ func X_strtoi64_l(tls *TLS, __String uintptr, __EndPtr uintptr, __Radix int32, _
 }
 
 var proc_strtoui64 = dll.NewProc("_strtoui64")
+var _ = proc_strtoui64.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _strtoui64(const char *_String,char **_EndPtr,int _Radix);
 func X_strtoui64(tls *TLS, __String uintptr, __EndPtr uintptr, __Radix int32) (r uint64) {
@@ -4934,6 +5159,7 @@ func X_strtoui64(tls *TLS, __String uintptr, __EndPtr uintptr, __Radix int32) (r
 }
 
 var proc_strtoui64_l = dll.NewProc("_strtoui64_l")
+var _ = proc_strtoui64_l.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _strtoui64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
 func X_strtoui64_l(tls *TLS, __String uintptr, __EndPtr uintptr, __Radix int32, __Locale T_locale_t) (r uint64) {
@@ -4952,6 +5178,7 @@ func X_strtoui64_l(tls *TLS, __String uintptr, __EndPtr uintptr, __Radix int32, 
 }
 
 var procldiv = dll.NewProc("ldiv")
+var _ = procldiv.Addr()
 
 // ldiv_t __attribute__((__cdecl__)) ldiv(long _Numerator,long _Denominator);
 func Xldiv(tls *TLS, __Numerator int32, __Denominator int32) (r Tldiv_t) {
@@ -4970,6 +5197,7 @@ func Xldiv(tls *TLS, __Numerator int32, __Denominator int32) (r Tldiv_t) {
 }
 
 var proc_ltoa = dll.NewProc("_ltoa")
+var _ = proc_ltoa.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _ltoa(long _Value,char *_Dest,int _Radix);
 func X_ltoa(tls *TLS, __Value int32, __Dest uintptr, __Radix int32) (r uintptr) {
@@ -4988,6 +5216,7 @@ func X_ltoa(tls *TLS, __Value int32, __Dest uintptr, __Radix int32) (r uintptr) 
 }
 
 var procmblen = dll.NewProc("mblen")
+var _ = procmblen.Addr()
 
 // int __attribute__((__cdecl__)) mblen(const char *_Ch,size_t _MaxCount);
 func Xmblen(tls *TLS, __Ch uintptr, __MaxCount Tsize_t) (r int32) {
@@ -5006,6 +5235,7 @@ func Xmblen(tls *TLS, __Ch uintptr, __MaxCount Tsize_t) (r int32) {
 }
 
 var proc_mblen_l = dll.NewProc("_mblen_l")
+var _ = proc_mblen_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _mblen_l(const char *_Ch,size_t _MaxCount,_locale_t _Locale);
 func X_mblen_l(tls *TLS, __Ch uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r int32) {
@@ -5024,6 +5254,7 @@ func X_mblen_l(tls *TLS, __Ch uintptr, __MaxCount Tsize_t, __Locale T_locale_t) 
 }
 
 var proc_mbstrlen = dll.NewProc("_mbstrlen")
+var _ = proc_mbstrlen.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrlen(const char *_Str);
 func X_mbstrlen(tls *TLS, __Str uintptr) (r Tsize_t) {
@@ -5042,6 +5273,7 @@ func X_mbstrlen(tls *TLS, __Str uintptr) (r Tsize_t) {
 }
 
 var proc_mbstrlen_l = dll.NewProc("_mbstrlen_l")
+var _ = proc_mbstrlen_l.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrlen_l(const char *_Str,_locale_t _Locale);
 func X_mbstrlen_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r Tsize_t) {
@@ -5060,6 +5292,7 @@ func X_mbstrlen_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r Tsize_t) {
 }
 
 var proc_mbstrnlen = dll.NewProc("_mbstrnlen")
+var _ = proc_mbstrnlen.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrnlen(const char *_Str,size_t _MaxCount);
 func X_mbstrnlen(tls *TLS, __Str uintptr, __MaxCount Tsize_t) (r Tsize_t) {
@@ -5078,6 +5311,7 @@ func X_mbstrnlen(tls *TLS, __Str uintptr, __MaxCount Tsize_t) (r Tsize_t) {
 }
 
 var proc_mbstrnlen_l = dll.NewProc("_mbstrnlen_l")
+var _ = proc_mbstrnlen_l.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrnlen_l(const char *_Str,size_t _MaxCount,_locale_t _Locale);
 func X_mbstrnlen_l(tls *TLS, __Str uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r Tsize_t) {
@@ -5096,6 +5330,7 @@ func X_mbstrnlen_l(tls *TLS, __Str uintptr, __MaxCount Tsize_t, __Locale T_local
 }
 
 var procmbtowc = dll.NewProc("mbtowc")
+var _ = procmbtowc.Addr()
 
 // int __attribute__((__cdecl__)) mbtowc(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes);
 func Xmbtowc(tls *TLS, __DstCh uintptr, __SrcCh uintptr, __SrcSizeInBytes Tsize_t) (r int32) {
@@ -5114,6 +5349,7 @@ func Xmbtowc(tls *TLS, __DstCh uintptr, __SrcCh uintptr, __SrcSizeInBytes Tsize_
 }
 
 var proc_mbtowc_l = dll.NewProc("_mbtowc_l")
+var _ = proc_mbtowc_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _mbtowc_l(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes,_locale_t _Locale);
 func X_mbtowc_l(tls *TLS, __DstCh uintptr, __SrcCh uintptr, __SrcSizeInBytes Tsize_t, __Locale T_locale_t) (r int32) {
@@ -5132,6 +5368,7 @@ func X_mbtowc_l(tls *TLS, __DstCh uintptr, __SrcCh uintptr, __SrcSizeInBytes Tsi
 }
 
 var procmbstowcs = dll.NewProc("mbstowcs")
+var _ = procmbstowcs.Addr()
 
 // size_t __attribute__((__cdecl__)) mbstowcs(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount);
 func Xmbstowcs(tls *TLS, __Dest uintptr, __Source uintptr, __MaxCount Tsize_t) (r Tsize_t) {
@@ -5150,6 +5387,7 @@ func Xmbstowcs(tls *TLS, __Dest uintptr, __Source uintptr, __MaxCount Tsize_t) (
 }
 
 var proc_mbstowcs_l = dll.NewProc("_mbstowcs_l")
+var _ = proc_mbstowcs_l.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstowcs_l(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale);
 func X_mbstowcs_l(tls *TLS, __Dest uintptr, __Source uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r Tsize_t) {
@@ -5168,6 +5406,7 @@ func X_mbstowcs_l(tls *TLS, __Dest uintptr, __Source uintptr, __MaxCount Tsize_t
 }
 
 var procrand = dll.NewProc("rand")
+var _ = procrand.Addr()
 
 // int __attribute__((__cdecl__)) rand(void);
 func Xrand(tls *TLS) (r int32) {
@@ -5186,6 +5425,7 @@ func Xrand(tls *TLS) (r int32) {
 }
 
 var proc_set_error_mode = dll.NewProc("_set_error_mode")
+var _ = proc_set_error_mode.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_error_mode(int _Mode);
 func X_set_error_mode(tls *TLS, __Mode int32) (r int32) {
@@ -5204,6 +5444,7 @@ func X_set_error_mode(tls *TLS, __Mode int32) (r int32) {
 }
 
 var procsrand = dll.NewProc("srand")
+var _ = procsrand.Addr()
 
 // void __attribute__((__cdecl__)) srand(unsigned int _Seed);
 func Xsrand(tls *TLS, __Seed uint32) {
@@ -5220,6 +5461,7 @@ func Xsrand(tls *TLS, __Seed uint32) {
 }
 
 var procstrtol = dll.NewProc("strtol")
+var _ = procstrtol.Addr()
 
 // long __attribute__((__cdecl__)) strtol(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
 func Xstrtol(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r int32) {
@@ -5238,6 +5480,7 @@ func Xstrtol(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r int32)
 }
 
 var proc_strtol_l = dll.NewProc("_strtol_l")
+var _ = proc_strtol_l.Addr()
 
 // __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _strtol_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
 func X_strtol_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Locale T_locale_t) (r int32) {
@@ -5256,6 +5499,7 @@ func X_strtol_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Loca
 }
 
 var procstrtoul = dll.NewProc("strtoul")
+var _ = procstrtoul.Addr()
 
 // unsigned long __attribute__((__cdecl__)) strtoul(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
 func Xstrtoul(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r uint32) {
@@ -5274,6 +5518,7 @@ func Xstrtoul(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r uint3
 }
 
 var proc_strtoul_l = dll.NewProc("_strtoul_l")
+var _ = proc_strtoul_l.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _strtoul_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
 func X_strtoul_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Locale T_locale_t) (r uint32) {
@@ -5292,6 +5537,7 @@ func X_strtoul_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Loc
 }
 
 var procsystem = dll.NewProc("system")
+var _ = procsystem.Addr()
 
 // int __attribute__((__cdecl__)) system(const char *_Command);
 func Xsystem(tls *TLS, __Command uintptr) (r int32) {
@@ -5310,6 +5556,7 @@ func Xsystem(tls *TLS, __Command uintptr) (r int32) {
 }
 
 var proc_ultoa = dll.NewProc("_ultoa")
+var _ = proc_ultoa.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _ultoa(unsigned long _Value,char *_Dest,int _Radix);
 func X_ultoa(tls *TLS, __Value uint32, __Dest uintptr, __Radix int32) (r uintptr) {
@@ -5328,6 +5575,7 @@ func X_ultoa(tls *TLS, __Value uint32, __Dest uintptr, __Radix int32) (r uintptr
 }
 
 var procwctomb = dll.NewProc("wctomb")
+var _ = procwctomb.Addr()
 
 // int __attribute__((__cdecl__)) wctomb(char *_MbCh,wchar_t _WCh);
 func Xwctomb(tls *TLS, __MbCh uintptr, __WCh Twchar_t) (r int32) {
@@ -5346,6 +5594,7 @@ func Xwctomb(tls *TLS, __MbCh uintptr, __WCh Twchar_t) (r int32) {
 }
 
 var proc_wctomb_l = dll.NewProc("_wctomb_l")
+var _ = proc_wctomb_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wctomb_l(char *_MbCh,wchar_t _WCh,_locale_t _Locale);
 func X_wctomb_l(tls *TLS, __MbCh uintptr, __WCh Twchar_t, __Locale T_locale_t) (r int32) {
@@ -5364,6 +5613,7 @@ func X_wctomb_l(tls *TLS, __MbCh uintptr, __WCh Twchar_t, __Locale T_locale_t) (
 }
 
 var procwcstombs = dll.NewProc("wcstombs")
+var _ = procwcstombs.Addr()
 
 // size_t __attribute__((__cdecl__)) wcstombs(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount);
 func Xwcstombs(tls *TLS, __Dest uintptr, __Source uintptr, __MaxCount Tsize_t) (r Tsize_t) {
@@ -5382,6 +5632,7 @@ func Xwcstombs(tls *TLS, __Dest uintptr, __Source uintptr, __MaxCount Tsize_t) (
 }
 
 var proc_wcstombs_l = dll.NewProc("_wcstombs_l")
+var _ = proc_wcstombs_l.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcstombs_l(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale);
 func X_wcstombs_l(tls *TLS, __Dest uintptr, __Source uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r Tsize_t) {
@@ -5400,6 +5651,7 @@ func X_wcstombs_l(tls *TLS, __Dest uintptr, __Source uintptr, __MaxCount Tsize_t
 }
 
 var proccalloc = dll.NewProc("calloc")
+var _ = proccalloc.Addr()
 
 // void * __attribute__((__cdecl__)) calloc(size_t _NumOfElements,size_t _SizeOfElements);
 func Xcalloc(tls *TLS, __NumOfElements Tsize_t, __SizeOfElements Tsize_t) (r uintptr) {
@@ -5418,6 +5670,7 @@ func Xcalloc(tls *TLS, __NumOfElements Tsize_t, __SizeOfElements Tsize_t) (r uin
 }
 
 var procfree = dll.NewProc("free")
+var _ = procfree.Addr()
 
 // void __attribute__((__cdecl__)) free(void *_Memory);
 func Xfree(tls *TLS, __Memory uintptr) {
@@ -5434,6 +5687,7 @@ func Xfree(tls *TLS, __Memory uintptr) {
 }
 
 var procmalloc = dll.NewProc("malloc")
+var _ = procmalloc.Addr()
 
 // void * __attribute__((__cdecl__)) malloc(size_t _Size);
 func Xmalloc(tls *TLS, __Size Tsize_t) (r uintptr) {
@@ -5452,6 +5706,7 @@ func Xmalloc(tls *TLS, __Size Tsize_t) (r uintptr) {
 }
 
 var procrealloc = dll.NewProc("realloc")
+var _ = procrealloc.Addr()
 
 // void * __attribute__((__cdecl__)) realloc(void *_Memory,size_t _NewSize);
 func Xrealloc(tls *TLS, __Memory uintptr, __NewSize Tsize_t) (r uintptr) {
@@ -5470,6 +5725,7 @@ func Xrealloc(tls *TLS, __Memory uintptr, __NewSize Tsize_t) (r uintptr) {
 }
 
 var proc_recalloc = dll.NewProc("_recalloc")
+var _ = proc_recalloc.Addr()
 
 // __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) _recalloc(void *_Memory,size_t _Count,size_t _Size);
 func X_recalloc(tls *TLS, __Memory uintptr, __Count Tsize_t, __Size Tsize_t) (r uintptr) {
@@ -5488,6 +5744,7 @@ func X_recalloc(tls *TLS, __Memory uintptr, __Count Tsize_t, __Size Tsize_t) (r 
 }
 
 var proc_aligned_free = dll.NewProc("_aligned_free")
+var _ = proc_aligned_free.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _aligned_free(void *_Memory);
 func X_aligned_free(tls *TLS, __Memory uintptr) {
@@ -5504,6 +5761,7 @@ func X_aligned_free(tls *TLS, __Memory uintptr) {
 }
 
 var proc_aligned_malloc = dll.NewProc("_aligned_malloc")
+var _ = proc_aligned_malloc.Addr()
 
 // __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) _aligned_malloc(size_t _Size,size_t _Alignment);
 func X_aligned_malloc(tls *TLS, __Size Tsize_t, __Alignment Tsize_t) (r uintptr) {
@@ -5522,6 +5780,7 @@ func X_aligned_malloc(tls *TLS, __Size Tsize_t, __Alignment Tsize_t) (r uintptr)
 }
 
 var proc_aligned_offset_malloc = dll.NewProc("_aligned_offset_malloc")
+var _ = proc_aligned_offset_malloc.Addr()
 
 // __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) _aligned_offset_malloc(size_t _Size,size_t _Alignment,size_t _Offset);
 func X_aligned_offset_malloc(tls *TLS, __Size Tsize_t, __Alignment Tsize_t, __Offset Tsize_t) (r uintptr) {
@@ -5540,6 +5799,7 @@ func X_aligned_offset_malloc(tls *TLS, __Size Tsize_t, __Alignment Tsize_t, __Of
 }
 
 var proc_aligned_realloc = dll.NewProc("_aligned_realloc")
+var _ = proc_aligned_realloc.Addr()
 
 // __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) _aligned_realloc(void *_Memory,size_t _Size,size_t _Alignment);
 func X_aligned_realloc(tls *TLS, __Memory uintptr, __Size Tsize_t, __Alignment Tsize_t) (r uintptr) {
@@ -5558,6 +5818,7 @@ func X_aligned_realloc(tls *TLS, __Memory uintptr, __Size Tsize_t, __Alignment T
 }
 
 var proc_aligned_recalloc = dll.NewProc("_aligned_recalloc")
+var _ = proc_aligned_recalloc.Addr()
 
 // __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) _aligned_recalloc(void *_Memory,size_t _Count,size_t _Size,size_t _Alignment);
 func X_aligned_recalloc(tls *TLS, __Memory uintptr, __Count Tsize_t, __Size Tsize_t, __Alignment Tsize_t) (r uintptr) {
@@ -5576,6 +5837,7 @@ func X_aligned_recalloc(tls *TLS, __Memory uintptr, __Count Tsize_t, __Size Tsiz
 }
 
 var proc_aligned_offset_realloc = dll.NewProc("_aligned_offset_realloc")
+var _ = proc_aligned_offset_realloc.Addr()
 
 // __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) _aligned_offset_realloc(void *_Memory,size_t _Size,size_t _Alignment,size_t _Offset);
 func X_aligned_offset_realloc(tls *TLS, __Memory uintptr, __Size Tsize_t, __Alignment Tsize_t, __Offset Tsize_t) (r uintptr) {
@@ -5594,6 +5856,7 @@ func X_aligned_offset_realloc(tls *TLS, __Memory uintptr, __Size Tsize_t, __Alig
 }
 
 var proc_aligned_offset_recalloc = dll.NewProc("_aligned_offset_recalloc")
+var _ = proc_aligned_offset_recalloc.Addr()
 
 // __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) _aligned_offset_recalloc(void *_Memory,size_t _Count,size_t _Size,size_t _Alignment,size_t _Offset);
 func X_aligned_offset_recalloc(tls *TLS, __Memory uintptr, __Count Tsize_t, __Size Tsize_t, __Alignment Tsize_t, __Offset Tsize_t) (r uintptr) {
@@ -5612,6 +5875,7 @@ func X_aligned_offset_recalloc(tls *TLS, __Memory uintptr, __Count Tsize_t, __Si
 }
 
 var proc_itow = dll.NewProc("_itow")
+var _ = proc_itow.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _itow(int _Value,wchar_t *_Dest,int _Radix);
 func X_itow(tls *TLS, __Value int32, __Dest uintptr, __Radix int32) (r uintptr) {
@@ -5630,6 +5894,7 @@ func X_itow(tls *TLS, __Value int32, __Dest uintptr, __Radix int32) (r uintptr) 
 }
 
 var proc_ltow = dll.NewProc("_ltow")
+var _ = proc_ltow.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _ltow(long _Value,wchar_t *_Dest,int _Radix);
 func X_ltow(tls *TLS, __Value int32, __Dest uintptr, __Radix int32) (r uintptr) {
@@ -5648,6 +5913,7 @@ func X_ltow(tls *TLS, __Value int32, __Dest uintptr, __Radix int32) (r uintptr) 
 }
 
 var proc_ultow = dll.NewProc("_ultow")
+var _ = proc_ultow.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _ultow(unsigned long _Value,wchar_t *_Dest,int _Radix);
 func X_ultow(tls *TLS, __Value uint32, __Dest uintptr, __Radix int32) (r uintptr) {
@@ -5666,6 +5932,7 @@ func X_ultow(tls *TLS, __Value uint32, __Dest uintptr, __Radix int32) (r uintptr
 }
 
 var procwcstol = dll.NewProc("wcstol")
+var _ = procwcstol.Addr()
 
 // long __attribute__((__cdecl__)) wcstol(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
 func Xwcstol(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r int32) {
@@ -5684,6 +5951,7 @@ func Xwcstol(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r int32)
 }
 
 var proc_wcstol_l = dll.NewProc("_wcstol_l")
+var _ = proc_wcstol_l.Addr()
 
 // __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wcstol_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
 func X_wcstol_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Locale T_locale_t) (r int32) {
@@ -5702,6 +5970,7 @@ func X_wcstol_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Loca
 }
 
 var procwcstoul = dll.NewProc("wcstoul")
+var _ = procwcstoul.Addr()
 
 // unsigned long __attribute__((__cdecl__)) wcstoul(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
 func Xwcstoul(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r uint32) {
@@ -5720,6 +5989,7 @@ func Xwcstoul(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r uint3
 }
 
 var proc_wcstoul_l = dll.NewProc("_wcstoul_l")
+var _ = proc_wcstoul_l.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _wcstoul_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
 func X_wcstoul_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Locale T_locale_t) (r uint32) {
@@ -5738,6 +6008,7 @@ func X_wcstoul_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Loc
 }
 
 var proc_wsystem = dll.NewProc("_wsystem")
+var _ = proc_wsystem.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wsystem(const wchar_t *_Command);
 func X_wsystem(tls *TLS, __Command uintptr) (r int32) {
@@ -5756,6 +6027,7 @@ func X_wsystem(tls *TLS, __Command uintptr) (r int32) {
 }
 
 var proc_wtoi = dll.NewProc("_wtoi")
+var _ = proc_wtoi.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wtoi(const wchar_t *_Str);
 func X_wtoi(tls *TLS, __Str uintptr) (r int32) {
@@ -5774,6 +6046,7 @@ func X_wtoi(tls *TLS, __Str uintptr) (r int32) {
 }
 
 var proc_wtoi_l = dll.NewProc("_wtoi_l")
+var _ = proc_wtoi_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wtoi_l(const wchar_t *_Str,_locale_t _Locale);
 func X_wtoi_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int32) {
@@ -5792,6 +6065,7 @@ func X_wtoi_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int32) {
 }
 
 var proc_wtol = dll.NewProc("_wtol")
+var _ = proc_wtol.Addr()
 
 // __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wtol(const wchar_t *_Str);
 func X_wtol(tls *TLS, __Str uintptr) (r int32) {
@@ -5810,6 +6084,7 @@ func X_wtol(tls *TLS, __Str uintptr) (r int32) {
 }
 
 var proc_wtol_l = dll.NewProc("_wtol_l")
+var _ = proc_wtol_l.Addr()
 
 // __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wtol_l(const wchar_t *_Str,_locale_t _Locale);
 func X_wtol_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int32) {
@@ -5828,6 +6103,7 @@ func X_wtol_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int32) {
 }
 
 var proc_i64tow = dll.NewProc("_i64tow")
+var _ = proc_i64tow.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _i64tow( long long _Val,wchar_t *_DstBuf,int _Radix);
 func X_i64tow(tls *TLS, __Val int64, __DstBuf uintptr, __Radix int32) (r uintptr) {
@@ -5846,6 +6122,7 @@ func X_i64tow(tls *TLS, __Val int64, __DstBuf uintptr, __Radix int32) (r uintptr
 }
 
 var proc_ui64tow = dll.NewProc("_ui64tow")
+var _ = proc_ui64tow.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _ui64tow(unsigned long long _Val,wchar_t *_DstBuf,int _Radix);
 func X_ui64tow(tls *TLS, __Val uint64, __DstBuf uintptr, __Radix int32) (r uintptr) {
@@ -5864,6 +6141,7 @@ func X_ui64tow(tls *TLS, __Val uint64, __DstBuf uintptr, __Radix int32) (r uintp
 }
 
 var proc_wtoi64 = dll.NewProc("_wtoi64")
+var _ = proc_wtoi64.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wtoi64(const wchar_t *_Str);
 func X_wtoi64(tls *TLS, __Str uintptr) (r int64) {
@@ -5882,6 +6160,7 @@ func X_wtoi64(tls *TLS, __Str uintptr) (r int64) {
 }
 
 var proc_wtoi64_l = dll.NewProc("_wtoi64_l")
+var _ = proc_wtoi64_l.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wtoi64_l(const wchar_t *_Str,_locale_t _Locale);
 func X_wtoi64_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int64) {
@@ -5900,6 +6179,7 @@ func X_wtoi64_l(tls *TLS, __Str uintptr, __Locale T_locale_t) (r int64) {
 }
 
 var proc_wcstoi64 = dll.NewProc("_wcstoi64")
+var _ = proc_wcstoi64.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wcstoi64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
 func X_wcstoi64(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r int64) {
@@ -5918,6 +6198,7 @@ func X_wcstoi64(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r int
 }
 
 var proc_wcstoi64_l = dll.NewProc("_wcstoi64_l")
+var _ = proc_wcstoi64_l.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wcstoi64_l(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
 func X_wcstoi64_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Locale T_locale_t) (r int64) {
@@ -5936,6 +6217,7 @@ func X_wcstoi64_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Lo
 }
 
 var proc_wcstoui64 = dll.NewProc("_wcstoui64")
+var _ = proc_wcstoui64.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _wcstoui64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
 func X_wcstoui64(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r uint64) {
@@ -5954,6 +6236,7 @@ func X_wcstoui64(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32) (r ui
 }
 
 var proc_wcstoui64_l = dll.NewProc("_wcstoui64_l")
+var _ = proc_wcstoui64_l.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _wcstoui64_l(const wchar_t *_Str ,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
 func X_wcstoui64_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __Locale T_locale_t) (r uint64) {
@@ -5972,6 +6255,7 @@ func X_wcstoui64_l(tls *TLS, __Str uintptr, __EndPtr uintptr, __Radix int32, __L
 }
 
 var proc_putenv = dll.NewProc("_putenv")
+var _ = proc_putenv.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putenv(const char *_EnvString);
 func X_putenv(tls *TLS, __EnvString uintptr) (r int32) {
@@ -5990,6 +6274,7 @@ func X_putenv(tls *TLS, __EnvString uintptr) (r int32) {
 }
 
 var proc_fullpath = dll.NewProc("_fullpath")
+var _ = proc_fullpath.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _fullpath(char *_FullPath,const char *_Path,size_t _SizeInBytes);
 func X_fullpath(tls *TLS, __FullPath uintptr, __Path uintptr, __SizeInBytes Tsize_t) (r uintptr) {
@@ -6008,6 +6293,7 @@ func X_fullpath(tls *TLS, __FullPath uintptr, __Path uintptr, __SizeInBytes Tsiz
 }
 
 var proc_atodbl = dll.NewProc("_atodbl")
+var _ = proc_atodbl.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atodbl(_CRT_DOUBLE *_Result,char *_Str);
 func X_atodbl(tls *TLS, __Result uintptr, __Str uintptr) (r int32) {
@@ -6026,6 +6312,7 @@ func X_atodbl(tls *TLS, __Result uintptr, __Str uintptr) (r int32) {
 }
 
 var proc_atoldbl = dll.NewProc("_atoldbl")
+var _ = proc_atoldbl.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoldbl(_LDOUBLE *_Result,char *_Str);
 func X_atoldbl(tls *TLS, __Result uintptr, __Str uintptr) (r int32) {
@@ -6044,6 +6331,7 @@ func X_atoldbl(tls *TLS, __Result uintptr, __Str uintptr) (r int32) {
 }
 
 var proc_atoflt = dll.NewProc("_atoflt")
+var _ = proc_atoflt.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoflt(_CRT_FLOAT *_Result,char *_Str);
 func X_atoflt(tls *TLS, __Result uintptr, __Str uintptr) (r int32) {
@@ -6062,6 +6350,7 @@ func X_atoflt(tls *TLS, __Result uintptr, __Str uintptr) (r int32) {
 }
 
 var proc_atodbl_l = dll.NewProc("_atodbl_l")
+var _ = proc_atodbl_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atodbl_l(_CRT_DOUBLE *_Result,char *_Str,_locale_t _Locale);
 func X_atodbl_l(tls *TLS, __Result uintptr, __Str uintptr, __Locale T_locale_t) (r int32) {
@@ -6080,6 +6369,7 @@ func X_atodbl_l(tls *TLS, __Result uintptr, __Str uintptr, __Locale T_locale_t) 
 }
 
 var proc_atoldbl_l = dll.NewProc("_atoldbl_l")
+var _ = proc_atoldbl_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoldbl_l(_LDOUBLE *_Result,char *_Str,_locale_t _Locale);
 func X_atoldbl_l(tls *TLS, __Result uintptr, __Str uintptr, __Locale T_locale_t) (r int32) {
@@ -6098,6 +6388,7 @@ func X_atoldbl_l(tls *TLS, __Result uintptr, __Str uintptr, __Locale T_locale_t)
 }
 
 var proc_atoflt_l = dll.NewProc("_atoflt_l")
+var _ = proc_atoflt_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoflt_l(_CRT_FLOAT *_Result,char *_Str,_locale_t _Locale);
 func X_atoflt_l(tls *TLS, __Result uintptr, __Str uintptr, __Locale T_locale_t) (r int32) {
@@ -6116,6 +6407,7 @@ func X_atoflt_l(tls *TLS, __Result uintptr, __Str uintptr, __Locale T_locale_t) 
 }
 
 var proc_lrotl = dll.NewProc("_lrotl")
+var _ = proc_lrotl.Addr()
 
 // unsigned long __attribute__((__cdecl__)) _lrotl(unsigned long,int);
 func X_lrotl(tls *TLS, _0 uint32, _1 int32) (r uint32) {
@@ -6134,6 +6426,7 @@ func X_lrotl(tls *TLS, _0 uint32, _1 int32) (r uint32) {
 }
 
 var proc_lrotr = dll.NewProc("_lrotr")
+var _ = proc_lrotr.Addr()
 
 // unsigned long __attribute__((__cdecl__)) _lrotr(unsigned long,int);
 func X_lrotr(tls *TLS, _0 uint32, _1 int32) (r uint32) {
@@ -6152,6 +6445,7 @@ func X_lrotr(tls *TLS, _0 uint32, _1 int32) (r uint32) {
 }
 
 var proc_makepath = dll.NewProc("_makepath")
+var _ = proc_makepath.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _makepath(char *_Path,const char *_Drive,const char *_Dir,const char *_Filename,const char *_Ext);
 func X_makepath(tls *TLS, __Path uintptr, __Drive uintptr, __Dir uintptr, __Filename uintptr, __Ext uintptr) {
@@ -6168,6 +6462,7 @@ func X_makepath(tls *TLS, __Path uintptr, __Drive uintptr, __Dir uintptr, __File
 }
 
 var proc_rotl64 = dll.NewProc("_rotl64")
+var _ = proc_rotl64.Addr()
 
 // unsigned long long __attribute__((__cdecl__)) _rotl64(unsigned long long _Val,int _Shift);
 func X_rotl64(tls *TLS, __Val uint64, __Shift int32) (r uint64) {
@@ -6186,6 +6481,7 @@ func X_rotl64(tls *TLS, __Val uint64, __Shift int32) (r uint64) {
 }
 
 var proc_rotr64 = dll.NewProc("_rotr64")
+var _ = proc_rotr64.Addr()
 
 // unsigned long long __attribute__((__cdecl__)) _rotr64(unsigned long long Value,int Shift);
 func X_rotr64(tls *TLS, _Value uint64, _Shift int32) (r uint64) {
@@ -6204,6 +6500,7 @@ func X_rotr64(tls *TLS, _Value uint64, _Shift int32) (r uint64) {
 }
 
 var proc_rotr = dll.NewProc("_rotr")
+var _ = proc_rotr.Addr()
 
 // unsigned int __attribute__((__cdecl__)) _rotr(unsigned int _Val,int _Shift);
 func X_rotr(tls *TLS, __Val uint32, __Shift int32) (r uint32) {
@@ -6222,6 +6519,7 @@ func X_rotr(tls *TLS, __Val uint32, __Shift int32) (r uint32) {
 }
 
 var proc_rotl = dll.NewProc("_rotl")
+var _ = proc_rotl.Addr()
 
 // unsigned int __attribute__((__cdecl__)) _rotl(unsigned int _Val,int _Shift);
 func X_rotl(tls *TLS, __Val uint32, __Shift int32) (r uint32) {
@@ -6240,6 +6538,7 @@ func X_rotl(tls *TLS, __Val uint32, __Shift int32) (r uint32) {
 }
 
 var proc_searchenv = dll.NewProc("_searchenv")
+var _ = proc_searchenv.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _searchenv(const char *_Filename,const char *_EnvVar,char *_ResultPath);
 func X_searchenv(tls *TLS, __Filename uintptr, __EnvVar uintptr, __ResultPath uintptr) {
@@ -6256,6 +6555,7 @@ func X_searchenv(tls *TLS, __Filename uintptr, __EnvVar uintptr, __ResultPath ui
 }
 
 var proc_splitpath = dll.NewProc("_splitpath")
+var _ = proc_splitpath.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _splitpath(const char *_FullPath,char *_Drive,char *_Dir,char *_Filename,char *_Ext);
 func X_splitpath(tls *TLS, __FullPath uintptr, __Drive uintptr, __Dir uintptr, __Filename uintptr, __Ext uintptr) {
@@ -6272,6 +6572,7 @@ func X_splitpath(tls *TLS, __FullPath uintptr, __Drive uintptr, __Dir uintptr, _
 }
 
 var proc_swab = dll.NewProc("_swab")
+var _ = proc_swab.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _swab(char *_Buf1,char *_Buf2,int _SizeInBytes);
 func X_swab(tls *TLS, __Buf1 uintptr, __Buf2 uintptr, __SizeInBytes int32) {
@@ -6288,6 +6589,7 @@ func X_swab(tls *TLS, __Buf1 uintptr, __Buf2 uintptr, __SizeInBytes int32) {
 }
 
 var proc_wfullpath = dll.NewProc("_wfullpath")
+var _ = proc_wfullpath.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wfullpath(wchar_t *_FullPath,const wchar_t *_Path,size_t _SizeInWords);
 func X_wfullpath(tls *TLS, __FullPath uintptr, __Path uintptr, __SizeInWords Tsize_t) (r uintptr) {
@@ -6306,6 +6608,7 @@ func X_wfullpath(tls *TLS, __FullPath uintptr, __Path uintptr, __SizeInWords Tsi
 }
 
 var proc_wmakepath = dll.NewProc("_wmakepath")
+var _ = proc_wmakepath.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wmakepath(wchar_t *_ResultPath,const wchar_t *_Drive,const wchar_t *_Dir,const wchar_t *_Filename,const wchar_t *_Ext);
 func X_wmakepath(tls *TLS, __ResultPath uintptr, __Drive uintptr, __Dir uintptr, __Filename uintptr, __Ext uintptr) {
@@ -6322,6 +6625,7 @@ func X_wmakepath(tls *TLS, __ResultPath uintptr, __Drive uintptr, __Dir uintptr,
 }
 
 var proc_wsearchenv = dll.NewProc("_wsearchenv")
+var _ = proc_wsearchenv.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wsearchenv(const wchar_t *_Filename,const wchar_t *_EnvVar,wchar_t *_ResultPath);
 func X_wsearchenv(tls *TLS, __Filename uintptr, __EnvVar uintptr, __ResultPath uintptr) {
@@ -6338,6 +6642,7 @@ func X_wsearchenv(tls *TLS, __Filename uintptr, __EnvVar uintptr, __ResultPath u
 }
 
 var proc_wsplitpath = dll.NewProc("_wsplitpath")
+var _ = proc_wsplitpath.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wsplitpath(const wchar_t *_FullPath,wchar_t *_Drive,wchar_t *_Dir,wchar_t *_Filename,wchar_t *_Ext);
 func X_wsplitpath(tls *TLS, __FullPath uintptr, __Drive uintptr, __Dir uintptr, __Filename uintptr, __Ext uintptr) {
@@ -6354,6 +6659,7 @@ func X_wsplitpath(tls *TLS, __FullPath uintptr, __Drive uintptr, __Dir uintptr, 
 }
 
 var proc_beep = dll.NewProc("_beep")
+var _ = proc_beep.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _beep(unsigned _Frequency,unsigned _Duration) __attribute__ ((__deprecated__));
 func X_beep(tls *TLS, __Frequency uint32, __Duration uint32) {
@@ -6370,6 +6676,7 @@ func X_beep(tls *TLS, __Frequency uint32, __Duration uint32) {
 }
 
 var proc_seterrormode = dll.NewProc("_seterrormode")
+var _ = proc_seterrormode.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _seterrormode(int _Mode) __attribute__ ((__deprecated__));
 func X_seterrormode(tls *TLS, __Mode int32) {
@@ -6386,6 +6693,7 @@ func X_seterrormode(tls *TLS, __Mode int32) {
 }
 
 var proc_sleep = dll.NewProc("_sleep")
+var _ = proc_sleep.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _sleep(unsigned long _Duration) __attribute__ ((__deprecated__));
 func X_sleep(tls *TLS, __Duration uint32) {
@@ -6407,6 +6715,7 @@ type Tlldiv_t = struct {
 }
 
 var procllabs = dll.NewProc("llabs")
+var _ = procllabs.Addr()
 
 // long long __attribute__((__cdecl__)) llabs(long long);
 func Xllabs(tls *TLS, _0 int64) (r int64) {
@@ -6425,6 +6734,7 @@ func Xllabs(tls *TLS, _0 int64) (r int64) {
 }
 
 var procstrtoll = dll.NewProc("strtoll")
+var _ = procstrtoll.Addr()
 
 // long long __attribute__((__cdecl__)) strtoll(const char * __restrict__, char ** __restrict, int);
 func Xstrtoll(tls *TLS, _0 uintptr, _1 uintptr, _2 int32) (r int64) {
@@ -6443,6 +6753,7 @@ func Xstrtoll(tls *TLS, _0 uintptr, _1 uintptr, _2 int32) (r int64) {
 }
 
 var procstrtoull = dll.NewProc("strtoull")
+var _ = procstrtoull.Addr()
 
 // unsigned long long __attribute__((__cdecl__)) strtoull(const char * __restrict__, char ** __restrict__, int);
 func Xstrtoull(tls *TLS, _0 uintptr, _1 uintptr, _2 int32) (r uint64) {
@@ -6461,6 +6772,7 @@ func Xstrtoull(tls *TLS, _0 uintptr, _1 uintptr, _2 int32) (r uint64) {
 }
 
 var procatoll = dll.NewProc("atoll")
+var _ = procatoll.Addr()
 
 // long long __attribute__((__cdecl__)) atoll (const char *);
 func Xatoll(tls *TLS, _0 uintptr) (r int64) {
@@ -6487,6 +6799,7 @@ type T_HEAPINFO = struct {
 type T_heapinfo = T_HEAPINFO
 
 var proc_resetstkoflw = dll.NewProc("_resetstkoflw")
+var _ = proc_resetstkoflw.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _resetstkoflw (void);
 func X_resetstkoflw(tls *TLS) (r int32) {
@@ -6505,6 +6818,7 @@ func X_resetstkoflw(tls *TLS) (r int32) {
 }
 
 var proc_expand = dll.NewProc("_expand")
+var _ = proc_expand.Addr()
 
 // __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) _expand(void *_Memory,size_t _NewSize);
 func X_expand(tls *TLS, __Memory uintptr, __NewSize Tsize_t) (r uintptr) {
@@ -6523,6 +6837,7 @@ func X_expand(tls *TLS, __Memory uintptr, __NewSize Tsize_t) (r uintptr) {
 }
 
 var proc_msize = dll.NewProc("_msize")
+var _ = proc_msize.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _msize(void *_Memory);
 func X_msize(tls *TLS, __Memory uintptr) (r Tsize_t) {
@@ -6541,6 +6856,7 @@ func X_msize(tls *TLS, __Memory uintptr) (r Tsize_t) {
 }
 
 var proc_heapchk = dll.NewProc("_heapchk")
+var _ = proc_heapchk.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapchk(void);
 func X_heapchk(tls *TLS) (r int32) {
@@ -6559,6 +6875,7 @@ func X_heapchk(tls *TLS) (r int32) {
 }
 
 var proc_heapmin = dll.NewProc("_heapmin")
+var _ = proc_heapmin.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapmin(void);
 func X_heapmin(tls *TLS) (r int32) {
@@ -6577,6 +6894,7 @@ func X_heapmin(tls *TLS) (r int32) {
 }
 
 var proc_heapwalk = dll.NewProc("_heapwalk")
+var _ = proc_heapwalk.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapwalk(_HEAPINFO *_EntryInfo);
 func X_heapwalk(tls *TLS, __EntryInfo uintptr) (r int32) {
@@ -6595,6 +6913,7 @@ func X_heapwalk(tls *TLS, __EntryInfo uintptr) (r int32) {
 }
 
 var proc_get_heap_handle = dll.NewProc("_get_heap_handle")
+var _ = proc_get_heap_handle.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _get_heap_handle(void);
 func X_get_heap_handle(tls *TLS) (r Tintptr_t) {
@@ -6613,6 +6932,7 @@ func X_get_heap_handle(tls *TLS) (r Tintptr_t) {
 }
 
 var proc_memccpy = dll.NewProc("_memccpy")
+var _ = proc_memccpy.Addr()
 
 // __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) _memccpy(void *_Dst,const void *_Src,int _Val,size_t _MaxCount);
 func X_memccpy(tls *TLS, __Dst uintptr, __Src uintptr, __Val int32, __MaxCount Tsize_t) (r uintptr) {
@@ -6631,6 +6951,7 @@ func X_memccpy(tls *TLS, __Dst uintptr, __Src uintptr, __Val int32, __MaxCount T
 }
 
 var procmemchr = dll.NewProc("memchr")
+var _ = procmemchr.Addr()
 
 // void * __attribute__((__cdecl__)) memchr(const void *_Buf ,int _Val,size_t _MaxCount);
 func Xmemchr(tls *TLS, __Buf uintptr, __Val int32, __MaxCount Tsize_t) (r uintptr) {
@@ -6649,6 +6970,7 @@ func Xmemchr(tls *TLS, __Buf uintptr, __Val int32, __MaxCount Tsize_t) (r uintpt
 }
 
 var proc_memicmp = dll.NewProc("_memicmp")
+var _ = proc_memicmp.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp(const void *_Buf1,const void *_Buf2,size_t _Size);
 func X_memicmp(tls *TLS, __Buf1 uintptr, __Buf2 uintptr, __Size Tsize_t) (r int32) {
@@ -6667,6 +6989,7 @@ func X_memicmp(tls *TLS, __Buf1 uintptr, __Buf2 uintptr, __Size Tsize_t) (r int3
 }
 
 var proc_memicmp_l = dll.NewProc("_memicmp_l")
+var _ = proc_memicmp_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _memicmp_l(const void *_Buf1,const void *_Buf2,size_t _Size,_locale_t _Locale);
 func X_memicmp_l(tls *TLS, __Buf1 uintptr, __Buf2 uintptr, __Size Tsize_t, __Locale T_locale_t) (r int32) {
@@ -6685,6 +7008,7 @@ func X_memicmp_l(tls *TLS, __Buf1 uintptr, __Buf2 uintptr, __Size Tsize_t, __Loc
 }
 
 var procmemcmp = dll.NewProc("memcmp")
+var _ = procmemcmp.Addr()
 
 // int __attribute__((__cdecl__)) memcmp(const void *_Buf1,const void *_Buf2,size_t _Size);
 func Xmemcmp(tls *TLS, __Buf1 uintptr, __Buf2 uintptr, __Size Tsize_t) (r int32) {
@@ -6703,6 +7027,7 @@ func Xmemcmp(tls *TLS, __Buf1 uintptr, __Buf2 uintptr, __Size Tsize_t) (r int32)
 }
 
 var procmemcpy = dll.NewProc("memcpy")
+var _ = procmemcpy.Addr()
 
 // void * __attribute__((__cdecl__)) memcpy(void * __restrict__ _Dst,const void * __restrict__ _Src,size_t _Size);
 func Xmemcpy(tls *TLS, __Dst uintptr, __Src uintptr, __Size Tsize_t) (r uintptr) {
@@ -6721,6 +7046,7 @@ func Xmemcpy(tls *TLS, __Dst uintptr, __Src uintptr, __Size Tsize_t) (r uintptr)
 }
 
 var procmemcpy_s = dll.NewProc("memcpy_s")
+var _ = procmemcpy_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) memcpy_s (void *_dest,size_t _numberOfElements,const void *_src,size_t _count);
 func Xmemcpy_s(tls *TLS, __dest uintptr, __numberOfElements Tsize_t, __src uintptr, __count Tsize_t) (r Terrno_t) {
@@ -6739,6 +7065,7 @@ func Xmemcpy_s(tls *TLS, __dest uintptr, __numberOfElements Tsize_t, __src uintp
 }
 
 var procmemset = dll.NewProc("memset")
+var _ = procmemset.Addr()
 
 // void * __attribute__((__cdecl__)) memset(void *_Dst,int _Val,size_t _Size);
 func Xmemset(tls *TLS, __Dst uintptr, __Val int32, __Size Tsize_t) (r uintptr) {
@@ -6757,6 +7084,7 @@ func Xmemset(tls *TLS, __Dst uintptr, __Val int32, __Size Tsize_t) (r uintptr) {
 }
 
 var proc_strset = dll.NewProc("_strset")
+var _ = proc_strset.Addr()
 
 // char * __attribute__((__cdecl__)) _strset(char *_Str,int _Val);
 func X_strset(tls *TLS, __Str uintptr, __Val int32) (r uintptr) {
@@ -6775,6 +7103,7 @@ func X_strset(tls *TLS, __Str uintptr, __Val int32) (r uintptr) {
 }
 
 var procstrcpy = dll.NewProc("strcpy")
+var _ = procstrcpy.Addr()
 
 // char * __attribute__((__cdecl__)) strcpy(char * __restrict__ _Dest,const char * __restrict__ _Source);
 func Xstrcpy(tls *TLS, __Dest uintptr, __Source uintptr) (r uintptr) {
@@ -6793,6 +7122,7 @@ func Xstrcpy(tls *TLS, __Dest uintptr, __Source uintptr) (r uintptr) {
 }
 
 var procstrcat = dll.NewProc("strcat")
+var _ = procstrcat.Addr()
 
 // char * __attribute__((__cdecl__)) strcat(char * __restrict__ _Dest,const char * __restrict__ _Source);
 func Xstrcat(tls *TLS, __Dest uintptr, __Source uintptr) (r uintptr) {
@@ -6811,6 +7141,7 @@ func Xstrcat(tls *TLS, __Dest uintptr, __Source uintptr) (r uintptr) {
 }
 
 var procstrcmp = dll.NewProc("strcmp")
+var _ = procstrcmp.Addr()
 
 // int __attribute__((__cdecl__)) strcmp(const char *_Str1,const char *_Str2);
 func Xstrcmp(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
@@ -6829,6 +7160,7 @@ func Xstrcmp(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
 }
 
 var procstrlen = dll.NewProc("strlen")
+var _ = procstrlen.Addr()
 
 // size_t __attribute__((__cdecl__)) strlen(const char *_Str);
 func Xstrlen(tls *TLS, __Str uintptr) (r Tsize_t) {
@@ -6847,6 +7179,7 @@ func Xstrlen(tls *TLS, __Str uintptr) (r Tsize_t) {
 }
 
 var procstrnlen = dll.NewProc("strnlen")
+var _ = procstrnlen.Addr()
 
 // size_t __attribute__((__cdecl__)) strnlen(const char *_Str,size_t _MaxCount);
 func Xstrnlen(tls *TLS, __Str uintptr, __MaxCount Tsize_t) (r Tsize_t) {
@@ -6865,6 +7198,7 @@ func Xstrnlen(tls *TLS, __Str uintptr, __MaxCount Tsize_t) (r Tsize_t) {
 }
 
 var procmemmove = dll.NewProc("memmove")
+var _ = procmemmove.Addr()
 
 // void * __attribute__((__cdecl__)) memmove(void *_Dst,const void *_Src,size_t _Size);
 func Xmemmove(tls *TLS, __Dst uintptr, __Src uintptr, __Size Tsize_t) (r uintptr) {
@@ -6883,6 +7217,7 @@ func Xmemmove(tls *TLS, __Dst uintptr, __Src uintptr, __Size Tsize_t) (r uintptr
 }
 
 var proc_strdup = dll.NewProc("_strdup")
+var _ = proc_strdup.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _strdup(const char *_Src);
 func X_strdup(tls *TLS, __Src uintptr) (r uintptr) {
@@ -6901,6 +7236,7 @@ func X_strdup(tls *TLS, __Src uintptr) (r uintptr) {
 }
 
 var procstrchr = dll.NewProc("strchr")
+var _ = procstrchr.Addr()
 
 // char * __attribute__((__cdecl__)) strchr(const char *_Str,int _Val);
 func Xstrchr(tls *TLS, __Str uintptr, __Val int32) (r uintptr) {
@@ -6919,6 +7255,7 @@ func Xstrchr(tls *TLS, __Str uintptr, __Val int32) (r uintptr) {
 }
 
 var proc_stricmp = dll.NewProc("_stricmp")
+var _ = proc_stricmp.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp(const char *_Str1,const char *_Str2);
 func X_stricmp(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
@@ -6937,6 +7274,7 @@ func X_stricmp(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
 }
 
 var proc_stricmp_l = dll.NewProc("_stricmp_l")
+var _ = proc_stricmp_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricmp_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
 func X_stricmp_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) (r int32) {
@@ -6955,6 +7293,7 @@ func X_stricmp_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) 
 }
 
 var procstrcoll = dll.NewProc("strcoll")
+var _ = procstrcoll.Addr()
 
 // int __attribute__((__cdecl__)) strcoll(const char *_Str1,const char *_Str2);
 func Xstrcoll(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
@@ -6973,6 +7312,7 @@ func Xstrcoll(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
 }
 
 var proc_strcoll_l = dll.NewProc("_strcoll_l")
+var _ = proc_strcoll_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strcoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
 func X_strcoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) (r int32) {
@@ -6991,6 +7331,7 @@ func X_strcoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) 
 }
 
 var proc_stricoll = dll.NewProc("_stricoll")
+var _ = proc_stricoll.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll(const char *_Str1,const char *_Str2);
 func X_stricoll(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
@@ -7009,6 +7350,7 @@ func X_stricoll(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
 }
 
 var proc_stricoll_l = dll.NewProc("_stricoll_l")
+var _ = proc_stricoll_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _stricoll_l(const char *_Str1,const char *_Str2,_locale_t _Locale);
 func X_stricoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) (r int32) {
@@ -7027,6 +7369,7 @@ func X_stricoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t)
 }
 
 var proc_strncoll = dll.NewProc("_strncoll")
+var _ = proc_strncoll.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
 func X_strncoll(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r int32) {
@@ -7045,6 +7388,7 @@ func X_strncoll(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r
 }
 
 var proc_strncoll_l = dll.NewProc("_strncoll_l")
+var _ = proc_strncoll_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strncoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
 func X_strncoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r int32) {
@@ -7063,6 +7407,7 @@ func X_strncoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, 
 }
 
 var proc_strnicoll = dll.NewProc("_strnicoll")
+var _ = proc_strnicoll.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll (const char *_Str1,const char *_Str2,size_t _MaxCount);
 func X_strnicoll(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r int32) {
@@ -7081,6 +7426,7 @@ func X_strnicoll(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (
 }
 
 var proc_strnicoll_l = dll.NewProc("_strnicoll_l")
+var _ = proc_strnicoll_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicoll_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
 func X_strnicoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r int32) {
@@ -7099,6 +7445,7 @@ func X_strnicoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t,
 }
 
 var procstrcspn = dll.NewProc("strcspn")
+var _ = procstrcspn.Addr()
 
 // size_t __attribute__((__cdecl__)) strcspn(const char *_Str,const char *_Control);
 func Xstrcspn(tls *TLS, __Str uintptr, __Control uintptr) (r Tsize_t) {
@@ -7117,6 +7464,7 @@ func Xstrcspn(tls *TLS, __Str uintptr, __Control uintptr) (r Tsize_t) {
 }
 
 var proc_strerror = dll.NewProc("_strerror")
+var _ = proc_strerror.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _strerror(const char *_ErrMsg);
 func X_strerror(tls *TLS, __ErrMsg uintptr) (r uintptr) {
@@ -7135,6 +7483,7 @@ func X_strerror(tls *TLS, __ErrMsg uintptr) (r uintptr) {
 }
 
 var procstrerror = dll.NewProc("strerror")
+var _ = procstrerror.Addr()
 
 // char * __attribute__((__cdecl__)) strerror(int);
 func Xstrerror(tls *TLS, _0 int32) (r uintptr) {
@@ -7153,6 +7502,7 @@ func Xstrerror(tls *TLS, _0 int32) (r uintptr) {
 }
 
 var proc_strlwr = dll.NewProc("_strlwr")
+var _ = proc_strlwr.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _strlwr(char *_String);
 func X_strlwr(tls *TLS, __String uintptr) (r uintptr) {
@@ -7171,6 +7521,7 @@ func X_strlwr(tls *TLS, __String uintptr) (r uintptr) {
 }
 
 var procstrncat = dll.NewProc("strncat")
+var _ = procstrncat.Addr()
 
 // char * __attribute__((__cdecl__)) strncat(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count);
 func Xstrncat(tls *TLS, __Dest uintptr, __Source uintptr, __Count Tsize_t) (r uintptr) {
@@ -7189,6 +7540,7 @@ func Xstrncat(tls *TLS, __Dest uintptr, __Source uintptr, __Count Tsize_t) (r ui
 }
 
 var procstrncmp = dll.NewProc("strncmp")
+var _ = procstrncmp.Addr()
 
 // int __attribute__((__cdecl__)) strncmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
 func Xstrncmp(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r int32) {
@@ -7207,6 +7559,7 @@ func Xstrncmp(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r i
 }
 
 var proc_strnicmp = dll.NewProc("_strnicmp")
+var _ = proc_strnicmp.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
 func X_strnicmp(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r int32) {
@@ -7225,6 +7578,7 @@ func X_strnicmp(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r
 }
 
 var proc_strnicmp_l = dll.NewProc("_strnicmp_l")
+var _ = proc_strnicmp_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _strnicmp_l(const char *_Str1,const char *_Str2,size_t _MaxCount,_locale_t _Locale);
 func X_strnicmp_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r int32) {
@@ -7243,6 +7597,7 @@ func X_strnicmp_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, 
 }
 
 var procstrncpy = dll.NewProc("strncpy")
+var _ = procstrncpy.Addr()
 
 // char *strncpy(char * __restrict__ _Dest,const char * __restrict__ _Source,size_t _Count);
 func Xstrncpy(tls *TLS, __Dest uintptr, __Source uintptr, __Count Tsize_t) (r uintptr) {
@@ -7261,6 +7616,7 @@ func Xstrncpy(tls *TLS, __Dest uintptr, __Source uintptr, __Count Tsize_t) (r ui
 }
 
 var proc_strnset = dll.NewProc("_strnset")
+var _ = proc_strnset.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _strnset(char *_Str,int _Val,size_t _MaxCount);
 func X_strnset(tls *TLS, __Str uintptr, __Val int32, __MaxCount Tsize_t) (r uintptr) {
@@ -7279,6 +7635,7 @@ func X_strnset(tls *TLS, __Str uintptr, __Val int32, __MaxCount Tsize_t) (r uint
 }
 
 var procstrpbrk = dll.NewProc("strpbrk")
+var _ = procstrpbrk.Addr()
 
 // char * __attribute__((__cdecl__)) strpbrk(const char *_Str,const char *_Control);
 func Xstrpbrk(tls *TLS, __Str uintptr, __Control uintptr) (r uintptr) {
@@ -7297,6 +7654,7 @@ func Xstrpbrk(tls *TLS, __Str uintptr, __Control uintptr) (r uintptr) {
 }
 
 var procstrrchr = dll.NewProc("strrchr")
+var _ = procstrrchr.Addr()
 
 // char * __attribute__((__cdecl__)) strrchr(const char *_Str,int _Ch);
 func Xstrrchr(tls *TLS, __Str uintptr, __Ch int32) (r uintptr) {
@@ -7315,6 +7673,7 @@ func Xstrrchr(tls *TLS, __Str uintptr, __Ch int32) (r uintptr) {
 }
 
 var proc_strrev = dll.NewProc("_strrev")
+var _ = proc_strrev.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _strrev(char *_Str);
 func X_strrev(tls *TLS, __Str uintptr) (r uintptr) {
@@ -7333,6 +7692,7 @@ func X_strrev(tls *TLS, __Str uintptr) (r uintptr) {
 }
 
 var procstrspn = dll.NewProc("strspn")
+var _ = procstrspn.Addr()
 
 // size_t __attribute__((__cdecl__)) strspn(const char *_Str,const char *_Control);
 func Xstrspn(tls *TLS, __Str uintptr, __Control uintptr) (r Tsize_t) {
@@ -7351,6 +7711,7 @@ func Xstrspn(tls *TLS, __Str uintptr, __Control uintptr) (r Tsize_t) {
 }
 
 var procstrstr = dll.NewProc("strstr")
+var _ = procstrstr.Addr()
 
 // char * __attribute__((__cdecl__)) strstr(const char *_Str,const char *_SubStr);
 func Xstrstr(tls *TLS, __Str uintptr, __SubStr uintptr) (r uintptr) {
@@ -7369,6 +7730,7 @@ func Xstrstr(tls *TLS, __Str uintptr, __SubStr uintptr) (r uintptr) {
 }
 
 var procstrtok = dll.NewProc("strtok")
+var _ = procstrtok.Addr()
 
 // char * __attribute__((__cdecl__)) strtok(char * __restrict__ _Str,const char * __restrict__ _Delim);
 func Xstrtok(tls *TLS, __Str uintptr, __Delim uintptr) (r uintptr) {
@@ -7387,6 +7749,7 @@ func Xstrtok(tls *TLS, __Str uintptr, __Delim uintptr) (r uintptr) {
 }
 
 var proc_strupr = dll.NewProc("_strupr")
+var _ = proc_strupr.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _strupr(char *_String);
 func X_strupr(tls *TLS, __String uintptr) (r uintptr) {
@@ -7405,6 +7768,7 @@ func X_strupr(tls *TLS, __String uintptr) (r uintptr) {
 }
 
 var proc_strupr_l = dll.NewProc("_strupr_l")
+var _ = proc_strupr_l.Addr()
 
 // __attribute__ ((__dllimport__)) char *_strupr_l(char *_String,_locale_t _Locale);
 func X_strupr_l(tls *TLS, __String uintptr, __Locale T_locale_t) (r uintptr) {
@@ -7423,6 +7787,7 @@ func X_strupr_l(tls *TLS, __String uintptr, __Locale T_locale_t) (r uintptr) {
 }
 
 var procstrxfrm = dll.NewProc("strxfrm")
+var _ = procstrxfrm.Addr()
 
 // size_t __attribute__((__cdecl__)) strxfrm(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount);
 func Xstrxfrm(tls *TLS, __Dst uintptr, __Src uintptr, __MaxCount Tsize_t) (r Tsize_t) {
@@ -7441,6 +7806,7 @@ func Xstrxfrm(tls *TLS, __Dst uintptr, __Src uintptr, __MaxCount Tsize_t) (r Tsi
 }
 
 var proc_strxfrm_l = dll.NewProc("_strxfrm_l")
+var _ = proc_strxfrm_l.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _strxfrm_l(char * __restrict__ _Dst,const char * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
 func X_strxfrm_l(tls *TLS, __Dst uintptr, __Src uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r Tsize_t) {
@@ -7459,6 +7825,7 @@ func X_strxfrm_l(tls *TLS, __Dst uintptr, __Src uintptr, __MaxCount Tsize_t, __L
 }
 
 var proc_wcsdup = dll.NewProc("_wcsdup")
+var _ = proc_wcsdup.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wcsdup(const wchar_t *_Str);
 func X_wcsdup(tls *TLS, __Str uintptr) (r uintptr) {
@@ -7477,6 +7844,7 @@ func X_wcsdup(tls *TLS, __Str uintptr) (r uintptr) {
 }
 
 var procwcscat = dll.NewProc("wcscat")
+var _ = procwcscat.Addr()
 
 // wchar_t * __attribute__((__cdecl__)) wcscat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source);
 func Xwcscat(tls *TLS, __Dest uintptr, __Source uintptr) (r uintptr) {
@@ -7495,6 +7863,7 @@ func Xwcscat(tls *TLS, __Dest uintptr, __Source uintptr) (r uintptr) {
 }
 
 var procwcschr = dll.NewProc("wcschr")
+var _ = procwcschr.Addr()
 
 // wchar_t * __attribute__((__cdecl__)) wcschr(const wchar_t *_Str,wchar_t _Ch);
 func Xwcschr(tls *TLS, __Str uintptr, __Ch Twchar_t) (r uintptr) {
@@ -7513,6 +7882,7 @@ func Xwcschr(tls *TLS, __Str uintptr, __Ch Twchar_t) (r uintptr) {
 }
 
 var procwcscmp = dll.NewProc("wcscmp")
+var _ = procwcscmp.Addr()
 
 // int __attribute__((__cdecl__)) wcscmp(const wchar_t *_Str1,const wchar_t *_Str2);
 func Xwcscmp(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
@@ -7531,6 +7901,7 @@ func Xwcscmp(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
 }
 
 var procwcscpy = dll.NewProc("wcscpy")
+var _ = procwcscpy.Addr()
 
 // wchar_t * __attribute__((__cdecl__)) wcscpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source);
 func Xwcscpy(tls *TLS, __Dest uintptr, __Source uintptr) (r uintptr) {
@@ -7549,6 +7920,7 @@ func Xwcscpy(tls *TLS, __Dest uintptr, __Source uintptr) (r uintptr) {
 }
 
 var procwcscspn = dll.NewProc("wcscspn")
+var _ = procwcscspn.Addr()
 
 // size_t __attribute__((__cdecl__)) wcscspn(const wchar_t *_Str,const wchar_t *_Control);
 func Xwcscspn(tls *TLS, __Str uintptr, __Control uintptr) (r Tsize_t) {
@@ -7567,6 +7939,7 @@ func Xwcscspn(tls *TLS, __Str uintptr, __Control uintptr) (r Tsize_t) {
 }
 
 var procwcslen = dll.NewProc("wcslen")
+var _ = procwcslen.Addr()
 
 // size_t __attribute__((__cdecl__)) wcslen(const wchar_t *_Str);
 func Xwcslen(tls *TLS, __Str uintptr) (r Tsize_t) {
@@ -7585,6 +7958,7 @@ func Xwcslen(tls *TLS, __Str uintptr) (r Tsize_t) {
 }
 
 var procwcsnlen = dll.NewProc("wcsnlen")
+var _ = procwcsnlen.Addr()
 
 // size_t __attribute__((__cdecl__)) wcsnlen(const wchar_t *_Src,size_t _MaxCount);
 func Xwcsnlen(tls *TLS, __Src uintptr, __MaxCount Tsize_t) (r Tsize_t) {
@@ -7603,6 +7977,7 @@ func Xwcsnlen(tls *TLS, __Src uintptr, __MaxCount Tsize_t) (r Tsize_t) {
 }
 
 var procwcsncat = dll.NewProc("wcsncat")
+var _ = procwcsncat.Addr()
 
 // wchar_t *wcsncat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count);
 func Xwcsncat(tls *TLS, __Dest uintptr, __Source uintptr, __Count Tsize_t) (r uintptr) {
@@ -7621,6 +7996,7 @@ func Xwcsncat(tls *TLS, __Dest uintptr, __Source uintptr, __Count Tsize_t) (r ui
 }
 
 var procwcsncmp = dll.NewProc("wcsncmp")
+var _ = procwcsncmp.Addr()
 
 // int __attribute__((__cdecl__)) wcsncmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
 func Xwcsncmp(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r int32) {
@@ -7639,6 +8015,7 @@ func Xwcsncmp(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r i
 }
 
 var procwcsncpy = dll.NewProc("wcsncpy")
+var _ = procwcsncpy.Addr()
 
 // wchar_t *wcsncpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count);
 func Xwcsncpy(tls *TLS, __Dest uintptr, __Source uintptr, __Count Tsize_t) (r uintptr) {
@@ -7657,6 +8034,7 @@ func Xwcsncpy(tls *TLS, __Dest uintptr, __Source uintptr, __Count Tsize_t) (r ui
 }
 
 var procwcspbrk = dll.NewProc("wcspbrk")
+var _ = procwcspbrk.Addr()
 
 // wchar_t * __attribute__((__cdecl__)) wcspbrk(const wchar_t *_Str,const wchar_t *_Control);
 func Xwcspbrk(tls *TLS, __Str uintptr, __Control uintptr) (r uintptr) {
@@ -7675,6 +8053,7 @@ func Xwcspbrk(tls *TLS, __Str uintptr, __Control uintptr) (r uintptr) {
 }
 
 var procwcsrchr = dll.NewProc("wcsrchr")
+var _ = procwcsrchr.Addr()
 
 // wchar_t * __attribute__((__cdecl__)) wcsrchr(const wchar_t *_Str,wchar_t _Ch);
 func Xwcsrchr(tls *TLS, __Str uintptr, __Ch Twchar_t) (r uintptr) {
@@ -7693,6 +8072,7 @@ func Xwcsrchr(tls *TLS, __Str uintptr, __Ch Twchar_t) (r uintptr) {
 }
 
 var procwcsspn = dll.NewProc("wcsspn")
+var _ = procwcsspn.Addr()
 
 // size_t __attribute__((__cdecl__)) wcsspn(const wchar_t *_Str,const wchar_t *_Control);
 func Xwcsspn(tls *TLS, __Str uintptr, __Control uintptr) (r Tsize_t) {
@@ -7711,6 +8091,7 @@ func Xwcsspn(tls *TLS, __Str uintptr, __Control uintptr) (r Tsize_t) {
 }
 
 var procwcsstr = dll.NewProc("wcsstr")
+var _ = procwcsstr.Addr()
 
 // wchar_t * __attribute__((__cdecl__)) wcsstr(const wchar_t *_Str,const wchar_t *_SubStr);
 func Xwcsstr(tls *TLS, __Str uintptr, __SubStr uintptr) (r uintptr) {
@@ -7729,6 +8110,7 @@ func Xwcsstr(tls *TLS, __Str uintptr, __SubStr uintptr) (r uintptr) {
 }
 
 var procwcstok = dll.NewProc("wcstok")
+var _ = procwcstok.Addr()
 
 // wchar_t * __attribute__((__cdecl__)) wcstok(wchar_t * __restrict__ _Str,const wchar_t * __restrict__ _Delim);
 func Xwcstok(tls *TLS, __Str uintptr, __Delim uintptr) (r uintptr) {
@@ -7747,6 +8129,7 @@ func Xwcstok(tls *TLS, __Str uintptr, __Delim uintptr) (r uintptr) {
 }
 
 var proc_wcserror = dll.NewProc("_wcserror")
+var _ = proc_wcserror.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wcserror(int _ErrNum);
 func X_wcserror(tls *TLS, __ErrNum int32) (r uintptr) {
@@ -7765,6 +8148,7 @@ func X_wcserror(tls *TLS, __ErrNum int32) (r uintptr) {
 }
 
 var proc__wcserror = dll.NewProc("__wcserror")
+var _ = proc__wcserror.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) __wcserror(const wchar_t *_Str);
 func X__wcserror(tls *TLS, __Str uintptr) (r uintptr) {
@@ -7783,6 +8167,7 @@ func X__wcserror(tls *TLS, __Str uintptr) (r uintptr) {
 }
 
 var proc_wcsicmp = dll.NewProc("_wcsicmp")
+var _ = proc_wcsicmp.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2);
 func X_wcsicmp(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
@@ -7801,6 +8186,7 @@ func X_wcsicmp(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
 }
 
 var proc_wcsicmp_l = dll.NewProc("_wcsicmp_l")
+var _ = proc_wcsicmp_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
 func X_wcsicmp_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) (r int32) {
@@ -7819,6 +8205,7 @@ func X_wcsicmp_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) 
 }
 
 var proc_wcsnicmp = dll.NewProc("_wcsnicmp")
+var _ = proc_wcsnicmp.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
 func X_wcsnicmp(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r int32) {
@@ -7837,6 +8224,7 @@ func X_wcsnicmp(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r
 }
 
 var proc_wcsnicmp_l = dll.NewProc("_wcsnicmp_l")
+var _ = proc_wcsnicmp_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
 func X_wcsnicmp_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r int32) {
@@ -7855,6 +8243,7 @@ func X_wcsnicmp_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, 
 }
 
 var proc_wcsnset = dll.NewProc("_wcsnset")
+var _ = proc_wcsnset.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount);
 func X_wcsnset(tls *TLS, __Str uintptr, __Val Twchar_t, __MaxCount Tsize_t) (r uintptr) {
@@ -7873,6 +8262,7 @@ func X_wcsnset(tls *TLS, __Str uintptr, __Val Twchar_t, __MaxCount Tsize_t) (r u
 }
 
 var proc_wcsrev = dll.NewProc("_wcsrev")
+var _ = proc_wcsrev.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wcsrev(wchar_t *_Str);
 func X_wcsrev(tls *TLS, __Str uintptr) (r uintptr) {
@@ -7891,6 +8281,7 @@ func X_wcsrev(tls *TLS, __Str uintptr) (r uintptr) {
 }
 
 var proc_wcsset = dll.NewProc("_wcsset")
+var _ = proc_wcsset.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wcsset(wchar_t *_Str,wchar_t _Val);
 func X_wcsset(tls *TLS, __Str uintptr, __Val Twchar_t) (r uintptr) {
@@ -7909,6 +8300,7 @@ func X_wcsset(tls *TLS, __Str uintptr, __Val Twchar_t) (r uintptr) {
 }
 
 var proc_wcslwr = dll.NewProc("_wcslwr")
+var _ = proc_wcslwr.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wcslwr(wchar_t *_String);
 func X_wcslwr(tls *TLS, __String uintptr) (r uintptr) {
@@ -7927,6 +8319,7 @@ func X_wcslwr(tls *TLS, __String uintptr) (r uintptr) {
 }
 
 var proc_wcslwr_l = dll.NewProc("_wcslwr_l")
+var _ = proc_wcslwr_l.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t *_wcslwr_l(wchar_t *_String,_locale_t _Locale);
 func X_wcslwr_l(tls *TLS, __String uintptr, __Locale T_locale_t) (r uintptr) {
@@ -7945,6 +8338,7 @@ func X_wcslwr_l(tls *TLS, __String uintptr, __Locale T_locale_t) (r uintptr) {
 }
 
 var proc_wcsupr = dll.NewProc("_wcsupr")
+var _ = proc_wcsupr.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wcsupr(wchar_t *_String);
 func X_wcsupr(tls *TLS, __String uintptr) (r uintptr) {
@@ -7963,6 +8357,7 @@ func X_wcsupr(tls *TLS, __String uintptr) (r uintptr) {
 }
 
 var proc_wcsupr_l = dll.NewProc("_wcsupr_l")
+var _ = proc_wcsupr_l.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t *_wcsupr_l(wchar_t *_String,_locale_t _Locale);
 func X_wcsupr_l(tls *TLS, __String uintptr, __Locale T_locale_t) (r uintptr) {
@@ -7981,6 +8376,7 @@ func X_wcsupr_l(tls *TLS, __String uintptr, __Locale T_locale_t) (r uintptr) {
 }
 
 var procwcsxfrm = dll.NewProc("wcsxfrm")
+var _ = procwcsxfrm.Addr()
 
 // size_t __attribute__((__cdecl__)) wcsxfrm(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount);
 func Xwcsxfrm(tls *TLS, __Dst uintptr, __Src uintptr, __MaxCount Tsize_t) (r Tsize_t) {
@@ -7999,6 +8395,7 @@ func Xwcsxfrm(tls *TLS, __Dst uintptr, __Src uintptr, __MaxCount Tsize_t) (r Tsi
 }
 
 var proc_wcsxfrm_l = dll.NewProc("_wcsxfrm_l")
+var _ = proc_wcsxfrm_l.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcsxfrm_l(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
 func X_wcsxfrm_l(tls *TLS, __Dst uintptr, __Src uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r Tsize_t) {
@@ -8017,6 +8414,7 @@ func X_wcsxfrm_l(tls *TLS, __Dst uintptr, __Src uintptr, __MaxCount Tsize_t, __L
 }
 
 var procwcscoll = dll.NewProc("wcscoll")
+var _ = procwcscoll.Addr()
 
 // int __attribute__((__cdecl__)) wcscoll(const wchar_t *_Str1,const wchar_t *_Str2);
 func Xwcscoll(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
@@ -8035,6 +8433,7 @@ func Xwcscoll(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
 }
 
 var proc_wcscoll_l = dll.NewProc("_wcscoll_l")
+var _ = proc_wcscoll_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcscoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
 func X_wcscoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) (r int32) {
@@ -8053,6 +8452,7 @@ func X_wcscoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) 
 }
 
 var proc_wcsicoll = dll.NewProc("_wcsicoll")
+var _ = proc_wcsicoll.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2);
 func X_wcsicoll(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
@@ -8071,6 +8471,7 @@ func X_wcsicoll(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
 }
 
 var proc_wcsicoll_l = dll.NewProc("_wcsicoll_l")
+var _ = proc_wcsicoll_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
 func X_wcsicoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t) (r int32) {
@@ -8089,6 +8490,7 @@ func X_wcsicoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __Locale T_locale_t)
 }
 
 var proc_wcsncoll = dll.NewProc("_wcsncoll")
+var _ = proc_wcsncoll.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
 func X_wcsncoll(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r int32) {
@@ -8107,6 +8509,7 @@ func X_wcsncoll(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r
 }
 
 var proc_wcsncoll_l = dll.NewProc("_wcsncoll_l")
+var _ = proc_wcsncoll_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
 func X_wcsncoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r int32) {
@@ -8125,6 +8528,7 @@ func X_wcsncoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, 
 }
 
 var proc_wcsnicoll = dll.NewProc("_wcsnicoll")
+var _ = proc_wcsnicoll.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
 func X_wcsnicoll(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (r int32) {
@@ -8143,6 +8547,7 @@ func X_wcsnicoll(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t) (
 }
 
 var proc_wcsnicoll_l = dll.NewProc("_wcsnicoll_l")
+var _ = proc_wcsnicoll_l.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
 func X_wcsnicoll_l(tls *TLS, __Str1 uintptr, __Str2 uintptr, __MaxCount Tsize_t, __Locale T_locale_t) (r int32) {
@@ -8182,6 +8587,7 @@ type T__timeb64 = struct {
 }
 
 var proc_ftime64 = dll.NewProc("_ftime64")
+var _ = proc_ftime64.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _ftime64(struct __timeb64 *_Time);
 func X_ftime64(tls *TLS, __Time uintptr) {
@@ -8198,6 +8604,7 @@ func X_ftime64(tls *TLS, __Time uintptr) {
 }
 
 var proc_ftime32 = dll.NewProc("_ftime32")
+var _ = proc_ftime32.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _ftime32(struct __timeb32 *_Time);
 func X_ftime32(tls *TLS, __Time uintptr) {
@@ -8248,6 +8655,7 @@ type Ttm = struct {
 }
 
 var proc__daylight = dll.NewProc("__daylight")
+var _ = proc__daylight.Addr()
 
 // __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __daylight(void);
 func X__daylight(tls *TLS) (r uintptr) {
@@ -8266,6 +8674,7 @@ func X__daylight(tls *TLS) (r uintptr) {
 }
 
 var proc__dstbias = dll.NewProc("__dstbias")
+var _ = proc__dstbias.Addr()
 
 // __attribute__ ((__dllimport__)) long * __attribute__((__cdecl__)) __dstbias(void);
 func X__dstbias(tls *TLS) (r uintptr) {
@@ -8284,6 +8693,7 @@ func X__dstbias(tls *TLS) (r uintptr) {
 }
 
 var proc__timezone = dll.NewProc("__timezone")
+var _ = proc__timezone.Addr()
 
 // __attribute__ ((__dllimport__)) long * __attribute__((__cdecl__)) __timezone(void);
 func X__timezone(tls *TLS) (r uintptr) {
@@ -8302,6 +8712,7 @@ func X__timezone(tls *TLS) (r uintptr) {
 }
 
 var proc__tzname = dll.NewProc("__tzname")
+var _ = proc__tzname.Addr()
 
 // __attribute__ ((__dllimport__)) char ** __attribute__((__cdecl__)) __tzname(void);
 func X__tzname(tls *TLS) (r uintptr) {
@@ -8320,6 +8731,7 @@ func X__tzname(tls *TLS) (r uintptr) {
 }
 
 var proc_get_daylight = dll.NewProc("_get_daylight")
+var _ = proc_get_daylight.Addr()
 
 // __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_daylight(int *_Daylight);
 func X_get_daylight(tls *TLS, __Daylight uintptr) (r Terrno_t) {
@@ -8338,6 +8750,7 @@ func X_get_daylight(tls *TLS, __Daylight uintptr) (r Terrno_t) {
 }
 
 var proc_get_dstbias = dll.NewProc("_get_dstbias")
+var _ = proc_get_dstbias.Addr()
 
 // __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_dstbias(long *_Daylight_savings_bias);
 func X_get_dstbias(tls *TLS, __Daylight_savings_bias uintptr) (r Terrno_t) {
@@ -8356,6 +8769,7 @@ func X_get_dstbias(tls *TLS, __Daylight_savings_bias uintptr) (r Terrno_t) {
 }
 
 var proc_get_timezone = dll.NewProc("_get_timezone")
+var _ = proc_get_timezone.Addr()
 
 // __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_timezone(long *_Timezone);
 func X_get_timezone(tls *TLS, __Timezone uintptr) (r Terrno_t) {
@@ -8374,6 +8788,7 @@ func X_get_timezone(tls *TLS, __Timezone uintptr) (r Terrno_t) {
 }
 
 var proc_get_tzname = dll.NewProc("_get_tzname")
+var _ = proc_get_tzname.Addr()
 
 // __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_tzname(size_t *_ReturnValue,char *_Buffer,size_t _SizeInBytes,int _Index);
 func X_get_tzname(tls *TLS, __ReturnValue uintptr, __Buffer uintptr, __SizeInBytes Tsize_t, __Index int32) (r Terrno_t) {
@@ -8392,6 +8807,7 @@ func X_get_tzname(tls *TLS, __ReturnValue uintptr, __Buffer uintptr, __SizeInByt
 }
 
 var procasctime = dll.NewProc("asctime")
+var _ = procasctime.Addr()
 
 // char * __attribute__((__cdecl__)) asctime(const struct tm *_Tm);
 func Xasctime(tls *TLS, __Tm uintptr) (r uintptr) {
@@ -8410,6 +8826,7 @@ func Xasctime(tls *TLS, __Tm uintptr) (r uintptr) {
 }
 
 var procasctime_s = dll.NewProc("asctime_s")
+var _ = procasctime_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) asctime_s (char *_Buf,size_t _SizeInWords,const struct tm *_Tm);
 func Xasctime_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Tm uintptr) (r Terrno_t) {
@@ -8428,6 +8845,7 @@ func Xasctime_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Tm uintptr) (r
 }
 
 var proc_ctime32 = dll.NewProc("_ctime32")
+var _ = proc_ctime32.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _ctime32(const __time32_t *_Time);
 func X_ctime32(tls *TLS, __Time uintptr) (r uintptr) {
@@ -8446,6 +8864,7 @@ func X_ctime32(tls *TLS, __Time uintptr) (r uintptr) {
 }
 
 var proc_ctime32_s = dll.NewProc("_ctime32_s")
+var _ = proc_ctime32_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _ctime32_s (char *_Buf,size_t _SizeInBytes,const __time32_t *_Time);
 func X_ctime32_s(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t, __Time uintptr) (r Terrno_t) {
@@ -8464,6 +8883,7 @@ func X_ctime32_s(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t, __Time uintptr)
 }
 
 var procclock = dll.NewProc("clock")
+var _ = procclock.Addr()
 
 // clock_t __attribute__((__cdecl__)) clock(void);
 func Xclock(tls *TLS) (r Tclock_t) {
@@ -8482,6 +8902,7 @@ func Xclock(tls *TLS) (r Tclock_t) {
 }
 
 var proc_gmtime32 = dll.NewProc("_gmtime32")
+var _ = proc_gmtime32.Addr()
 
 // __attribute__ ((__dllimport__)) struct tm * __attribute__((__cdecl__)) _gmtime32(const __time32_t *_Time);
 func X_gmtime32(tls *TLS, __Time uintptr) (r uintptr) {
@@ -8500,6 +8921,7 @@ func X_gmtime32(tls *TLS, __Time uintptr) (r uintptr) {
 }
 
 var proc_gmtime32_s = dll.NewProc("_gmtime32_s")
+var _ = proc_gmtime32_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _gmtime32_s (struct tm *_Tm,const __time32_t *_Time);
 func X_gmtime32_s(tls *TLS, __Tm uintptr, __Time uintptr) (r Terrno_t) {
@@ -8518,6 +8940,7 @@ func X_gmtime32_s(tls *TLS, __Tm uintptr, __Time uintptr) (r Terrno_t) {
 }
 
 var proc_localtime32 = dll.NewProc("_localtime32")
+var _ = proc_localtime32.Addr()
 
 // __attribute__ ((__dllimport__)) struct tm * __attribute__((__cdecl__)) _localtime32(const __time32_t *_Time);
 func X_localtime32(tls *TLS, __Time uintptr) (r uintptr) {
@@ -8536,6 +8959,7 @@ func X_localtime32(tls *TLS, __Time uintptr) (r uintptr) {
 }
 
 var proc_localtime32_s = dll.NewProc("_localtime32_s")
+var _ = proc_localtime32_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _localtime32_s (struct tm *_Tm,const __time32_t *_Time);
 func X_localtime32_s(tls *TLS, __Tm uintptr, __Time uintptr) (r Terrno_t) {
@@ -8554,6 +8978,7 @@ func X_localtime32_s(tls *TLS, __Tm uintptr, __Time uintptr) (r Terrno_t) {
 }
 
 var procstrftime = dll.NewProc("strftime")
+var _ = procstrftime.Addr()
 
 // size_t __attribute__((__cdecl__)) strftime(char * __restrict__ _Buf,size_t _SizeInBytes,const char * __restrict__ _Format,const struct tm * __restrict__ _Tm);
 func Xstrftime(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t, __Format uintptr, __Tm uintptr) (r Tsize_t) {
@@ -8572,6 +8997,7 @@ func Xstrftime(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t, __Format uintptr,
 }
 
 var proc_strftime_l = dll.NewProc("_strftime_l")
+var _ = proc_strftime_l.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _strftime_l(char * __restrict__ _Buf,size_t _Max_size,const char * __restrict__ _Format,const struct tm * __restrict__ _Tm,_locale_t _Locale);
 func X_strftime_l(tls *TLS, __Buf uintptr, __Max_size Tsize_t, __Format uintptr, __Tm uintptr, __Locale T_locale_t) (r Tsize_t) {
@@ -8590,6 +9016,7 @@ func X_strftime_l(tls *TLS, __Buf uintptr, __Max_size Tsize_t, __Format uintptr,
 }
 
 var proc_strdate = dll.NewProc("_strdate")
+var _ = proc_strdate.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _strdate(char *_Buffer);
 func X_strdate(tls *TLS, __Buffer uintptr) (r uintptr) {
@@ -8608,6 +9035,7 @@ func X_strdate(tls *TLS, __Buffer uintptr) (r uintptr) {
 }
 
 var proc_strdate_s = dll.NewProc("_strdate_s")
+var _ = proc_strdate_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _strdate_s (char *_Buf,size_t _SizeInBytes);
 func X_strdate_s(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t) (r Terrno_t) {
@@ -8626,6 +9054,7 @@ func X_strdate_s(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t) (r Terrno_t) {
 }
 
 var proc_strtime = dll.NewProc("_strtime")
+var _ = proc_strtime.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _strtime(char *_Buffer);
 func X_strtime(tls *TLS, __Buffer uintptr) (r uintptr) {
@@ -8644,6 +9073,7 @@ func X_strtime(tls *TLS, __Buffer uintptr) (r uintptr) {
 }
 
 var proc_strtime_s = dll.NewProc("_strtime_s")
+var _ = proc_strtime_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _strtime_s (char *_Buf ,size_t _SizeInBytes);
 func X_strtime_s(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t) (r Terrno_t) {
@@ -8662,6 +9092,7 @@ func X_strtime_s(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t) (r Terrno_t) {
 }
 
 var proc_time32 = dll.NewProc("_time32")
+var _ = proc_time32.Addr()
 
 // __attribute__ ((__dllimport__)) __time32_t __attribute__((__cdecl__)) _time32(__time32_t *_Time);
 func X_time32(tls *TLS, __Time uintptr) (r T__time32_t) {
@@ -8680,6 +9111,7 @@ func X_time32(tls *TLS, __Time uintptr) (r T__time32_t) {
 }
 
 var proc_timespec32_get = dll.NewProc("_timespec32_get")
+var _ = proc_timespec32_get.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _timespec32_get(struct _timespec32 *_Ts, int _Base);
 func X_timespec32_get(tls *TLS, __Ts uintptr, __Base int32) (r int32) {
@@ -8698,6 +9130,7 @@ func X_timespec32_get(tls *TLS, __Ts uintptr, __Base int32) (r int32) {
 }
 
 var proc_mktime32 = dll.NewProc("_mktime32")
+var _ = proc_mktime32.Addr()
 
 // __attribute__ ((__dllimport__)) __time32_t __attribute__((__cdecl__)) _mktime32(struct tm *_Tm);
 func X_mktime32(tls *TLS, __Tm uintptr) (r T__time32_t) {
@@ -8716,6 +9149,7 @@ func X_mktime32(tls *TLS, __Tm uintptr) (r T__time32_t) {
 }
 
 var proc_mkgmtime32 = dll.NewProc("_mkgmtime32")
+var _ = proc_mkgmtime32.Addr()
 
 // __attribute__ ((__dllimport__)) __time32_t __attribute__((__cdecl__)) _mkgmtime32(struct tm *_Tm);
 func X_mkgmtime32(tls *TLS, __Tm uintptr) (r T__time32_t) {
@@ -8734,6 +9168,7 @@ func X_mkgmtime32(tls *TLS, __Tm uintptr) (r T__time32_t) {
 }
 
 var proc_tzset = dll.NewProc("_tzset")
+var _ = proc_tzset.Addr()
 
 // void __attribute__((__cdecl__)) _tzset(void);
 func X_tzset(tls *TLS) {
@@ -8750,6 +9185,7 @@ func X_tzset(tls *TLS) {
 }
 
 var proc_ctime64 = dll.NewProc("_ctime64")
+var _ = proc_ctime64.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _ctime64(const __time64_t *_Time);
 func X_ctime64(tls *TLS, __Time uintptr) (r uintptr) {
@@ -8768,6 +9204,7 @@ func X_ctime64(tls *TLS, __Time uintptr) (r uintptr) {
 }
 
 var proc_ctime64_s = dll.NewProc("_ctime64_s")
+var _ = proc_ctime64_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _ctime64_s (char *_Buf,size_t _SizeInBytes,const __time64_t *_Time);
 func X_ctime64_s(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t, __Time uintptr) (r Terrno_t) {
@@ -8786,6 +9223,7 @@ func X_ctime64_s(tls *TLS, __Buf uintptr, __SizeInBytes Tsize_t, __Time uintptr)
 }
 
 var proc_gmtime64 = dll.NewProc("_gmtime64")
+var _ = proc_gmtime64.Addr()
 
 // __attribute__ ((__dllimport__)) struct tm * __attribute__((__cdecl__)) _gmtime64(const __time64_t *_Time);
 func X_gmtime64(tls *TLS, __Time uintptr) (r uintptr) {
@@ -8804,6 +9242,7 @@ func X_gmtime64(tls *TLS, __Time uintptr) (r uintptr) {
 }
 
 var proc_gmtime64_s = dll.NewProc("_gmtime64_s")
+var _ = proc_gmtime64_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _gmtime64_s (struct tm *_Tm,const __time64_t *_Time);
 func X_gmtime64_s(tls *TLS, __Tm uintptr, __Time uintptr) (r Terrno_t) {
@@ -8822,6 +9261,7 @@ func X_gmtime64_s(tls *TLS, __Tm uintptr, __Time uintptr) (r Terrno_t) {
 }
 
 var proc_localtime64 = dll.NewProc("_localtime64")
+var _ = proc_localtime64.Addr()
 
 // __attribute__ ((__dllimport__)) struct tm * __attribute__((__cdecl__)) _localtime64(const __time64_t *_Time);
 func X_localtime64(tls *TLS, __Time uintptr) (r uintptr) {
@@ -8840,6 +9280,7 @@ func X_localtime64(tls *TLS, __Time uintptr) (r uintptr) {
 }
 
 var proc_localtime64_s = dll.NewProc("_localtime64_s")
+var _ = proc_localtime64_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _localtime64_s (struct tm *_Tm,const __time64_t *_Time);
 func X_localtime64_s(tls *TLS, __Tm uintptr, __Time uintptr) (r Terrno_t) {
@@ -8858,6 +9299,7 @@ func X_localtime64_s(tls *TLS, __Tm uintptr, __Time uintptr) (r Terrno_t) {
 }
 
 var proc_mktime64 = dll.NewProc("_mktime64")
+var _ = proc_mktime64.Addr()
 
 // __attribute__ ((__dllimport__)) __time64_t __attribute__((__cdecl__)) _mktime64(struct tm *_Tm);
 func X_mktime64(tls *TLS, __Tm uintptr) (r T__time64_t) {
@@ -8876,6 +9318,7 @@ func X_mktime64(tls *TLS, __Tm uintptr) (r T__time64_t) {
 }
 
 var proc_mkgmtime64 = dll.NewProc("_mkgmtime64")
+var _ = proc_mkgmtime64.Addr()
 
 // __attribute__ ((__dllimport__)) __time64_t __attribute__((__cdecl__)) _mkgmtime64(struct tm *_Tm);
 func X_mkgmtime64(tls *TLS, __Tm uintptr) (r T__time64_t) {
@@ -8894,6 +9337,7 @@ func X_mkgmtime64(tls *TLS, __Tm uintptr) (r T__time64_t) {
 }
 
 var proc_time64 = dll.NewProc("_time64")
+var _ = proc_time64.Addr()
 
 // __attribute__ ((__dllimport__)) __time64_t __attribute__((__cdecl__)) _time64(__time64_t *_Time);
 func X_time64(tls *TLS, __Time uintptr) (r T__time64_t) {
@@ -8912,6 +9356,7 @@ func X_time64(tls *TLS, __Time uintptr) (r T__time64_t) {
 }
 
 var proc_timespec64_get = dll.NewProc("_timespec64_get")
+var _ = proc_timespec64_get.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _timespec64_get(struct _timespec64 *_Ts, int _Base);
 func X_timespec64_get(tls *TLS, __Ts uintptr, __Base int32) (r int32) {
@@ -8930,6 +9375,7 @@ func X_timespec64_get(tls *TLS, __Ts uintptr, __Base int32) (r int32) {
 }
 
 var proc_getsystime = dll.NewProc("_getsystime")
+var _ = proc_getsystime.Addr()
 
 // unsigned __attribute__((__cdecl__)) _getsystime(struct tm *_Tm);
 func X_getsystime(tls *TLS, __Tm uintptr) (r uint32) {
@@ -8948,6 +9394,7 @@ func X_getsystime(tls *TLS, __Tm uintptr) (r uint32) {
 }
 
 var proc_setsystime = dll.NewProc("_setsystime")
+var _ = proc_setsystime.Addr()
 
 // unsigned __attribute__((__cdecl__)) _setsystime(struct tm *_Tm,unsigned _MilliSec);
 func X_setsystime(tls *TLS, __Tm uintptr, __MilliSec uint32) (r uint32) {
@@ -8966,6 +9413,7 @@ func X_setsystime(tls *TLS, __Tm uintptr, __MilliSec uint32) (r uint32) {
 }
 
 var proc_wasctime = dll.NewProc("_wasctime")
+var _ = proc_wasctime.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wasctime(const struct tm *_Tm);
 func X_wasctime(tls *TLS, __Tm uintptr) (r uintptr) {
@@ -8984,6 +9432,7 @@ func X_wasctime(tls *TLS, __Tm uintptr) (r uintptr) {
 }
 
 var proc_wasctime_s = dll.NewProc("_wasctime_s")
+var _ = proc_wasctime_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wasctime_s (wchar_t *_Buf,size_t _SizeInWords,const struct tm *_Tm);
 func X_wasctime_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Tm uintptr) (r Terrno_t) {
@@ -9002,6 +9451,7 @@ func X_wasctime_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Tm uintptr) 
 }
 
 var proc_wctime32 = dll.NewProc("_wctime32")
+var _ = proc_wctime32.Addr()
 
 // wchar_t * __attribute__((__cdecl__)) _wctime32(const __time32_t *_Time);
 func X_wctime32(tls *TLS, __Time uintptr) (r uintptr) {
@@ -9020,6 +9470,7 @@ func X_wctime32(tls *TLS, __Time uintptr) (r uintptr) {
 }
 
 var proc_wctime32_s = dll.NewProc("_wctime32_s")
+var _ = proc_wctime32_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wctime32_s (wchar_t *_Buf,size_t _SizeInWords,const __time32_t *_Time);
 func X_wctime32_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Time uintptr) (r Terrno_t) {
@@ -9038,6 +9489,7 @@ func X_wctime32_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Time uintptr
 }
 
 var procwcsftime = dll.NewProc("wcsftime")
+var _ = procwcsftime.Addr()
 
 // size_t __attribute__((__cdecl__)) wcsftime(wchar_t * __restrict__ _Buf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,const struct tm * __restrict__ _Tm);
 func Xwcsftime(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Format uintptr, __Tm uintptr) (r Tsize_t) {
@@ -9056,6 +9508,7 @@ func Xwcsftime(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Format uintptr,
 }
 
 var proc_wcsftime_l = dll.NewProc("_wcsftime_l")
+var _ = proc_wcsftime_l.Addr()
 
 // __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcsftime_l(wchar_t * __restrict__ _Buf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,const struct tm * __restrict__ _Tm,_locale_t _Locale);
 func X_wcsftime_l(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Format uintptr, __Tm uintptr, __Locale T_locale_t) (r Tsize_t) {
@@ -9074,6 +9527,7 @@ func X_wcsftime_l(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Format uintp
 }
 
 var proc_wstrdate = dll.NewProc("_wstrdate")
+var _ = proc_wstrdate.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wstrdate(wchar_t *_Buffer);
 func X_wstrdate(tls *TLS, __Buffer uintptr) (r uintptr) {
@@ -9092,6 +9546,7 @@ func X_wstrdate(tls *TLS, __Buffer uintptr) (r uintptr) {
 }
 
 var proc_wstrdate_s = dll.NewProc("_wstrdate_s")
+var _ = proc_wstrdate_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wstrdate_s (wchar_t *_Buf,size_t _SizeInWords);
 func X_wstrdate_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t) (r Terrno_t) {
@@ -9110,6 +9565,7 @@ func X_wstrdate_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t) (r Terrno_t) {
 }
 
 var proc_wstrtime = dll.NewProc("_wstrtime")
+var _ = proc_wstrtime.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wstrtime(wchar_t *_Buffer);
 func X_wstrtime(tls *TLS, __Buffer uintptr) (r uintptr) {
@@ -9128,6 +9584,7 @@ func X_wstrtime(tls *TLS, __Buffer uintptr) (r uintptr) {
 }
 
 var proc_wstrtime_s = dll.NewProc("_wstrtime_s")
+var _ = proc_wstrtime_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wstrtime_s (wchar_t *_Buf,size_t _SizeInWords);
 func X_wstrtime_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t) (r Terrno_t) {
@@ -9146,6 +9603,7 @@ func X_wstrtime_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t) (r Terrno_t) {
 }
 
 var proc_wctime64 = dll.NewProc("_wctime64")
+var _ = proc_wctime64.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wctime64(const __time64_t *_Time);
 func X_wctime64(tls *TLS, __Time uintptr) (r uintptr) {
@@ -9164,6 +9622,7 @@ func X_wctime64(tls *TLS, __Time uintptr) (r uintptr) {
 }
 
 var proc_wctime64_s = dll.NewProc("_wctime64_s")
+var _ = proc_wctime64_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wctime64_s (wchar_t *_Buf,size_t _SizeInWords,const __time64_t *_Time);
 func X_wctime64_s(tls *TLS, __Buf uintptr, __SizeInWords Tsize_t, __Time uintptr) (r Terrno_t) {
@@ -9232,6 +9691,7 @@ type T_wfinddata64_t = struct {
 }
 
 var proc_wgetcwd = dll.NewProc("_wgetcwd")
+var _ = proc_wgetcwd.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wgetcwd(wchar_t *_DstBuf,int _SizeInWords);
 func X_wgetcwd(tls *TLS, __DstBuf uintptr, __SizeInWords int32) (r uintptr) {
@@ -9250,6 +9710,7 @@ func X_wgetcwd(tls *TLS, __DstBuf uintptr, __SizeInWords int32) (r uintptr) {
 }
 
 var proc_wgetdcwd = dll.NewProc("_wgetdcwd")
+var _ = proc_wgetdcwd.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wgetdcwd(int _Drive,wchar_t *_DstBuf,int _SizeInWords);
 func X_wgetdcwd(tls *TLS, __Drive int32, __DstBuf uintptr, __SizeInWords int32) (r uintptr) {
@@ -9268,6 +9729,7 @@ func X_wgetdcwd(tls *TLS, __Drive int32, __DstBuf uintptr, __SizeInWords int32) 
 }
 
 var proc_wchdir = dll.NewProc("_wchdir")
+var _ = proc_wchdir.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wchdir(const wchar_t *_Path);
 func X_wchdir(tls *TLS, __Path uintptr) (r int32) {
@@ -9286,6 +9748,7 @@ func X_wchdir(tls *TLS, __Path uintptr) (r int32) {
 }
 
 var proc_wmkdir = dll.NewProc("_wmkdir")
+var _ = proc_wmkdir.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wmkdir(const wchar_t *_Path);
 func X_wmkdir(tls *TLS, __Path uintptr) (r int32) {
@@ -9304,6 +9767,7 @@ func X_wmkdir(tls *TLS, __Path uintptr) (r int32) {
 }
 
 var proc_wrmdir = dll.NewProc("_wrmdir")
+var _ = proc_wrmdir.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wrmdir(const wchar_t *_Path);
 func X_wrmdir(tls *TLS, __Path uintptr) (r int32) {
@@ -9322,6 +9786,7 @@ func X_wrmdir(tls *TLS, __Path uintptr) (r int32) {
 }
 
 var proc_waccess = dll.NewProc("_waccess")
+var _ = proc_waccess.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _waccess(const wchar_t *_Filename,int _AccessMode);
 func X_waccess(tls *TLS, __Filename uintptr, __AccessMode int32) (r int32) {
@@ -9340,6 +9805,7 @@ func X_waccess(tls *TLS, __Filename uintptr, __AccessMode int32) (r int32) {
 }
 
 var proc_wchmod = dll.NewProc("_wchmod")
+var _ = proc_wchmod.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wchmod(const wchar_t *_Filename,int _Mode);
 func X_wchmod(tls *TLS, __Filename uintptr, __Mode int32) (r int32) {
@@ -9358,6 +9824,7 @@ func X_wchmod(tls *TLS, __Filename uintptr, __Mode int32) (r int32) {
 }
 
 var proc_wcreat = dll.NewProc("_wcreat")
+var _ = proc_wcreat.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcreat(const wchar_t *_Filename,int _PermissionMode);
 func X_wcreat(tls *TLS, __Filename uintptr, __PermissionMode int32) (r int32) {
@@ -9376,6 +9843,7 @@ func X_wcreat(tls *TLS, __Filename uintptr, __PermissionMode int32) (r int32) {
 }
 
 var proc_wfindfirst32 = dll.NewProc("_wfindfirst32")
+var _ = proc_wfindfirst32.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wfindfirst32(const wchar_t *_Filename,struct _wfinddata32_t *_FindData);
 func X_wfindfirst32(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_t) {
@@ -9394,6 +9862,7 @@ func X_wfindfirst32(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr
 }
 
 var proc_wfindnext32 = dll.NewProc("_wfindnext32")
+var _ = proc_wfindnext32.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wfindnext32(intptr_t _FindHandle,struct _wfinddata32_t *_FindData);
 func X_wfindnext32(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32) {
@@ -9412,6 +9881,7 @@ func X_wfindnext32(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int3
 }
 
 var proc_wunlink = dll.NewProc("_wunlink")
+var _ = proc_wunlink.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wunlink(const wchar_t *_Filename);
 func X_wunlink(tls *TLS, __Filename uintptr) (r int32) {
@@ -9430,6 +9900,7 @@ func X_wunlink(tls *TLS, __Filename uintptr) (r int32) {
 }
 
 var proc_wrename = dll.NewProc("_wrename")
+var _ = proc_wrename.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wrename(const wchar_t *_OldFilename,const wchar_t *_NewFilename);
 func X_wrename(tls *TLS, __OldFilename uintptr, __NewFilename uintptr) (r int32) {
@@ -9448,6 +9919,7 @@ func X_wrename(tls *TLS, __OldFilename uintptr, __NewFilename uintptr) (r int32)
 }
 
 var proc_wmktemp = dll.NewProc("_wmktemp")
+var _ = proc_wmktemp.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wmktemp(wchar_t *_TemplateName);
 func X_wmktemp(tls *TLS, __TemplateName uintptr) (r uintptr) {
@@ -9466,6 +9938,7 @@ func X_wmktemp(tls *TLS, __TemplateName uintptr) (r uintptr) {
 }
 
 var proc_wfindfirst32i64 = dll.NewProc("_wfindfirst32i64")
+var _ = proc_wfindfirst32i64.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wfindfirst32i64(const wchar_t *_Filename,struct _wfinddata32i64_t *_FindData);
 func X_wfindfirst32i64(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_t) {
@@ -9484,6 +9957,7 @@ func X_wfindfirst32i64(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tint
 }
 
 var proc_wfindfirst64i32 = dll.NewProc("_wfindfirst64i32")
+var _ = proc_wfindfirst64i32.Addr()
 
 // intptr_t __attribute__((__cdecl__)) _wfindfirst64i32(const wchar_t *_Filename,struct _wfinddata64i32_t *_FindData);
 func X_wfindfirst64i32(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_t) {
@@ -9502,6 +9976,7 @@ func X_wfindfirst64i32(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tint
 }
 
 var proc_wfindfirst64 = dll.NewProc("_wfindfirst64")
+var _ = proc_wfindfirst64.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wfindfirst64(const wchar_t *_Filename,struct _wfinddata64_t *_FindData);
 func X_wfindfirst64(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_t) {
@@ -9520,6 +9995,7 @@ func X_wfindfirst64(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr
 }
 
 var proc_wfindnext32i64 = dll.NewProc("_wfindnext32i64")
+var _ = proc_wfindnext32i64.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wfindnext32i64(intptr_t _FindHandle,struct _wfinddata32i64_t *_FindData);
 func X_wfindnext32i64(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32) {
@@ -9538,6 +10014,7 @@ func X_wfindnext32i64(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r i
 }
 
 var proc_wfindnext64i32 = dll.NewProc("_wfindnext64i32")
+var _ = proc_wfindnext64i32.Addr()
 
 // int __attribute__((__cdecl__)) _wfindnext64i32(intptr_t _FindHandle,struct _wfinddata64i32_t *_FindData);
 func X_wfindnext64i32(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32) {
@@ -9556,6 +10033,7 @@ func X_wfindnext64i32(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r i
 }
 
 var proc_wfindnext64 = dll.NewProc("_wfindnext64")
+var _ = proc_wfindnext64.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wfindnext64(intptr_t _FindHandle,struct _wfinddata64_t *_FindData);
 func X_wfindnext64(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32) {
@@ -9574,6 +10052,7 @@ func X_wfindnext64(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int3
 }
 
 var proc_wsopen_s = dll.NewProc("_wsopen_s")
+var _ = proc_wsopen_s.Addr()
 
 // __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wsopen_s(int *_FileHandle,const wchar_t *_Filename,int _OpenFlag,int _ShareFlag,int _PermissionFlag);
 func X_wsopen_s(tls *TLS, __FileHandle uintptr, __Filename uintptr, __OpenFlag int32, __ShareFlag int32, __PermissionFlag int32) (r Terrno_t) {
@@ -9592,6 +10071,7 @@ func X_wsopen_s(tls *TLS, __FileHandle uintptr, __Filename uintptr, __OpenFlag i
 }
 
 var proc_wsetlocale = dll.NewProc("_wsetlocale")
+var _ = proc_wsetlocale.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t * __attribute__((__cdecl__)) _wsetlocale(int _Category,const wchar_t *_Locale);
 func X_wsetlocale(tls *TLS, __Category int32, __Locale uintptr) (r uintptr) {
@@ -9610,6 +10090,7 @@ func X_wsetlocale(tls *TLS, __Category int32, __Locale uintptr) (r uintptr) {
 }
 
 var proc_wexecv = dll.NewProc("_wexecv")
+var _ = proc_wexecv.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecv(const wchar_t *_Filename,const wchar_t *const *_ArgList);
 func X_wexecv(tls *TLS, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
@@ -9628,6 +10109,7 @@ func X_wexecv(tls *TLS, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
 }
 
 var proc_wexecve = dll.NewProc("_wexecve")
+var _ = proc_wexecve.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecve(const wchar_t *_Filename,const wchar_t *const *_ArgList,const wchar_t *const *_Env);
 func X_wexecve(tls *TLS, __Filename uintptr, __ArgList uintptr, __Env uintptr) (r Tintptr_t) {
@@ -9646,6 +10128,7 @@ func X_wexecve(tls *TLS, __Filename uintptr, __ArgList uintptr, __Env uintptr) (
 }
 
 var proc_wexecvp = dll.NewProc("_wexecvp")
+var _ = proc_wexecvp.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecvp(const wchar_t *_Filename,const wchar_t *const *_ArgList);
 func X_wexecvp(tls *TLS, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
@@ -9664,6 +10147,7 @@ func X_wexecvp(tls *TLS, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
 }
 
 var proc_wexecvpe = dll.NewProc("_wexecvpe")
+var _ = proc_wexecvpe.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecvpe(const wchar_t *_Filename,const wchar_t *const *_ArgList,const wchar_t *const *_Env);
 func X_wexecvpe(tls *TLS, __Filename uintptr, __ArgList uintptr, __Env uintptr) (r Tintptr_t) {
@@ -9760,6 +10244,7 @@ type T_stat64 = struct {
 }
 
 var proc_wstat32 = dll.NewProc("_wstat32")
+var _ = proc_wstat32.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wstat32(const wchar_t *_Name,struct _stat32 *_Stat);
 func X_wstat32(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
@@ -9778,6 +10263,7 @@ func X_wstat32(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
 }
 
 var proc_wstat32i64 = dll.NewProc("_wstat32i64")
+var _ = proc_wstat32i64.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wstat32i64(const wchar_t *_Name,struct _stat32i64 *_Stat);
 func X_wstat32i64(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
@@ -9796,6 +10282,7 @@ func X_wstat32i64(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
 }
 
 var proc_wstat64i32 = dll.NewProc("_wstat64i32")
+var _ = proc_wstat64i32.Addr()
 
 // int __attribute__((__cdecl__)) _wstat64i32(const wchar_t *_Name,struct _stat64i32 *_Stat);
 func X_wstat64i32(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
@@ -9814,6 +10301,7 @@ func X_wstat64i32(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
 }
 
 var proc_wstat64 = dll.NewProc("_wstat64")
+var _ = proc_wstat64.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wstat64(const wchar_t *_Name,struct _stat64 *_Stat);
 func X_wstat64(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
@@ -9832,6 +10320,7 @@ func X_wstat64(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
 }
 
 var proc_cgetws = dll.NewProc("_cgetws")
+var _ = proc_cgetws.Addr()
 
 // __attribute__ ((__dllimport__)) wchar_t *_cgetws(wchar_t *_Buffer);
 func X_cgetws(tls *TLS, __Buffer uintptr) (r uintptr) {
@@ -9850,6 +10339,7 @@ func X_cgetws(tls *TLS, __Buffer uintptr) (r uintptr) {
 }
 
 var proc_getwch = dll.NewProc("_getwch")
+var _ = proc_getwch.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _getwch(void);
 func X_getwch(tls *TLS) (r Twint_t) {
@@ -9868,6 +10358,7 @@ func X_getwch(tls *TLS) (r Twint_t) {
 }
 
 var proc_getwche = dll.NewProc("_getwche")
+var _ = proc_getwche.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _getwche(void);
 func X_getwche(tls *TLS) (r Twint_t) {
@@ -9886,6 +10377,7 @@ func X_getwche(tls *TLS) (r Twint_t) {
 }
 
 var proc_putwch = dll.NewProc("_putwch")
+var _ = proc_putwch.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _putwch(wchar_t _WCh);
 func X_putwch(tls *TLS, __WCh Twchar_t) (r Twint_t) {
@@ -9904,6 +10396,7 @@ func X_putwch(tls *TLS, __WCh Twchar_t) (r Twint_t) {
 }
 
 var proc_ungetwch = dll.NewProc("_ungetwch")
+var _ = proc_ungetwch.Addr()
 
 // __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _ungetwch(wint_t _WCh);
 func X_ungetwch(tls *TLS, __WCh Twint_t) (r Twint_t) {
@@ -9922,6 +10415,7 @@ func X_ungetwch(tls *TLS, __WCh Twint_t) (r Twint_t) {
 }
 
 var proc_cputws = dll.NewProc("_cputws")
+var _ = proc_cputws.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cputws(const wchar_t *_String);
 func X_cputws(tls *TLS, __String uintptr) (r int32) {
@@ -9940,6 +10434,7 @@ func X_cputws(tls *TLS, __String uintptr) (r int32) {
 }
 
 var proc_putwch_nolock = dll.NewProc("_putwch_nolock")
+var _ = proc_putwch_nolock.Addr()
 
 // wint_t __attribute__((__cdecl__)) _putwch_nolock(wchar_t _WCh);
 func X_putwch_nolock(tls *TLS, __WCh Twchar_t) (r Twint_t) {
@@ -9958,6 +10453,7 @@ func X_putwch_nolock(tls *TLS, __WCh Twchar_t) (r Twint_t) {
 }
 
 var proc_getwch_nolock = dll.NewProc("_getwch_nolock")
+var _ = proc_getwch_nolock.Addr()
 
 // wint_t __attribute__((__cdecl__)) _getwch_nolock(void);
 func X_getwch_nolock(tls *TLS) (r Twint_t) {
@@ -9976,6 +10472,7 @@ func X_getwch_nolock(tls *TLS) (r Twint_t) {
 }
 
 var proc_getwche_nolock = dll.NewProc("_getwche_nolock")
+var _ = proc_getwche_nolock.Addr()
 
 // wint_t __attribute__((__cdecl__)) _getwche_nolock(void);
 func X_getwche_nolock(tls *TLS) (r Twint_t) {
@@ -9994,6 +10491,7 @@ func X_getwche_nolock(tls *TLS) (r Twint_t) {
 }
 
 var proc_ungetwch_nolock = dll.NewProc("_ungetwch_nolock")
+var _ = proc_ungetwch_nolock.Addr()
 
 // wint_t __attribute__((__cdecl__)) _ungetwch_nolock(wint_t _WCh);
 func X_ungetwch_nolock(tls *TLS, __WCh Twint_t) (r Twint_t) {
@@ -10028,6 +10526,7 @@ type T_Mbstatet1 = Tmbstate_t
 type T_Wint_t = uint16
 
 var procbtowc = dll.NewProc("btowc")
+var _ = procbtowc.Addr()
 
 // wint_t __attribute__((__cdecl__)) btowc(int);
 func Xbtowc(tls *TLS, _0 int32) (r Twint_t) {
@@ -10046,6 +10545,7 @@ func Xbtowc(tls *TLS, _0 int32) (r Twint_t) {
 }
 
 var procmbrlen = dll.NewProc("mbrlen")
+var _ = procmbrlen.Addr()
 
 // size_t __attribute__((__cdecl__)) mbrlen(const char * __restrict__ _Ch,size_t _SizeInBytes,mbstate_t * __restrict__ _State);
 func Xmbrlen(tls *TLS, __Ch uintptr, __SizeInBytes Tsize_t, __State uintptr) (r Tsize_t) {
@@ -10064,6 +10564,7 @@ func Xmbrlen(tls *TLS, __Ch uintptr, __SizeInBytes Tsize_t, __State uintptr) (r 
 }
 
 var procmbrtowc = dll.NewProc("mbrtowc")
+var _ = procmbrtowc.Addr()
 
 // size_t __attribute__((__cdecl__)) mbrtowc(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SizeInBytes,mbstate_t * __restrict__ _State);
 func Xmbrtowc(tls *TLS, __DstCh uintptr, __SrcCh uintptr, __SizeInBytes Tsize_t, __State uintptr) (r Tsize_t) {
@@ -10082,6 +10583,7 @@ func Xmbrtowc(tls *TLS, __DstCh uintptr, __SrcCh uintptr, __SizeInBytes Tsize_t,
 }
 
 var procmbsrtowcs = dll.NewProc("mbsrtowcs")
+var _ = procmbsrtowcs.Addr()
 
 // size_t __attribute__((__cdecl__)) mbsrtowcs(wchar_t * __restrict__ _Dest,const char ** __restrict__ _PSrc,size_t _Count,mbstate_t * __restrict__ _State);
 func Xmbsrtowcs(tls *TLS, __Dest uintptr, __PSrc uintptr, __Count Tsize_t, __State uintptr) (r Tsize_t) {
@@ -10100,6 +10602,7 @@ func Xmbsrtowcs(tls *TLS, __Dest uintptr, __PSrc uintptr, __Count Tsize_t, __Sta
 }
 
 var procwcrtomb = dll.NewProc("wcrtomb")
+var _ = procwcrtomb.Addr()
 
 // size_t __attribute__((__cdecl__)) wcrtomb(char * __restrict__ _Dest,wchar_t _Source,mbstate_t * __restrict__ _State);
 func Xwcrtomb(tls *TLS, __Dest uintptr, __Source Twchar_t, __State uintptr) (r Tsize_t) {
@@ -10118,6 +10621,7 @@ func Xwcrtomb(tls *TLS, __Dest uintptr, __Source Twchar_t, __State uintptr) (r T
 }
 
 var procwcsrtombs = dll.NewProc("wcsrtombs")
+var _ = procwcsrtombs.Addr()
 
 // size_t __attribute__((__cdecl__)) wcsrtombs(char * __restrict__ _Dest,const wchar_t ** __restrict__ _PSource,size_t _Count,mbstate_t * __restrict__ _State);
 func Xwcsrtombs(tls *TLS, __Dest uintptr, __PSource uintptr, __Count Tsize_t, __State uintptr) (r Tsize_t) {
@@ -10136,6 +10640,7 @@ func Xwcsrtombs(tls *TLS, __Dest uintptr, __PSource uintptr, __Count Tsize_t, __
 }
 
 var procwctob = dll.NewProc("wctob")
+var _ = procwctob.Addr()
 
 // int __attribute__((__cdecl__)) wctob(wint_t _WCh);
 func Xwctob(tls *TLS, __WCh Twint_t) (r int32) {
@@ -10154,6 +10659,7 @@ func Xwctob(tls *TLS, __WCh Twint_t) (r int32) {
 }
 
 var procwcstoll = dll.NewProc("wcstoll")
+var _ = procwcstoll.Addr()
 
 // long long __attribute__((__cdecl__)) wcstoll(const wchar_t * __restrict__ nptr,wchar_t ** __restrict__ endptr, int base);
 func Xwcstoll(tls *TLS, _nptr uintptr, _endptr uintptr, _base int32) (r int64) {
@@ -10172,6 +10678,7 @@ func Xwcstoll(tls *TLS, _nptr uintptr, _endptr uintptr, _base int32) (r int64) {
 }
 
 var procwcstoull = dll.NewProc("wcstoull")
+var _ = procwcstoull.Addr()
 
 // unsigned long long __attribute__((__cdecl__)) wcstoull(const wchar_t * __restrict__ nptr,wchar_t ** __restrict__ endptr, int base);
 func Xwcstoull(tls *TLS, _nptr uintptr, _endptr uintptr, _base int32) (r uint64) {
@@ -10190,6 +10697,7 @@ func Xwcstoull(tls *TLS, _nptr uintptr, _endptr uintptr, _base int32) (r uint64)
 }
 
 var proc_getcwd = dll.NewProc("_getcwd")
+var _ = proc_getcwd.Addr()
 
 // __attribute__ ((__dllimport__)) char* __attribute__((__cdecl__)) _getcwd (char*, int);
 func X_getcwd(tls *TLS, _0 uintptr, _1 int32) (r uintptr) {
@@ -10244,6 +10752,7 @@ type T__finddata64_t = struct {
 }
 
 var proc_access = dll.NewProc("_access")
+var _ = proc_access.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _access(const char *_Filename,int _AccessMode);
 func X_access(tls *TLS, __Filename uintptr, __AccessMode int32) (r int32) {
@@ -10262,6 +10771,7 @@ func X_access(tls *TLS, __Filename uintptr, __AccessMode int32) (r int32) {
 }
 
 var proc_access_s = dll.NewProc("_access_s")
+var _ = proc_access_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _access_s(const char *_Filename,int _AccessMode);
 func X_access_s(tls *TLS, __Filename uintptr, __AccessMode int32) (r Terrno_t) {
@@ -10280,6 +10790,7 @@ func X_access_s(tls *TLS, __Filename uintptr, __AccessMode int32) (r Terrno_t) {
 }
 
 var proc_chmod = dll.NewProc("_chmod")
+var _ = proc_chmod.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _chmod(const char *_Filename,int _Mode);
 func X_chmod(tls *TLS, __Filename uintptr, __Mode int32) (r int32) {
@@ -10298,6 +10809,7 @@ func X_chmod(tls *TLS, __Filename uintptr, __Mode int32) (r int32) {
 }
 
 var proc_chsize = dll.NewProc("_chsize")
+var _ = proc_chsize.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _chsize(int _FileHandle,long _Size);
 func X_chsize(tls *TLS, __FileHandle int32, __Size int32) (r int32) {
@@ -10316,6 +10828,7 @@ func X_chsize(tls *TLS, __FileHandle int32, __Size int32) (r int32) {
 }
 
 var proc_chsize_s = dll.NewProc("_chsize_s")
+var _ = proc_chsize_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _chsize_s (int _FileHandle, long long _Size);
 func X_chsize_s(tls *TLS, __FileHandle int32, __Size int64) (r Terrno_t) {
@@ -10334,6 +10847,7 @@ func X_chsize_s(tls *TLS, __FileHandle int32, __Size int64) (r Terrno_t) {
 }
 
 var proc_close = dll.NewProc("_close")
+var _ = proc_close.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _close(int _FileHandle);
 func X_close(tls *TLS, __FileHandle int32) (r int32) {
@@ -10352,6 +10866,7 @@ func X_close(tls *TLS, __FileHandle int32) (r int32) {
 }
 
 var proc_commit = dll.NewProc("_commit")
+var _ = proc_commit.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _commit(int _FileHandle);
 func X_commit(tls *TLS, __FileHandle int32) (r int32) {
@@ -10370,6 +10885,7 @@ func X_commit(tls *TLS, __FileHandle int32) (r int32) {
 }
 
 var proc_creat = dll.NewProc("_creat")
+var _ = proc_creat.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _creat(const char *_Filename,int _PermissionMode);
 func X_creat(tls *TLS, __Filename uintptr, __PermissionMode int32) (r int32) {
@@ -10388,6 +10904,7 @@ func X_creat(tls *TLS, __Filename uintptr, __PermissionMode int32) (r int32) {
 }
 
 var proc_dup = dll.NewProc("_dup")
+var _ = proc_dup.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _dup(int _FileHandle);
 func X_dup(tls *TLS, __FileHandle int32) (r int32) {
@@ -10406,6 +10923,7 @@ func X_dup(tls *TLS, __FileHandle int32) (r int32) {
 }
 
 var proc_dup2 = dll.NewProc("_dup2")
+var _ = proc_dup2.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _dup2(int _FileHandleSrc,int _FileHandleDst);
 func X_dup2(tls *TLS, __FileHandleSrc int32, __FileHandleDst int32) (r int32) {
@@ -10424,6 +10942,7 @@ func X_dup2(tls *TLS, __FileHandleSrc int32, __FileHandleDst int32) (r int32) {
 }
 
 var proc_eof = dll.NewProc("_eof")
+var _ = proc_eof.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _eof(int _FileHandle);
 func X_eof(tls *TLS, __FileHandle int32) (r int32) {
@@ -10442,6 +10961,7 @@ func X_eof(tls *TLS, __FileHandle int32) (r int32) {
 }
 
 var proc_filelength = dll.NewProc("_filelength")
+var _ = proc_filelength.Addr()
 
 // __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _filelength(int _FileHandle);
 func X_filelength(tls *TLS, __FileHandle int32) (r int32) {
@@ -10460,6 +10980,7 @@ func X_filelength(tls *TLS, __FileHandle int32) (r int32) {
 }
 
 var proc_findfirst32 = dll.NewProc("_findfirst32")
+var _ = proc_findfirst32.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _findfirst32(const char *_Filename,struct _finddata32_t *_FindData);
 func X_findfirst32(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_t) {
@@ -10478,6 +10999,7 @@ func X_findfirst32(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_
 }
 
 var proc_findnext32 = dll.NewProc("_findnext32")
+var _ = proc_findnext32.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _findnext32(intptr_t _FindHandle,struct _finddata32_t *_FindData);
 func X_findnext32(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32) {
@@ -10496,6 +11018,7 @@ func X_findnext32(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32
 }
 
 var proc_findclose = dll.NewProc("_findclose")
+var _ = proc_findclose.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _findclose(intptr_t _FindHandle);
 func X_findclose(tls *TLS, __FindHandle Tintptr_t) (r int32) {
@@ -10514,6 +11037,7 @@ func X_findclose(tls *TLS, __FindHandle Tintptr_t) (r int32) {
 }
 
 var proc_isatty = dll.NewProc("_isatty")
+var _ = proc_isatty.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isatty(int _FileHandle);
 func X_isatty(tls *TLS, __FileHandle int32) (r int32) {
@@ -10532,6 +11056,7 @@ func X_isatty(tls *TLS, __FileHandle int32) (r int32) {
 }
 
 var proc_locking = dll.NewProc("_locking")
+var _ = proc_locking.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _locking(int _FileHandle,int _LockMode,long _NumOfBytes);
 func X_locking(tls *TLS, __FileHandle int32, __LockMode int32, __NumOfBytes int32) (r int32) {
@@ -10550,6 +11075,7 @@ func X_locking(tls *TLS, __FileHandle int32, __LockMode int32, __NumOfBytes int3
 }
 
 var proc_lseek = dll.NewProc("_lseek")
+var _ = proc_lseek.Addr()
 
 // __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _lseek(int _FileHandle,long _Offset,int _Origin);
 func X_lseek(tls *TLS, __FileHandle int32, __Offset int32, __Origin int32) (r int32) {
@@ -10568,6 +11094,7 @@ func X_lseek(tls *TLS, __FileHandle int32, __Offset int32, __Origin int32) (r in
 }
 
 var proc_mktemp = dll.NewProc("_mktemp")
+var _ = proc_mktemp.Addr()
 
 // __attribute__ ((__dllimport__)) char * __attribute__((__cdecl__)) _mktemp(char *_TemplateName);
 func X_mktemp(tls *TLS, __TemplateName uintptr) (r uintptr) {
@@ -10586,6 +11113,7 @@ func X_mktemp(tls *TLS, __TemplateName uintptr) (r uintptr) {
 }
 
 var proc_mktemp_s = dll.NewProc("_mktemp_s")
+var _ = proc_mktemp_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _mktemp_s (char *_TemplateName,size_t _Size);
 func X_mktemp_s(tls *TLS, __TemplateName uintptr, __Size Tsize_t) (r Terrno_t) {
@@ -10604,6 +11132,7 @@ func X_mktemp_s(tls *TLS, __TemplateName uintptr, __Size Tsize_t) (r Terrno_t) {
 }
 
 var proc_pipe = dll.NewProc("_pipe")
+var _ = proc_pipe.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _pipe(int *_PtHandles,unsigned int _PipeSize,int _TextMode);
 func X_pipe(tls *TLS, __PtHandles uintptr, __PipeSize uint32, __TextMode int32) (r int32) {
@@ -10622,6 +11151,7 @@ func X_pipe(tls *TLS, __PtHandles uintptr, __PipeSize uint32, __TextMode int32) 
 }
 
 var proc_read = dll.NewProc("_read")
+var _ = proc_read.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _read(int _FileHandle,void *_DstBuf,unsigned int _MaxCharCount);
 func X_read(tls *TLS, __FileHandle int32, __DstBuf uintptr, __MaxCharCount uint32) (r int32) {
@@ -10640,6 +11170,7 @@ func X_read(tls *TLS, __FileHandle int32, __DstBuf uintptr, __MaxCharCount uint3
 }
 
 var proc_setmode = dll.NewProc("_setmode")
+var _ = proc_setmode.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _setmode(int _FileHandle,int _Mode);
 func X_setmode(tls *TLS, __FileHandle int32, __Mode int32) (r int32) {
@@ -10658,6 +11189,7 @@ func X_setmode(tls *TLS, __FileHandle int32, __Mode int32) (r int32) {
 }
 
 var proc_tell = dll.NewProc("_tell")
+var _ = proc_tell.Addr()
 
 // __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _tell(int _FileHandle);
 func X_tell(tls *TLS, __FileHandle int32) (r int32) {
@@ -10676,6 +11208,7 @@ func X_tell(tls *TLS, __FileHandle int32) (r int32) {
 }
 
 var proc_umask = dll.NewProc("_umask")
+var _ = proc_umask.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _umask(int _Mode);
 func X_umask(tls *TLS, __Mode int32) (r int32) {
@@ -10694,6 +11227,7 @@ func X_umask(tls *TLS, __Mode int32) (r int32) {
 }
 
 var proc_umask_s = dll.NewProc("_umask_s")
+var _ = proc_umask_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _umask_s (int _NewMode,int *_OldMode);
 func X_umask_s(tls *TLS, __NewMode int32, __OldMode uintptr) (r Terrno_t) {
@@ -10712,6 +11246,7 @@ func X_umask_s(tls *TLS, __NewMode int32, __OldMode uintptr) (r Terrno_t) {
 }
 
 var proc_write = dll.NewProc("_write")
+var _ = proc_write.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _write(int _FileHandle,const void *_Buf,unsigned int _MaxCharCount);
 func X_write(tls *TLS, __FileHandle int32, __Buf uintptr, __MaxCharCount uint32) (r int32) {
@@ -10730,6 +11265,7 @@ func X_write(tls *TLS, __FileHandle int32, __Buf uintptr, __MaxCharCount uint32)
 }
 
 var proc_filelengthi64 = dll.NewProc("_filelengthi64")
+var _ = proc_filelengthi64.Addr()
 
 // __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _filelengthi64(int _FileHandle);
 func X_filelengthi64(tls *TLS, __FileHandle int32) (r int64) {
@@ -10748,6 +11284,7 @@ func X_filelengthi64(tls *TLS, __FileHandle int32) (r int64) {
 }
 
 var proc_findfirst32i64 = dll.NewProc("_findfirst32i64")
+var _ = proc_findfirst32i64.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _findfirst32i64(const char *_Filename,struct _finddata32i64_t *_FindData);
 func X_findfirst32i64(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_t) {
@@ -10766,6 +11303,7 @@ func X_findfirst32i64(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintp
 }
 
 var proc_findfirst64 = dll.NewProc("_findfirst64")
+var _ = proc_findfirst64.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _findfirst64(const char *_Filename,struct __finddata64_t *_FindData);
 func X_findfirst64(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_t) {
@@ -10784,6 +11322,7 @@ func X_findfirst64(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_
 }
 
 var proc_findfirst64i32 = dll.NewProc("_findfirst64i32")
+var _ = proc_findfirst64i32.Addr()
 
 // intptr_t __attribute__((__cdecl__)) _findfirst64i32(const char *_Filename,struct _finddata64i32_t *_FindData);
 func X_findfirst64i32(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintptr_t) {
@@ -10802,6 +11341,7 @@ func X_findfirst64i32(tls *TLS, __Filename uintptr, __FindData uintptr) (r Tintp
 }
 
 var proc_findnext32i64 = dll.NewProc("_findnext32i64")
+var _ = proc_findnext32i64.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _findnext32i64(intptr_t _FindHandle,struct _finddata32i64_t *_FindData);
 func X_findnext32i64(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32) {
@@ -10820,6 +11360,7 @@ func X_findnext32i64(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r in
 }
 
 var proc_findnext64 = dll.NewProc("_findnext64")
+var _ = proc_findnext64.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _findnext64(intptr_t _FindHandle,struct __finddata64_t *_FindData);
 func X_findnext64(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32) {
@@ -10838,6 +11379,7 @@ func X_findnext64(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32
 }
 
 var proc_findnext64i32 = dll.NewProc("_findnext64i32")
+var _ = proc_findnext64i32.Addr()
 
 // int __attribute__((__cdecl__)) _findnext64i32(intptr_t _FindHandle,struct _finddata64i32_t *_FindData);
 func X_findnext64i32(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r int32) {
@@ -10856,6 +11398,7 @@ func X_findnext64i32(tls *TLS, __FindHandle Tintptr_t, __FindData uintptr) (r in
 }
 
 var proc_lseeki64 = dll.NewProc("_lseeki64")
+var _ = proc_lseeki64.Addr()
 
 // long long __attribute__((__cdecl__)) _lseeki64(int _FileHandle, long long _Offset,int _Origin);
 func X_lseeki64(tls *TLS, __FileHandle int32, __Offset int64, __Origin int32) (r int64) {
@@ -10874,6 +11417,7 @@ func X_lseeki64(tls *TLS, __FileHandle int32, __Offset int64, __Origin int32) (r
 }
 
 var proc_telli64 = dll.NewProc("_telli64")
+var _ = proc_telli64.Addr()
 
 // long long __attribute__((__cdecl__)) _telli64(int _FileHandle);
 func X_telli64(tls *TLS, __FileHandle int32) (r int64) {
@@ -10892,6 +11436,7 @@ func X_telli64(tls *TLS, __FileHandle int32) (r int64) {
 }
 
 var proc_sopen_s = dll.NewProc("_sopen_s")
+var _ = proc_sopen_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _sopen_s(int *_FileHandle,const char *_Filename,int _OpenFlag,int _ShareFlag,int _PermissionMode);
 func X_sopen_s(tls *TLS, __FileHandle uintptr, __Filename uintptr, __OpenFlag int32, __ShareFlag int32, __PermissionMode int32) (r Terrno_t) {
@@ -10910,6 +11455,7 @@ func X_sopen_s(tls *TLS, __FileHandle uintptr, __Filename uintptr, __OpenFlag in
 }
 
 var proc_get_osfhandle = dll.NewProc("_get_osfhandle")
+var _ = proc_get_osfhandle.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _get_osfhandle(int _FileHandle);
 func X_get_osfhandle(tls *TLS, __FileHandle int32) (r Tintptr_t) {
@@ -10928,6 +11474,7 @@ func X_get_osfhandle(tls *TLS, __FileHandle int32) (r Tintptr_t) {
 }
 
 var proc_open_osfhandle = dll.NewProc("_open_osfhandle")
+var _ = proc_open_osfhandle.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _open_osfhandle(intptr_t _OSFileHandle,int _Flags);
 func X_open_osfhandle(tls *TLS, __OSFileHandle Tintptr_t, __Flags int32) (r int32) {
@@ -10974,6 +11521,7 @@ type T_beginthread_proc_type = uintptr
 type T_beginthreadex_proc_type = uintptr
 
 var proc_endthread = dll.NewProc("_endthread")
+var _ = proc_endthread.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _endthread(void) __attribute__ ((__noreturn__));
 func X_endthread(tls *TLS) {
@@ -10992,6 +11540,7 @@ func X_endthread(tls *TLS) {
 type T_tls_callback_type = uintptr
 
 var proc_register_thread_local_exe_atexit_callback = dll.NewProc("_register_thread_local_exe_atexit_callback")
+var _ = proc_register_thread_local_exe_atexit_callback.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _register_thread_local_exe_atexit_callback(_tls_callback_type callback);
 func X_register_thread_local_exe_atexit_callback(tls *TLS, _callback T_tls_callback_type) {
@@ -11000,6 +11549,7 @@ func X_register_thread_local_exe_atexit_callback(tls *TLS, _callback T_tls_callb
 }
 
 var proc_cexit = dll.NewProc("_cexit")
+var _ = proc_cexit.Addr()
 
 // void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _cexit(void);
 func X_cexit(tls *TLS) {
@@ -11016,6 +11566,7 @@ func X_cexit(tls *TLS) {
 }
 
 var proc_c_exit = dll.NewProc("_c_exit")
+var _ = proc_c_exit.Addr()
 
 // void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _c_exit(void);
 func X_c_exit(tls *TLS) {
@@ -11032,6 +11583,7 @@ func X_c_exit(tls *TLS) {
 }
 
 var proc_getpid = dll.NewProc("_getpid")
+var _ = proc_getpid.Addr()
 
 // __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _getpid(void);
 func X_getpid(tls *TLS) (r int32) {
@@ -11050,6 +11602,7 @@ func X_getpid(tls *TLS) (r int32) {
 }
 
 var proc_cwait = dll.NewProc("_cwait")
+var _ = proc_cwait.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _cwait(int *_TermStat,intptr_t _ProcHandle,int _Action);
 func X_cwait(tls *TLS, __TermStat uintptr, __ProcHandle Tintptr_t, __Action int32) (r Tintptr_t) {
@@ -11068,6 +11621,7 @@ func X_cwait(tls *TLS, __TermStat uintptr, __ProcHandle Tintptr_t, __Action int3
 }
 
 var proc_execv = dll.NewProc("_execv")
+var _ = proc_execv.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _execv(const char *_Filename,const char *const *_ArgList);
 func X_execv(tls *TLS, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
@@ -11086,6 +11640,7 @@ func X_execv(tls *TLS, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
 }
 
 var proc_execve = dll.NewProc("_execve")
+var _ = proc_execve.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _execve(const char *_Filename,const char *const *_ArgList,const char *const *_Env);
 func X_execve(tls *TLS, __Filename uintptr, __ArgList uintptr, __Env uintptr) (r Tintptr_t) {
@@ -11104,6 +11659,7 @@ func X_execve(tls *TLS, __Filename uintptr, __ArgList uintptr, __Env uintptr) (r
 }
 
 var proc_execvp = dll.NewProc("_execvp")
+var _ = proc_execvp.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _execvp(const char *_Filename,const char *const *_ArgList);
 func X_execvp(tls *TLS, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
@@ -11122,6 +11678,7 @@ func X_execvp(tls *TLS, __Filename uintptr, __ArgList uintptr) (r Tintptr_t) {
 }
 
 var proc_execvpe = dll.NewProc("_execvpe")
+var _ = proc_execvpe.Addr()
 
 // __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _execvpe(const char *_Filename,const char *const *_ArgList,const char *const *_Env);
 func X_execvpe(tls *TLS, __Filename uintptr, __ArgList uintptr, __Env uintptr) (r Tintptr_t) {
@@ -11140,6 +11697,7 @@ func X_execvpe(tls *TLS, __Filename uintptr, __ArgList uintptr, __Env uintptr) (
 }
 
 var proc_loaddll = dll.NewProc("_loaddll")
+var _ = proc_loaddll.Addr()
 
 // intptr_t __attribute__((__cdecl__)) _loaddll(char *_Filename);
 func X_loaddll(tls *TLS, __Filename uintptr) (r Tintptr_t) {
@@ -11158,6 +11716,7 @@ func X_loaddll(tls *TLS, __Filename uintptr) (r Tintptr_t) {
 }
 
 var proc_unloaddll = dll.NewProc("_unloaddll")
+var _ = proc_unloaddll.Addr()
 
 // int __attribute__((__cdecl__)) _unloaddll(intptr_t _Handle);
 func X_unloaddll(tls *TLS, __Handle Tintptr_t) (r int32) {
@@ -11176,6 +11735,7 @@ func X_unloaddll(tls *TLS, __Handle Tintptr_t) (r int32) {
 }
 
 var proc_getdllprocaddr = dll.NewProc("_getdllprocaddr")
+var _ = proc_getdllprocaddr.Addr()
 
 // int ( * __attribute__((__cdecl__)) _getdllprocaddr(intptr_t _Handle,char *_ProcedureName,intptr_t _Ordinal))(void);
 func X_getdllprocaddr(tls *TLS, __Handle Tintptr_t, __ProcedureName uintptr, __Ordinal Tintptr_t) (r uintptr) {
@@ -11194,6 +11754,7 @@ func X_getdllprocaddr(tls *TLS, __Handle Tintptr_t, __ProcedureName uintptr, __O
 }
 
 var proc_controlfp = dll.NewProc("_controlfp")
+var _ = proc_controlfp.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _controlfp (unsigned int _NewValue, unsigned int _Mask);
 func X_controlfp(tls *TLS, __NewValue uint32, __Mask uint32) (r uint32) {
@@ -11212,6 +11773,7 @@ func X_controlfp(tls *TLS, __NewValue uint32, __Mask uint32) (r uint32) {
 }
 
 var proc_controlfp_s = dll.NewProc("_controlfp_s")
+var _ = proc_controlfp_s.Addr()
 
 // __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _controlfp_s(unsigned int *_CurrentState, unsigned int _NewValue, unsigned int _Mask);
 func X_controlfp_s(tls *TLS, __CurrentState uintptr, __NewValue uint32, __Mask uint32) (r Terrno_t) {
@@ -11230,6 +11792,7 @@ func X_controlfp_s(tls *TLS, __CurrentState uintptr, __NewValue uint32, __Mask u
 }
 
 var proc_control87 = dll.NewProc("_control87")
+var _ = proc_control87.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _control87 (unsigned int _NewValue, unsigned int _Mask);
 func X_control87(tls *TLS, __NewValue uint32, __Mask uint32) (r uint32) {
@@ -11248,6 +11811,7 @@ func X_control87(tls *TLS, __NewValue uint32, __Mask uint32) (r uint32) {
 }
 
 var proc_clearfp = dll.NewProc("_clearfp")
+var _ = proc_clearfp.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _clearfp (void);
 func X_clearfp(tls *TLS) (r uint32) {
@@ -11266,6 +11830,7 @@ func X_clearfp(tls *TLS) (r uint32) {
 }
 
 var proc_statusfp = dll.NewProc("_statusfp")
+var _ = proc_statusfp.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _statusfp (void);
 func X_statusfp(tls *TLS) (r uint32) {
@@ -11284,6 +11849,7 @@ func X_statusfp(tls *TLS) (r uint32) {
 }
 
 var proc_fpreset = dll.NewProc("_fpreset")
+var _ = proc_fpreset.Addr()
 
 // void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _fpreset (void);
 func X_fpreset(tls *TLS) {
@@ -11300,6 +11866,7 @@ func X_fpreset(tls *TLS) {
 }
 
 var proc__fpecode = dll.NewProc("__fpecode")
+var _ = proc__fpecode.Addr()
 
 // __attribute__ ((__dllimport__)) int * __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) __fpecode(void);
 func X__fpecode(tls *TLS) (r uintptr) {
@@ -11347,6 +11914,7 @@ type Tlconv = struct {
 }
 
 var proc_configthreadlocale = dll.NewProc("_configthreadlocale")
+var _ = proc_configthreadlocale.Addr()
 
 // int __attribute__((__cdecl__)) _configthreadlocale(int _Flag);
 func X_configthreadlocale(tls *TLS, __Flag int32) (r int32) {
@@ -11365,6 +11933,7 @@ func X_configthreadlocale(tls *TLS, __Flag int32) (r int32) {
 }
 
 var procsetlocale = dll.NewProc("setlocale")
+var _ = procsetlocale.Addr()
 
 // char * __attribute__((__cdecl__)) setlocale(int _Category,const char *_Locale);
 func Xsetlocale(tls *TLS, __Category int32, __Locale uintptr) (r uintptr) {
@@ -11383,6 +11952,7 @@ func Xsetlocale(tls *TLS, __Category int32, __Locale uintptr) (r uintptr) {
 }
 
 var proclocaleconv = dll.NewProc("localeconv")
+var _ = proclocaleconv.Addr()
 
 // __attribute__ ((__dllimport__)) struct lconv * __attribute__((__cdecl__)) localeconv(void);
 func Xlocaleconv(tls *TLS) (r uintptr) {
@@ -11401,6 +11971,7 @@ func Xlocaleconv(tls *TLS) (r uintptr) {
 }
 
 var proc_get_current_locale = dll.NewProc("_get_current_locale")
+var _ = proc_get_current_locale.Addr()
 
 // __attribute__ ((__dllimport__)) _locale_t __attribute__((__cdecl__)) _get_current_locale(void);
 func X_get_current_locale(tls *TLS) (r T_locale_t) {
@@ -11419,6 +11990,7 @@ func X_get_current_locale(tls *TLS) (r T_locale_t) {
 }
 
 var proc_create_locale = dll.NewProc("_create_locale")
+var _ = proc_create_locale.Addr()
 
 // __attribute__ ((__dllimport__)) _locale_t __attribute__((__cdecl__)) _create_locale(int _Category,const char *_Locale);
 func X_create_locale(tls *TLS, __Category int32, __Locale uintptr) (r T_locale_t) {
@@ -11437,6 +12009,7 @@ func X_create_locale(tls *TLS, __Category int32, __Locale uintptr) (r T_locale_t
 }
 
 var proc_free_locale = dll.NewProc("_free_locale")
+var _ = proc_free_locale.Addr()
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _free_locale(_locale_t _Locale);
 func X_free_locale(tls *TLS, __Locale T_locale_t) {
@@ -11453,6 +12026,7 @@ func X_free_locale(tls *TLS, __Locale T_locale_t) {
 }
 
 var proc___lc_codepage_func = dll.NewProc("___lc_codepage_func")
+var _ = proc___lc_codepage_func.Addr()
 
 // __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) ___lc_codepage_func(void);
 func X___lc_codepage_func(tls *TLS) (r uint32) {
@@ -11471,6 +12045,7 @@ func X___lc_codepage_func(tls *TLS) (r uint32) {
 }
 
 var proc_mkdir = dll.NewProc("_mkdir")
+var _ = proc_mkdir.Addr()
 
 // int __attribute__((__cdecl__)) _mkdir(const char *_Path);
 func X_mkdir(tls *TLS, __Path uintptr) (r int32) {
@@ -11489,6 +12064,7 @@ func X_mkdir(tls *TLS, __Path uintptr) (r int32) {
 }
 
 var proc_fstat64 = dll.NewProc("_fstat64")
+var _ = proc_fstat64.Addr()
 
 // int __attribute__((__cdecl__)) _fstat64(int _FileDes,struct _stat64 *_Stat);
 func X_fstat64(tls *TLS, __FileDes int32, __Stat uintptr) (r int32) {
@@ -11507,6 +12083,7 @@ func X_fstat64(tls *TLS, __FileDes int32, __Stat uintptr) (r int32) {
 }
 
 var proc_stat64 = dll.NewProc("_stat64")
+var _ = proc_stat64.Addr()
 
 // int __attribute__((__cdecl__)) _stat64(const char *_Name,struct _stat64 *_Stat);
 func X_stat64(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
@@ -11525,6 +12102,7 @@ func X_stat64(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
 }
 
 var proc_stat64i32 = dll.NewProc("_stat64i32")
+var _ = proc_stat64i32.Addr()
 
 // int __attribute__((__cdecl__)) _stat64i32(const char *_Name,struct _stat64i32 *_Stat);
 func X_stat64i32(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
@@ -11540,595 +12118,4 @@ func X_stat64i32(tls *TLS, __Name uintptr, __Stat uintptr) (r int32) {
 		tls.setErrno(int32(err))
 	}
 	return int32(r0)
-}
-
-func init() {
-	for _, nm := range []string{
-		"_Exit",
-		"___lc_codepage_func",
-		"___mb_cur_max_func",
-		"__daylight",
-		"__doserrno",
-		"__dstbias",
-		"__fpecode",
-		"__isascii",
-		"__iscsym",
-		"__iscsymf",
-		"__iswcsym",
-		"__iswcsymf",
-		"__p___argc",
-		"__p___argv",
-		"__p___wargv",
-		"__p__environ",
-		"__p__fmode",
-		"__p__pgmptr",
-		"__p__wenviron",
-		"__p__wpgmptr",
-		"__pctype_func",
-		"__setusermatherr",
-		"__sys_errlist",
-		"__sys_nerr",
-		"__timezone",
-		"__toascii",
-		"__tzname",
-		"__wcserror",
-		"_abs64",
-		"_access",
-		"_access_s",
-		"_aligned_free",
-		"_aligned_malloc",
-		"_aligned_offset_malloc",
-		"_aligned_offset_realloc",
-		"_aligned_offset_recalloc",
-		"_aligned_realloc",
-		"_aligned_recalloc",
-		"_atodbl",
-		"_atodbl_l",
-		"_atoflt",
-		"_atoflt_l",
-		"_atoi64",
-		"_atoi64_l",
-		"_atoi_l",
-		"_atol_l",
-		"_atoldbl",
-		"_atoldbl_l",
-		"_beep",
-		"_byteswap_uint64",
-		"_byteswap_ulong",
-		"_byteswap_ushort",
-		"_c_exit",
-		"_cexit",
-		"_cgetws",
-		"_chmod",
-		"_chsize",
-		"_chsize_s",
-		"_clearfp",
-		"_close",
-		"_commit",
-		"_configthreadlocale",
-		"_control87",
-		"_controlfp",
-		"_controlfp_s",
-		"_cputws",
-		"_creat",
-		"_create_locale",
-		"_ctime32",
-		"_ctime32_s",
-		"_ctime64",
-		"_ctime64_s",
-		"_cwait",
-		"_dup",
-		"_dup2",
-		"_endthread",
-		"_eof",
-		"_execv",
-		"_execve",
-		"_execvp",
-		"_execvpe",
-		"_exit",
-		"_expand",
-		"_fclose_nolock",
-		"_fcloseall",
-		"_fdopen",
-		"_fflush_nolock",
-		"_fgetc_nolock",
-		"_fgetchar",
-		"_fgetwc_nolock",
-		"_fgetwchar",
-		"_filelength",
-		"_filelengthi64",
-		"_fileno",
-		"_findclose",
-		"_findfirst32",
-		"_findfirst32i64",
-		"_findfirst64",
-		"_findfirst64i32",
-		"_findnext32",
-		"_findnext32i64",
-		"_findnext64",
-		"_findnext64i32",
-		"_flushall",
-		"_fpreset",
-		"_fputc_nolock",
-		"_fputchar",
-		"_fputwc_nolock",
-		"_fputwchar",
-		"_fread_nolock",
-		"_free_locale",
-		"_fseek_nolock",
-		"_fseeki64",
-		"_fseeki64_nolock",
-		"_fsopen",
-		"_fstat64",
-		"_ftell_nolock",
-		"_ftelli64",
-		"_ftelli64_nolock",
-		"_ftime32",
-		"_ftime64",
-		"_fullpath",
-		"_fwrite_nolock",
-		"_get_current_locale",
-		"_get_daylight",
-		"_get_doserrno",
-		"_get_dstbias",
-		"_get_errno",
-		"_get_fmode",
-		"_get_heap_handle",
-		"_get_invalid_parameter_handler",
-		"_get_osfhandle",
-		"_get_pgmptr",
-		"_get_printf_count_output",
-		"_get_purecall_handler",
-		"_get_timezone",
-		"_get_tzname",
-		"_get_wpgmptr",
-		"_getc_nolock",
-		"_getcwd",
-		"_getdllprocaddr",
-		"_getmaxstdio",
-		"_getpid",
-		"_getsystime",
-		"_getw",
-		"_getwch",
-		"_getwch_nolock",
-		"_getwche",
-		"_getwche_nolock",
-		"_getws",
-		"_gmtime32",
-		"_gmtime32_s",
-		"_gmtime64",
-		"_gmtime64_s",
-		"_heapchk",
-		"_heapmin",
-		"_heapwalk",
-		"_i64toa",
-		"_i64tow",
-		"_isalnum_l",
-		"_isalpha_l",
-		"_isatty",
-		"_iscntrl_l",
-		"_isctype",
-		"_isctype_l",
-		"_isdigit_l",
-		"_isgraph_l",
-		"_isleadbyte_l",
-		"_islower_l",
-		"_isprint_l",
-		"_ispunct_l",
-		"_isspace_l",
-		"_isupper_l",
-		"_iswalnum_l",
-		"_iswalpha_l",
-		"_iswcntrl_l",
-		"_iswcsym_l",
-		"_iswcsymf_l",
-		"_iswctype_l",
-		"_iswdigit_l",
-		"_iswgraph_l",
-		"_iswlower_l",
-		"_iswprint_l",
-		"_iswpunct_l",
-		"_iswspace_l",
-		"_iswupper_l",
-		"_iswxdigit_l",
-		"_isxdigit_l",
-		"_itoa",
-		"_itow",
-		"_loaddll",
-		"_localtime32",
-		"_localtime32_s",
-		"_localtime64",
-		"_localtime64_s",
-		"_lock_file",
-		"_locking",
-		"_lrotl",
-		"_lrotr",
-		"_lseek",
-		"_lseeki64",
-		"_ltoa",
-		"_ltow",
-		"_makepath",
-		"_mblen_l",
-		"_mbstowcs_l",
-		"_mbstrlen",
-		"_mbstrlen_l",
-		"_mbstrnlen",
-		"_mbstrnlen_l",
-		"_mbtowc_l",
-		"_memccpy",
-		"_memicmp",
-		"_memicmp_l",
-		"_mkdir",
-		"_mkgmtime32",
-		"_mkgmtime64",
-		"_mktemp",
-		"_mktemp_s",
-		"_mktime32",
-		"_mktime64",
-		"_msize",
-		"_open_osfhandle",
-		"_pclose",
-		"_pipe",
-		"_popen",
-		"_putc_nolock",
-		"_putenv",
-		"_putw",
-		"_putwch",
-		"_putwch_nolock",
-		"_putws",
-		"_read",
-		"_recalloc",
-		"_register_thread_local_exe_atexit_callback",
-		"_resetstkoflw",
-		"_rmtmp",
-		"_rotl",
-		"_rotl64",
-		"_rotr",
-		"_rotr64",
-		"_searchenv",
-		"_set_abort_behavior",
-		"_set_doserrno",
-		"_set_errno",
-		"_set_error_mode",
-		"_set_fmode",
-		"_set_invalid_parameter_handler",
-		"_set_printf_count_output",
-		"_set_purecall_handler",
-		"_seterrormode",
-		"_setmaxstdio",
-		"_setmode",
-		"_setsystime",
-		"_sleep",
-		"_sopen_s",
-		"_spawnv",
-		"_spawnve",
-		"_spawnvp",
-		"_spawnvpe",
-		"_splitpath",
-		"_stat64",
-		"_stat64i32",
-		"_statusfp",
-		"_strcoll_l",
-		"_strdate",
-		"_strdate_s",
-		"_strdup",
-		"_strerror",
-		"_strftime_l",
-		"_stricmp",
-		"_stricmp_l",
-		"_stricoll",
-		"_stricoll_l",
-		"_strlwr",
-		"_strncoll",
-		"_strncoll_l",
-		"_strnicmp",
-		"_strnicmp_l",
-		"_strnicoll",
-		"_strnicoll_l",
-		"_strnset",
-		"_strrev",
-		"_strset",
-		"_strtime",
-		"_strtime_s",
-		"_strtoi64",
-		"_strtoi64_l",
-		"_strtol_l",
-		"_strtoui64",
-		"_strtoui64_l",
-		"_strtoul_l",
-		"_strupr",
-		"_strupr_l",
-		"_strxfrm_l",
-		"_swab",
-		"_tell",
-		"_telli64",
-		"_tempnam",
-		"_time32",
-		"_time64",
-		"_timespec32_get",
-		"_timespec64_get",
-		"_tolower",
-		"_tolower_l",
-		"_toupper",
-		"_toupper_l",
-		"_towlower_l",
-		"_towupper_l",
-		"_tzset",
-		"_ui64toa",
-		"_ui64tow",
-		"_ultoa",
-		"_ultow",
-		"_umask",
-		"_umask_s",
-		"_ungetc_nolock",
-		"_ungetwc_nolock",
-		"_ungetwch",
-		"_ungetwch_nolock",
-		"_unlink",
-		"_unloaddll",
-		"_unlock_file",
-		"_waccess",
-		"_wasctime",
-		"_wasctime_s",
-		"_wchdir",
-		"_wchmod",
-		"_wcreat",
-		"_wcscoll_l",
-		"_wcsdup",
-		"_wcserror",
-		"_wcsftime_l",
-		"_wcsicmp",
-		"_wcsicmp_l",
-		"_wcsicoll",
-		"_wcsicoll_l",
-		"_wcslwr",
-		"_wcslwr_l",
-		"_wcsncoll",
-		"_wcsncoll_l",
-		"_wcsnicmp",
-		"_wcsnicmp_l",
-		"_wcsnicoll",
-		"_wcsnicoll_l",
-		"_wcsnset",
-		"_wcsrev",
-		"_wcsset",
-		"_wcstoi64",
-		"_wcstoi64_l",
-		"_wcstol_l",
-		"_wcstombs_l",
-		"_wcstoui64",
-		"_wcstoui64_l",
-		"_wcstoul_l",
-		"_wcsupr",
-		"_wcsupr_l",
-		"_wcsxfrm_l",
-		"_wctime32",
-		"_wctime32_s",
-		"_wctime64",
-		"_wctime64_s",
-		"_wctomb_l",
-		"_wexecv",
-		"_wexecve",
-		"_wexecvp",
-		"_wexecvpe",
-		"_wfdopen",
-		"_wfindfirst32",
-		"_wfindfirst32i64",
-		"_wfindfirst64",
-		"_wfindfirst64i32",
-		"_wfindnext32",
-		"_wfindnext32i64",
-		"_wfindnext64",
-		"_wfindnext64i32",
-		"_wfopen",
-		"_wfreopen",
-		"_wfsopen",
-		"_wfullpath",
-		"_wgetcwd",
-		"_wgetdcwd",
-		"_wmakepath",
-		"_wmkdir",
-		"_wmktemp",
-		"_wperror",
-		"_wpopen",
-		"_wremove",
-		"_wrename",
-		"_write",
-		"_wrmdir",
-		"_wsearchenv",
-		"_wsetlocale",
-		"_wsopen_s",
-		"_wspawnv",
-		"_wspawnve",
-		"_wspawnvp",
-		"_wspawnvpe",
-		"_wsplitpath",
-		"_wstat32",
-		"_wstat32i64",
-		"_wstat64",
-		"_wstat64i32",
-		"_wstrdate",
-		"_wstrdate_s",
-		"_wstrtime",
-		"_wstrtime_s",
-		"_wsystem",
-		"_wtempnam",
-		"_wtmpnam",
-		"_wtoi",
-		"_wtoi64",
-		"_wtoi64_l",
-		"_wtoi_l",
-		"_wtol",
-		"_wtol_l",
-		"_wunlink",
-		"abort",
-		"abs",
-		"asctime",
-		"asctime_s",
-		"atoi",
-		"atol",
-		"atoll",
-		"bsearch",
-		"btowc",
-		"calloc",
-		"clearerr",
-		"clock",
-		"div",
-		"fclose",
-		"feof",
-		"ferror",
-		"fflush",
-		"fgetc",
-		"fgetpos",
-		"fgets",
-		"fgetwc",
-		"fgetws",
-		"fopen",
-		"fputc",
-		"fputs",
-		"fputwc",
-		"fputws",
-		"fread",
-		"free",
-		"freopen",
-		"fseek",
-		"fsetpos",
-		"ftell",
-		"fwrite",
-		"getc",
-		"getchar",
-		"getenv",
-		"gets",
-		"getwc",
-		"getwchar",
-		"is_wctype",
-		"isalnum",
-		"isalpha",
-		"isblank",
-		"iscntrl",
-		"isdigit",
-		"isgraph",
-		"isleadbyte",
-		"islower",
-		"isprint",
-		"ispunct",
-		"isspace",
-		"isupper",
-		"iswalnum",
-		"iswalpha",
-		"iswascii",
-		"iswblank",
-		"iswcntrl",
-		"iswctype",
-		"iswdigit",
-		"iswgraph",
-		"iswlower",
-		"iswprint",
-		"iswpunct",
-		"iswspace",
-		"iswupper",
-		"iswxdigit",
-		"isxdigit",
-		"labs",
-		"ldiv",
-		"llabs",
-		"localeconv",
-		"malloc",
-		"mblen",
-		"mbrlen",
-		"mbrtowc",
-		"mbsrtowcs",
-		"mbstowcs",
-		"mbtowc",
-		"memchr",
-		"memcmp",
-		"memcpy",
-		"memcpy_s",
-		"memmove",
-		"memset",
-		"perror",
-		"putc",
-		"putchar",
-		"puts",
-		"putwc",
-		"putwchar",
-		"quick_exit",
-		"rand",
-		"realloc",
-		"remove",
-		"rename",
-		"rewind",
-		"setbuf",
-		"setlocale",
-		"setvbuf",
-		"srand",
-		"strcat",
-		"strchr",
-		"strcmp",
-		"strcoll",
-		"strcpy",
-		"strcspn",
-		"strerror",
-		"strftime",
-		"strlen",
-		"strncat",
-		"strncmp",
-		"strncpy",
-		"strnlen",
-		"strpbrk",
-		"strrchr",
-		"strspn",
-		"strstr",
-		"strtok",
-		"strtol",
-		"strtoll",
-		"strtoul",
-		"strtoull",
-		"strxfrm",
-		"system",
-		"tmpfile",
-		"tmpnam",
-		"tolower",
-		"toupper",
-		"towlower",
-		"towupper",
-		"ungetc",
-		"ungetwc",
-		"wcrtomb",
-		"wcscat",
-		"wcschr",
-		"wcscmp",
-		"wcscoll",
-		"wcscpy",
-		"wcscspn",
-		"wcsftime",
-		"wcslen",
-		"wcsncat",
-		"wcsncmp",
-		"wcsncpy",
-		"wcsnlen",
-		"wcspbrk",
-		"wcsrchr",
-		"wcsrtombs",
-		"wcsspn",
-		"wcsstr",
-		"wcstok",
-		"wcstol",
-		"wcstoll",
-		"wcstombs",
-		"wcstoul",
-		"wcstoull",
-		"wcsxfrm",
-		"wctob",
-		"wctomb",
-	} {
-		func() {
-			defer func() {
-				if recover() != nil {
-					println(nm)
-				}
-			}()
-			dll.NewProc(nm).Addr()
-		}()
-	}
 }

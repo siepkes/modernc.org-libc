@@ -64,7 +64,7 @@ ucrt_amd64:
 		--prefix-tagged-struct=T \
 		--prefix-tagged-union=T \
 		--prefix-typename=T \
-		--winapi-test dump \
+		--winapi-test panic \
 		--winapi=ctype.h \
 		--winapi=float.h \
 		--winapi=io.h \
@@ -249,7 +249,7 @@ ucrt_arm64:
 		--prefix-tagged-struct=T \
 		--prefix-tagged-union=T \
 		--prefix-typename=T \
-		--winapi-test dump \
+		--winapi-test panic \
 		--winapi=ctype.h \
 		--winapi=float.h \
 		--winapi=io.h \
@@ -434,7 +434,7 @@ ucrt_386:
 		--prefix-tagged-struct=T \
 		--prefix-tagged-union=T \
 		--prefix-typename=T \
-		--winapi-test dump \
+		--winapi-test panic \
 		--winapi=ctype.h \
 		--winapi=float.h \
 		--winapi=io.h \
