@@ -15,6 +15,7 @@ import (
 	"flag"
 	"fmt"
 	"io/fs"
+	"math"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -1483,4 +1484,85 @@ func TestLibc(t *testing.T) {
 	// 202403051424 all_musl_test.go:650:  files=476 buildFails=244 skip=16  execFails=19 pass=197
 	// 202403151750 all_musl_test.go:1213: files=476 buildFails=  0 skip=273 execFails= 0 pass=203
 	// 202403211526 all_musl_test.go:1214: files=477 buildFails=  0 skip=274 execFails= 0 pass=203
+}
+
+func TestABI(t *testing.T) {
+	tls := NewTLS()
+
+	defer tls.Close()
+
+	t.Run("sinf", func(t *testing.T) { testABIsinf(t, tls) })
+	t.Run("sin", func(t *testing.T) { testABIsin(t, tls) })
+	t.Run("cabs", func(t *testing.T) { testABIcabs(t, tls) })
+	t.Run("hypot", func(t *testing.T) { testABIhypot(t, tls) })
+	t.Run("hypotf", func(t *testing.T) { testABIhypotf(t, tls) })
+	t.Run("div", func(t *testing.T) { testABIdiv(t, tls) })
+	t.Run("ldiv", func(t *testing.T) { testABIldiv(t, tls) })
+	t.Run("fabs", func(t *testing.T) { testABIfabs(t, tls) })
+	t.Run("fabsf", func(t *testing.T) { testABIfabsf(t, tls) })
+	t.Run("fabsl", func(t *testing.T) { testABIfabsf(t, tls) })
+	t.Run("ldiv", func(t *testing.T) { testABIfabsf(t, tls) })
+}
+
+func testABIsinf(t *testing.T, tls *TLS) {
+	if g, e := Xsinf(tls, math.Pi/6), float32(.5); g != e {
+		t.Error(g, e)
+	}
+}
+
+func testABIsin(t *testing.T, tls *TLS) {
+	if g, e := Xsin(tls, math.Pi/6), .5; g != e {
+		t.Error(g, e)
+	}
+}
+
+func testABIcabs(t *testing.T, tls *TLS) {
+	if g, e := Xhypot(tls, 3, 4), 5.; g != e {
+		t.Error(g, e)
+	}
+}
+
+func testABIhypot(t *testing.T, tls *TLS) {
+	if g, e := Xhypot(tls, 3, 4), 5.; g != e {
+		t.Error(g, e)
+	}
+}
+
+func testABIhypotf(t *testing.T, tls *TLS) {
+	if g, e := Xhypotf(tls, 3, 4), float32(5.); g != e {
+		t.Error(g, e)
+	}
+}
+
+func testABIdiv(t *testing.T, tls *TLS) {
+	if g, e := Xdiv(tls, 31, 5), (Tdiv_t{6, 1}); g != e {
+		t.Error(g, e)
+	}
+}
+
+func testABIfabs(t *testing.T, tls *TLS) {
+	if g, e := Xfabs(tls, -2.), 2.; g != e {
+		t.Error(g, e)
+	}
+}
+
+func testABIfabsf(t *testing.T, tls *TLS) {
+	if g, e := Xfabs(tls, -2.), 2.; g != e {
+		t.Error(g, e)
+	}
+}
+
+func testABIfabsl(t *testing.T, tls *TLS) {
+	if g, e := Xfabsl(tls, -2.), 2.; g != e {
+		t.Error(g, e)
+	}
+}
+
+func testABIldiv(t *testing.T, tls *TLS) {
+	if g, e := Xldiv(tls, 1e16+1, 10), (Tldiv_t{1e15, 1}); g != e {
+		t.Error(g, e)
+	}
+	if g, e := Xldiv(tls, 1e16+1, 1e15), (Tldiv_t{10, 1}); g != e {
+		t.Error(g, e)
+	}
 }
