@@ -85,8 +85,8 @@ func (s *sorter) Less(i, j int) bool {
 }
 
 func (s *sorter) Swap(i, j int) {
-	p := uintptr(s.base + uintptr(i)*s.sz)
-	q := uintptr(s.base + uintptr(j)*s.sz)
+	p := s.base + uintptr(i)*s.sz
+	q := s.base + uintptr(j)*s.sz
 	for i := 0; i < int(s.sz); i++ {
 		*(*byte)(unsafe.Pointer(p)), *(*byte)(unsafe.Pointer(q)) = *(*byte)(unsafe.Pointer(q)), *(*byte)(unsafe.Pointer(p))
 		p++
