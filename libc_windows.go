@@ -855,6 +855,10 @@ func X__ms_vsnprintf(tls *TLS, str uintptr, size Tsize_t, format, va uintptr) in
 	return Xsnprintf(tls, str, size, format, va)
 }
 
+func X_vsnprintf(tls *TLS, str uintptr, size Tsize_t, format, va uintptr) int32 {
+	return Xsnprintf(tls, str, size, format, va)
+}
+
 // int snprintf(char *str, size_t size, const char *format, ...);
 func Xsnprintf(t *TLS, str uintptr, size Tsize_t, format, args uintptr) (r int32) {
 	if __ccgo_strace {
@@ -1402,6 +1406,21 @@ func X_stati64(t *TLS, path, buffer uintptr) int32 {
 // int _fstati64(int fd, struct _stati64 *buffer);
 func X_fstati64(t *TLS, fd int32, buffer uintptr) int32 {
 	return X_fstat64(t, fd, buffer)
+}
+
+func X_strcmpi(tls *TLS, __Str1 uintptr, __Str2 uintptr) (r int32) {
+	if __ccgo_strace {
+		trc("_Str1=%+v _Str2=%+v", __Str1, __Str2)
+		defer func() { trc(`X_strcmpi->%+v`, r) }()
+	}
+	r0, r1, err := syscall.SyscallN(proc_stricmp.Addr(), __Str1, __Str2)
+	if err != 0 {
+		if __ccgo_strace {
+			trc(`r0=%v r1=%v err=%v`, r0, r1, err)
+		}
+		tls.setErrno(int32(err))
+	}
+	return int32(r0)
 }
 
 // ------------------------------------------------------------------------ (A)
