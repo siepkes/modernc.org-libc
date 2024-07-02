@@ -107,7 +107,7 @@ func (t *threadAdapter) run() uintptr {
 
 	t.tls.token = t.token
 	r := (t.threadFunc(t.tls, t.param))
-	t.tls.endthread(r, false)
+	t.tls.endthread(r)
 	return uintptr(r)
 }
 
@@ -158,7 +158,7 @@ func X_beginthreadex(tls *TLS, __Security uintptr, __StackSize uint32, __StartAd
 
 // __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _endthreadex(unsigned _Retval) __attribute__ ((__noreturn__));
 func X_endthreadex(tls *TLS, __Retval uint32) {
-	tls.endthread(__Retval, true)
+	tls.endthread(__Retval)
 }
 
 func Start(main func(*TLS, int32, uintptr) int32) {
@@ -223,7 +223,7 @@ func Xexit(tls *TLS, __Code int32) {
 	syscall.SyscallN(procexit.Addr(), uintptr(__Code))
 }
 
-func (tls *TLS) endthread(retval uint32, goexit bool) {
+func (tls *TLS) endthread(retval uint32) {
 	if tls == nil || tls.exited {
 		return
 	}
@@ -233,9 +233,6 @@ func (tls *TLS) endthread(retval uint32, goexit bool) {
 	tls.Close()
 	removeObject(tls.token)
 	runtime.UnlockOSThread()
-	if goexit {
-		runtime.Goexit()
-	}
 }
 
 func (tls *TLS) SetLastError(_dwErrCode uint32) {
