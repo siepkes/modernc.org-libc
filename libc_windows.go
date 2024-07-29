@@ -3715,7 +3715,7 @@ func XGetFileAttributesA(t *TLS, lpFileName uintptr) uint32 {
 //	LPVOID                 lpFileInformation
 //
 // );
-func XGetFileAttributesExW(t *TLS, lpFileName uintptr, fInfoLevelId uint32, lpFileInformation uintptr) int32 {
+func XGetFileAttributesExW(t *TLS, lpFileName uintptr, fInfoLevelId int32, lpFileInformation uintptr) int32 {
 	if __ccgo_strace {
 		trc("t=%v lpFileName=%v fInfoLevelId=%v lpFileInformation=%v, (%v:)", t, lpFileName, fInfoLevelId, lpFileInformation, origin(2))
 	}
@@ -6475,7 +6475,7 @@ func XGetAce(tls *TLS, _pAcl uintptr, _dwAceIndex uint32, _pAce uintptr) (r int3
 //	ACL_INFORMATION_CLASS dwAclInformationClass
 //
 // );
-func XGetAclInformation(t *TLS, pAcl, pAclInformation uintptr, nAclInformationLength, dwAclInformationClass uint32) int32 {
+func XGetAclInformation(t *TLS, pAcl, pAclInformation uintptr, nAclInformationLength uint32, dwAclInformationClass int32) int32 {
 	if __ccgo_strace {
 		trc("t=%v pAclInformation=%v dwAclInformationClass=%v, (%v:)", t, pAclInformation, dwAclInformationClass, origin(2))
 	}
@@ -6667,7 +6667,7 @@ func XSetErrorMode(t *TLS, uMode uint32) int32 {
 //	PACL                 pSacl
 //
 // );
-func XSetNamedSecurityInfoA(t *TLS, pObjectName uintptr, ObjectType, SecurityInfo uint32, psidOwner, psidGroup, pDacl, pSacl uintptr) uint32 {
+func XSetNamedSecurityInfoA(t *TLS, pObjectName uintptr, ObjectType int32, SecurityInfo uint32, psidOwner, psidGroup, pDacl, pSacl uintptr) uint32 {
 	if __ccgo_strace {
 		trc("t=%v pObjectName=%v SecurityInfo=%v pSacl=%v, (%v:)", t, pObjectName, SecurityInfo, pSacl, origin(2))
 	}
