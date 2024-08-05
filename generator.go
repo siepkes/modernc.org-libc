@@ -30,6 +30,7 @@ var (
 	goos                 = runtime.GOOS
 	j                    = fmt.Sprint(runtime.GOMAXPROCS(-1))
 	muslArch             string
+	target               = fmt.Sprintf("%s/%s", goos, goarch)
 )
 
 func fail(rc int, msg string, args ...any) {
@@ -191,8 +192,11 @@ func main() {
 		cflags := []string{
 			"-DNDEBUG",
 		}
-		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
-			cflags = append(cflags, s)
+		switch target {
+		case "linux/ppc64le":
+			if s := cc.LongDouble64Flag(goos, goarch); s != "" {
+				cflags = append(cflags, s)
+			}
 		}
 		util.MustShell(true, nil, "sh", "-c", fmt.Sprintf("CFLAGS='%s' ./configure "+
 			"--disable-static "+
