@@ -5,9 +5,9 @@
 package libc
 
 import (
+	"golang.org/x/sys/unix"
 	"reflect"
 	"unsafe"
-	"golang.org/x/sys/unix"
 )
 
 var (
