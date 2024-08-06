@@ -229,6 +229,10 @@ func main() {
 			"-ignore-asm-errors",
 			"-isystem", "",
 		}
+		switch target {
+		case "linux/s390x":
+			args = append(args, "-hide", "__mmap")
+		}
 		if s := cc.LongDouble64Flag(goos, goarch); s != "" {
 			args = append(args, s)
 		}
@@ -306,9 +310,6 @@ func main() {
 	}
 	if format {
 		util.MustShell(true, nil, "sh", "-c", "gofmt -w *.go")
-	}
-	if !dev {
-		util.Shell(nil, "sh", "-c", "./unconvert.sh")
 	}
 	util.MustShell(true, nil, "go", "test", "-run", "@")
 	util.Shell(nil, "git", "status")
