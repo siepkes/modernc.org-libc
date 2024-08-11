@@ -44,7 +44,7 @@ func _a_ctz_l(tls *TLS, x ulong) int32 {
 		return int32(mbits.TrailingZeros64(uint64(x)))
 	}
 
-	return int32(mbits.TrailingZeros32(uint32(x)))
+	return int32(mbits.TrailingZeros32(x))
 }
 
 // static inline int a_ctz_64(uint64_t x)
