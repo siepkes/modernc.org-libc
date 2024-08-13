@@ -6,8 +6,8 @@ package libc // import "modernc.org/libc"
 
 import (
 	"math/bits"
-	"unsafe"
 	"sync/atomic"
+	"unsafe"
 )
 
 type long = int32
