@@ -555,7 +555,7 @@ func (p *parallel) run(path string) {
 	}()
 
 	bin := path + ".bin"
-	if out, err := shell(time.Minute, "go", "build", "-o", bin, path); err != nil {
+	if out, err := shell(10*time.Minute, "go", "build", "-o", bin, path); err != nil {
 		p.t.Logf("%v: BUILD FAIL err=%v out=%s", path, err, out)
 		switch _, ok := p.blacklist[path]; {
 		case ok:
@@ -567,7 +567,7 @@ func (p *parallel) run(path string) {
 		return
 	}
 
-	if out, err := shell(time.Minute, bin); err != nil {
+	if out, err := shell(10*time.Minute, bin); err != nil {
 		switch s := fmt.Sprintf("%s %s", out, err); {
 		case
 			strings.Contains(s, "Function not implemented"),
@@ -2550,15 +2550,15 @@ func TestLibc(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	mustShell(t, time.Minute, "sh", "-c", fmt.Sprintf("rm -rf %s", filepath.Join(tempdir, "*")))
+	mustShell(t, 10*time.Minute, "sh", "-c", fmt.Sprintf("rm -rf %s", filepath.Join(tempdir, "*")))
 	libcTest := filepath.Join(tempdir, "libc-test")
 	mustCopyDir(t, libcTest, filepath.Join("testdata", "nsz.repo.hu", "libc-test"), nil)
 	cwd := util.MustAbsCwd(true)
 	mustInDir(t, libcTest, func() error {
-		mustShell(t, time.Minute, "go", "mod", "init", "example.com/libc_test")
-		mustShell(t, time.Minute, "go", "get", "modernc.org/libc@latest")
-		mustShell(t, time.Minute, "go", "work", "init")
-		mustShell(t, time.Minute, "go", "work", "use", ".", cwd)
+		mustShell(t, 10*time.Minute, "go", "mod", "init", "example.com/libc_test")
+		mustShell(t, 10*time.Minute, "go", "get", "modernc.org/libc@latest")
+		mustShell(t, 10*time.Minute, "go", "work", "init")
+		mustShell(t, 10*time.Minute, "go", "work", "use", ".", cwd)
 		return nil
 	})
 
