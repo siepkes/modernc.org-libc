@@ -1982,3 +1982,11 @@ func Xpwrite(t *TLS, fd int32, buf uintptr, count types.Size_t, offset types.Off
 func Xexplicit_bzero(tls *TLS, d uintptr, n types.Size_t) {
 	Xmemset(tls, d, 0, n)
 }
+
+// int issetugid(void);
+func Xissetugid(t *TLS) int32 {
+	if __ccgo_strace {
+		trc("t=%v, (%v:)", t, origin(2))
+	}
+	panic(todo(""))
+}
