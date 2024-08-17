@@ -2011,3 +2011,25 @@ func Xgetprogname(t *TLS) uintptr {
 
 	return progname
 }
+
+func Xstrncasecmp(tls *TLS, _l uintptr, _r uintptr, n types.Size_t) int32 { /* strncasecmp.c:4:5: */
+	var l uintptr = _l
+	var r uintptr = _r
+	if !(int32(PostDecUint64(&n, 1)) != 0) {
+		return 0
+	}
+__1:
+	if !(*(*uint8)(unsafe.Pointer(l)) != 0 && *(*uint8)(unsafe.Pointer(r)) != 0 && n != 0 && (int32(*(*uint8)(unsafe.Pointer(l))) == int32(*(*uint8)(unsafe.Pointer(r))) || Xtolower(tls, int32(*(*uint8)(unsafe.Pointer(l)))) == Xtolower(tls, int32(*(*uint8)(unsafe.Pointer(r)))))) {
+		goto __3
+	}
+	goto __2
+__2:
+	l++
+	r++
+	n--
+	goto __1
+	goto __3
+__3:
+	;
+	return Xtolower(tls, int32(*(*uint8)(unsafe.Pointer(l)))) - Xtolower(tls, int32(*(*uint8)(unsafe.Pointer(r))))
+}
