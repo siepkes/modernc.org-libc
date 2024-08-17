@@ -1990,3 +1990,24 @@ func Xissetugid(t *TLS) int32 {
 	}
 	panic(todo(""))
 }
+
+var progname uintptr
+
+// const char *getprogname(void);
+func Xgetprogname(t *TLS) uintptr {
+	if __ccgo_strace {
+		trc("t=%v, (%v:)", t, origin(2))
+	}
+	if progname != 0 {
+		return progname
+	}
+
+	var err error
+	progname, err = CString(filepath.Base(os.Args[0]))
+	if err != nil {
+		t.setErrno(err)
+		return 0
+	}
+
+	return progname
+}
