@@ -118,8 +118,8 @@ import (
 	"sort"
 	"strings"
 	"sync"
-	"time"
 	"sync/atomic"
+	"time"
 	"unsafe"
 
 	guuid "github.com/google/uuid"
@@ -666,26 +666,29 @@ func ___synccall(tls *TLS, fn, ctx uintptr) {
 // #include <time.h>
 // #include <stdint.h>
 // #include "pthread_impl.h"
-// 
+//
 // /* This assumes that a check for the
-//    template size has already been made */
+//
+//	template size has already been made */
+//
 // char *__randname(char *template)
-// {
-// 	int i;
-// 	struct timespec ts;
-// 	unsigned long r;
-// 
-// 	__clock_gettime(CLOCK_REALTIME, &ts);
-// 	r = ts.tv_sec + ts.tv_nsec + __pthread_self()->tid * 65537UL;
-// 	for (i=0; i<6; i++, r>>=5)
-// 		template[i] = 'A'+(r&15)+(r&16)*2;
-// 
-// 	return template;
-// }
+//
+//	{
+//		int i;
+//		struct timespec ts;
+//		unsigned long r;
+//
+//		__clock_gettime(CLOCK_REALTIME, &ts);
+//		r = ts.tv_sec + ts.tv_nsec + __pthread_self()->tid * 65537UL;
+//		for (i=0; i<6; i++, r>>=5)
+//			template[i] = 'A'+(r&15)+(r&16)*2;
+//
+//		return template;
+//	}
 func ___randname(tls *TLS, template uintptr) (r1 uintptr) {
 	var i int32
 	ts := time.Now().UnixNano()
-	r := uint64(ts)+uint64(tls.ID)*65537
+	r := uint64(ts) + uint64(tls.ID)*65537
 	i = 0
 	for {
 		if !(i < int32(6)) {
