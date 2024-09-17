@@ -9,8 +9,9 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/mattn/go-isatty v0.0.20
 	github.com/ncruces/go-strftime v0.1.9
+	golang.org/x/exp v0.0.0-20230315142452-642cacee5cc0
 	golang.org/x/sys v0.22.0
-	modernc.org/ccgo/v4 v4.21.0
+	modernc.org/ccgo/v4 v4.22.0
 	modernc.org/fileutil v1.3.0
 	modernc.org/mathutil v1.6.0
 	modernc.org/memory v1.8.0
