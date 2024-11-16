@@ -14,7 +14,7 @@ func Xpread(tls *TLS, fd int32, buf uintptr, size Tsize_t, ofs Toff_t) (r Tssize
 		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
-	n, err := syscall.Pread(int(fd), unsafe.Slice((*byte)(unsafe.Pointer(buf)), size), int64(ofs))
+	n, err := syscall.Pread(int(fd), unsafe.Slice((*byte)(unsafe.Pointer(buf)), size), ofs)
 	if err != nil {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(err.(syscall.Errno))
 		return -1
@@ -28,7 +28,7 @@ func Xpwrite(tls *TLS, fd int32, buf uintptr, size Tsize_t, ofs Toff_t) (r Tssiz
 		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
-	n, err := syscall.Pwrite(int(fd), unsafe.Slice((*byte)(unsafe.Pointer(buf)), size), int64(ofs))
+	n, err := syscall.Pwrite(int(fd), unsafe.Slice((*byte)(unsafe.Pointer(buf)), size), ofs)
 	if err != nil {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(err.(syscall.Errno))
 		return -1
