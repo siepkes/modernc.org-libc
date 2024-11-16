@@ -152255,28 +152255,12 @@ func Xposix_close(tls *TLS, fd int32, flags int32) (r int32) {
 	return Xclose(tls, fd)
 }
 
-func Xpread(tls *TLS, fd int32, buf uintptr, size Tsize_t, ofs Toff_t) (r Tssize_t) {
-	if __ccgo_strace {
-		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	return X__syscall_ret(tls, uint32(___syscall_cp(tls, int32(SYS_pread64), fd, int32(buf), int32(size), int32(ofs), 0, 0)))
-}
-
 func Xpreadv(tls *TLS, fd int32, iov uintptr, count int32, ofs Toff_t) (r Tssize_t) {
 	if __ccgo_strace {
 		trc("tls=%v fd=%v iov=%v count=%v ofs=%v, (%v:)", tls, fd, iov, count, ofs, origin(2))
 		defer func() { trc("-> %v", r) }()
 	}
 	return X__syscall_ret(tls, uint32(___syscall_cp(tls, int32(SYS_preadv), fd, int32(iov), count, int32(ofs), int32(ofs>>Int32FromInt32(32)), 0)))
-}
-
-func Xpwrite(tls *TLS, fd int32, buf uintptr, size Tsize_t, ofs Toff_t) (r Tssize_t) {
-	if __ccgo_strace {
-		trc("tls=%v fd=%v buf=%v size=%v ofs=%v, (%v:)", tls, fd, buf, size, ofs, origin(2))
-		defer func() { trc("-> %v", r) }()
-	}
-	return X__syscall_ret(tls, uint32(___syscall_cp(tls, int32(SYS_pwrite64), fd, int32(buf), int32(size), int32(ofs), 0, 0)))
 }
 
 func Xpwritev(tls *TLS, fd int32, iov uintptr, count int32, ofs Toff_t) (r Tssize_t) {
