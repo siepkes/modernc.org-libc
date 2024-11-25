@@ -44,7 +44,7 @@ func Xftruncate(tls *TLS, fd int32, length Toff_t) (r int32) {
 		defer func() { trc("-> %v", r) }()
 	}
 	//return X__syscall_ret(tls, uint32(X__syscall2(tls, int32(SYS_ftruncate64), fd, int32(length))))
-	if err := unix.Ftruncate(int(fd), int64(length)); err != nil {
+	if err := unix.Ftruncate(int(fd), length); err != nil {
 		*(*int32)(unsafe.Pointer(X__errno_location(tls))) = int32(err.(unix.Errno))
 		return -1
 	}
