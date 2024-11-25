@@ -52,6 +52,10 @@ func Xftruncate(tls *TLS, fd int32, length Toff_t) (r int32) {
 	return 0
 }
 
+func _read(tls *TLS, fd int32, buf uintptr, count Tsize_t) (r Tssize_t) {
+	return Xread(tls, fd, buf, count)
+}
+
 func Xread(tls *TLS, fd int32, buf uintptr, count Tsize_t) (r Tssize_t) {
 	if __ccgo_strace {
 		trc("tls=%v fd=%v buf=%v count=%v, (%v:)", tls, fd, buf, count, origin(2))
@@ -65,6 +69,10 @@ func Xread(tls *TLS, fd int32, buf uintptr, count Tsize_t) (r Tssize_t) {
 	}
 
 	return Tssize_t(n)
+}
+
+func _write(tls *TLS, fd int32, buf uintptr, count Tsize_t) (r Tssize_t) {
+	return Xwrite(tls, fd, buf, count)
 }
 
 func Xwrite(tls *TLS, fd int32, buf uintptr, count Tsize_t) (r Tssize_t) {
