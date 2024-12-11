@@ -15,6 +15,9 @@ import (
 	"time"
 	"unsafe"
 
+	_ "modernc.org/cc/v4"
+	_ "modernc.org/ccgo/v4/lib"
+	_ "modernc.org/fileutil/ccgo"
 	ctime "modernc.org/libc/time"
 )
 
