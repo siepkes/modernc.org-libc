@@ -9,10 +9,8 @@ import (
 	"unsafe"
 )
 
-var (
-	_ reflect.Type
-	_ unsafe.Pointer
-)
+var _ reflect.Type
+var _ unsafe.Pointer
 
 const BIG_ENDIAN = 4321
 const BYTE_ORDER = 1234
