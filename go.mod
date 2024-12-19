@@ -12,7 +12,7 @@ require (
 	golang.org/x/exp v0.0.0-20230315142452-642cacee5cc0
 	golang.org/x/sys v0.22.0
 	modernc.org/cc/v4 v4.24.1
-	modernc.org/ccgo/v4 v4.23.4
+	modernc.org/ccgo/v4 v4.23.5
 	modernc.org/fileutil v1.3.0
 	modernc.org/mathutil v1.6.0
 	modernc.org/memory v1.8.0
