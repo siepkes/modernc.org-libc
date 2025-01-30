@@ -36,6 +36,7 @@ int main() {
 
     char buffer[13];
     ssize_t bytes_read = pread(fd, buffer, sizeof(buffer), large_offset);
+    printf("bytes_read: %lli\n", bytes_read);
     if (bytes_read == -1) {
         printf("pread (large offset)\n");
         printf("errno: %d\n", errno); 
@@ -65,6 +66,7 @@ int main() {
     lseek(fd, -10, SEEK_END); // Seek back to the same position
 
     bytes_read = pread(fd, buffer, 3, 0);
+    printf("bytes_read: %lli\n", bytes_read);
     if (bytes_read == -1) {
         printf("pread (after lseek)\n");
         return 1;
