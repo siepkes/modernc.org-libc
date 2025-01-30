@@ -7,8 +7,8 @@ package libc // import "modernc.org/libc"
 import (
 	"os"
 	"os/exec"
-	"testing"
 	"path/filepath"
+	"testing"
 
 	ccgo "modernc.org/ccgo/v4/lib"
 )

@@ -12,7 +12,7 @@ static __inline long __syscall6(long n, long a1, long a2, long a3, long a4, long
 #ifdef __CCGO__
 
 #define __SYSCALL_LL_E(x) ((int)(x)), ((int)((x)>>32))
-#define __SYSCALL_LL_O(x) __SYSCALL_LL_E((x))
+#define __SYSCALL_LL_O(x) 0, __SYSCALL_LL_E((x))
 
 #else
 
@@ -116,8 +116,6 @@ static inline long __syscall6(long n, long a, long b, long c, long d, long e, lo
 	__asm_syscall(R7_OPERAND, "0"(r0), "r"(r1), "r"(r2), "r"(r3), "r"(r4), "r"(r5));
 }
 
-#define SYSCALL_FADVISE_6_ARG
-
 #define SYSCALL_IPC_BROKEN_MODE
 
 #define VDSO_USEFUL
@@ -128,3 +126,5 @@ static inline long __syscall6(long n, long a, long b, long c, long d, long e, lo
 #define VDSO_CGT_WORKAROUND 1
 
 #endif // __CCGO__
+
+#define SYSCALL_FADVISE_6_ARG
