@@ -8,9 +8,15 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"testing"
 
 	ccgo "modernc.org/ccgo/v4/lib"
+)
+
+var (
+	goarch = runtime.GOARCH
+	goos   = runtime.GOOS
 )
 
 // https://gitlab.com/cznic/libc/-/issues/42

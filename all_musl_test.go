@@ -34,8 +34,6 @@ import (
 
 var (
 	cpus     = runtime.GOMAXPROCS(-1)
-	goarch   = runtime.GOARCH
-	goos     = runtime.GOOS
 	j        = fmt.Sprint(cpus)
 	muslArch string
 	target   = fmt.Sprintf("%s/%s", goos, goarch)
