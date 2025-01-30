@@ -31,7 +31,7 @@ int main() {
         printf("pwrite (large offset)\n");
         printf("errno: %d\n", errno); 
     } else {
-        printf("Data written at large offset: %zd bytes\n", bytes_written);
+        printf("Data written at large offset: %lli bytes\n", bytes_written);
     }
 
     char buffer[13];
