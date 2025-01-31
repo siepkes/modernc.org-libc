@@ -21,6 +21,10 @@ var (
 
 // https://gitlab.com/cznic/libc/-/issues/42
 func TestIssue42(t *testing.T) {
+	if goos == "windows" {
+		t.Skip("SKIP: windows")
+	}
+
 	dir := t.TempDir()
 
 	defer os.Remove("test_pread_pwrite.txt")
@@ -30,6 +34,7 @@ func TestIssue42(t *testing.T) {
 		goos, goarch,
 		[]string{
 			os.Args[0],
+			"-ignore-unsupported-alignment",
 			"-o", gof,
 			filepath.Join("testdata", "pread_test.c"),
 		},
