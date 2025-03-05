@@ -121,6 +121,23 @@ func UsableSize(p uintptr) types.Size_t {
 	return types.Size_t(memory.UintptrUsableSize(p))
 }
 
+type AllocatorStat struct {
+	Allocs int
+	Bytes  int
+	Mmaps  int
+}
+
+func MemStat() AllocatorStat {
+	allocMu.Lock()
+	defer allocMu.Unlock()
+
+	return AllocatorStat{
+		Allocs: allocator.Allocs,
+		Bytes:  allocator.Bytes,
+		Mmaps:  allocator.Mmaps,
+	}
+}
+
 // MemAuditStart locks the memory allocator, initializes and enables memory
 // auditing. Finaly it unlocks the memory allocator.
 //
