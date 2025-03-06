@@ -121,17 +121,19 @@ func UsableSize(p uintptr) types.Size_t {
 	return types.Size_t(memory.UintptrUsableSize(p))
 }
 
-type AllocatorStat struct {
+type MemAllocatorStat struct {
 	Allocs int
 	Bytes  int
 	Mmaps  int
 }
 
-func MemStat() AllocatorStat {
+// MemStat returns the global memory allocator statistics.
+// should be compiled with the memory.counters build tag for the data to be available.
+func MemStat() MemAllocatorStat {
 	allocMu.Lock()
 	defer allocMu.Unlock()
 
-	return AllocatorStat{
+	return MemAllocatorStat{
 		Allocs: allocator.Allocs,
 		Bytes:  allocator.Bytes,
 		Mmaps:  allocator.Mmaps,
