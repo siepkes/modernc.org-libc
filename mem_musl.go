@@ -133,9 +133,17 @@ type MemAllocatorStat struct {
 	Mmaps  int
 }
 
-// MemStat no-op for this build tag
+// MemStat returns the global memory allocator statistics.
+// should be compiled with the memory.counters build tag for the data to be available.
 func MemStat() MemAllocatorStat {
-	return MemAllocatorStat{}
+	allocMu.Lock()
+	defer allocMu.Unlock()
+
+	return MemAllocatorStat{
+		Allocs: allocator.Allocs,
+		Bytes:  allocator.Bytes,
+		Mmaps:  allocator.Mmaps,
+	}
 }
 
 // MemAuditStart locks the memory allocator, initializes and enables memory
