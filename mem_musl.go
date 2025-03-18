@@ -136,8 +136,8 @@ type MemAllocatorStat struct {
 // MemStat returns the global memory allocator statistics.
 // should be compiled with the memory.counters build tag for the data to be available.
 func MemStat() MemAllocatorStat {
-	allocMu.Lock()
-	defer allocMu.Unlock()
+	allocatorMu.Lock()
+	defer allocatorMu.Unlock()
 
 	return MemAllocatorStat{
 		Allocs: allocator.Allocs,
