@@ -2,7 +2,6 @@ module modernc.org/libc
 
 go 1.23.0
 
-
 retract v1.43.0
 
 require (
@@ -16,7 +15,7 @@ require (
 	modernc.org/ccgo/v4 v4.25.0
 	modernc.org/fileutil v1.3.0
 	modernc.org/mathutil v1.7.1
-	modernc.org/memory v1.8.2
+	modernc.org/memory v1.9.0
 )
 
 require (
