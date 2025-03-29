@@ -331,7 +331,6 @@ func Xpthread_mutex_unlock(tls *TLS, m uintptr) int32 {
 		}
 
 		if atomic.AddInt32(&((*pthreadMutex)(unsafe.Pointer(m)).count), -1) == 0 {
-			atomic.StoreInt32(&((*pthreadMutex)(unsafe.Pointer(m)).count), 0)
 			atomic.StoreInt32(&((*pthreadMutex)(unsafe.Pointer(m)).owner), 0)
 			(*pthreadMutex)(unsafe.Pointer(m)).Unlock()
 		}
